@@ -2,6 +2,7 @@
  * Toolblaster Shared Design System (Tailwind CSS Configuration)
  * -------------------------------------------------------------
  * Central Source of Truth for Design.
+ * Usage: Include this script AFTER the Tailwind CDN script in every HTML file.
  */
 
 tailwind.config = {
@@ -26,25 +27,11 @@ tailwind.config = {
             },
             // GLOBAL TYPOGRAPHY SYSTEM
             fontSize: {
-                // Paragraphs (13px as requested)
                 'article-p': ['13px', { lineHeight: '1.6', letterSpacing: '0.01em' }],
                 'article-p-lg': ['13px', { lineHeight: '1.7', letterSpacing: '0.01em' }],
-                
-                // STRICT HEADING HIERARCHY
-                
-                // H1 - Main Page Titles (40px, ExtraBold/Black 900)
                 'heading-1':    ['40px', { lineHeight: '1.2', fontWeight: '900' }],
-                
-                // H2 - Section Titles (24px, ExtraBold 800)
                 'heading-2':    ['24px', { lineHeight: '1.3', fontWeight: '800' }],
-                
-                // H3 - Card Titles / Subsections (16px, Bold 700)
                 'heading-3':    ['16px', { lineHeight: '1.4', fontWeight: '700' }],
-                
-                /* * IMPORTANT:
-                 * Do NOT use H4, H5, or H6. 
-                 * Stick to the H1-H3 hierarchy for clarity.
-                 */
             },
             animation: {
                 'fade-in': 'fadeIn 0.3s ease-out forwards',
@@ -61,5 +48,21 @@ tailwind.config = {
                 }
             }
         }
-    }
+    },
+    // NEW: Global Component Plugin
+    plugins: [
+        function({ addComponents }) {
+            addComponents({
+                '.card-section': {
+                    'backgroundColor': '#ffffff',
+                    'borderWidth': '2px',
+                    'borderColor': '#d1d5db', // gray-300
+                    'borderRadius': '0.75rem', // rounded-xl
+                    'padding': '1.5rem', // p-6
+                    'marginBottom': '2rem', // mb-8
+                    'boxShadow': '0 1px 2px 0 rgba(0, 0, 0, 0.05)', // shadow-sm
+                }
+            })
+        }
+    ]
 }
