@@ -5,39 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Updated Metadata for SEO compliance (WCAG AA & length constraints) -->
     <meta name="impact-site-verification" content="874218691">
-    <!-- Removed 'noindex' to allow the primary site to be indexed -->
+    
+    <!-- SEO: Canonical Tag to prevent Duplicate Content in Google Search Console -->
+    <!-- Tells Google the preferred URL is the root (without index.html) -->
+    <link rel="canonical" href="https://toolblaster.com/">
+    
+    <!-- SEO: Robots Meta Tag -->
+    <!-- 'index': Allow Google to index this page. -->
+    <!-- 'follow': Allow Google to follow links to your tools and articles (Recommended for Hubs). -->
+    <meta name="robots" content="index, follow">
+
     <title>Toolblaster: Calculators, Creative Learning, Hosting & SEO Solutions</title> <!-- Max 60 chars: 59 -->
     <meta name="description" content="Toolblaster is your all-in-one digital hub for finance calculators, exam preparation, educational resources for kids, and expert-reviewed SEO tools."> <!-- Max 160 chars: 148 -->
 
     <!-- Favicon using Base64 encoded SVG of the Solid Bolt icon in brand color (#E34037) to match fa-solid fa-bolt -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E34037'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
 
-    <!-- Load Tailwind CSS -->
+    <!-- Load Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tailwind Configuration using arbitrary values for branded colors -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'accent-main': '#E34037', // Your primary red
-                        'accent-dark': '#c93a32', // Your dark red
-                        'hero-bg': '#121212', // Your dark background
-                        'icon-bg': '#fcebeb',
-                    },
-                    boxShadow: {
-                        // Increased shadow for prominence
-                        'custom-hover': '0 12px 25px rgba(0, 0, 0, 0.15)', 
-                        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                    }
-                }
-            }
-        }
-    </script>
+    
+    <!-- Load Shared Tailwind Configuration (Design System) -->
+    <script src="js/tailwind-config.js"></script>
+
     <!-- Load Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Load FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -67,142 +60,152 @@
 <body class="flex flex-col min-h-screen font-inter text-gray-800 relative [background:linear-gradient(180deg,#f9f9f9_0%,#ffffff_100%)]">
 
     <!-- Hero Section (h1 - Primary Heading) -->
-    <!-- UPDATED: Replaced concave-bottom with rounded-b-[2.5rem] for large, smooth curve -->
-    <header class="py-2 md:py-8 px-6 text-white text-center shadow-2xl [background:linear-gradient(180deg,#2b2b2b_0%,#1c1c1c_100%)] rounded-b-[2.5rem]">
-        <div class="container mx-auto max-w-4xl">
-            <h1 class="text-xl md:text-4xl font-extrabold mb-1 drop-shadow-lg tracking-tight flex items-center justify-center gap-2">
-                <!-- Replaced Lucide 'zap' with FontAwesome 'fa-bolt' -->
-                <i class="fa-solid fa-bolt text-xl md:text-3xl text-accent-main drop-shadow-sm"></i>
+    <!-- UPDATED: Removed Navbar HTML and replaced with #app-header container. 
+         Added min-h-[56px] to #app-header for CLS prevention (height of navbar). -->
+    <header class="relative flex flex-col bg-[#0f1115] overflow-hidden shadow-2xl">
+        
+        <!-- Background Glow Effect -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-3xl pointer-events-none opacity-20">
+            <div class="absolute top-[-20%] left-[20%] w-[300px] h-[300px] bg-accent-main rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-[-20%] right-[20%] w-[250px] h-[250px] bg-blue-900 rounded-full blur-[100px]"></div>
+        </div>
+
+        <!-- CLS Fix: Reserved space for the Navigation Bar -->
+        <div id="app-header" class="min-h-[56px] w-full relative z-20"></div>
+
+        <!-- Content Container (Hero) - This remains specific to the Homepage -->
+        <!-- UPDATED: Reduced padding from py-8 to py-5 for a denser look -->
+        <div class="relative z-10 container mx-auto max-w-4xl text-center py-5 px-6">
+            
+            <!-- Modern Logo Badge -->
+            <!-- UPDATED: Reduced bottom margin from mb-3 to mb-2 -->
+            <div class="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 mb-2 bg-white/5 border border-white/10 rounded-xl shadow-[0_0_15px_rgba(227,64,55,0.3)] backdrop-blur-md">
+                <i class="fa-solid fa-bolt text-lg md:text-xl text-accent-main"></i>
+            </div>
+
+            <!-- Title - UPDATED: Using text-heading-1 global class (40px) -->
+            <!-- UPDATED: Reduced bottom margin from mb-2 to mb-1 -->
+            <h1 class="text-heading-1 text-white mb-1 tracking-tight drop-shadow-md">
                 Toolblaster Hub
             </h1>
-            <!-- UPDATED: Added "government exam preparation" to the description -->
-            <p class="text-xs font-light mb-2 opacity-90 max-w-2xl mx-auto">Your comprehensive suite for financial planning, government exam preparation, creative learning resources, and powerful digital marketing tools.</p>
-            <!-- CTA Button removed as requested -->
+
+            <!-- Description - UPDATED: Using text-article-p global class (13px) -->
+            <p class="text-article-p font-medium text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Explore a growing ecosystem of precision tools and in-depth reviews. Whether mastering <span class="text-gray-200">financial planning</span>, acing <span class="text-gray-200">government exams</span>, accessing <span class="text-gray-200">creative resources</span>, or optimizing with <span class="text-gray-200">digital marketing utilities</span>, Toolblaster is your trusted partner for actionable insights and smart solutions.
+            </p>
         </div>
     </header>
 
     <main class="flex-grow">
-        <!-- Main container - UPDATED: Changed max-w-[1100px] to max-w-[1150px] -->
-        <div class="container mx-auto max-w-[1150px] px-4 sm:px-6 py-4 md:py-6">
+        <!-- Main container -->
+        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 md:py-6">
             
             <!-- Our Projects Section (h2 - Main Content Heading) -->
             <section id="projects" class="text-center">
                 
-                <!-- 
-                  Title & Underline block re-added as per user feedback.
-                -->
-                <!-- REDUCED MARGIN BOTTOM (mb-4 md:mb-10 -> mb-3 md:mb-6) -->
+                <!-- Title & Underline block -->
                 <div class="flex flex-col items-center mb-6">
-                    <!-- UPDATED: H2 text size reduced (md:text-2xl) for better stacking -->
-                    <h2 class="text-base md:text-2xl font-extrabold text-gray-800 relative pb-1">
-                        All Websites & Projects
+                    <!-- Title - UPDATED: Using text-heading-2 global class (24px) -->
+                    <h2 class="text-heading-2 text-gray-800 relative pb-1">
+                        All Tools & Projects
                     </h2>
-                    <!-- Reduced underline width for tighter look -->
                     <div class="w-10 h-[2px] rounded-full bg-accent-main mt-1"></div>
                 </div>
                 
-                <!-- 
-                   Consolidated Grid Section
-                   Removed individual Category wrappers and headers.
-                   Using CSS Grid for 2 columns on mobile and 3 columns on desktop.
-                -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
+                <!-- Consolidated Grid Section -->
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mb-12">
                         
                         <!-- Tool 1: SIP Calculator (Active) -->
-                        <!-- Entire card is now a link, button removed -->
-                        <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-4 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
                             <div class="flex items-start h-full"> 
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-money-bill-trend-up text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
+                                    <i class="fa-solid fa-money-bill-trend-up text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left"> 
-                                    <h4 class="text-sm font-bold text-gray-900 mb-1 group-hover:text-accent-main transition-colors">Inflation-Adjusted SIP Calculator</h4>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600">Plan for long-term goals. Accurately estimate future wealth by factoring in the impact of inflation.</p>
+                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Inflation-Adjusted SIP Calculator</h3>
+                                    <!-- Hardcoded to text-[13px] as per preference -->
+                                    <p class="text-[13px] text-gray-600">Plan for long-term goals. Accurately estimate future wealth by factoring in the impact of inflation.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 2: Mortgage Planner (Active) -->
-                        <a href="https://mortgageplanner.toolblaster.com" class="block w-full rounded-lg p-4 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://mortgageplanner.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
                             <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-house text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
+                                    <i class="fa-solid fa-house text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <h4 class="text-sm font-bold text-gray-900 mb-1 group-hover:text-accent-main transition-colors">Mortgage Planner & Calculators</h4>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600">A powerful tool to plan your home loan payments, visualize interest, and structure your mortgage effectively.</p>
+                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Mortgage Planner & Calculators</h3>
+                                    <!-- Hardcoded to text-[13px] -->
+                                    <p class="text-[13px] text-gray-600">A powerful tool to plan your home loan payments, visualize interest, and structure your mortgage effectively.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 3: Stories & Rhymes (Active) -->
-                        <a href="https://kids.toolblaster.com" class="block w-full rounded-lg p-4 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://kids.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
                             <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-wand-magic-sparkles text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <h4 class="text-sm font-bold text-gray-900 mb-1 group-hover:text-accent-main transition-colors">Stories & Rhymes for Kids</h4>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600">A safe, ad-free world of classic and original tales designed to entertain, educate, and inspire young readers.</p>
+                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Stories & Rhymes for Kids</h3>
+                                    <!-- Hardcoded to text-[13px] -->
+                                    <p class="text-[13px] text-gray-600">A safe, ad-free world of classic and original tales designed to entertain, educate, and inspire young readers.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 4: SEO Tools (Active) -->
-                        <a href="https://bestseotools.toolblaster.com" class="block w-full rounded-lg p-4 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://bestseotools.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
                             <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-magnifying-glass text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
+                                    <i class="fa-solid fa-magnifying-glass text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <h4 class="text-sm font-bold text-gray-900 mb-1 group-hover:text-accent-main transition-colors">Best SEO Tools: Comparison</h4>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600">Expert-curated comparison of top SEO platforms (Semrush vs. KWFinder) to boost your digital marketing strategy.</p>
+                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Best SEO Tools: Comparison</h3>
+                                    <!-- Hardcoded to text-[13px] -->
+                                    <p class="text-[13px] text-gray-600">Expert-curated comparison of top SEO platforms (Semrush vs. KWFinder) to boost your digital marketing strategy.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 5: Calculator Hub (Coming Soon) -->
-                        <!-- Kept as DIV because it's not ready to launch yet -->
-                        <div class="w-full rounded-lg p-4 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
+                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
                             <div class="flex items-start">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
-                                    <i class="fa-solid fa-layer-group text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
+                                    <i class="fa-solid fa-layer-group text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <!-- Flex container for Title and Badge to ensure proper alignment -->
                                     <div class="flex justify-between items-center mb-1">
-                                        <h4 class="text-sm font-bold text-gray-900">Financial Calculator's Hub</h4>
+                                        <h3 class="text-sm font-bold text-gray-900">Financial Calculator's Hub</h3>
                                         <div class="bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap ml-2">
                                             Coming Soon
                                         </div>
                                     </div>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600 mb-2">India's most powerful and user-friendly financial toolkit is here to help you plan, save, and invest.</p>
+                                    <!-- Hardcoded to text-[13px] -->
+                                    <p class="text-[13px] text-gray-600 mb-2">India's most powerful and user-friendly financial toolkit is here to help you plan, save, and invest.</p>
                                 </div>
                             </div>
                         </div>
 
                          <!-- Tool 6: HP Exam Prep (Coming Soon) -->
-                        <!-- Kept as DIV because it's not ready to launch yet -->
-                        <div class="w-full rounded-lg p-4 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
+                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
                             <div class="flex items-start">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
-                                    <i class="fa-solid fa-graduation-cap text-xs sm:text-lg"></i>
+                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
+                                    <i class="fa-solid fa-graduation-cap text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <!-- Flex container for Title and Badge to ensure proper alignment -->
                                     <div class="flex justify-between items-center mb-1">
-                                        <h4 class="text-sm font-bold text-gray-900">HP Exam Prep Portal</h4>
-                                        <div class="bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap ml-2">
+                                        <h3 class="text-sm font-bold text-gray-900 pr-16">HP Exam Prep Portal</h3>
+                                        <!-- Adjusted absolute position for dense style -->
+                                        <div class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
                                             Coming Soon
                                         </div>
                                     </div>
-                                    <!-- UPDATED: Font size increased to text-sm (14px) -->
-                                    <p class="text-sm text-gray-600 mb-2">Master HPPSC, HPRCA, Patwari, HRTC, TET, High Court & Police exams with expert GK, Aptitude & Technical resources.</p>
+                                    <!-- Hardcoded to text-[13px] -->
+                                    <p class="text-[13px] text-gray-600 mb-2">Master HPPSC, HPRCA, Patwari, HRTC, TET, High Court & Police exams with expert GK, Aptitude & Technical resources.</p>
                                 </div>
                             </div>
                         </div>
@@ -213,61 +216,13 @@
         </div>
     </main>
     
-    <!-- Modal for Privacy, About, and Contact -->
-    <div id="page-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4 hidden">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] flex flex-col">
-            <!-- Modal Header -->
-            <div class="flex justify-between items-center p-4 border-b border-gray-300">
-                <h3 id="modal-title" class="text-xl font-bold text-gray-800"></h3>
-                <!-- UPDATED: Modal close button color changed to accent-main -->
-                <button id="modal-close-btn" class="text-accent-main hover:text-accent-dark transition duration-200">
-                    <!-- Replaced Lucide 'x' with FontAwesome 'fa-xmark' -->
-                    <i class="fa-solid fa-xmark text-2xl"></i>
-                </button>
-            </div>
-            
-            <!-- Modal Content (Scrollable) -->
-            <div class="p-6 overflow-y-auto space-y-4 text-sm text-gray-700">
-                
-                <!-- Privacy Policy Content -->
-                <div id="privacy-content" class="modal-page hidden">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-900">Privacy Policy for Toolblaster.com</h4>
-                    <p class="mb-2">Your privacy is important to us. This privacy statement explains the personal data Toolblaster.com processes, how we process it, and for what purposes.</p>
-                    
-                    <h5 class="font-semibold mt-3 mb-1 text-gray-800">Data We Collect</h5>
-                    <p class="mb-2">We do not collect any personal data directly from users of our calculator tools. Any data you enter into the calculators (such as financial figures) is processed in your browser and is not stored on our servers.</p>
+    <!-- Footer Placeholder (CLS Fix: Min-height reserved) -->
+    <div id="app-footer" class="min-h-[80px]"></div>
 
-                    <h5 class="font-semibold mt-3 mb-1 text-gray-800">Cookies and Advertising</h5>
-                    <p class="mb-2">We may use third-party advertising companies, such as Google AdSense, to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
-                    <p class="mb-2">Google's use of the DART cookie enables it to serve ads to users based on their visit to our sites and other sites on the Internet. Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy.</p>
-
-                    <h5 class="font-semibold mt-3 mb-1 text-gray-800">Links to Other Websites</h5>
-                    <p class="mb-2">Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst visiting such sites.</p>
-                </div>
-
-                <!-- About Us Content -->
-                <div id="about-content" class="modal-page hidden">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-900">About Toolblaster.com</h4>
-                    <p class="mb-2">Toolblaster.com is a digital hub created by Vikas Rana, dedicated to providing high-quality, free, and easy-to-use tools for everyone. Our mission is to simplify complex tasks, whether it's financial planning, creative learning, or digital marketing.</p>
-                    <p class="mb-2">We believe that access to good tools and information should be free. From our Inflation-Adjusted SIP Calculator to our collection of kids' stories and SEO resources, every project is built with care, precision, and a focus on the user.</p>
-                    <p>Thank you for visiting, and we hope our tools help you achieve your goals.</p>
-                </div>
-
-                <!-- Contact Us Content -->
-                <div id="contact-content" class="modal-page hidden">
-                    <h4 class="text-lg font-semibold mb-2 text-gray-900">Contact Us</h4>
-                    <p class="mb-2">Have a question, suggestion, or feedback? We'd love to hear from you.</p>
-                    <p>You can reach out to us by email at: <strong class="text-accent-main">vikas@toolblaster.com</strong></p>
-                    <p class="mt-2">We try to respond to all inquiries as quickly as possible.</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-40 w-full bg-gray-900 text-white p-4 shadow-lg md:flex md:items-center md:justify-between md:p-6">
-        <p class="text-sm md:text-base mb-3 md:mb-0">
+    <!-- Cookie Consent Banner - Updated to use Tailwind utility classes for toggling -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-40 w-full bg-gray-900 text-white p-4 shadow-lg md:flex md:items-center md:justify-between md:p-6 translate-y-full transition-transform duration-300 ease-in-out">
+        <!-- UPDATED: Using text-article-p global class (13px) -->
+        <p class="text-article-p md:text-base mb-3 md:mb-0">
             We use cookies to improve your experience and to show you relevant ads. By using this site, you agree to our <a id="privacy-link-cookie" class="font-bold text-accent-main hover:underline cursor-pointer">Privacy Policy</a>.
         </p>
         <button id="accept-cookies" class="w-full md:w-auto bg-accent-main text-white font-bold py-2 px-6 rounded-lg text-sm hover:bg-accent-dark transition duration-200">
@@ -275,101 +230,10 @@
         </button>
     </div>
 
-    <!-- Footer updated for AdSense compliance with required links -->
-    <!-- UPDATED: Replaced concave-top with rounded-t-[2.5rem] for large, smooth curve -->
-    <footer class="bg-gray-800 text-gray-400 text-center py-6 px-4 mt-8 rounded-t-[2.5rem]">
-        <!-- UPDATED: Changed max-w-[1100px] to max-w-[1150px] -->
-        <div class="container mx-auto max-w-[1150px] flex flex-col sm:flex-row justify-between items-center">
-            <p class="text-sm mb-2 sm:mb-0">&copy; 2025 Toolblaster.com by Vikas Rana. All Rights Reserved.</p>
-            <nav class="flex gap-4">
-                <!-- AdSense requires a Privacy Policy page -->
-                <a id="privacy-link" class="text-sm hover:text-white transition duration-200 cursor-pointer">Privacy Policy</a>
-                <a id="about-link" class="text-sm hover:text-white transition duration-200 cursor-pointer">About Us</a>
-                <!-- AdSense requires a Contact page -->
-                <a id="contact-link" class="text-sm hover:text-white transition duration-200 cursor-pointer">Contact Us</a>
-            </nav>
-        </div>
-    </footer>
-
-    <!-- Script to render Lucide icons removed. Replaced with FontAwesome CDN in <head> -->
+    <!-- Script to render Lucide icons and load Components -->
+    <script src="js/header-footer.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Lucide icons script removed
-
-            // Modal Javascript
-            const modal = document.getElementById('page-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            
-            const modalPages = {
-                'privacy': {
-                    link: document.getElementById('privacy-link'),
-                    content: document.getElementById('privacy-content'),
-                    title: 'Privacy Policy'
-                },
-                'about': {
-                    link: document.getElementById('about-link'),
-                    content: document.getElementById('about-content'),
-                    title: 'About Us'
-                },
-                'contact': {
-                    link: document.getElementById('contact-link'),
-                    content: document.getElementById('contact-content'),
-                    title: 'Contact Us'
-                }
-            };
-            
-            const allModalPages = document.querySelectorAll('.modal-page');
-            // Get the privacy link from the cookie banner as well
-            const privacyLinkCookie = document.getElementById('privacy-link-cookie');
-
-            const openModal = (pageId) => {
-                if (modal && modalPages[pageId]) {
-                    // Set title
-                    modalTitle.textContent = modalPages[pageId].title;
-                    
-                    // Hide all pages
-                    allModalPages.forEach(page => page.classList.add('hidden'));
-                    
-                    // Show target page
-                    modalPages[pageId].content.classList.remove('hidden');
-                    
-                    // Show modal
-                    modal.classList.remove('hidden');
-                    // Removed lucide.createIcons() call
-                }
-            };
-
-            const closeModal = () => {
-                if (modal) {
-                    modal.classList.add('hidden');
-                }
-            };
-
-            // Add event listeners for links
-            Object.keys(modalPages).forEach(key => {
-                if (modalPages[key].link) {
-                    modalPages[key].link.addEventListener('click', () => openModal(key));
-                }
-            });
-            // Add listener for the cookie banner's privacy link
-            if (privacyLinkCookie) {
-                privacyLinkCookie.addEventListener('click', () => openModal('privacy'));
-            }
-
-            // Add event listeners for closing modal
-            if (modalCloseBtn) {
-                modalCloseBtn.addEventListener('click', closeModal);
-            }
-            if (modal) {
-                // Close modal when clicking on the overlay (outside the content box)
-                modal.addEventListener('click', (event) => {
-                    if (event.target === modal) {
-                        closeModal();
-                    }
-                });
-            }
-
             // Cookie Banner Javascript
             const cookieBanner = document.getElementById('cookie-banner');
             const acceptCookiesBtn = document.getElementById('accept-cookies');
@@ -379,14 +243,16 @@
                 if (!localStorage.getItem('cookiesAccepted')) {
                     // Show the banner
                     setTimeout(() => {
-                         cookieBanner.classList.add('show');
+                         cookieBanner.classList.remove('translate-y-full');
+                         cookieBanner.classList.add('translate-y-0');
                     }, 500); // Small delay
                 }
 
                 // Set cookie and hide banner on accept
                 acceptCookiesBtn.addEventListener('click', () => {
                     localStorage.setItem('cookiesAccepted', 'true');
-                    cookieBanner.classList.remove('show');
+                    cookieBanner.classList.remove('translate-y-0');
+                    cookieBanner.classList.add('translate-y-full');
                     // Hide it completely after transition
                     setTimeout(() => {
                         cookieBanner.style.display = 'none';
