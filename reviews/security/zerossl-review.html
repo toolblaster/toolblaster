@@ -98,21 +98,23 @@
     <!-- CLS Prevention: Header Placeholder -->
     <div id="app-header" class="min-h-[56px] w-full relative z-20 bg-[#0f1115]"></div>
 
-    <main class="flex-grow container mx-auto max-w-site px-4 sm:px-6 pb-8 pt-0 md:pb-12">
+    <!-- UPDATED: Reduced vertical padding for denser layout -->
+    <main class="flex-grow container mx-auto max-w-site px-4 sm:px-6 pb-6 pt-0 md:pb-8">
         
         <!-- Global Ad Space Container -->
         <div id="app-ad-space" class="w-full h-[100px]"></div>
 
-        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <!-- UPDATED: Reduced gap -->
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
             
             <!-- LEFT COLUMN: Article Content (80% Width) -->
             <div class="w-full lg:w-[80%]">
                 
-                <!-- Breadcrumb Updated -->
-                <nav class="text-xs text-gray-500 mb-6 font-medium">
+                <!-- Breadcrumb -->
+                <!-- UPDATED: Reduced margin -->
+                <nav class="text-xs text-gray-500 mb-3 font-medium">
                     <a href="/" class="hover:text-accent-main transition-colors">Home</a> 
                     <span class="mx-2">/</span> 
-                    <!-- FIXED: Changed Blog to Reviews -->
                     <a href="/reviews/" class="hover:text-accent-main transition-colors">Reviews</a>
                     <span class="mx-2">/</span> 
                     <span class="text-gray-500">Security</span>
@@ -121,21 +123,22 @@
                 </nav>
 
                 <!-- Article Header -->
-                <header class="mb-8 text-center sm:text-left">
-                    <span class="inline-block bg-green-100 text-green-800 text-[11px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">Cybersecurity Tools</span>
-                    <h1 class="text-heading-1 text-gray-900 mb-4 tracking-tight leading-tight">
+                <!-- UPDATED: Reduced margin and padding -->
+                <header class="mb-5 text-center sm:text-left">
+                    <span class="inline-block bg-green-100 text-green-800 text-[11px] font-bold px-2 py-1 rounded mb-2 uppercase tracking-wider">Cybersecurity Tools</span>
+                    <h1 class="text-heading-1 text-gray-900 mb-2 tracking-tight leading-tight">
                         ZeroSSL Review: Is It Finally Time to Ditch Paid SSL?
                     </h1>
-                    <p class="text-article-p-lg text-gray-600 mb-6 italic">
+                    <p class="text-article-p-lg text-gray-600 mb-4 italic">
                         We tested the dashboard, ACME API, and free tier limits. Here is the unfiltered truth about securing your domain with robust HTTPS encryption for $0.
                     </p>
                     
                     <!-- Author Block -->
-                    <div class="flex items-center justify-center sm:justify-start space-x-3 border-t border-b border-gray-200 py-4">
+                    <div class="flex items-center justify-center sm:justify-start space-x-3 border-t border-b border-gray-200 py-3">
                         <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
                         <div class="text-left">
                             <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
-                            <p class="text-xs text-gray-500">Updated: Dec 2025 • 12 min read</p>
+                            <p class="text-xs text-gray-500">Updated: Dec 2025 â€¢ 12 min read</p>
                         </div>
                     </div>
                 </header>
@@ -144,27 +147,27 @@
                 <article class="prose prose-lg max-w-none text-gray-700">
                     
                     <!-- THE HOOK -->
-                    <!-- UPDATED: Removed drop-cap classes, applied red color to first word 'In' -->
-                    <p class="text-article-p leading-relaxed mb-6">
+                    <p class="text-article-p leading-relaxed mb-3">
                         <span class="text-accent-main font-bold">In</span> today's digital landscape, <strong>website security</strong> isn't just a technical requirement; it's a fundamental pillar of user trust and SEO. If a visitor sees "Not Secure" next to your URL in Chrome or Safari, they run. They don't just leave; you lose credibility, potential revenue, and search engine ranking. For years, the SSL market offered a binary choice: pay legacy providers like GoDaddy or DigiCert $70/year for a standard padlock icon, or struggle with complex command-line tools for <strong>Let's Encrypt</strong>.
                     </p>
-                    <p class="text-article-p leading-relaxed mb-8">
+                    <p class="text-article-p leading-relaxed mb-5">
                         Enter <strong>ZeroSSL</strong>. It entered the scene promising the accessibility and support of a premium <strong>Certificate Authority (CA)</strong> with the disruptive pricing model of Let's Encrypt (free). But is it truly reliable enough for mission-critical e-commerce sites? Does it support modern encryption standards? Or is it just another "freemium" trap designed to upsell you? I integrated it into three live projects this week - a WordPress blog, a custom React app, and an e-commerce store - to test its <strong>HTTPS encryption</strong> standards deeply. Here is what I found.
                     </p>
 
                     <!-- KEY TAKEAWAY BOX -->
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-10 shadow-sm">
-                        <h3 class="text-heading-3 text-blue-900 mb-2">🚀 The Bottom Line Up Front</h3>
+                    <!-- UPDATED: Reduced padding and margin -->
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6 shadow-sm">
+                        <h3 class="text-heading-3 text-blue-900 mb-2">ðŸš€ The Bottom Line Up Front</h3>
                         <p class="text-article-p text-blue-800">
                             ZeroSSL is currently the most user-friendly interface for free <strong>SSL/TLS certificates</strong>. It beats Let's Encrypt for beginners because it offers a full <strong>visual dashboard</strong> for managing keys, monitoring expirations, and validating domains. However, the free tier has strict limits (3 manual certifications per account) that power users and agencies need to navigate carefully.
                         </p>
                     </div>
 
                     <!-- SECTION CONTAINER 1: What is ZeroSSL -->
-                    <!-- UPDATED: Replaced manual classes with global .card-section -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="what-is-zerossl">What Actually is ZeroSSL?</h2>
-                        <p class="text-article-p mb-4">
+                    <!-- UPDATED: Added overrides (!p-4 !mb-5) for denser card -->
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="what-is-zerossl">What Actually is ZeroSSL?</h2>
+                        <p class="text-article-p mb-3">
                             Technically, ZeroSSL started as a simple UI for Let's Encrypt but has evolved into a fully independent, trusted Certificate Authority (CA). Here are the core specs:
                         </p>
                         <ul class="list-disc pl-5 space-y-2 mb-0 text-article-p marker:text-accent-main text-gray-600">
@@ -175,9 +178,9 @@
                     </section>
 
                     <!-- SECTION CONTAINER 2: Management Console -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="management-console">The Management Console: A UX Breakthrough</h2>
-                        <p class="text-article-p mb-4">
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="management-console">The Management Console: A UX Breakthrough</h2>
+                        <p class="text-article-p mb-3">
                             One of the primary reasons developers dread SSL management is the lack of visibility. ZeroSSL changes this dynamic by providing a centralized <strong>SSL management console</strong> that acts as a command center for your security.
                         </p>
                         <!-- Dense Style Grid Layout -->
@@ -202,8 +205,8 @@
                     </section>
 
                     <!-- SECTION CONTAINER 3: Feature Comparison -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0">ZeroSSL vs Let's Encrypt</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0">ZeroSSL vs Let's Encrypt</h2>
                         <div class="overflow-hidden rounded-lg border border-gray-200">
                             <table class="w-full text-left text-sm">
                                 <thead class="bg-gray-100 text-gray-900 font-bold uppercase text-xs">
@@ -240,14 +243,14 @@
                     </section>
 
                     <!-- SECTION CONTAINER 4: Feature Deep Dive -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="feature-deep-dive">Feature Deep Dive: Beyond the Basics</h2>
-                        <p class="text-article-p mb-6">
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="feature-deep-dive">Feature Deep Dive: Beyond the Basics</h2>
+                        <p class="text-article-p mb-4">
                             ZeroSSL isn't just a basic certificate issuer; it's a full-stack security platform. Here is a breakdown of the critical features usually hidden in technical documentation.
                         </p>
 
                         <h3 class="text-heading-3 text-gray-900 mt-6 mb-2">1. 90-Day vs. 1-Year Certificates</h3>
-                        <ul class="list-disc pl-5 space-y-2 mb-6 text-article-p text-gray-600">
+                        <ul class="list-disc pl-5 space-y-2 mb-4 text-article-p text-gray-600">
                             <li><strong>Free (90-Day):</strong> The standard for automated security. Limits the window of opportunity for compromised keys. Requires <strong>SSL certificate renewal</strong> every 3 months.</li>
                             <li><strong>Premium (1-Year):</strong> Set it and forget it. Ideal for legacy clients or corporate environments with strict change management policies.</li>
                         </ul>
@@ -263,15 +266,15 @@
                     </section>
 
                     <!-- SECTION CONTAINER 5: Hands-On Verification -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="hands-on-verification">Hands-On: The Verification Process</h2>
-                        <p class="text-article-p mb-6">
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="hands-on-verification">Hands-On: The Verification Process</h2>
+                        <p class="text-article-p mb-4">
                             This is where ZeroSSL shines for non-technical users. <strong>Domain Validation (DV)</strong> is often the biggest hurdle in securing a website. Typically, you have to mess with complex DNS TXT records and wait hours for propagation.
                         </p>
-                        <p class="text-article-p mb-6">
+                        <p class="text-article-p mb-4">
                             With ZeroSSL, I utilized the <strong>HTTP File Upload</strong> method for instant verification, which bypasses DNS delays entirely:
                         </p>
-                        <div class="bg-gray-50 rounded-lg p-5 border-2 border-gray-300 mb-6">
+                        <div class="bg-gray-50 rounded-lg p-5 border-2 border-gray-300 mb-4">
                             <ol class="list-decimal pl-5 space-y-3 text-article-p text-gray-700">
                                 <li><strong>Generate CSR:</strong> Enter domains in dashboard (auto-generated CSR).</li>
                                 <li><strong>Download Auth File:</strong> Get the tiny text file from the wizard.</li>
@@ -281,7 +284,7 @@
                         </div>
 
                         <!-- VISUAL HIGHLIGHT -->
-                        <div class="p-6 bg-gray-900 rounded-xl text-center shadow-custom-hover transform transition hover:scale-[1.02] duration-300 mb-8">
+                        <div class="p-6 bg-gray-900 rounded-xl text-center shadow-custom-hover transform transition hover:scale-[1.02] duration-300 mb-6">
                             <i class="fa-solid fa-bolt text-yellow-400 text-4xl mb-3"></i>
                             <h3 class="text-heading-3 text-white mb-2">Speed Test Results</h3>
                             <p class="text-article-p text-gray-300">
@@ -329,8 +332,8 @@
                     </section>
 
                     <!-- SECTION CONTAINER 6: Installation -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="installation-guide">Installation: What Happens After Verification?</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="installation-guide">Installation: What Happens After Verification?</h2>
                         <p class="text-article-p mb-4">
                             Once your domain is verified, the "Download" button becomes active. This is another area where ZeroSSL simplifies the process compared to raw ACME clients which just dump files in a hidden directory. You receive a standard <code>.zip</code> file containing three critical components:
                         </p>
@@ -345,8 +348,8 @@
                     </section>
 
                     <!-- SECTION CONTAINER 7: Encryption Standards -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="encryption-standards">Under the Hood: Encryption Standards</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="encryption-standards">Under the Hood: Encryption Standards</h2>
                         <p class="text-article-p mb-6">
                             A pretty dashboard is useless if the encryption is weak. Fortunately, ZeroSSL adheres to the highest industry standards. By default, it uses <strong>2048-bit RSA</strong>, but it also supports modern <strong>ECC (Elliptic Curve Cryptography)</strong>.
                         </p>
@@ -378,13 +381,13 @@
                         </div>
 
                         <div class="bg-gray-50 border-l-4 border-gray-300 p-4 mb-0">
-                            <p class="text-article-p text-gray-700 italic">"<strong>Pro Tip:</strong> If you are optimizing for mobile performance, choose CSR generation with ECC (P-256 or P-384). ECC keys are significantly smaller than RSA keys, resulting in faster TLS handshakes—a critical metric for Core Web Vitals and mobile SEO."</p>
+                            <p class="text-article-p text-gray-700 italic">"<strong>Pro Tip:</strong> If you are optimizing for mobile performance, choose CSR generation with ECC (P-256 or P-384). ECC keys are significantly smaller than RSA keys, resulting in faster TLS handshakesâ€”a critical metric for Core Web Vitals and mobile SEO."</p>
                         </div>
                     </section>
 
                     <!-- SECTION CONTAINER 8: Developer Tools -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="developer-tools">Developer Tools: REST API & ACME</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="developer-tools">Developer Tools: REST API & ACME</h2>
                         <p class="text-article-p mb-4">
                             For developers managing scale, manual uploads are a bottleneck. ZeroSSL offers two powerful automation paths:
                         </p>
@@ -395,8 +398,8 @@
                     </section>
 
                     <!-- SECTION CONTAINER 9: Troubleshooting -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="troubleshooting">Troubleshooting Common Issues</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="troubleshooting">Troubleshooting Common Issues</h2>
                         <p class="text-article-p mb-4">Even with a refined GUI, things can go wrong during the validation phase. Here are common hurdles and fixes:</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-0">
                             <div class="bg-gray-50 p-2.5 rounded border-2 border-gray-300">
@@ -411,15 +414,15 @@
                     </section>
 
                     <!-- SECTION CONTAINER 10: Pricing & Limits -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="limits-pricing">Pricing & Plans Breakdown</h2>
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="limits-pricing">Pricing & Plans Breakdown</h2>
                         <p class="text-article-p mb-6">
                             Nothing is truly free forever in the SaaS world. ZeroSSL offers a "Free Plan," but if you use their <strong>web UI</strong> manually, you are limited to 3 certificates <em>per account lifetime</em>. However, if you use the <strong>ACME protocol</strong> (server-side automation), issuance remains <strong>unlimited</strong>.
                         </p>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             <!-- Free Plan - High Contrast Accent -->
-                            <div class="bg-white border-2 border-accent-main rounded-xl p-6 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                            <div class="bg-white border-2 border-accent-main rounded-xl p-4 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
                                 <div class="absolute top-0 right-0 bg-accent-main text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">BEST START</div>
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Free</h3>
                                 <div class="text-3xl font-black text-gray-900 mb-4">$0<span class="text-sm font-medium text-gray-500">/mo</span></div>
@@ -431,7 +434,7 @@
                             </div>
 
                             <!-- Basic Plan - High Contrast Border -->
-                            <div class="bg-white border-2 border-gray-300 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300">
+                            <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Basic</h3>
                                 <div class="text-3xl font-black text-gray-900 mb-4">$10<span class="text-sm font-medium text-gray-500">/mo</span></div>
                                 <ul class="text-article-p text-gray-600 space-y-3 mb-6">
@@ -442,7 +445,7 @@
                             </div>
 
                             <!-- Premium Plan - High Contrast Border -->
-                            <div class="bg-white border-2 border-gray-300 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300">
+                            <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Premium</h3>
                                 <div class="text-3xl font-black text-gray-900 mb-4">$50<span class="text-sm font-medium text-gray-500">/mo</span></div>
                                 <ul class="text-article-p text-gray-600 space-y-3 mb-6">
@@ -496,8 +499,8 @@
 
                     <!-- NEW: Review Summary & Verdict Box (Replacing old Pros & Cons) -->
                     <!-- UPDATED: Increased border contrast (border-2 border-gray-300) -->
-                    <div class="card-section p-0 bg-white border-2 border-gray-300 rounded-xl shadow-lg overflow-hidden my-10">
-                        <div class="bg-gray-50 p-6 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="bg-white border-2 border-gray-300 rounded-xl shadow-lg overflow-hidden my-6">
+                        <div class="bg-gray-50 p-4 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4">
                             <div>
                                 <h2 class="text-heading-2 text-gray-900 mb-1" id="review-summary">ZeroSSL Review Summary</h2>
                                 <p class="text-xs text-gray-500">Comprehensive analysis based on 3 live projects.</p>
@@ -510,11 +513,10 @@
                             </div>
                         </div>
                         
-                        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-5">
                             <!-- Ratings Column -->
-                            <div class="space-y-4">
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Feature Ratings</h3>
-                                <!-- Rating Item: Value -->
+                            <div class="space-y-3">
+                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-1">Feature Ratings</h3>
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Value for Money</span>
@@ -524,7 +526,6 @@
                                         <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
                                     </div>
                                 </div>
-                                 <!-- Rating Item: Ease -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Ease of Use</span>
@@ -534,7 +535,6 @@
                                         <div class="bg-green-500 h-2 rounded-full" style="width: 98%"></div>
                                     </div>
                                 </div>
-                                 <!-- Rating Item: Features -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Features (Free Tier)</span>
@@ -544,7 +544,6 @@
                                         <div class="bg-yellow-500 h-2 rounded-full" style="width: 90%"></div>
                                     </div>
                                 </div>
-                                <!-- Rating Item: Support -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Support</span>
@@ -554,7 +553,6 @@
                                         <div class="bg-blue-400 h-2 rounded-full" style="width: 80%"></div>
                                     </div>
                                 </div>
-                                <!-- Rating Item: Speed -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Issuance Speed</span>
@@ -564,7 +562,6 @@
                                         <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
                                     </div>
                                 </div>
-                                <!-- Rating Item: Documentation -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>Documentation</span>
@@ -576,9 +573,9 @@
                                 </div>
                             </div>
 
-                            <!-- Pros & Cons Column -->
-                            <div class="space-y-4">
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Verdict Highlights</h3>
+                            <!-- Verdict Highlights Column (Pros & Cons) -->
+                            <div class="space-y-3">
+                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-1">Verdict Highlights</h3>
                                 <div class="space-y-2">
                                     <div class="flex items-start text-[13px] text-gray-600 leading-snug">
                                         <i class="fa-solid fa-check-circle text-green-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
@@ -617,43 +614,43 @@
                         </div>
 
                         <!-- CTA Footer -->
-                        <div class="p-6 bg-gray-50 border-t border-gray-200 text-center">
-                            <a href="https://zerossl.com?fpr=vikas95" target="_blank" rel="nofollow noopener" class="inline-flex items-center justify-center w-full sm:w-auto bg-accent-main text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5">
+                        <div class="p-4 bg-gray-50 border-t border-gray-200 text-center">
+                            <a href="https://zerossl.com?fpr=vikas95" target="_blank" rel="nofollow noopener" class="inline-flex items-center justify-center w-full sm:w-auto bg-accent-main text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5">
                                 Get Secured for Free with ZeroSSL <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
-                            <p class="text-[11px] text-gray-400 mt-3">Free plan available forever. No credit card required for signup.</p>
+                            <p class="text-[11px] text-gray-400 mt-2">Free plan available forever. No credit card required for signup.</p>
                         </div>
                     </div>
 
                     <!-- SECTION CONTAINER 11: FAQ -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="faq">FAQ: Common Questions</h2>
-                        <div class="space-y-4 mb-0">
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="faq">FAQ: Common Questions</h2>
+                        <div class="space-y-3 mb-0">
                             <!-- FAQ Details UPDATED with High Contrast Border -->
-                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-4 cursor-pointer">
+                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer">
                                 <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
                                     <span>Does ZeroSSL improve SEO rankings?</span>
                                     <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
                                 </summary>
-                                <p class="text-article-p text-gray-600 mt-3 pl-2 border-l-2 border-accent-main">
+                                <p class="text-article-p text-gray-600 mt-2 pl-2 border-l-2 border-accent-main">
                                     Absolutely. Google considers HTTPS a confirmed <strong>ranking signal</strong>. A valid SSL certificate ensures user data privacy and prevents browser security warnings that increase bounce rates.
                                 </p>
                             </details>
-                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-4 cursor-pointer">
+                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer">
                                 <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
                                     <span>Is it safer than paid SSL certificates?</span>
                                     <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
                                 </summary>
-                                <p class="text-article-p text-gray-600 mt-3 pl-2 border-l-2 border-accent-main">
+                                <p class="text-article-p text-gray-600 mt-2 pl-2 border-l-2 border-accent-main">
                                     Cryptographically, yes. A free DV (Domain Validated) certificate uses the exact same <strong>256-bit encryption standards</strong> as a paid one. Paid options (OV/EV) offer identity verification for corporations but do not provide stronger data encryption.
                                 </p>
                             </details>
-                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-4 cursor-pointer">
+                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer">
                                 <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
                                     <span>Does it work with cPanel and WordPress?</span>
                                     <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
                                 </summary>
-                                <p class="text-article-p text-gray-600 mt-3 pl-2 border-l-2 border-accent-main">
+                                <p class="text-article-p text-gray-600 mt-2 pl-2 border-l-2 border-accent-main">
                                     Yes. You can manually install the CRT and Key files in cPanel under "SSL/TLS Status", or use WordPress plugins like "WP Encryption" which leverage the ZeroSSL API for automation.
                                 </p>
                             </details>
@@ -661,12 +658,12 @@
                     </section>
 
                     <!-- SECTION CONTAINER 12: Final Verdict -->
-                    <section class="card-section">
-                        <h2 class="text-heading-2 text-gray-900 mb-4 mt-0" id="verdict">Final Verdict</h2>
-                        <p class="text-article-p mb-6">
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="verdict">Final Verdict</h2>
+                        <p class="text-article-p mb-4">
                             ZeroSSL bridges the gap between the developer-focused world of Let's Encrypt and the user-friendly paid market.
                         </p>
-                        <ul class="list-disc pl-5 space-y-2 mb-6 text-article-p text-gray-600">
+                        <ul class="list-disc pl-5 space-y-2 mb-0 text-article-p text-gray-600">
                             <li><strong>Why it Wins:</strong> Combines a visual dashboard with robust ACME automation.</li>
                             <li><strong>Who it's for:</strong> Freelancers, agencies, and SMEs managing multiple sites.</li>
                             <li><strong>Power User Tip:</strong> Use the REST API to bypass manual limits completely.</li>
@@ -679,7 +676,7 @@
                 </article>
 
                 <!-- CTA / Next Steps -->
-                <div class="mt-12 pt-8 border-t border-gray-200 text-center">
+                <div class="mt-8 pt-6 border-t border-gray-200 text-center">
                     <h3 class="text-heading-3 text-gray-800 mb-3">Ready to secure your site?</h3>
                     <a href="https://zerossl.com?fpr=vikas95" target="_blank" rel="nofollow noopener" class="inline-block bg-accent-main text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300">
                         Visit ZeroSSL <i class="fa-solid fa-external-link-alt ml-2 text-sm"></i>
