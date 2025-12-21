@@ -1,26 +1,26 @@
 /**
- * Toolblaster Global Components (Header, Footer, Modals)
+ * Toolblaster Global Components (Header, Sidebar, Footer, Modals, Ads)
  * Handles injection of shared UI elements to ensure consistency across pages.
- * * * DESIGN RULES:
+ * * DESIGN RULES:
  * - Do NOT hardcode colors or font sizes.
- * - Use global classes from 'js/tailwind-config.js':
- * - Text: text-article-p (13px)
- * - Headings: text-heading-1 (40px), text-heading-2 (24px), text-heading-3 (16px)
- * - Do NOT use H4, H5, H6.
+ * - Use global classes from 'js/tailwind-config.js'.
  * * * CLS PREVENTION (MANDATORY):
- * To prevent layout shifts (CLS) as this JS loads, ALL pages must reserve space in HTML:
- * 1. Header Container: <div id="app-header" class="min-h-[56px] w-full relative z-20"></div>
- * 2. Footer Container: <div id="app-footer" class="min-h-[80px]"></div>
+ * To prevent layout shifts (CLS), ALL pages must reserve space in HTML:
+ * 1. Header: <div id="app-header" class="min-h-[56px] w-full relative z-20 bg-[#0f1115]"></div>
+ * 2. Ad Space (Optional): <div id="app-ad-space" class="min-h-[100px] mb-8"></div>
+ * 3. Sidebar (Optional): <aside id="app-sidebar" class="w-full lg:w-[20%] hidden lg:block"></aside>
+ * 4. Footer: <div id="app-footer" class="min-h-[80px]"></div>
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
+    injectAdSpace(); // New Global Ad Space Logic
+    injectSidebar();
     injectFooterAndModals();
 });
 
 /**
  * Injects the Navigation Bar into the #app-header element.
- * Includes the Mobile Menu logic.
  */
 function injectHeader() {
     const headerContainer = document.getElementById('app-header');
@@ -28,17 +28,12 @@ function injectHeader() {
 
     // Determine current path for active state (simple logic)
     const path = window.location.pathname;
-    
-    // Logic to handle root relative paths
-    // If we are in a subfolder (e.g. /articles/), we need to go up one level for assets if not using absolute paths.
-    // For simplicity, we assume root relative paths works (requires a local server).
-    const rootPath = path.includes('/articles/') || path.includes('/reviews/') ? '../' : './';
+    const rootPath = path.includes('/blog/') || path.includes('/reviews/') ? '../' : './';
 
-    // UPDATED: Used Clean URLs (removed index.html) where possible
     const headerHTML = `
         <nav class="relative z-20 border-b border-white/5 bg-[#0f1115]/50 backdrop-blur-sm w-full">
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
-                <!-- Brand / Logo - UPDATED: Point to root '/' for canonical consistency -->
+                <!-- Brand / Logo -->
                 <a href="/" class="flex items-center gap-2 group">
                     <i class="fa-solid fa-bolt text-accent-main text-lg group-hover:text-white transition-colors"></i>
                     <span class="text-white font-bold text-lg tracking-tight">Toolblaster</span>
@@ -47,7 +42,7 @@ function injectHeader() {
                 <!-- Desktop Menu Links -->
                 <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                     <a href="/#projects" class="hover:text-white transition-colors">Tools</a>
-                    <a href="/articles/" class="hover:text-white transition-colors">Articles</a>
+                    <a href="/blog/" class="hover:text-white transition-colors">Blog</a>
                     <a href="/reviews/" class="hover:text-white transition-colors">Reviews</a>
                 </div>
 
@@ -57,11 +52,11 @@ function injectHeader() {
                 </button>
             </div>
 
-            <!-- Mobile Menu Dropdown (Hidden by default) -->
+            <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu" class="hidden md:hidden bg-[#161b22] border-t border-white/10 absolute w-full left-0 top-full shadow-xl z-30">
                 <div class="flex flex-col p-4 gap-4 text-sm text-gray-300 font-medium">
                     <a href="/#projects" class="hover:text-white mobile-link">Tools</a>
-                    <a href="/articles/" class="hover:text-white mobile-link">Articles</a>
+                    <a href="/blog/" class="hover:text-white mobile-link">Blog</a>
                     <a href="/reviews/" class="hover:text-white mobile-link">Reviews</a>
                 </div>
             </div>
@@ -70,15 +65,94 @@ function injectHeader() {
 
     headerContainer.innerHTML = headerHTML;
 
-    // Re-attach Event Listeners for Mobile Menu
+    // Mobile Menu Logic
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
     }
+}
+
+/**
+ * Injects the Global Ad Space content into #app-ad-space.
+ * Ensures consistent styling for the placeholder across all pages.
+ */
+function injectAdSpace() {
+    const adContainer = document.getElementById('app-ad-space');
+    if (!adContainer) return;
+
+    // Standard Ad Placeholder Styling - UPDATED: Removed text
+    const adHTML = `
+        <div class="w-full h-full bg-gray-50 border border-gray-100 rounded-lg flex items-center justify-center">
+            <!-- Ad Space Text Removed -->
+        </div>
+    `;
+
+    adContainer.innerHTML = adHTML;
+}
+
+/**
+ * Injects the Sidebar Content into #app-sidebar.
+ * Automatically generates a Table of Contents from <article> <h2> tags.
+ */
+function injectSidebar() {
+    const sidebarContainer = document.getElementById('app-sidebar');
+    if (!sidebarContainer) return;
+
+    // 1. Auto-Generate Table of Contents (TOC)
+    const article = document.querySelector('article');
+    let tocHTML = '';
+
+    if (article) {
+        const headings = article.querySelectorAll('h2');
+        if (headings.length > 0) {
+            tocHTML = `
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                    <h4 class="text-sm font-bold text-gray-900 mb-3 border-b pb-2">On This Page</h4>
+                    <ul class="text-xs text-gray-600 space-y-2">
+                        ${Array.from(headings).map((h, i) => {
+                            // Ensure every heading has an ID for linking
+                            if (!h.id) {
+                                h.id = `section-${i}`;
+                            }
+                            return `<li><a href="#${h.id}" class="hover:text-accent-main transition-colors">${h.innerText}</a></li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+    }
+
+    // 2. Global "Popular Tools" Widget
+    const toolsWidgetHTML = `
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h4 class="text-sm font-bold text-gray-900 mb-3">Popular Tools</h4>
+            <ul class="space-y-3">
+                <li>
+                    <a href="https://bestseotools.toolblaster.com" class="block group">
+                        <span class="block text-xs font-semibold text-gray-800 group-hover:text-accent-main">SEO Tools Guide</span>
+                        <span class="block text-[10px] text-gray-500">Compare Semrush vs Ahrefs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block group">
+                        <span class="block text-xs font-semibold text-gray-800 group-hover:text-accent-main">SIP Calculator</span>
+                        <span class="block text-[10px] text-gray-500">Plan your investments</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    `;
+
+    // Inject Wrapper and Content
+    sidebarContainer.innerHTML = `
+        <div class="sticky top-24 space-y-8">
+            ${tocHTML}
+            ${toolsWidgetHTML}
+        </div>
+    `;
 }
 
 /**
@@ -136,11 +210,8 @@ function initModals() {
 
     const openModal = (type) => {
         if (!modal) return;
-        
-        // Hide all contents
         allModalPages.forEach(p => p.classList.add('hidden'));
         
-        // Setup content based on type
         let contentId = '';
         let title = '';
 
@@ -158,10 +229,7 @@ function initModals() {
         if (modal) modal.classList.add('hidden');
     };
 
-    // Attach listeners to Footer Links
     document.getElementById('contact-link')?.addEventListener('click', () => openModal('contact'));
-
-    // Close buttons
     modalCloseBtn?.addEventListener('click', closeModal);
     modal?.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
