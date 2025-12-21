@@ -4,7 +4,7 @@ Toolblaster Hub is an all-in-one digital platform serving as a central gateway t
 
 🏗️ Project Architecture
 
-The website is built using a component-based architecture within a static HTML environment. It utilizes vanilla JavaScript to inject shared elements (Header, Footer) and a centralized configuration file for styling, ensuring consistency across all pages (Home, Articles, Reviews).
+The website is built using a component-based architecture within a static HTML environment. It utilises vanilla JavaScript to inject shared elements (Header, Footer) and a centralised configuration file for styling, ensuring consistency across all pages (Home, Blog, Reviews).
 
 Core File Structure
 
@@ -14,7 +14,7 @@ js/header-footer.js: Handles the injection of the Navigation Bar, Footer, and Mo
 
 js/tailwind-config.js: The central design system source of truth.
 
-articles/: Directory for article content.
+blog/: Directory for blog content (formerly articles).
 
 reviews/: Directory for review content.
 
@@ -38,7 +38,7 @@ hero-bg: #121212 (Dark Theme Backgrounds)
 
 2. Typography Hierarchy
 
-A strict hierarchy is enforced to ensure readability across the hub and future articles.
+A strict hierarchy is enforced to ensure readability across the hub and future content.
 
 Element
 
@@ -138,4 +138,4 @@ Responsiveness: Mobile-first design philosophy.
 
 Email: hello@toolblaster.com
 
-Links: Privacy Policy and Contact forms are accessible via the global footer.
+Links: Contact forms are accessible via the global footer.
