@@ -1,20 +1,11 @@
 /**
  * Toolblaster Global Components (Header, Sidebar, Footer, Modals, Ads)
  * Handles injection of shared UI elements to ensure consistency across pages.
- * * DESIGN RULES:
- * - Do NOT hardcode colors or font sizes.
- * - Use global classes from 'js/tailwind-config.js'.
- * * * CLS PREVENTION (MANDATORY):
- * To prevent layout shifts (CLS), ALL pages must reserve space in HTML:
- * 1. Header: <div id="app-header" class="min-h-[56px] w-full relative z-20 bg-[#0f1115]"></div>
- * 2. Ad Space (Optional): <div id="app-ad-space" class="min-h-[100px] mb-8"></div>
- * 3. Sidebar (Optional): <aside id="app-sidebar" class="w-full lg:w-[20%] hidden lg:block"></aside>
- * 4. Footer: <div id="app-footer" class="min-h-[80px]"></div>
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
-    injectAdSpace(); // New Global Ad Space Logic
+    injectAdSpace(); 
     injectSidebar();
     injectFooterAndModals();
 });
@@ -26,7 +17,6 @@ function injectHeader() {
     const headerContainer = document.getElementById('app-header');
     if (!headerContainer) return;
 
-    // Determine current path for active state (simple logic)
     const path = window.location.pathname;
     const rootPath = path.includes('/blog/') || path.includes('/reviews/') ? '../' : './';
 
@@ -65,7 +55,6 @@ function injectHeader() {
 
     headerContainer.innerHTML = headerHTML;
 
-    // Mobile Menu Logic
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -77,16 +66,13 @@ function injectHeader() {
 
 /**
  * Injects the Global Ad Space content into #app-ad-space.
- * Ensures consistent styling for the placeholder across all pages.
  */
 function injectAdSpace() {
     const adContainer = document.getElementById('app-ad-space');
     if (!adContainer) return;
 
-    // Standard Ad Placeholder Styling - UPDATED: Removed text
     const adHTML = `
         <div class="w-full h-full bg-gray-50 border border-gray-100 rounded-lg flex items-center justify-center">
-            <!-- Ad Space Text Removed -->
         </div>
     `;
 
@@ -95,62 +81,78 @@ function injectAdSpace() {
 
 /**
  * Injects the Sidebar Content into #app-sidebar.
- * Automatically generates a Table of Contents from <article> <h2> tags.
+ * Features: Static Tools widget + Sticky Numbered Index/TOC with internal scrolling.
  */
 function injectSidebar() {
     const sidebarContainer = document.getElementById('app-sidebar');
     if (!sidebarContainer) return;
 
-    // 1. Auto-Generate Table of Contents (TOC)
-    const article = document.querySelector('article');
-    let tocHTML = '';
-
-    if (article) {
-        const headings = article.querySelectorAll('h2');
-        if (headings.length > 0) {
-            tocHTML = `
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                    <h4 class="text-sm font-bold text-gray-900 mb-3 border-b pb-2">On This Page</h4>
-                    <ul class="text-xs text-gray-600 space-y-2">
-                        ${Array.from(headings).map((h, i) => {
-                            // Ensure every heading has an ID for linking
-                            if (!h.id) {
-                                h.id = `section-${i}`;
-                            }
-                            return `<li><a href="#${h.id}" class="hover:text-accent-main transition-colors">${h.innerText}</a></li>`;
-                        }).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-    }
-
-    // 2. Global "Popular Tools" Widget
+    // 1. Popular Tools Widget (Static Top)
     const toolsWidgetHTML = `
-        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <h4 class="text-sm font-bold text-gray-900 mb-3">Popular Tools</h4>
+        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50">
+            <h3 class="text-[12px] font-black text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+                <i class="fa-solid fa-fire text-accent-main mr-1.5"></i> Popular Tools
+            </h3>
             <ul class="space-y-3">
                 <li>
                     <a href="https://bestseotools.toolblaster.com" class="block group">
-                        <span class="block text-xs font-semibold text-gray-800 group-hover:text-accent-main">SEO Tools Guide</span>
-                        <span class="block text-[10px] text-gray-500">Compare Semrush vs Ahrefs</span>
+                        <span class="block text-[12px] font-bold text-gray-800 group-hover:text-accent-main transition-colors">SEO Tools Guide</span>
+                        <span class="block text-[10px] text-gray-500 leading-tight">Compare top platform performance.</span>
                     </a>
                 </li>
                 <li>
                     <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block group">
-                        <span class="block text-xs font-semibold text-gray-800 group-hover:text-accent-main">SIP Calculator</span>
-                        <span class="block text-[10px] text-gray-500">Plan your investments</span>
+                        <span class="block text-[12px] font-bold text-gray-800 group-hover:text-accent-main transition-colors">SIP Calculator</span>
+                        <span class="block text-[10px] text-gray-500 leading-tight">Inflation-adjusted wealth planning.</span>
                     </a>
                 </li>
             </ul>
         </div>
     `;
 
-    // Inject Wrapper and Content
+    // 2. Generate Numbered Index (Sticky Bottom with Internal Scroll)
+    const article = document.querySelector('article');
+    let indexWidgetHTML = '';
+
+    if (article) {
+        const headings = article.querySelectorAll('h2');
+        if (headings.length > 0) {
+            indexWidgetHTML = `
+                <div class="sticky top-20 card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)]">
+                    <h3 class="text-[12px] font-black text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2 flex-shrink-0">
+                        <i class="fa-solid fa-list-ul text-accent-main mr-1.5"></i> Review Index
+                    </h3>
+                    
+                    <!-- Internal Scrollable Area for the Index -->
+                    <div class="overflow-y-auto pr-1 flex-grow scrollbar-thin scrollbar-thumb-gray-200">
+                        <ul class="space-y-2">
+                            ${Array.from(headings).map((h, i) => {
+                                if (!h.id) h.id = `section-${i}`;
+                                const num = (i + 1).toString().padStart(2, '0');
+                                return `
+                                <li class="group">
+                                    <a href="#${h.id}" class="flex items-center justify-between">
+                                        <span class="text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2">${h.innerText}</span>
+                                        <span class="flex-shrink-0 w-6 h-4 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
+                                    </a>
+                                </li>`;
+                            }).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-center flex-shrink-0">
+                        <p class="text-[10px] text-gray-400 italic">Updating daily for 2026</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    // Combine Widgets
     sidebarContainer.innerHTML = `
-        <div class="sticky top-24 space-y-8">
-            ${tocHTML}
+        <div class="flex flex-col gap-5">
             ${toolsWidgetHTML}
+            ${indexWidgetHTML}
         </div>
     `;
 }
@@ -165,7 +167,7 @@ function injectFooterAndModals() {
     const footerHTML = `
         <footer class="bg-gray-800 text-gray-400 text-center py-6 px-4 mt-8 rounded-t-[2.5rem]">
             <div class="container mx-auto max-w-site flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-article-p mb-2 sm:mb-0">&copy; 2025 Toolblaster.com by Vikas Rana. All Rights Reserved.</p>
+                <p class="text-article-p mb-2 sm:mb-0">&copy; 2026 Toolblaster.com by Vikas Rana. All Rights Reserved.</p>
                 <nav class="flex gap-4">
                     <a id="contact-link" class="text-article-p hover:text-white transition duration-200 cursor-pointer">Contact Us</a>
                 </nav>
@@ -185,7 +187,6 @@ function injectFooterAndModals() {
                 
                 <!-- Modal Content -->
                 <div class="p-6 overflow-y-auto space-y-4 text-article-p text-gray-700">
-                    <!-- Contact Content -->
                     <div id="contact-content" class="modal-page hidden">
                         <h3 class="text-heading-3 font-semibold mb-2 text-gray-900">Contact Us</h3>
                         <p class="mb-2">Have a question? We'd love to hear from you.</p>
@@ -197,8 +198,6 @@ function injectFooterAndModals() {
     `;
 
     footerContainer.innerHTML = footerHTML;
-
-    // Initialize Modal Logic after injection
     initModals();
 }
 
