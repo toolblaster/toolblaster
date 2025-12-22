@@ -8,13 +8,17 @@
 // INSTRUCTION: Add new reviews to the BEGINNING (TOP) of this array.
 const recentReviews = [
     { 
+        title: "Semrush Review 2025", 
+        url: "/reviews/seo/semrush-review.html", 
+        category: "SEO Tools", 
+        date: "Jan 2025" 
+    },
+    { 
         title: "ZeroSSL Review", 
         url: "/reviews/security/zerossl-review.html", 
         category: "Security", 
         date: "Dec 2025" 
     },
-    // Example of future review:
-    // { title: "Next Review Title", url: "/reviews/category/slug.html", category: "Category", date: "Jan 2026" },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -233,7 +237,7 @@ function injectSidebar() {
 
     // 1. Popular Tools Widget
     const toolsWidgetHTML = `
-        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50">
+        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50 w-full max-w-full">
             <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
                 <i class="fa-solid fa-fire text-accent-main mr-1.5"></i> Popular Tools
             </h3>
@@ -256,10 +260,11 @@ function injectSidebar() {
 
     // 2. Related Reviews Widget (Sidebar Version)
     // Uses the dynamic getReviewListHTML() function
+    // UPDATED: Changed Title from 'Latest Reviews' to 'Other Reviews'
     const reviewsWidgetHTML = `
-        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-white">
+        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-white w-full max-w-full">
             <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
-                <i class="fa-solid fa-book-open text-accent-main mr-1.5"></i> Latest Reviews
+                <i class="fa-solid fa-book-open text-accent-main mr-1.5"></i> Other Reviews
             </h3>
             <ul class="space-y-2">
                 ${getReviewListHTML(false)}
@@ -268,6 +273,8 @@ function injectSidebar() {
     `;
 
     // 3. Table of Contents Widget
+    // UPDATED: Added width constraint classes (w-full max-w-full) to wrapper
+    // UPDATED: Changed width calculation logic to better constrain within sidebar
     const article = document.querySelector('article');
     let indexWidgetHTML = '';
 
@@ -275,7 +282,7 @@ function injectSidebar() {
         const headings = article.querySelectorAll('h2');
         if (headings.length > 0) {
             indexWidgetHTML = `
-                <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300">
+                <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300 w-full max-w-full overflow-hidden">
                     <h3 class="text-[14px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2 flex-shrink-0">
                         <i class="fa-solid fa-list-ul text-accent-main mr-1.5"></i> Review Index
                     </h3>
@@ -287,7 +294,7 @@ function injectSidebar() {
                                 return `
                                 <li class="group">
                                     <a href="#${h.id}" class="toc-link flex items-center justify-between p-1 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
-                                        <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2">${h.innerText}</span>
+                                        <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2 truncate">${h.innerText}</span>
                                         <span class="toc-badge flex-shrink-0 w-6 h-4 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
                                     </a>
                                 </li>`;
@@ -303,7 +310,7 @@ function injectSidebar() {
     }
 
     sidebarContainer.innerHTML = `
-        <div class="flex flex-col gap-5 h-full"> 
+        <div class="flex flex-col gap-5 h-full w-full"> 
             ${toolsWidgetHTML}
             ${reviewsWidgetHTML}
             ${indexWidgetHTML}
@@ -400,21 +407,16 @@ function injectMobileTOC() {
 
 /**
  * Injects a small, compact share widget into the Author block.
+ * UPDATED: Uses querySelectorAll to find ALL share-widget containers and injects into them.
  */
 function injectShareWidget() {
+    // New Logic: Find ANY container with class .share-widget, not just authorBlock injection
+    // This supports manual placement in the HTML (like in Review Template)
+    const shareContainers = document.querySelectorAll('.share-widget');
+    
+    // Fallback: If no .share-widget container exists, try to inject into the author header block
+    // This supports older pages (like ZeroSSL) that rely on JS injection into 'header .flex.border-t.border-b'
     const authorBlock = document.querySelector('header .flex.border-t.border-b');
-    if (!authorBlock || authorBlock.querySelector('.share-widget')) return;
-
-    const leftWrapper = document.createElement('div');
-    leftWrapper.className = 'flex items-center space-x-3 mb-2 sm:mb-0'; 
-
-    while (authorBlock.firstChild) {
-        leftWrapper.appendChild(authorBlock.firstChild);
-    }
-    authorBlock.appendChild(leftWrapper);
-
-    authorBlock.classList.remove('justify-center', 'sm:justify-start', 'space-x-3');
-    authorBlock.classList.add('justify-between', 'flex-wrap', 'gap-y-2'); 
 
     const canonical = document.querySelector('link[rel="canonical"]');
     const pageUrl = canonical ? canonical.href : window.location.href.split('?')[0];
@@ -439,9 +441,6 @@ function injectShareWidget() {
         document.body.removeChild(textArea);
     };
 
-    const shareWidget = document.createElement('div');
-    shareWidget.className = 'share-widget flex items-center gap-2'; 
-    
     const shareItems = [
         { icon: 'fa-brands fa-whatsapp', color: 'hover:bg-[#25D366]', url: `https://api.whatsapp.com/send?text=${encodeURIComponent(pageTitle + ' ' + pageUrl)}`, label: 'WhatsApp' },
         { icon: 'fa-brands fa-facebook-f', color: 'hover:bg-[#1877F2]', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, label: 'Facebook' },
@@ -466,12 +465,42 @@ function injectShareWidget() {
         </button>
     `;
 
-    shareWidget.innerHTML = `
-        <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest hidden md:block mr-1">Share</span>
-        ${buttonsHTML}
+    const widgetHTML = `
+        <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest hidden md:block mr-1">Share</span>
+            ${buttonsHTML}
+        </div>
     `;
 
-    authorBlock.appendChild(shareWidget);
+    // 1. Inject into dedicated containers first
+    if (shareContainers.length > 0) {
+        shareContainers.forEach(container => {
+            if (!container.innerHTML.trim()) { 
+                container.innerHTML = widgetHTML;
+            }
+        });
+    } 
+    // 2. Fallback: Dynamic injection for pages without .share-widget div (ZeroSSL compatibility)
+    else if (authorBlock && !authorBlock.querySelector('.share-buttons-container')) {
+        
+        // Wrapper for author info
+        const leftWrapper = document.createElement('div');
+        leftWrapper.className = 'flex items-center space-x-3 mb-2 sm:mb-0'; 
+        while (authorBlock.firstChild) {
+            leftWrapper.appendChild(authorBlock.firstChild);
+        }
+        authorBlock.appendChild(leftWrapper);
+
+        // Adjust parent layout
+        authorBlock.classList.remove('justify-center', 'sm:justify-start', 'space-x-3');
+        authorBlock.classList.add('justify-between', 'flex-wrap', 'gap-y-2'); 
+
+        // Insert widget
+        const shareWidgetDiv = document.createElement('div');
+        shareWidgetDiv.className = 'share-buttons-container';
+        shareWidgetDiv.innerHTML = widgetHTML;
+        authorBlock.appendChild(shareWidgetDiv);
+    }
 }
 
 /**
