@@ -71,7 +71,7 @@ tailwind.config = {
                 'sm':           ['12px', { lineHeight: '1.5', fontWeight: '400' }],
 
                 // Headings
-                'heading-1':    ['38px', { lineHeight: '1.1', fontWeight: '900' }], 
+                'heading-1':    ['36px', { lineHeight: '1.1', fontWeight: '900' }], 
                 'heading-2':    ['22px', { lineHeight: '1.3', fontWeight: '800' }], 
                 'heading-3':    ['14px', { lineHeight: '1.4', fontWeight: '800' }], 
             },
