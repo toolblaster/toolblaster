@@ -1,141 +1,118 @@
-Toolblaster Hub - Project Documentation
+Toolblaster.com - Tech Review Platform
 
-Toolblaster Hub is an all-in-one digital platform serving as a central gateway to various specialized verticals, including financial planning, government exam preparation, creative learning for kids, and digital marketing tools.
+Toolblaster is a modern, performance-focused static website dedicated to in-depth software reviews and tech tools. This repository contains the source code, design system, and content templates for the platform.
 
-🏗️ Project Architecture
+Latest Update: December 2026 Standards (High Contrast, WCAG AA, Mobile-First)
 
-The website is built using a component-based architecture within a static HTML environment. It utilises vanilla JavaScript to inject shared elements (Header, Footer) and a centralised configuration file for styling, ensuring consistency across all pages (Home, Blog, Reviews).
+📂 Project Structure
 
-Core File Structure
+toolblaster/
+├── index.html              # Homepage
+├── js/
+│   ├── header-footer.js    # Centralized UI logic (Header, Footer, Sidebar, Share Widget, TOC)
+│   └── tailwind-config.js  # Global Design System (Typography, Colors, Layout)
+├── reviews/
+│   ├── index.html          # Reviews Hub
+│   ├── review-template.html # GOLDEN MASTER Template for new reviews
+│   └── security/
+│       └── zerossl-review.html # Production example of the 2026 design standards
+└── ...
 
-index.html: The main entry point and landing page.
 
-js/header-footer.js: Handles the injection of the Navigation Bar, Footer, and Modals. Also manages mobile menu logic.
+🎨 Design System (2026 Standards)
 
-js/tailwind-config.js: The central design system source of truth.
+The site utilizes a centralized Tailwind CSS configuration to ensure consistency across all pages.
 
-blog/: Directory for blog content (formerly articles).
+Layout: Strict 75% Content / 25% Sidebar split on Desktop. Single column on Mobile.
 
-reviews/: Directory for review content.
+Max Width: Locked to 1150px for optimal readability.
 
-🎨 Design System
+Typography:
 
-The design is powered by Tailwind CSS (via CDN) but configured centrally to strictly enforce branding and typography.
+H1: 38px (Extrabold 900)
 
-1. Centralized Configuration (js/tailwind-config.js)
+H2: 22px (Bold 800)
 
-Instead of hardcoding styles in HTML, the site uses a custom configuration to define:
+H3: 14px (Bold 800)
 
-Global Max Width: 1150px (max-w-site)
+Body Text: 12px (High legibility)
 
-Font Family: Inter (English) + Hind (Devanagari/Hindi fallback).
+Colors: High-contrast palette compliant with WCAG AA standards.
 
-Brand Colors:
+Accent: #D9261F (Optimized Red)
 
-accent-main: #E34037 (Primary Red)
+Text: Slate/Zinc scale for better contrast against white backgrounds.
 
-hero-bg: #121212 (Dark Theme Backgrounds)
+Configuration File
 
-2. Typography Hierarchy
+All styles are defined in js/tailwind-config.js. Do not write inline styles unless absolutely necessary. Use the utility classes defined there (e.g., text-article-p, text-heading-1).
 
-A strict hierarchy is enforced to ensure readability across the hub and future content.
+🧩 Centralized Components (header-footer.js)
 
-Element
+To maintain maintainability, key UI elements are injected via JavaScript. Do not hardcode these in HTML files.
 
-Size
+Global Header & Footer: Automatically injected into #app-header and #app-footer.
 
-Weight
+Sticky Sidebar (Desktop):
 
-Tailwind Class
+Automatically generates a Table of Contents (TOC) based on <h2> tags in the article.
 
-Notes
+Includes "Popular Tools" widget.
 
-H1
+Features ScrollSpy logic to highlight the active section while reading.
 
-40px
+Mobile TOC: A foldable accordion menu injected at the very top of the article for mobile users.
 
-Black (900)
+Share Widget: Automatically injects high-contrast social icons (WhatsApp, Telegram, X, LinkedIn, Copy Link) into the author header block.
 
-text-heading-1
+Back to Top: A floating button that appears after scrolling down 300px.
 
-Main Page Titles
+📝 How to Create a New Review
 
-H2
+We have created a Golden Master template to streamline the creation of new content.
 
-24px
+Duplicate the Template:
+Copy reviews/review-template.html to your desired location (e.g., reviews/marketing/new-tool.html).
 
-ExtraBold (800)
+Fill in Metadata:
+Update the <title>, <meta name="description">, and <link rel="canonical"> tags.
 
-text-heading-2
+Update JSON-LD Schema:
+Edit the structured data blocks at the top of the file with the specific tool name, author, and rating.
 
-Section Titles
+Write Content:
 
-H3
+Replace [Tool Name] placeholders.
 
-16px
+Use the Flexible Content Blocks provided in the template (commented out sections) for things like:
 
-Bold (700)
+Comparison Tables (Compact style)
 
-text-heading-3
+Feature Grids
 
-Subsections
+Pricing Cards
 
-Body
+Performance Benchmarks
 
-13px
+Publish:
+No extra JavaScript work is needed. The header-footer.js script will automatically detect your new headings, build the sidebar/mobile TOC, and attach the share widget.
 
-Normal
+🛠 Development & Testing
 
-text-article-p
+Tailwind: The project uses the CDN version of Tailwind for rapid prototyping, configured via js/tailwind-config.js.
 
-Standard text
+Icons: FontAwesome (Free tier) is used for all UI icons.
 
-Note: H4, H5, and H6 are intentionally avoided to maintain a clean visual depth.
+Browser Support: Tested on Chrome, Firefox, Safari (Mobile & Desktop).
 
-3. Layout & CLS Prevention
+Accessibility Checklist (Manual)
 
-To prevent Cumulative Layout Shift (CLS) caused by JavaScript injection, the layout reserves fixed vertical space in the HTML before scripts load:
+[x] Ensure text contrast ratio is > 4.5:1.
 
-Header: min-h-[56px]
+[x] Touch targets on mobile must be at least 32px (Social icons are optimized).
 
-Footer: min-h-[80px]
+[x] alt tags required for all images (or placeholders).
 
-🚀 Live Tools & Verticals
+[x] Layout should never exceed 1150px width.
 
-The homepage currently features a dense grid layout showcasing the following active projects:
-
-Inflation-Adjusted SIP Calculator: Financial planning tool.
-
-Mortgage Planner: Home loan structuring and analysis.
-
-Stories & Rhymes for Kids: Educational content platform.
-
-Best SEO Tools Comparison: Expert reviews on digital marketing software.
-
-🔜 Upcoming Projects
-
-Financial Calculator's Hub: A complete suite of Indian financial tools.
-
-HP Exam Prep Portal: Preparation resources for HPPSC, HPRCA, and other Himachal Pradesh government exams.
-
-🔧 Technical Details
-
-Framework: Vanilla HTML5 / JS.
-
-Styling: Tailwind CSS (CDN Mode with Custom Config).
-
-Icons: FontAwesome 6 (Solid style).
-
-SEO: * Canonical tags implemented (https://toolblaster.com/).
-
-Robots set to index, follow.
-
-Clean URLs (no .html extensions in links).
-
-Responsiveness: Mobile-first design philosophy.
-
-📬 Contact & Support
-
-Email: hello@toolblaster.com
-
-Links: Contact forms are accessible via the global footer.
+Maintained by Toolblaster Engineering Team
