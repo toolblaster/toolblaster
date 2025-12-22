@@ -3,6 +3,13 @@
  * Handles injection of shared UI elements to ensure consistency across pages.
  */
 
+// CENTRALIZED REVIEW DATA
+// Add new reviews here. The widgets will automatically update (Max 5 shown).
+const recentReviews = [
+    // Example format:
+    // { title: "ZeroSSL Review", url: "/reviews/security/zerossl-review.html", category: "Security", date: "Dec 2026" },
+];
+
 document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
     injectAdSpace(); 
@@ -11,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectShareWidget(); 
     injectFooterAndModals();
     injectBackToTop();
+    injectMobileRelated(); // Function updated to place widget below CTA
 });
 
 /**
@@ -144,15 +152,58 @@ function injectAdSpace() {
 }
 
 /**
+ * Generates the HTML for review list items.
+ * Handles the empty state with a "Coming Soon" placeholder.
+ */
+function getReviewListHTML(isMobile = false) {
+    const currentPath = window.location.pathname;
+    
+    // Filter out the current page so we don't link to ourselves
+    const displayReviews = recentReviews.filter(r => !currentPath.includes(r.url)).slice(0, 5);
+    
+    if (displayReviews.length === 0) {
+        // Placeholder State
+        return `
+            <li class="opacity-70">
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded border border-dashed border-gray-300">
+                    <div class="flex-shrink-0 w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-gray-400">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[11px] font-bold text-gray-600 leading-tight">More reviews coming soon</span>
+                        <span class="block text-[9px] text-gray-400">Stay tuned for updates</span>
+                    </div>
+                </div>
+            </li>
+        `;
+    }
+
+    return displayReviews.map(review => `
+        <li>
+            <a href="${review.url}" class="group flex items-start gap-3 p-2 rounded hover:bg-gray-50 transition-colors">
+                <div class="flex-shrink-0 w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors">
+                    <i class="fa-solid fa-star text-[10px]"></i>
+                </div>
+                <div>
+                    <span class="block text-[11px] font-bold text-gray-800 group-hover:text-accent-main leading-tight transition-colors line-clamp-2">${review.title}</span>
+                    <span class="block text-[9px] text-gray-400 mt-0.5">${review.date} • ${review.category}</span>
+                </div>
+            </a>
+        </li>
+    `).join('');
+}
+
+/**
  * Injects the Sidebar Content into #app-sidebar.
  */
 function injectSidebar() {
     const sidebarContainer = document.getElementById('app-sidebar');
     if (!sidebarContainer) return;
 
+    // 1. Popular Tools Widget
     const toolsWidgetHTML = `
         <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50">
-            <h3 class="text-[14px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+            <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
                 <i class="fa-solid fa-fire text-accent-main mr-1.5"></i> Popular Tools
             </h3>
             <ul class="space-y-3">
@@ -172,6 +223,19 @@ function injectSidebar() {
         </div>
     `;
 
+    // 2. Related Reviews Widget (Sidebar Version)
+    const reviewsWidgetHTML = `
+        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-white">
+            <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+                <i class="fa-solid fa-book-open text-accent-main mr-1.5"></i> Latest Reviews
+            </h3>
+            <ul class="space-y-2">
+                ${getReviewListHTML(false)}
+            </ul>
+        </div>
+    `;
+
+    // 3. Table of Contents Widget
     const article = document.querySelector('article');
     let indexWidgetHTML = '';
 
@@ -209,12 +273,54 @@ function injectSidebar() {
     sidebarContainer.innerHTML = `
         <div class="flex flex-col gap-5 h-full"> 
             ${toolsWidgetHTML}
+            ${reviewsWidgetHTML}
             ${indexWidgetHTML}
         </div>
     `;
 
     if (article) {
         initScrollSpy();
+    }
+}
+
+/**
+ * Injects Related Reviews at the end of the article on Mobile.
+ * Uses a unique design to differentiate from the main content.
+ */
+function injectMobileRelated() {
+    const articleContent = document.querySelector('article');
+    // Only inject if on mobile (screen width check or CSS class check) AND article exists
+    // We stick to CSS hiding logic for reliability on resize
+    if (!articleContent) return;
+    
+    if (document.getElementById('mobile-related-widget')) return;
+
+    // TARGET PARENT ELEMENT TO INSERT AFTER SIBLING CTA
+    // The structure is usually Article -> CTA Div -> End of Column
+    // By appending to the parent container, we ensure it sits at the very bottom of the main content column,
+    // after the CTA which is a sibling of the article.
+    const parentContainer = articleContent.parentElement;
+
+    const mobileRelatedHTML = `
+        <div id="mobile-related-widget" class="mt-10 pt-6 border-t-4 border-gray-100 lg:hidden">
+            <h3 class="flex items-center gap-2 text-[14px] font-black text-gray-900 mb-4 uppercase tracking-tight">
+                <span class="w-1 h-5 bg-accent-main rounded-r"></span>
+                You might also like
+            </h3>
+            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-3">
+                <ul class="space-y-3">
+                    ${getReviewListHTML(true)}
+                </ul>
+            </div>
+        </div>
+    `;
+
+    // Append to the end of the parent container
+    if (parentContainer) {
+        parentContainer.insertAdjacentHTML('beforeend', mobileRelatedHTML);
+    } else {
+        // Fallback if no parent exists (edge case)
+        articleContent.insertAdjacentHTML('afterend', mobileRelatedHTML);
     }
 }
 
@@ -309,7 +415,7 @@ function injectShareWidget() {
     const shareItems = [
         { icon: 'fa-brands fa-whatsapp', color: 'hover:bg-[#25D366]', url: `https://api.whatsapp.com/send?text=${encodeURIComponent(pageTitle + ' ' + pageUrl)}`, label: 'WhatsApp' },
         { icon: 'fa-brands fa-facebook-f', color: 'hover:bg-[#1877F2]', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, label: 'Facebook' },
-        { icon: 'fa-brands fa-telegram', color: 'hover:bg-[#0088cc]', url: `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`, label: 'Telegram' },
+        { icon: 'fa-brands fa-telegram', color: 'hover:bg-[#0088cc]', url: `https://t.me/share/url?url=${encodeURIComponent(pageTitle)}`, label: 'Telegram' },
         { icon: 'fa-brands fa-linkedin-in', color: 'hover:bg-[#0077b5]', url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`, label: 'LinkedIn' }
     ];
 
