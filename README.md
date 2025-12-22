@@ -1,118 +1,78 @@
-Toolblaster.com - Tech Review Platform
+Toolblaster Hub ⚡
 
-Toolblaster is a modern, performance-focused static website dedicated to in-depth software reviews and tech tools. This repository contains the source code, design system, and content templates for the platform.
+Financial Calculators, SEO Tools & In-Depth Software Reviews
 
-Latest Update: December 2026 Standards (High Contrast, WCAG AA, Mobile-First)
+Toolblaster is a high-performance, mobile-first digital hub designed to host precision financial calculators, expert-reviewed SEO tools, and comprehensive software reviews. Built with standard HTML5, Tailwind CSS (via CDN), and vanilla JavaScript for maximum speed and zero build-step complexity.
+
+🚀 Key Features
+
+Mobile-First Design: Fully responsive layouts with dedicated mobile navigation drawers and touch-friendly UI.
+
+SEO Optimized: Hand-tuned Meta tags, JSON-LD Schema markup, and semantic HTML structure (WCAG AA compliant).
+
+Centralized UI Logic: Header, Footer, Sidebar, and Modals are injected via header-footer.js to maintain consistency across hundreds of pages.
+
+Dynamic Review Widgets: Automatically populates "Latest Reviews" and "Related Articles" widgets from a single data source.
+
+Performance: Uses system fonts (Inter/Hind) and CDN-hosted Tailwind to ensure high Core Web Vitals scores.
 
 📂 Project Structure
 
-toolblaster/
-├── index.html              # Homepage
+/
+├── index.html                 # Homepage (Hub)
 ├── js/
-│   ├── header-footer.js    # Centralized UI logic (Header, Footer, Sidebar, Share Widget, TOC)
-│   └── tailwind-config.js  # Global Design System (Typography, Colors, Layout)
+│   ├── header-footer.js       # Core UI injection (Header, Footer, Sidebar, Review Widgets)
+│   ├── global-script.js       # Secondary logic & global event listeners (Overflow)
+│   └── tailwind-config.js     # Shared Tailwind design system (Colors, Fonts)
 ├── reviews/
-│   ├── index.html          # Reviews Hub
-│   ├── review-template.html # GOLDEN MASTER Template for new reviews
+│   ├── index.html             # Reviews Hub
 │   └── security/
-│       └── zerossl-review.html # Production example of the 2026 design standards
-└── ...
+│       └── zerossl-review.html # Example Deep-Dive Review
+└── terms/                     # Legal pages (Privacy, Terms, About)
 
 
-🎨 Design System (2026 Standards)
+🛠️ How to Manage Content
 
-The site utilizes a centralized Tailwind CSS configuration to ensure consistency across all pages.
+Adding a New Review
 
-Layout: Strict 75% Content / 25% Sidebar split on Desktop. Single column on Mobile.
+To add a new review that automatically appears in the Sidebar and Mobile "You Might Also Like" widgets:
 
-Max Width: Locked to 1150px for optimal readability.
+Create your HTML file in reviews/category/your-review.html.
 
-Typography:
+Open js/header-footer.js.
 
-H1: 38px (Extrabold 900)
+Add the review metadata to the recentReviews array at the top of the file:
 
-H2: 22px (Bold 800)
+const recentReviews = [
+    { 
+        title: "New Tool Review", 
+        url: "/reviews/category/new-tool.html", 
+        category: "Productivity", 
+        date: "Jan 2026" 
+    },
+    // ... existing reviews
+];
 
-H3: 14px (Bold 800)
 
-Body Text: 12px (High legibility)
+The system automatically filters out the current page to prevent self-linking.
 
-Colors: High-contrast palette compliant with WCAG AA standards.
+Global Scripting
 
-Accent: #D9261F (Optimized Red)
+js/header-footer.js: strictly for layout injection (Nav, Footer, Sidebar).
 
-Text: Slate/Zinc scale for better contrast against white backgrounds.
+js/global-script.js: Use this for analytics, complex animations, or site-wide logic that doesn't involve layout injection.
 
-Configuration File
+🎨 Design System
 
-All styles are defined in js/tailwind-config.js. Do not write inline styles unless absolutely necessary. Use the utility classes defined there (e.g., text-article-p, text-heading-1).
+Primary Color: #E34037 (Accent Red)
 
-🧩 Centralized Components (header-footer.js)
+Background: #0f1115 (Dark Headers), #f9f9f9 (Body)
 
-To maintain maintainability, key UI elements are injected via JavaScript. Do not hardcode these in HTML files.
+Fonts: Hind (Headings), Inter (Body Text)
 
-Global Header & Footer: Automatically injected into #app-header and #app-footer.
+📦 Deployment
 
-Sticky Sidebar (Desktop):
+This is a static site. No build process (npm/webpack) is required.
+Simply upload the root folder to Cloudflare Pages, Netlify, or Vercel.
 
-Automatically generates a Table of Contents (TOC) based on <h2> tags in the article.
-
-Includes "Popular Tools" widget.
-
-Features ScrollSpy logic to highlight the active section while reading.
-
-Mobile TOC: A foldable accordion menu injected at the very top of the article for mobile users.
-
-Share Widget: Automatically injects high-contrast social icons (WhatsApp, Telegram, X, LinkedIn, Copy Link) into the author header block.
-
-Back to Top: A floating button that appears after scrolling down 300px.
-
-📝 How to Create a New Review
-
-We have created a Golden Master template to streamline the creation of new content.
-
-Duplicate the Template:
-Copy reviews/review-template.html to your desired location (e.g., reviews/marketing/new-tool.html).
-
-Fill in Metadata:
-Update the <title>, <meta name="description">, and <link rel="canonical"> tags.
-
-Update JSON-LD Schema:
-Edit the structured data blocks at the top of the file with the specific tool name, author, and rating.
-
-Write Content:
-
-Replace [Tool Name] placeholders.
-
-Use the Flexible Content Blocks provided in the template (commented out sections) for things like:
-
-Comparison Tables (Compact style)
-
-Feature Grids
-
-Pricing Cards
-
-Performance Benchmarks
-
-Publish:
-No extra JavaScript work is needed. The header-footer.js script will automatically detect your new headings, build the sidebar/mobile TOC, and attach the share widget.
-
-🛠 Development & Testing
-
-Tailwind: The project uses the CDN version of Tailwind for rapid prototyping, configured via js/tailwind-config.js.
-
-Icons: FontAwesome (Free tier) is used for all UI icons.
-
-Browser Support: Tested on Chrome, Firefox, Safari (Mobile & Desktop).
-
-Accessibility Checklist (Manual)
-
-[x] Ensure text contrast ratio is > 4.5:1.
-
-[x] Touch targets on mobile must be at least 32px (Social icons are optimized).
-
-[x] alt tags required for all images (or placeholders).
-
-[x] Layout should never exceed 1150px width.
-
-Maintained by Toolblaster Engineering Team
+Maintained by Toolblaster Team
