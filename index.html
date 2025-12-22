@@ -98,10 +98,12 @@
 
     <main class="flex-grow">
         <!-- Main container -->
-        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 md:py-6">
+        <!-- UPDATED: Added space-y-8 to separate the boxed sections -->
+        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 md:py-6 space-y-8">
             
             <!-- Our Projects Section (h2 - Main Content Heading) -->
-            <section id="projects" class="text-center">
+            <!-- UPDATED: Added border, background, and padding to create a container box style -->
+            <section id="projects" class="text-center border-2 border-gray-200 rounded-2xl p-4 md:p-8 bg-white shadow-sm">
                 
                 <!-- Title & Underline block -->
                 <div class="flex flex-col items-center mb-6">
@@ -113,66 +115,66 @@
                 </div>
                 
                 <!-- Consolidated Grid Section -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mb-12">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
                         
                         <!-- Tool 1: SIP Calculator (Active) -->
-                        <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
                             <div class="flex items-start h-full"> 
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
                                     <i class="fa-solid fa-money-bill-trend-up text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left"> 
                                     <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Inflation-Adjusted SIP Calculator</h3>
-                                    <!-- Hardcoded to text-[13px] as per preference -->
-                                    <p class="text-[13px] text-gray-600">Plan for long-term goals. Accurately estimate future wealth by factoring in the impact of inflation.</p>
+                                    <!-- Hardcoded to text-[13px] as per preference, added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 line-clamp-3">Plan for long-term goals. Accurately estimate future wealth by factoring in the impact of inflation.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 2: Mortgage Planner (Active) -->
-                        <a href="https://mortgageplanner.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://mortgageplanner.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
                             <div class="flex items-start h-full">
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
                                     <i class="fa-solid fa-house text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
                                     <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Mortgage Planner & Calculators</h3>
-                                    <!-- Hardcoded to text-[13px] -->
-                                    <p class="text-[13px] text-gray-600">A powerful tool to plan your home loan payments, visualize interest, and structure your mortgage effectively.</p>
+                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 line-clamp-3">A powerful tool to plan your home loan payments, visualize interest, and structure your mortgage effectively.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 3: Stories & Rhymes (Active) -->
-                        <a href="https://kids.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://kids.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
                             <div class="flex items-start h-full">
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
                                     <i class="fa-solid fa-wand-magic-sparkles text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
                                     <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Stories & Rhymes for Kids</h3>
-                                    <!-- Hardcoded to text-[13px] -->
-                                    <p class="text-[13px] text-gray-600">A safe, ad-free world of classic and original tales designed to entertain, educate, and inspire young readers.</p>
+                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 line-clamp-3">A safe, ad-free world of classic and original tales designed to entertain, educate, and inspire young readers.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 4: SEO Tools (Active) -->
-                        <a href="https://bestseotools.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full">
+                        <a href="https://bestseotools.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
                             <div class="flex items-start h-full">
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
                                     <i class="fa-solid fa-magnifying-glass text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
                                     <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Best SEO Tools: Comparison</h3>
-                                    <!-- Hardcoded to text-[13px] -->
-                                    <p class="text-[13px] text-gray-600">Expert-curated comparison of top SEO platforms (Semrush vs. KWFinder) to boost your digital marketing strategy.</p>
+                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 line-clamp-3">Expert-curated comparison of top SEO platforms (Semrush vs. KWFinder) to boost your digital marketing strategy.</p>
                                 </div>
                             </div>
                         </a>
 
                         <!-- Tool 5: Calculator Hub (Coming Soon) -->
-                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
+                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-200 opacity-70 adsense-hide relative">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
                                     <i class="fa-solid fa-layer-group text-xs sm:text-base"></i>
@@ -184,14 +186,14 @@
                                             Coming Soon
                                         </div>
                                     </div>
-                                    <!-- Hardcoded to text-[13px] -->
-                                    <p class="text-[13px] text-gray-600 mb-2">India's most powerful and user-friendly financial toolkit is here to help you plan, save, and invest.</p>
+                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 mb-2 line-clamp-3">India's most powerful and user-friendly financial toolkit is here to help you plan, save, and invest.</p>
                                 </div>
                             </div>
                         </div>
 
                          <!-- Tool 6: HP Exam Prep (Coming Soon) -->
-                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-700 opacity-70 adsense-hide relative">
+                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-200 opacity-70 adsense-hide relative">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
                                     <i class="fa-solid fa-graduation-cap text-xs sm:text-base"></i>
@@ -204,8 +206,8 @@
                                             Coming Soon
                                         </div>
                                     </div>
-                                    <!-- Hardcoded to text-[13px] -->
-                                    <p class="text-[13px] text-gray-600 mb-2">Master HPPSC, HPRCA, Patwari, HRTC, TET, High Court & Police exams with expert GK, Aptitude & Technical resources.</p>
+                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
+                                    <p class="text-[13px] text-gray-600 mb-2 line-clamp-3">Master HPPSC, HPRCA, Patwari, HRTC, TET, High Court & Police exams with expert GK, Aptitude & Technical resources.</p>
                                 </div>
                             </div>
                         </div>
@@ -214,7 +216,8 @@
             </section>
 
             <!-- Latest Reviews Section (NEW) -->
-            <section id="reviews" class="text-center mt-2">
+            <!-- UPDATED: Added border, background, and padding to create a container box style -->
+            <section id="reviews" class="text-center border-2 border-gray-200 rounded-2xl p-4 md:p-8 bg-white shadow-sm">
                 
                 <div class="flex flex-col items-center mb-6">
                     <h2 class="text-heading-2 text-gray-800 relative pb-1">
@@ -223,9 +226,11 @@
                     <div class="w-10 h-[2px] rounded-full bg-accent-main mt-1"></div>
                 </div>
 
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mb-12">
+                <!-- Grid updated to max 3 columns (lg:grid-cols-3) -->
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
                     <!-- ZeroSSL Review -->
-                    <a href="reviews/security/zerossl-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-700 transition duration-300 hover:translate-y-[-4px] hover:shadow-custom-hover hover:border-accent-main group h-full text-left">
+                    <!-- Card removed movement/shadow hover effects, kept group for icon hover -->
+                    <a href="reviews/security/zerossl-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
                         <div class="flex items-start h-full">
                             <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
                                 <i class="fa-solid fa-shield-halved text-xs sm:text-base"></i>
@@ -235,8 +240,8 @@
                                     <span class="bg-green-100 text-green-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-green-200 uppercase tracking-wide">Security</span>
                                     <span class="text-[10px] text-gray-400">Dec 2026</span>
                                 </div>
-                                <h3 class="text-sm font-bold text-gray-900 mb-1 group-hover:text-accent-main transition-colors">ZeroSSL Review 2026</h3>
-                                <p class="text-[13px] text-gray-600 line-clamp-2">Is it time to ditch paid SSL? Deep dive into ACME automation, Wildcard support, and free tier limits.</p>
+                                <!-- UPDATED: Replaced summary paragraph with full article title -->
+                                <h3 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-accent-main transition-colors">ZeroSSL Review: Is It Finally Time to Ditch Paid SSL?</h3>
                             </div>
                         </div>
                     </a>
