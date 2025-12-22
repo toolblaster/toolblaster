@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectAdSpace(); 
     injectSidebar();
     injectMobileTOC(); 
-    injectShareWidget(); // Added Global Share Widget injection
+    injectShareWidget(); 
     injectFooterAndModals();
     injectBackToTop();
 });
@@ -23,6 +23,9 @@ function injectHeader() {
     const path = window.location.pathname;
     const rootPath = path.includes('/blog/') || path.includes('/reviews/') ? '../' : './';
 
+    // NOTE: The overlay and drawer are placed OUTSIDE the <nav> tag.
+    // This is crucial because 'backdrop-blur' on <nav> creates a containing block
+    // that traps 'fixed' elements, preventing them from covering the full screen.
     const headerHTML = `
         <nav class="relative z-20 border-b border-white/5 bg-[#0f1115]/50 backdrop-blur-sm w-full">
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
@@ -34,37 +37,96 @@ function injectHeader() {
 
                 <!-- Desktop Menu Links -->
                 <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                    <a href="/" class="hover:text-white transition-colors">Home</a>
                     <a href="/#projects" class="hover:text-white transition-colors">Tools</a>
                     <a href="/blog/" class="hover:text-white transition-colors">Blog</a>
                     <a href="/reviews/" class="hover:text-white transition-colors">Reviews</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2 relative z-30" aria-label="Open Menu">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
-
-            <!-- Mobile Menu Dropdown -->
-            <div id="mobile-menu" class="hidden md:hidden bg-[#161b22] border-t border-white/10 absolute w-full left-0 top-full shadow-xl z-30">
-                <div class="flex flex-col p-4 gap-4 text-sm text-gray-300 font-medium">
-                    <a href="/#projects" class="hover:text-white mobile-link">Tools</a>
-                    <a href="/blog/" class="hover:text-white mobile-link">Blog</a>
-                    <a href="/reviews/" class="hover:text-white mobile-link">Reviews</a>
-                </div>
-            </div>
         </nav>
+
+        <!-- Mobile Menu Overlay (Backdrop) - MOVED OUTSIDE NAV -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-hidden="true"></div>
+
+        <!-- Mobile Menu Drawer (Slide-in) - MOVED OUTSIDE NAV -->
+        <div id="mobile-menu-drawer" class="fixed top-0 right-0 z-[100] w-[75%] max-w-[300px] h-full bg-[#161b22] border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+            
+            <!-- Drawer Header -->
+            <div class="flex justify-between items-center p-5 border-b border-white/5">
+                <span class="text-white font-bold text-lg tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-accent-main"></i> Toolblaster
+                </span>
+                <button id="mobile-menu-close" class="text-gray-400 hover:text-white transition-colors focus:outline-none p-1" aria-label="Close Menu">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Drawer Links -->
+            <div class="flex flex-col p-5 gap-4 text-sm text-gray-300 font-medium overflow-y-auto">
+                <a href="/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
+                    <i class="fa-solid fa-house w-5 text-center text-accent-main"></i> 
+                    <span>Home</span>
+                </a>
+                <a href="/#projects" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
+                    <i class="fa-solid fa-toolbox w-5 text-center text-accent-main"></i> 
+                    <span>Tools</span>
+                </a>
+                <a href="/blog/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
+                    <i class="fa-solid fa-newspaper w-5 text-center text-accent-main"></i> 
+                    <span>Blog</span>
+                </a>
+                <a href="/reviews/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
+                    <i class="fa-solid fa-star w-5 text-center text-accent-main"></i> 
+                    <span>Reviews</span>
+                </a>
+            </div>
+            
+            <!-- Drawer Footer -->
+            <div class="mt-auto p-6 border-t border-white/5">
+                <p class="text-xs text-gray-500 text-center mb-2">Designed for performance.</p>
+                <p class="text-xs text-gray-600 text-center">&copy; 2026 Toolblaster</p>
+            </div>
+        </div>
     `;
 
     headerContainer.innerHTML = headerHTML;
 
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    // Mobile Menu Logic
+    const openBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const links = document.querySelectorAll('.mobile-link');
+
+    function toggleMenu(show) {
+        if (show) {
+            overlay.classList.remove('opacity-0', 'invisible');
+            overlay.classList.add('opacity-100', 'visible');
+            drawer.classList.remove('translate-x-full');
+            drawer.classList.add('translate-x-0');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            overlay.classList.remove('opacity-100', 'visible');
+            overlay.classList.add('opacity-0', 'invisible');
+            drawer.classList.remove('translate-x-0');
+            drawer.classList.add('translate-x-full');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
     }
+
+    if (openBtn) openBtn.addEventListener('click', () => toggleMenu(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => toggleMenu(false));
+    if (overlay) overlay.addEventListener('click', () => toggleMenu(false));
+    
+    // Close menu when a link is clicked
+    links.forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+    });
 }
 
 /**
