@@ -4,10 +4,17 @@
  */
 
 // CENTRALIZED REVIEW DATA
-// Add new reviews here. The widgets will automatically update (Max 5 shown).
+// Logic: The widgets below will automatically display the first 5 items from this list.
+// INSTRUCTION: Add new reviews to the BEGINNING (TOP) of this array.
 const recentReviews = [
-    // Example format:
-    // { title: "ZeroSSL Review", url: "/reviews/security/zerossl-review.html", category: "Security", date: "Dec 2026" },
+    { 
+        title: "ZeroSSL Review", 
+        url: "/reviews/security/zerossl-review.html", 
+        category: "Security", 
+        date: "Dec 2025" 
+    },
+    // Example of future review:
+    // { title: "Next Review Title", url: "/reviews/category/slug.html", category: "Category", date: "Jan 2026" },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     injectShareWidget(); 
     injectFooterAndModals();
     injectBackToTop();
-    injectMobileRelated(); // Function updated to place widget below CTA
+    injectMobileRelated(); 
 });
 
 /**
@@ -28,10 +35,11 @@ function injectHeader() {
     const headerContainer = document.getElementById('app-header');
     if (!headerContainer) return;
 
-    const path = window.location.pathname;
-    const rootPath = path.includes('/blog/') || path.includes('/reviews/') ? '../' : './';
+    // FOUC (Flash of Unstyled Content) FIX:
+    // 1. Added style="display: none;" to #mobile-menu-drawer. 
+    //    This completely removes it from the layout tree on load, preventing ANY visual glitch/reflection.
+    // 2. We remove this inline style via JS only when the menu is opened.
 
-    // NOTE: The overlay and drawer are placed OUTSIDE the <nav> tag.
     const headerHTML = `
         <nav class="relative z-20 border-b border-white/5 bg-[#0f1115]/50 backdrop-blur-sm w-full">
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
@@ -56,46 +64,45 @@ function injectHeader() {
             </div>
         </nav>
 
-        <!-- Mobile Menu Overlay (Backdrop) - MOVED OUTSIDE NAV -->
+        <!-- Mobile Menu Overlay (Backdrop) -->
         <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-hidden="true"></div>
 
-        <!-- Mobile Menu Drawer (Slide-in) - MOVED OUTSIDE NAV -->
-        <div id="mobile-menu-drawer" class="fixed top-0 right-0 z-[100] w-[75%] max-w-[300px] h-full bg-[#161b22] border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+        <!-- Mobile Menu Drawer (Slide-in) -->
+        <!-- FIXED: Added style="display: none;" here. This prevents the reflection bug. -->
+        <div id="mobile-menu-drawer" style="display: none;" class="fixed top-0 right-0 z-[100] w-[85%] max-w-[300px] h-full bg-[#161b22] border-l border-white/10 shadow-2xl transform translate-x-full invisible md:hidden flex flex-col">
             
             <!-- Drawer Header -->
             <div class="flex justify-between items-center p-5 border-b border-white/5">
-                <span class="text-white font-bold text-lg tracking-tight flex items-center gap-2">
+                <span class="text-white font-bold text-xl tracking-tight flex items-center gap-3">
                     <i class="fa-solid fa-bolt text-accent-main"></i> Toolblaster
                 </span>
-                <!-- CONTRAST FIX: Changed text-gray-400 to text-gray-300 -->
-                <button id="mobile-menu-close" class="text-gray-300 hover:text-white transition-colors focus:outline-none p-1" aria-label="Close Menu">
-                    <i class="fa-solid fa-xmark text-xl"></i>
+                <button id="mobile-menu-close" class="text-gray-400 hover:text-white transition-colors focus:outline-none p-2" aria-label="Close Menu">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
                 </button>
             </div>
             
             <!-- Drawer Links -->
-            <div class="flex flex-col p-5 gap-4 text-sm text-gray-300 font-medium overflow-y-auto">
-                <a href="/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
-                    <i class="fa-solid fa-house w-5 text-center text-accent-main"></i> 
+            <div class="flex flex-col p-4 gap-2 text-lg text-gray-200 font-bold overflow-y-auto">
+                <a href="/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-house w-6 text-center text-accent-main text-lg"></i> 
                     <span>Home</span>
                 </a>
-                <a href="/#projects" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
-                    <i class="fa-solid fa-toolbox w-5 text-center text-accent-main"></i> 
+                <a href="/#projects" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-toolbox w-6 text-center text-accent-main text-lg"></i> 
                     <span>Tools</span>
                 </a>
-                <a href="/blog/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
-                    <i class="fa-solid fa-newspaper w-5 text-center text-accent-main"></i> 
+                <a href="/blog/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-newspaper w-6 text-center text-accent-main text-lg"></i> 
                     <span>Blog</span>
                 </a>
-                <a href="/reviews/" class="flex items-center gap-3 hover:text-white transition-colors p-3 rounded-lg hover:bg-white/5 mobile-link">
-                    <i class="fa-solid fa-star w-5 text-center text-accent-main"></i> 
+                <a href="/reviews/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-star w-6 text-center text-accent-main text-lg"></i> 
                     <span>Reviews</span>
                 </a>
             </div>
             
             <!-- Drawer Footer -->
-            <div class="mt-auto p-6 border-t border-white/5">
-                <!-- CONTRAST FIX: Changed text-gray-500 to text-gray-400 for better visibility on dark bg -->
+            <div class="mt-auto p-6 border-t border-white/5 bg-black/20">
                 <p class="text-xs text-gray-400 text-center mb-2">Designed for performance.</p>
                 <p class="text-xs text-gray-400 text-center">&copy; 2026 Toolblaster</p>
             </div>
@@ -112,17 +119,38 @@ function injectHeader() {
     const links = document.querySelectorAll('.mobile-link');
 
     function toggleMenu(show) {
+        if (!drawer) return;
+
+        // DYNAMIC TRANSITION INJECTION
+        // Add classes only when interacting.
+        if (!drawer.classList.contains('transition-transform')) {
+            drawer.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+        }
+
         if (show) {
-            overlay.classList.remove('opacity-0', 'invisible');
-            overlay.classList.add('opacity-100', 'visible');
-            drawer.classList.remove('translate-x-full');
-            drawer.classList.add('translate-x-0');
+            // CRITICAL FIX: Remove display: none to allow rendering
+            drawer.style.display = '';
+
+            // Double requestAnimationFrame ensures the 'display' change is registered
+            // by the browser BEFORE we trigger the transform, preventing a jump.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    overlay.classList.remove('opacity-0', 'invisible');
+                    overlay.classList.add('opacity-100', 'visible');
+                    
+                    drawer.classList.remove('translate-x-full', 'invisible');
+                    drawer.classList.add('translate-x-0');
+                });
+            });
+            
             document.body.style.overflow = 'hidden'; 
         } else {
             overlay.classList.remove('opacity-100', 'visible');
             overlay.classList.add('opacity-0', 'invisible');
+            
             drawer.classList.remove('translate-x-0');
             drawer.classList.add('translate-x-full');
+            
             document.body.style.overflow = ''; 
         }
     }
@@ -152,17 +180,19 @@ function injectAdSpace() {
 }
 
 /**
- * Generates the HTML for review list items.
- * Handles the empty state with a "Coming Soon" placeholder.
+ * Generates the HTML for review list items dynamically.
+ * LOGIC: Slices the top 5 items from recentReviews and excludes the current page.
  */
 function getReviewListHTML(isMobile = false) {
     const currentPath = window.location.pathname;
     
-    // Filter out the current page so we don't link to ourselves
+    // Dynamic Logic:
+    // 1. Filter: Remove the review that matches the current page URL.
+    // 2. Slice: Take only the first 5 items.
     const displayReviews = recentReviews.filter(r => !currentPath.includes(r.url)).slice(0, 5);
     
     if (displayReviews.length === 0) {
-        // Placeholder State
+        // Placeholder State if no other reviews exist
         return `
             <li class="opacity-70">
                 <div class="flex items-center gap-3 p-2 bg-gray-50 rounded border border-dashed border-gray-300">
@@ -178,6 +208,7 @@ function getReviewListHTML(isMobile = false) {
         `;
     }
 
+    // Dynamic HTML Generation
     return displayReviews.map(review => `
         <li>
             <a href="${review.url}" class="group flex items-start gap-3 p-2 rounded hover:bg-gray-50 transition-colors">
@@ -224,6 +255,7 @@ function injectSidebar() {
     `;
 
     // 2. Related Reviews Widget (Sidebar Version)
+    // Uses the dynamic getReviewListHTML() function
     const reviewsWidgetHTML = `
         <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-white">
             <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
@@ -296,11 +328,9 @@ function injectMobileRelated() {
     if (document.getElementById('mobile-related-widget')) return;
 
     // TARGET PARENT ELEMENT TO INSERT AFTER SIBLING CTA
-    // The structure is usually Article -> CTA Div -> End of Column
-    // By appending to the parent container, we ensure it sits at the very bottom of the main content column,
-    // after the CTA which is a sibling of the article.
     const parentContainer = articleContent.parentElement;
 
+    // Uses the dynamic getReviewListHTML() function
     const mobileRelatedHTML = `
         <div id="mobile-related-widget" class="mt-10 pt-6 border-t-4 border-gray-100 lg:hidden">
             <h3 class="flex items-center gap-2 text-[14px] font-black text-gray-900 mb-4 uppercase tracking-tight">
