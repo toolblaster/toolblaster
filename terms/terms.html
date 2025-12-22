@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
     <title>Terms of Service | Toolblaster</title>
     <meta name="description" content="Terms of Service for Toolblaster.com. Important disclaimers regarding financial calculators and content usage.">
+    <meta name="keywords" content="terms of service, user agreement, legal disclaimer, financial disclaimer, content usage">
+    
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://toolblaster.com/terms/terms.html">
     <meta name="robots" content="noindex, follow">
+    
+    <!-- Schema Markup: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://toolblaster.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Terms of Service",
+        "item": "https://toolblaster.com/terms/terms.html"
+      }]
+    }
+    </script>
+
+    <!-- Schema Markup: WebPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Terms of Service",
+      "description": "Terms of Service for Toolblaster.com.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Toolblaster",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolblaster.com/favicon/favicon.ico"
+        }
+      }
+    }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E34037'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind-config.js"></script>
@@ -20,6 +63,14 @@
 
     <main class="flex-grow container mx-auto max-w-site px-4 sm:px-6 py-8">
         <div class="max-w-3xl mx-auto bg-white border-2 border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            
+            <!-- Visible Breadcrumb Navigation -->
+            <nav class="text-xs text-gray-500 mb-6 font-medium">
+                <a href="/" class="hover:text-accent-main transition-colors">Home</a> 
+                <span class="mx-2">/</span> 
+                <span class="text-gray-800">Terms of Service</span>
+            </nav>
+
             <h1 class="text-heading-1 text-gray-900 mb-2">Terms of Service</h1>
             <p class="text-[11px] text-gray-400 font-bold uppercase tracking-widest mb-6 border-b border-gray-100 pb-4">Last Updated: January 1, 2026</p>
             
