@@ -1,5 +1,5 @@
 /**
- * Toolblaster Global Components (Header, Sidebar, Footer, Modals, Ads)
+ * Toolblaster Global Components (Header, Sidebar, Footer, Modals, Ads, Back to Top, Share Widget)
  * Handles injection of shared UI elements to ensure consistency across pages.
  */
 
@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
     injectAdSpace(); 
     injectSidebar();
+    injectMobileTOC(); 
+    injectShareWidget(); // Added Global Share Widget injection
     injectFooterAndModals();
+    injectBackToTop();
 });
 
 /**
@@ -87,10 +90,10 @@ function injectSidebar() {
     const sidebarContainer = document.getElementById('app-sidebar');
     if (!sidebarContainer) return;
 
-    // 1. Popular Tools Widget (Static Top)
+    // 1. Popular Tools Widget (Static Top - Not Sticky)
     const toolsWidgetHTML = `
         <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50">
-            <h3 class="text-[12px] font-black text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+            <h3 class="text-[14px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
                 <i class="fa-solid fa-fire text-accent-main mr-1.5"></i> Popular Tools
             </h3>
             <ul class="space-y-3">
@@ -118,22 +121,22 @@ function injectSidebar() {
         const headings = article.querySelectorAll('h2');
         if (headings.length > 0) {
             indexWidgetHTML = `
-                <div class="sticky top-20 card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)]">
-                    <h3 class="text-[12px] font-black text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2 flex-shrink-0">
+                <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300">
+                    <h3 class="text-[14px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2 flex-shrink-0">
                         <i class="fa-solid fa-list-ul text-accent-main mr-1.5"></i> Review Index
                     </h3>
                     
                     <!-- Internal Scrollable Area for the Index -->
-                    <div class="overflow-y-auto pr-1 flex-grow scrollbar-thin scrollbar-thumb-gray-200">
-                        <ul class="space-y-2">
+                    <div id="review-index-scroll-container" class="overflow-y-auto pr-1 flex-grow scrollbar-thin scrollbar-thumb-gray-200">
+                        <ul class="space-y-2" id="review-index-list">
                             ${Array.from(headings).map((h, i) => {
                                 if (!h.id) h.id = `section-${i}`;
                                 const num = (i + 1).toString().padStart(2, '0');
                                 return `
                                 <li class="group">
-                                    <a href="#${h.id}" class="flex items-center justify-between">
-                                        <span class="text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2">${h.innerText}</span>
-                                        <span class="flex-shrink-0 w-6 h-4 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
+                                    <a href="#${h.id}" class="toc-link flex items-center justify-between p-1 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
+                                        <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2">${h.innerText}</span>
+                                        <span class="toc-badge flex-shrink-0 w-6 h-4 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
                                     </a>
                                 </li>`;
                             }).join('')}
@@ -148,13 +151,230 @@ function injectSidebar() {
         }
     }
 
-    // Combine Widgets
+    // Combine Widgets with h-full on the wrapper to ensure sticky behavior works
     sidebarContainer.innerHTML = `
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5 h-full"> 
             ${toolsWidgetHTML}
             ${indexWidgetHTML}
         </div>
     `;
+
+    // Initialize the active highlighting logic
+    if (article) {
+        initScrollSpy();
+    }
+}
+
+/**
+ * Injects a Mobile-Only Table of Contents at the top of the article.
+ * This is hidden on Desktop (lg:hidden) and visible on Mobile.
+ */
+function injectMobileTOC() {
+    const article = document.querySelector('article');
+    // Ensure we have an article and haven't already injected the TOC
+    if (!article || document.getElementById('mobile-toc-widget')) return;
+
+    const headings = article.querySelectorAll('h2');
+    if (headings.length === 0) return;
+
+    const mobileTocHTML = `
+        <div id="mobile-toc-widget" class="lg:hidden mb-6">
+            <details class="bg-gray-50 border-2 border-gray-200 rounded-lg shadow-sm group">
+                <summary class="list-none flex items-center justify-between p-3 cursor-pointer select-none">
+                    <div class="flex items-center gap-2 text-[13px] font-extrabold text-gray-900 uppercase tracking-widest">
+                        <i class="fa-solid fa-list-ul text-accent-main"></i>
+                        <span>Review Index</span>
+                    </div>
+                    <span class="transition-transform duration-300 group-open:rotate-180 text-gray-500 text-xs bg-white w-6 h-6 rounded-full flex items-center justify-center border border-gray-200 shadow-sm">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </summary>
+                <nav class="p-3 border-t border-gray-200 bg-white rounded-b-lg">
+                    <ul class="space-y-3">
+                        ${Array.from(headings).map((h, i) => {
+                            // Ensure ID exists (sidebar might have set it, or not yet)
+                            if (!h.id) h.id = `section-${i}`;
+                            const num = (i + 1).toString().padStart(2, '0');
+                            return `
+                            <li>
+                                <a href="#${h.id}" class="flex items-start gap-3 text-article-p text-gray-700 hover:text-accent-main transition-colors" onclick="document.getElementById('mobile-toc-widget').querySelector('details').removeAttribute('open')">
+                                    <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-gray-100 text-[10px] font-black text-gray-500 rounded mt-0.5 border border-gray-200">${num}</span>
+                                    <span class="leading-tight font-medium">${h.innerText}</span>
+                                </a>
+                            </li>`;
+                        }).join('')}
+                    </ul>
+                </nav>
+            </details>
+        </div>
+    `;
+
+    // Insert as the very first element inside the article tag
+    article.insertAdjacentHTML('afterbegin', mobileTocHTML);
+}
+
+/**
+ * Injects a small, compact share widget into the Author block in the header.
+ * Restructures the author block to use flex justify-between.
+ */
+function injectShareWidget() {
+    // Target the author block by its unique structure class combination in the header
+    const authorBlock = document.querySelector('header .flex.border-t.border-b');
+    
+    // Safety check: if block doesn't exist or we already injected (check for our widget class), exit
+    if (!authorBlock || authorBlock.querySelector('.share-widget')) return;
+
+    // 1. Create a wrapper for the existing author content (Avatar + Text)
+    // This ensures they stay grouped on the left when we switch parent to justify-between
+    const leftWrapper = document.createElement('div');
+    leftWrapper.className = 'flex items-center space-x-3 mb-2 sm:mb-0'; // Added margin-bottom for mobile wrapping
+
+    // Move existing children into the new left wrapper
+    while (authorBlock.firstChild) {
+        leftWrapper.appendChild(authorBlock.firstChild);
+    }
+    authorBlock.appendChild(leftWrapper);
+
+    // 2. Adjust parent container classes
+    // Remove centering/start alignment, add space-between alignment and wrapping for mobile
+    authorBlock.classList.remove('justify-center', 'sm:justify-start', 'space-x-3');
+    authorBlock.classList.add('justify-between', 'flex-wrap', 'gap-y-2'); // Added wrap and gap
+
+    // 3. Create the Share Widget
+    // USE CANONICAL URL Logic: 
+    // Checks for <link rel="canonical"> first. If not found, uses window.location.href splitting query params.
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const pageUrl = canonical ? canonical.href : window.location.href.split('?')[0];
+    const pageTitle = document.title;
+    
+    // Copy to Clipboard logic using legacy execCommand for iframe compatibility
+    window.copyToClipboard = function(btn) {
+        const textArea = document.createElement("textarea");
+        textArea.value = pageUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            const icon = btn.querySelector('i');
+            const originalClass = icon.className;
+            // Added text-[14px] text-green-600 to maintain size and show success color
+            icon.className = 'fa-solid fa-check text-[14px] text-green-600';
+            setTimeout(() => {
+                icon.className = originalClass;
+            }, 2000);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+    };
+
+    const shareWidget = document.createElement('div');
+    // Using gap-1.5 for mobile compactness, gap-2 for desktop
+    shareWidget.className = 'share-widget flex items-center gap-2'; // Slightly increased gap for touch targets
+    
+    // Social Media Items Configuration
+    const shareItems = [
+        { icon: 'fa-brands fa-whatsapp', color: 'hover:bg-[#25D366]', url: `https://api.whatsapp.com/send?text=${encodeURIComponent(pageTitle + ' ' + pageUrl)}`, label: 'WhatsApp' },
+        { icon: 'fa-brands fa-facebook-f', color: 'hover:bg-[#1877F2]', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, label: 'Facebook' },
+        { icon: 'fa-brands fa-telegram', color: 'hover:bg-[#0088cc]', url: `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`, label: 'Telegram' },
+        { icon: 'fa-brands fa-linkedin-in', color: 'hover:bg-[#0077b5]', url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`, label: 'LinkedIn' }
+    ];
+
+    // Generate Buttons HTML
+    // Mobile: w-8 h-8 (32px) for better touch/visibility, Icon size bumped to text-[14px]
+    let buttonsHTML = shareItems.map(item => `
+        <a href="${item.url}" 
+           target="_blank" rel="noopener noreferrer" 
+           class="w-8 h-8 rounded-full bg-gray-100 ${item.color} hover:text-white text-gray-700 transition-all flex items-center justify-center shadow-sm" 
+           aria-label="Share on ${item.label}">
+            <i class="${item.icon} text-[14px]"></i>
+        </a>
+    `).join('');
+
+    // Add Copy Link Button
+    buttonsHTML += `
+        <button onclick="window.copyToClipboard(this)" 
+           class="w-8 h-8 rounded-full bg-gray-100 hover:bg-accent-main hover:text-white text-gray-700 transition-all flex items-center justify-center shadow-sm" 
+           aria-label="Copy Link">
+            <i class="fa-solid fa-link text-[14px]"></i>
+        </button>
+    `;
+
+    shareWidget.innerHTML = `
+        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden md:block mr-1">Share</span>
+        ${buttonsHTML}
+    `;
+
+    authorBlock.appendChild(shareWidget);
+}
+
+/**
+ * Initializes ScrollSpy logic to highlight sidebar items based on scroll position.
+ */
+function initScrollSpy() {
+    const links = document.querySelectorAll('.toc-link');
+    const sections = Array.from(links).map(link => document.getElementById(link.dataset.target));
+    const scrollContainer = document.getElementById('review-index-scroll-container');
+
+    if (links.length === 0 || sections.length === 0) return;
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px -60% 0px', // Activate when section is near top
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remove active class from all
+                links.forEach(l => {
+                    l.classList.remove('bg-gray-100');
+                    const text = l.querySelector('.toc-text');
+                    const badge = l.querySelector('.toc-badge');
+                    
+                    if(text) text.classList.remove('text-accent-main');
+                    if(badge) {
+                        badge.classList.remove('bg-accent-main', 'text-white');
+                        badge.classList.add('bg-gray-100', 'text-gray-400');
+                    }
+                });
+
+                // Add active class to current
+                const activeLink = document.querySelector(`.toc-link[data-target="${entry.target.id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('bg-gray-100');
+                    const text = activeLink.querySelector('.toc-text');
+                    const badge = activeLink.querySelector('.toc-badge');
+
+                    if(text) text.classList.add('text-accent-main');
+                    if(badge) {
+                        badge.classList.remove('bg-gray-100', 'text-gray-400');
+                        badge.classList.add('bg-accent-main', 'text-white');
+                    }
+                    
+                    // Auto-scroll the sidebar internal list to keep active item in view
+                    if (scrollContainer) {
+                        const activeRect = activeLink.getBoundingClientRect();
+                        const containerRect = scrollContainer.getBoundingClientRect();
+
+                        // Scroll up if item is above container view
+                        if (activeRect.top < containerRect.top) {
+                            scrollContainer.scrollTop -= (containerRect.top - activeRect.top + 10);
+                        } 
+                        // Scroll down if item is below container view
+                        else if (activeRect.bottom > containerRect.bottom) {
+                            scrollContainer.scrollTop += (activeRect.bottom - containerRect.bottom + 10);
+                        }
+                    }
+                }
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        if(section) observer.observe(section);
+    });
 }
 
 /**
@@ -199,6 +419,36 @@ function injectFooterAndModals() {
 
     footerContainer.innerHTML = footerHTML;
     initModals();
+}
+
+/**
+ * Injects a global 'Back to Top' button.
+ */
+function injectBackToTop() {
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.id = 'back-to-top';
+    backToTopBtn.className = 'fixed bottom-8 right-8 w-12 h-12 bg-accent-main text-white rounded-full shadow-lg z-50 hover:bg-accent-dark hover:scale-110 transition-all duration-300 opacity-0 invisible translate-y-4 flex items-center justify-center';
+    backToTopBtn.setAttribute('aria-label', 'Back to Top');
+    backToTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up text-lg"></i>';
+
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+            backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+        } else {
+            backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
 
 function initModals() {
