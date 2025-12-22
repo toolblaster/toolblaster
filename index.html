@@ -119,7 +119,8 @@
                 </div>
                 
                 <!-- Consolidated Grid Section -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
+                <!-- UPDATED GRID: Switched to grid-cols-1 for mobile, 2 for tablet (sm), 3 for desktop -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
                         
                         <!-- Tool 1: SIP Calculator (Active) -->
                         <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
@@ -184,9 +185,10 @@
                                     <i class="fa-solid fa-layer-group text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <h3 class="text-sm font-bold text-gray-900">Financial Calculator's Hub</h3>
-                                        <div class="bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap ml-2">
+                                    <!-- LAYOUT FIX: Changed from flex-row to ensure safe wrapping, added gap and removed absolute positioning risk -->
+                                    <div class="flex justify-between items-start mb-1 gap-2">
+                                        <h3 class="text-sm font-bold text-gray-900 leading-tight">Financial Calculator's Hub</h3>
+                                        <div class="flex-shrink-0 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
                                             Coming Soon
                                         </div>
                                     </div>
@@ -203,10 +205,10 @@
                                     <i class="fa-solid fa-graduation-cap text-xs sm:text-base"></i>
                                 </div>
                                 <div class="w-full text-left">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <h3 class="text-sm font-bold text-gray-900 pr-16">HP Exam Prep Portal</h3>
-                                        <!-- Adjusted absolute position for dense style -->
-                                        <div class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
+                                    <!-- LAYOUT FIX: Removed absolute positioning which caused overlap. Converted to flex layout consistent with other cards. -->
+                                    <div class="flex justify-between items-start mb-1 gap-2">
+                                        <h3 class="text-sm font-bold text-gray-900 leading-tight">HP Exam Prep Portal</h3>
+                                        <div class="flex-shrink-0 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
                                             Coming Soon
                                         </div>
                                     </div>
@@ -230,8 +232,8 @@
                     <div class="w-10 h-[2px] rounded-full bg-accent-main mt-1"></div>
                 </div>
 
-                <!-- Grid updated to max 3 columns (lg:grid-cols-3) -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
+                <!-- UPDATED GRID: Switched to grid-cols-1 for mobile, 2 for tablet (sm), 3 for desktop -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
                     <!-- ZeroSSL Review -->
                     <!-- Card removed movement/shadow hover effects, kept group for icon hover -->
                     <a href="reviews/security/zerossl-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
