@@ -68,7 +68,7 @@
         <!-- Content Grid -->
         <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
             
-            <!-- LEFT COLUMN: Reviews Listing (80% Width) -->
+            <!-- LEFT COLUMN: Reviews Listing (78% Width) -->
             <div class="w-full lg:w-[78%]">
                 
                 <!-- Category Filter -->
@@ -78,38 +78,57 @@
                     <span class="px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-colors cursor-pointer uppercase tracking-wide">SEO Tools</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Updated Grid: 3 Columns on LG screens, compact gap -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     
                     <!-- REVIEW CARD: ZeroSSL -->
-                    <article class="card-section !p-0 overflow-hidden group hover:shadow-md transition-shadow">
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-[10px] font-black bg-blue-100 text-blue-800 px-2 py-0.5 rounded uppercase tracking-tighter">Security</span>
-                                <div class="flex text-yellow-400 text-[10px]">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                                    <span class="ml-1 text-gray-500 font-bold">4.8</span>
-                                </div>
+                    <article class="flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow group">
+                        <!-- Header: Category & Rating -->
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[9px] font-black bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded border border-blue-100 uppercase tracking-tight">Security</span>
+                            <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            <h2 class="text-[18px] font-extrabold text-gray-900 mb-2 leading-tight group-hover:text-accent-main transition-colors">
-                                <a href="security/zerossl-review.html">ZeroSSL Review 2026: Is It Finally Time to Ditch Paid SSL?</a>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="flex-grow">
+                            <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                                <a href="security/zerossl-review.html">ZeroSSL Review: Time to Ditch Paid SSL?</a>
                             </h2>
-                            <p class="text-[13px] text-gray-600 mb-4 line-clamp-2">
-                                We tested the dashboard, ACME API, and free tier limits. Here is the unfiltered truth about securing your domain with robust HTTPS encryption for $0.
+                            <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                                We tested dashboard, ACME API & free limits. The truth about securing domains for $0.
                             </p>
-                            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                <span class="text-[11px] text-gray-400 font-medium"><i class="fa-regular fa-calendar mr-1"></i> Dec 2026</span>
-                                <a href="security/zerossl-review.html" class="text-[11px] font-bold text-accent-main hover:underline uppercase tracking-wider">
-                                    Read Review <i class="fa-solid fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
+                        </div>
+
+                        <!-- Footer: Meta -->
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
+                            <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                                <i class="fa-regular fa-calendar mr-1"></i> Dec 2026
+                            </span>
+                            <a href="security/zerossl-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                                Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                            </a>
                         </div>
                     </article>
 
-                    <!-- PLACEHOLDER CARD: Future Review -->
-                    <article class="card-section !p-0 overflow-hidden opacity-60 grayscale border-dashed border-gray-300 bg-gray-50/50">
-                        <div class="p-4 flex flex-col items-center justify-center min-h-[160px] text-center">
-                            <i class="fa-solid fa-plus-circle text-gray-300 text-2xl mb-2"></i>
-                            <p class="text-[12px] font-bold text-gray-400 uppercase tracking-widest">More Reviews Coming Soon</p>
+                    <!-- PLACEHOLDER CARD: Future Review 1 -->
+                    <article class="flex flex-col h-full bg-gray-50/50 border border-dashed border-gray-300 rounded-lg p-3 opacity-70">
+                         <div class="flex-grow flex flex-col items-center justify-center min-h-[120px] text-center">
+                            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 mb-2">
+                                <i class="fa-solid fa-plus text-sm"></i>
+                            </div>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Coming Soon</p>
+                        </div>
+                    </article>
+
+                     <!-- PLACEHOLDER CARD: Future Review 2 -->
+                    <article class="flex flex-col h-full bg-gray-50/50 border border-dashed border-gray-300 rounded-lg p-3 opacity-70">
+                         <div class="flex-grow flex flex-col items-center justify-center min-h-[120px] text-center">
+                            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 mb-2">
+                                <i class="fa-solid fa-plus text-sm"></i>
+                            </div>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Coming Soon</p>
                         </div>
                     </article>
 
