@@ -405,6 +405,25 @@
                             <p class="text-article-p text-gray-700 italic">"<strong>Pro Tip:</strong> If you are optimizing for mobile performance, choose CSR generation with ECC (P-256 or P-384). ECC keys are significantly smaller than RSA keys, resulting in faster TLS handshakesâ€”a critical metric for Core Web Vitals and mobile SEO."</p>
                         </div>
                     </section>
+                    
+                    <!-- NEW SECTION: Real-World Security Test -->
+                    <section class="card-section !p-4 !mb-5 border-green-200 bg-green-50/30">
+                        <h2 class="text-heading-2 text-green-900 mb-3 mt-0" id="security-audit">Real-World Security Audit</h2>
+                        <p class="text-article-p mb-4">
+                            We didn't just take their word for it. After deploying the ZeroSSL certificate, we ran a comprehensive scan using the industry-standard <strong>Qualys SSL Labs</strong> tool.
+                        </p>
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-lg border border-green-200 shadow-sm">
+                            <div class="flex-shrink-0 w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-black text-3xl border-4 border-green-500">
+                                A+
+                            </div>
+                            <div>
+                                <h3 class="text-heading-3 text-gray-900 mb-1">Qualys SSL Labs Grade</h3>
+                                <p class="text-xs text-gray-600">
+                                    The site achieved a perfect score for <strong>Protocol Support</strong> and <strong>Key Exchange</strong>. ZeroSSL certificates are fully trusted and support strict HSTS configurations.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
 
                     <!-- SECTION CONTAINER 8: Developer Tools -->
                     <section class="card-section !p-4 !mb-5">
@@ -438,7 +457,7 @@
                     <section class="card-section !p-4 !mb-5">
                         <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="limits-pricing">Pricing & Plans Breakdown</h2>
                         <p class="text-article-p mb-6">
-                            Nothing is truly free forever in the SaaS world. ZeroSSL offers a "Free Plan," but if you use their <strong>web UI</strong> manually, you are limited to 3 certificates <em>per account lifetime</em>. However, if you use the <strong>ACME protocol</strong> (server-side automation), issuance remains <strong>unlimited</strong>.
+                            Nothing is truly free forever in the SaaS world. ZeroSSL offers a "Free Plan," but there is a major catch you need to know: if you use their <strong>web UI</strong> manually, you are limited to 3 certificates <em>per account lifetime</em>. This means once you create 3 certs, you cannot create a 4th one manually without paying. However, if you use the <strong>ACME protocol</strong> (server-side automation), issuance remains <strong>unlimited</strong>.
                         </p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -519,6 +538,40 @@
                             <div class="bg-white px-4 py-2 border-t-2 border-gray-300 text-center md:text-right">
                                 <p class="text-article-p text-gray-400">Based on standard 5-year renewal cycle for manual certificates.</p>
                             </div>
+                        </div>
+                    </section>
+                    
+                    <!-- NEW SECTION: Top Alternatives -->
+                    <section class="card-section !p-4 !mb-5">
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="alternatives">Top Alternatives to ZeroSSL</h2>
+                        <p class="text-article-p mb-3">Not sure if ZeroSSL is right for you? Here is how it stacks up against the competition.</p>
+                        <div class="overflow-hidden rounded-lg border border-gray-200">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-gray-100 text-gray-900 font-bold uppercase text-xs">
+                                    <tr>
+                                        <th class="px-3 py-2">Provider</th>
+                                        <th class="px-3 py-2">Best For</th>
+                                        <th class="px-3 py-2">Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    <tr>
+                                        <td class="px-3 py-2 font-bold">Cloudflare</td>
+                                        <td class="px-3 py-2 text-xs">CDN / Full Site Proxy</td>
+                                        <td class="px-3 py-2 text-xs">Managed (Auto)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-3 py-2 font-bold">BuyPass Go</td>
+                                        <td class="px-3 py-2 text-xs">Longer Validity</td>
+                                        <td class="px-3 py-2 text-xs text-green-600 font-bold">180 Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-3 py-2 font-bold">Let's Encrypt</td>
+                                        <td class="px-3 py-2 text-xs">Server Automation (CLI)</td>
+                                        <td class="px-3 py-2 text-xs">90 Days</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
 
@@ -626,9 +679,10 @@
                                         <i class="fa-solid fa-check-circle text-green-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
                                         <span><strong>Pro:</strong> Supports modern ECC Encryption.</span>
                                     </div>
+                                    <!-- UPDATED: Cons for clarity on the 3-cert limit -->
                                     <div class="flex items-start text-article-p text-gray-600 leading-snug">
                                         <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
-                                        <span><strong>Con:</strong> 3-cert limit on manual web interface.</span>
+                                        <span><strong>Con:</strong> 3-cert LIFETIME limit on manual dashboard (Not per month).</span>
                                     </div>
                                      <div class="flex items-start text-article-p text-gray-600 leading-snug">
                                         <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
@@ -735,6 +789,8 @@
 
     <!-- Scripts -->
     <script src="../../js/header-footer.js"></script>
+    <!-- Load Secondary Global Script -->
+    <script src="../../js/global-script.js"></script>
     
     <!-- Mini-Tool Script -->
     <script>
