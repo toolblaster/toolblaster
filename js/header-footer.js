@@ -448,39 +448,20 @@ function injectFooterAndModals() {
 
     const footerHTML = `
         <footer class="bg-gray-800 text-gray-400 text-center py-6 px-4 mt-8 rounded-t-[2.5rem]">
-            <div class="container mx-auto max-w-site flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-article-p mb-2 sm:mb-0">&copy; 2026 Toolblaster.com by Vikas Rana. All Rights Reserved.</p>
-                <nav class="flex gap-4">
-                    <a id="contact-link" class="text-article-p hover:text-white transition duration-200 cursor-pointer">Contact Us</a>
+            <div class="container mx-auto max-w-site flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-article-p">&copy; 2026 Toolblaster.com. All Rights Reserved.</p>
+                <nav class="flex flex-wrap justify-center gap-4 text-article-p">
+                    <a href="/terms/about.html" class="hover:text-white transition duration-200">About</a>
+                    <a href="/terms/privacy.html" class="hover:text-white transition duration-200">Privacy</a>
+                    <a href="/terms/terms.html" class="hover:text-white transition duration-200">Terms</a>
                 </nav>
             </div>
         </footer>
-
-        <!-- Shared Modals (Contact) -->
-        <div id="page-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4 hidden">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] flex flex-col relative animate-fade-in">
-                <!-- Modal Header -->
-                <div class="flex justify-between items-center p-4 border-b border-gray-300">
-                    <h3 id="modal-title" class="text-heading-3 font-bold text-gray-800"></h3>
-                    <button id="modal-close-btn" class="text-accent-main hover:text-accent-dark transition duration-200 p-1">
-                        <i class="fa-solid fa-xmark text-2xl"></i>
-                    </button>
-                </div>
-                
-                <!-- Modal Content -->
-                <div class="p-6 overflow-y-auto space-y-4 text-article-p text-gray-700">
-                    <div id="contact-content" class="modal-page hidden">
-                        <h3 class="text-heading-3 font-semibold mb-2 text-gray-900">Contact Us</h3>
-                        <p class="mb-2">Have a question? We'd love to hear from you.</p>
-                        <p>Email: <strong class="text-accent-main">hello@toolblaster.com</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
     `;
 
     footerContainer.innerHTML = footerHTML;
-    initModals();
+    
+    // Legacy modal logic (removed call to initModals as we now use pages)
 }
 
 /**
@@ -510,39 +491,5 @@ function injectBackToTop() {
             top: 0,
             behavior: 'smooth'
         });
-    });
-}
-
-function initModals() {
-    const modal = document.getElementById('page-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
-    const allModalPages = document.querySelectorAll('.modal-page');
-
-    const openModal = (type) => {
-        if (!modal) return;
-        allModalPages.forEach(p => p.classList.add('hidden'));
-        
-        let contentId = '';
-        let title = '';
-
-        if (type === 'contact') { contentId = 'contact-content'; title = 'Contact Us'; }
-
-        const contentEl = document.getElementById(contentId);
-        if (contentEl) {
-            contentEl.classList.remove('hidden');
-            modalTitle.textContent = title;
-            modal.classList.remove('hidden');
-        }
-    };
-
-    const closeModal = () => {
-        if (modal) modal.classList.add('hidden');
-    };
-
-    document.getElementById('contact-link')?.addEventListener('click', () => openModal('contact'));
-    modalCloseBtn?.addEventListener('click', closeModal);
-    modal?.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
     });
 }
