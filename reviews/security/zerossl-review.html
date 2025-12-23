@@ -12,7 +12,8 @@
     <meta name="keywords" content="ZeroSSL review, free SSL certificate, Let's Encrypt alternative, ACME protocol automation, Wildcard SSL free, HTTPS encryption, website security, 90-day SSL certificate, SSL management console, cybersecurity tools, SSL certificate renewal, domain validation">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://toolblaster.com/reviews/security/zerossl-review/">
+    <!-- FIXED: Removed trailing slash and ensured .html extension -->
+    <link rel="canonical" href="https://toolblaster.com/reviews/security/zerossl-review.html">
     <meta name="robots" content="index, follow">
 
     <!-- Schema Markup: BreadcrumbList -->
@@ -39,7 +40,7 @@
         "@type": "ListItem",
         "position": 4,
         "name": "ZeroSSL Review",
-        "item": "https://toolblaster.com/reviews/security/zerossl-review/"
+        "item": "https://toolblaster.com/reviews/security/zerossl-review.html"
       }]
     }
     </script>
@@ -192,6 +193,24 @@
                         <p class="text-article-p mb-3">
                             One of the primary reasons developers dread SSL management is the lack of visibility. ZeroSSL changes this dynamic by providing a centralized <strong>SSL management console</strong> that acts as a command center for your security.
                         </p>
+                        
+                        <!-- ADDED: Image Popup Feature for Dashboard with MODERN FRAME -->
+                        <!-- STYLING UPDATE: Added heavy shadow, white border, and soft ring for a 'framed' look -->
+                        <figure class="mb-8 rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
+                                <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md text-3xl"></i>
+                            </div>
+                            <!-- FIXED: Image path relative to reviews/security/ folder -->
+                            <img src="../image/zerossl-dashboard-interface.jpg" 
+                                 alt="ZeroSSL Dashboard Interface showing certificate management" 
+                                 class="w-full h-auto object-cover max-h-[350px] object-top bg-gray-50"
+                                 loading="lazy" 
+                                 onerror="this.style.display='none'">
+                            <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-500 italic border-t border-gray-100">
+                                The ZeroSSL Dashboard provides a visual overview of all certificates. (Click to expand)
+                            </figcaption>
+                        </figure>
+
                         <!-- Dense Style Grid Layout -->
                         <div class="grid grid-cols-2 gap-2 mb-0">
                             <div class="bg-gray-50 p-2.5 rounded border-2 border-gray-300">
@@ -595,7 +614,7 @@
                             <div class="text-center sm:text-right">
                                 <div class="text-4xl font-black text-accent-main leading-none">4.7<span class="text-lg text-gray-400 font-medium">/5</span></div>
                                 <div class="text-yellow-400 text-sm mt-1">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
                             </div>
                         </div>
@@ -832,6 +851,57 @@
                 siteInput.addEventListener('input', updateCalculator);
             }
         });
+    </script>
+    
+    <!-- ADDED: Image Modal Logic -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
+        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Image Container -->
+            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+            });
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Add Esc key listener
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('modal-image').src = '';
+            }, 300); // Match transition duration
+            
+            document.body.style.overflow = ''; // Restore scrolling
+            document.removeEventListener('keydown', handleEscKey);
+        }
+
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        }
     </script>
 
 </body>
