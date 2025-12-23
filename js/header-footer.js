@@ -63,7 +63,6 @@ function injectHeader() {
                 <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                     <a href="/" class="hover:text-white transition-colors">Home</a>
                     <a href="/#projects" class="hover:text-white transition-colors">Tools</a>
-                    <a href="/blog/" class="hover:text-white transition-colors">Blog</a>
                     <a href="/reviews/" class="hover:text-white transition-colors">Reviews</a>
                 </div>
 
@@ -100,10 +99,6 @@ function injectHeader() {
                 <a href="/#projects" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
                     <i class="fa-solid fa-toolbox w-6 text-center text-accent-main text-lg"></i> 
                     <span>Tools</span>
-                </a>
-                <a href="/blog/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
-                    <i class="fa-solid fa-newspaper w-6 text-center text-accent-main text-lg"></i> 
-                    <span>Blog</span>
                 </a>
                 <a href="/reviews/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
                     <i class="fa-solid fa-star w-6 text-center text-accent-main text-lg"></i> 
@@ -192,6 +187,7 @@ function injectAdSpace() {
 /**
  * Generates the HTML for review list items dynamically.
  * LOGIC: Slices the top 5 items from recentReviews and excludes the current page.
+ * COMPACT MODE: Reduced padding, icon size, and spacing for dense sidebar.
  */
 function getReviewListHTML(isMobile = false) {
     const currentPath = window.location.pathname;
@@ -205,29 +201,29 @@ function getReviewListHTML(isMobile = false) {
         // Placeholder State if no other reviews exist
         return `
             <li class="opacity-70">
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded border border-dashed border-gray-300">
-                    <div class="flex-shrink-0 w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-gray-400">
-                        <i class="fa-regular fa-clock"></i>
+                <div class="flex items-center gap-2 p-1.5 bg-gray-50 rounded border border-dashed border-gray-300">
+                    <div class="flex-shrink-0 w-7 h-7 rounded bg-gray-100 flex items-center justify-center text-gray-400">
+                        <i class="fa-regular fa-clock text-[10px]"></i>
                     </div>
                     <div>
-                        <span class="block text-[11px] font-bold text-gray-600 leading-tight">More reviews coming soon</span>
-                        <span class="block text-[9px] text-gray-400">Stay tuned for updates</span>
+                        <span class="block text-[11px] font-bold text-gray-600 leading-tight">Reviews coming soon</span>
+                        <span class="block text-[9px] text-gray-400">Stay tuned</span>
                     </div>
                 </div>
             </li>
         `;
     }
 
-    // Dynamic HTML Generation
+    // Dynamic HTML Generation - COMPACT DENSE STYLE
     return displayReviews.map(review => `
         <li>
-            <a href="${review.url}" class="group flex items-start gap-3 p-2 rounded hover:bg-gray-50 transition-colors">
-                <div class="flex-shrink-0 w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-star text-[10px]"></i>
+            <a href="${review.url}" class="group flex items-start gap-2 p-1.5 rounded hover:bg-gray-50 transition-colors">
+                <div class="flex-shrink-0 w-7 h-7 rounded bg-gray-100 flex items-center justify-center text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors">
+                    <i class="fa-solid fa-star text-[9px]"></i>
                 </div>
-                <div>
-                    <span class="block text-[11px] font-bold text-gray-800 group-hover:text-accent-main leading-tight transition-colors line-clamp-2">${review.title}</span>
-                    <span class="block text-[9px] text-gray-400 mt-0.5">${review.date} • ${review.category}</span>
+                <div class="min-w-0">
+                    <span class="block text-[11px] font-bold text-gray-800 group-hover:text-accent-main leading-tight transition-colors truncate">${review.title}</span>
+                    <span class="block text-[9px] text-gray-400 leading-none mt-0.5">${review.date} • ${review.category}</span>
                 </div>
             </a>
         </li>
@@ -241,38 +237,49 @@ function injectSidebar() {
     const sidebarContainer = document.getElementById('app-sidebar');
     if (!sidebarContainer) return;
 
-    // 1. Popular Tools Widget
+    // 1. Popular Tools Widget - COMPACT REDESIGN
+    // Changes: Reduced padding (p-3 -> p-2.5), added icons for visual density, tighter spacing (space-y-1).
     const toolsWidgetHTML = `
-        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-gray-50/50 w-full max-w-full">
-            <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+        <div class="card-section !p-2.5 !mb-0 shadow-sm border-gray-300 bg-gray-50/50 w-full max-w-full">
+            <h3 class="text-[11px] font-extrabold text-gray-900 mb-2 uppercase tracking-widest border-b border-gray-200 pb-1.5">
                 <i class="fa-solid fa-fire text-accent-main mr-1.5"></i> Popular Tools
             </h3>
-            <ul class="space-y-3">
+            <ul class="space-y-1">
                 <li>
-                    <a href="https://bestseotools.toolblaster.com" class="block group">
-                        <span class="block text-[12px] font-bold text-gray-800 group-hover:text-accent-main transition-colors">SEO Tools Guide</span>
-                        <span class="block text-[10px] text-gray-500 leading-tight">Compare top platform performance.</span>
+                    <a href="https://bestseotools.toolblaster.com" class="group flex items-center gap-2 p-1.5 rounded hover:bg-white hover:shadow-sm transition-all border border-transparent hover:border-gray-100">
+                        <div class="flex-shrink-0 w-7 h-7 rounded bg-white border border-gray-200 flex items-center justify-center text-accent-main group-hover:bg-accent-main group-hover:text-white group-hover:border-accent-main transition-colors">
+                            <i class="fa-solid fa-magnifying-glass-chart text-[10px]"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[11px] font-bold text-gray-800 group-hover:text-accent-main leading-tight transition-colors">SEO Tools Guide</span>
+                            <span class="block text-[9px] text-gray-500 leading-none mt-0.5">Performance Comparison</span>
+                        </div>
                     </a>
                 </li>
                 <li>
-                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block group">
-                        <span class="block text-[12px] font-bold text-gray-800 group-hover:text-accent-main transition-colors">SIP Calculator</span>
-                        <span class="block text-[10px] text-gray-500 leading-tight">Inflation-adjusted wealth planning.</span>
+                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="group flex items-center gap-2 p-1.5 rounded hover:bg-white hover:shadow-sm transition-all border border-transparent hover:border-gray-100">
+                        <div class="flex-shrink-0 w-7 h-7 rounded bg-white border border-gray-200 flex items-center justify-center text-accent-main group-hover:bg-accent-main group-hover:text-white group-hover:border-accent-main transition-colors">
+                            <i class="fa-solid fa-calculator text-[10px]"></i>
+                        </div>
+                        <div>
+                            <span class="block text-[11px] font-bold text-gray-800 group-hover:text-accent-main leading-tight transition-colors">SIP Calculator</span>
+                            <span class="block text-[9px] text-gray-500 leading-none mt-0.5">Inflation Adjusted</span>
+                        </div>
                     </a>
                 </li>
             </ul>
         </div>
     `;
 
-    // 2. Related Reviews Widget (Sidebar Version)
-    // Uses the dynamic getReviewListHTML() function
-    // UPDATED: Changed Title from 'Latest Reviews' to 'Other Reviews'
+    // 2. Related Reviews Widget (Sidebar Version) - COMPACT REDESIGN
+    // Changes: Reduced padding (p-3 -> p-2.5), tighter spacing (space-y-1), smaller header.
+    // Uses the updated compact getReviewListHTML() function
     const reviewsWidgetHTML = `
-        <div class="card-section !p-3 !mb-0 shadow-sm border-gray-300 bg-white w-full max-w-full">
-            <h3 class="text-[12px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2">
+        <div class="card-section !p-2.5 !mb-0 shadow-sm border-gray-300 bg-white w-full max-w-full">
+            <h3 class="text-[11px] font-extrabold text-gray-900 mb-2 uppercase tracking-widest border-b border-gray-200 pb-1.5">
                 <i class="fa-solid fa-book-open text-accent-main mr-1.5"></i> Other Reviews
             </h3>
-            <ul class="space-y-2">
+            <ul class="space-y-1">
                 ${getReviewListHTML(false)}
             </ul>
         </div>
@@ -289,26 +296,26 @@ function injectSidebar() {
         if (headings.length > 0) {
             indexWidgetHTML = `
                 <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300 w-full max-w-full overflow-hidden">
-                    <h3 class="text-[14px] font-extrabold text-gray-900 mb-3 uppercase tracking-widest border-b border-gray-200 pb-2 flex-shrink-0">
+                    <h3 class="text-[12px] font-extrabold text-gray-900 mb-2 uppercase tracking-widest border-b border-gray-200 pb-1.5 flex-shrink-0">
                         <i class="fa-solid fa-list-ul text-accent-main mr-1.5"></i> Review Index
                     </h3>
                     <div id="review-index-scroll-container" class="overflow-y-auto pr-1 flex-grow scrollbar-thin scrollbar-thumb-gray-200">
-                        <ul class="space-y-2" id="review-index-list">
+                        <ul class="space-y-1" id="review-index-list">
                             ${Array.from(headings).map((h, i) => {
                                 if (!h.id) h.id = `section-${i}`;
                                 const num = (i + 1).toString().padStart(2, '0');
                                 return `
                                 <li class="group">
-                                    <a href="#${h.id}" class="toc-link flex items-center justify-between p-1 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
+                                    <a href="#${h.id}" class="toc-link flex items-center justify-between p-1.5 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
                                         <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2 truncate">${h.innerText}</span>
-                                        <span class="toc-badge flex-shrink-0 w-6 h-4 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
+                                        <span class="toc-badge flex-shrink-0 w-5 h-5 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
                                     </a>
                                 </li>`;
                             }).join('')}
                         </ul>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 text-center flex-shrink-0">
-                        <p class="text-[10px] text-gray-400 italic">Updating daily for 2026</p>
+                    <div class="mt-3 pt-2 border-t border-gray-100 text-center flex-shrink-0">
+                        <p class="text-[9px] text-gray-400 italic">Updating daily for 2026</p>
                     </div>
                 </div>
             `;
@@ -316,7 +323,7 @@ function injectSidebar() {
     }
 
     sidebarContainer.innerHTML = `
-        <div class="flex flex-col gap-5 h-full w-full"> 
+        <div class="flex flex-col gap-4 h-full w-full"> 
             ${toolsWidgetHTML}
             ${reviewsWidgetHTML}
             ${indexWidgetHTML}
