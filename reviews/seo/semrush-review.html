@@ -187,7 +187,7 @@
                             <li><strong>PPC & Social Media:</strong> Optimize Google Ads spend and schedule social posts across platforms.</li>
                         </ul>
                         <p class="text-article-p mb-0 bg-accent-main/5 p-3 rounded-lg border border-accent-main/20 text-gray-700">
-                            <strong class="text-accent-main">Why it matters in 2026:</strong> Beyond raw data, Semrush excels at connecting the dots. It doesn't just show you <em>what</em> keywords to target, but <em>why</em> your competitors are winning them - whether it's through superior backlinks, technical health, or content structure. In an era dominated by AI overviews and volatile algorithms, this holistic "X-ray vision" of the digital landscape allows you to pivot proactively rather than reacting to ranking drops after they happen.
+                            <strong class="text-accent-main">Why it matters in 2026:</strong> Beyond raw data, Semrush excels at connecting the dots. It doesn't just show you <em>what</em> keywords to target, but <em>why</em> your competitors are winning them—whether it's through superior backlinks, technical health, or content structure. In an era dominated by AI overviews and volatile algorithms, this holistic "X-ray vision" of the digital landscape allows you to pivot proactively rather than reacting to ranking drops after they happen.
                         </p>
                     </section>
 
@@ -207,7 +207,7 @@
                                 <div class="bg-green-50 p-3 rounded-lg border border-green-100">
                                     <strong class="block text-sm text-green-900 mb-1">SEO Agencies & Consultants</strong>
                                     <p class="text-xs text-gray-600 leading-relaxed">
-                                        The white-label reporting features are best-in-class. You can automate PDF reports to clients that show ranking improvements, justifying your retainer fees effortlessly.
+                                        The white-label reporting features arguably make it one of the <strong>best SEO reporting tools</strong> available. You can automate PDF reports to clients that show ranking improvements, justifying your retainer fees effortlessly.
                                     </p>
                                 </div>
                                 <div class="bg-green-50 p-3 rounded-lg border border-green-100">
@@ -251,6 +251,22 @@
                     <section class="card-section !p-4 !mb-5">
                         <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="key-features">Key Features: A Hands-On Test</h2>
                         
+                        <!-- ADDED: Image Popup Feature with MODERN FRAME -->
+                        <!-- STYLING UPDATE: Added heavy shadow, white border, and soft ring for a 'framed' look -->
+                        <figure class="mb-8 rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
+                                <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md text-3xl"></i>
+                            </div>
+                            <img src="../image/keyword-magic-tool-semrush.jpg" 
+                                 alt="Semrush Keyword Magic Tool Interface showing keyword metrics" 
+                                 class="w-full h-auto object-cover max-h-[350px] object-top bg-gray-50"
+                                 loading="lazy" 
+                                 onerror="this.style.display='none'">
+                            <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-500 italic border-t border-gray-100">
+                                The Keyword Magic Tool interface showing volume and KD% metrics. (Click to expand)
+                            </figcaption>
+                        </figure>
+
                         <div class="space-y-4">
                             <div>
                                 <h3 class="text-heading-3 text-gray-800 mb-1">1. Keyword Magic Tool (The Gold Standard)</h3>
@@ -267,7 +283,7 @@
                             <div>
                                 <h3 class="text-heading-3 text-gray-800 mb-1">3. Competitor Analysis (The Gap Tool)</h3>
                                 <p class="text-article-p text-gray-600">
-                                    This feature is where the ROI happens. Using the <strong>Keyword Gap</strong> tool, we inputted our domain alongside three top competitors. The tool generated a list of 1,200 keywords that they rank for on Page 1, but we didn't rank for at all. This instant "content roadmap" takes the guesswork out of what to write next.
+                                    This feature is where the ROI happens. Using the <strong>Keyword Gap</strong> tool, we inputted our domain alongside three top competitors. The tool generated a list of 1,200 keywords that *they* rank for on Page 1, but we didn't rank for at all. This instant "content roadmap" takes the guesswork out of what to write next.
                                 </p>
                             </div>
                         </div>
@@ -651,6 +667,20 @@
                                     Yes, Semrush is a month-to-month service unless you pay annually. You can cancel directly from your dashboard settings without needing to call support.
                                 </p>
                             </details>
+
+                            <!-- Question 5 (LSI Integration) -->
+                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer" open>
+                                <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
+                                    <div class="flex items-center gap-3">
+                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-main/10 text-accent-main flex items-center justify-center text-xs font-bold">5</span>
+                                        <span>what is the best automated seo reports tool?</span>
+                                    </div>
+                                    <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                                </summary>
+                                <p class="text-article-p text-gray-600 mt-2 pl-11 border-l-2 border-accent-main ml-3">
+                                    For agencies and serious marketers, Semrush takes the crown. Its "My Reports" tool lets you build custom, white-label PDF reports with drag-and-drop ease, pulling data from site audits, rank tracking, and competitor analysis automatically.
+                                </p>
+                            </details>
                         </div>
                     </section>
 
@@ -702,6 +732,57 @@
 
     <!-- Scripts -->
     <script src="../../js/header-footer.js"></script>
+
+    <!-- Image Modal Logic -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
+        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Image Container -->
+            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+            });
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Add Esc key listener
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('modal-image').src = '';
+            }, 300); // Match transition duration
+            
+            document.body.style.overflow = ''; // Restore scrolling
+            document.removeEventListener('keydown', handleEscKey);
+        }
+
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        }
+    </script>
 
 </body>
 </html>
