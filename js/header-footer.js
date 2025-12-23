@@ -8,7 +8,13 @@
 // INSTRUCTION: Add new reviews to the BEGINNING (TOP) of this array.
 const recentReviews = [
     { 
-        title: "Semrush Review 2025", 
+        title: "KWFinder Review 2026", 
+        url: "/reviews/seo/kwfinder-review.html", 
+        category: "SEO Tools", 
+        date: "Jan 2026" 
+    },
+    { 
+        title: "Semrush Review 2026", 
         url: "/reviews/seo/semrush-review.html", 
         category: "SEO Tools", 
         date: "Jan 2025" 
