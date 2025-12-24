@@ -108,7 +108,6 @@
             <div class="w-full lg:w-[75%]">
                 
                 <!-- Breadcrumb -->
-                <!-- CONTRAST FIX: text-gray-500 -> text-gray-600 -->
                 <nav class="text-xs text-gray-600 mb-3 font-medium">
                     <a href="/" class="hover:text-accent-main transition-colors">Home</a> 
                     <span class="mx-2">/</span> 
@@ -121,38 +120,36 @@
 
                 <!-- Article Header -->
                 <header class="mb-5 text-center sm:text-left">
-                    <!-- Category & Rating Block -->
                     <div class="flex items-center justify-center sm:justify-start gap-3 mb-4">
                         <span class="inline-block bg-green-100 text-green-800 text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wider">Security</span>
-                        <!-- CONTRAST FIX: text-yellow-400 -> text-yellow-500 -->
                         <div class="flex text-yellow-500 text-xs gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                         </div>
-                        <!-- CONTRAST FIX: text-gray-400 -> text-gray-600 -->
                         <span class="text-xs text-gray-600 font-medium">4.7/5 Rating</span>
                     </div>
 
                     <h1 class="text-heading-1 text-gray-900 mb-2 tracking-tight leading-tight">
                         ZeroSSL Review: Is It Finally Time to Ditch Paid SSL?
                     </h1>
-                    <!-- CONTRAST FIX: text-gray-600 -> text-gray-700 -->
                     <p class="text-article-p-lg text-gray-700 mb-4 italic">
                         We tested the dashboard, ACME API, and free tier limits. Here is the unfiltered truth about securing your domain with robust HTTPS encryption for $0.
                     </p>
                     
-                    <!-- Author Block -->
-                    <div class="flex items-center justify-center sm:justify-start space-x-3 border-t border-b border-gray-200 py-3">
-                        <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
-                        <div class="text-left">
-                            <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
-                            <!-- CONTRAST FIX: text-gray-500 -> text-gray-600 -->
-                            <p class="text-xs text-gray-600">Updated: Dec 2026 • 12 min read</p>
+                    <!-- Author & Share Block -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between border-t border-b border-gray-200 py-3 gap-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
+                            <div class="text-left">
+                                <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
+                                <p class="text-xs text-gray-600">Updated: Dec 2026 • 12 min read</p>
+                            </div>
                         </div>
+                        <!-- Place holder for global share widget injection -->
+                        <div class="share-widget"></div>
                     </div>
                 </header>
 
                 <!-- Article Content -->
-                <!-- CONTRAST FIX: prose text color -> text-gray-800 -->
                 <article class="prose prose-lg max-w-none text-gray-800">
                     
                     <!-- THE HOOK -->
@@ -165,7 +162,6 @@
 
                     <!-- KEY TAKEAWAY BOX -->
                     <div class="bg-blue-50 border-2 border-gray-300 p-4 rounded-xl mb-6 shadow-sm">
-                        <!-- HIERARCHY FIX: Changed h3 to h2 for proper nesting after intro -->
                         <h2 class="text-heading-3 text-blue-900 mb-2 mt-0">🚀 The Bottom Line Up Front</h2>
                         <p class="text-article-p text-blue-800">
                             ZeroSSL is currently the most user-friendly interface for free <strong>SSL/TLS certificates</strong>. It beats Let's Encrypt for beginners because it offers a full <strong>visual dashboard</strong> for managing keys, monitoring expirations, and validating domains. However, the free tier has strict limits (3 manual certifications per account) that power users and agencies need to navigate carefully.
@@ -178,7 +174,6 @@
                         <p class="text-article-p mb-3">
                             Technically, ZeroSSL started as a simple UI for Let's Encrypt but has evolved into a fully independent, trusted Certificate Authority (CA). Here are the core specs:
                         </p>
-                        <!-- CONTRAST FIX: marker color and text color -->
                         <ul class="list-disc pl-5 space-y-2 mb-0 text-article-p marker:text-accent-main text-gray-700">
                             <li><strong>Trust Chain:</strong> Partnered with <strong>Sectigo</strong> (formerly Comodo CA), ensuring recognition by 99.9% of browsers and OSs.</li>
                             <li><strong>Technology:</strong> Operates as a modern wrapper around the <strong>ACME protocol</strong> (same as Let's Encrypt), enabling automated <strong>SSL certificate renewal</strong>.</li>
@@ -193,7 +188,7 @@
                             One of the primary reasons developers dread SSL management is the lack of visibility. ZeroSSL changes this dynamic by providing a centralized <strong>SSL management console</strong> that acts as a command center for your security.
                         </p>
                         
-                        <!-- Image Popup Feature for Dashboard -->
+                        <!-- Image Popup Feature for Dashboard (Using global openImageModal) -->
                         <figure class="mb-8 rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
                                 <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md text-3xl"></i>
@@ -203,7 +198,6 @@
                                  class="w-full h-auto object-cover max-h-[350px] object-top bg-gray-50"
                                  loading="lazy" 
                                  onerror="this.style.display='none'">
-                            <!-- CONTRAST FIX: text-gray-500 -> text-gray-600 -->
                             <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-600 italic border-t border-gray-100">
                                 The ZeroSSL Dashboard provides a visual overview of all certificates. (Click to expand)
                             </figcaption>
@@ -211,7 +205,6 @@
 
                         <!-- Dense Style Grid Layout -->
                         <div class="grid grid-cols-2 gap-2 mb-0">
-                            <!-- CONTRAST FIX: Applied text-gray-700 to paragraph texts in cards -->
                             <div class="bg-gray-50 p-2.5 rounded border-2 border-gray-300">
                                 <h3 class="text-sm font-bold text-gray-900 mb-0.5"><i class="fa-solid fa-eye text-accent-main mr-1.5 text-xs"></i>Full Visibility</h3>
                                 <p class="text-article-p leading-snug text-gray-700">View a clear list of all active certificates and their exact issuance dates.</p>
@@ -296,7 +289,6 @@
                             ZeroSSL isn't just a basic certificate issuer; it's a full-stack security platform. Here is a breakdown of the critical features usually hidden in technical documentation.
                         </p>
 
-                        <!-- HIERARCHY FIX: Using H3 for sub-sections is correct -->
                         <h3 class="text-heading-3 text-gray-900 mt-6 mb-2">1. 90-Day vs. 1-Year Certificates</h3>
                         <ul class="list-disc pl-5 space-y-2 mb-4 text-article-p text-gray-700">
                             <li><strong>Free (90-Day):</strong> The standard for automated security. Limits the window of opportunity for compromised keys. Requires <strong>SSL certificate renewal</strong> every 3 months.</li>
@@ -333,7 +325,7 @@
 
                         <!-- VISUAL HIGHLIGHT -->
                         <div class="p-6 bg-gray-900 rounded-xl text-center shadow-custom-hover transform transition hover:scale-[1.02] duration-300 mb-6">
-                            <i class="fa-solid fa-bolt text-yellow-500 text-4xl mb-3"></i> <!-- CONTRAST FIX: text-yellow-500 -->
+                            <i class="fa-solid fa-bolt text-yellow-500 text-4xl mb-3"></i>
                             <h3 class="text-heading-3 text-white mb-2">Speed Test Results</h3>
                             <p class="text-article-p text-gray-300">
                                 From account creation to installing the <strong>2048-bit RSA Key</strong> on a live Apache server took exactly <strong>4 minutes and 20 seconds</strong>.
@@ -374,7 +366,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-600 mt-4 italic"> <!-- CONTRAST FIX -->
+                        <p class="text-xs text-gray-600 mt-4 italic">
                             *Time estimates based on first-time setup for a new domain including account creation, validation, and installation. Renewal times for ACME/ZeroSSL are effectively 0 seconds (automated).
                         </p>
                     </section>
@@ -488,7 +480,7 @@
                         </p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                            <!-- Free Plan - High Contrast Accent -->
+                            <!-- Free Plan -->
                             <div class="bg-white border-2 border-accent-main rounded-xl p-4 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
                                 <div class="absolute top-0 right-0 bg-accent-main text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">BEST START</div>
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Free</h3>
@@ -500,7 +492,7 @@
                                 </ul>
                             </div>
 
-                            <!-- Basic Plan - High Contrast Border -->
+                            <!-- Basic Plan -->
                             <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Basic</h3>
                                 <div class="text-3xl font-black text-gray-900 mb-4">$10<span class="text-sm font-medium text-gray-600">/mo</span></div>
@@ -511,7 +503,7 @@
                                 </ul>
                             </div>
 
-                            <!-- Premium Plan - High Contrast Border -->
+                            <!-- Premium Plan -->
                             <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-heading-3 text-gray-900 mb-2">Premium</h3>
                                 <div class="text-3xl font-black text-gray-900 mb-4">$50<span class="text-sm font-medium text-gray-600">/mo</span></div>
@@ -523,45 +515,31 @@
                             </div>
                         </div>
 
-                        <!-- Savings Calculator (UPDATED LAYOUT) -->
+                        <!-- Savings Calculator -->
                         <div class="bg-gray-50 border-2 border-gray-300 rounded-lg shadow-sm overflow-hidden mb-0" id="savings-calculator">
                             <div class="p-4 flex flex-col md:flex-row items-center justify-between gap-6">
-                                
-                                <!-- Header & Input Section -->
                                 <div class="flex-1 w-full md:w-auto">
                                     <h3 class="text-sm font-bold text-gray-900 mb-1 flex items-center">
                                         <i class="fa-solid fa-calculator text-accent-main mr-2"></i> Free SSL Savings Calculator
                                     </h3>
                                     <p class="text-[12px] text-gray-700 mb-3 leading-snug">Compare 5-year costs vs. standard paid providers ($70/yr).</p>
-                                    
                                     <div class="flex items-center bg-white rounded-md border-2 border-gray-300 px-3 py-1.5 w-full md:w-max">
                                         <label for="site-count" class="text-article-p font-semibold text-gray-700 mr-3">Websites:</label>
                                         <input type="number" id="site-count" value="3" min="1" max="100" class="bg-transparent border-none p-0 w-12 text-center text-sm font-bold text-gray-900 focus:ring-0 focus:outline-none">
                                     </div>
                                 </div>
-
-                                <!-- Results Section (Updated Visual Equation) -->
                                 <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto items-center justify-center bg-white p-3 rounded-lg border border-gray-200">
-                                    
-                                    <!-- Paid Cost -->
                                     <div class="text-center">
                                         <div class="text-[9px] uppercase tracking-wide text-red-600 font-bold mb-0.5">Competitor</div>
                                         <div class="text-base font-bold text-red-500 line-through decoration-red-300 decoration-2">$<span id="paid-cost">1,050</span></div>
                                     </div>
-
-                                    <!-- Math Logic (Equation) -->
                                     <div class="hidden sm:block text-gray-400 text-sm font-light px-1">- $0 =</div>
-
-                                    <!-- Savings -->
                                     <div class="text-center pl-2 border-l border-gray-100 sm:border-0 sm:pl-0">
                                         <div class="text-[9px] uppercase tracking-wide text-green-700 font-bold mb-0.5">Your Savings</div>
                                         <div class="text-lg font-black text-green-600">$<span id="savings-amount">1,050</span></div>
                                     </div>
                                 </div>
-                                
                             </div>
-                            
-                            <!-- Footer Note -->
                             <div class="bg-white px-4 py-2 border-t-2 border-gray-300 text-center md:text-right">
                                 <p class="text-article-p text-gray-600">Based on standard 5-year renewal cycle for manual certificates.</p>
                             </div>
@@ -602,8 +580,7 @@
                         </div>
                     </section>
 
-                    <!-- NEW: Review Summary & Verdict Box (Replacing old Pros & Cons) -->
-                    <!-- UPDATED: Increased border contrast (border-2 border-gray-300) -->
+                    <!-- Review Summary & Verdict Box -->
                     <div class="bg-white border-2 border-gray-300 rounded-xl shadow-lg overflow-hidden my-6">
                         <div class="bg-gray-50 p-4 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4">
                             <div>
@@ -676,7 +653,6 @@
                                         <div class="bg-green-500 h-2 rounded-full" style="width: 94%"></div>
                                     </div>
                                 </div>
-                                <!-- NEW RATING ADDED HERE -->
                                 <div>
                                     <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
                                         <span>API Access</span>
@@ -716,10 +692,9 @@
                                         <i class="fa-solid fa-check-circle text-green-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
                                         <span><strong>Pro:</strong> Supports modern ECC Encryption.</span>
                                     </div>
-                                    <!-- UPDATED: Cons for clarity on the 3-cert limit -->
                                     <div class="flex items-start text-article-p text-gray-600 leading-snug">
                                         <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
-                                        <span><strong>Con:</strong> 3-cert LIFETIME limit on manual dashboard (Not per month).</span>
+                                        <span><strong>Con:</strong> 3-cert LIFETIME limit on manual dashboard.</span>
                                     </div>
                                      <div class="flex items-start text-article-p text-gray-600 leading-snug">
                                         <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
@@ -738,11 +713,10 @@
                         </div>
                     </div>
 
-                    <!-- SECTION CONTAINER 11: FAQ -->
+                    <!-- FAQ -->
                     <section class="card-section !p-4 !mb-5">
                         <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="faq">FAQ: Common Questions</h2>
                         <div class="space-y-3 mb-0">
-                            <!-- FAQ Details UPDATED with Numbered Icons and Expanded by default -->
                             <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer" open>
                                 <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
                                     <div class="flex items-center gap-3">
@@ -800,7 +774,7 @@
                         </p>
                     </section>
 
-                    <!-- ADDED: Author Bio -->
+                    <!-- Author Bio -->
                     <div class="mt-8 pt-6 border-t border-gray-200 flex items-start gap-4">
                         <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-gray-500 text-xl font-bold">V</div>
                         <div>
@@ -813,11 +787,10 @@
 
                 </article>
 
-                <!-- CTA / Next Steps (COMPACT VERSION) -->
+                <!-- CTA / Next Steps -->
                 <div class="mt-6 mb-4 p-4 bg-gray-900 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
                     <div class="text-center sm:text-left">
                         <h3 class="text-white font-bold text-lg leading-tight">Ready to secure your site?</h3>
-                        <!-- CONTRAST FIX: Changed text-gray-400 to text-gray-300 for dark background -->
                         <p class="text-gray-300 text-xs mt-1">Get your free SSL certificate today.</p>
                     </div>
                     <a href="https://zerossl.com?fpr=vikas95" target="_blank" rel="nofollow noopener" class="whitespace-nowrap bg-accent-main text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5 text-sm">
@@ -832,12 +805,11 @@
         </div>
     </main>
 
-    <!-- CLS Prevention: Footer Placeholder -->
+    <!-- Footer -->
     <div id="app-footer" class="min-h-[80px]"></div>
 
     <!-- Scripts -->
     <script src="../../js/header-footer.js"></script>
-    <!-- Load Secondary Global Script -->
     <script src="../../js/global-script.js"></script>
     
     <!-- Mini-Tool Script -->
@@ -861,57 +833,6 @@
                 siteInput.addEventListener('input', updateCalculator);
             }
         });
-    </script>
-    
-    <!-- ADDED: Image Modal Logic -->
-    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
-        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <!-- Image Container -->
-            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
-        </div>
-    </div>
-
-    <script>
-        function openImageModal(src) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-image');
-            
-            modalImg.src = src;
-            modal.classList.remove('hidden');
-            // Small delay to allow display:block to apply before opacity transition
-            requestAnimationFrame(() => {
-                modal.classList.remove('opacity-0');
-            });
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-            
-            // Add Esc key listener
-            document.addEventListener('keydown', handleEscKey);
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('image-modal');
-            modal.classList.add('opacity-0');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.getElementById('modal-image').src = '';
-            }, 300); // Match transition duration
-            
-            document.body.style.overflow = ''; // Restore scrolling
-            document.removeEventListener('keydown', handleEscKey);
-        }
-
-        function handleEscKey(e) {
-            if (e.key === 'Escape') {
-                closeImageModal();
-            }
-        }
     </script>
 
 </body>
