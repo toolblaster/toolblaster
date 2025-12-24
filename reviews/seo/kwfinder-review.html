@@ -383,9 +383,9 @@
                                     </tr>
                                     <tr>
                                         <td class="px-4 py-3 font-medium text-gray-700">Ease of Use</td>
-                                        <td class="px-4 py-3 text-green-700 bg-accent-main/5 font-bold">тнРтнРтнРтнРтнР</td>
-                                        <td class="px-4 py-3 text-gray-600">тнРтнРтнРтнР</td>
-                                        <td class="px-4 py-3 text-gray-600">тнРтнРтнР</td>
+                                        <td class="px-4 py-3 text-green-700 bg-accent-main/5 font-bold">тШЕтШЕтШЕтШЕтШЕ</td>
+                                        <td class="px-4 py-3 text-gray-600">тШЕтШЕтШЕтШЕ</td>
+                                        <td class="px-4 py-3 text-gray-600">тШЕтШЕтШЕ</td>
                                     </tr>
                                     <tr>
                                         <td class="px-4 py-3 font-medium text-gray-700">Best For</td>
@@ -599,46 +599,5 @@
     <script src="../../js/header-footer.js"></script>
     <script src="../../js/global-script.js"></script>
 
-    <!-- Image Modal Logic -->
-    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
-        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
-        </div>
-    </div>
-
-    <script>
-        function openImageModal(src) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-image');
-            modalImg.src = src;
-            modal.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                modal.classList.remove('opacity-0');
-            });
-            document.body.style.overflow = 'hidden';
-            document.addEventListener('keydown', handleEscKey);
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('image-modal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.getElementById('modal-image').src = '';
-            }, 300);
-            document.body.style.overflow = '';
-            document.removeEventListener('keydown', handleEscKey);
-        }
-
-        function handleEscKey(e) {
-            if (e.key === 'Escape') {
-                closeImageModal();
-            }
-        }
-    </script>
 </body>
 </html>
