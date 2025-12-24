@@ -74,6 +74,7 @@
             <!-- ADDED: Filter IDs and data attributes for JS targeting -->
             <div class="flex flex-wrap gap-2 mb-5" id="filter-container">
                 <button class="filter-btn active px-3 py-1 bg-accent-main border border-accent-main text-white text-[11px] font-bold rounded-full cursor-pointer uppercase tracking-wide transition-all" data-filter="all">All Reviews</button>
+                <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="hosting">Hosting</button>
                 <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="security">Security</button>
                 <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="seo">SEO Tools</button>
             </div>
@@ -81,6 +82,39 @@
             <!-- Review Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="reviews-grid">
                 
+                <!-- Verpex Review (Hosting) -->
+                <!-- ADDED: data-category="hosting" and review-card class -->
+                <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="hosting">
+                    <!-- Header: Category & Rating -->
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[9px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200 uppercase tracking-tight">Hosting</span>
+                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="flex-grow">
+                        <!-- RESTORED: Specific Year in Title -->
+                        <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                            <a href="hosting/verpex-hosting-review.html">Verpex Review 2026: The New "Fastest" Budget Host?</a>
+                        </h2>
+                        <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                            We stress-tested their NVMe speeds and support. Better than Hostinger?
+                        </p>
+                    </div>
+
+                    <!-- Footer: Meta -->
+                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
+                        <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                            <i class="fa-regular fa-calendar mr-1"></i> Feb 2026
+                        </span>
+                        <a href="hosting/verpex-hosting-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                        </a>
+                    </div>
+                </article>
+
                 <!-- KWFinder Review (Specific Year) -->
                 <!-- ADDED: data-category="seo" and review-card class -->
                 <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
