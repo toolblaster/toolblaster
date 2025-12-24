@@ -135,12 +135,16 @@
                     </p>
                     
                     <!-- Author Block -->
-                    <div class="flex items-center justify-center sm:justify-start space-x-3 border-t border-b border-gray-200 py-3">
-                        <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
-                        <div class="text-left">
-                            <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
-                            <p class="text-xs text-gray-600">Updated: Jan 2026 • 15 min read</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-between border-t border-b border-gray-200 py-3 gap-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
+                            <div class="text-left">
+                                <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
+                                <p class="text-xs text-gray-600">Updated: Jan 2026 • 15 min read</p>
+                            </div>
                         </div>
+                        <!-- Place holder for global share widget injection -->
+                        <div class="share-widget"></div>
                     </div>
                 </header>
 
@@ -746,57 +750,7 @@
 
     <!-- Scripts -->
     <script src="../../js/header-footer.js"></script>
-
-    <!-- Image Modal Logic -->
-    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
-        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <!-- Image Container -->
-            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
-        </div>
-    </div>
-
-    <script>
-        function openImageModal(src) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-image');
-            
-            modalImg.src = src;
-            modal.classList.remove('hidden');
-            // Small delay to allow display:block to apply before opacity transition
-            requestAnimationFrame(() => {
-                modal.classList.remove('opacity-0');
-            });
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-            
-            // Add Esc key listener
-            document.addEventListener('keydown', handleEscKey);
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('image-modal');
-            modal.classList.add('opacity-0');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.getElementById('modal-image').src = '';
-            }, 300); // Match transition duration
-            
-            document.body.style.overflow = ''; // Restore scrolling
-            document.removeEventListener('keydown', handleEscKey);
-        }
-
-        function handleEscKey(e) {
-            if (e.key === 'Escape') {
-                closeImageModal();
-            }
-        }
-    </script>
+    <script src="../../js/global-script.js"></script>
 
 </body>
 </html>
