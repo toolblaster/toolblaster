@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <!-- UPDATED: Year changed to 2026 -->
-    <title>[Tool Name] Review 2026: Features, Pricing & Verdict | Toolblaster</title>
-    <!-- UPDATED: Year changed to 2026 -->
-    <meta name="description" content="Comprehensive review of [Tool Name]. We test its features, performance, and pricing to help you decide if it is the right tool for [Target Audience] in 2026.">
-    <meta name="keywords" content="[Tool Name] review, [Keyword 1], [Keyword 2], [Keyword 3]">
+    <title>[Tool Name] Review: Features, Pricing & Verdict | Toolblaster</title>
+    <meta name="description" content="Is [Tool Name] worth it? We tested [Feature 1], [Feature 2], and [Feature 3]. Read our unbiased review vs [Competitor].">
+    <meta name="keywords" content="[Tool Name] review, [Tool Name] pricing, [Tool Category], [Competitor] vs [Tool Name]">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://toolblaster.com/reviews/[category]/[slug]/">
+    <link rel="canonical" href="https://toolblaster.com/reviews/[category]/[tool-name]-review.html">
     <meta name="robots" content="index, follow">
 
-    <!-- Schema Markup: BreadcrumbList (Template) -->
+    <!-- Schema Markup: BreadcrumbList -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,12 +37,12 @@
         "@type": "ListItem",
         "position": 4,
         "name": "[Tool Name] Review",
-        "item": "https://toolblaster.com/reviews/[category]/[slug]/"
+        "item": "https://toolblaster.com/reviews/[category]/[tool-name]-review.html"
       }]
     }
     </script>
 
-    <!-- Schema Markup: Software Review (Template) -->
+    <!-- Schema Markup: Software/Service Review -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -52,8 +50,8 @@
       "itemReviewed": {
         "@type": "SoftwareApplication",
         "name": "[Tool Name]",
-        "applicationCategory": "[Category]Application",
-        "operatingSystem": "Web",
+        "applicationCategory": "[Category] Software",
+        "operatingSystem": "Web-based",
         "offers": {
           "@type": "Offer",
           "price": "[Price]",
@@ -66,7 +64,7 @@
       },
       "reviewRating": {
         "@type": "Rating",
-        "ratingValue": "4.5",
+        "ratingValue": "[Rating]",
         "bestRating": "5"
       },
       "publisher": {
@@ -78,7 +76,7 @@
         }
       },
       "datePublished": "2026-01-01", 
-      "description": "A deep dive review of [Tool Name], comparing it with [Competitor] for [Key Feature]."
+      "description": "[Brief description of review]"
     }
     </script>
 
@@ -87,304 +85,285 @@
 
     <!-- Styles & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../js/tailwind-config.js"></script> 
+    <script src="../../js/tailwind-config.js"></script> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="flex flex-col min-h-screen font-inter text-gray-800 bg-gray-50">
+<body class="flex flex-col min-h-screen font-inter text-gray-900 bg-gray-50">
 
-    <!-- CLS Prevention: Header Placeholder -->
+    <!-- Header Placeholder -->
     <div id="app-header" class="min-h-[56px] w-full relative z-20 bg-[#0f1115]"></div>
 
-    <!-- MAIN CONTAINER: 75% Content / 25% Sidebar Layout -->
+    <!-- MAIN CONTAINER -->
     <main class="flex-grow container mx-auto max-w-site px-4 sm:px-6 pb-6 pt-0 md:pb-8">
         
-        <!-- Global Ad Space Container -->
+        <!-- Global Ad Space -->
         <div id="app-ad-space" class="w-full h-[100px]"></div>
 
         <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
             
-            <!-- LEFT COLUMN: Article Content (75% Width) -->
+            <!-- LEFT COLUMN: Article Content (75%) -->
             <div class="w-full lg:w-[75%]">
                 
                 <!-- Breadcrumb -->
-                <nav class="text-xs text-gray-500 mb-3 font-medium">
+                <nav class="text-xs text-gray-700 mb-3 font-medium">
                     <a href="/" class="hover:text-accent-main transition-colors">Home</a> 
                     <span class="mx-2">/</span> 
-                    <a href="/reviews/" class="hover:text-accent-main transition-colors">Reviews</a>
+                    <a href="../../reviews/" class="hover:text-accent-main transition-colors">Reviews</a>
                     <span class="mx-2">/</span> 
-                    <span class="text-gray-500">[Category]</span>
+                    <span class="text-gray-700">[Category]</span>
                     <span class="mx-2">/</span> 
-                    <span class="text-gray-800">[Tool Name]</span>
+                    <span class="text-gray-900">[Tool Name]</span>
                 </nav>
 
                 <!-- Article Header -->
                 <header class="mb-5 text-center sm:text-left">
-                    <span class="inline-block bg-green-100 text-green-800 text-[11px] font-bold px-2 py-1 rounded mb-2 uppercase tracking-wider">[Category] Tool</span>
+                    <div class="flex items-center justify-center sm:justify-start gap-3 mb-4">
+                        <span class="inline-block bg-indigo-100 text-indigo-900 text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wider">[Category]</span>
+                        <div class="flex text-yellow-600 text-xs gap-0.5">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-xs text-gray-700 font-medium">[Rating]/5 Rating</span>
+                    </div>
+
                     <h1 class="text-heading-1 text-gray-900 mb-2 tracking-tight leading-tight">
-                        [Tool Name] Review: [Engaging Hook or Question]?
+                        [Tool Name] Review: Is It Worth The Hype?
                     </h1>
-                    <p class="text-article-p-lg text-gray-600 mb-4 italic">
-                        We tested [Key Feature 1], [Key Feature 2], and [Key Feature 3]. Here is the unfiltered truth about [Value Proposition] in 2026.
+                    <p class="text-article-p-lg text-gray-800 mb-4 italic">
+                        We tested [Key Feature 1], [Key Feature 2], and [Key Feature 3]. Here is the unfiltered truth about [Tool Name] for [Target Audience].
                     </p>
                     
-                    <!-- Author Block (REVERTED to Simple Structure) -->
-                    <div class="flex items-center justify-center sm:justify-start space-x-3 border-t border-b border-gray-200 py-3">
-                        <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
-                        <div class="text-left">
-                            <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
-                            <!-- UPDATED: Year changed to 2026 -->
-                            <p class="text-xs text-gray-500">Updated: Dec 2026 â€¢ 12 min read</p>
+                    <!-- Author Block -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between border-t border-b border-gray-300 py-3 gap-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
+                            <div class="text-left">
+                                <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
+                                <p class="text-xs text-gray-700">Updated: [Date] • [Time] min read</p>
+                            </div>
                         </div>
+                        <!-- Place holder for global share widget injection -->
+                        <div class="share-widget"></div>
                     </div>
                 </header>
 
                 <!-- Article Content -->
-                <article class="prose prose-lg max-w-none text-gray-700">
+                <article class="prose prose-lg max-w-none text-gray-900">
                     
                     <!-- THE HOOK -->
                     <p class="text-article-p leading-relaxed mb-3">
-                        <span class="text-accent-main font-bold">Imagine this:</span> A potential customer lands on your site, <strong>wallet in hand, ready to buy</strong>. But before they click 'Checkout', they face [Pain Point]. In a split second, <strong>trust evaporates</strong>, and they <strong>bounce straight to your competitor</strong>. This is the <strong>nightmare scenario</strong> for every [Role] in 2026. For years, avoiding this meant a <strong>painful binary choice</strong>: [Bad Option A], or [Bad Option B].
+                        <span class="text-accent-main font-bold">The Problem:</span> [Describe the pain point users face without this tool].
                     </p>
                     <p class="text-article-p leading-relaxed mb-5">
-                        Then came <strong>[Tool Name]</strong>. It entered the scene promising the <strong>holy grail</strong>: [Promise 1] with [Promise 2]. Sounds too good to be true? I thought so too. To find out if it's a <strong>genuine game-changer</strong> or just a shiny <strong>"freemium" trap</strong>, I didn't just read the documentationâ€”I deployed it. Here is the <strong>unfiltered truth</strong>.
+                        Then came <strong>[Tool Name]</strong>. It promises to [Value Proposition]. But is it actually worth the investment? In this hands-on review, I put it to the test.
                     </p>
 
                     <!-- KEY TAKEAWAY BOX (BLUF) -->
                     <div class="bg-blue-50 border-2 border-gray-300 p-4 rounded-xl mb-6 shadow-sm">
-                        <h3 class="text-heading-3 text-blue-900 mb-2">ðŸš€ The Bottom Line Up Front</h3>
-                        <p class="text-article-p text-blue-800">
-                            [Tool Name] is currently the [Superlative] for [Target Audience]. It beats [Competitor] because [Key Reason]. However, [Major Limitation] means [Specific User Group] should look elsewhere.
+                        <h2 class="text-heading-3 text-blue-900 mb-2 mt-0">🚀 The Bottom Line Up Front</h2>
+                        <p class="text-article-p text-blue-900">
+                            [Tool Name] is the <strong>[Best For Whom]</strong>. It excels at [Top Feature] but falls short on [Weakness]. If you need [Specific Need], this is a no-brainer.
                         </p>
                     </div>
 
-                    <!-- ========================================== -->
-                    <!-- FLEXIBLE CONTENT BLOCKS (Copy/Paste as needed) -->
-                    <!-- ========================================== -->
+                    <!-- Methodology -->
+                    <div class="bg-gray-100 border-l-4 border-gray-600 p-4 mb-6 text-sm text-gray-800 shadow-sm">
+                        <strong>⚖️ How We Tested:</strong> We subscribed to the [Plan Name] and tested it on [Real Project]. We evaluated [Metric 1], [Metric 2], and [Metric 3].
+                    </div>
 
-                    <!-- BLOCK 1: Standard Text Section -->
+                    <!-- PROOF IMAGE (CLS Optimized) -->
+                    <figure class="mb-6 border border-gray-200 rounded-lg overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
+                            <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md text-3xl"></i>
+                        </div>
+                        <!-- Placeholder Image - Always use width/height attrs -->
+                        <img src="../../images/placeholder.jpg" 
+                             alt="[Tool Name] Dashboard" 
+                             width="800"
+                             height="450"
+                             class="w-full h-auto bg-gray-200"
+                             loading="lazy" 
+                             onerror="this.style.display='none'">
+                        <figcaption class="bg-gray-100 p-2 text-center text-xs text-gray-700 italic border-t border-gray-200">
+                            [Caption describing the image] (Click to expand)
+                        </figcaption>
+                    </figure>
+
+                    <!-- SECTION 1: What Is It -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="what-is-it">What is [Tool Name]?</h2>
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="overview">What Is [Tool Name]?</h2>
                         <p class="text-article-p mb-3">
-                            [Brief description of the tool]. Here are the core specs:
+                            [Tool Name] is a [Type of Tool] designed to help [Target Audience] achieve [Goal].
                         </p>
-                        <ul class="list-disc pl-5 space-y-2 mb-0 text-article-p marker:text-accent-main text-gray-600">
-                            <li><strong>Feature A:</strong> Description.</li>
-                            <li><strong>Feature B:</strong> Description.</li>
-                            <li><strong>Feature C:</strong> Description.</li>
-                        </ul>
                     </section>
 
-                    <!-- BLOCK 2: Features Grid (Good for Visual USPs) -->
+                    <!-- SECTION 2: Key Features -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="key-feature">The [Key Feature]: A UX Breakthrough</h2>
-                        <p class="text-article-p mb-3">
-                            [Description of the main selling point].
-                        </p>
-                        <div class="grid grid-cols-2 gap-2 mb-0">
-                            <div class="bg-gray-50 p-2.5 rounded border-2 border-gray-300">
-                                <h3 class="text-sm font-bold text-gray-900 mb-0.5"><i class="fa-solid fa-star text-accent-main mr-1.5 text-xs"></i>Feature 1</h3>
-                                <p class="text-article-p leading-snug text-gray-600">Short description.</p>
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="features">Key Features: A Hands-On Test</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-heading-3 text-gray-900 mb-1">1. [Feature One]</h3>
+                                <p class="text-article-p text-gray-800">
+                                    [Description of feature usage and benefits].
+                                </p>
                             </div>
-                            <div class="bg-gray-50 p-2.5 rounded border-2 border-gray-300">
-                                <h3 class="text-sm font-bold text-gray-900 mb-0.5"><i class="fa-solid fa-bolt text-accent-main mr-1.5 text-xs"></i>Feature 2</h3>
-                                <p class="text-article-p leading-snug text-gray-600">Short description.</p>
-                            </div>
+                            <!-- Add more features as needed -->
                         </div>
                     </section>
 
-                    <!-- BLOCK 3: Comparison Table (Vertical Compact) -->
+                    <!-- EXCLUSIVE DATA SECTION (Optional) -->
+                    <!-- 
+                    <section class="card-section !p-4 !mb-5 border-l-4 border-indigo-500 bg-indigo-50">
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-heading-3 text-indigo-900 mt-0 flex items-center">
+                                <i class="fa-solid fa-microscope mr-2"></i> Exclusive Data: [Test Name]
+                            </h2>
+                            <span class="bg-indigo-200 text-indigo-900 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Lab Test</span>
+                        </div>
+                        <p class="text-article-p mb-3 text-indigo-900 text-xs">
+                            [Description of unique test and results].
+                        </p>
+                    </section>
+                    -->
+
+                    <!-- SECTION 3: Comparison Table (Compact) -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-2 mt-0">[Tool Name] vs [Competitor]</h2>
-                        <div class="overflow-hidden rounded-lg border border-gray-200">
-                            <table class="w-full text-left text-sm">
-                                <thead class="bg-gray-100 text-gray-900 font-bold uppercase text-xs">
+                        <h2 class="text-heading-2 text-gray-900 mb-2 mt-0" id="comparison">[Tool] vs Competitors</h2>
+                        <div class="overflow-x-auto rounded-lg border border-gray-300">
+                            <table class="w-full text-left text-xs whitespace-nowrap">
+                                <thead class="bg-gray-200 text-gray-900 font-bold uppercase">
                                     <tr>
-                                        <!-- Compact padding: px-3 py-2 -->
-                                        <th class="px-3 py-2">Feature</th>
-                                        <th class="px-3 py-2">[Competitor]</th>
-                                        <th class="px-3 py-2 text-accent-main">[Tool Name]</th>
+                                        <th class="px-2 py-2">Feature</th>
+                                        <th class="px-2 py-2 text-accent-main bg-accent-main/10">[Tool]</th>
+                                        <th class="px-2 py-2">Competitor A</th>
+                                        <th class="px-2 py-2">Competitor B</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
+                                <tbody class="divide-y divide-gray-300 bg-white">
                                     <tr>
-                                        <td class="px-3 py-2 font-medium">Feature 1</td>
-                                        <td class="px-3 py-2 text-red-500"><i class="fa-solid fa-xmark"></i> No</td>
-                                        <td class="px-3 py-2 text-green-600"><i class="fa-solid fa-check"></i> Yes</td>
+                                        <td class="px-2 py-2 font-medium text-gray-800">Price</td>
+                                        <td class="px-2 py-2 text-green-800 bg-accent-main/10 font-bold">$$$</td>
+                                        <td class="px-2 py-2 text-gray-700">$$$</td>
+                                        <td class="px-2 py-2 text-gray-700">$$$</td>
                                     </tr>
-                                    <tr>
-                                        <td class="px-3 py-2 font-medium">Feature 2</td>
-                                        <td class="px-3 py-2">Value A</td>
-                                        <td class="px-3 py-2 font-bold text-accent-main">Value B</td>
-                                    </tr>
+                                    <!-- Add more rows -->
                                 </tbody>
                             </table>
                         </div>
                     </section>
 
-                    <!-- SECTION 4: Performance Analysis -->
+                    <!-- SECTION 4: Pricing (Modern Cards) -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="deep-dive">Deep Dive: Performance & Usage</h2>
-                        <p class="text-article-p mb-4">
-                            [Detailed analysis of usage].
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="pricing">[Tool] Pricing</h2>
+                        <p class="text-article-p mb-6 text-gray-800">
+                            [Pricing overview text].
                         </p>
                         
-                        <!-- Visual Highlight -->
-                        <div class="p-6 bg-gray-900 rounded-xl text-center shadow-custom-hover transform transition hover:scale-[1.02] duration-300 mb-6">
-                            <i class="fa-solid fa-chart-line text-yellow-400 text-4xl mb-3"></i>
-                            <h3 class="text-heading-3 text-white mb-2">Test Result</h3>
-                            <p class="text-article-p text-gray-300">
-                                [Tool Name] achieved [Result] in our tests, which is [X]% faster than the industry average.
-                            </p>
-                        </div>
-                    </section>
-
-                    <!-- SECTION 5: Pricing -->
-                    <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="pricing">Pricing & Plans</h2>
-                        <p class="text-article-p mb-6">
-                            [Overview of pricing structure].
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                             <!-- Plan 1 -->
-                            <div class="bg-white border-2 border-accent-main rounded-xl p-4 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
-                                <div class="absolute top-0 right-0 bg-accent-main text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-                                <h3 class="text-heading-3 text-gray-900 mb-2">Starter</h3>
-                                <div class="text-3xl font-black text-gray-900 mb-4">$0<span class="text-sm font-medium text-gray-500">/mo</span></div>
-                                <ul class="text-article-p text-gray-600 space-y-3 mb-6">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2 text-xs"></i> Feature A</li>
+                            <div class="bg-white border border-gray-300 rounded-lg p-2.5 shadow-sm hover:shadow-md transition duration-300">
+                                <h3 class="text-xs font-bold text-gray-900 mb-0.5">Basic</h3>
+                                <div class="text-xl font-black text-gray-900 mb-2">$XX<span class="text-[10px] font-medium text-gray-600">/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Feature 1</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Feature 2</li>
                                 </ul>
                             </div>
-                            <!-- Plan 2 -->
-                            <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
-                                <h3 class="text-heading-3 text-gray-900 mb-2">Pro</h3>
-                                <div class="text-3xl font-black text-gray-900 mb-4">$29<span class="text-sm font-medium text-gray-500">/mo</span></div>
-                                <ul class="text-article-p text-gray-600 space-y-3 mb-6">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2 text-xs"></i> Feature A + B</li>
+                            
+                            <!-- Plan 2 (Recommended) -->
+                            <div class="bg-white border-2 border-accent-main rounded-lg p-2.5 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
+                                <div class="absolute top-0 right-0 bg-accent-main text-white text-[8px] font-bold px-2 py-0.5 rounded-bl">RECOMMENDED</div>
+                                <h3 class="text-xs font-bold text-gray-900 mb-0.5">Pro</h3>
+                                <div class="text-xl font-black text-gray-900 mb-2">$XX<span class="text-[10px] font-medium text-gray-600">/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Everything in Basic</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Advanced Feature</strong></li>
                                 </ul>
                             </div>
+
                             <!-- Plan 3 -->
-                            <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm hover:shadow-md transition duration-300">
-                                <h3 class="text-heading-3 text-gray-900 mb-2">Enterprise</h3>
-                                <div class="text-3xl font-black text-gray-900 mb-4">$99<span class="text-sm font-medium text-gray-500">/mo</span></div>
-                                <ul class="text-article-p text-gray-600 space-y-3 mb-6">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2 text-xs"></i> All Features</li>
+                            <div class="bg-white border border-gray-300 rounded-lg p-2.5 shadow-sm hover:shadow-md transition duration-300">
+                                <h3 class="text-xs font-bold text-gray-900 mb-0.5">Business</h3>
+                                <div class="text-xl font-black text-gray-900 mb-2">$XX<span class="text-[10px] font-medium text-gray-600">/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> All Pro Features</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> API Access</li>
                                 </ul>
                             </div>
                         </div>
                     </section>
 
-                    <!-- REVIEW SUMMARY BOX -->
-                    <div class="bg-white border-2 border-gray-300 rounded-xl shadow-lg overflow-hidden my-6">
-                        <div class="bg-gray-50 p-4 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <div>
-                                <h2 class="text-heading-2 text-gray-900 mb-1" id="review-summary">Review Summary</h2>
-                                <p class="text-xs text-gray-500">Comprehensive analysis based on live testing.</p>
-                            </div>
-                            <div class="text-center sm:text-right">
-                                <div class="text-4xl font-black text-accent-main leading-none">4.5<span class="text-lg text-gray-400 font-medium">/5</span></div>
-                                <div class="text-yellow-400 text-sm mt-1">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <!-- Ratings -->
-                            <div class="space-y-3">
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-1">Ratings</h3>
-                                <!-- Rating Item -->
-                                <div>
-                                    <div class="flex justify-between text-xs font-semibold text-gray-700 mb-1">
-                                        <span>Value for Money</span>
-                                        <span>5.0/5</span>
-                                    </div>
-                                    <div class="w-full bg-gray-100 rounded-full h-2">
-                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                                <!-- Add more ratings -->
-                            </div>
-
-                            <!-- Pros & Cons -->
-                            <div class="space-y-3">
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-1">Verdict Highlights</h3>
-                                <div class="space-y-2">
-                                    <div class="flex items-start text-article-p text-gray-600 leading-snug">
-                                        <i class="fa-solid fa-check-circle text-green-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
-                                        <span><strong>Pro:</strong> Benefit 1.</span>
-                                    </div>
-                                    <div class="flex items-start text-article-p text-gray-600 leading-snug">
-                                        <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 mr-2 text-sm flex-shrink-0"></i>
-                                        <span><strong>Con:</strong> Drawback 1.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer CTA -->
-                        <div class="p-4 bg-gray-50 border-t border-gray-200 text-center">
-                            <a href="#" target="_blank" rel="nofollow noopener" class="inline-flex items-center justify-center w-full sm:w-auto bg-accent-main text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5">
-                                Try [Tool Name] <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Section (UPDATED: Added 'open' attribute) -->
+                    <!-- SECTION 5: FAQ -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="faq">FAQ: Common Questions</h2>
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="faq">FAQ</h2>
                         <div class="space-y-3 mb-0">
-                            <!-- Question 1 -->
-                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer" open>
+                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer">
                                 <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
                                     <div class="flex items-center gap-3">
                                         <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-main/10 text-accent-main flex items-center justify-center text-xs font-bold">1</span>
-                                        <span>Question 1?</span>
+                                        <span>Common Question?</span>
                                     </div>
                                     <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
                                 </summary>
-                                <p class="text-article-p text-gray-600 mt-2 pl-11 border-l-2 border-accent-main ml-3">
-                                    Answer 1.
-                                </p>
-                            </details>
-                            
-                            <!-- Question 2 -->
-                            <details class="group bg-white border-2 border-gray-300 rounded-lg p-3 cursor-pointer" open>
-                                <summary class="flex justify-between items-center text-heading-3 text-gray-900 list-none">
-                                    <div class="flex items-center gap-3">
-                                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-main/10 text-accent-main flex items-center justify-center text-xs font-bold">2</span>
-                                        <span>Question 2?</span>
-                                    </div>
-                                    <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
-                                </summary>
-                                <p class="text-article-p text-gray-600 mt-2 pl-11 border-l-2 border-accent-main ml-3">
-                                    Answer 2.
+                                <p class="text-article-p text-gray-800 mt-2 pl-11 border-l-2 border-accent-main ml-3">
+                                    Answer goes here.
                                 </p>
                             </details>
                         </div>
                     </section>
 
-                    <!-- Final Verdict -->
+                    <!-- SECTION 6: Final Verdict (Grid Style) -->
                     <section class="card-section !p-4 !mb-5">
-                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="verdict">Final Verdict</h2>
+                        <h2 class="text-heading-2 text-gray-900 mb-3 mt-0" id="verdict">Final Verdict: Is [Tool] Worth It?</h2>
                         <p class="text-article-p mb-4">
-                            [Final summary statement].
+                            [Final summary paragraph].
                         </p>
-                        <p class="text-article-p mb-0">
-                            If you need [Benefit], [Tool Name] is the clear choice for 2026.
-                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Buy If -->
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                <h3 class="text-sm font-bold text-green-900 mb-2 flex items-center">
+                                    <i class="fa-solid fa-thumbs-up mr-2"></i> Buy it if you want...
+                                </h3>
+                                <ul class="space-y-1.5 text-xs text-gray-800">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-700 mt-0.5 mr-2"></i> Reason 1</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-700 mt-0.5 mr-2"></i> Reason 2</li>
+                                </ul>
+                            </div>
+
+                            <!-- Skip If -->
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                                <h3 class="text-sm font-bold text-red-900 mb-2 flex items-center">
+                                    <i class="fa-solid fa-thumbs-down mr-2"></i> Skip it if you need...
+                                </h3>
+                                <ul class="space-y-1.5 text-xs text-gray-800">
+                                    <li class="flex items-start"><i class="fa-solid fa-xmark text-red-600 mt-0.5 mr-2"></i> Reason 1</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-xmark text-red-600 mt-0.5 mr-2"></i> Reason 2</li>
+                                </ul>
+                            </div>
+                        </div>
                     </section>
+
+                    <!-- Author Bio -->
+                    <div class="mt-8 pt-6 border-t border-gray-200 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-gray-500 text-xl font-bold">V</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-gray-900">About the Author: Vikas Rana</h4>
+                            <p class="text-xs text-gray-700 leading-relaxed mt-1">
+                                [Short Bio].
+                            </p>
+                        </div>
+                    </div>
 
                 </article>
 
-                <!-- Compact Final CTA -->
+                <!-- Sticky CTA -->
                 <div class="mt-6 mb-4 p-4 bg-gray-900 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
                     <div class="text-center sm:text-left">
                         <h3 class="text-white font-bold text-lg leading-tight">Ready to start?</h3>
-                        <!-- CONTRAST FIX: Changed text-gray-400 to text-gray-300 -->
                         <p class="text-gray-300 text-xs mt-1">Get started with [Tool Name] today.</p>
                     </div>
                     <a href="#" target="_blank" rel="nofollow noopener" class="whitespace-nowrap bg-accent-main text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5 text-sm">
@@ -394,23 +373,58 @@
             </div>
 
             <!-- RIGHT COLUMN: Sidebar (Global Injection) -->
-            <!-- FIXED: Removed 'overflow-hidden' to allow sticky positioning to work -->
             <aside id="app-sidebar" class="w-full lg:w-[25%] hidden lg:block"></aside>
 
         </div>
     </main>
 
-    <!-- CLS Prevention: Footer Placeholder -->
+    <!-- Footer -->
     <div id="app-footer" class="min-h-[80px]"></div>
 
     <!-- Scripts -->
-    <script src="../js/header-footer.js"></script>
+    <script src="../../js/header-footer.js"></script>
+    <script src="../../js/global-script.js"></script>
     
-    <!-- Page Specific Script (If needed for calculators etc) -->
+    <!-- Image Modal Logic -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" onclick="closeImageModal()">
+        <div class="relative max-w-7xl w-full max-h-screen flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-gray-300 transition-colors focus:outline-none" onclick="closeImageModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modal-image" src="" alt="Full size screenshot" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+            <p class="text-gray-400 text-sm mt-3 text-center">Click outside or press Esc to close</p>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Optional: Add page specific logic here
-        });
+        function openImageModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+            });
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', handleEscKey);
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('modal-image').src = '';
+            }, 300);
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', handleEscKey);
+        }
+
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        }
     </script>
 
 </body>
