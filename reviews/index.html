@@ -80,13 +80,15 @@
             </div>
 
             <!-- Review Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="reviews-grid">
+            <!-- MODIFIED: Updated grid to lg:grid-cols-4 and gap-3 for ultra compact feel -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="reviews-grid">
                 
                 <!-- Verpex Review (Hosting) -->
                 <!-- CHANGED: article -> div to prevent mobile TOC injection -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="hosting">
+                <!-- COMPACT: Reduced padding to p-2.5 -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="hosting">
                     <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-1.5">
                         <span class="text-[9px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200 uppercase tracking-tight">Hosting</span>
                         <div class="flex text-yellow-400 text-[9px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -96,30 +98,31 @@
                     <!-- Content -->
                     <div class="flex-grow">
                         <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
                             <a href="hosting/verpex-hosting-review.html">Verpex Review 2026: The New "Fastest" Budget Host?</a>
                         </h2>
-                        <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
                             We stress-tested their NVMe speeds and support. Better than Hostinger?
                         </p>
                     </div>
 
                     <!-- Footer: Meta -->
                     <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
                             <i class="fa-regular fa-calendar mr-1"></i> Feb 2026
                         </span>
-                        <a href="hosting/verpex-hosting-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                        <a href="hosting/verpex-hosting-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- KWFinder Review (Specific Year) -->
                 <!-- CHANGED: article -> div to prevent mobile TOC injection -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
+                <!-- COMPACT: Reduced padding to p-2.5 -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="seo">
                     <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-1.5">
                         <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
                         <div class="flex text-yellow-400 text-[9px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
@@ -129,30 +132,31 @@
                     <!-- Content -->
                     <div class="flex-grow">
                         <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
                             <a href="seo/kwfinder-review.html">KWFinder Review 2026: Is It Worth It?</a>
                         </h2>
-                        <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
                             Detailed test of keyword difficulty accuracy, UX, and Mangools integration.
                         </p>
                     </div>
 
                     <!-- Footer: Meta -->
                     <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
                             <i class="fa-regular fa-calendar mr-1"></i> Jan 2026
                         </span>
-                        <a href="seo/kwfinder-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                        <a href="seo/kwfinder-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Semrush Review (Specific Year) -->
                 <!-- CHANGED: article -> div to prevent mobile TOC injection -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
+                <!-- COMPACT: Reduced padding to p-2.5 -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="seo">
                     <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-1.5">
                         <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
                         <div class="flex text-yellow-400 text-[9px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -162,30 +166,31 @@
                     <!-- Content -->
                     <div class="flex-grow">
                         <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
                             <a href="seo/semrush-review.html">Semrush Review 2026: Is It Worth It?</a>
                         </h2>
-                        <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
                             Detailed test of features, pricing, and data accuracy vs Ahrefs.
                         </p>
                     </div>
 
                     <!-- Footer: Meta -->
                     <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
                             <i class="fa-regular fa-calendar mr-1"></i> Jan 2026
                         </span>
-                        <a href="seo/semrush-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                        <a href="seo/semrush-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- ZeroSSL Review (Specific Year) -->
                 <!-- CHANGED: article -> div to prevent mobile TOC injection -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="security">
+                <!-- COMPACT: Reduced padding to p-2.5 -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="security">
                     <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-1.5">
                         <span class="text-[9px] font-black bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded border border-blue-100 uppercase tracking-tight">Security</span>
                         <div class="flex text-yellow-400 text-[9px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
@@ -195,21 +200,21 @@
                     <!-- Content -->
                     <div class="flex-grow">
                         <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[14px] font-bold text-gray-900 mb-1.5 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
+                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
                             <a href="security/zerossl-review.html">ZeroSSL Review 2026: Time to Ditch Paid SSL?</a>
                         </h2>
-                        <p class="text-[11px] text-gray-500 leading-snug line-clamp-3 mb-3">
+                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
                             We tested dashboard, ACME API & free limits. The truth about securing domains for $0.
                         </p>
                     </div>
 
                     <!-- Footer: Meta -->
                     <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[10px] text-gray-400 font-medium flex items-center">
+                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
                             <i class="fa-regular fa-calendar mr-1"></i> Dec 2026
                         </span>
-                        <a href="security/zerossl-review.html" class="text-[10px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                        <a href="security/zerossl-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
                         </a>
                     </div>
                 </div>
