@@ -103,14 +103,14 @@
             <div class="w-full lg:w-[75%]">
                 
                 <!-- Breadcrumb -->
-                <nav class="text-xs text-gray-600 mb-3 font-medium">
+                <nav class="text-xs text-gray-700 mb-3 font-medium">
                     <a href="/" class="hover:text-accent-main transition-colors">Home</a> 
                     <span class="mx-2">/</span> 
                     <a href="../../reviews/" class="hover:text-accent-main transition-colors">Reviews</a>
                     <span class="mx-2">/</span> 
-                    <span class="text-gray-600">Hosting</span>
+                    <span class="text-gray-700">Hosting</span>
                     <span class="mx-2">/</span> 
-                    <span class="text-gray-800">Verpex</span>
+                    <span class="text-gray-900">Verpex</span>
                 </nav>
 
                 <!-- Article Header -->
@@ -120,7 +120,7 @@
                         <div class="flex text-yellow-500 text-xs gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <span class="text-xs text-gray-600 font-medium">4.8/5 Rating</span>
+                        <span class="text-xs text-gray-700 font-medium">4.8/5 Rating</span>
                     </div>
                     <h1 class="text-heading-1 text-gray-900 mb-2 tracking-tight leading-tight">
                         Verpex Review 2025: The New "Fastest" Budget Host?
@@ -136,7 +136,7 @@
                             <div class="w-10 h-10 rounded-full bg-accent-main flex items-center justify-center text-white font-bold text-lg">V</div>
                             <div class="text-left">
                                 <p class="text-sm font-bold text-gray-900">Vikas Rana</p>
-                                <p class="text-xs text-gray-600">Updated: Jan 2026 • 15 min read</p>
+                                <p class="text-xs text-gray-700">Updated: Jan 2026 • 15 min read</p>
                             </div>
                         </div>
                         <!-- Place holder for global share widget injection -->
@@ -169,17 +169,19 @@
                     </div>
 
                     <!-- PROOF OF PURCHASE - EEAT SIGNAL (UPDATED STYLE) -->
-                    <!-- MATCHING STYLE FROM KWFINDER REVIEW -->
+                    <!-- CLS FIX: Added width/height attributes to reserve space -->
                     <figure class="mb-6 border border-gray-200 rounded-lg overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
                             <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md text-3xl"></i>
                         </div>
                         <img src="../image/verpex-invoice-proof.png" 
                              alt="Verpex Hosting Invoice Proof of Purchase" 
-                             class="w-full h-auto object-cover max-h-[350px] object-top bg-gray-50"
+                             width="800"
+                             height="600"
+                             class="w-full h-auto bg-gray-200"
                              loading="lazy" 
                              onerror="this.style.display='none'">
-                        <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-600 italic border-t border-gray-100">
+                        <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-700 italic border-t border-gray-100">
                             <i class="fa-solid fa-check-circle text-green-500 mr-1.5"></i> Transparency: We paid for the Gold Monthly plan to ensure our test data is 100% unbiased. (Click to expand)
                         </figcaption>
                     </figure>
@@ -216,7 +218,7 @@
                         
                         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-5 rounded-r-lg">
                             <h3 class="text-sm font-bold text-indigo-900 mb-2">Think of it like a highway:</h3>
-                            <ul class="space-y-2 text-xs text-indigo-800">
+                            <ul class="space-y-2 text-xs text-indigo-900">
                                 <li class="flex items-start">
                                     <span class="mr-2">🐢</span>
                                     <span><strong>Old HDD:</strong> A dirt road. Slow, bumpy, gets jammed easily.</span>
@@ -233,9 +235,10 @@
                         </div>
 
                         <!-- PROOF OF UPTIME - EEAT SIGNAL (UPDATED STYLE) -->
+                        <!-- CLS FIX: Added width/height attributes and aspect ratio class -->
                         <figure class="mb-6 border border-gray-200 rounded-lg overflow-hidden shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] border-4 border-white ring-1 ring-gray-200 mx-auto max-w-[600px] cursor-pointer group relative transition-transform duration-300 hover:scale-[1.01]" onclick="openImageModal(this.querySelector('img').src)">
                             <div class="bg-gray-50 border-b border-gray-100 px-3 py-1.5 flex items-center justify-between">
-                                <span class="text-[10px] font-bold text-gray-600 uppercase tracking-wider">Uptime Monitor Results</span>
+                                <span class="text-[10px] font-bold text-gray-700 uppercase tracking-wider">Uptime Monitor Results</span>
                                 <span class="bg-green-100 text-green-800 text-[9px] font-bold px-1.5 py-0.5 rounded-full">1 Month 22 Days</span>
                             </div>
                             <div class="absolute inset-0 top-[28px] bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none z-10">
@@ -243,10 +246,12 @@
                             </div>
                             <img src="../image/verpex-uptime-proof.png" 
                                  alt="UptimeRobot Graph Showing 100% Uptime for Verpex" 
-                                 class="w-full h-auto object-cover max-h-[350px] object-top bg-white"
+                                 width="800"
+                                 height="450"
+                                 class="w-full h-auto bg-gray-200"
                                  loading="lazy" 
                                  onerror="this.style.display='none'">
-                            <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-600 italic border-t border-gray-100">
+                            <figcaption class="bg-gray-50 p-2 text-center text-xs text-gray-700 italic border-t border-gray-100">
                                 <strong>Result:</strong> 100% Uptime recorded for <i>toolblaster.com</i> on Verpex London Server. (Click to expand)
                             </figcaption>
                         </figure>
@@ -354,29 +359,29 @@
                             <h2 class="text-heading-3 text-purple-900 mt-0 flex items-center">
                                 <i class="fa-solid fa-microchip mr-2"></i> Exclusive: The "Hidden" Resource Limits
                             </h2>
-                            <span class="bg-purple-200 text-purple-800 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Lab Test</span>
+                            <span class="bg-purple-200 text-purple-900 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Lab Test</span>
                         </div>
-                        <p class="text-article-p mb-3 text-purple-800 text-xs">
+                        <p class="text-article-p mb-3 text-purple-900 text-xs">
                             Most reviews stop at "Unlimited," but we dug into the <strong>CloudLinux LVE limits</strong> to see what you <em>actually</em> get on the Bronze plan. Here is the raw server capacity compared to the industry standard:
                         </p>
                         <div class="grid grid-cols-3 gap-2 text-center">
                             <div class="bg-white p-2 rounded border border-purple-100 shadow-sm">
-                                <div class="text-[9px] uppercase text-gray-500 font-bold mb-0.5">Inodes (Files)</div>
+                                <div class="text-[9px] uppercase text-gray-700 font-bold mb-0.5">Inodes (Files)</div>
                                 <div class="text-base font-black text-gray-800">500,000</div>
-                                <div class="text-[8px] text-green-600 font-bold">vs 200k Avg</div>
+                                <div class="text-[8px] text-green-700 font-bold">vs 200k Avg</div>
                             </div>
                             <div class="bg-white p-2 rounded border border-purple-100 shadow-sm">
-                                <div class="text-[9px] uppercase text-gray-500 font-bold mb-0.5">RAM Limit</div>
+                                <div class="text-[9px] uppercase text-gray-700 font-bold mb-0.5">RAM Limit</div>
                                 <div class="text-base font-black text-gray-800">2 GB</div>
-                                <div class="text-[8px] text-green-600 font-bold">vs 768MB Avg</div>
+                                <div class="text-[8px] text-green-700 font-bold">vs 768MB Avg</div>
                             </div>
                             <div class="bg-white p-2 rounded border border-purple-100 shadow-sm">
-                                <div class="text-[9px] uppercase text-gray-500 font-bold mb-0.5">Entry Process</div>
+                                <div class="text-[9px] uppercase text-gray-700 font-bold mb-0.5">Entry Process</div>
                                 <div class="text-base font-black text-gray-800">50 EP</div>
-                                <div class="text-[8px] text-gray-400">Standard</div>
+                                <div class="text-[8px] text-gray-500">Standard</div>
                             </div>
                         </div>
-                        <p class="text-[9px] text-purple-800/70 mt-2 italic text-center">
+                        <p class="text-[9px] text-purple-900 mt-2 italic text-center">
                             *Data verified via cPanel Resource Usage dashboard. High RAM = Better stability during traffic spikes.
                         </p>
                     </section>
@@ -387,11 +392,11 @@
                         <p class="text-article-p mb-3">
                             Many budget hosts outsource their night shifts to non-technical staff who just paste knowledge base links. To test Verpex, I deliberately broke my site (htaccess error) at <strong>2:14 AM London Time</strong> and opened a live chat.
                         </p>
-                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-700">
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-800">
                             <ul class="space-y-2">
                                 <li class="flex items-center">
                                     <span class="font-bold w-24">Wait Time:</span> 
-                                    <span class="text-green-600 font-bold"><i class="fa-solid fa-stopwatch mr-1"></i> 45 Seconds</span>
+                                    <span class="text-green-700 font-bold"><i class="fa-solid fa-stopwatch mr-1"></i> 45 Seconds</span>
                                 </li>
                                 <li class="flex items-center">
                                     <span class="font-bold w-24">Agent Type:</span> 
@@ -403,7 +408,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="text-[11px] text-gray-500 mt-2 italic">
+                        <p class="text-[11px] text-gray-600 mt-2 italic">
                             <strong>Why it sells:</strong> You're never alone when your site crashes, even in the middle of the night. This level of competency usually costs $20/mo elsewhere.
                         </p>
                     </section>
@@ -435,56 +440,56 @@
                             <!-- Plan 1: Bronze (Updated Pricing) -->
                             <div class="bg-white border border-gray-300 rounded-lg p-2.5 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-xs font-bold text-gray-900 mb-0.5">Bronze (Starter)</h3>
-                                <div class="text-xl font-black text-gray-900 mb-2">$2<span class="text-[10px] font-medium text-gray-500">.95/mo</span></div>
-                                <ul class="text-[10px] text-gray-600 space-y-1.5 mb-2">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> 1 Website</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> 30GB NVMe Storage</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Unmetered Bandwidth</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> LiteSpeed Server</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> 24/7 Human Chat</li>
+                                <div class="text-xl font-black text-gray-900 mb-2">$2<span class="text-[10px] font-medium text-gray-600">.95/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> 1 Website</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> 30GB NVMe Storage</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Unmetered Bandwidth</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> LiteSpeed Server</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> 24/7 Human Chat</li>
                                     <!-- Added Features -->
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> 30GB NVMe Space</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> 30GB NVMe Space</li>
                                 </ul>
                             </div>
                             <!-- Plan 2: Silver (Best Value Updated) -->
                             <div class="bg-white border-2 border-accent-main rounded-lg p-2.5 shadow-md relative overflow-hidden transform hover:-translate-y-1 transition duration-300">
                                 <div class="absolute top-0 right-0 bg-accent-main text-white text-[8px] font-bold px-2 py-0.5 rounded-bl">RECOMMENDED</div>
                                 <h3 class="text-xs font-bold text-gray-900 mb-0.5">Silver (Best)</h3>
-                                <div class="text-xl font-black text-gray-900 mb-2">$5<span class="text-[10px] font-medium text-gray-500">.95/mo</span></div>
-                                <ul class="text-[10px] text-gray-600 space-y-1.5 mb-2">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> Websites</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> NVMe</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Free Migration Expert</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited Bandwidth</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Priority Support</li>
+                                <div class="text-xl font-black text-gray-900 mb-2">$5<span class="text-[10px] font-medium text-gray-600">.95/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> Websites</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> NVMe</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Free Migration Expert</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited Bandwidth</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Priority Support</li>
                                     <!-- Added Features -->
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited NVMe Space</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited NVMe Space</li>
                                 </ul>
                             </div>
                             <!-- Plan 3: Gold (Updated) -->
                             <div class="bg-white border border-gray-300 rounded-lg p-2.5 shadow-sm hover:shadow-md transition duration-300">
                                 <h3 class="text-xs font-bold text-gray-900 mb-0.5">Gold</h3>
-                                <div class="text-xl font-black text-gray-900 mb-2">$8<span class="text-[10px] font-medium text-gray-500">.95/mo</span></div>
-                                <ul class="text-[10px] text-gray-600 space-y-1.5 mb-2">
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> NVMe</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> Websites</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Priority Support</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Unmetered Bandwidth</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> LiteSpeed Enterprise</li>
+                                <div class="text-xl font-black text-gray-900 mb-2">$8<span class="text-[10px] font-medium text-gray-600">.95/mo</span></div>
+                                <ul class="text-[10px] text-gray-700 space-y-1.5 mb-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> NVMe</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> <strong>Unlimited</strong> Websites</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Priority Support</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Unmetered Bandwidth</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Free Domain & SSL</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Daily Backups</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> LiteSpeed Enterprise</li>
                                     <!-- Added Features -->
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
-                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited NVMe Space</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Malware Protection</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Developer Tools</li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-green-600 mt-0.5 mr-1.5 text-[9px]"></i> Unlimited NVMe Space</li>
                                 </ul>
                             </div>
                         </div>
@@ -493,7 +498,7 @@
                             <h4 class="text-xs font-bold text-yellow-900 mb-1 flex items-center">
                                 <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Pricing Alert
                             </h4>
-                            <p class="text-[11px] text-yellow-800 leading-relaxed">
+                            <p class="text-[11px] text-yellow-900 leading-relaxed">
                                 Prices above reflect the current promotional rates for new customers. Be sure to check for any active <strong>Verpex coupon</strong> to secure the best deal. Renewal prices may vary. We recommend the 48-month term to lock in savings.
                             </p>
                         </div>
@@ -512,36 +517,36 @@
                                 <div>
                                     <div class="flex justify-between text-xs font-bold text-gray-800 mb-1">
                                         <span>Beginners & Bloggers</span>
-                                        <span class="text-green-600">Perfect Match (9.5/10)</span>
+                                        <span class="text-green-700">Perfect Match (9.5/10)</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 95%"></div>
+                                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 95%"></div>
                                     </div>
-                                    <p class="text-[10px] text-gray-500 mt-1 italic">Easy cPanel, 24/7 chat support, and affordable entry price.</p>
+                                    <p class="text-[10px] text-gray-600 mt-1 italic">Easy cPanel, 24/7 chat support, and affordable entry price.</p>
                                 </div>
 
                                 <!-- Suitability Bar 2: Small Business & Agencies -->
                                 <div>
                                     <div class="flex justify-between text-xs font-bold text-gray-800 mb-1">
                                         <span>Small Business & Agencies</span>
-                                        <span class="text-green-600">Excellent (9.0/10)</span>
+                                        <span class="text-green-700">Excellent (9.0/10)</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 90%"></div>
+                                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 90%"></div>
                                     </div>
-                                    <p class="text-[10px] text-gray-500 mt-1 italic">Unlimited sites (Gold/Silver), free migration, and stable NVMe speed.</p>
+                                    <p class="text-[10px] text-gray-600 mt-1 italic">Unlimited sites (Gold/Silver), free migration, and stable NVMe speed.</p>
                                 </div>
 
                                 <!-- Suitability Bar 3: High Traffic / Enterprise -->
                                 <div>
                                     <div class="flex justify-between text-xs font-bold text-gray-800 mb-1">
                                         <span>High Traffic / Enterprise</span>
-                                        <span class="text-orange-500">Consider VPS (6.5/10)</span>
+                                        <span class="text-orange-600">Consider VPS (6.5/10)</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-orange-400 h-2.5 rounded-full" style="width: 65%"></div>
+                                        <div class="bg-orange-500 h-2.5 rounded-full" style="width: 65%"></div>
                                     </div>
-                                    <p class="text-[10px] text-gray-500 mt-1 italic">Shared plans have resource limits. Better to look at Verpex Managed Cloud.</p>
+                                    <p class="text-[10px] text-gray-600 mt-1 italic">Shared plans have resource limits. Better to look at Verpex Managed Cloud.</p>
                                 </div>
                             </div>
                         </div>
@@ -559,10 +564,10 @@
                             <div class="relative w-full h-[300px] border-l-2 border-b-2 border-gray-300">
                                 
                                 <!-- X Axis Label -->
-                                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-bold text-gray-500 tracking-wider">MONTHLY COST ($)</div>
+                                <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-bold text-gray-600 tracking-wider">MONTHLY COST ($)</div>
                                 
                                 <!-- Y Axis Label -->
-                                <div class="absolute -left-8 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-bold text-gray-500 tracking-wider">SPEED (TTFB)</div>
+                                <div class="absolute -left-8 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs font-bold text-gray-600 tracking-wider">SPEED (TTFB)</div>
 
                                 <!-- Grid Lines (Horizontal) -->
                                 <div class="absolute w-full h-px bg-gray-100 top-1/4"></div>
@@ -599,38 +604,38 @@
                                 <!-- Kinsta (Premium) -->
                                 <div class="absolute top-[10%] right-[10%] flex flex-col items-center opacity-70">
                                     <div class="w-3 h-3 bg-indigo-500 rounded-full border-2 border-white shadow-md"></div>
-                                    <span class="text-[9px] font-medium text-gray-500 mt-1">Kinsta</span>
+                                    <span class="text-[9px] font-medium text-gray-600 mt-1">Kinsta</span>
                                 </div>
 
                                 <!-- WP Engine (Premium) -->
                                 <div class="absolute top-[15%] right-[20%] flex flex-col items-center opacity-70">
                                     <div class="w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-md"></div>
-                                    <span class="text-[9px] font-medium text-gray-500 mt-1">WP Engine</span>
+                                    <span class="text-[9px] font-medium text-gray-600 mt-1">WP Engine</span>
                                 </div>
 
                                 <!-- Hostinger (Mid) -->
                                 <div class="absolute top-[40%] left-[30%] flex flex-col items-center opacity-70">
                                     <div class="w-3 h-3 bg-purple-500 rounded-full border-2 border-white shadow-md"></div>
-                                    <span class="text-[9px] font-medium text-gray-500 mt-1">Hostinger</span>
+                                    <span class="text-[9px] font-medium text-gray-600 mt-1">Hostinger</span>
                                 </div>
 
                                 <!-- Bluehost (Budget) -->
                                 <div class="absolute bottom-[20%] left-[25%] flex flex-col items-center opacity-70">
                                     <div class="w-3 h-3 bg-blue-400 rounded-full border-2 border-white shadow-md"></div>
-                                    <span class="text-[9px] font-medium text-gray-500 mt-1">Bluehost</span>
+                                    <span class="text-[9px] font-medium text-gray-600 mt-1">Bluehost</span>
                                 </div>
 
                                 <!-- HostGator (Budget) -->
                                 <div class="absolute bottom-[15%] left-[35%] flex flex-col items-center opacity-70">
                                     <div class="w-3 h-3 bg-yellow-500 rounded-full border-2 border-white shadow-md"></div>
-                                    <span class="text-[9px] font-medium text-gray-500 mt-1">HostGator</span>
+                                    <span class="text-[9px] font-medium text-gray-600 mt-1">HostGator</span>
                                 </div>
 
                             </div>
                         </div>
                         
                         <div class="mt-8 bg-green-50 border border-green-100 p-3 rounded-lg flex items-start gap-3">
-                            <i class="fa-solid fa-lightbulb text-green-600 mt-0.5"></i>
+                            <i class="fa-solid fa-lightbulb text-green-700 mt-0.5"></i>
                             <div class="text-[11px] text-green-800 leading-snug">
                                 <strong>The "Verpex Advantage":</strong> It sits in the rare top-left quadrant—offering <strong>Enterprise-grade NVMe speed</strong> typically found in $30/mo plans, but for a <strong>budget price ($2.95/mo)</strong>. This unique positioning makes it the smartest buy for 2025.
                             </div>
@@ -654,58 +659,58 @@
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Control Panel</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5 font-bold">Standard cPanel</td>
-                                        <td class="px-2 py-2 text-gray-600">Custom hPanel</td>
-                                        <td class="px-2 py-2 text-gray-600">Custom Dash</td>
+                                        <td class="px-2 py-2 text-gray-700">Custom hPanel</td>
+                                        <td class="px-2 py-2 text-gray-700">Custom Dash</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Storage Tech</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5 font-bold">NVMe (All Plans)</td>
-                                        <td class="px-2 py-2 text-gray-600">NVMe (Premium+)</td>
-                                        <td class="px-2 py-2 text-gray-600">SSD (SATA)</td>
+                                        <td class="px-2 py-2 text-gray-700">NVMe (Premium+)</td>
+                                        <td class="px-2 py-2 text-gray-700">SSD (SATA)</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Daily Backups</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">Included</td>
-                                        <td class="px-2 py-2 text-gray-600">Business Plan Only</td>
-                                        <td class="px-2 py-2 text-gray-600">Paid Add-on</td>
+                                        <td class="px-2 py-2 text-gray-700">Business Plan Only</td>
+                                        <td class="px-2 py-2 text-gray-700">Paid Add-on</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Support</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">Human Chat (Fast)</td>
-                                        <td class="px-2 py-2 text-gray-600">Chat (AI First)</td>
-                                        <td class="px-2 py-2 text-gray-600">Chat/Phone</td>
+                                        <td class="px-2 py-2 text-gray-700">Chat (AI First)</td>
+                                        <td class="px-2 py-2 text-gray-700">Chat/Phone</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Locations</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">12+ Global</td>
-                                        <td class="px-2 py-2 text-gray-600">10 Locations</td>
-                                        <td class="px-2 py-2 text-gray-600">USA & India</td>
+                                        <td class="px-2 py-2 text-gray-700">10 Locations</td>
+                                        <td class="px-2 py-2 text-gray-700">USA & India</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Migration</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">Expert Managed</td>
-                                        <td class="px-2 py-2 text-gray-600">Automated Tool</td>
-                                        <td class="px-2 py-2 text-gray-600">Paid Service</td>
+                                        <td class="px-2 py-2 text-gray-700">Automated Tool</td>
+                                        <td class="px-2 py-2 text-gray-700">Paid Service</td>
                                     </tr>
                                     <!-- Removed duplicate Refund Policy row -->
                                     <!-- Added features -->
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Domain Privacy</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">Free</td>
-                                        <td class="px-2 py-2 text-gray-600">Free</td>
-                                        <td class="px-2 py-2 text-gray-600">Paid Add-on</td>
+                                        <td class="px-2 py-2 text-gray-700">Free</td>
+                                        <td class="px-2 py-2 text-gray-700">Paid Add-on</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Email Accounts</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5">Unlimited (Gold)</td>
-                                        <td class="px-2 py-2 text-gray-600">100 (Premium)</td>
-                                        <td class="px-2 py-2 text-gray-600">5 (Basic)</td>
+                                        <td class="px-2 py-2 text-gray-700">100 (Premium)</td>
+                                        <td class="px-2 py-2 text-gray-700">5 (Basic)</td>
                                     </tr>
                                     <tr>
                                         <td class="px-2 py-2 font-medium text-gray-700">Money-Back Guarantee</td>
                                         <td class="px-2 py-2 text-green-700 bg-accent-main/5 font-bold">45 Days</td>
-                                        <td class="px-2 py-2 text-gray-600">30 Days</td>
-                                        <td class="px-2 py-2 text-gray-600">30 Days</td>
+                                        <td class="px-2 py-2 text-gray-700">30 Days</td>
+                                        <td class="px-2 py-2 text-gray-700">30 Days</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -717,7 +722,7 @@
                         <div class="bg-gray-50 p-4 border-b border-gray-300 flex flex-col sm:flex-row justify-between items-center gap-4">
                             <div>
                                 <h2 class="text-heading-2 text-gray-900 mb-1" id="review-summary">Verpex Review Summary</h2>
-                                <p class="text-xs text-gray-600">Verdict based on 30 days of active monitoring.</p>
+                                <p class="text-xs text-gray-700">Verdict based on 30 days of active monitoring.</p>
                             </div>
                             <div class="text-center sm:text-right">
                                 <div class="text-4xl font-black text-accent-main leading-none">4.8<span class="text-lg text-gray-500 font-medium">/5</span></div>
@@ -888,7 +893,7 @@
                             <a href="https://clients.verpex.com/aff/?a_aid=toolblaster" target="_blank" rel="nofollow noopener" class="inline-flex items-center justify-center w-full sm:w-auto bg-accent-main text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:bg-accent-dark hover:shadow-custom-hover transition duration-300 transform hover:-translate-y-0.5">
                                 Visit Verpex & Check Deal <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
-                            <p class="text-[11px] text-gray-500 mt-2">45-Day Money-Back Guarantee included.</p>
+                            <p class="text-[11px] text-gray-600 mt-2">45-Day Money-Back Guarantee included.</p>
                         </div>
                     </div>
 
@@ -931,7 +936,7 @@
                         <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-gray-500 text-xl font-bold">V</div>
                         <div>
                             <h4 class="text-sm font-bold text-gray-900">About the Author: Vikas Rana</h4>
-                            <p class="text-xs text-gray-600 leading-relaxed mt-1">
+                            <p class="text-xs text-gray-700 leading-relaxed mt-1">
                                 Vikas is a digital marketing strategist and server performance enthusiast. With over 8 years of experience, he tests hosting providers on speed, uptime, and support to help businesses find the perfect infrastructure.
                             </p>
                         </div>
