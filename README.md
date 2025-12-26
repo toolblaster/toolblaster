@@ -1,78 +1,91 @@
-Toolblaster Hub ⚡
+Toolblaster Reviews Project
 
-Financial Calculators, SEO Tools & In-Depth Software Reviews
+This project is a static site for software and service reviews, focusing on SEO tools, hosting, and security. It uses Tailwind CSS (via CDN) for styling and vanilla JavaScript for dynamic components like headers, footers, and sidebars.
 
-Toolblaster is a high-performance, mobile-first digital hub designed to host precision financial calculators, expert-reviewed SEO tools, and comprehensive software reviews. Built with standard HTML5, Tailwind CSS (via CDN), and vanilla JavaScript for maximum speed and zero build-step complexity.
+Project Structure
 
-🚀 Key Features
+index.html: The main homepage listing categories or featured reviews.
 
-Mobile-First Design: Fully responsive layouts with dedicated mobile navigation drawers and touch-friendly UI.
+reviews/: Directory containing individual review pages.
 
-SEO Optimized: Hand-tuned Meta tags, JSON-LD Schema markup, and semantic HTML structure (WCAG AA compliant).
+index.html: The main reviews index page with filtering logic.
 
-Centralized UI Logic: Header, Footer, Sidebar, and Modals are injected via header-footer.js to maintain consistency across hundreds of pages.
+review-template.html: The master template for creating new reviews (Updated with 2026 standards).
 
-Dynamic Review Widgets: Automatically populates "Latest Reviews" and "Related Articles" widgets from a single data source.
+hosting/:
 
-Performance: Uses system fonts (Inter/Hind) and CDN-hosted Tailwind to ensure high Core Web Vitals scores.
+verpex-hosting-review.html: Detailed review of Verpex Hosting.
 
-📂 Project Structure
+seo/:
 
-/
-├── index.html                 # Homepage (Hub)
-├── js/
-│   ├── header-footer.js       # Core UI injection (Header, Footer, Sidebar, Review Widgets)
-│   ├── global-script.js       # Secondary logic & global event listeners (Overflow)
-│   └── tailwind-config.js     # Shared Tailwind design system (Colors, Fonts)
-├── reviews/
-│   ├── index.html             # Reviews Hub
-│   └── security/
-│       └── zerossl-review.html # Example Deep-Dive Review
-└── terms/                     # Legal pages (Privacy, Terms, About)
+semrush-review.html: In-depth review of Semrush.
 
+kwfinder-review.html: Review of KWFinder by Mangools.
 
-🛠️ How to Manage Content
+security/:
 
-Adding a New Review
+zerossl-review.html: Review of ZeroSSL certificate authority.
 
-To add a new review that automatically appears in the Sidebar and Mobile "You Might Also Like" widgets:
+js/:
 
-Create your HTML file in reviews/category/your-review.html.
+header-footer.js: Handles injection of the global navigation, footer, sidebar skeleton (TOC), modals, and back-to-top button. Contains the requestAnimationFrame fix for forced reflows.
 
-Open js/header-footer.js.
+global-script.js: Handles sidebar widgets (Popular Tools, Other Reviews) and dynamic content injection.
 
-Add the review metadata to the recentReviews array at the top of the file:
+tailwind-config.js: Custom Tailwind configuration (colors, fonts).
 
-const recentReviews = [
-    { 
-        title: "New Tool Review", 
-        url: "/reviews/category/new-tool.html", 
-        category: "Productivity", 
-        date: "Jan 2026" 
-    },
-    // ... existing reviews
-];
+terms/: Static pages for legal/info (about.html, privacy.html, terms.html).
 
+Recent Updates (Dec 2025)
 
-The system automatically filters out the current page to prevent self-linking.
+Core Improvements
 
-Global Scripting
+CLS Prevention: All review images now use explicit width and height attributes alongside w-full h-auto classes to reserve layout space and prevent Cumulative Layout Shift.
 
-js/header-footer.js: strictly for layout injection (Nav, Footer, Sidebar).
+Modern Pricing Cards: Pricing sections have been redesigned into compact, 3-column card grids with clear feature lists and "Recommended" badges.
 
-js/global-script.js: Use this for analytics, complex animations, or site-wide logic that doesn't involve layout injection.
+Enhanced Verdicts: The "Final Verdict" sections now use a "Buy it if / Skip it if" grid layout for better scannability.
 
-🎨 Design System
+High Contrast: Text colors have been darkened (text-gray-800/900) across all reviews to ensure WCAG AA accessibility compliance.
 
-Primary Color: #E34037 (Accent Red)
+Performance: js/header-footer.js now uses requestAnimationFrame for ScrollSpy initialization to prevent forced reflows during page load.
 
-Background: #0f1115 (Dark Headers), #f9f9f9 (Body)
+Updated Pages
 
-Fonts: Hind (Headings), Inter (Body Text)
+Verpex Review: Added "Hidden Resource Limits" exclusive section and speed matrix graph.
 
-📦 Deployment
+Semrush Review: Added "Ghost Keyword Discovery" exclusive test and compact competitor comparison.
 
-This is a static site. No build process (npm/webpack) is required.
-Simply upload the root folder to Cloudflare Pages, Netlify, or Vercel.
+KWFinder Review: Modernized pricing with a 4th "Free Trial" column and added "Niche Site Test" data.
 
-Maintained by Toolblaster Team
+ZeroSSL Review: Updated pricing to reflect 2026 rates, added "Speed Test" benchmarks, and modernized the FAQ section.
+
+How to Create a New Review
+
+Duplicate reviews/review-template.html.
+
+Update the SEO Meta Tags (Title, Description, Keywords) and JSON-LD Schema.
+
+Fill in the Header details (Title, Rating, Date).
+
+Write the Article Content:
+
+Use <section class="card-section"> for main blocks.
+
+Include an Exclusive Data section if possible.
+
+Fill out the Comparison Table and Pricing Cards.
+
+Complete the Final Verdict grid.
+
+Ensure all images have width and height attributes.
+
+Test on mobile to ensure the Sidebar TOC doesn't intrude (handled by <div> vs <article> structure in index pages).
+
+Development Notes
+
+Tailwind: Uses the Play CDN for prototyping. For production, this should be compiled.
+
+Sidebar: The sidebar is dynamically injected. The TOC is generated automatically from <h2> tags within the <article> element.
+
+Icons: Uses FontAwesome 6.4.0 via CDN.
