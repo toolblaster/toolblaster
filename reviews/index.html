@@ -83,8 +83,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="reviews-grid">
                 
                 <!-- Verpex Review (Hosting) -->
-                <!-- ADDED: data-category="hosting" and review-card class -->
-                <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="hosting">
+                <!-- CHANGED: article -> div to prevent mobile TOC injection -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="hosting">
                     <!-- Header: Category & Rating -->
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-[9px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200 uppercase tracking-tight">Hosting</span>
@@ -113,11 +113,11 @@
                             Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
                         </a>
                     </div>
-                </article>
+                </div>
 
                 <!-- KWFinder Review (Specific Year) -->
-                <!-- ADDED: data-category="seo" and review-card class -->
-                <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
+                <!-- CHANGED: article -> div to prevent mobile TOC injection -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
                     <!-- Header: Category & Rating -->
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
@@ -146,11 +146,11 @@
                             Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
                         </a>
                     </div>
-                </article>
+                </div>
 
                 <!-- Semrush Review (Specific Year) -->
-                <!-- ADDED: data-category="seo" and review-card class -->
-                <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
+                <!-- CHANGED: article -> div to prevent mobile TOC injection -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="seo">
                     <!-- Header: Category & Rating -->
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
@@ -179,11 +179,11 @@
                             Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
                         </a>
                     </div>
-                </article>
+                </div>
 
                 <!-- ZeroSSL Review (Specific Year) -->
-                <!-- ADDED: data-category="security" and review-card class -->
-                <article class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="security">
+                <!-- CHANGED: article -> div to prevent mobile TOC injection -->
+                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 group" data-category="security">
                     <!-- Header: Category & Rating -->
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-[9px] font-black bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded border border-blue-100 uppercase tracking-tight">Security</span>
@@ -212,7 +212,7 @@
                             Read <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
                         </a>
                     </div>
-                </article>
+                </div>
 
             </div>
         </div>
@@ -224,11 +224,14 @@
     <!-- Scripts -->
     <script src="../js/header-footer.js"></script>
     
-    <!-- ADDED: Filtering Logic Script -->
+    <!-- ADDED: Filtering Logic Script with DOM Reordering -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const reviewCards = document.querySelectorAll('.review-card');
+            const reviewsGrid = document.getElementById('reviews-grid');
+            
+            // Store original order implicitly by current DOM order
+            // If needed, we could store it in an array, but simply appending moves them to end.
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -243,20 +246,41 @@
                     // 3. Get filter value
                     const filterValue = btn.getAttribute('data-filter');
 
-                    // 4. Loop through cards and apply blur/opacity effect
-                    reviewCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        
-                        if (filterValue === 'all' || category === filterValue) {
-                            // Show card clearly
+                    // 4. Sort and Filter Logic
+                    const cards = Array.from(reviewsGrid.children);
+                    
+                    if (filterValue === 'all') {
+                        // Reset visibility
+                        cards.forEach(card => {
                             card.classList.remove('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
                             card.classList.add('opacity-100', 'blur-0');
-                        } else {
-                            // Blur and fade card
-                            card.classList.remove('opacity-100', 'blur-0');
-                            card.classList.add('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
-                        }
-                    });
+                        });
+                        // Optional: Could reset order here if original index was stored, 
+                        // but sticking to current order is usually fine for "All".
+                    } else {
+                        // Separate matching and non-matching
+                        const matches = [];
+                        const nonMatches = [];
+
+                        cards.forEach(card => {
+                            const category = card.getAttribute('data-category');
+                            if (category === filterValue) {
+                                // Highlight
+                                card.classList.remove('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
+                                card.classList.add('opacity-100', 'blur-0');
+                                matches.push(card);
+                            } else {
+                                // Dim/Blur
+                                card.classList.remove('opacity-100', 'blur-0');
+                                card.classList.add('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
+                                nonMatches.push(card);
+                            }
+                        });
+
+                        // Re-append in order: Matches first, then Non-Matches
+                        matches.forEach(card => reviewsGrid.appendChild(card));
+                        nonMatches.forEach(card => reviewsGrid.appendChild(card));
+                    }
                 });
             });
         });
