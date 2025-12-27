@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // We try immediately, and also set a small timeout to catch race conditions if header-footer is slow.
     injectSidebarWidgets();
     setTimeout(injectSidebarWidgets, 100); 
+
+    // 3. Initialize Global Ad Manager
+    initAdManager();
 });
 
 /**
@@ -235,4 +238,24 @@ function getReviewListHTMLGlobal() {
             </a>
         </li>
     `).join('');
+}
+
+/**
+ * ------------------------------------------------------------------------
+ * 3. GLOBAL AD MANAGER
+ * ------------------------------------------------------------------------
+ * Centralized logic to inject ads into specific placeholders (e.g. #app-ad-space)
+ */
+function initAdManager() {
+    const adContainer = document.getElementById("app-ad-space");
+    
+    // Only try to insert ads if the container exists on the current page
+    if (adContainer) {
+        // PASTE YOUR ADSENSE/AD CODE INSIDE THE BACKTICKS ` ` BELOW
+        const adCode = `
+            <!-- Place your AdSense or Ad Network code here in the future -->
+        `;
+        
+        adContainer.innerHTML = adCode;
+    }
 }
