@@ -47,7 +47,7 @@ function injectHeader() {
         </nav>
 
         <!-- Mobile Menu Overlay (Backdrop) -->
-        <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-hidden="true"></div>
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-label="Close Menu"></div>
 
         <!-- Mobile Menu Drawer (Slide-in) -->
         <div id="mobile-menu-drawer" style="display: none;" class="fixed top-0 right-0 z-[100] w-[85%] max-w-[300px] h-full bg-[#161b22] border-l border-white/10 shadow-2xl transform translate-x-full invisible md:hidden flex flex-col">
@@ -161,26 +161,30 @@ function injectSidebarSkeleton() {
         const headings = article.querySelectorAll('h2');
         if (headings.length > 0) {
             indexWidgetHTML = `
-                <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-3 shadow-md border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300 w-full max-w-full overflow-hidden order-3">
-                    <h3 class="text-[12px] font-extrabold text-gray-900 mb-2 uppercase tracking-widest border-b border-gray-200 pb-1.5 flex-shrink-0">
+                <!-- UPDATED: Compact spacing (!p-2.5) to match Sidebar Reviews widget -->
+                <div id="review-index-wrapper" class="sticky top-24 self-start card-section !p-2.5 shadow-sm border-gray-300 flex flex-col max-h-[calc(100vh-120px)] transition-all duration-300 w-full max-w-full overflow-hidden order-3">
+                    <h3 class="text-[11px] font-extrabold text-gray-900 mb-1.5 uppercase tracking-widest border-b border-gray-200 pb-1.5 flex-shrink-0">
                         <i class="fa-solid fa-list-ul text-accent-main mr-1.5"></i> Review Index
                     </h3>
                     <div id="review-index-scroll-container" class="overflow-y-auto pr-1 flex-grow scrollbar-thin scrollbar-thumb-gray-200">
-                        <ul class="space-y-1" id="review-index-list">
+                        <!-- UPDATED: Reduced list spacing from space-y-1 to space-y-0.5 -->
+                        <ul class="space-y-0.5" id="review-index-list">
                             ${Array.from(headings).map((h, i) => {
                                 if (!h.id) h.id = `section-${i}`;
                                 const num = (i + 1).toString().padStart(2, '0');
                                 return `
                                 <li class="group">
-                                    <a href="#${h.id}" class="toc-link flex items-center justify-between p-1.5 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
-                                        <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2 truncate">${h.innerText}</span>
-                                        <span class="toc-badge flex-shrink-0 w-5 h-5 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
+                                    <!-- UPDATED: Reduced vertical padding from p-1.5 to p-1 -->
+                                    <a href="#${h.id}" class="toc-link flex items-center justify-between p-1 rounded hover:bg-gray-50 transition-colors" data-target="${h.id}">
+                                        <span class="toc-text text-[11px] font-semibold text-gray-600 group-hover:text-accent-main transition-colors line-clamp-1 pr-2 truncate leading-tight">${h.innerText}</span>
+                                        <!-- UPDATED: Reduced badge size from w-5 h-5 to w-4.5 h-4.5 -->
+                                        <span class="toc-badge flex-shrink-0 w-4.5 h-4.5 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-400 rounded group-hover:bg-accent-main group-hover:text-white transition-all">${num}</span>
                                     </a>
                                 </li>`;
                             }).join('')}
                         </ul>
                     </div>
-                    <div class="mt-3 pt-2 border-t border-gray-100 text-center flex-shrink-0">
+                    <div class="mt-2 pt-1.5 border-t border-gray-100 text-center flex-shrink-0">
                         <p class="text-[9px] text-gray-400 italic">Updating daily for 2026</p>
                     </div>
                 </div>
@@ -191,7 +195,7 @@ function injectSidebarSkeleton() {
     // 2. Set up the container structure
     // Note: Other widgets are injected into this .flex-col container by global-script.js
     sidebarContainer.innerHTML = `
-        <div class="flex flex-col gap-4 h-full w-full"> 
+        <div class="flex flex-col gap-3 h-full w-full"> 
             ${indexWidgetHTML}
         </div>
     `;
@@ -203,47 +207,16 @@ function injectSidebarSkeleton() {
 
 /**
  * Mobile Related Reviews logic
+ * (Currently unused as global-script.js handles sidebar injections, 
+ * but kept as placeholder/fallback structure)
  */
 function injectMobileRelated() {
     const articleContent = document.querySelector('article');
     if (!articleContent) return;
     if (document.getElementById('mobile-related-widget')) return;
 
-    // TARGET PARENT ELEMENT TO INSERT AFTER SIBLING CTA
-    const parentContainer = articleContent.parentElement;
-
-    // Uses the dynamic getReviewListHTML() function from global-script.js if available,
-    // otherwise falls back to basic or hidden state. 
-    // Since this runs after global-script might have loaded, we check.
-    // Ideally this logic should also move to global-script.js, but keeping here as requested structure.
-    
-    // For now, we will rely on global-script.js to inject this, or if we keep it here, 
-    // we need to access the data. 
-    // To properly "move" widgets as requested, I will disable the logic here that requires data 
-    // and let global-script handle content injection if possible, OR
-    // re-implement a simple version here if global-script isn't meant to handle mobile-related.
-    
-    // Actually, user said "move both the widgets i.e. Other Reviews and Popular Tools".
-    // Mobile Related is a separate "Other Reviews" tailored for mobile.
-    // I will let global-script.js handle the *data* and *html generation* for this too if called.
-    // But since global-script.js provided in previous turn didn't explicitly take over `injectMobileRelated`,
-    // I will leave it here but make it use the global data if possible, or just stub it out 
-    // so global-script can take over entirely in a future refactor.
-    
-    // Correction: I will REMOVE the implementation here if global-script is intended to fully manage widgets.
-    // But to be safe and ensure functionality isn't lost if global-script misses this specific mobile widget,
-    // I will modify `injectSidebarSkeleton` to be the main integration point.
-    
-    // Wait, the prompt specifically said "move both the widgets i.e. Other Reviews and Popular Tools".
-    // It didn't explicitly say "Mobile Related". 
-    // However, for consistency, I will comment this out and assume global-script or future update handles it,
-    // OR just leave it as is if it doesn't conflict. 
-    // Given the constraints, I'll leave the function shell but let global-script.js do the heavy lifting if I had edited it to do so.
-    // Since I can't edit global-script.js in *this* turn (I already did in prev), I will leave this function valid 
-    // but ensure it doesn't crash if `recentReviews` is missing.
-    
     if (typeof recentReviewsGlobal !== 'undefined') {
-         // Logic using global data
+         // Logic using global data could go here if needed
     }
 }
 
@@ -267,15 +240,17 @@ function injectMobileTOC() {
                     </span>
                 </summary>
                 <nav class="p-3 border-t border-gray-200 bg-white rounded-b-lg">
-                    <ul class="space-y-3">
+                    <!-- UPDATED: Tighter list spacing for mobile (space-y-3 -> space-y-2) -->
+                    <ul class="space-y-2">
                         ${Array.from(headings).map((h, i) => {
                             if (!h.id) h.id = `section-${i}`;
                             const num = (i + 1).toString().padStart(2, '0');
                             return `
                             <li>
                                 <a href="#${h.id}" class="flex items-start gap-3 text-article-p text-gray-700 hover:text-accent-main transition-colors" onclick="document.getElementById('mobile-toc-widget').querySelector('details').removeAttribute('open')">
-                                    <span class="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-gray-100 text-[10px] font-black text-gray-500 rounded mt-0.5 border border-gray-200">${num}</span>
-                                    <span class="leading-tight font-medium">${h.innerText}</span>
+                                    <!-- UPDATED: Compact Badge -->
+                                    <span class="flex-shrink-0 w-4.5 h-4.5 flex items-center justify-center bg-gray-100 text-[9px] font-black text-gray-500 rounded mt-0.5 border border-gray-200">${num}</span>
+                                    <span class="leading-tight font-medium text-[13px]">${h.innerText}</span>
                                 </a>
                             </li>`;
                         }).join('')}
