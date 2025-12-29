@@ -93,6 +93,12 @@ function handleEscKey(e) {
 // CENTRALIZED REVIEW DATA (Moved from header-footer.js for better consolidation)
 // Add new reviews to the TOP of this array ONLY when they are published.
 const recentReviewsGlobal = [
+    {
+        title: "SSLs.com Review 2026",
+        url: "/reviews/security/ssls-com-review.html",
+        category: "Security",
+        date: "Feb 2026"
+    },
     { 
         title: "Verpex Hosting Review", 
         url: "/reviews/hosting/verpex-hosting-review.html", 
