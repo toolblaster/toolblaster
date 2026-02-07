@@ -20,6 +20,13 @@ tailwind.config = {
             },
         },
         extend: {
+            // Custom Backgrounds
+            backgroundImage: {
+                // Subtle dark dot pattern for texture
+                'dot-pattern': "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23333' fill-opacity='0.15' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3C/g%3E%3C/svg%3E\")",
+                // Subtle diagonal stripe pattern for header
+                'stripe-pattern': "linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.03) 75%, transparent 75%, transparent)",
+            },
             // Custom Max Widths
             maxWidth: {
                 'site': '1150px',
@@ -56,9 +63,10 @@ tailwind.config = {
             },
             // Custom Shadows
             boxShadow: {
-                'custom-hover': '0 0 20px rgba(239, 68, 68, 0.4)',
+                'custom-hover': '0 0 30px rgba(239, 68, 68, 0.3)',
                 'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                'glow': '0 0 20px rgba(220, 38, 38, 0.5)',
+                'glow': '0 0 40px rgba(220, 38, 38, 0.6)',
+                'card-glow': '0 0 15px rgba(0, 0, 0, 0.5), 0 0 5px rgba(239, 68, 68, 0.1)',
             },
             // Font Families
             fontFamily: {

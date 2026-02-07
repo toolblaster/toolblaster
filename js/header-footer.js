@@ -24,7 +24,7 @@ function injectHeader() {
     if (!headerContainer) return;
 
     const headerHTML = `
-        <nav class="relative z-20 border-b border-dark-800 bg-dark-950/80 backdrop-blur-md w-full">
+        <nav class="sticky top-0 z-50 border-b border-dark-800 bg-dark-950/80 backdrop-blur-xl w-full transition-all duration-300">
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
                 <!-- Brand / Logo -->
                 <a href="/" class="flex items-center gap-2 group">
