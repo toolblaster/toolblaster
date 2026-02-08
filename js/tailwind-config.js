@@ -20,6 +20,13 @@ tailwind.config = {
             },
         },
         extend: {
+            // Custom Backgrounds
+            backgroundImage: {
+                // Subtle dark dot pattern for texture
+                'dot-pattern': "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23333' fill-opacity='0.15' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3C/g%3E%3C/svg%3E\")",
+                // Subtle diagonal stripe pattern for header
+                'stripe-pattern': "linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.03) 75%, transparent 75%, transparent)",
+            },
             // Custom Max Widths
             maxWidth: {
                 'site': '1150px',
@@ -27,31 +34,39 @@ tailwind.config = {
             // Custom Colors - WCAG AA Compliant High Contrast Palette
             colors: {
                 // Optimized Red: Darkened slightly to pass 4.5:1 contrast ratio on white
-                'accent-main': '#D9261F', 
-                'accent-dark': '#B91C1C', // Darker shade for hover states
-                
-                'hero-bg': '#121212',
-                'icon-bg': '#fcebeb',
-                
+                'accent-main': '#ef4444',
+                'accent-dark': '#b91c1c', // Darker shade for hover states
+                'accent-glow': '#b91c1c', // Darker red for glow
+
+                'hero-bg': '#0a0a0a',
+                'icon-bg': '#262626',
+
+                // Dark Theme Colors
+                'dark-950': '#0a0a0a', // Background
+                'dark-900': '#171717', // Cards
+                'dark-800': '#262626', // Borders/Hovers
+
                 // HIGH CONTRAST GRAYS (Zinc/Neutral basis)
                 // Lighter backgrounds kept for card contrast
-                'gray-50': '#FAFAFA', 
-                'gray-100': '#F4F4F5', 
+                'gray-50': '#FAFAFA',
+                'gray-100': '#F4F4F5',
                 'gray-200': '#E4E4E7',
                 'gray-300': '#D4D4D8', // Borders
-                
+
                 // Darkened text colors for readability
-                'gray-400': '#71717A', // Footer text / Meta text (Passes AA large)
-                'gray-500': '#52525B', // Subtitles / Secondary text (Passes AA)
-                'gray-600': '#3F3F46', // Body text (Strong contrast)
-                'gray-700': '#27272A', // Headings / High priority text
-                'gray-800': '#18181B', // Almost black
-                'gray-900': '#09090B', // Pitch black
+                'gray-400': '#a1a1aa', // Footer text / Meta text (Passes AA large)
+                'gray-500': '#71717a', // Subtitles / Secondary text (Passes AA)
+                'gray-600': '#52525b', // Body text (Strong contrast)
+                'gray-700': '#3f3f46', // Headings / High priority text
+                'gray-800': '#27272a', // Almost black
+                'gray-900': '#18181b', // Pitch black
             },
             // Custom Shadows
             boxShadow: {
-                'custom-hover': '0 10px 40px -10px rgba(0,0,0,0.15)',
+                'custom-hover': '0 0 30px rgba(239, 68, 68, 0.3)',
                 'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                'glow': '0 0 40px rgba(220, 38, 38, 0.6)',
+                'card-glow': '0 0 15px rgba(0, 0, 0, 0.5), 0 0 5px rgba(239, 68, 68, 0.1)',
             },
             // Font Families
             fontFamily: {
@@ -62,18 +77,18 @@ tailwind.config = {
             // GLOBAL TYPOGRAPHY SYSTEM
             fontSize: {
                 // Paragraph - 12px (Base)
-                'article-p':    ['12px', { lineHeight: '1.6', fontWeight: '400' }], 
-                
+                'article-p':    ['12px', { lineHeight: '1.6', fontWeight: '400' }],
+
                 // Large Paragraph/Intro - 12px (Updated per request)
                 'article-p-lg': ['12px', { lineHeight: '1.6', fontWeight: '400' }],
-                
+
                 // Override default 'text-sm' to 12px (For tables/auxiliary content)
                 'sm':           ['12px', { lineHeight: '1.5', fontWeight: '400' }],
 
                 // Headings
-                'heading-1':    ['36px', { lineHeight: '1.1', fontWeight: '900' }], 
-                'heading-2':    ['22px', { lineHeight: '1.3', fontWeight: '800' }], 
-                'heading-3':    ['14px', { lineHeight: '1.4', fontWeight: '800' }], 
+                'heading-1':    ['36px', { lineHeight: '1.1', fontWeight: '900' }],
+                'heading-2':    ['22px', { lineHeight: '1.3', fontWeight: '800' }],
+                'heading-3':    ['14px', { lineHeight: '1.4', fontWeight: '800' }],
             },
             // Animations
             animation: {
