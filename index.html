@@ -59,241 +59,180 @@
         /* Removed custom concave styles */
     </style>
 </head>
-<!-- UPDATED: Applied a very subtle light gradient to the body background for a 'charming' lift -->
-<body class="flex flex-col min-h-screen font-inter text-gray-800 relative [background:linear-gradient(180deg,#f9f9f9_0%,#ffffff_100%)]">
+<!-- UPDATED: Applied dot pattern and dark theme -->
+<body class="flex flex-col min-h-screen font-inter text-white bg-dark-950 bg-dot-pattern relative selection:bg-accent-main selection:text-white">
 
     <!-- Hero Section (h1 - Primary Heading) -->
-    <!-- UPDATED: Removed Navbar HTML and replaced with #app-header container. 
-         Added min-h-[56px] to #app-header for CLS prevention (height of navbar). -->
-    <header class="relative flex flex-col bg-[#0f1115] overflow-hidden shadow-2xl">
+    <header class="relative flex flex-col bg-gradient-to-b from-dark-950/80 via-dark-950/90 to-dark-950 overflow-hidden pb-8 border-b border-dark-800/50">
         
         <!-- Background Glow Effect -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-3xl pointer-events-none opacity-20">
-            <div class="absolute top-[-20%] left-[20%] w-[300px] h-[300px] bg-accent-main rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-[-20%] right-[20%] w-[250px] h-[250px] bg-blue-900 rounded-full blur-[100px]"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-5xl pointer-events-none opacity-40">
+            <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent-glow/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+            <div class="absolute top-[10%] right-[-10%] w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] mix-blend-screen"></div>
         </div>
 
         <!-- CLS Fix: Reserved space for the Navigation Bar -->
-        <div id="app-header" class="min-h-[56px] w-full relative z-20"></div>
+        <div id="app-header" class="min-h-[56px] w-full relative z-50"></div>
 
-        <!-- Content Container (Hero) - This remains specific to the Homepage -->
-        <!-- UPDATED: Reduced padding from py-8 to py-5 for a denser look -->
-        <div class="relative z-10 container mx-auto max-w-4xl text-center py-5 px-6">
+        <!-- Content Container (Hero) -->
+        <div class="relative z-10 container mx-auto max-w-4xl text-center py-8 px-6">
             
-            <!-- Modern Logo Badge -->
-            <!-- UPDATED: Reduced bottom margin from mb-3 to mb-2 -->
-            <div class="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 mb-2 bg-white/5 border border-white/10 rounded-xl shadow-[0_0_15px_rgba(227,64,55,0.3)] backdrop-blur-md">
-                <i class="fa-solid fa-bolt text-lg md:text-xl text-accent-main"></i>
+            <!-- Modern Logo Badge with Glass Effect (Smaller) -->
+            <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mb-4 bg-dark-900/50 border border-white/10 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.2)] backdrop-blur-md ring-1 ring-white/5">
+                <i class="fa-solid fa-bolt text-xl md:text-2xl text-accent-main drop-shadow-md"></i>
             </div>
 
-            <!-- Title - UPDATED: Compact responsiveness for mobile using clamp() -->
-            <h1 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: clamp(26px, 6vw, 36px); line-height: 1.15; color: #ffffff; text-shadow: 0 10px 30px rgba(0,0,0,0.6); margin-bottom: 12px; letter-spacing: -1px;">
-                Financial Calculators, SEO Tools & In-Depth Software Reviews
+            <!-- Title (Broader Scope, More Compact) -->
+            <h1 class="font-inter font-black text-white drop-shadow-xl mb-3 tracking-tight" style="font-size: clamp(28px, 5vw, 42px); line-height: 1.1;">
+                Smart Tools for <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-main via-red-400 to-white">Business, Finance & Life</span>
             </h1>
 
-            <!-- Description - UPDATED: Using text-article-p global class (13px) -->
-            <!-- UPDATED: Content deeply refined to include 'WordPress tools' and 'Web Hosting' with inline styles. -->
-            <p style="font-family: 'Inter', sans-serif; font-size: clamp(12px, 3vw, 15px); font-weight: 400; color: #9ca3af; max-width: 768px; margin: 0 auto; line-height: 1.5;">
-                Master your future with <span style="color: #f3f4f6; font-weight: 500;">inflation-adjusted SIP & mortgage planners</span>, dominate search rankings with <span style="color: #f3f4f6; font-weight: 500;">expert SEO comparisons</span>, and make smarter tech choices with <span style="color: #f3f4f6; font-weight: 500;">unbiased reviews of WordPress tools & Web Hosting</span>.
+            <!-- Description (Refined) -->
+            <p class="font-inter text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6" style="font-size: clamp(14px, 3vw, 15px); font-weight: 400;">
+                One platform, infinite utilities. From <span class="text-gray-300 font-medium">financial planning</span> and <span class="text-gray-300 font-medium">SEO audits</span> to <span class="text-gray-300 font-medium">exam prep</span> and <span class="text-gray-300 font-medium">daily productivity</span>.
             </p>
         </div>
     </header>
 
-    <main class="flex-grow">
+    <main class="flex-grow relative z-10">
         <!-- Main container -->
-        <!-- UPDATED: Added space-y-8 to separate the boxed sections -->
-        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 md:py-6 space-y-8">
-            
-            <!-- Our Projects Section (h2 - Main Content Heading) -->
-            <!-- UPDATED: Added border, background, and padding to create a container box style -->
-            <section id="projects" class="text-center border-2 border-gray-200 rounded-2xl p-4 md:p-8 bg-white shadow-sm">
-                
-                <!-- Title & Underline block -->
-                <div class="flex flex-col items-center mb-6">
-                    <!-- Title - UPDATED: Using text-heading-2 global class (24px) -->
-                    <h2 class="text-heading-2 text-gray-800 relative pb-1">
-                        All Tools & Projects
-                    </h2>
-                    <div class="w-10 h-[2px] rounded-full bg-accent-main mt-1"></div>
-                </div>
-                
-                <!-- Consolidated Grid Section -->
-                <!-- UPDATED GRID: Switched to grid-cols-1 for mobile, 2 for tablet (sm), 3 for desktop -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
-                        
-                        <!-- Tool 1: SIP Calculator (Active) -->
-                        <a href="https://sipcalculatorwithinflation.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
-                            <div class="flex items-start h-full"> 
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-money-bill-trend-up text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left"> 
-                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Inflation-Adjusted SIP Calculator</h3>
-                                    <!-- Hardcoded to text-[13px] as per preference, added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 line-clamp-3">Plan for long-term goals. Accurately estimate future wealth by factoring in the impact of inflation.</p>
-                                </div>
-                            </div>
-                        </a>
+        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 space-y-12">
 
-                        <!-- Tool 2: Mortgage Planner (Active) -->
-                        <a href="https://mortgageplanner.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
-                            <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-house text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left">
-                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Mortgage Planner & Calculators</h3>
-                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 line-clamp-3">A powerful tool to plan your home loan payments, visualize interest, and structure your mortgage effectively.</p>
-                                </div>
-                            </div>
-                        </a>
+            <!-- Quick Tools / Subdomain Grid -->
+            <section class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
 
-                        <!-- Tool 3: Stories & Rhymes (Active) -->
-                        <a href="https://kids.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
-                            <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-wand-magic-sparkles text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left">
-                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Stories & Rhymes for Kids</h3>
-                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 line-clamp-3">A safe, ad-free world of classic and original tales designed to entertain, educate, and inspire young readers.</p>
-                                </div>
-                            </div>
-                        </a>
+                <!-- 1. Best SEO Tools -->
+                <a href="https://bestseotools.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SEO Tools</span>
+                </a>
 
-                        <!-- Tool 4: SEO Tools (Active) -->
-                        <a href="https://bestseotools.toolblaster.com" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full">
-                            <div class="flex items-start h-full">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                    <i class="fa-solid fa-magnifying-glass text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left">
-                                    <h3 class="text-sm font-bold text-gray-900 mb-0.5 group-hover:text-accent-main transition-colors">Best SEO Tools: Comparison</h3>
-                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 line-clamp-3">Expert-curated comparison of top SEO platforms (Semrush vs. KWFinder) to boost your digital marketing strategy.</p>
-                                </div>
-                            </div>
-                        </a>
+                <!-- 2. DesiBill -->
+                <a href="https://desibill.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-file-invoice text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Billing Tool</span>
+                </a>
 
-                        <!-- Tool 5: Calculator Hub (Coming Soon) -->
-                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-200 opacity-70 adsense-hide relative">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
-                                    <i class="fa-solid fa-layer-group text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left">
-                                    <!-- LAYOUT FIX: Changed from flex-row to ensure safe wrapping, added gap and removed absolute positioning risk -->
-                                    <div class="flex justify-between items-start mb-1 gap-2">
-                                        <h3 class="text-sm font-bold text-gray-900 leading-tight">Financial Calculator's Hub</h3>
-                                        <div class="flex-shrink-0 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
-                                            Coming Soon
-                                        </div>
-                                    </div>
-                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 mb-2 line-clamp-3">India's most powerful and user-friendly financial toolkit is here to help you plan, save, and invest.</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- 3. AgriQuiz -->
+                <a href="https://agriquiz.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wheat-awn text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Agri Mock Test</span>
+                </a>
 
-                         <!-- Tool 6: HP Exam Prep (Coming Soon) -->
-                        <div class="w-full rounded-lg p-3 flex flex-col justify-between h-full bg-white shadow-md border border-gray-200 opacity-70 adsense-hide relative">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main">
-                                    <i class="fa-solid fa-graduation-cap text-xs sm:text-base"></i>
-                                </div>
-                                <div class="w-full text-left">
-                                    <!-- LAYOUT FIX: Removed absolute positioning which caused overlap. Converted to flex layout consistent with other cards. -->
-                                    <div class="flex justify-between items-start mb-1 gap-2">
-                                        <h3 class="text-sm font-bold text-gray-900 leading-tight">HP Exam Prep Portal</h3>
-                                        <div class="flex-shrink-0 bg-yellow-100 text-yellow-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-yellow-300 uppercase tracking-wide whitespace-nowrap">
-                                            Coming Soon
-                                        </div>
-                                    </div>
-                                    <!-- Hardcoded to text-[13px], added line-clamp-3 -->
-                                    <p class="text-[13px] text-gray-600 mb-2 line-clamp-3">Master HPPSC, HPRCA, Patwari, HRTC, TET, High Court & Police exams with expert GK, Aptitude & Technical resources.</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- 4. Online Notepad -->
+                <a href="https://onlinenotepad.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pen-to-square text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Notepad</span>
+                </a>
 
-                </div>
+                <!-- 5. SIP Calculator -->
+                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SIP Planner</span>
+                </a>
+
             </section>
 
-            <!-- Latest Reviews Section (NEW) -->
-            <!-- UPDATED: Added border, background, and padding to create a container box style -->
-            <section id="reviews" class="text-center border-2 border-gray-200 rounded-2xl p-4 md:p-8 bg-white shadow-sm">
+            <!-- Latest Reviews Section -->
+            <section id="reviews" class="text-center">
                 
-                <div class="flex flex-col items-center mb-6">
-                    <h2 class="text-heading-2 text-gray-800 relative pb-1">
-                        Latest Reviews & Guides
+                <div class="flex flex-col items-center mb-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-[2px] bg-accent-main"></div>
+                        <span class="text-accent-main font-bold text-xs uppercase tracking-[0.2em]">Deep Dives</span>
+                        <div class="w-8 h-[2px] bg-accent-main"></div>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">
+                        Latest Software Reviews
                     </h2>
-                    <div class="w-10 h-[2px] rounded-full bg-accent-main mt-1"></div>
                 </div>
 
-                <!-- UPDATED GRID: Switched to grid-cols-1 for mobile, 2 for tablet (sm), 3 for desktop -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
+                <!-- Modern Glassmorphic Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
                     
-                    <!-- 1. NEW: Verpex Review Card -->
-                    <a href="reviews/hosting/verpex-hosting-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
-                        <div class="flex items-start h-full">
-                            <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                <i class="fa-solid fa-server text-xs sm:text-base"></i>
+                    <!-- 1. Verpex Review Card -->
+                    <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                        <!-- Glow Effect on Hover -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="flex items-start h-full relative z-10">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-server text-lg"></i>
                             </div>
-                            <div class="w-full">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="bg-indigo-100 text-indigo-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-indigo-200 uppercase tracking-wide">Hosting</span>
-                                    <span class="text-[10px] text-gray-500">Feb 2026</span>
+                            <div class="w-full text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">Hosting</span>
+                                    <span class="text-[11px] text-gray-500">Feb 2026</span>
                                 </div>
-                                <h3 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-accent-main transition-colors">Verpex Review 2026: The New "Fastest" Budget Host?</h3>
+                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">Verpex Review 2026</h3>
+                                <p class="text-[13px] text-gray-400 line-clamp-2">Is this the new "fastest" budget host? We tested speed, uptime, and support.</p>
                             </div>
                         </div>
                     </a>
                     
                     <!-- 2. KWFinder Review Card -->
-                    <a href="reviews/seo/kwfinder-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
-                        <div class="flex items-start h-full">
-                            <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                <i class="fa-solid fa-key text-xs sm:text-base"></i>
+                    <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="flex items-start h-full relative z-10">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-key text-lg"></i>
                             </div>
-                            <div class="w-full">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="bg-orange-100 text-orange-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-wide">SEO Tools</span>
-                                    <span class="text-[10px] text-gray-500">Jan 2026</span>
+                            <div class="w-full text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">SEO Tools</span>
+                                    <span class="text-[11px] text-gray-500">Jan 2026</span>
                                 </div>
-                                <h3 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-accent-main transition-colors">KWFinder Review 2026: Is It Worth It for Beginners?</h3>
+                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">KWFinder Review</h3>
+                                <p class="text-[13px] text-gray-400 line-clamp-2">Is Mangools KWFinder still the best budget SEO tool for beginners? A deep dive.</p>
                             </div>
                         </div>
                     </a>
 
                     <!-- 3. Semrush Review Card -->
-                    <a href="reviews/seo/semrush-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
-                        <div class="flex items-start h-full">
-                            <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                <i class="fa-solid fa-magnifying-glass-chart text-xs sm:text-base"></i>
+                    <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="flex items-start h-full relative z-10">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
                             </div>
-                            <div class="w-full">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="bg-orange-100 text-orange-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-wide">SEO Tools</span>
-                                    <span class="text-[10px] text-gray-500">Jan 2026</span>
+                            <div class="w-full text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">SEO Tools</span>
+                                    <span class="text-[11px] text-gray-500">Jan 2026</span>
                                 </div>
-                                <h3 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-accent-main transition-colors">Semrush Review 2026: Features, Pricing & Verdict</h3>
+                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">Semrush Review</h3>
+                                <p class="text-[13px] text-gray-400 line-clamp-2">The gold standard for marketing data. But is the $130/mo price tag justified?</p>
                             </div>
                         </div>
                     </a>
 
-                    <!-- 4. ZeroSSL Review (RESTORED - Wraps to 2nd Row) -->
-                    <a href="reviews/security/zerossl-review.html" class="block w-full rounded-lg p-3 bg-white shadow-md border border-gray-200 group h-full text-left">
-                        <div class="flex items-start h-full">
-                            <div class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-icon-bg flex items-center justify-center mr-3 text-accent-main group-hover:bg-accent-main group-hover:text-white transition-colors duration-300">
-                                <i class="fa-solid fa-shield-halved text-xs sm:text-base"></i>
+                    <!-- 4. ZeroSSL Review -->
+                    <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="flex items-start h-full relative z-10">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid fa-shield-halved text-lg"></i>
                             </div>
-                            <div class="w-full">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="bg-green-100 text-green-800 text-[9px] font-bold px-1.5 py-0.5 rounded border border-green-200 uppercase tracking-wide">Security</span>
-                                    <span class="text-[10px] text-gray-500">Dec 2025</span>
+                            <div class="w-full text-left">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">Security</span>
+                                    <span class="text-[11px] text-gray-500">Dec 2025</span>
                                 </div>
-                                <h3 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-accent-main transition-colors">ZeroSSL Review: Is It Finally Time to Ditch Paid SSL?</h3>
+                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">ZeroSSL Review</h3>
+                                <p class="text-[13px] text-gray-400 line-clamp-2">Is it finally time to ditch paid SSL certificates? We test free vs paid options.</p>
                             </div>
                         </div>
                     </a>

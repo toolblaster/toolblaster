@@ -7,10 +7,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     injectHeader();
-    injectAdSpace(); 
+    injectAdSpace();
     injectSidebarSkeleton(); // Sets up the structure + TOC. Widgets injected by global-script.js
-    injectMobileTOC(); 
-    injectShareWidget(); 
+    injectMobileTOC();
+    injectShareWidget();
     injectFooterAndModals();
     injectBackToTop();
     injectMobileRelated(); // Scans article content similar to TOC
@@ -24,19 +24,18 @@ function injectHeader() {
     if (!headerContainer) return;
 
     const headerHTML = `
-        <nav class="relative z-20 border-b border-white/5 bg-[#0f1115]/50 backdrop-blur-sm w-full">
+        <nav class="sticky top-0 z-50 border-b border-dark-800 bg-dark-950/80 backdrop-blur-xl w-full transition-all duration-300">
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
                 <!-- Brand / Logo -->
                 <a href="/" class="flex items-center gap-2 group">
-                    <i class="fa-solid fa-bolt text-accent-main text-lg group-hover:text-white transition-colors"></i>
+                    <i class="fa-solid fa-bolt text-accent-main text-lg group-hover:text-white transition-colors shadow-glow"></i>
                     <span class="text-white font-bold text-lg tracking-tight">Toolblaster</span>
                 </a>
 
                 <!-- Desktop Menu Links -->
                 <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
-                    <a href="/" class="hover:text-white transition-colors">Home</a>
-                    <a href="/#projects" class="hover:text-white transition-colors">Tools</a>
-                    <a href="/reviews/" class="hover:text-white transition-colors">Reviews</a>
+                    <a href="/" class="hover:text-white hover:text-accent-main transition-colors">Home</a>
+                    <a href="/reviews/" class="hover:text-white hover:text-accent-main transition-colors">Reviews</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -47,13 +46,13 @@ function injectHeader() {
         </nav>
 
         <!-- Mobile Menu Overlay (Backdrop) -->
-        <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-label="Close Menu"></div>
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm opacity-0 invisible transition-all duration-300 md:hidden" aria-label="Close Menu"></div>
 
         <!-- Mobile Menu Drawer (Slide-in) -->
-        <div id="mobile-menu-drawer" style="display: none;" class="fixed top-0 right-0 z-[100] w-[85%] max-w-[300px] h-full bg-[#161b22] border-l border-white/10 shadow-2xl transform translate-x-full invisible md:hidden flex flex-col">
-            
+        <div id="mobile-menu-drawer" style="display: none;" class="fixed top-0 right-0 z-[100] w-[85%] max-w-[300px] h-full bg-dark-900 border-l border-dark-800 shadow-2xl transform translate-x-full invisible md:hidden flex flex-col">
+
             <!-- Drawer Header -->
-            <div class="flex justify-between items-center p-5 border-b border-white/5">
+            <div class="flex justify-between items-center p-5 border-b border-dark-800">
                 <span class="text-white font-bold text-xl tracking-tight flex items-center gap-3">
                     <i class="fa-solid fa-bolt text-accent-main"></i> Toolblaster
                 </span>
@@ -61,25 +60,21 @@ function injectHeader() {
                     <i class="fa-solid fa-xmark text-2xl"></i>
                 </button>
             </div>
-            
+
             <!-- Drawer Links -->
             <div class="flex flex-col p-4 gap-2 text-lg text-gray-200 font-bold overflow-y-auto">
-                <a href="/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
-                    <i class="fa-solid fa-house w-6 text-center text-accent-main text-lg"></i> 
+                <a href="/" class="flex items-center gap-3 p-3 rounded-xl bg-dark-950 hover:bg-dark-800 hover:text-accent-main transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-house w-6 text-center text-accent-main text-lg"></i>
                     <span>Home</span>
                 </a>
-                <a href="/#projects" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
-                    <i class="fa-solid fa-toolbox w-6 text-center text-accent-main text-lg"></i> 
-                    <span>Tools</span>
-                </a>
-                <a href="/reviews/" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 hover:text-white transition-all mobile-link active:scale-[0.98]">
-                    <i class="fa-solid fa-star w-6 text-center text-accent-main text-lg"></i> 
+                <a href="/reviews/" class="flex items-center gap-3 p-3 rounded-xl bg-dark-950 hover:bg-dark-800 hover:text-accent-main transition-all mobile-link active:scale-[0.98]">
+                    <i class="fa-solid fa-star w-6 text-center text-accent-main text-lg"></i>
                     <span>Reviews</span>
                 </a>
             </div>
-            
+
             <!-- Drawer Footer -->
-            <div class="mt-auto p-6 border-t border-white/5 bg-black/20">
+            <div class="mt-auto p-6 border-t border-dark-800 bg-dark-950/50">
                 <p class="text-xs text-gray-400 text-center mb-2">Designed for performance.</p>
                 <p class="text-xs text-gray-400 text-center">&copy; 2026 Toolblaster</p>
             </div>
@@ -108,19 +103,19 @@ function injectHeader() {
                 requestAnimationFrame(() => {
                     overlay.classList.remove('opacity-0', 'invisible');
                     overlay.classList.add('opacity-100', 'visible');
-                    
+
                     drawer.classList.remove('translate-x-full', 'invisible');
                     drawer.classList.add('translate-x-0');
                 });
             });
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
         } else {
             overlay.classList.remove('opacity-100', 'visible');
             overlay.classList.add('opacity-0', 'invisible');
-            
+
             drawer.classList.remove('translate-x-0');
             drawer.classList.add('translate-x-full');
-            document.body.style.overflow = ''; 
+            document.body.style.overflow = '';
         }
     }
 
@@ -195,7 +190,7 @@ function injectSidebarSkeleton() {
     // 2. Set up the container structure
     // Note: Other widgets are injected into this .flex-col container by global-script.js
     sidebarContainer.innerHTML = `
-        <div class="flex flex-col gap-3 h-full w-full"> 
+        <div class="flex flex-col gap-3 h-full w-full">
             ${indexWidgetHTML}
         </div>
     `;
@@ -207,7 +202,7 @@ function injectSidebarSkeleton() {
 
 /**
  * Mobile Related Reviews logic
- * (Currently unused as global-script.js handles sidebar injections, 
+ * (Currently unused as global-script.js handles sidebar injections,
  * but kept as placeholder/fallback structure)
  */
 function injectMobileRelated() {
@@ -269,7 +264,7 @@ function injectShareWidget() {
     const canonical = document.querySelector('link[rel="canonical"]');
     const pageUrl = canonical ? canonical.href : window.location.href.split('?')[0];
     const pageTitle = document.title;
-    
+
     window.copyToClipboard = function(btn) {
         const textArea = document.createElement("textarea");
         textArea.value = pageUrl;
@@ -306,11 +301,11 @@ function injectShareWidget() {
         shareContainers.forEach(container => { if (!container.innerHTML.trim()) container.innerHTML = widgetHTML; });
     } else if (authorBlock && !authorBlock.querySelector('.share-buttons-container')) {
         const leftWrapper = document.createElement('div');
-        leftWrapper.className = 'flex items-center space-x-3 mb-2 sm:mb-0'; 
+        leftWrapper.className = 'flex items-center space-x-3 mb-2 sm:mb-0';
         while (authorBlock.firstChild) leftWrapper.appendChild(authorBlock.firstChild);
         authorBlock.appendChild(leftWrapper);
         authorBlock.classList.remove('justify-center', 'sm:justify-start', 'space-x-3');
-        authorBlock.classList.add('justify-between', 'flex-wrap', 'gap-y-2'); 
+        authorBlock.classList.add('justify-between', 'flex-wrap', 'gap-y-2');
         const shareWidgetDiv = document.createElement('div');
         shareWidgetDiv.className = 'share-buttons-container';
         shareWidgetDiv.innerHTML = widgetHTML;
@@ -318,56 +313,17 @@ function injectShareWidget() {
     }
 }
 
-function initScrollSpy() {
-    const links = document.querySelectorAll('.toc-link');
-    const sections = Array.from(links).map(link => document.getElementById(link.dataset.target));
-    const scrollContainer = document.getElementById('review-index-scroll-container');
-
-    if (links.length === 0 || sections.length === 0) return;
-
-    const observerOptions = { root: null, rootMargin: '-100px 0px -60% 0px', threshold: 0 };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                links.forEach(l => {
-                    l.classList.remove('bg-gray-100');
-                    const text = l.querySelector('.toc-text');
-                    const badge = l.querySelector('.toc-badge');
-                    if(text) text.classList.remove('text-accent-main');
-                    if(badge) { badge.classList.remove('bg-accent-main', 'text-white'); badge.classList.add('bg-gray-100', 'text-gray-400'); }
-                });
-                const activeLink = document.querySelector(`.toc-link[data-target="${entry.target.id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('bg-gray-100');
-                    const text = activeLink.querySelector('.toc-text');
-                    const badge = activeLink.querySelector('.toc-badge');
-                    if(text) text.classList.add('text-accent-main');
-                    if(badge) { badge.classList.remove('bg-gray-100', 'text-gray-400'); badge.classList.add('bg-accent-main', 'text-white'); }
-                    if (scrollContainer) {
-                        const activeRect = activeLink.getBoundingClientRect();
-                        const containerRect = scrollContainer.getBoundingClientRect();
-                        if (activeRect.top < containerRect.top) scrollContainer.scrollTop -= (containerRect.top - activeRect.top + 10);
-                        else if (activeRect.bottom > containerRect.bottom) scrollContainer.scrollTop += (activeRect.bottom - containerRect.bottom + 10);
-                    }
-                }
-            }
-        });
-    }, observerOptions);
-    sections.forEach(section => { if(section) observer.observe(section); });
-}
-
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
     if (!footerContainer) return;
     const footerHTML = `
-        <footer class="bg-gray-800 text-gray-300 text-center py-6 px-4 mt-8 rounded-t-[2.5rem]">
+        <footer class="bg-dark-900 border-t border-dark-800 text-gray-400 text-center py-8 px-4 mt-12">
             <div class="container mx-auto max-w-site flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-article-p">&copy; 2026 Toolblaster.com. All Rights Reserved.</p>
                 <nav class="flex flex-wrap justify-center gap-4 text-article-p">
-                    <a href="/terms/about.html" class="hover:text-white transition duration-200">About</a>
-                    <a href="/terms/privacy.html" class="hover:text-white transition duration-200">Privacy</a>
-                    <a href="/terms/terms.html" class="hover:text-white transition duration-200">Terms</a>
+                    <a href="/terms/about.html" class="hover:text-white hover:text-accent-main transition duration-200">About</a>
+                    <a href="/terms/privacy.html" class="hover:text-white hover:text-accent-main transition duration-200">Privacy</a>
+                    <a href="/terms/terms.html" class="hover:text-white hover:text-accent-main transition duration-200">Terms</a>
                 </nav>
             </div>
         </footer>
