@@ -1,20 +1,75 @@
 /**
  * Toolblaster Global Components (Header, Sidebar Skeleton, Footer, Modals, Ads, Back to Top, Share Widget)
  * Handles injection of shared UI elements.
- * * NOTE: "Popular Tools" and "Other Reviews" widgets are now handled by js/global-script.js
- * to allow for easier centralized management and expansion.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    injectHeader();
-    injectAdSpace();
-    injectSidebarSkeleton(); // Sets up the structure + TOC. Widgets injected by global-script.js
-    injectMobileTOC();
-    injectShareWidget();
-    injectFooterAndModals();
-    injectBackToTop();
-    injectMobileRelated(); // Scans article content similar to TOC
+    safeRun(injectHeader);
+    safeRun(injectAdSpace);
+    safeRun(injectSidebarSkeleton);
+    safeRun(injectMobileTOC);
+    safeRun(injectShareWidget);
+    safeRun(injectFooterAndModals);
+    safeRun(injectBackToTop);
+    safeRun(injectMobileRelated);
 });
+
+function safeRun(fn) {
+    try {
+        fn();
+    } catch (e) {
+        console.error(`Error in ${fn.name}:`, e);
+    }
+}
+
+/**
+ * Helper: ScrollSpy Initialization
+ * Defined early to ensure availability.
+ */
+function initScrollSpy() {
+    const links = document.querySelectorAll('.toc-link');
+    const scrollContainer = document.getElementById('review-index-scroll-container');
+
+    if (links.length === 0) return;
+
+    // Filter out links where target doesn't exist
+    const validLinks = Array.from(links).filter(link => document.getElementById(link.dataset.target));
+    if (validLinks.length === 0) return;
+
+    const observerOptions = { root: null, rootMargin: '-100px 0px -60% 0px', threshold: 0 };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                links.forEach(l => {
+                    l.classList.remove('bg-gray-100');
+                    const text = l.querySelector('.toc-text');
+                    const badge = l.querySelector('.toc-badge');
+                    if(text) text.classList.remove('text-accent-main');
+                    if(badge) { badge.classList.remove('bg-accent-main', 'text-white'); badge.classList.add('bg-gray-100', 'text-gray-400'); }
+                });
+                const activeLink = document.querySelector(`.toc-link[data-target="${entry.target.id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('bg-gray-100');
+                    const text = activeLink.querySelector('.toc-text');
+                    const badge = activeLink.querySelector('.toc-badge');
+                    if(text) text.classList.add('text-accent-main');
+                    if(badge) { badge.classList.remove('bg-gray-100', 'text-gray-400'); badge.classList.add('bg-accent-main', 'text-white'); }
+                    if (scrollContainer) {
+                        const activeRect = activeLink.getBoundingClientRect();
+                        const containerRect = scrollContainer.getBoundingClientRect();
+                        if (activeRect.top < containerRect.top) scrollContainer.scrollTop -= (containerRect.top - activeRect.top + 10);
+                        else if (activeRect.bottom > containerRect.bottom) scrollContainer.scrollTop += (activeRect.bottom - containerRect.bottom + 10);
+                    }
+                }
+            }
+        });
+    }, observerOptions);
+    validLinks.forEach(link => {
+        const section = document.getElementById(link.dataset.target);
+        if(section) observer.observe(section);
+    });
+}
 
 /**
  * Injects the Navigation Bar into the #app-header element.
@@ -142,7 +197,6 @@ function injectAdSpace() {
 
 /**
  * Injects the Sidebar Structure (Skeleton) and TOC.
- * Popular Tools and Other Reviews are injected by global-script.js into the gap created here.
  */
 function injectSidebarSkeleton() {
     const sidebarContainer = document.getElementById('app-sidebar');
@@ -188,7 +242,6 @@ function injectSidebarSkeleton() {
     }
 
     // 2. Set up the container structure
-    // Note: Other widgets are injected into this .flex-col container by global-script.js
     sidebarContainer.innerHTML = `
         <div class="flex flex-col gap-3 h-full w-full">
             ${indexWidgetHTML}
@@ -202,8 +255,6 @@ function injectSidebarSkeleton() {
 
 /**
  * Mobile Related Reviews logic
- * (Currently unused as global-script.js handles sidebar injections,
- * but kept as placeholder/fallback structure)
  */
 function injectMobileRelated() {
     const articleContent = document.querySelector('article');
