@@ -157,83 +157,91 @@
                     </h2>
                 </div>
 
-                <!-- Modern Glassmorphic Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+                <!-- Modern Glassmorphic Grid (5-column Layout) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mx-auto">
                     
                     <!-- 1. Verpex Review Card -->
-                    <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
-                        <!-- Glow Effect on Hover -->
+                    <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
                         <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                        <div class="flex items-start h-full relative z-10">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                <i class="fa-solid fa-server text-lg"></i>
-                            </div>
-                            <div class="w-full text-left">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">Hosting</span>
-                                    <span class="text-[11px] text-gray-500">Feb 2026</span>
+                        <div class="flex flex-col items-start h-full relative z-10">
+                            <div class="flex justify-between w-full items-start mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fa-solid fa-server text-lg"></i>
                                 </div>
-                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">Verpex Review 2026</h3>
-                                <p class="text-[13px] text-gray-400 line-clamp-2">Is this the new "fastest" budget host? We tested speed, uptime, and support.</p>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">Feb 2026</span>
                             </div>
+
+                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">Verpex Review: Fastest Budget Host?</h3>
+                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">We tested speed, uptime, and support to see if it lives up to the hype.</p>
                         </div>
                     </a>
                     
                     <!-- 2. KWFinder Review Card -->
-                    <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                    <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
                         <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                        <div class="flex items-start h-full relative z-10">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                <i class="fa-solid fa-key text-lg"></i>
-                            </div>
-                            <div class="w-full text-left">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">SEO Tools</span>
-                                    <span class="text-[11px] text-gray-500">Jan 2026</span>
+                        <div class="flex flex-col items-start h-full relative z-10">
+                            <div class="flex justify-between w-full items-start mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fa-solid fa-key text-lg"></i>
                                 </div>
-                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">KWFinder Review</h3>
-                                <p class="text-[13px] text-gray-400 line-clamp-2">Is Mangools KWFinder still the best budget SEO tool for beginners? A deep dive.</p>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
                             </div>
+
+                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">KWFinder: Best for Beginners?</h3>
+                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">A deep dive into Mangools KWFinder features, pricing, and data accuracy.</p>
                         </div>
                     </a>
 
                     <!-- 3. Semrush Review Card -->
-                    <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                    <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
                         <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                        <div class="flex items-start h-full relative z-10">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
-                            </div>
-                            <div class="w-full text-left">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">SEO Tools</span>
-                                    <span class="text-[11px] text-gray-500">Jan 2026</span>
+                        <div class="flex flex-col items-start h-full relative z-10">
+                            <div class="flex justify-between w-full items-start mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
                                 </div>
-                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">Semrush Review</h3>
-                                <p class="text-[13px] text-gray-400 line-clamp-2">The gold standard for marketing data. But is the $130/mo price tag justified?</p>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
                             </div>
+
+                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">Semrush: Is It Worth $130/mo?</h3>
+                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">The gold standard for marketing data. We analyze features vs price tag.</p>
                         </div>
                     </a>
 
                     <!-- 4. ZeroSSL Review -->
-                    <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-3xl p-5 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden">
+                    <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
                         <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                        <div class="flex items-start h-full relative z-10">
-                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-dark-800/80 flex items-center justify-center mr-4 text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                <i class="fa-solid fa-shield-halved text-lg"></i>
-                            </div>
-                            <div class="w-full text-left">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="bg-white/5 text-gray-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-wide group-hover:text-white transition-colors">Security</span>
-                                    <span class="text-[11px] text-gray-500">Dec 2025</span>
+                        <div class="flex flex-col items-start h-full relative z-10">
+                            <div class="flex justify-between w-full items-start mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fa-solid fa-shield-halved text-lg"></i>
                                 </div>
-                                <h3 class="text-base font-bold text-white leading-snug group-hover:text-accent-main transition-colors mb-1">ZeroSSL Review</h3>
-                                <p class="text-[13px] text-gray-400 line-clamp-2">Is it finally time to ditch paid SSL certificates? We test free vs paid options.</p>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">Dec 2025</span>
                             </div>
+
+                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">ZeroSSL: Ditch Paid SSL?</h3>
+                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">We compare free vs paid SSL options to see if ZeroSSL is the best choice.</p>
+                        </div>
+                    </a>
+
+                    <!-- 5. SSLs.com Review -->
+                    <a href="reviews/security/ssls-com-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="flex flex-col items-start h-full relative z-10">
+                            <div class="flex justify-between w-full items-start mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fa-solid fa-lock text-lg"></i>
+                                </div>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
+                            </div>
+
+                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">SSLs.com Review: Legit?</h3>
+                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">Is $3.75/yr for an SSL too good to be true? We tested issuance speed.</p>
                         </div>
                     </a>
 
