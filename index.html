@@ -63,59 +63,97 @@
 <body class="flex flex-col min-h-screen font-inter text-white bg-dark-950 bg-dot-pattern relative selection:bg-accent-main selection:text-white">
 
     <!-- Hero Section (h1 - Primary Heading) -->
-    <header class="relative flex flex-col bg-gradient-to-b from-dark-950/80 via-dark-950/90 to-dark-950 overflow-hidden pb-12 border-b border-dark-800/50">
+    <header class="relative flex flex-col bg-gradient-to-b from-dark-950/80 via-dark-950/90 to-dark-950 overflow-hidden pb-8 border-b border-dark-800/50">
         
         <!-- Background Glow Effect -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-5xl pointer-events-none opacity-50">
-            <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-accent-glow/30 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
-            <div class="absolute top-[10%] right-[-10%] w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[100px] mix-blend-screen"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-5xl pointer-events-none opacity-40">
+            <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent-glow/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+            <div class="absolute top-[10%] right-[-10%] w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] mix-blend-screen"></div>
         </div>
 
         <!-- CLS Fix: Reserved space for the Navigation Bar -->
         <div id="app-header" class="min-h-[56px] w-full relative z-50"></div>
 
         <!-- Content Container (Hero) -->
-        <div class="relative z-10 container mx-auto max-w-4xl text-center py-12 px-6">
+        <div class="relative z-10 container mx-auto max-w-4xl text-center py-8 px-6">
             
-            <!-- Modern Logo Badge with Glass Effect -->
-            <div class="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 mb-6 bg-dark-900/50 border border-white/10 rounded-2xl shadow-[0_0_30px_rgba(239,68,68,0.25)] backdrop-blur-md ring-1 ring-white/5">
-                <i class="fa-solid fa-bolt text-2xl md:text-3xl text-accent-main drop-shadow-lg"></i>
+            <!-- Modern Logo Badge with Glass Effect (Smaller) -->
+            <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mb-4 bg-dark-900/50 border border-white/10 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.2)] backdrop-blur-md ring-1 ring-white/5">
+                <i class="fa-solid fa-bolt text-xl md:text-2xl text-accent-main drop-shadow-md"></i>
             </div>
 
-            <!-- Title -->
-            <h1 class="font-inter font-black text-white drop-shadow-2xl mb-5 tracking-tight" style="font-size: clamp(36px, 6vw, 56px); line-height: 1.05;">
-                Financial Calculators & <br class="hidden sm:block" />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-main via-red-400 to-white">Expert Software Reviews</span>
+            <!-- Title (Broader Scope, More Compact) -->
+            <h1 class="font-inter font-black text-white drop-shadow-xl mb-3 tracking-tight" style="font-size: clamp(28px, 5vw, 42px); line-height: 1.1;">
+                Smart Tools for <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-main via-red-400 to-white">Business, Finance & Life</span>
             </h1>
 
-            <!-- Description -->
-            <p class="font-inter text-gray-400 max-w-xl mx-auto leading-relaxed mb-8" style="font-size: clamp(15px, 3vw, 17px); font-weight: 400;">
-                Make smarter decisions with <span class="text-white font-medium">unbiased data</span> on SEO tools, hosting, and financial planning.
+            <!-- Description (Refined) -->
+            <p class="font-inter text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6" style="font-size: clamp(14px, 3vw, 15px); font-weight: 400;">
+                One platform, infinite utilities. From <span class="text-gray-300 font-medium">financial planning</span> and <span class="text-gray-300 font-medium">SEO audits</span> to <span class="text-gray-300 font-medium">exam prep</span> and <span class="text-gray-300 font-medium">daily productivity</span>.
             </p>
-
-            <!-- Hero Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                 <a href="#reviews" class="px-8 py-3 rounded-full bg-accent-main text-white font-bold text-sm hover:bg-accent-dark transition-all shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] transform hover:-translate-y-0.5">
-                    Read Latest Reviews
-                 </a>
-                 <a href="/#tools" class="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-all backdrop-blur-sm">
-                    View Calculators
-                 </a>
-            </div>
         </div>
     </header>
 
     <main class="flex-grow relative z-10">
         <!-- Main container -->
-        <div class="container mx-auto max-w-site px-4 sm:px-6 py-8 space-y-12">
+        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 space-y-12">
+
+            <!-- Quick Tools / Subdomain Grid -->
+            <section class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+
+                <!-- 1. Best SEO Tools -->
+                <a href="https://bestseotools.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SEO Tools</span>
+                </a>
+
+                <!-- 2. DesiBill -->
+                <a href="https://desibill.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-file-invoice text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Billing Tool</span>
+                </a>
+
+                <!-- 3. AgriQuiz -->
+                <a href="https://agriquiz.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-wheat-awn text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Agri Mock Test</span>
+                </a>
+
+                <!-- 4. Online Notepad -->
+                <a href="https://onlinenotepad.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pen-to-square text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Notepad</span>
+                </a>
+
+                <!-- 5. SIP Calculator -->
+                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SIP Planner</span>
+                </a>
+
+            </section>
 
             <!-- Latest Reviews Section -->
             <section id="reviews" class="text-center">
                 
-                <div class="flex flex-col items-center mb-10">
-                    <span class="text-accent-main font-bold text-xs uppercase tracking-[0.2em] mb-2">Editorial Picks</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">
-                        Latest Reviews & Guides
+                <div class="flex flex-col items-center mb-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-[2px] bg-accent-main"></div>
+                        <span class="text-accent-main font-bold text-xs uppercase tracking-[0.2em]">Deep Dives</span>
+                        <div class="w-8 h-[2px] bg-accent-main"></div>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">
+                        Latest Software Reviews
                     </h2>
                 </div>
 
