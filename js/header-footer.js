@@ -83,7 +83,17 @@ function injectHeader() {
             <div class="container mx-auto max-w-site px-4 sm:px-6 py-3 flex justify-between items-center h-full">
                 <!-- Brand / Logo -->
                 <a href="/" class="flex items-center gap-2 group">
-                    <i class="fa-solid fa-bolt text-accent-main text-lg group-hover:text-white transition-colors shadow-glow"></i>
+                    <!-- Rocket Logo SVG -->
+                    <svg class="w-8 h-8 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)] transition-all duration-300" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
+                        <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
+                        <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
+                        <circle cx="256" cy="200" r="15" fill="#EF4444"/>
+                        <path d="M160 250L96 320V384H160V250Z" fill="#EF4444"/>
+                        <path d="M352 250L416 320V384H352V250Z" fill="#EF4444"/>
+                        <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
+                        <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
+                    </svg>
                     <span class="text-white font-bold text-lg tracking-tight">Toolblaster</span>
                 </a>
 
@@ -109,7 +119,17 @@ function injectHeader() {
             <!-- Drawer Header -->
             <div class="flex justify-between items-center p-5 border-b border-dark-800">
                 <span class="text-white font-bold text-xl tracking-tight flex items-center gap-3">
-                    <i class="fa-solid fa-bolt text-accent-main"></i> Toolblaster
+                    <svg class="w-8 h-8" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
+                        <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
+                        <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
+                        <circle cx="256" cy="200" r="15" fill="#EF4444"/>
+                        <path d="M160 250L96 320V384H160V250Z" fill="#EF4444"/>
+                        <path d="M352 250L416 320V384H352V250Z" fill="#EF4444"/>
+                        <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
+                        <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
+                    </svg>
+                    Toolblaster
                 </span>
                 <button id="mobile-menu-close" class="text-gray-400 hover:text-white transition-colors focus:outline-none p-2" aria-label="Close Menu">
                     <i class="fa-solid fa-xmark text-2xl"></i>
