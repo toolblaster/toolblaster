@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="brand-gradient" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#EF4444" /> <!-- Brand Red Fixed -->
+            <stop offset="1" stop-color="#EF4444" /> <!-- Brand Red Fixed -->
+        </linearGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="10" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+    </defs>
+    
+    <!-- Rocket Body -->
+    <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
+    <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
+    
+    <!-- Center Gear/Window (The "Tool" aspect) -->
+    <!-- Stroke Changed to #EF4444 -->
+    <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
+    <!-- Inner Dot Changed to #EF4444 -->
+    <circle cx="256" cy="200" r="15" fill="#EF4444"/>
+    
+    <!-- Fins -->
+    <!-- Changed fill to #EF4444 -->
+    <path d="M160 250L96 320V384H160V250Z" fill="#EF4444"/>
+    <path d="M352 250L416 320V384H352V250Z" fill="#EF4444"/>
+    
+    <!-- Engine/Exhaust Area -->
+    <!-- Changed fill to #EF4444 -->
+    <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
+    
+    <!-- Flame -->
+    <!-- Changed fill to #EF4444 -->
+    <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
+</svg>
