@@ -108,10 +108,11 @@
         <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 space-y-12">
 
             <!-- Quick Tools / Subdomain Grid -->
-            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+            <!-- Converted to flex-wrap to handle odd numbers (7 items) gracefully -->
+            <section class="flex flex-wrap justify-center gap-3 mb-8">
 
                 <!-- 1. Best SEO Tools -->
-                <a href="https://bestseotools.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <a href="https://bestseotools.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
                     </div>
@@ -119,7 +120,7 @@
                 </a>
 
                 <!-- 2. DesiBill -->
-                <a href="https://desibill.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <a href="https://desibill.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-file-invoice text-lg"></i>
                     </div>
@@ -127,7 +128,7 @@
                 </a>
 
                 <!-- 3. AgriQuiz -->
-                <a href="https://agriquiz.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <a href="https://agriquiz.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-wheat-awn text-lg"></i>
                     </div>
@@ -135,7 +136,7 @@
                 </a>
 
                 <!-- 4. Online Notepad -->
-                <a href="https://onlinenotepad.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <a href="https://onlinenotepad.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-pen-to-square text-lg"></i>
                     </div>
@@ -143,19 +144,27 @@
                 </a>
 
                 <!-- 5. SIP Calculator -->
-                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-chart-line text-lg"></i>
                     </div>
                     <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SIP Planner</span>
                 </a>
 
-                <!-- 6. Decide (New) -->
-                <a href="https://decide.toolblaster.com" class="group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                <!-- 6. Decide -->
+                <a href="https://decide.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
                     <div class="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-bullseye text-lg"></i>
                     </div>
                     <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Daily Focus</span>
+                </a>
+
+                <!-- 7. Percentage Calculator (New) -->
+                <a href="https://percentagecalculator.toolblaster.com/" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-teal-500/10 text-teal-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-percent text-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Percentage Calc</span>
                 </a>
 
             </section>
