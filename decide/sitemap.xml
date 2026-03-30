@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- DECIDE Main Tool Page -->
+  <url>
+    <loc>https://toolblaster.com/decide/</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- DECIDE About Page -->
+  <url>
+    <loc>https://toolblaster.com/decide/pages/about.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- DECIDE Why Three? Page -->
+  <url>
+    <loc>https://toolblaster.com/decide/pages/why-three.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- DECIDE Privacy & Terms Page -->
+  <url>
+    <loc>https://toolblaster.com/decide/pages/privacy-policy-terms.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
