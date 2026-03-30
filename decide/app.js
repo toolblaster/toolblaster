@@ -8,33 +8,46 @@ const store = {
     
     init() {
         try {
+            // Safely parse Data
             const rD = localStorage.getItem(DB_KEY);
             if (rD) {
-                this.data = JSON.parse(rD);
+                const parsed = JSON.parse(rD);
+                if (parsed && typeof parsed === 'object') this.data = parsed;
                 localStorage.setItem(DB_KEY + '_bak', rD); 
             } else {
                 const bD = localStorage.getItem(DB_KEY + '_bak');
                 if (bD) {
-                    this.data = JSON.parse(bD);
-                } else {
-                    this.data = {};
+                    const parsed = JSON.parse(bD);
+                    if (parsed && typeof parsed === 'object') this.data = parsed;
                 }
             }
             
+            // Safely parse Meta
             const rM = localStorage.getItem(META_KEY);
             if (rM) {
-                this.meta = JSON.parse(rM);
+                const parsed = JSON.parse(rM);
+                if (parsed && typeof parsed === 'object') this.meta = parsed;
                 localStorage.setItem(META_KEY + '_bak', rM);
             } else {
                 const bM = localStorage.getItem(META_KEY + '_bak');
-                if (bM) this.meta = JSON.parse(bM);
+                if (bM) {
+                    const parsed = JSON.parse(bM);
+                    if (parsed && typeof parsed === 'object') this.meta = parsed;
+                }
             }
         } catch (e) {
+            // Fallback catch block with added object safety checks to prevent silent crash
             try {
                 const bD = localStorage.getItem(DB_KEY + '_bak');
-                this.data = bD ? JSON.parse(bD) : {};
+                if (bD) {
+                    const parsed = JSON.parse(bD);
+                    if (parsed && typeof parsed === 'object') this.data = parsed;
+                }
                 const bM = localStorage.getItem(META_KEY + '_bak');
-                if (bM) this.meta = JSON.parse(bM);
+                if (bM) {
+                    const parsed = JSON.parse(bM);
+                    if (parsed && typeof parsed === 'object') this.meta = parsed;
+                }
             } catch (e2) {
                 this.data = {};
             }
@@ -43,7 +56,16 @@ const store = {
     },
 
     migrateData() {
+        // Ultimate fallback to guarantee the app renders even if localStorage is fatally corrupted
+        if (!this.meta || typeof this.meta !== 'object') {
+            this.meta = { version: 1, streak: 0, lastOpened: null, isPremium: false, v3Enabled: false, events: { yesterday: false, closure: false, weekly: false }, lastWeeklySummary: null };
+        }
+        if (!this.data || typeof this.data !== 'object') {
+            this.data = {};
+        }
+
         if (!this.meta.version) this.meta.version = 1;
+        
         if (this.meta.version < 2) {
             if (this.meta.v3Enabled === undefined) this.meta.v3Enabled = false;
             if (!this.meta.events) this.meta.events = { yesterday: false, closure: false, weekly: false };
@@ -70,8 +92,12 @@ const store = {
     },
 
     getDraft() {
-        try { return JSON.parse(localStorage.getItem(DRAFT_KEY)) || []; }
-        catch { return []; }
+        try { 
+            const draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+            return Array.isArray(draft) ? draft : [];
+        } catch { 
+            return []; 
+        }
     },
     saveDraft(draftArray) {
         localStorage.setItem(DRAFT_KEY, JSON.stringify(draftArray));
