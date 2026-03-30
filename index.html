@@ -1,254 +1,515 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth h-full">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="impact-site-verification" content="874218691">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
-    <link rel="canonical" href="https://toolblaster.com/">
-    <meta name="robots" content="index, follow">
-
-    <title>Toolblaster: Calculators, SEO, WordPress & Hosting Reviews</title>
-    <meta name="description" content="Master your finances with SIP calculators. Discover expert SEO comparisons and unbiased reviews of top WordPress tools & Web Hosting providers on Toolblaster.">
-
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='brand-gradient' x1='0' y1='0' x2='512' y2='512' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23EF4444'/%3E%3Cstop offset='1' stop-color='%23EF4444'/%3E%3C/linearGradient%3E%3Cfilter id='glow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='10' result='blur'/%3E%3CfeComposite in='SourceGraphic' in2='blur' operator='over'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z' fill='%23EF4444'/%3E%3Cpath d='M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z' fill='%23EF4444' opacity='0.9'/%3E%3Ccircle cx='256' cy='200' r='45' fill='white' stroke='%23EF4444' stroke-width='12'/%3E%3Ccircle cx='256' cy='200' r='15' fill='%23EF4444'/%3E%3Cpath d='M160 250L96 320V384H160V250Z' fill='%23EF4444'/%3E%3Cpath d='M352 250L416 320V384H352V250Z' fill='%23EF4444'/%3E%3Crect x='224' y='352' width='64' height='20' fill='%23EF4444'/%3E%3Cpath d='M235 380 L256 460 L277 380 Z' fill='%23EF4444'/%3E%3C/svg%3E">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/tailwind-config.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>DECIDE. | Daily Priority Tool for Focus</title>
+    <meta name="title" content="DECIDE. | Daily Priority Tool for Focus">
+    <meta name="description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner designed to eliminate overwhelm and build consistent focus. Works offline.">
+    <meta name="keywords" content="daily priority tool, focus app, minimalist daily planner, top 3 priorities, local-first planner, adhd planner, daily focus, offline productivity tool">
+    <meta name="author" content="ToolBlaster">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="canonical" href="https://toolblaster.com/decide/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DECIDE.">
+    <meta property="og:url" content="https://toolblaster.com/decide/">
+    <meta property="og:title" content="DECIDE. | Daily Priority Tool for Focus">
+    <meta property="og:description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner designed to eliminate overwhelm and build consistent focus.">
+    <meta property="og:image" content="https://toolblaster.com/decide/favicon/web-app-manifest-512x512.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://toolblaster.com/decide/">
+    <meta name="twitter:title" content="DECIDE. | Daily Priority Tool">
+    <meta name="twitter:description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner to build consistent focus.">
+    <meta name="twitter:image" content="https://toolblaster.com/decide/favicon/web-app-manifest-512x512.png">
+
+    <meta name="theme-color" content="#FAFAF9">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="DECIDE">
+
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+
+    <script src="../js/tailwind-config.js"></script>
+
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = window.tailwind.config || {};
+        window.tailwind.config.theme = window.tailwind.config.theme || {};
+        window.tailwind.config.theme.extend = window.tailwind.config.theme.extend || {};
+        window.tailwind.config.theme.extend.colors = window.tailwind.config.theme.extend.colors || {};
+        
+        window.tailwind.config.theme.extend.colors.stone = {
+            ...(window.tailwind.config.theme.extend.colors.stone || {}),
+            850: '#1c1917', 
+            950: '#0c0a09'
+        };
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
 
     <style>
-        .adsense-hide {
-            display: none;
+        :root {
+            --bg-color: #FAFAF9;
+            --text-main: #292524;
+            --accent: #1C1917;
+            --input-border: #d6d3d1;
         }
-        #cookie-banner {
-            transition: transform 0.3s ease-in-out;
-            transform: translateY(100%);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
         }
-        #cookie-banner.show {
-            transform: translateY(0);
+        
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.4s;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
         }
+
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .priority-input {
+            background: transparent; border: none; border-bottom: 1px solid var(--input-border);
+            border-radius: 0; transition: border-color 0.3s ease; font-size: 16px;
+        }
+        .priority-input:focus { outline: none; border-bottom: 1.5px solid var(--accent); box-shadow: none; }
+        
+        .hidden-app { display: none !important; }
+        
+        .modal-backdrop {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 50; align-items: center; justify-content: center; padding: 1rem;
+            backdrop-filter: blur(2px);
+        }
+        .modal-active { display: flex; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen font-inter text-white bg-dark-950 bg-dot-pattern relative selection:bg-accent-main selection:text-white">
 
-    <header class="relative flex flex-col bg-gradient-to-b from-dark-950/80 via-dark-950/90 to-dark-950 overflow-hidden pb-8 border-b border-dark-800/50">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-5xl pointer-events-none opacity-40">
-            <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent-glow/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
-            <div class="absolute top-[10%] right-[-10%] w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] mix-blend-screen"></div>
-        </div>
+<body class="min-h-screen flex flex-col overflow-x-hidden">
 
-        <div id="app-header" class="min-h-[56px] w-full relative z-50"></div>
+    <!-- CLS Fix: Min height added to explicitly reserve space before JS injects header -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    
+    <!-- CLS Fix: Min height added to explicitly reserve space before JS injects secondary nav -->
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-        <div class="relative z-10 container mx-auto max-w-4xl text-center py-8 px-6">
-            <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mb-4 bg-dark-900/50 border border-white/10 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.2)] backdrop-blur-md ring-1 ring-white/5">
-                <svg class="w-8 h-8 md:w-9 md:h-9 drop-shadow-md" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
-                    <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
-                    <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
-                    <circle cx="256" cy="200" r="15" fill="#EF4444"/>
-                    <path d="M160 250L96 320V384H160V250Z" fill="#EF4444"/>
-                    <path d="M352 250L416 320V384H352V250Z" fill="#EF4444"/>
-                    <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
-                    <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
-                </svg>
+    <!-- Uniform Padding App Wrapper -->
+    <div class="flex-grow flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-8 pb-12 w-full max-w-7xl mx-auto">
+
+        <main id="app" class="w-full max-w-lg mx-auto mt-0 relative z-10">
+
+            <header id="date-header" class="mb-8 text-center fade-in relative scroll-mt-12">
+                <div class="flex justify-center items-center mb-2 px-1 relative">
+                    <span class="text-sm font-semibold tracking-widest text-stone-500 uppercase">DECIDE</span>
+                </div>
+                <div id="current-date-display" class="text-3xl font-bold text-stone-900" aria-live="polite">Today</div>
+            </header>
+
+            <div id="intro-block" class="text-center mb-10 fade-in">
+                <h1 class="text-2xl md:text-3xl text-stone-900 font-bold mb-3">
+                    Decide your day in 60 seconds.
+                </h1>
+                <p class="text-stone-600 text-sm leading-relaxed max-w-sm mx-auto">
+                    A simple daily priority tool to help you decide what truly matters today — without planners, to-do lists, or overwhelm.
+                </p>
             </div>
 
-            <h1 class="font-inter font-black text-white drop-shadow-xl mb-3 tracking-tight" style="font-size: clamp(28px, 5vw, 42px); line-height: 1.1;">
-                Smart Tools for <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-main via-red-400 to-white">Business, Finance & Life</span>
-            </h1>
+            <div id="yesterday-section" class="hidden-app mb-10 p-6 bg-white border border-stone-200 rounded-xl fade-in shadow-sm">
+                <h2 class="text-sm text-stone-700 mb-4 font-bold">Yesterday, you focused on:</h2>
+                <ul id="yesterday-list" class="space-y-3"></ul>
+            </div>
 
-            <p class="font-inter text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6" style="font-size: clamp(14px, 3vw, 15px); font-weight: 400;">
-                One platform, infinite utilities. From <span class="text-gray-300 font-medium">financial planning</span> and <span class="text-gray-300 font-medium">SEO audits</span> to <span class="text-gray-300 font-medium">exam prep</span> and <span class="text-gray-300 font-medium">daily productivity</span>.
-            </p>
-        </div>
-    </header>
-
-    <main class="flex-grow relative z-10">
-        <div class="container mx-auto max-w-site px-4 sm:px-6 py-4 space-y-12">
-
-            <section class="flex flex-wrap justify-center gap-3 mb-8">
-                <a href="https://desibill.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-green-500/10 text-green-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-file-invoice text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Billing Tool</span>
-                </a>
-
-                <a href="https://agriquiz.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-wheat-awn text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Agri Mock Test</span>
-                </a>
-
-                <a href="https://onlinenotepad.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-pen-to-square text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Notepad</span>
-                </a>
-
-                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-chart-line text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">SIP Planner</span>
-                </a>
-
-                <a href="/decide/" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-bullseye text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Daily Focus</span>
-                </a>
-
-                <a href="https://percentagecalculator.toolblaster.com/" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[150px] group flex flex-col items-center p-4 rounded-xl bg-dark-900/40 border border-white/5 hover:border-accent-main/40 hover:bg-dark-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-full bg-teal-500/10 text-teal-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-percent text-lg"></i>
-                    </div>
-                    <span class="text-xs font-bold text-gray-300 group-hover:text-white text-center">Percentage Calc</span>
-                </a>
-            </section>
-
-            <section id="reviews" class="text-center">
-                <div class="flex flex-col items-center mb-8">
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-8 h-[2px] bg-accent-main"></div>
-                        <span class="text-accent-main font-bold text-xs uppercase tracking-[0.2em]">Deep Dives</span>
-                        <div class="w-8 h-[2px] bg-accent-main"></div>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">
-                        Latest Software Reviews
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mx-auto">
-                    <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                        <div class="flex flex-col items-start h-full relative z-10">
-                            <div class="flex justify-between w-full items-start mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-server text-lg"></i>
-                                </div>
-                                <span class="text-[9px] font-bold text-gray-500 uppercase">Feb 2026</span>
-                            </div>
-
-                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">Verpex Review: Fastest Budget Host?</h3>
-                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">We tested speed, uptime, and support to see if it lives up to the hype.</p>
-                        </div>
-                    </a>
+            <form id="priority-form" class="space-y-8 fade-in">
+                <div class="space-y-6">
+                    <label id="greeting-label" class="block text-xl text-stone-900 font-bold mb-6 transition-opacity duration-300">What matters today?</label>
                     
-                    <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="relative group">
+                        <span class="absolute left-0 top-2 text-stone-400 font-mono text-sm" aria-hidden="true">01</span>
+                        <input type="text" id="p1" name="p1" autocomplete="off" aria-label="Priority 1"
+                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                            placeholder="Most important task..." required maxlength="60">
+                    </div>
 
-                        <div class="flex flex-col items-start h-full relative z-10">
-                            <div class="flex justify-between w-full items-start mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-key text-lg"></i>
-                                </div>
-                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
-                            </div>
+                    <div class="relative group">
+                        <span class="absolute left-0 top-2 text-stone-400 font-mono text-sm" aria-hidden="true">02</span>
+                        <input type="text" id="p2" name="p2" autocomplete="off" aria-label="Priority 2"
+                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                            placeholder="Quick win..." required maxlength="60">
+                    </div>
 
-                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">KWFinder: Best for Beginners?</h3>
-                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">A deep dive into Mangools KWFinder features, pricing, and data accuracy.</p>
-                        </div>
-                    </a>
-
-                    <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                        <div class="flex flex-col items-start h-full relative z-10">
-                            <div class="flex justify-between w-full items-start mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
-                                </div>
-                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
-                            </div>
-
-                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">Semrush: Is It Worth $130/mo?</h3>
-                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">The gold standard for marketing data. We analyze features vs price tag.</p>
-                        </div>
-                    </a>
-
-                    <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                        <div class="flex flex-col items-start h-full relative z-10">
-                            <div class="flex justify-between w-full items-start mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-shield-halved text-lg"></i>
-                                </div>
-                                <span class="text-[9px] font-bold text-gray-500 uppercase">Dec 2025</span>
-                            </div>
-
-                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">ZeroSSL: Ditch Paid SSL?</h3>
-                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">We compare free vs paid SSL options to see if ZeroSSL is the best choice.</p>
-                        </div>
-                    </a>
-
-                    <a href="reviews/security/ssls-com-review.html" class="relative group block w-full rounded-2xl p-4 bg-dark-900/40 backdrop-blur-md border border-white/5 hover:border-accent-main/50 hover:bg-dark-900/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-custom-hover overflow-hidden text-left">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-accent-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                        <div class="flex flex-col items-start h-full relative z-10">
-                            <div class="flex justify-between w-full items-start mb-3">
-                                <div class="w-10 h-10 rounded-xl bg-dark-800/80 flex items-center justify-center text-accent-main border border-white/5 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                                    <i class="fa-solid fa-lock text-lg"></i>
-                                </div>
-                                <span class="text-[9px] font-bold text-gray-500 uppercase">Jan 2026</span>
-                            </div>
-
-                            <h3 class="text-sm font-bold text-white leading-tight group-hover:text-accent-main transition-colors mb-2 line-clamp-2">SSLs.com Review: Legit?</h3>
-                            <p class="text-[11px] text-gray-400 line-clamp-3 leading-relaxed">Is $3.75/yr for an SSL too good to be true? We tested issuance speed.</p>
-                        </div>
-                    </a>
+                    <div class="relative group">
+                        <span class="absolute left-0 top-2 text-stone-400 font-mono text-sm" aria-hidden="true">03</span>
+                        <input type="text" id="p3" name="p3" autocomplete="off" aria-label="Priority 3"
+                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                            placeholder="Personal goal..." required maxlength="60">
+                    </div>
                 </div>
-            </section>
-        </div>
-    </main>
-    
-    <div id="app-footer" class="min-h-[80px]"></div>
+                
+                <div class="pt-6 flex flex-col items-center space-y-4">
+                    <button type="submit" id="main-action-btn" title="Shortcut: Cmd/Ctrl + Enter"
+                        class="px-8 py-3 bg-stone-900 text-white rounded-full text-sm font-bold hover:bg-stone-800 active:scale-95 transition-all duration-300 w-full sm:w-auto shadow-md flex items-center justify-center gap-2">
+                        Decide Today <span>&rarr;</span>
+                    </button>
+                    <p id="trust-badges" class="text-xs text-stone-500 font-medium">No sign-up · Works offline · Free to use</p>
+                    <p id="streak-msg" class="hidden-app text-center text-xs text-stone-600 mt-4">You're building consistency.</p>
+                </div>
+            </form>
 
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-40 w-full bg-gray-900 text-white p-4 shadow-lg md:flex md:items-center md:justify-between md:p-6 translate-y-full transition-transform duration-300 ease-in-out">
-        <p class="text-article-p md:text-base mb-3 md:mb-0">
-            We use cookies to improve your experience and to show you relevant ads. By using this site, you agree to our <a id="privacy-link-cookie" class="font-bold text-accent-main hover:underline cursor-pointer">Privacy Policy</a>.
-        </p>
-        <button id="accept-cookies" class="w-full md:w-auto bg-accent-main text-white font-bold py-2 px-6 rounded-lg text-sm hover:bg-accent-dark transition duration-200">
-            Accept
-        </button>
+            <div id="readonly-view" class="hidden-app space-y-8 fade-in">
+                <div class="space-y-6">
+                    <div class="flex justify-between items-end mb-6">
+                        <h2 class="block text-xl text-stone-900 font-bold">Today's Focus</h2>
+                        <div class="flex items-center space-x-4">
+                            <button id="copy-btn" class="text-xs text-stone-500 hover:text-stone-900 transition-colors flex items-center gap-1" aria-label="Copy to clipboard">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span id="copy-text" class="font-medium">Share</span>
+                            </button>
+                            <button id="edit-btn" class="text-xs font-medium text-stone-500 hover:text-stone-900 underline">Edit</button>
+                        </div>
+                    </div>
+                    <div id="readonly-list" class="space-y-3"></div>
+                    <p class="text-[11px] text-stone-400 text-center mt-4 italic fade-in">Tip: Tap a priority to cross it off. Double-tap to edit.</p>
+                </div>
+                
+                <div id="footer-status" class="mt-16 pb-8 text-center fade-in flex flex-col items-center space-y-6">
+                    <div id="status-text-container" class="inline-flex items-center space-x-2 text-stone-600 font-medium"></div>
+                    <div id="footer-controls" class="flex gap-6 text-sm text-stone-500 font-medium"></div>
+                </div>
+            </div>
+
+            <div id="weekly-glimpse" class="hidden-app mt-8 p-6 bg-stone-50 rounded-xl text-center fade-in"></div>
+
+            <div id="closure-section" class="hidden-app mt-12 pt-12 border-t border-stone-200 fade-in text-center">
+                <h3 class="text-lg text-stone-900 mb-6 font-bold">Did you do what mattered?</h3>
+                <div class="flex flex-wrap justify-center gap-3" id="closure-buttons">
+                    <button data-val="yes" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Yes</button>
+                    <button data-val="partial" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Partially</button>
+                    <button data-val="no" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Not really</button>
+                </div>
+            </div>
+        </main>
+
+        <article class="w-full max-w-2xl mx-auto mt-24 mb-16 prose prose-stone">
+            <div class="space-y-8 text-stone-600">
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>🧠</span> What is DECIDE?
+                    </h2>
+                    <p class="leading-relaxed mb-4 text-stone-600">
+                        Think of DECIDE as a quiet corner for your brain. It’s a simple tool designed to help you cut through the noise and figure out your top three priorities for the day—usually in less than a minute.
+                    </p>
+                    <p class="font-medium text-stone-800 italic border-l-2 border-stone-300 pl-4 py-2 bg-stone-50 rounded-r-lg">
+                        What are the three most important things today?
+                    </p>
+                    <p class="mt-4 mb-0 text-stone-600">
+                        That’s it. No complicated systems, no endless backlogs, and definitely no guilt. Just clarity.
+                        <a href="pages/about.html" class="font-semibold text-accent-main hover:underline">Read our full story.</a>
+                    </p>
+                </section>
+                
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>🎯</span> Why DECIDE is Different
+                    </h2>
+                    <p class="mb-4 text-stone-600">Most daily planners focus on managing tasks. <strong class="text-stone-900">We focus on something else: making decisions.</strong></p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                        <li>We don't let you drown in tasks.</li>
+                        <li>We don't ask you to schedule every minute.</li>
+                        <li>We don't pester you with notifications.</li>
+                    </ul>
+                    <p class="mt-4 mb-0 text-stone-600">
+                        It’s just one day, three clear goals, and a clear mind. It helps you start your day with intention and end it with a sense of closure.
+                    </p>
+                </section>
+
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-6 flex items-center gap-2 mt-0">
+                        <span>🆚</span> DECIDE vs Traditional Planners
+                    </h2>
+                    <p class="mb-6 text-stone-600">We've all been there. You buy a planner, fill it out perfectly for three days, miss one day, feel guilty, and never open it again.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100">
+                            <h3 class="font-bold text-stone-800 mb-3 mt-0">❌ Traditional Planners</h3>
+                            <p class="text-sm mb-3 text-stone-600">Often feel like homework:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-stone-600">
+                                <li>List literally everything</li>
+                                <li>Color-code and categorize</li>
+                                <li>Feel bad about unfinished items</li>
+                                <li>Eventually get abandoned</li>
+                            </ul>
+                            <p class="text-sm mt-4 font-medium text-stone-800">High effort, high guilt.</p>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100">
+                            <h3 class="font-bold text-stone-800 mb-3 mt-0">✅ DECIDE</h3>
+                            <p class="text-sm mb-3 text-stone-600">Feels like a fresh start:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-stone-600">
+                                <li>Focus only on what matters</li>
+                                <li>Limit yourself to 3 wins</li>
+                                <li>Fresh slate every morning</li>
+                                <li>Zero judgment</li>
+                            </ul>
+                            <p class="text-sm mt-4 font-medium text-stone-800">Low effort, high clarity.</p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead>
+                                <tr class="border-b-2 border-stone-200">
+                                    <th class="py-3 font-bold text-stone-800">Feature</th>
+                                    <th class="py-3 font-bold text-stone-900">DECIDE</th>
+                                    <th class="py-3 font-bold text-stone-500">Traditional Planner</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-100">
+                                <tr>
+                                    <td class="py-3 font-medium text-stone-700">Main Goal</td>
+                                    <td class="py-3 text-stone-900 font-medium">Clear decisions</td>
+                                    <td class="py-3 text-stone-500">Task management</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-medium text-stone-700">Scope</td>
+                                    <td class="py-3 text-stone-900 font-medium">Just today</td>
+                                    <td class="py-3 text-stone-500">Weeks / Months</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-medium text-stone-700">Limit</td>
+                                    <td class="py-3 text-stone-900 font-medium">Strictly 3 items</td>
+                                    <td class="py-3 text-stone-500">Unlimited</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 font-medium text-stone-700">Time needed</td>
+                                    <td class="py-3 text-stone-900 font-medium">~60 seconds</td>
+                                    <td class="py-3 text-stone-500">10–30 minutes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>⏱️</span> Decide Your Day in 60 Seconds
+                    </h2>
+                    <p class="mb-4 text-stone-600">It’s built to be the easiest habit you have:</p>
+                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                        <li>Open the app (it loads instantly).</li>
+                        <li>Type the 3 things that would make today a success.</li>
+                        <li>Click Save. Go do them.</li>
+                    </ol>
+                    <p class="mt-4 mb-0 text-stone-600">
+                        The app resets itself at midnight. No cleanup required.
+                    </p>
+                </section>
+
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>🔁</span> Built for Daily Use, Not Burnout
+                    </h2>
+                    <p class="mb-4 text-stone-600">We designed this around how real people actually behave, not how "productivity gurus" say we should behave.</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                        <li>Gentle Recall: We'll remind you what you focused on yesterday, just to keep the momentum going.</li>
+                        <li>Quiet Consistency: We track your streak internally to give you encouragement, but we won't flash big numbers at you if you break it.</li>
+                        <li>Weekly Glimpse: Once a week, we'll show you the themes you've been focusing on. No charts, just words.</li>
+                    </ul>
+                    <p class="mt-4 mb-0 text-stone-600">
+                        It's perfect for students, creators, parents, or anyone who just wants to feel a little more in control.
+                    </p>
+                </section>
+
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>🛠️</span> Who is DECIDE For?
+                    </h2>
+                    <p class="mb-4 text-stone-600">DECIDE works best if you want to:</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                        <li>Focus on what truly matters today</li>
+                        <li>Reduce mental clutter and decision fatigue</li>
+                        <li>Build a simple daily planning habit</li>
+                        <li>Avoid complex productivity systems</li>
+                    </ul>
+                    <p class="mt-4 mb-0 text-stone-600">
+                        If you’ve tried planners, to-do apps, or task managers and felt overwhelmed — DECIDE is for you.
+                    </p>
+                </section>
+
+                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                        <span>🔒</span> Simple, Private, and Fast
+                    </h2>
+                    <ul class="grid sm:grid-cols-2 gap-4 text-sm font-medium text-stone-700 mb-6">
+                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> No sign-up needed</li>
+                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Works totally offline</li>
+                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Data stays on your device</li>
+                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Loads in milliseconds</li>
+                    </ul>
+                    <p class="mt-4 text-sm font-medium text-stone-500 mb-0 bg-stone-50 p-3 rounded-lg text-center">
+                        We respect your attention. We won't sell your data.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-bold text-stone-900 mb-6 flex items-center gap-2">
+                        <span>❓</span> Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">1. What is DECIDE?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">DECIDE is a daily priority tool that helps you decide your top three priorities for today in under 60 seconds. Instead of managing long to-do lists or planning weeks ahead, DECIDE focuses only on what truly matters today.</p>
+                        </div>
+                        
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">2. Is DECIDE a daily planner or a to-do list?</h3>
+                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">No.</strong> DECIDE is not a traditional daily planner, to-do list, or task manager.</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1 text-sm mb-2 text-stone-700">
+                                <li>It does not support unlimited tasks</li>
+                                <li>It does not include schedules or calendars</li>
+                                <li>It does not track task completion</li>
+                            </ul>
+                            <p class="text-sm leading-relaxed mt-2 mb-0 text-stone-700">DECIDE is designed purely for decision clarity, not task management.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">3. How is DECIDE different from productivity apps?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Most productivity apps help you do more. <strong class="text-stone-900">DECIDE helps you choose better.</strong> By limiting you to just three priorities per day, DECIDE reduces decision fatigue and mental clutter, making it easier to focus and actually get started.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">4. Why only three priorities?</h3>
+                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">Because focus is limited.</strong> Research and real-world experience show that most people can only make meaningful progress on 2–3 important things per day. Limiting choices forces clarity and prevents overwhelm.</p>
+                            <p class="text-sm mt-2"><a href="pages/why-three.html" class="underline hover:text-stone-900 font-medium">Read why this limit is a feature, not a bug.</a></p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">5. Do I need to create an account to use DECIDE?</h3>
+                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">No.</strong> DECIDE does not require sign-up or login. Your daily priorities are stored locally on your device. This keeps the app fast, private, and distraction-free.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">6. Does DECIDE work offline?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE is a local-first tool and works offline once loaded. You can decide your day without an internet connection.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">7. What happens to yesterday’s priorities?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Yesterday’s priorities remain saved and read-only. DECIDE may gently show them as a reminder to help you maintain continuity, but it does not judge or score your performance.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">8. Does DECIDE track streaks or performance?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">DECIDE tracks consistency internally to improve the experience, but it does not show streak numbers or productivity scores. There is no pressure, no guilt, and no gamification.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">9. Can I use DECIDE along with another planner or task app?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes — and that’s encouraged.</strong> DECIDE works best as a starting point, helping you decide what matters before you open planners, calendars, or task managers.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">10. Is DECIDE free to use?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE is free to use. Any future premium features (such as exports or backups) will always be optional and non-intrusive.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">11. Who should use DECIDE?</h3>
+                            <p class="text-sm leading-relaxed mb-2 text-stone-700">DECIDE is ideal for students, professionals, creators, founders, and anyone overwhelmed by to-do lists. If you want clarity instead of complexity, DECIDE is for you.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">12. Is my data private?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE does not upload your data to servers. Everything stays on your device unless you explicitly choose otherwise in the future.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">13. How long does it take to use DECIDE each day?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Most users complete their daily decision in under one minute. That’s the point.</p>
+                        </div>
+
+                        <div class="p-5 bg-stone-100 rounded-xl">
+                            <h3 class="font-bold text-stone-900 mb-2 mt-0">14. Are there any keyboard shortcuts?</h3>
+                            <p class="text-sm leading-relaxed mb-0 text-stone-700">
+                                <strong class="text-stone-900">Yes.</strong> For desktop power users who want to move fast without touching their mouse: <br><br>
+                                • Press <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Cmd + Enter</kbd> (Mac) or <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Ctrl + Enter</kbd> (Windows) to instantly save your priorities.<br>
+                                • Press <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Escape</kbd> to quickly close any open menus, popups, or to cancel editing your priorities.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-12 p-8 bg-stone-50 rounded-2xl border border-stone-200 shadow-sm text-center">
+                    <h2 class="text-xl font-bold text-stone-900 mb-3 mt-0">✅ Start with just one day</h2>
+                    <p class="mb-6 text-stone-600">You don’t need a complicated system. You just need a decision.</p>
+                    <button onclick="ui.scrollToTool()" class="text-stone-900 font-bold bg-white border border-stone-200 hover:bg-stone-100 px-8 py-3 rounded-xl transition-all shadow-sm">Decide your day now</button>
+                </section>
+            </div>
+        </article>
+
     </div>
 
-    <script src="js/header-footer.js"></script>
-    <script src="js/global-script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cookieBanner = document.getElementById('cookie-banner');
-            const acceptCookiesBtn = document.getElementById('accept-cookies');
+    <!-- Modals -->
+    <div id="edit-modal" class="modal-backdrop">
+        <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl text-center border border-stone-200">
+            <h3 class="text-xl font-bold text-stone-900 mb-2">Edit priorities?</h3>
+            <p class="text-stone-500 text-sm mb-6">Editing is meant for small corrections, not replanning the day.</p>
+            <div class="flex gap-4 justify-center">
+                <button id="cancel-edit-btn" class="px-6 py-2 border-2 border-stone-200 rounded-xl text-stone-600 font-bold hover:bg-stone-50 hover:border-stone-300 transition-all">Cancel</button>
+                <button id="confirm-edit-btn" class="px-6 py-2 bg-stone-900 text-white rounded-xl font-bold hover:opacity-90 transition-opacity">Edit</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="export-options-modal" class="modal-backdrop">
+        <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl border border-stone-200">
+            <h3 class="text-xl font-bold text-stone-900 mb-4 text-center">Export & Backup</h3>
+            <p class="text-stone-500 text-sm mb-6 text-center">Download your history to keep it safe, or transfer it to a new device.</p>
+            <div class="space-y-3">
+                <button id="export-csv" class="w-full py-3 px-4 border-2 border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl text-left font-bold text-stone-800 transition-all flex justify-between items-center">
+                    <span>Export CSV Spreadsheet</span>
+                    <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </button>
+                <button id="export-pdf" class="w-full py-3 px-4 border-2 border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl text-left font-bold text-stone-800 transition-all flex justify-between items-center">
+                    <span>Export PDF Document</span>
+                    <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </button>
+                
+                <div class="pt-4 mt-4 border-t border-stone-200">
+                    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-3">Device Portability</p>
+                    <button id="export-json" class="w-full py-3 px-4 bg-stone-50 hover:bg-stone-100 border border-stone-100 rounded-xl text-left font-bold text-stone-700 transition-colors flex justify-between items-center mb-3">
+                        <span>Download Backup (.json)</span>
+                        <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </button>
+                    <label class="w-full py-3 px-4 bg-stone-50 hover:bg-stone-100 border border-stone-100 rounded-xl text-left font-bold text-stone-700 transition-colors flex justify-between items-center cursor-pointer">
+                        <span>Restore from Backup</span>
+                        <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <input type="file" id="import-json" accept=".json" class="hidden">
+                    </label>
+                </div>
+            </div>
+            <button id="export-close-btn" class="mt-4 w-full py-2 text-stone-400 hover:text-stone-800 font-bold text-sm transition-colors">Cancel</button>
+        </div>
+    </div>
 
-            if (cookieBanner && acceptCookiesBtn) {
-                if (!localStorage.getItem('cookiesAccepted')) {
-                    setTimeout(() => {
-                         cookieBanner.classList.remove('translate-y-full');
-                         cookieBanner.classList.add('translate-y-0');
-                    }, 500);
-                }
+    <!-- Global Toolblaster Footer -->
+    <div id="app-footer" class="w-full relative z-[60]"></div>
 
-                acceptCookiesBtn.addEventListener('click', () => {
-                    localStorage.setItem('cookiesAccepted', 'true');
-                    cookieBanner.classList.remove('translate-y-0');
-                    cookieBanner.classList.add('translate-y-full');
-                    setTimeout(() => {
-                        cookieBanner.style.display = 'none';
-                    }, 300);
-                });
-            }
-        });
-    </script>
+    <script src="app.js"></script>
+    <script src="../js/header-footer.js"></script>
+    <script src="../js/global-script.js"></script>
 </body>
 </html>
