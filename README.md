@@ -1,91 +1,81 @@
-Toolblaster Reviews Project
+Toolblaster Utility Hub
 
-This project is a static site for software and service reviews, focusing on SEO tools, hosting, and security. It uses Tailwind CSS (via CDN) for styling and vanilla JavaScript for dynamic components like headers, footers, and sidebars.
+Toolblaster is a professional digital utility hub and software analysis platform. It combines in-depth, unbiased reviews of web hosting and cybersecurity tools with a suite of lightweight, high-performance web applications designed for creators, students, and professionals.
 
-Project Structure
+🚀 Project Vision
 
-index.html: The main homepage listing categories or featured reviews.
+To become a consolidated "Utility Hub" (similar to the QuillBot model), where multiple tools live under a single root domain to build massive SEO authority, user trust, and streamlined monetization via AdSense.
 
-reviews/: Directory containing individual review pages.
+🏗️ Architecture
 
-index.html: The main reviews index page with filtering logic.
+Toolblaster is built as a Static Utility Suite.
 
-review-template.html: The master template for creating new reviews (Updated with 2026 standards).
+Frontend: Vanilla HTML5, JavaScript (ES6+).
 
-hosting/:
+Styling: Tailwind CSS (configured via js/tailwind-config.js).
 
-verpex-hosting-review.html: Detailed review of Verpex Hosting.
+Data Pattern: Local-First (Privacy-focused, no server-side databases for user data).
 
-seo/:
+Global Components: Shared navigation and footers are injected via js/header-footer.js for site-wide consistency and "DRY" (Don't Repeat Yourself) development.
 
-semrush-review.html: In-depth review of Semrush.
+📂 Directory Structure
 
-kwfinder-review.html: Review of KWFinder by Mangools.
+/ (Root)
+├── index.html              # Main Hub Homepage
+├── robots.txt              # Global search engine instructions
+├── sitemap.xml             # Main sitemap linking sub-tools
+├── js/
+│   ├── tailwind-config.js  # Central brand styling & colors
+│   ├── header-footer.js    # Global navigation injection logic
+│   └── global-script.js    # Ad management & UI interactions
+├── decide/                 # DECIDE Tool Subfolder (Umbrella Pattern)
+│   ├── index.html          # Main tool interface
+│   ├── app.js              # Local storage & logic for DECIDE
+│   ├── sitemap.xml         # Tool-specific sitemap
+│   └── pages/              # Content-rich SEO subpages
+│       ├── about.html      # Project story
+│       └── why-three.html  # Philosophical/Scientific context
+└── reviews/                # Software Analysis Directory
+    ├── hosting/            # Hosting review categories
+    └── security/           # Cybersecurity review categories
 
-security/:
 
-zerossl-review.html: Review of ZeroSSL certificate authority.
+🎯 The "Umbrella" SEO Strategy
 
-js/:
+We have transitioned from subdomains (e.g., decide.toolblaster.com) to a Subfolder Structure (e.g., toolblaster.com/decide/).
 
-header-footer.js: Handles injection of the global navigation, footer, sidebar skeleton (TOC), modals, and back-to-top button. Contains the requestAnimationFrame fix for forced reflows.
+Benefits:
 
-global-script.js: Handles sidebar widgets (Popular Tools, Other Reviews) and dynamic content injection.
+Consolidated Domain Authority: Backlinks to individual tools now power the entire toolblaster.com domain.
 
-tailwind-config.js: Custom Tailwind configuration (colors, fonts).
+Instant AdSense Approval: A single site verification covers all internal tools.
 
-terms/: Static pages for legal/info (about.html, privacy.html, terms.html).
+User Retention: Shared headers and footers keep users within the Toolblaster ecosystem.
 
-Recent Updates (Dec 2025)
+🛠️ Featured Tool: DECIDE.
 
-Core Improvements
+DECIDE. is a minimalist daily priority tool. Unlike traditional planners that create overwhelm, DECIDE forces clarity by limiting users to exactly three priorities per day.
 
-CLS Prevention: All review images now use explicit width and height attributes alongside w-full h-auto classes to reserve layout space and prevent Cumulative Layout Shift.
+Privacy: 100% Local-first. No data ever leaves the user's device.
 
-Modern Pricing Cards: Pricing sections have been redesigned into compact, 3-column card grids with clear feature lists and "Recommended" badges.
+Performance: Sub-100ms load times.
 
-Enhanced Verdicts: The "Final Verdict" sections now use a "Buy it if / Skip it if" grid layout for better scannability.
+PWA Ready: Installable on iOS and Android for offline use.
 
-High Contrast: Text colors have been darkened (text-gray-800/900) across all reviews to ensure WCAG AA accessibility compliance.
+🎨 Development Standards
 
-Performance: js/header-footer.js now uses requestAnimationFrame for ScrollSpy initialization to prevent forced reflows during page load.
+Mobile-First: All components are designed for mobile interaction first, scaling up to desktop.
 
-Updated Pages
+Typography: Strict enforcement of the official Inter brand font.
 
-Verpex Review: Added "Hidden Resource Limits" exclusive section and speed matrix graph.
+SEO Limits: - Titles: < 60 characters.
 
-Semrush Review: Added "Ghost Keyword Discovery" exclusive test and compact competitor comparison.
+Descriptions: < 160 characters.
 
-KWFinder Review: Modernized pricing with a 4th "Free Trial" column and added "Niche Site Test" data.
+Accessibility: Targeted WCAG AA compliance with high-contrast stone-palette themes.
 
-ZeroSSL Review: Updated pricing to reflect 2026 rates, added "Speed Test" benchmarks, and modernized the FAQ section.
+📜 Legal
 
-How to Create a New Review
+Toolblaster and its associated tools are provided "as-is". User data for tools like DECIDE is stored in localStorage; users are responsible for their own backups using the built-in JSON export features.
 
-Duplicate reviews/review-template.html.
-
-Update the SEO Meta Tags (Title, Description, Keywords) and JSON-LD Schema.
-
-Fill in the Header details (Title, Rating, Date).
-
-Write the Article Content:
-
-Use <section class="card-section"> for main blocks.
-
-Include an Exclusive Data section if possible.
-
-Fill out the Comparison Table and Pricing Cards.
-
-Complete the Final Verdict grid.
-
-Ensure all images have width and height attributes.
-
-Test on mobile to ensure the Sidebar TOC doesn't intrude (handled by <div> vs <article> structure in index pages).
-
-Development Notes
-
-Tailwind: Uses the Play CDN for prototyping. For production, this should be compiled.
-
-Sidebar: The sidebar is dynamically injected. The TOC is generated automatically from <h2> tags within the <article> element.
-
-Icons: Uses FontAwesome 6.4.0 via CDN.
+© 2026 Toolblaster. All Rights Reserved.
