@@ -104,7 +104,7 @@ function injectHeader() {
                 <div class="flex items-center gap-3">
                     <!-- Desktop Button (Hidden on Mobile) -->
                     <a href="https://toolblaster.com/#tools" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
-                        Tools ki List
+                        Explore Tools
                     </a>
                     <!-- Mobile Hamburger Button (Visible only on Mobile) -->
                     <button id="mobile-menu-btn" aria-label="Menu kholen" class="sm:hidden text-stone-600 hover:text-stone-900 focus:outline-none transition-colors p-1">
@@ -131,7 +131,7 @@ function injectHeader() {
                 
                 <!-- Tools List Button inside Mobile Menu -->
                 <a href="https://toolblaster.com/#tools" class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
-                    Tools ki List
+                    Explore Tools
                 </a>
             </div>
         </div>
@@ -184,23 +184,23 @@ function injectToolNav() {
     navContainer.innerHTML = style + `
         <div class="w-full bg-stone-50 border-b border-stone-200 shadow-sm z-40 relative">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-6 md:gap-8 h-10 overflow-x-auto whitespace-nowrap hide-nav-scrollbar text-stone-600 relative px-2">
-                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-50 pr-2 z-10 shadow-[8px_0_10px_-5px_rgba(250,250,249,1)]">Apps</span>
+                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-4 md:gap-6 h-10 overflow-x-auto whitespace-nowrap hide-nav-scrollbar text-stone-600 relative px-2">
+                    <span class="text-[9px] font-bold text-stone-500 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-50 pr-2 z-10 shadow-[8px_0_10px_-5px_rgba(250,250,249,1)]">Apps</span>
                     
-                    <a href="/decide/" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
-                        <i class="fa-solid fa-bullseye text-[13px]"></i> DECIDE.
+                    <a href="/decide/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
                     </a>
                     
-                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
-                        <i class="fa-solid fa-file-invoice text-[13px]"></i> GST Billing
+                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-file-invoice text-[12px]"></i> GST Billing
                     </a>
                     
-                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
-                        <i class="fa-solid fa-chart-line text-[13px]"></i> SIP Planner
+                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-chart-line text-[12px]"></i> SIP Planner
                     </a>
                     
-                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
-                        <i class="fa-solid fa-pen-to-square text-[13px]"></i> Notepad
+                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-pen-to-square text-[12px]"></i> Notepad
                     </a>
                 </nav>
             </div>
