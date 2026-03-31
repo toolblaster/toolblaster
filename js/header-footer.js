@@ -30,7 +30,7 @@ function injectHeader() {
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // Logic: URL ke hisab se center title decide karna
+    // Logic 1: URL ke hisab se center short title decide karna
     let centerTitle = "TOOLBLASTER"; // Default title
     
     if (currentPath.includes('/decide/')) {
@@ -43,8 +43,32 @@ function injectHeader() {
         centerTitle = "AGRI QUIZ";
     } else if (currentHost.includes('onlinenotepad')) {
         centerTitle = "NOTEPAD";
+    } else if (currentHost.includes('sipcalculator')) {
+        centerTitle = "SIP PLANNER";
+    } else if (currentHost.includes('percentagecalculator')) {
+        centerTitle = "PERCENTAGE";
     } else if (currentPath === '/' || currentPath === '/index.html') {
         centerTitle = "HOME";
+    }
+
+    // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
+    let descTitle = "";
+    if (document.title) {
+        // Title ko common separators se split karte hain
+        const titleParts = document.title.split(/\||-|:/);
+        if (titleParts.length > 1) {
+            // Sabse lamba aur meaningful part nikalte hain jo brand name na ho
+            let bestPart = "";
+            titleParts.forEach(part => {
+                const cleanPart = part.trim();
+                if (cleanPart.toLowerCase() !== 'toolblaster' && cleanPart.length > bestPart.length) {
+                    bestPart = cleanPart;
+                }
+            });
+            descTitle = bestPart;
+        } else {
+            descTitle = document.title.trim();
+        }
     }
 
     headerContainer.innerHTML = `
@@ -68,16 +92,17 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Beech mein (Center): Dynamic Page Name -->
-                <div class="absolute left-1/2 -translate-x-1/2 text-center">
-                    <span class="font-inter font-extrabold text-[13px] md:text-sm tracking-[0.15em] text-stone-900 uppercase pointer-events-none whitespace-nowrap">
+                <!-- Beech mein (Center): Dynamic Page Name + Contextual Auto-Description -->
+                <div class="absolute left-1/2 -translate-x-1/2 text-center flex items-center justify-center w-full max-w-[50%] md:max-w-xl pointer-events-none">
+                    <span class="font-inter font-extrabold text-[13px] md:text-sm tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate">
                         ${centerTitle}
+                        ${descTitle ? `<span class="hidden md:inline text-stone-500 font-semibold tracking-widest text-[10px] ml-1.5 opacity-90">- ${descTitle}</span>` : ''}
                     </span>
                 </div>
 
                 <!-- Daayen (Right): Desktop Action Button & Mobile Hamburger -->
                 <div class="flex items-center gap-3">
-                    <!-- Desktop Button (Hidden on Mobile) - FIXED: bg-red-600 for contrast -->
+                    <!-- Desktop Button (Hidden on Mobile) -->
                     <a href="https://toolblaster.com/#tools" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
                         Tools ki List
                     </a>
@@ -104,7 +129,7 @@ function injectHeader() {
                     <i class="fa-solid fa-house w-4 text-center text-base"></i> Home
                 </a>
                 
-                <!-- Tools List Button inside Mobile Menu - FIXED: bg-red-600 for contrast -->
+                <!-- Tools List Button inside Mobile Menu -->
                 <a href="https://toolblaster.com/#tools" class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
                     Tools ki List
                 </a>
@@ -147,52 +172,69 @@ function injectToolNav() {
     if (!navContainer) return;
 
     const currentPath = window.location.pathname;
+    const currentHost = window.location.hostname;
 
     const style = `
         <style>
             .hide-nav-scrollbar::-webkit-scrollbar { display: none; }
-            .hide-nav-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            .hide-nav-scrollbar { -ms-overflow-style: none; scrollbar-width: none; scroll-behavior: smooth; }
         </style>
     `;
 
-    // FIXED: text-red-500 changed to text-red-600 for AA contrast
     navContainer.innerHTML = style + `
         <div class="w-full bg-stone-50 border-b border-stone-200 shadow-sm z-40 relative">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <nav class="flex items-center md:justify-center gap-6 md:gap-8 h-10 overflow-x-auto whitespace-nowrap hide-nav-scrollbar text-stone-600">
-                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-50 pr-2 z-10">Apps</span>
+                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-6 md:gap-8 h-10 overflow-x-auto whitespace-nowrap hide-nav-scrollbar text-stone-600 relative px-2">
+                    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-50 pr-2 z-10 shadow-[8px_0_10px_-5px_rgba(250,250,249,1)]">Apps</span>
                     
-                    <a href="/decide/" class="flex items-center gap-2 text-sm transition-colors duration-200 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold' : 'font-medium hover:text-stone-900'}">
-                        <i class="fa-solid fa-bullseye"></i> DECIDE.
+                    <a href="/decide/" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-bullseye text-[13px]"></i> DECIDE.
                     </a>
                     
-                    <!-- NOTE: Reviews link temporarily removed untill it is fully ready -->
+                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-file-invoice text-[13px]"></i> GST Billing
+                    </a>
                     
+                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-chart-line text-[13px]"></i> SIP Planner
+                    </a>
+                    
+                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center gap-2 text-sm transition-colors duration-200 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                        <i class="fa-solid fa-pen-to-square text-[13px]"></i> Notepad
+                    </a>
                 </nav>
             </div>
         </div>
     `;
+
+    // INSTANT Native Auto-Scroll Logic: Brings the active tool perfectly to the center
+    setTimeout(() => {
+        const activeItem = document.querySelector('#secondary-scroll-nav .active-tool');
+        if (activeItem) {
+            // Native browser API perfectly calculates scroll position
+            activeItem.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+        }
+    }, 100); 
 }
 
 /**
  * Global Footer - Modernized Layout for Mobile
+ * CENTRALLY ALIGNED CONTENT
  */
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
     if (!footerContainer) return;
 
-    // Mobile me modern look ke liye grid structure change kiya gaya hai.
-    // Ab links ek side-by-side grid me aayenge taaki scroll kam karna pade.
-    // UPDATE: Header ki tarah dark border-stone-300 aur top shadow add ki gayi hai.
-    // FIXED: hover:text-red-500 changed to hover:text-red-600
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-300 shadow-[0_-2px_15px_-3px_rgba(239,68,68,0.12)] py-12 mt-auto relative z-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
+                
+                <!-- Desktop: Horizontal centered. Mobile: Vertical centered -->
+                <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-12 md:gap-24 w-full">
                     
-                    <!-- Brand Section (1st Column) -->
-                    <div class="lg:col-span-1">
-                        <div class="flex items-center gap-2 mb-4">
+                    <!-- Brand Section -->
+                    <div class="text-center md:text-left max-w-xs">
+                        <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
                             <svg class="w-6 h-6 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
                                 <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
@@ -205,14 +247,13 @@ function injectFooterAndModals() {
                             </svg>
                             <span class="font-black text-base tracking-tighter text-stone-900 uppercase">Toolblaster</span>
                         </div>
-                        <p class="text-sm text-stone-500 leading-relaxed max-w-xs">
+                        <p class="text-sm text-stone-500 leading-relaxed">
                             Empowering your digital journey with smart utilities, financial calculators, and expert software analysis.
                         </p>
                     </div>
                     
-                    <!-- Links Section (Ab mobile par 2-columns me dikhega space bachane ke liye) -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:col-span-3">
-                        
+                    <!-- Links Section (Always 2 Columns with adjusted gap) -->
+                    <div class="grid grid-cols-2 gap-16 sm:gap-24 text-left w-full sm:w-auto">
                         <!-- Quick Links -->
                         <div>
                             <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Quick Links</h3>
@@ -220,16 +261,6 @@ function injectFooterAndModals() {
                                 <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">Online Notepad</a></li>
                                 <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">GST Billing</a></li>
                                 <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">Daily Focus</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- NEW: Reviews Section -->
-                        <div>
-                            <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Top Reviews</h3>
-                            <ul class="space-y-3">
-                                <li><a href="https://toolblaster.com/reviews/hosting/verpex-hosting-review.html" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">Hosting Reviews</a></li>
-                                <li><a href="https://toolblaster.com/reviews/seo/semrush-review.html" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">SEO Tools</a></li>
-                                <li><a href="https://toolblaster.com/reviews/security/zerossl-review.html" class="text-sm text-stone-600 hover:text-red-600 transition-colors font-medium">Security & SSL</a></li>
                             </ul>
                         </div>
 
@@ -246,8 +277,8 @@ function injectFooterAndModals() {
 
                 </div>
                 
-                <div class="mt-12 pt-8 border-t border-stone-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-xs text-stone-500 font-medium tracking-wide">© ${new Date().getFullYear()} TOOLBLASTER. ALL RIGHTS RESERVED.</p>
+                <div class="mt-12 pt-8 border-t border-stone-200 flex justify-center items-center">
+                    <p class="text-xs text-stone-500 font-medium tracking-wide text-center">© ${new Date().getFullYear()} TOOLBLASTER. ALL RIGHTS RESERVED.</p>
                 </div>
             </div>
         </footer>
@@ -257,7 +288,6 @@ function injectFooterAndModals() {
 function injectBackToTop() {
     const btn = document.createElement('button');
     btn.id = 'back-to-top';
-    // FIXED: bg-red-600 for better contrast on white arrow
     btn.className = 'fixed bottom-12 right-6 w-10 h-10 bg-red-600 text-white rounded-full shadow-xl z-50 hover:bg-red-700 hover:-translate-y-1 transition-all duration-300 opacity-0 invisible flex items-center justify-center';
     btn.innerHTML = '<i class="fa-solid fa-arrow-up text-sm"></i>';
     document.body.appendChild(btn);
