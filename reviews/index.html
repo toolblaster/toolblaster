@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <!-- SEO Meta Tags -->
-    <!-- Evergreen Title (No Year) -->
+    <!-- SEO Meta Tags (Optimized Lengths) -->
     <title>Expert Software & Service Reviews | Toolblaster</title>
     <meta name="description" content="In-depth, honest reviews of cybersecurity tools, SEO software, and digital services. We test features, speed, and pricing to help you choose the best tools.">
     <link rel="canonical" href="https://toolblaster.com/reviews/">
     <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Toolblaster Reviews">
+    <meta property="og:url" content="https://toolblaster.com/reviews/">
+    <meta property="og:title" content="Expert Software & Service Reviews | Toolblaster">
+    <meta property="og:description" content="In-depth, honest reviews of cybersecurity tools, SEO software, and digital services.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/web-app-manifest-512x512.png">
 
     <!-- Schema Markup: BreadcrumbList -->
     <script type="application/ld+json">
@@ -30,215 +37,225 @@
     }
     </script>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='brand-gradient' x1='0' y1='0' x2='512' y2='512' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23EF4444'/%3E%3Cstop offset='1' stop-color='%23EF4444'/%3E%3C/linearGradient%3E%3Cfilter id='glow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='10' result='blur'/%3E%3CfeComposite in='SourceGraphic' in2='blur' operator='over'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z' fill='%23EF4444'/%3E%3Cpath d='M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z' fill='%23EF4444' opacity='0.9'/%3E%3Ccircle cx='256' cy='200' r='45' fill='white' stroke='%23EF4444' stroke-width='12'/%3E%3Ccircle cx='256' cy='200' r='15' fill='%23EF4444'/%3E%3Cpath d='M160 250L96 320V384H160V250Z' fill='%23EF4444'/%3E%3Cpath d='M352 250L416 320V384H352V250Z' fill='%23EF4444'/%3E%3Crect x='224' y='352' width='64' height='20' fill='%23EF4444'/%3E%3Cpath d='M235 380 L256 460 L277 380 Z' fill='%23EF4444'/%3E%3C/svg%3E">
+    <!-- UPDATED: Correct Favicon Links pointing to js/favicon path -->
+    <link rel="icon" type="image/x-icon" href="../js/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../js/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../js/favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../js/favicon/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="../js/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="../js/favicon/site.webmanifest">
 
-    <!-- Styles & Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- BUG FIX: Initialize tailwind object BEFORE config loads to prevent ReferenceError -->
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = window.tailwind.config || {};
+        window.tailwind.config.theme = window.tailwind.config.theme || {};
+        window.tailwind.config.theme.extend = window.tailwind.config.theme.extend || {};
+        window.tailwind.config.theme.extend.colors = window.tailwind.config.theme.extend.colors || {};
+        
+        window.tailwind.config.theme.extend.colors.stone = {
+            ...(window.tailwind.config.theme.extend.colors.stone || {}),
+            850: '#1c1917', 
+            950: '#0c0a09'
+        };
+    </script>
+
+    <!-- Load Unified Tailwind Config & CDN -->
     <script src="../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #FAFAF9; /* Matches decide tool and homepage */
+            --text-main: #292524;
+            --accent: #EF4444;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
-<body class="flex flex-col min-h-screen font-inter text-gray-800 bg-gray-50">
+<body class="flex flex-col min-h-screen font-inter overflow-x-hidden selection:bg-red-500 selection:text-white">
 
-    <!-- Header Placeholder -->
-    <div id="app-header" class="min-h-[56px] w-full relative z-20 bg-[#0f1115]"></div>
+    <!-- CLS Fix: Dynamically injected headers ke liye minimum heights -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <main class="flex-grow container mx-auto max-w-site px-4 sm:px-6 pb-6 pt-0 md:pb-8">
-
-        <!-- Ad Space -->
-        <div id="app-ad-space" class="w-full h-[100px]"></div>
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 relative z-10">
 
         <!-- Breadcrumb -->
-        <nav class="text-xs text-gray-500 mb-3 font-medium">
-            <a href="/" class="hover:text-accent-main transition-colors">Home</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-800">Reviews</span>
+        <nav class="text-xs text-stone-500 mb-6 font-medium fade-in" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-red-500 transition-colors">Home</a>
+            <span class="mx-2 text-stone-300">/</span>
+            <span class="text-stone-900 font-bold">Reviews</span>
         </nav>
 
         <!-- Page Header -->
-        <header class="mb-6 text-center sm:text-left">
-            <!-- Evergreen Heading (No Year) -->
-            <h1 class="text-heading-1 text-gray-900 mb-2 tracking-tight">Software & Service Reviews</h1>
-            <p class="text-article-p-lg text-gray-600 max-w-3xl">
+        <header class="mb-10 text-center sm:text-left fade-in">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-bold uppercase tracking-widest mb-4 border border-red-100">
+                <i class="fa-solid fa-star"></i> Deep Dives
+            </div>
+            <h1 class="text-3xl md:text-4xl font-black text-stone-900 mb-4 tracking-tight">Software & Service Reviews</h1>
+            <p class="text-sm md:text-base text-stone-600 max-w-3xl leading-relaxed font-medium">
                 Unbiased, data-driven analysis of the digital tools powering the modern web. We go beyond the marketing hype to test security, performance, and real-world value.
             </p>
         </header>
 
-        <!-- Content Grid - Full Width, No Sidebar -->
-        <div class="w-full">
+        <!-- Content Section -->
+        <div class="w-full fade-in">
 
-            <!-- Category Filter -->
-            <!-- ADDED: Filter IDs and data attributes for JS targeting -->
-            <div class="flex flex-wrap gap-2 mb-5" id="filter-container">
-                <button class="filter-btn active px-3 py-1 bg-accent-main border border-accent-main text-white text-[11px] font-bold rounded-full cursor-pointer uppercase tracking-wide transition-all" data-filter="all">All Reviews</button>
-                <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="hosting">Hosting</button>
-                <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="security">Security</button>
-                <button class="filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide" data-filter="seo">SEO Tools</button>
+            <!-- Category Links (RESTORED TO JS FILTERS) -->
+            <div class="flex flex-wrap gap-2.5 mb-8" id="filter-container">
+                <button class="filter-btn active px-4 py-1.5 bg-red-500 border border-red-500 text-white text-[11px] sm:text-xs font-bold rounded-full cursor-pointer uppercase tracking-wider transition-all shadow-sm" data-filter="all">All Reviews</button>
+                <button class="filter-btn px-4 py-1.5 bg-white border border-stone-200 text-stone-600 text-[11px] sm:text-xs font-bold rounded-full hover:border-red-500 hover:text-red-500 transition-all cursor-pointer uppercase tracking-wider shadow-sm" data-filter="hosting">Hosting</button>
+                <button class="filter-btn px-4 py-1.5 bg-white border border-stone-200 text-stone-600 text-[11px] sm:text-xs font-bold rounded-full hover:border-red-500 hover:text-red-500 transition-all cursor-pointer uppercase tracking-wider shadow-sm" data-filter="security">Security</button>
+                <button class="filter-btn px-4 py-1.5 bg-white border border-stone-200 text-stone-600 text-[11px] sm:text-xs font-bold rounded-full hover:border-red-500 hover:text-red-500 transition-all cursor-pointer uppercase tracking-wider shadow-sm" data-filter="seo">SEO Tools</button>
             </div>
 
             <!-- Review Cards Grid -->
-            <!-- MODIFIED: Updated grid to lg:grid-cols-4 and gap-3 for ultra compact feel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="reviews-grid">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="reviews-grid">
 
-                <!-- SSLs.com Review (Security) - NEW -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="security">
-                    <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-1.5">
-                        <span class="text-[9px] font-black bg-green-100 text-green-700 px-1.5 py-0.5 rounded border border-green-200 uppercase tracking-tight">Security</span>
-                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                <!-- SSLs.com Review (Security) -->
+                <!-- FIXED: Added 'relative' class to prevent the link from stretching over the entire page -->
+                <div class="review-card relative flex flex-col h-full bg-white border border-stone-200 rounded-2xl p-4 hover:border-red-500 hover:shadow-lg transition-all duration-300 group" data-category="security">
+                    <div class="flex justify-between items-start mb-3 relative z-10 pointer-events-none">
+                        <span class="text-[10px] font-black bg-stone-100 text-stone-700 px-2 py-1 rounded border border-stone-200 uppercase tracking-widest group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-100 transition-colors">Security</span>
+                        <div class="flex text-yellow-400 text-[10px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="flex-grow">
-                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
-                            <a href="security/ssls-com-review.html">SSLs.com Review 2026: Trusted SSL Certificates at Unbeatable Prices?</a>
+                        <h2 class="text-sm md:text-base font-bold text-stone-900 mb-2 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">
+                            <a href="security/ssls-com-review.html" class="before:absolute before:inset-0">SSLs.com Review 2026: Trusted SSL Certificates at Unbeatable Prices?</a>
                         </h2>
-                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
+                        <p class="text-xs text-stone-600 leading-relaxed line-clamp-3 mb-4 relative z-10 pointer-events-none">
                             We tested their pricing, instant issuance speed, and support. Is it the best place to buy cheap SSLs?
                         </p>
                     </div>
-
-                    <!-- Footer: Meta -->
-                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
-                            <i class="fa-regular fa-calendar mr-1"></i> Feb 2026
+                    <div class="flex items-center justify-between pt-3 border-t border-stone-100 mt-auto relative z-10 pointer-events-none">
+                        <span class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">
+                            Feb 2026
                         </span>
-                        <a href="security/ssls-com-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
-                        </a>
+                        <span class="text-[10px] font-black text-stone-400 uppercase tracking-wider flex items-center group-hover:text-red-500 transition-colors">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Verpex Review (Hosting) -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="hosting">
-                    <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-1.5">
-                        <span class="text-[9px] font-black bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200 uppercase tracking-tight">Hosting</span>
-                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                <!-- FIXED: Added 'relative' class -->
+                <div class="review-card relative flex flex-col h-full bg-white border border-stone-200 rounded-2xl p-4 hover:border-red-500 hover:shadow-lg transition-all duration-300 group" data-category="hosting">
+                    <div class="flex justify-between items-start mb-3 relative z-10 pointer-events-none">
+                        <span class="text-[10px] font-black bg-stone-100 text-stone-700 px-2 py-1 rounded border border-stone-200 uppercase tracking-widest group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-100 transition-colors">Hosting</span>
+                        <div class="flex text-yellow-400 text-[10px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="flex-grow">
-                        <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
-                            <a href="hosting/verpex-hosting-review.html">Verpex Review 2026: The New "Fastest" Budget Host?</a>
+                        <h2 class="text-sm md:text-base font-bold text-stone-900 mb-2 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">
+                            <a href="hosting/verpex-hosting-review.html" class="before:absolute before:inset-0">Verpex Review 2026: The New "Fastest" Budget Host?</a>
                         </h2>
-                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
+                        <p class="text-xs text-stone-600 leading-relaxed line-clamp-3 mb-4 relative z-10 pointer-events-none">
                             We stress-tested their NVMe speeds and support. Better than Hostinger?
                         </p>
                     </div>
-
-                    <!-- Footer: Meta -->
-                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
-                            <i class="fa-regular fa-calendar mr-1"></i> Feb 2026
+                    <div class="flex items-center justify-between pt-3 border-t border-stone-100 mt-auto relative z-10 pointer-events-none">
+                        <span class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">
+                            Feb 2026
                         </span>
-                        <a href="hosting/verpex-hosting-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
-                        </a>
+                        <span class="text-[10px] font-black text-stone-400 uppercase tracking-wider flex items-center group-hover:text-red-500 transition-colors">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </div>
 
-                <!-- KWFinder Review (Specific Year) -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="seo">
-                    <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-1.5">
-                        <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
-                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                <!-- KWFinder Review (SEO Tools) -->
+                <!-- FIXED: Added 'relative' class -->
+                <div class="review-card relative flex flex-col h-full bg-white border border-stone-200 rounded-2xl p-4 hover:border-red-500 hover:shadow-lg transition-all duration-300 group" data-category="seo">
+                    <div class="flex justify-between items-start mb-3 relative z-10 pointer-events-none">
+                        <span class="text-[10px] font-black bg-stone-100 text-stone-700 px-2 py-1 rounded border border-stone-200 uppercase tracking-widest group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-100 transition-colors">SEO Tools</span>
+                        <div class="flex text-yellow-400 text-[10px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="flex-grow">
-                        <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
-                            <a href="seo/kwfinder-review.html">KWFinder Review 2026: Is It Worth It?</a>
+                        <h2 class="text-sm md:text-base font-bold text-stone-900 mb-2 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">
+                            <a href="seo/kwfinder-review.html" class="before:absolute before:inset-0">KWFinder Review 2026: Is It Worth It?</a>
                         </h2>
-                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
+                        <p class="text-xs text-stone-600 leading-relaxed line-clamp-3 mb-4 relative z-10 pointer-events-none">
                             Detailed test of keyword difficulty accuracy, UX, and Mangools integration.
                         </p>
                     </div>
-
-                    <!-- Footer: Meta -->
-                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
-                            <i class="fa-regular fa-calendar mr-1"></i> Jan 2026
+                    <div class="flex items-center justify-between pt-3 border-t border-stone-100 mt-auto relative z-10 pointer-events-none">
+                        <span class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">
+                            Jan 2026
                         </span>
-                        <a href="seo/kwfinder-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
-                        </a>
+                        <span class="text-[10px] font-black text-stone-400 uppercase tracking-wider flex items-center group-hover:text-red-500 transition-colors">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </div>
 
-                <!-- Semrush Review (Specific Year) -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="seo">
-                    <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-1.5">
-                        <span class="text-[9px] font-black bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded border border-orange-200 uppercase tracking-tight">SEO Tools</span>
-                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                <!-- Semrush Review (SEO Tools) -->
+                <!-- FIXED: Added 'relative' class -->
+                <div class="review-card relative flex flex-col h-full bg-white border border-stone-200 rounded-2xl p-4 hover:border-red-500 hover:shadow-lg transition-all duration-300 group" data-category="seo">
+                    <div class="flex justify-between items-start mb-3 relative z-10 pointer-events-none">
+                        <span class="text-[10px] font-black bg-stone-100 text-stone-700 px-2 py-1 rounded border border-stone-200 uppercase tracking-widest group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-100 transition-colors">SEO Tools</span>
+                        <div class="flex text-yellow-400 text-[10px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="flex-grow">
-                        <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
-                            <a href="seo/semrush-review.html">Semrush Review 2026: Is It Worth It?</a>
+                        <h2 class="text-sm md:text-base font-bold text-stone-900 mb-2 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">
+                            <a href="seo/semrush-review.html" class="before:absolute before:inset-0">Semrush Review 2026: Is It Worth It?</a>
                         </h2>
-                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
+                        <p class="text-xs text-stone-600 leading-relaxed line-clamp-3 mb-4 relative z-10 pointer-events-none">
                             Detailed test of features, pricing, and data accuracy vs Ahrefs.
                         </p>
                     </div>
-
-                    <!-- Footer: Meta -->
-                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
-                            <i class="fa-regular fa-calendar mr-1"></i> Jan 2026
+                    <div class="flex items-center justify-between pt-3 border-t border-stone-100 mt-auto relative z-10 pointer-events-none">
+                        <span class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">
+                            Jan 2026
                         </span>
-                        <a href="seo/semrush-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
-                        </a>
+                        <span class="text-[10px] font-black text-stone-400 uppercase tracking-wider flex items-center group-hover:text-red-500 transition-colors">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </div>
 
-                <!-- ZeroSSL Review (Specific Year) -->
-                <div class="review-card flex flex-col h-full bg-white border border-gray-200 rounded-lg p-2.5 hover:shadow-md transition-all duration-300 group" data-category="security">
-                    <!-- Header: Category & Rating -->
-                    <div class="flex justify-between items-start mb-1.5">
-                        <span class="text-[9px] font-black bg-green-100 text-green-700 px-1.5 py-0.5 rounded border border-green-200 uppercase tracking-tight">Security</span>
-                        <div class="flex text-yellow-400 text-[9px] gap-0.5">
+                <!-- ZeroSSL Review (Security) -->
+                <!-- FIXED: Added 'relative' class -->
+                <div class="review-card relative flex flex-col h-full bg-white border border-stone-200 rounded-2xl p-4 hover:border-red-500 hover:shadow-lg transition-all duration-300 group" data-category="security">
+                    <div class="flex justify-between items-start mb-3 relative z-10 pointer-events-none">
+                        <span class="text-[10px] font-black bg-stone-100 text-stone-700 px-2 py-1 rounded border border-stone-200 uppercase tracking-widest group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-100 transition-colors">Security</span>
+                        <div class="flex text-yellow-400 text-[10px] gap-0.5">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="flex-grow">
-                        <!-- RESTORED: Specific Year in Title -->
-                        <h2 class="text-[13px] font-bold text-gray-900 mb-1 leading-tight group-hover:text-accent-main transition-colors line-clamp-2">
-                            <a href="security/zerossl-review.html">ZeroSSL Review 2026: Time to Ditch Paid SSL?</a>
+                        <h2 class="text-sm md:text-base font-bold text-stone-900 mb-2 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">
+                            <a href="security/zerossl-review.html" class="before:absolute before:inset-0">ZeroSSL Review 2026: Time to Ditch Paid SSL?</a>
                         </h2>
-                        <p class="text-[10px] text-gray-500 leading-snug line-clamp-3 mb-2">
+                        <p class="text-xs text-stone-600 leading-relaxed line-clamp-3 mb-4 relative z-10 pointer-events-none">
                             We tested dashboard, ACME API & free limits. The truth about securing domains for $0.
                         </p>
                     </div>
-
-                    <!-- Footer: Meta -->
-                    <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
-                        <span class="text-[9px] text-gray-400 font-medium flex items-center">
-                            <i class="fa-regular fa-calendar mr-1"></i> Dec 2025
+                    <div class="flex items-center justify-between pt-3 border-t border-stone-100 mt-auto relative z-10 pointer-events-none">
+                        <span class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">
+                            Dec 2025
                         </span>
-                        <a href="security/zerossl-review.html" class="text-[9px] font-bold text-accent-main hover:underline uppercase tracking-wide flex items-center">
-                            Read <i class="fa-solid fa-arrow-right ml-1 text-[8px]"></i>
-                        </a>
+                        <span class="text-[10px] font-black text-stone-400 uppercase tracking-wider flex items-center group-hover:text-red-500 transition-colors">
+                            Read <i class="fa-solid fa-arrow-right ml-1 text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </span>
                     </div>
                 </div>
 
@@ -246,30 +263,27 @@
         </div>
     </main>
 
-    <!-- Footer Placeholder -->
-    <div id="app-footer" class="min-h-[80px]"></div>
+    <!-- Global Footer -->
+    <div id="app-footer" class="w-full relative z-[60]"></div>
 
     <!-- Scripts -->
     <script src="../js/header-footer.js"></script>
 
-    <!-- ADDED: Filtering Logic Script with DOM Reordering -->
+    <!-- RESTORED: Filtering Logic Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const filterBtns = document.querySelectorAll('.filter-btn');
             const reviewsGrid = document.getElementById('reviews-grid');
 
-            // Store original order implicitly by current DOM order
-            // If needed, we could store it in an array, but simply appending moves them to end.
-
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // 1. Reset all buttons to inactive style
+                    // 1. Reset all buttons to inactive uniform style
                     filterBtns.forEach(b => {
-                        b.className = 'filter-btn px-3 py-1 bg-white border border-gray-300 text-gray-600 text-[11px] font-bold rounded-full hover:border-accent-main hover:text-accent-main transition-all cursor-pointer uppercase tracking-wide';
+                        b.className = 'filter-btn px-4 py-1.5 bg-white border border-stone-200 text-stone-600 text-[11px] sm:text-xs font-bold rounded-full hover:border-red-500 hover:text-red-500 transition-all cursor-pointer uppercase tracking-wider shadow-sm';
                     });
 
-                    // 2. Set clicked button to active style
-                    btn.className = 'filter-btn px-3 py-1 bg-accent-main border border-accent-main text-white text-[11px] font-bold rounded-full cursor-pointer uppercase tracking-wide transition-all';
+                    // 2. Set clicked button to active uniform style
+                    btn.className = 'filter-btn active px-4 py-1.5 bg-red-500 border border-red-500 text-white text-[11px] sm:text-xs font-bold rounded-full cursor-pointer uppercase tracking-wider transition-all shadow-sm';
 
                     // 3. Get filter value
                     const filterValue = btn.getAttribute('data-filter');
@@ -278,27 +292,21 @@
                     const cards = Array.from(reviewsGrid.children);
 
                     if (filterValue === 'all') {
-                        // Reset visibility
                         cards.forEach(card => {
                             card.classList.remove('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
                             card.classList.add('opacity-100', 'blur-0');
                         });
-                        // Optional: Could reset order here if original index was stored,
-                        // but sticking to current order is usually fine for "All".
                     } else {
-                        // Separate matching and non-matching
                         const matches = [];
                         const nonMatches = [];
 
                         cards.forEach(card => {
                             const category = card.getAttribute('data-category');
                             if (category === filterValue) {
-                                // Highlight
                                 card.classList.remove('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
                                 card.classList.add('opacity-100', 'blur-0');
                                 matches.push(card);
                             } else {
-                                // Dim/Blur
                                 card.classList.remove('opacity-100', 'blur-0');
                                 card.classList.add('opacity-30', 'blur-[2px]', 'pointer-events-none', 'grayscale');
                                 nonMatches.push(card);
