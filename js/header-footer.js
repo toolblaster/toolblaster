@@ -161,7 +161,7 @@ function injectHeader() {
 
 /**
  * Secondary Nav (Tool App Switcher)
- * Instant horizontal scrolling integration.
+ * Instant horizontal scrolling integration with Pill Design & Recessed Background.
  */
 function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
@@ -178,29 +178,33 @@ function injectToolNav() {
     `;
 
     navContainer.innerHTML = style + `
-        <div class="w-full bg-stone-50 border-b border-stone-200 shadow-sm z-40 relative">
+        <!-- Recessed Glassmorphism Background (bg-stone-100/90 + shadow-inner) -->
+        <div class="w-full bg-stone-100/90 backdrop-blur-md border-b border-stone-200 shadow-inner z-40 relative">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-4 md:gap-6 h-10 overflow-x-auto whitespace-nowrap hide-nav-scrollbar text-stone-600 relative px-2">
-                    <span class="text-[9px] font-bold text-stone-500 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-50 pr-2 z-10 shadow-[8px_0_10px_-5px_rgba(250,250,249,1)]">Apps</span>
+                <!-- Increased height to h-12 for better mobile touch, added gap-2 -->
+                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar relative px-1">
                     
-                    <a href="/decide/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                    <!-- Fixed Left Label -->
+                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/90 backdrop-blur-md pr-3 z-10 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)]">Apps</span>
+                    
+                    <!-- App Links (Pill Style) -->
+                    <a href="/decide/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
                         <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
                     </a>
                     
-                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
                         <i class="fa-solid fa-file-invoice text-[12px]"></i> GST Billing
                     </a>
                     
-                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
                         <i class="fa-solid fa-chart-line text-[12px]"></i> SIP Planner
                     </a>
                     
-                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
                         <i class="fa-solid fa-pen-to-square text-[12px]"></i> Notepad
                     </a>
 
-                    <!-- Nursery Rhymes Learning Tool Link -->
-                    <a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-colors duration-200 ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool' : 'font-medium hover:text-stone-900'}">
+                    <a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
                         <i class="fa-solid fa-music text-[12px]"></i> Kids Rhymes
                     </a>
                 </nav>
@@ -245,7 +249,7 @@ function injectFooterAndModals() {
                             </svg>
                             <span class="font-black text-base tracking-tighter text-stone-900 uppercase">Toolblaster</span>
                         </div>
-                        <p class="text-xs text-stone-500 leading-relaxed pr-4">
+                        <p class="text-xs text-stone-600 leading-relaxed pr-4">
                             Empowering your digital journey with smart utilities, financial calculators, and professional software analysis.
                         </p>
                     </div>
@@ -257,10 +261,10 @@ function injectFooterAndModals() {
                     <div class="md:col-span-4 lg:col-span-3">
                         <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Quick Links</h3>
                         <ul class="space-y-3">
-                            <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Online Notepad</a></li>
-                            <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">GST Billing</a></li>
-                            <li><a href="/decide/" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Daily Focus</a></li>
-                            <li><a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Kids Rhymes Tool</a></li>
+                            <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Online Notepad</a></li>
+                            <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">GST Billing</a></li>
+                            <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Daily Focus</a></li>
+                            <li><a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Kids Rhymes Tool</a></li>
                         </ul>
                     </div>
 
@@ -268,17 +272,17 @@ function injectFooterAndModals() {
                     <div class="md:col-span-3 lg:col-span-3">
                         <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Legal</h3>
                         <ul class="space-y-3">
-                            <li><a href="https://toolblaster.com/terms/privacy.html" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Privacy Policy</a></li>
-                            <li><a href="https://toolblaster.com/terms/terms.html" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Terms of Service</a></li>
-                            <li><a href="https://toolblaster.com/terms/about.html" class="text-sm text-stone-500 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">About Us</a></li>
+                            <li><a href="https://toolblaster.com/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Privacy Policy</a></li>
+                            <li><a href="https://toolblaster.com/terms/terms.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Terms of Service</a></li>
+                            <li><a href="https://toolblaster.com/terms/about.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">About Us</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- Bottom Bar -->
                 <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <p class="text-[10px] text-stone-400 font-bold tracking-widest uppercase">© ${new Date().getFullYear()} TOOLBLASTER. ALL RIGHTS RESERVED.</p>
-                    <span class="text-[10px] text-stone-400 font-bold tracking-widest uppercase hidden md:inline-block">Built for Speed & Privacy</span>
+                    <p class="text-[10px] text-stone-500 font-bold tracking-widest uppercase">© ${new Date().getFullYear()} TOOLBLASTER. ALL RIGHTS RESERVED.</p>
+                    <span class="text-[10px] text-stone-500 font-bold tracking-widest uppercase hidden md:inline-block">Built for Speed & Privacy</span>
                 </div>
             </div>
         </footer>
