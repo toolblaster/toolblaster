@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags - Optimized for "Tool" Branding -->
+    <title>Interactive Nursery Rhymes Tool for Kids | Toolblaster</title>
+    <meta name="description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
+    
+    <!-- FIX: Hardcoded Canonical Tag (Removed JS-injection which confuses crawlers) -->
+    <link rel="canonical" href="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    <meta property="og:title" content="Interactive Nursery Rhymes Tool for Kids | Toolblaster">
+    <meta property="og:description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:alt" content="Interactive Rhymes Tool by Toolblaster">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    <meta property="twitter:title" content="Interactive Nursery Rhymes Tool for Kids | Toolblaster">
+    <meta property="twitter:description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
+    <meta property="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Absolute Paths to prevent 404s -->
+    <link rel="icon" type="image/x-icon" href="/js/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/js/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/js/favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/js/favicon/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="/js/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="/js/favicon/site.webmanifest">
+    
+    <!-- Absolute Paths for Scripts -->
+    <script src="/js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Nursery Rhymes Learning Tool",
+      "url": "https://toolblaster.com/educational/nursery-rhymes-for-kids/",
+      "description": "Interactive nursery rhymes tool for kids in English and Hindi.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #FAFAF9; 
+            --text-main: #292524;
+            --accent: #EF4444;
+        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        
+        .category-btn { transition: all 0.2s ease-in-out; }
+        .category-btn.active { background-color: #DC2626; color: white; border-color: #DC2626; }
+        .action-btn { transition: all 0.2s ease-in-out; }
+        .action-btn:hover { background-color: #f5f5f4; color: #DC2626; transform: scale(1.05); }
+        
+        #toast-notification {
+            visibility: hidden; min-width: 200px; background-color: #292524; color: #fff; text-align: center; border-radius: 12px;
+            padding: 12px 16px; font-weight: 600; font-size: 14px; position: fixed; z-index: 100; left: 50%; transform: translateX(-50%); bottom: 30px;
+            opacity: 0; transition: opacity 0.3s, bottom 0.3s; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+        }
+        #toast-notification.show { visibility: visible; opacity: 1; bottom: 50px; }
+        
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        .animate-pop { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .button-pop:active { animation: pop 0.2s ease-in-out; }
+        
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::before { content: '▶'; margin-right: 0.5rem; display: inline-block; transition: transform 0.2s; font-size: 12px; }
+        details[open] > summary::before { transform: rotate(90deg); }
+
+        @media print {
+            body { background-color: white; color: black; }
+            #app-header, #app-tool-nav, #app-footer, #tool-action-bar, #controls-section, #rhyme-of-the-day, #playlist-view, #back-to-top-btn, #toast-notification { display: none !important; }
+            #rhyme-gallery { display: none !important; }
+            #rhyme-detail { display: block !important; box-shadow: none; }
+            .print-hide { display: none !important; }
+            pre { white-space: pre-wrap; border: 1px solid #e5e5e4; padding: 16px; background: #fafaf9; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white">
+
+    <!-- Global Toolblaster Headers -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Tool Workspace -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 py-6 md:py-8 max-w-7xl">
+        
+        <!-- Local Tool Action Bar - 3D Glassmorphism Gradient Effect -->
+        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden">
+            
+            <!-- Subtle decorative gradient orb in the background for extra depth -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-100/40 rounded-full blur-2xl pointer-events-none -z-10"></div>
+
+            <div class="flex items-center gap-3 md:gap-4 relative z-10">
+                <!-- 3D Inner Shadow on the Icon -->
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-xl md:text-2xl flex-shrink-0 shadow-inner border border-red-100/50">
+                    🎵
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-black text-stone-900 leading-tight">Interactive Nursery Rhymes for Kids</h1>
+                    <h2 class="text-xs md:text-sm text-stone-500 font-medium mt-0.5">Complete Rhymes collection in English & Hindi</h2>
+                </div>
+            </div>
+            
+            <div class="w-full sm:w-auto flex-shrink-0 relative z-10">
+                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/80 hover:bg-white text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop shadow-sm border border-stone-200/60" aria-label="View Playlist">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span>Playlist</span>
+                    <span id="playlist-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center shadow-sm hidden animate-pop border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Rhyme of the Day -->
+        <section id="rhyme-of-the-day" class="mb-6 fade-in">
+            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-red-50 border border-red-200 p-4 rounded-2xl cursor-pointer hover:border-red-300 transition-all duration-300 flex items-center justify-between gap-3 shadow-sm">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <div class="text-2xl bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" id="rotd-icon"><span class="animate-pulse opacity-50">🎵</span></div>
+                    <div class="text-left overflow-hidden">
+                        <h2 class="text-[10px] font-black uppercase tracking-widest text-red-700 mb-0.5 block truncate">Featured Today</h2>
+                        <h3 class="text-base sm:text-lg font-bold text-stone-900 truncate" id="rotd-title">Loading...</h3>
+                    </div>
+                </div>
+                <div class="bg-white text-red-700 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-200 shadow-sm whitespace-nowrap flex-shrink-0">
+                    Read & Listen &rarr;
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls Section -->
+        <section id="controls-section" class="mb-8 fade-in">
+            <div class="bg-white border border-stone-200 rounded-[2rem] shadow-sm p-5 md:p-6">
+                <div class="flex flex-col md:flex-row items-center gap-4 mb-6">
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass text-stone-400"></i>
+                        </div>
+                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all">
+                    </div>
+                    <button id="surprise-button" class="w-full md:w-auto flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-sm rounded-xl shadow-sm transition-transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shuffle"></i> Random Rhyme
+                    </button>
+                </div>
+
+                <div id="category-filters">
+                    <div class="flex flex-wrap items-center justify-start md:justify-center gap-2">
+                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Rhymes">All</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Favorites">Favorites ❤️</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Learning">Learning 🧠</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Animal">Animals 🐾</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Classic">Classics 📜</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Lullaby">Lullabies 🌙</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Indian">Indian 🇮🇳</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rhyme Gallery View -->
+        <section id="rhyme-gallery" class="mb-12">
+            <h2 id="gallery-title" class="text-xl md:text-2xl font-black text-stone-900 text-center md:text-left mb-6 transition-opacity duration-300 px-2">All Rhymes</h2>
+            
+            <div id="rhyme-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[50vh]">
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+            </div>
+        </section>
+
+        <!-- Single Rhyme Detail View -->
+        <section id="rhyme-detail" class="hidden min-h-[60vh] fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-6 print-hide">
+                    <button id="back-button" class="flex items-center gap-2 text-stone-500 hover:text-red-600 font-bold py-2 px-3 transition-colors active:scale-95 text-sm">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Gallery
+                    </button>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Prev</button>
+                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Next</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-stone-200">
+                    <div class="text-center border-b border-stone-100 pb-6 mb-6">
+                        <h2 id="rhyme-title-en" class="text-2xl sm:text-3xl md:text-4xl font-black text-stone-900 mb-2"></h2>
+                        <h3 id="rhyme-title-hi" class="text-xl sm:text-2xl font-bold text-stone-500"></h3>
+                        
+                        <div id="learning-focus-badge-container" class="hidden mt-4">
+                            <span id="learning-focus-badge" class="inline-block bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        </div>
+
+                        <div class="flex justify-center items-center gap-3 mt-6 print-hide">
+                            <button id="read-aloud-btn-rhyme" class="action-btn w-12 h-12 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-lg button-pop" title="Read Aloud" aria-label="Read Aloud">📢</button>
+                            <button id="add-to-playlist-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full button-pop" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-600"></i></button>
+                            <button id="favorite-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-lg button-pop" title="Add to Favorites" aria-label="Add to Favorites">🤍</button>
+                            <button id="share-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-lg button-pop" title="Share" aria-label="Share">🔗</button>
+                            <button id="print-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-lg button-pop" title="Print" aria-label="Print">🖨️</button>
+                        </div>
+                    </div>
+                    
+                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-4 mb-8 bg-red-50 p-3 rounded-xl border border-red-200 print-hide">
+                        <button id="prev-rhyme-btn" class="text-red-700 hover:text-red-900 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-backward-step"></i></button>
+                        <span id="playlist-position" class="text-red-800 font-bold text-sm"></span>
+                        <button id="next-rhyme-btn" class="text-red-700 hover:text-red-900 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-forward-step"></i></button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4">English</h3>
+                            <pre id="rhyme-lyrics-en" class="text-base leading-loose text-stone-800 whitespace-pre-wrap font-inter"></pre>
+                        </div>
+                        <div id="hindi-column">
+                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4">Hindi</h3>
+                            <pre id="rhyme-lyrics-hi" class="text-base leading-loose text-stone-800 whitespace-pre-wrap font-inter"></pre>
+                        </div>
+                    </div>
+                    
+                    <div id="fun-fact-container" class="mt-10 pt-8 border-t border-stone-100 hidden">
+                        <details id="fun-fact-details" class="bg-stone-50 p-5 rounded-2xl cursor-pointer border border-stone-200 group">
+                            <summary class="font-bold text-stone-900 group-hover:text-red-600 transition-colors">💡 Educational Fact</summary>
+                            <p id="fun-fact-text" class="mt-3 text-sm text-stone-600 leading-relaxed"></p>
+                        </details>
+                    </div>
+
+                     <div id="copyright-notice-container" class="mt-6 hidden print-hide">
+                        <div class="text-center">
+                            <p id="copyright-text" class="text-[10px] text-stone-400 uppercase tracking-wider font-bold"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full"></div>
+
+    <!-- Modals & Overlays -->
+    <div id="playlist-view" class="fixed inset-0 bg-stone-900/60 z-[100] hidden flex justify-end transition-opacity duration-300">
+        <div class="bg-white shadow-2xl w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300" id="playlist-sidebar">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200 bg-stone-50">
+                <h2 class="text-lg font-black text-stone-900">Queue</h2>
+                <button id="close-playlist-btn" class="text-stone-400 hover:text-red-600 transition-colors p-2 text-xl" aria-label="Close Playlist"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="playlist-items" class="flex-grow p-4 space-y-2 overflow-y-auto"></div>
+            <div class="p-5 border-t border-stone-200 bg-stone-50">
+                <button id="clear-playlist-btn" class="w-full bg-stone-200 hover:bg-red-600 hover:text-white text-stone-700 font-bold py-3 px-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification"></div>
+    
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] w-full bg-stone-900 text-white p-4 shadow-2xl md:flex md:items-center md:justify-between md:px-8 translate-y-full transition-transform duration-300 ease-in-out">
+        <p class="text-sm md:text-base mb-4 md:mb-0 text-stone-300">
+            Cookies improve your experience. Read our <a href="/terms/privacy.html" class="font-bold text-white hover:text-red-400 underline transition-colors cursor-pointer">Privacy Policy</a>.
+        </p>
+        <button id="accept-cookies" class="w-full md:w-auto bg-white text-stone-900 font-bold py-2.5 px-8 rounded-lg text-sm hover:bg-stone-200 active:scale-95 transition-all shadow-md">
+            Accept
+        </button>
+    </div>
+
+    <script src="/js/header-footer.js"></script>
+    <script src="/js/global-script.js"></script>
+    <script src="/educational/nursery-rhymes-for-kids/app.js"></script>
+    
+    <script>
+        // Local logic strictly for cookie banner behavior
+        document.addEventListener('DOMContentLoaded', () => {
+            const cookieBanner = document.getElementById('cookie-banner');
+            const acceptCookiesBtn = document.getElementById('accept-cookies');
+
+            if (cookieBanner && acceptCookiesBtn) {
+                if (!localStorage.getItem('cookiesAccepted')) {
+                    setTimeout(() => {
+                         cookieBanner.classList.remove('translate-y-full');
+                         cookieBanner.classList.add('translate-y-0');
+                    }, 500);
+                }
+
+                acceptCookiesBtn.addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieBanner.classList.remove('translate-y-0');
+                    cookieBanner.classList.add('translate-y-full');
+                    setTimeout(() => {
+                        cookieBanner.style.display = 'none';
+                    }, 300);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
