@@ -100,6 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const controlsSection = document.getElementById('controls-section');
     const searchBar = document.getElementById('search-bar');
 
+    // FIX: Prevent grid rows from stretching vertically when there are few items (like in Favorites)
+    if (rhymeGrid) rhymeGrid.classList.add('content-start');
+
     let isReading = false;
     let readingQueue = [];
     let englishVoice = null;
@@ -191,7 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         rhymes.forEach(rhyme => {
             const card = document.createElement('div');
-            card.className = 'bg-white border border-stone-200 rounded-2xl p-4 flex flex-col items-center text-center cursor-pointer hover:border-red-500 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 relative';
+            // FIX: Added 'h-max' to prevent vertical stretching of the card
+            card.className = 'h-max bg-white border border-stone-200 rounded-2xl p-4 flex flex-col items-center text-center cursor-pointer hover:border-red-500 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 relative';
             card.dataset.rhymeId = rhyme.id;
             
             // FIX: Added SEO Slug to Gallery Anchor Tags
@@ -216,6 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.TB.showRhymeDetail = function(rhymeId, fromPlaylist = false, playlistIndex = -1) {
+        const wasAlreadyInDetailView = !rhymeDetailView.classList.contains('hidden');
+
         window.TB.currentRhyme = window.TB.allRhymes.find(r => r.id === rhymeId);
         if (!window.TB.currentRhyme) return;
         window.TB.hideAllViews();
@@ -273,7 +279,18 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePlaylistBtns();
         updatePlaylistNav();
 
-        window.scrollTo(0, 0);
+        if (!wasAlreadyInDetailView) {
+            window.scrollTo(0, 0);
+        } else {
+            // Naya Logic: Jaise hi Next/Prev press hoga, page automatically rhyme detail section ke top tak smooth scroll ho jayega
+            // Taaki Next/Prev buttons aur rhyme humesha screen par easily dikhte rahein.
+            const detailSection = document.getElementById('rhyme-detail');
+            if (detailSection) {
+                // Header nav bar (sticky) ke liye 60px ka offset subtract kar rahe hain
+                const topPosition = detailSection.getBoundingClientRect().top + window.scrollY - 60;
+                window.scrollTo({ top: Math.max(0, topPosition), behavior: 'smooth' });
+            }
+        }
     }
 
     function displayRhymeOfTheDay() {
@@ -544,6 +561,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('playlist-toggle-btn').addEventListener('click', togglePlaylistView);
         document.getElementById('close-playlist-btn').addEventListener('click', togglePlaylistView);
+        
+        // NAYA LOGIC: Khali jagah (dark overlay) par click karne se playlist close hogi
+        document.getElementById('playlist-view').addEventListener('click', (e) => {
+            if (e.target.id === 'playlist-view') {
+                togglePlaylistView();
+            }
+        });
+
+        // Keyboard er 'Esc' button chaple playlist bondho korar logic
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const playlistView = document.getElementById('playlist-view');
+                if (playlistView && !playlistView.classList.contains('hidden')) {
+                    togglePlaylistView();
+                }
+            }
+        });
+
         document.getElementById('clear-playlist-btn').addEventListener('click', () => { window.TB.playlist = []; localStorage.setItem('playlist', '[]'); renderPlaylist(); });
         document.getElementById('share-rhyme-btn').addEventListener('click', shareContent);
         document.getElementById('print-rhyme-btn').addEventListener('click', () => { document.body.classList.add('printing-rhyme'); window.print(); document.body.classList.remove('printing-rhyme'); });
