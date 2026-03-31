@@ -2,10 +2,13 @@
  * Toolblaster Shared Design System (Tailwind CSS Configuration)
  * -------------------------------------------------------------
  * Central Source of Truth for Design & Accessibility.
- * Usage: Include this script AFTER the Tailwind CDN script in every HTML file.
+ * Usage: Include this script BEFORE the Tailwind CDN script in every HTML file.
  */
 
-tailwind.config = {
+// ReferenceError rokne ke liye tailwind object ko safely initialize karein
+window.tailwind = window.tailwind || {};
+
+window.tailwind.config = {
     theme: {
         // Global Container Configuration
         container: {
