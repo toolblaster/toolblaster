@@ -21,6 +21,7 @@ function safeRun(fn) {
 /**
  * Header inject karne wala function
  * Center mein dynamic page/tool ka naam dikhayega
+ * Mobile ke liye Hamburger Slide-over Menu add kiya gaya hai
  */
 function injectHeader() {
     const headerContainer = document.getElementById('app-header');
@@ -52,8 +53,8 @@ function injectHeader() {
                 
                 <!-- Baayen (Left): Logo -->
                 <div class="flex items-center flex-shrink-0">
-                    <a href="https://toolblaster.com/" class="flex items-center gap-2 group transition-transform hover:scale-105">
-                        <svg class="w-6 h-6 drop-shadow-sm group-hover:scale-110 transition-transform duration-300" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="https://toolblaster.com/" aria-label="Toolblaster Home" class="flex items-center gap-2 group transition-transform hover:scale-105">
+                        <svg class="w-6 h-6 drop-shadow-sm group-hover:scale-110 transition-transform duration-300" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
                             <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
                             <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
@@ -74,15 +75,68 @@ function injectHeader() {
                     </span>
                 </div>
 
-                <!-- Daayen (Right): Action Button -->
+                <!-- Daayen (Right): Desktop Action Button & Mobile Hamburger -->
                 <div class="flex items-center gap-3">
-                    <a href="https://toolblaster.com/#tools" class="bg-red-500 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
+                    <!-- Desktop Button (Hidden on Mobile) -->
+                    <a href="https://toolblaster.com/#tools" class="hidden sm:inline-flex bg-red-500 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
                         Tools ki List
                     </a>
+                    <!-- Mobile Hamburger Button (Visible only on Mobile) -->
+                    <button id="mobile-menu-btn" aria-label="Menu kholen" class="sm:hidden text-stone-600 hover:text-stone-900 focus:outline-none transition-colors p-1">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
                 </div>
             </div>
         </nav>
+
+        <!-- Mobile Slide-over Menu (Sidebar) -->
+        <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-stone-900/50 z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+        <div id="mobile-sidebar" class="fixed inset-y-0 right-0 w-60 bg-white z-[200] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-stone-200">
+                <span class="font-black text-stone-900 tracking-widest text-xs uppercase">Menu</span>
+                <button id="close-sidebar-btn" aria-label="Menu band karein" class="text-stone-500 hover:text-red-500 p-1 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="flex flex-col px-3 py-4 gap-2">
+                <!-- Home Link with Icon -->
+                <a href="https://toolblaster.com/" class="flex items-center gap-3 text-sm font-bold text-stone-700 hover:text-red-500 transition-colors px-3 py-2.5 rounded-lg hover:bg-stone-50 border border-transparent hover:border-stone-200">
+                    <i class="fa-solid fa-house w-4 text-center text-base"></i> Home
+                </a>
+                
+                <!-- Tools List Button inside Mobile Menu -->
+                <a href="https://toolblaster.com/#tools" class="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
+                    Tools ki List
+                </a>
+            </div>
+        </div>
     `;
+
+    // Mobile menu open/close karne ka JS logic
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-sidebar-btn');
+    const sidebar = document.getElementById('mobile-sidebar');
+    const overlay = document.getElementById('mobile-sidebar-overlay');
+
+    if(menuBtn && sidebar && overlay) {
+        const openMenu = () => {
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            overlay.classList.add('opacity-100');
+            sidebar.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden'; // Background scroll rokne ke liye
+        };
+
+        const closeMenu = () => {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            sidebar.classList.add('translate-x-full');
+            document.body.style.overflow = ''; // Scroll wapas chalu karne ke liye
+        };
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn?.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+    }
 }
 
 /**
@@ -120,19 +174,24 @@ function injectToolNav() {
 }
 
 /**
- * Global Footer
+ * Global Footer - Modernized Layout for Mobile
  */
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
     if (!footerContainer) return;
 
+    // Mobile me modern look ke liye grid structure change kiya gaya hai.
+    // Ab links ek side-by-side grid me aayenge taaki scroll kam karna pade.
+    // UPDATE: Header ki tarah dark border-stone-300 aur top shadow add ki gayi hai.
     footerContainer.innerHTML = `
-        <footer class="bg-white border-t border-stone-200 py-12 mt-auto">
+        <footer class="bg-white border-t border-stone-300 shadow-[0_-2px_15px_-3px_rgba(239,68,68,0.12)] py-12 mt-auto relative z-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div>
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
+                    
+                    <!-- Brand Section (1st Column) -->
+                    <div class="lg:col-span-1">
                         <div class="flex items-center gap-2 mb-4">
-                            <svg class="w-6 h-6 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
                                 <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
                                 <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
@@ -149,25 +208,40 @@ function injectFooterAndModals() {
                         </p>
                     </div>
                     
-                    <div>
-                        <!-- FIXED: Changed h4 to h3 to fix heading hierarchy order for PageSpeed -->
-                        <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Quick Links</h3>
-                        <ul class="space-y-3">
-                            <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Online Notepad</a></li>
-                            <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">GST Billing</a></li>
-                            <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Daily Focus</a></li>
-                        </ul>
+                    <!-- Links Section (Ab mobile par 2-columns me dikhega space bachane ke liye) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:col-span-3">
+                        
+                        <!-- Quick Links -->
+                        <div>
+                            <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Online Notepad</a></li>
+                                <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">GST Billing</a></li>
+                                <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Daily Focus</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- NEW: Reviews Section -->
+                        <div>
+                            <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Top Reviews</h3>
+                            <ul class="space-y-3">
+                                <li><a href="https://toolblaster.com/reviews/hosting/verpex-hosting-review.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Hosting Reviews</a></li>
+                                <li><a href="https://toolblaster.com/reviews/seo/semrush-review.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">SEO Tools</a></li>
+                                <li><a href="https://toolblaster.com/reviews/security/zerossl-review.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Security & SSL</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Legal -->
+                        <div>
+                            <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Legal</h3>
+                            <ul class="space-y-3">
+                                <li><a href="https://toolblaster.com/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Privacy Policy</a></li>
+                                <li><a href="https://toolblaster.com/terms/terms.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Terms of Service</a></li>
+                                <li><a href="https://toolblaster.com/terms/about.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">About Us</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div>
-                        <!-- FIXED: Changed h4 to h3 to fix heading hierarchy order for PageSpeed -->
-                        <h3 class="text-stone-900 text-xs font-bold uppercase tracking-widest mb-4">Legal</h3>
-                        <ul class="space-y-3">
-                            <li><a href="https://toolblaster.com/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Privacy Policy</a></li>
-                            <li><a href="https://toolblaster.com/terms/terms.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">Terms of Service</a></li>
-                            <li><a href="https://toolblaster.com/terms/about.html" class="text-sm text-stone-600 hover:text-red-500 transition-colors font-medium">About Us</a></li>
-                        </ul>
-                    </div>
                 </div>
                 
                 <div class="mt-12 pt-8 border-t border-stone-200 flex flex-col md:flex-row justify-between items-center gap-4">
