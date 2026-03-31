@@ -563,8 +563,9 @@ const ui = {
                         const isDone = yesterday.entry.completed && yesterday.entry.completed[i];
                         const escapedTask = p.replace(/"/g, '&quot;');
                         
+                        // FIXED: text-stone-400 to text-stone-500 for better contrast on carry-over icon
                         const carryOverBtn = isDone ? '' : `
-                            <button type="button" title="Carry over to today" class="carry-over-btn flex-shrink-0 text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors p-1 rounded hover:bg-stone-100 dark:hover:bg-stone-800" data-task="${escapedTask}">
+                            <button type="button" title="Carry over to today" class="carry-over-btn flex-shrink-0 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors p-1 rounded hover:bg-stone-100 dark:hover:bg-stone-800" data-task="${escapedTask}">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             </button>
                         `;
@@ -607,10 +608,11 @@ const ui = {
             if (this.dom.readonlyList) {
                 this.dom.readonlyList.innerHTML = entry.priorities.map((p, i) => {
                     const isDone = entry.completed && entry.completed[i];
+                    // FIXED: text-stone-500 instead of text-stone-400 for numbers, and text-stone-500 for line-through text for AA compliance
                     return `
                     <div class="priority-item flex items-baseline space-x-4 py-3 cursor-pointer select-none rounded-lg px-2 -mx-2 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-300 group" data-index="${i}">
                         <span class="text-stone-500 font-mono text-sm transition-opacity duration-300 ${isDone ? 'opacity-40' : ''}">0${i+1}</span>
-                        <span class="text-lg font-medium transition-all duration-300 ${isDone ? 'line-through text-stone-400 dark:text-stone-600 decoration-stone-300 dark:decoration-stone-600' : 'text-stone-900 dark:text-stone-100 group-hover:text-stone-700 dark:group-hover:text-stone-300'}">${p}</span>
+                        <span class="text-lg font-medium transition-all duration-300 ${isDone ? 'line-through text-stone-500 dark:text-stone-500 decoration-stone-300 dark:decoration-stone-600' : 'text-stone-900 dark:text-stone-100 group-hover:text-stone-700 dark:group-hover:text-stone-300'}">${p}</span>
                     </div>
                     `;
                 }).join('');
