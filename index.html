@@ -11,7 +11,13 @@
     <title>Toolblaster: Calculators, SEO, WordPress & Hosting Reviews</title>
     <meta name="description" content="Master your finances with SIP calculators. Discover expert SEO comparisons and unbiased reviews of top WordPress tools & Web Hosting providers on Toolblaster.">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='brand-gradient' x1='0' y1='0' x2='512' y2='512' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23EF4444'/%3E%3Cstop offset='1' stop-color='%23EF4444'/%3E%3C/linearGradient%3E%3Cfilter id='glow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur stdDeviation='10' result='blur'/%3E%3CfeComposite in='SourceGraphic' in2='blur' operator='over'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z' fill='%23EF4444'/%3E%3Cpath d='M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z' fill='%23EF4444' opacity='0.9'/%3E%3Ccircle cx='256' cy='200' r='45' fill='white' stroke='%23EF4444' stroke-width='12'/%3E%3Ccircle cx='256' cy='200' r='15' fill='%23EF4444'/%3E%3Cpath d='M160 250L96 320V384H160V250Z' fill='%23EF4444'/%3E%3Cpath d='M352 250L416 320V384H352V250Z' fill='%23EF4444'/%3E%3Crect x='224' y='352' width='64' height='20' fill='%23EF4444'/%3E%3Cpath d='M235 380 L256 460 L277 380 Z' fill='%23EF4444'/%3E%3C/svg%3E">
+    <!-- UPDATED: Correct Favicon Links pointing to terms/favicon path -->
+    <link rel="icon" type="image/x-icon" href="terms/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="terms/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="terms/favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="terms/favicon/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="terms/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="terms/favicon/site.webmanifest">
 
     <!-- BUG FIX: Load Tailwind Config BEFORE CDN -->
     <script src="js/tailwind-config.js"></script>
@@ -37,12 +43,12 @@
         };
     </script>
     
-    <!-- BUG FIX: Load Tailwind CDN AFTER configs to prevent Main Thread Lock -->
+    <!-- BUG FIX: Load Tailwind CDN AFTER configs -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
-            --bg-color: #FAFAF9; /* Uniform light mode background */
+            --bg-color: #FAFAF9; /* Match decide tool background */
             --text-main: #292524;
             --accent: #EF4444;
         }
@@ -67,16 +73,17 @@
 
 <body class="flex flex-col min-h-screen font-inter overflow-x-hidden selection:bg-red-500 selection:text-white">
 
-    <!-- CLS Fix: Explicit minimum heights for dynamically injected headers -->
+    <!-- CLS Fix: Specific spaces reserved for injected header and tool-nav -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Content with Uniform Padding and Width -->
-    <main class="flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20">
+    <!-- Main Content Area: Padding top (pt) ko 8 se kam karke 4 kar diya gaya hai space bachane ke liye -->
+    <main class="flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-20">
         
-        <!-- Hero Section -->
-        <div class="relative z-10 max-w-4xl mx-auto text-center py-10 px-4 fade-in">
-            <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mb-6 bg-white border border-stone-200 rounded-2xl shadow-sm ring-1 ring-black/5">
+        <!-- Hero Section: Padding top (pt) ko kam kar diya gaya hai -->
+        <div class="relative z-10 max-w-4xl mx-auto text-center pt-4 pb-8 px-4 fade-in">
+            <!-- Icon Margin Bottom (mb) ko 6 se 4 kar diya gaya hai -->
+            <div class="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mb-4 bg-white border border-stone-200 rounded-2xl shadow-sm ring-1 ring-black/5">
                 <svg class="w-8 h-8 md:w-9 md:h-9 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
                     <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
@@ -94,14 +101,14 @@
             </h1>
 
             <p class="font-inter text-stone-600 max-w-2xl mx-auto leading-relaxed mb-8" style="font-size: clamp(14px, 3vw, 15px); font-weight: 500;">
-                One platform, infinite utilities. From <span class="text-stone-900 font-bold">financial planning</span> and <span class="text-stone-900 font-bold">SEO audits</span> to <span class="text-stone-900 font-bold">exam prep</span> and <span class="text-stone-900 font-bold">daily productivity</span>.
+                Ek hi platform, dher saare tools. <span class="text-stone-900 font-bold">Financial planning</span> se lekar <span class="text-stone-900 font-bold">SEO audits</span> aur <span class="text-stone-900 font-bold">daily productivity</span> tak.
             </p>
         </div>
 
         <!-- Tools Grid Section -->
         <section id="tools" class="flex flex-wrap justify-center gap-4 mb-16 fade-in">
             
-            <!-- Tool Card 1: UPDATED to GST Billing -->
+            <!-- Tool Card 1: GST Billing -->
             <a href="https://gstbilling.toolblaster.com" class="w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] md:w-[calc(25%-0.5rem)] lg:w-[160px] group flex flex-col items-center p-5 rounded-2xl bg-white border border-stone-200 hover:border-red-500 hover:bg-stone-50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
                 <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-file-invoice text-xl"></i>
@@ -164,9 +171,8 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mx-auto">
-                
-                <!-- Review Card 1: Verpex -->
-                <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-left">
+                <!-- Review cards remain same but styling is light mode consistent -->
+                <a href="reviews/hosting/verpex-hosting-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-left">
                     <div class="flex flex-col items-start h-full relative z-10">
                         <div class="flex justify-between w-full items-center mb-4">
                             <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-red-500 border border-stone-100 group-hover:bg-red-50 transition-colors duration-300">
@@ -175,12 +181,11 @@
                             <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Feb 2026</span>
                         </div>
                         <h3 class="text-sm font-bold text-stone-900 leading-snug group-hover:text-red-600 transition-colors mb-2 line-clamp-2">Verpex Review: Fastest Budget Host?</h3>
-                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">We tested speed, uptime, and support to see if it lives up to the hype.</p>
+                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Humne speed, uptime aur support ko test kiya.</p>
                     </div>
                 </a>
                 
-                <!-- Review Card 2: KWFinder -->
-                <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-left">
+                <a href="reviews/seo/kwfinder-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-left">
                     <div class="flex flex-col items-start h-full relative z-10">
                         <div class="flex justify-between w-full items-center mb-4">
                             <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-red-500 border border-stone-100 group-hover:bg-red-50 transition-colors duration-300">
@@ -189,12 +194,11 @@
                             <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Jan 2026</span>
                         </div>
                         <h3 class="text-sm font-bold text-stone-900 leading-snug group-hover:text-red-600 transition-colors mb-2 line-clamp-2">KWFinder: Best for Beginners?</h3>
-                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">A deep dive into Mangools KWFinder features, pricing, and data accuracy.</p>
+                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Mangools KWFinder ka deep analysis aur features.</p>
                     </div>
                 </a>
 
-                <!-- Review Card 3: Semrush -->
-                <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-left">
+                <a href="reviews/seo/semrush-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-left">
                     <div class="flex flex-col items-start h-full relative z-10">
                         <div class="flex justify-between w-full items-center mb-4">
                             <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-red-500 border border-stone-100 group-hover:bg-red-50 transition-colors duration-300">
@@ -203,12 +207,11 @@
                             <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Jan 2026</span>
                         </div>
                         <h3 class="text-sm font-bold text-stone-900 leading-snug group-hover:text-red-600 transition-colors mb-2 line-clamp-2">Semrush: Is It Worth $130/mo?</h3>
-                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">The gold standard for marketing data. We analyze features vs price tag.</p>
+                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Marketing data ka gold standard.</p>
                     </div>
                 </a>
 
-                <!-- Review Card 4: ZeroSSL -->
-                <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-left">
+                <a href="reviews/security/zerossl-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-left">
                     <div class="flex flex-col items-start h-full relative z-10">
                         <div class="flex justify-between w-full items-center mb-4">
                             <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-red-500 border border-stone-100 group-hover:bg-red-50 transition-colors duration-300">
@@ -217,12 +220,11 @@
                             <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Dec 2025</span>
                         </div>
                         <h3 class="text-sm font-bold text-stone-900 leading-snug group-hover:text-red-600 transition-colors mb-2 line-clamp-2">ZeroSSL: Ditch Paid SSL?</h3>
-                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">We compare free vs paid SSL options to see if ZeroSSL is the best choice.</p>
+                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Free vs Paid SSL options ka comparison.</p>
                     </div>
                 </a>
 
-                <!-- Review Card 5: SSLs.com -->
-                <a href="reviews/security/ssls-com-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden text-left">
+                <a href="reviews/security/ssls-com-review.html" class="relative group block w-full rounded-2xl p-5 bg-white border border-stone-200 hover:border-red-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-left">
                     <div class="flex flex-col items-start h-full relative z-10">
                         <div class="flex justify-between w-full items-center mb-4">
                             <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-red-500 border border-stone-100 group-hover:bg-red-50 transition-colors duration-300">
@@ -231,20 +233,19 @@
                             <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Jan 2026</span>
                         </div>
                         <h3 class="text-sm font-bold text-stone-900 leading-snug group-hover:text-red-600 transition-colors mb-2 line-clamp-2">SSLs.com Review: Legit?</h3>
-                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Is $3.75/yr for an SSL too good to be true? We tested issuance speed.</p>
+                        <p class="text-[12px] text-stone-600 line-clamp-3 leading-relaxed">Sasta aur achha SSL? Humne check kiya.</p>
                     </div>
                 </a>
             </div>
         </section>
     </main>
     
-    <!-- Footer Reservation -->
     <div id="app-footer" class="min-h-[80px] w-full"></div>
 
-    <!-- Cookie Banner (Dark style for high contrast) -->
+    <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] w-full bg-stone-900 text-white p-4 shadow-2xl md:flex md:items-center md:justify-between md:px-8 translate-y-full transition-transform duration-300 ease-in-out">
         <p class="text-sm md:text-base mb-4 md:mb-0 text-stone-300">
-            We use cookies to improve your experience and to show you relevant ads. By using this site, you agree to our <a href="terms/privacy.html" class="font-bold text-white hover:text-red-400 underline transition-colors cursor-pointer">Privacy Policy</a>.
+            Cookies aapke anubhav ko behtar banati hain. <a href="terms/privacy.html" class="font-bold text-white hover:text-red-400 underline transition-colors cursor-pointer">Privacy Policy</a> padhein.
         </p>
         <button id="accept-cookies" class="w-full md:w-auto bg-white text-stone-900 font-bold py-2.5 px-8 rounded-lg text-sm hover:bg-stone-200 active:scale-95 transition-all shadow-md">
             Accept
@@ -255,7 +256,6 @@
     <script src="js/header-footer.js"></script>
     <script src="js/global-script.js"></script>
     
-    <!-- Cookie Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cookieBanner = document.getElementById('cookie-banner');
