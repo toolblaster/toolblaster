@@ -8,7 +8,7 @@
     <title>Interactive Nursery Rhymes Tool for Kids | Toolblaster</title>
     <meta name="description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
     
-    <!-- FIX: Hardcoded Canonical Tag (Removed JS-injection which confuses crawlers) -->
+    <!-- Canonical Tag -->
     <link rel="canonical" href="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
     
     <!-- Open Graph / Facebook -->
@@ -66,14 +66,14 @@
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; }
         
         .category-btn { transition: all 0.2s ease-in-out; }
-        .category-btn.active { background-color: #DC2626; color: white; border-color: #DC2626; }
+        .category-btn.active { background-color: #DC2626; color: white; border-color: #DC2626; box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3); }
         .action-btn { transition: all 0.2s ease-in-out; }
-        .action-btn:hover { background-color: #f5f5f4; color: #DC2626; transform: scale(1.05); }
+        .action-btn:hover { background-color: rgba(255,255,255,0.9); color: #DC2626; transform: scale(1.05); }
         
         #toast-notification {
-            visibility: hidden; min-width: 200px; background-color: #292524; color: #fff; text-align: center; border-radius: 12px;
+            visibility: hidden; min-width: 200px; background-color: rgba(41, 37, 36, 0.95); backdrop-filter: blur(8px); color: #fff; text-align: center; border-radius: 12px;
             padding: 12px 16px; font-weight: 600; font-size: 14px; position: fixed; z-index: 100; left: 50%; transform: translateX(-50%); bottom: 30px;
-            opacity: 0; transition: opacity 0.3s, bottom 0.3s; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            opacity: 0; transition: opacity 0.3s, bottom 0.3s; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
         }
         #toast-notification.show { visibility: visible; opacity: 1; bottom: 50px; }
         
@@ -86,30 +86,38 @@
 
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
-        details > summary::before { content: '▶'; margin-right: 0.5rem; display: inline-block; transition: transform 0.2s; font-size: 12px; }
+        details > summary::before { content: 'тЦ╢'; margin-right: 0.5rem; display: inline-block; transition: transform 0.2s; font-size: 12px; }
         details[open] > summary::before { transform: rotate(90deg); }
 
         @media print {
             body { background-color: white; color: black; }
-            #app-header, #app-tool-nav, #app-footer, #tool-action-bar, #controls-section, #rhyme-of-the-day, #playlist-view, #back-to-top-btn, #toast-notification { display: none !important; }
+            #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, #tool-action-bar, #controls-section, #rhyme-of-the-day, #playlist-view, #back-to-top-btn, #toast-notification { display: none !important; }
             #rhyme-gallery { display: none !important; }
-            #rhyme-detail { display: block !important; box-shadow: none; }
+            #rhyme-detail { display: block !important; box-shadow: none; border: none; background: white !important; }
             .print-hide { display: none !important; }
             pre { white-space: pre-wrap; border: 1px solid #e5e5e4; padding: 16px; background: #fafaf9; }
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white">
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+
+    <!-- NEW: Global Ambient Glassmorphism Background Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-200/40 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-100/50 blur-[100px]"></div>
+        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-yellow-100/40 blur-[80px]"></div>
+        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-pink-200/30 blur-[90px]"></div>
+    </div>
 
     <!-- Global Toolblaster Headers -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
     <!-- Main Tool Workspace -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 py-6 md:py-8 max-w-7xl">
+    <main class="flex-grow container mx-auto px-4 sm:px-6 py-6 md:py-8 max-w-7xl relative z-10">
         
-        <!-- Breadcrumb Navigation (Mobile & Desktop Optimized Size) -->
-        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap">
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap relative z-10">
             <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
                 <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
             </a>
@@ -119,150 +127,145 @@
             <span class="text-stone-900 font-bold">Kids Rhymes</span>
         </nav>
 
-        <!-- Local Tool Action Bar - 3D Glassmorphism Gradient Effect -->
-        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-gradient-to-br from-white/95 to-white/60 backdrop-blur-xl border border-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden">
-            
-            <!-- Subtle decorative gradient orb in the background for extra depth -->
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-100/40 rounded-full blur-2xl pointer-events-none -z-10"></div>
-
+        <!-- Local Tool Action Bar - Premium Glassmorphism -->
+        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/60 backdrop-blur-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden">
             <div class="flex items-center gap-3 md:gap-4 relative z-10">
-                <!-- 3D Inner Shadow on the Icon -->
-                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-xl md:text-2xl flex-shrink-0 shadow-inner border border-red-100/50">
-                    🎵
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/80 backdrop-blur-md text-red-600 flex items-center justify-center font-bold text-2xl md:text-3xl flex-shrink-0 shadow-[inset_0_2px_10px_rgba(255,255,255,0.8)] border border-white/50">
+                    ЁЯО╡
                 </div>
-                <div>
-                    <h1 class="text-lg md:text-xl font-black text-stone-900 leading-tight">Interactive Nursery Rhymes for Kids</h1>
-                    <h2 class="text-xs md:text-sm text-stone-500 font-medium mt-0.5">Complete Rhymes collection in English & Hindi</h2>
+                <div class="flex flex-col justify-center">
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 leading-tight tracking-tight drop-shadow-sm">Interactive Nursery Rhymes for Kids</h1>
+                    <h2 class="text-xs sm:text-sm text-stone-600 font-medium mt-0.5 leading-tight">Complete Rhymes collection in English & Hindi</h2>
                 </div>
             </div>
             
             <div class="w-full sm:w-auto flex-shrink-0 relative z-10">
-                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/80 hover:bg-white text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop shadow-sm border border-stone-200/60" aria-label="View Playlist">
+                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/80 backdrop-blur-md hover:bg-white text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop shadow-sm border border-white" aria-label="View Playlist">
                     <i class="fa-solid fa-list-ul"></i>
                     <span>Playlist</span>
-                    <span id="playlist-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center shadow-sm hidden animate-pop border-2 border-white">0</span>
+                    <span id="playlist-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center shadow-md hidden animate-pop border-2 border-white">0</span>
                 </button>
             </div>
         </div>
 
-        <!-- Rhyme of the Day -->
-        <section id="rhyme-of-the-day" class="mb-6 fade-in">
-            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-red-50 border border-red-200 p-4 rounded-2xl cursor-pointer hover:border-red-300 transition-all duration-300 flex items-center justify-between gap-3 shadow-sm">
+        <!-- Rhyme of the Day - Glassmorphism -->
+        <section id="rhyme-of-the-day" class="mb-6 fade-in relative z-10">
+            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-red-50/60 backdrop-blur-lg border border-red-200/60 p-4 rounded-2xl cursor-pointer hover:border-red-300 hover:bg-red-50/80 transition-all duration-300 flex items-center justify-between gap-3 shadow-[0_8px_20px_rgba(239,68,68,0.05)]">
                 <div class="flex items-center gap-3 overflow-hidden">
-                    <div class="text-2xl bg-white w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" id="rotd-icon"><span class="animate-pulse opacity-50">🎵</span></div>
+                    <div class="text-2xl bg-white/90 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0 border border-white" id="rotd-icon"><span class="animate-pulse opacity-50">ЁЯО╡</span></div>
                     <div class="text-left overflow-hidden">
-                        <h2 class="text-[10px] font-black uppercase tracking-widest text-red-700 mb-0.5 block truncate">Featured Today</h2>
+                        <h2 class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-0.5 block truncate">Featured Today</h2>
                         <h3 class="text-base sm:text-lg font-bold text-stone-900 truncate" id="rotd-title">Loading...</h3>
                     </div>
                 </div>
-                <div class="bg-white text-red-700 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-200 shadow-sm whitespace-nowrap flex-shrink-0">
+                <div class="bg-white/90 backdrop-blur-sm text-red-600 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-100 shadow-sm whitespace-nowrap flex-shrink-0 hover:scale-105 transition-transform">
                     Read & Listen &rarr;
                 </div>
             </div>
         </section>
 
-        <!-- Controls Section -->
-        <section id="controls-section" class="mb-8 fade-in">
-            <div class="bg-white border border-stone-200 rounded-[2rem] shadow-sm p-5 md:p-6">
+        <!-- Controls Section - Glassmorphism -->
+        <section id="controls-section" class="mb-8 fade-in relative z-10">
+            <div class="bg-white/50 backdrop-blur-xl border border-white/80 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 md:p-6">
                 <div class="flex flex-col md:flex-row items-center gap-4 mb-6">
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i class="fa-solid fa-magnifying-glass text-stone-400"></i>
                         </div>
-                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all">
+                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-white/70 backdrop-blur-sm border border-white shadow-inner rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition-all">
                     </div>
-                    <button id="surprise-button" class="w-full md:w-auto flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-sm rounded-xl shadow-sm transition-transform active:scale-95 flex items-center justify-center gap-2">
+                    <button id="surprise-button" class="w-full md:w-auto flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-sm rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-shuffle"></i> Random Rhyme
                     </button>
                 </div>
 
                 <div id="category-filters">
                     <div class="flex flex-wrap items-center justify-start md:justify-center gap-2">
-                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Rhymes">All</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Favorites">Favorites ❤️</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Learning">Learning 🧠</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Animal">Animals 🐾</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Classic">Classics 📜</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Lullaby">Lullabies 🌙</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-stone-100 rounded-full border border-transparent hover:border-stone-300" data-category="Indian">Indian 🇮🇳</button>
+                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Rhymes">All</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Favorites">Favorites тЭдя╕П</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Learning">Learning ЁЯза</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Animal">Animals ЁЯР╛</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Classic">Classics ЁЯУЬ</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Lullaby">Lullabies ЁЯМЩ</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Indian">Indian ЁЯЗоЁЯЗ│</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Rhyme Gallery View -->
-        <section id="rhyme-gallery" class="mb-12">
-            <h2 id="gallery-title" class="text-xl md:text-2xl font-black text-stone-900 text-center md:text-left mb-6 transition-opacity duration-300 px-2">All Rhymes</h2>
+        <section id="rhyme-gallery" class="mb-12 relative z-10">
+            <h2 id="gallery-title" class="text-lg md:text-xl font-black text-stone-900 text-center md:text-left mb-6 transition-opacity duration-300 px-2 drop-shadow-sm">All Rhymes</h2>
             
             <div id="rhyme-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[50vh]">
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-stone-100 animate-pulse rounded-2xl h-32 md:h-36"></div>
+                <!-- Glassmorphic Skeleton Loaders -->
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
             </div>
         </section>
 
-        <!-- Single Rhyme Detail View -->
-        <section id="rhyme-detail" class="hidden min-h-[60vh] fade-in">
+        <!-- Single Rhyme Detail View - Glassmorphism -->
+        <section id="rhyme-detail" class="hidden min-h-[60vh] fade-in relative z-10">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-wrap justify-between items-center gap-4 mb-6 print-hide">
-                    <button id="back-button" class="flex items-center gap-2 text-stone-500 hover:text-red-600 font-bold py-2 px-3 transition-colors active:scale-95 text-sm">
+                    <button id="back-button" class="flex items-center gap-2 bg-white/60 backdrop-blur-md border border-white/80 shadow-sm rounded-lg text-stone-600 hover:text-red-600 hover:bg-white font-bold py-2 px-3 transition-all active:scale-95 text-sm">
                         <i class="fa-solid fa-arrow-left"></i> Back to Gallery
                     </button>
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Prev</button>
-                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Next</button>
+                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/60 backdrop-blur-md border border-white/80 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Prev</button>
+                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/60 backdrop-blur-md border border-white/80 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Next</button>
                     </div>
                 </div>
 
-                <div class="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-stone-200">
-                    <div class="text-center border-b border-stone-100 pb-5 mb-5">
-                        <h2 id="rhyme-title-en" class="text-2xl sm:text-[30px] font-black text-stone-900 mb-1.5 leading-tight"></h2>
-                        <h3 id="rhyme-title-hi" class="text-lg sm:text-xl font-bold text-stone-500"></h3>
+                <div class="bg-white/70 backdrop-blur-2xl p-6 md:p-10 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.06)] border border-white/80 relative overflow-hidden">
+                    <div class="text-center border-b border-stone-200/50 pb-5 mb-5 relative z-10">
+                        <h2 id="rhyme-title-en" class="text-2xl sm:text-[30px] font-black text-stone-900 mb-1.5 leading-tight drop-shadow-sm"></h2>
+                        <h3 id="rhyme-title-hi" class="text-lg sm:text-xl font-bold text-stone-600"></h3>
                         
                         <div id="learning-focus-badge-container" class="hidden mt-3">
-                            <span id="learning-focus-badge" class="inline-block bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"></span>
+                            <span id="learning-focus-badge" class="inline-block bg-blue-50/80 backdrop-blur-sm text-blue-600 border border-blue-200/50 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"></span>
                         </div>
 
-                        <div class="flex justify-center items-center gap-2 mt-4 print-hide">
-                            <button id="read-aloud-btn-rhyme" class="action-btn w-10 h-10 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-base button-pop" title="Read Aloud" aria-label="Read Aloud">📢</button>
-                            <button id="add-to-playlist-btn" class="action-btn w-10 h-10 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full button-pop" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-600 text-sm"></i></button>
-                            <button id="favorite-btn" class="action-btn w-10 h-10 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-base button-pop" title="Add to Favorites" aria-label="Add to Favorites">🤍</button>
-                            <button id="share-rhyme-btn" class="action-btn w-10 h-10 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-base button-pop" title="Share" aria-label="Share">🔗</button>
-                            <button id="print-rhyme-btn" class="action-btn w-10 h-10 flex items-center justify-center bg-stone-50 border border-stone-200 rounded-full text-base button-pop" title="Print" aria-label="Print">🖨️</button>
+                        <div class="flex justify-center items-center gap-3 mt-5 print-hide">
+                            <button id="read-aloud-btn-rhyme" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Read Aloud" aria-label="Read Aloud">ЁЯУв</button>
+                            <button id="add-to-playlist-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full button-pop" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-700 text-base"></i></button>
+                            <button id="favorite-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Add to Favorites" aria-label="Add to Favorites">ЁЯдН</button>
+                            <button id="share-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Share" aria-label="Share">ЁЯФЧ</button>
+                            <button id="print-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Print" aria-label="Print">ЁЯЦия╕П</button>
                         </div>
                     </div>
                     
-                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-3 mb-6 bg-red-50 py-2 px-3 rounded-xl border border-red-200 print-hide max-w-xs mx-auto">
-                        <button id="prev-rhyme-btn" class="text-red-700 hover:text-red-900 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-backward-step text-sm"></i></button>
-                        <span id="playlist-position" class="text-red-800 font-bold text-xs"></span>
-                        <button id="next-rhyme-btn" class="text-red-700 hover:text-red-900 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-forward-step text-sm"></i></button>
+                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-3 mb-6 bg-red-50/80 backdrop-blur-md py-2 px-4 rounded-xl border border-red-100 shadow-sm print-hide max-w-xs mx-auto relative z-10">
+                        <button id="prev-rhyme-btn" class="text-red-600 hover:text-red-800 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-backward-step text-sm"></i></button>
+                        <span id="playlist-position" class="text-red-800 font-bold text-xs uppercase tracking-wider"></span>
+                        <button id="next-rhyme-btn" class="text-red-600 hover:text-red-800 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-forward-step text-sm"></i></button>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4">English</h3>
-                            <pre id="rhyme-lyrics-en" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans"></pre>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                        <div class="bg-white/50 backdrop-blur-sm border border-white/60 p-5 rounded-2xl shadow-inner">
+                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4 border-b border-stone-200/50 pb-2">English</h3>
+                            <pre id="rhyme-lyrics-en" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans bg-transparent border-0 p-0"></pre>
                         </div>
-                        <div id="hindi-column">
-                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4">Hindi</h3>
-                            <pre id="rhyme-lyrics-hi" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans"></pre>
+                        <div id="hindi-column" class="bg-white/50 backdrop-blur-sm border border-white/60 p-5 rounded-2xl shadow-inner">
+                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4 border-b border-stone-200/50 pb-2">Hindi</h3>
+                            <pre id="rhyme-lyrics-hi" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans bg-transparent border-0 p-0"></pre>
                         </div>
                     </div>
                     
-                    <!-- Uniformed Educational Fact Section -->
-                    <div id="fun-fact-container" class="mt-8 pt-8 border-t border-stone-100 hidden">
-                        <details id="fun-fact-details" class="bg-stone-50 p-5 rounded-2xl cursor-pointer border border-stone-200 group">
-                            <summary class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] group-hover:text-red-600 transition-colors outline-none">
-                                💡 Educational Fact
+                    <div id="fun-fact-container" class="mt-8 pt-8 border-t border-stone-200/50 hidden relative z-10">
+                        <details id="fun-fact-details" class="bg-white/60 backdrop-blur-md p-5 rounded-2xl cursor-pointer border border-white/80 shadow-sm group">
+                            <summary class="text-xs font-black text-stone-500 uppercase tracking-[0.2em] group-hover:text-red-600 transition-colors outline-none flex items-center">
+                                <span class="mr-2 text-base">ЁЯТб</span> Educational Fact
                             </summary>
-                            <p id="fun-fact-text" class="mt-4 text-[13px] sm:text-sm leading-relaxed text-stone-800 font-sans"></p>
+                            <p id="fun-fact-text" class="mt-4 text-[13px] sm:text-sm leading-relaxed text-stone-700 font-sans"></p>
                         </details>
                     </div>
 
-                     <div id="copyright-notice-container" class="mt-6 hidden print-hide">
+                     <div id="copyright-notice-container" class="mt-6 hidden print-hide relative z-10">
                         <div class="text-center">
                             <p id="copyright-text" class="text-[10px] text-stone-400 uppercase tracking-wider font-bold"></p>
                         </div>
@@ -273,24 +276,100 @@
     </main>
 
     <!-- Global Footer Placeholder -->
-    <div id="app-footer" class="min-h-[80px] w-full"></div>
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
 
     <!-- Modals & Overlays -->
-    <div id="playlist-view" class="fixed inset-0 bg-stone-900/60 z-[100] hidden flex justify-end transition-opacity duration-300">
-        <div class="bg-white shadow-2xl w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300" id="playlist-sidebar">
-            <div class="flex justify-between items-center p-5 border-b border-stone-200 bg-stone-50">
-                <h2 class="text-lg font-black text-stone-900">Queue</h2>
+    <!-- Playlist Sidebar Glassmorphism -->
+    <div id="playlist-view" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[100] hidden flex justify-end transition-opacity duration-300">
+        <div class="bg-white/80 backdrop-blur-2xl shadow-[-10px_0_30px_rgba(0,0,0,0.1)] w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300 border-l border-white/50" id="playlist-sidebar">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200/50 bg-white/50">
+                <h2 class="text-lg font-black text-stone-900">Your Queue</h2>
                 <button id="close-playlist-btn" class="text-stone-400 hover:text-red-600 transition-colors p-2 text-xl" aria-label="Close Playlist"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div id="playlist-items" class="flex-grow p-4 space-y-2 overflow-y-auto"></div>
-            <div class="p-5 border-t border-stone-200 bg-stone-50">
-                <button id="clear-playlist-btn" class="w-full bg-stone-200 hover:bg-red-600 hover:text-white text-stone-700 font-bold py-3 px-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
+            <div id="playlist-items" class="flex-grow p-4 space-y-3 overflow-y-auto"></div>
+            <div class="p-5 border-t border-stone-200/50 bg-white/50">
+                <button id="clear-playlist-btn" class="w-full bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 border border-stone-200 hover:border-red-600 font-bold py-3 px-4 rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
             </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
     <div id="toast-notification"></div>
+
+    <!-- Data embedded for SEO -->
+    <script>
+        window.hardcodedRhymesData = [
+            // PUBLIC RHYMES
+            { id: 1, title: "Twinkle, Twinkle, Little Star", category: "Classic", icon: "тЬи", tags: ["lullaby", "classic"], lyrics: "Twinkle, twinkle, little star,\nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.\n\nWhen the blazing sun is gone,\nWhen he nothing shines upon,\nThen you show your little light,\nTwinkle, twinkle, all the night.", funFact: "The lyrics are from an early-19th-century English poem by Jane Taylor, 'The Star'. The tune is from an old French melody." },
+            { id: 2, title: "Baa, Baa, Black Sheep", category: "Animal", icon: "ЁЯРС", tags: ["animal", "classic", "learning"], lyrics: "Baa, baa, black sheep,\nHave you any wool?\nYes, sir, yes, sir,\nThree bags full.\n\nOne for the master,\nOne for the dame,\nAnd one for the little boy\nWho lives down the lane.", funFact: "This rhyme is over 250 years old! It is one of the most popular nursery rhymes in the English language." },
+            { id: 3, title: "Machli Jal Ki Rani Hai", title_hi: "рдордЫрд▓реА рдЬрд▓ рдХреА рд░рд╛рдиреА рд╣реИ", category: "Indian", icon: "ЁЯРа", tags: ["animal", "indian"], lyrics: "Fish, the queen of water,\nHer life is made of water.\nTouch it, and she will be scared,\nTake her out, and she will die.", lyrics_hi: "рдордЫрд▓реА рдЬрд▓ рдХреА рд░рд╛рдиреА рд╣реИ,\nрдЬреАрд╡рди рдЙрд╕рдХрд╛ рдкрд╛рдиреА рд╣реИред\nрд╣рд╛рде рд▓рдЧрд╛рдУ рдбрд░ рдЬрд╛рдПрдЧреА,\nрдмрд╛рд╣рд░ рдирд┐рдХрд╛рд▓реЛ рдорд░ рдЬрд╛рдПрдЧреАред", funFact: "This is one of the first and most popular Hindi rhymes taught to children in India to help them learn about nature." },
+            { id: 4, title: "Mary Had a Little Lamb", category: "Animal", icon: "ЁЯРС", tags: ["animal", "classic"], lyrics: "Mary had a little lamb,\nIts fleece was white as snow;\nAnd everywhere that Mary went,\nThe lamb was sure to go.\n\nIt followed her to school one day,\nWhich was against the rule;\nIt made the children laugh and play\nTo see a lamb at school.\n\nAnd so the teacher turned him out,\nBut still he lingered near,\nAnd waited patiently about\nTill Mary did appear.", funFact: "This rhyme is based on a real-life incident! A young girl named Mary Sawyer took her pet lamb to school in the 1830s." },
+            { id: 5, title: "Jack and Jill", category: "Classic", icon: "ЁЯСзЁЯСж", tags: ["classic"], lyrics: "Jack and Jill went up the hill\nTo fetch a pail of water;\nJack fell down and broke his crown,\nAnd Jill came tumbling after.\n\nUp Jack got and home did trot,\nAs fast as he could caper,\nTo old Dame Dob, who patched his nob\nWith vinegar and brown paper.", funFact: "Some historians think 'Jack and Jill' might be a story about King Louis XVI of France (who lost his 'crown') and his wife Marie Antoinette." },
+            { id: 6, title: "Hey Diddle Diddle", category: "Classic", icon: "ЁЯРИЁЯО╗", tags: ["silly", "animal", "classic"], lyrics: "Hey diddle diddle,\nThe cat and the fiddle,\nThe cow jumped over the moon;\nThe little dog laughed\nTo see such sport,\nAnd the dish ran away with the spoon.", funFact: "This rhyme is pure fun and nonsense! It is designed to be silly and make children laugh with its impossible images." },
+            { id: 7, title: "Itsy Bitsy Spider", category: "Animal", icon: "ЁЯХ╖я╕П", tags: ["animal"], lyrics: "The itsy bitsy spider\nClimbed up the waterspout.\nDown came the rain\nAnd washed the spider out.\nOut came the sun\nAnd dried up all the rain,\nAnd the itsy bitsy spider\nClimbed up the spout again.", funFact: "This rhyme teaches a simple lesson about perseverance. Even when things go wrong, you can always try again!" },
+            { id: 8, title: "Row, Row, Row Your Boat", category: "Classic", icon: "ЁЯЪг", tags: ["classic"], lyrics: "Row, row, row your boat,\nGently down the stream.\nMerrily, merrily, merrily, merrily,\nLife is but a dream.", funFact: "This rhyme is often sung in a 'round,' where different groups start singing at different times, creating beautiful harmony." },
+            { id: 9, title: "London Bridge Is Falling Down", category: "Classic", icon: "ЁЯМЙ", tags: ["classic"], lyrics: "London Bridge is falling down,\nFalling down, falling down.\nLondon Bridge is falling down,\nMy fair lady.\n\nBuild it up with wood and clay,\nWood and clay, wood and clay,\nBuild it up with wood and clay,\nMy fair lady.", funFact: "The famous London Bridge has been rebuilt many times over the centuries. One of the old bridges was even sold and moved to Arizona, USA!" },
+            { id: 13, title: "Hickory Dickory Dock", category: "Learning", icon: "ЁЯХ░я╕П", tags: ["learning", "animal", "classic"], learningFocus: "Telling Time", lyrics: "Hickory dickory dock,\nThe mouse ran up the clock.\nThe clock struck one,\nThe mouse ran down.\nHickory dickory dock.", funFact: "This rhyme is a fun way to help children learn how to tell time and practice counting." },
+            { id: 14, title: "Pat-a-cake, Pat-a-cake", category: "Classic", icon: "ЁЯОВ", tags: ["classic", "food"], lyrics: "Pat-a-cake, pat-a-cake, baker's man,\nBake me a cake as fast as you can;\nPat it and prick it, and mark it with B,\nAnd put it in the oven for Baby and me.", funFact: "This is one of the oldest English nursery rhymes, often played as a clapping game between a parent and a baby." },
+            { id: 15, title: "This Little Piggy", category: "Animal", icon: "ЁЯР╖", tags: ["animal", "classic"], lyrics: "This little piggy went to market,\nThis little piggy stayed home,\nThis little piggy had roast beef,\nThis little piggy had none.\nThis little piggy cried, 'Wee, wee, wee!' all the way home.", funFact: "This is a popular 'toe play' rhyme, where each line corresponds to wiggling one of a baby's five toes." },
+            { id: 17, title: "Ring Around the Rosie", category: "Classic", icon: "ЁЯМ╣", tags: ["classic"], lyrics: "Ring-a-round the rosie,\nA pocket full of posies,\nAshes! Ashes!\nWe all fall down.", funFact: "Many people believe this rhyme is about the Great Plague of London, but historians say there is no real evidence for this. It is most likely just a fun game!" },
+            { id: 18, title: "One, Two, Buckle My Shoe", category: "Learning", icon: "ЁЯСЮ", tags: ["learning", "classic"], learningFocus: "Counting to 20", lyrics: "One, two, Buckle my shoe;\nThree, four, Knock at the door;\nFive, six, Pick up sticks;\nSeven, eight, Lay them straight.\nNine, ten, A big fat hen;\nEleven, twelve, Dig and delve;\nThirteen, fourteen, Maids a-courting;\nFifteen, sixteen, Maids in the kitchen.\nSeventeen, eighteen, Maids a-waiting;\nNineteen, twenty, My plate's empty.", funFact: "This is a classic counting rhyme that helps children learn their numbers in a fun, memorable way." },
+            { id: 23, title: "Chanda Mama", title_hi: "рдЪрдВрджрд╛ рдорд╛рдорд╛ рджреВрд░ рдХреЗ", category: "Indian", icon: "ЁЯМЬ", tags: ["indian", "lullaby"], lyrics: "Moon uncle, so far away,\nCooking puddings day by day.\nYou eat from your plate so grand,\nGive me a bowl here in my hand.", lyrics_hi: "рдЪрдВрджрд╛ рдорд╛рдорд╛ рджреВрд░ рдХреЗ,\nрдкреБрдП рдкрдХрд╛рдП рдмреВрд░ рдХреЗред\nрдЖрдк рдЦрд╛рдПрдВ рдерд╛рд▓реА рдореЗрдВ,\nрдореБрдиреНрдиреЗ рдХреЛ рджреЗрдВ рдкреНрдпрд╛рд▓реА рдореЗрдВред", funFact: "In Indian culture, the moon is often affectionately called 'Chanda Mama' (Moon Uncle), and is a central character in many lullabies and stories." },
+            { id: 26, title: "Humpty Dumpty", category: "Classic", icon: "ЁЯеЪ", tags: ["classic", "silly"], lyrics: "Humpty Dumpty sat on a wall,\nHumpty Dumpty had a great fall.\nAll the king's horses and all the king's men,\nCould not put Humpty together again.", funFact: "Humpty Dumpty was originally a riddle! The answer is an egg. If an egg falls and breaks, you cannot put it back together." },
+            { id: 31, title: "Rain, Rain, Go Away", category: "Classic", icon: "тШФ", tags: ["classic"], lyrics: "Rain, rain, go away,\nCome again another day.\nLittle Johnny wants to play,\nRain, rain, go away.", funFact: null },
+            { id: 47, title: "Rock-a-bye Baby", category: "Classic", icon: "ЁЯС╢", tags: ["classic", "lullaby"], lyrics: "Rock-a-bye baby, on the treetop,\nWhen the wind blows, the cradle will rock,\nWhen the bough breaks, the cradle will fall,\nAnd down will come baby, cradle and all.", funFact: null },
+            { id: 84, title: "Little Bo-Peep", category: "Classic", icon: "ЁЯРС", tags: ["classic", "animal"], lyrics: "Little Bo-Peep has lost her sheep,\nAnd does not know where to find them;\nLeave them alone, and they will come home,\nWagging their tails behind them.", funFact: null },
+            
+            // EXCLUSIVE RHYMES
+            { id: 101, title: "The Friendly Robot", category: "Learning", icon: "ЁЯдЦ", tags: ["learning", "silly"], isExclusive: true, lyrics: "I have a robot, big and grand,\nThe best robot in the land.\nHe helps me clean my room each day,\nThen we both go out to play.", funFact: "The word 'robot' comes from the Czech word 'robota', which means 'forced labor' or 'work'." },
+            { id: 103, title: "The Sleepy Bear", title_hi: "рд╕реЛрддрд╛ рднрд╛рд▓реВ", category: "Animal", icon: "ЁЯР╗", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "The sleepy bear goes to his bed,\nLays down his big and fuzzy head.\nHe dreams of honey, sweet and deep,\nWhile all the little bunnies sleep.", lyrics_hi: "рд╕реЛрддрд╛ рднрд╛рд▓реВ рдмрд┐рд╕реНрддрд░ рдЬрд╛рдП,\nрдЕрдкрдирд╛ рдкреНрдпрд╛рд░рд╛ рд╕рд┐рд░ рдЯрд┐рдХрд╛рдПред\nрд╢рд╣рдж рдХреЗ рдореАрдареЗ рд╕рдкрдиреЗ рджреЗрдЦреЗ,\nрдЬрдм рдЦрд░рдЧреЛрд╢ рд╕рдм рд╕реЛ рдЬрд╛рдПрдВред", funFact: "Bears can sleep for several months during the winter in a process called hibernation." },
+            { id: 105, title: "My Rocket Ship Adventure", category: "Learning", icon: "ЁЯЪА", tags: ["silly", "action"], isExclusive: true, lyrics: "Five, four, three, two, one, we go,\nMy rocket ship is putting on a show!\nPast the clouds and up so high,\nWe'll draw a circle in the sky.\n\nWe zoom around the yellow moon,\nAnd dance among the stars in tune.\nThen we come back home to bed,\nWith sleepy thoughts inside my head.", funFact: "It takes about three days for a rocket to travel from the Earth to the Moon." },
+            { id: 106, title: "The Wiggle Worm", category: "Animal", icon: "ЁЯРЫ", tags: ["animal", "action"], isExclusive: true, lyrics: "I'm a little wiggle worm,\nWatch me squirm and squirm.\nI wiggle in the dirt all day,\nThen I wiggle, far away!", funFact: "Earthworms are very helpful because they create tunnels in the soil, which helps air and water reach the roots of plants." },
+            { id: 107, title: "The Popcorn Song", category: "Learning", icon: "ЁЯН┐", tags: ["food", "silly"], isExclusive: true, lyrics: "Pop, pop, popcorn,\nPopping in the pot.\nPop, pop, popcorn,\nEat it while it's hot!\n\nPop, pop, popcorn,\nWhite and fluffy, too.\nPop, pop, popcorn,\nI'll share a piece with you!", funFact: "A single kernel of popcorn can pop up to 3 feet in the air!" },
+            { id: 108, title: "My Happy Kite", title_hi: "рдореЗрд░реА рдкреНрдпрд╛рд░реА рдкрддрдВрдЧ", category: "Learning", icon: "ЁЯкБ", tags: ["action"], isExclusive: true, lyrics: "My kite, my kite, flies in the sky,\nSoaring, soaring, way up high.\nDancing with the wind so free,\nLook, my kite is waving at me!", lyrics_hi: "рдореЗрд░реА рдкрддрдВрдЧ, рдореЗрд░реА рдкрддрдВрдЧ, рдЖрд╕рдорд╛рди рдореЗрдВ рдЙрдбрд╝реЗ,\nрдКрдБрдЪреЗ, рдКрдБрдЪреЗ, рдмрд╣реБрдд рдКрдБрдЪреЗ рдЙрдбрд╝реЗред\nрд╣рд╡рд╛ рдХреЗ рд╕рдВрдЧ рдирд╛рдЪреЗ рдЖрдЬрд╝рд╛рдж,\nрджреЗрдЦреЛ, рдореЗрд░реА рдкрддрдВрдЧ рдореБрдЭреЗ рд╣рд┐рд▓рд╛рдП рд╣рд╛рде!", funFact: "Kites were invented in China over 2,000 years ago." },
+            { id: 109, title: "The Little Owl", category: "Animal", icon: "ЁЯжЙ", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "The sun is gone, the moon is bright,\nA little owl says, 'Hoo!' at night.\nHe spreads his wings and starts to fly,\nBeneath the starry, sleepy sky.", funFact: "Owls can turn their heads almost all the way around, but they can't move their eyes." },
+            { id: 111, title: "Silly Starfish", category: "Animal", icon: "тнР", tags: ["animal", "silly", "ocean"], isExclusive: true, lyrics: "Silly little starfish,\nSpinning in the blue,\nDoing cartwheels in the sea,\nJust for me and you.", funFact: "Starfish can regrow their arms if they lose one!" },
+            { id: 112, title: "The Mighty Rex", category: "Animal", icon: "ЁЯжЦ", tags: ["animal", "action"], isExclusive: true, lyrics: "The mighty Rex with a toothy grin,\nMakes the whole jungle shake and spin.\nHe gives a roar, a mighty sound,\nThen takes a nap upon the ground.", funFact: "Despite its ferocious reputation, some scientists think the T-Rex might have had feathers!" },
+            { id: 116, title: "Mr. Snail", category: "Animal", icon: "ЁЯРМ", tags: ["animal"], isExclusive: true, lyrics: "Slowly, slowly, Mr. Snail,\nCrawling down the garden trail.\nHe carries his house upon his back,\nThen hides inside, it's black, black, black.\n\nBut when the sun begins to peek,\nHe slowly lifts his head to speak.\nHe says, 'Hello, my friend, so grand!'\nAnd crawls out on his house-in-hand.", funFact: "Some snails can sleep for up to three years!" },
+            { id: 121, title: "Penguin Parade", category: "Animal", icon: "ЁЯРз", tags: ["animal", "action"], isExclusive: true, lyrics: "Down the snowy hill they slide,\nWhat a fun and slippery ride!\nThen they waddle, side-by-side,\nIt's the penguin parade!", funFact: "The way penguins waddle actually helps them save energy as they walk." },
+            { id: 122, title: "The Baking Song", category: "Learning", icon: "ЁЯНк", tags: ["food", "learning"], learningFocus: "Following Steps", isExclusive: true, lyrics: "Mix the flour, crack the egg,\nStir the batter with your leg!\nJust kidding, use a spoon instead,\nTime to make some gingerbread!", funFact: "The tradition of making decorated gingerbread houses started in Germany in the 1800s." },
+            { id: 123, title: "The Bouncing Ball", category: "Learning", icon: "тЪ╜", tags: ["action", "silly"], isExclusive: true, lyrics: "A bouncing ball, a bouncing ball,\nBouncing up against the wall.\nIt bounces high, it bounces low,\nWhere will the bouncing ball go?", funFact: "The first basketballs were not bouncy at all! They were made of leather panels stitched together with a rubber bladder inside, much like a soccer ball." },
+            { id: 125, title: "The Little Frog", category: "Animal", icon: "ЁЯР╕", tags: ["animal"], isExclusive: true, lyrics: "A little frog on a lily pad,\nWas feeling just a little sad.\nThen he jumped up with a CROAK!\nAnd that was the best froggy joke.", funFact: "Frogs don't need to drink water; they absorb it through their skin." },
+            { id: 127, title: "The Squirrel's Nut", category: "Animal", icon: "ЁЯР┐я╕П", tags: ["animal"], isExclusive: true, lyrics: "A little squirrel with a tail so grand,\nFound the biggest nut in all the land.\nHe buried it deep beside a tree,\nTo eat in winter, just for he.", funFact: "Squirrels pretend to bury nuts to fool other animals who might be watching them, then they hide the real nut somewhere else!" },
+            { id: 129, title: "The Friendly Ghost", category: "Classic", icon: "ЁЯС╗", tags: ["silly", "lullaby"], isExclusive: true, lyrics: "There's a friendly ghost who floats and flies,\nHe has two big and happy eyes.\nHe doesn't want to make you scared,\nHe just wants his teddy bear.\n\nHe finds his bear right on the floor,\nAnd hugs it tight and starts to snore.\nHe's happy now, his day is blessed,\nThe friendly ghost can go to rest.", funFact: "The idea of ghosts being white and floaty comes from old traditions where burial cloths, called shrouds, were usually white." },
+            { id: 131, title: "The Happy Dolphin", category: "Animal", icon: "ЁЯРм", tags: ["animal", "action"], isExclusive: true, lyrics: "Splash and flip, so fast and free,\nA happy dolphin in the sea.\nHe jumps and clicks and says hello,\nTo all the little fish below.", funFact: "Dolphins sleep with only half of their brain at a time, and they keep one eye open to watch for predators." },
+            { id: 132, title: "The Moon's Goodnight", title_hi: "рдЪрд╛рдБрдж рдХреА рд╢реБрднрд░рд╛рддреНрд░рд┐", category: "Classic", icon: "ЁЯМЬ", tags: ["lullaby"], isExclusive: true, lyrics: "The moon peeks out from cloudy skies,\nAnd winks its sleepy, silver eyes.\nIt's time for bed, you sleepy head,\n'Goodnight, goodnight,' the moonlight said.", lyrics_hi: "рдЪрд╛рдБрдж рдмрд╛рджрд▓реЛрдВ рд╕реЗ рдЭрд╛рдБрдХреЗ,\nрдЕрдкрдиреА рдиреАрдВрдж рднрд░реА, рдЪрд╛рдБрджреА рд╕реА рдЖрдБрдЦреЗрдВ рдЭрдкрдХрд╛рдПред\nрд╕реЛрдиреЗ рдХрд╛ рд╕рдордп рд╣реЛ рдЧрдпрд╛, рдореЗрд░реЗ рдкреНрдпрд╛рд░реЗ,\n'рд╢реБрднрд░рд╛рддреНрд░рд┐, рд╢реБрднрд░рд╛рддреНрд░рд┐,' рдЪрд╛рдБрджрдиреА рдиреЗ рдХрд╣рд╛ред", funFact: "The moon doesn't make its own light! It reflects the light from the sun, just like a giant mirror in the sky." },
+            { id: 133, title: "The Little Boat", category: "Learning", icon: "тЫ╡", tags: ["transport"], isExclusive: true, lyrics: "My little boat upon the sea,\nSails along so happily.\nThe wind it pushes, soft and low,\nThis way and that way we will go.", funFact: "Sailboats don't have engines; they use the power of the wind in their sails to move across the water." },
+            { id: 137, title: "The Sleepy Volcano", category: "Classic", icon: "ЁЯМЛ", tags: ["silly", "lullaby"], isExclusive: true, lyrics: "There's a sleepy volcano, taking a nap,\nWith a fluffy white cloud for a thinking cap.\nHe rumbles and grumbles, a sleepy sound,\nShaking the flowers all over the ground.", funFact: "When a volcano erupts, the hot liquid rock that comes out is called lava." },
+            { id: 138, title: "The Butterfly", category: "Animal", icon: "ЁЯжЛ", tags: ["animal"], isExclusive: true, lyrics: "A little caterpillar, slow and green,\nBecame the prettiest bug you've seen.\nShe grew some wings and fluttered high,\nA lovely, painted butterfly.", funFact: "Butterflies taste with their feet! It helps them find the right leaf to lay their eggs on." },
+            { id: 141, title: "My Little Wooden Horse", category: "Indian", icon: "ЁЯР┤", tags: ["indian", "animal"], isExclusive: true, lyrics: "Saddle up my horse of wood,\nOn his back, I've always stood.\nWith a tail of rope and a happy sound,\nWe gallop all over the town!", funFact: "Wooden pull-toys have been a childhood classic for hundreds of years, encouraging imagination and play." },
+            { id: 142, title: "The City Bus", category: "Classic", icon: "ЁЯЪМ", tags: ["classic", "silly"], isExclusive: true, lyrics: "The big red bus goes beep, beep, beep,\nWhile all the people are asleep.\nThe doors swing open, wide and grand,\nTo take us all across the land.", funFact: "The first city buses were pulled by horses!" },
+            { id: 143, title: "My Little Teacup", category: "Classic", icon: "ЁЯлЦ", tags: ["classic"], isExclusive: true, lyrics: "I have a little teacup,\nIt's shiny, small, and round.\nWhen I pour the tea in,\nIt makes a happy sound.", funFact: "Having a tea party with toys and friends is a fun way to practice being a good host." },
+            { id: 144, title: "The Happy Peacock", title_hi: "рдЦреБрд╢ рдореЛрд░", category: "Indian", icon: "ЁЯжЪ", tags: ["indian", "animal"], isExclusive: true, lyrics: "Grandma saw a peacock bright,\nWith feathers of blue and green.\nHe danced around in the morning light,\nThe prettiest bird she's seen.", lyrics_hi: "рдирд╛рдиреА рдиреЗ рджреЗрдЦрд╛ рдПрдХ рдореЛрд░ рдЪрдордХреАрд▓рд╛,\nрдкрдВрдЦ рдереЗ рдЙрд╕рдХреЗ рдиреАрд▓реЗ рдФрд░ рд╣рд░реЗред\nрд╕реБрдмрд╣ рдХреА рд░реЛрд╢рдиреА рдореЗрдВ рд╡реЛ рдирд╛рдЪрд╛,\nрд╕рдмрд╕реЗ рд╕реБрдВрджрд░ рдкрдХреНрд╖реА рдЬреЛ рдЙрдиреНрд╣реЛрдВрдиреЗ рджреЗрдЦрд╛ред", funFact: "A peacock's long, beautiful feathers are called a 'train'." },
+            { id: 146, title: "When I'm Feeling Glad", category: "Learning", icon: "ЁЯШК", tags: ["learning", "silly", "action"], isExclusive: true, lyrics: "When I'm feeling glad, a happy song I hum,\nI tap my feet just like a little drum.\nI give a wiggle, then a little leap,\nWhile all the grumpy feelings fall asleep.", funFact: "Doing something active, like dancing or jumping, can make you feel even happier!" },
+            { id: 147, title: "Panda's Peaceful Snack", category: "Animal", icon: "ЁЯР╝", tags: ["classic", "animal"], isExclusive: true, lyrics: "A happy panda, soft and grand,\nChews on bamboo in his land.\nMunch, munch, munch, the whole day long,\nHumming a quiet, happy song.", funFact: "Pandas have a special bone in their wrist that acts like a thumb to help them grip bamboo stalks." },
+            { id: 148, title: "Clever Monkey", title_hi: "рдЪрд╛рд▓рд╛рдХ рдмрдВрджрд░", category: "Indian", icon: "ЁЯР╡", tags: ["indian", "animal", "silly"], isExclusive: true, lyrics: "Monkey wears a silly hat,\nAnd has a friendly chatter-chat.\nHe swings from branches in the sun,\nAnd has a lot of monkey fun.\n\nHe climbs the trees up to the top,\nAnd gives a little playful hop.\nHe pulls a funny face for you,\nAnd waves his tail and says, 'Achoo!'", lyrics_hi: "рдмрдВрджрд░ рдкрд╣рдиреЗ рдПрдХ рдордЬрд╝реЗрджрд╛рд░ рдЯреЛрдкреА,\nрдФрд░ рдХрд░рддрд╛ рд╣реИ рдкреНрдпрд╛рд░реА рдмрд╛рддреЗрдВред\nрдзреВрдк рдореЗрдВ рдбрд╛рд▓рд┐рдпреЛрдВ рдкрд░ рдЭреВрд▓рддрд╛,\nрдФрд░ рдХрд░рддрд╛ рд╣реИ рдмрдВрджрд░ рд╡рд╛рд▓реА рдорд╕реНрддреАред\n\nрдкреЗрдбрд╝реЛрдВ рдкрд░ рдЪрдврд╝рддрд╛ рдКрдкрд░ рддрдХ,\nрдФрд░ рдПрдХ рдЫреЛрдЯреА рд╕реА рдЫрд▓рд╛рдВрдЧ рд▓рдЧрд╛рддрд╛ред\nрддреБрдореНрд╣рд╛рд░реЗ рд▓рд┐рдП рдПрдХ рдордЬрд╝реЗрджрд╛рд░ рдЪреЗрд╣рд░рд╛ рдмрдирд╛рддрд╛,\nрдФрд░ рдЕрдкрдиреА рдкреВрдБрдЫ рд╣рд┐рд▓рд╛рдХрд░ рдХрд╣рддрд╛, 'рдЖрдЪреНрдЫреВ!'", funFact: "Monkeys use their long tails to help them balance as they swing through the trees." },
+            { id: 149, title: "The Mighty Elephant", title_hi: "рд╢рдХреНрддрд┐рд╢рд╛рд▓реА рд╣рд╛рдереА", category: "Indian", icon: "ЁЯРШ", tags: ["indian", "animal"], isExclusive: true, lyrics: "Elephant king, so big and gray,\nSwings his trunk along the way.\nHe says hello with a happy toot,\nAnd stomps his great big elephant foot.", lyrics_hi: "рд╣рд╛рдереА рд░рд╛рдЬрд╛, рдмрдбрд╝рд╛ рдФрд░ рднреВрд░рд╛,\nрд░рд╛рд╕реНрддреЗ рдореЗрдВ рдЕрдкрдиреА рд╕реВрдВрдб рд╣рд┐рд▓рд╛рддрд╛ред\nрдЦреБрд╢реА рд╕реЗ рдПрдХ рддреВрд░реНрдп рдмрдЬрд╛рдХрд░ рдирдорд╕реНрддреЗ рдХрд╣рддрд╛,\nрдФрд░ рдЕрдкрдирд╛ рдмрдбрд╝рд╛ рд╣рд╛рдереА рдкреИрд░ рдкрдЯрдХрддрд╛ред", funFact: "An elephant's trunk is so strong and skillful it can pick up something as heavy as a log or as small as a single grain of rice." },
+            { id: 150, title: "Timothy's Tuba", category: "Classic", icon: "ЁЯО║", tags: ["classic", "silly"], isExclusive: true, lyrics: "Timothy found a tuba bright,\nHe puffed his cheeks with all his might.\nInstead of music, out came a pop,\nAnd a shower of lemon drops!", funFact: "Tubas are the largest brass instruments in an orchestra and make the lowest sounds." },
+            { id: 152, title: "Silly Billy Goat", category: "Animal", icon: "ЁЯРР", tags: ["classic", "silly"], isExclusive: true, lyrics: "Silly Billy Goat went to the fair,\nWith a bright blue ribbon in his hair.\nHe tipped his hat and tapped his toe,\nAnd put on a funny show.\n\nHe balanced books upon his nose,\nAnd jumped and twirled upon his toes.\nHe sang a song and took a bow,\nHe's the silliest goat, you'll agree right now!", funFact: null },
+            { id: 154, title: "My Counting Game", category: "Learning", icon: "ЁЯФв", tags: ["learning", "classic"], learningFocus: "Counting", isExclusive: true, lyrics: "Let's play a game and count to one,\nTap your head, the game's begun.\nLet's play a game and count to two,\nTouch your nose and then your shoe.\n\nLet's play a game and count to three,\nTouch your tummy, one, two, three.\nLet's play a game and count to four,\nClap your hands and ask for more!", funFact: null },
+            { id: 159, title: "Down by the Gate", category: "Classic", icon: "ЁЯЪк", tags: ["classic", "silly"], isExclusive: true, lyrics: "Down by the gate, gate, gate,\nStood a little cat, cat, cat,\nWith a fuzzy hat, hat, hat,\nImagine that, that, that!", funFact: null },
+            { id: 160, title: "The Alphabet's Echo", category: "Learning", icon: "ЁЯФд", tags: ["learning"], learningFocus: "Alphabet", isExclusive: true, lyrics: "A is for Achoo! when you sneeze,\nB is for Buzzing like the bees.\nC is for Clapping, one, two, three,\nD is for Dancing, wild and free!", funFact: "The English alphabet has 26 letters, but some languages have many more or many fewer!" },
+            { id: 163, title: "Time for a Snack", category: "Classic", icon: "ЁЯНО", tags: ["classic", "food"], isExclusive: true, lyrics: "The clock strikes four, it's time to eat,\nTime to eat, time to eat.\nThe clock strikes four, it's time to eat,\nLet's have a tasty treat.", funFact: null },
+            { id: 165, title: "A Fuzzy Caterpillar", category: "Animal", icon: "ЁЯРЫ", tags: ["animal"], isExclusive: true, lyrics: "I found a fuzzy caterpillar,\nWon't my mommy be so thrilled with her?\nI found a fuzzy caterpillar,\nWhoops! She's tickling my chin!", funFact: null },
+            { id: 166, title: "The Magical Garden", category: "Learning", icon: "ЁЯМ╖", tags: ["learning"], learningFocus: "Imagination", isExclusive: true, lyrics: "In a magical garden, the flowers can sing,\nAnd butterflies whisper on shimmering wing.\nThe clouds are all fluffy like cotton candy sweet,\nA wonderful place for my two little feet.", funFact: null },
+            { id: 167, title: "The Little Glimmer Bug", category: "Animal", icon: "ЁЯРЮ", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "A little glimmer bug at night,\nFlashes his tiny, happy light.\nHe dances in the moonlit air,\nWithout a worry, without a care.", funFact: "Fireflies create their light through a chemical reaction in their bodies called bioluminescence." },
+            { id: 168, title: "The Dreamland Train", category: "Learning", icon: "ЁЯЪВ", tags: ["lullaby", "transport"], isExclusive: true, lyrics: "The Dreamland Train goes choo-choo-choo,\nCarrying sleepy dreams for you.\nIt chugs along a starry track,\nDon't worry, it will bring them back.", funFact: "Many old steam trains had a 'cowcatcher' on the front, not to catch cows, but to clear obstacles off the tracks." },
+            { id: 169, title: "The Cloud Sheep", category: "Classic", icon: "тШБя╕ПЁЯРС", tags: ["silly", "animal"], isExclusive: true, lyrics: "A fluffy cloud, a sheep so white,\nFloated by in broad daylight.\nHe did a baa-baa in the sky,\nAnd winked his little cloudy eye.", funFact: "Clouds are made of tiny water droplets or ice crystals that are so light they can float in the air." },
+            { id: 170, title: "The Toothbrush March", category: "Learning", icon: "ЁЯж╖", tags: ["learning", "action"], learningFocus: "Personal Hygiene", isExclusive: true, lyrics: "My toothbrush marches left and right,\nTo make my teeth so clean and bright.\nIt marches up and marches down,\nThe cleanest teeth in all the town!", funFact: "It's important to brush your teeth for two minutes, which is about the length of singing 'Twinkle, Twinkle, Little Star' three times!" },
+            { id: 171, title: "The Tickle Monster", title_hi: "рдЧреБрджрдЧреБрджреА рд╡рд╛рд▓рд╛ рд░рд╛рдХреНрд╖рд╕", category: "Learning", icon: "ЁЯС╗", tags: ["silly", "action"], isExclusive: true, lyrics: "The tickle monster's on the loose,\nHe's not a monster you can shoo!\nWith fuzzy arms and happy feet,\nHe thinks a giggle is a treat.\n\nHe'll tickle toes and sleepy heads,\nAnd chase the grumpies from their beds.\nHe isn't scary, mean, or tall,\nHe just wants to make you laugh, that's all!", lyrics_hi: "рдЧреБрджрдЧреБрджреА рд╡рд╛рд▓рд╛ рд░рд╛рдХреНрд╖рд╕ рд╣реИ рднрд╛рдЧрд╛,\nрдпрд╣ рдРрд╕рд╛ рд░рд╛рдХреНрд╖рд╕ рдирд╣реАрдВ рдЬрд┐рд╕реЗ рддреБрдо рднрдЧрд╛ рд╕рдХреЛ!\nрд░реЛрдПрдБрджрд╛рд░ рдмрд╛рд╣реЛрдВ рдФрд░ рдЦреБрд╢ рдкреИрд░реЛрдВ рдХреЗ рд╕рд╛рде,\nрдЙрд╕реЗ рдЦрд┐рд▓рдЦрд┐рд▓рд╛рд╣рдЯ рдПрдХ рджрд╛рд╡рдд рд▓рдЧрддреА рд╣реИред\n\nрд╡рд╣ рдкреИрд░ рдХреА рдЙрдВрдЧрд▓рд┐рдпреЛрдВ рдФрд░ рдиреАрдВрдж рд╡рд╛рд▓реЗ рд╕рд┐рд░реЛрдВ рдХреЛ рдЧреБрджрдЧреБрджрд╛рдПрдЧрд╛,\nрдФрд░ рдЙрджрд╛рд╕реА рдХреЛ рдЙрдирдХреЗ рдмрд┐рд╕реНрддрд░реЛрдВ рд╕реЗ рднрдЧрд╛ рджреЗрдЧрд╛ред\nрд╡рд╣ рдбрд░рд╛рд╡рдирд╛, рдорддрд▓рдмреА рдпрд╛ рд▓рдВрдмрд╛ рдирд╣реАрдВ рд╣реИ,\nрд╡рд╣ рддреЛ рдмрд╕ рддреБрдореНрд╣реЗрдВ рд╣рдБрд╕рд╛рдирд╛ рдЪрд╛рд╣рддрд╛ рд╣реИ, рдмрд╕ рдЗрддрдирд╛ рд╣реА!", funFact: "Laughing is good for you! It can make you feel happy and relaxed." },
+            { id: 172, title: "The Dream Weaver", title_hi: "рд╕рдкрдиреЛрдВ рдХрд╛ рдмреБрдирдХрд░", category: "Classic", icon: "ЁЯХ╕я╕П", tags: ["lullaby", "animal"], isExclusive: true, lyrics: "A little spider, kind and bright,\nWeaves happy dreams throughout the night.\nShe takes a thread of moonlight beams,\nAnd spins a web of happy dreams.\n\nShe adds a star, a candy cane,\nA ride upon a choo-choo train.\nSo close your eyes and sleep so deep,\nGood dreams the weaver helps you keep.", lyrics_hi: "рдПрдХ рдЫреЛрдЯреА рдордХрдбрд╝реА, рджрдпрд╛рд▓реБ рдФрд░ рдЙрдЬреНрдЬреНрд╡рд▓,\nрд░рд╛рдд рднрд░ рдЦреБрд╢рд┐рдпреЛрдВ рдХреЗ рд╕рдкрдиреЗ рдмреБрдирддреА рд╣реИред\nрд╡рд╣ рдЪрд╛рдВрджрдиреА рдХреА рдХрд┐рд░рдгреЛрдВ рдХрд╛ рдПрдХ рдзрд╛рдЧрд╛ рд▓реЗрддреА рд╣реИ,\nрдФрд░ рдЦреБрд╢рд┐рдпреЛрдВ рдХреЗ рд╕рдкрдиреЛрдВ рдХрд╛ рдЬрд╛рд▓ рдмреБрдирддреА рд╣реИред\n\nрд╡рд╣ рдПрдХ рддрд╛рд░рд╛, рдПрдХ рдХреИрдВрдбреА рдХреЗрди рдЬреЛрдбрд╝рддреА рд╣реИ,\nрдПрдХ рдЫреБрдХ-рдЫреБрдХ рдЧрд╛рдбрд╝реА рдХреА рд╕рд╡рд╛рд░реАред\nрддреЛ рдЕрдкрдиреА рдЖрдБрдЦреЗрдВ рдмрдВрдж рдХрд░реЛ рдФрд░ рдЧрд╣рд░реА рдиреАрдВрдж рд╕реЛ рдЬрд╛рдУ,\nрдЕрдЪреНрдЫреЗ рд╕рдкрдиреЗ рдмреБрдирдХрд░ рддреБрдореНрд╣рд╛рд░реА рдорджрдж рдХрд░рддреА рд╣реИред", funFact: "Not all spiders spin webs to catch food. Some use their silk for building homes or protecting their eggs." },
+            { id: 173, title: "The Dancing Dinosaur", title_hi: "рдирд╛рдЪрдиреЗ рд╡рд╛рд▓рд╛ рдбрд╛рдпрдирд╛рд╕реЛрд░", category: "Animal", icon: "ЁЯТГЁЯжЦ", tags: ["animal", "silly", "action"], isExclusive: true, lyrics: "A dinosaur with happy feet,\nDanced all day right down the street.\nHe did the wiggle, did the stomp,\nAnd in the puddles, he would chomp!\n\nHe'd twirl around and give a roar,\nThen ask the people, \"Want some more?\"\nThe friendliest dino you could meet,\nWas the one with happy, dancing feet.", lyrics_hi: "рдПрдХ рдбрд╛рдпрдирд╛рд╕реЛрд░ рдЦреБрд╢ рдкреИрд░реЛрдВ рд╡рд╛рд▓рд╛,\nрд╕рдбрд╝рдХ рдкрд░ рджрд┐рди рднрд░ рдирд╛рдЪрддрд╛ рдерд╛ред\nрд╡рд╣ рдордЯрдХрддрд╛, рд╡рд╣ рдкрдЯрдХрддрд╛,\nрдФрд░ рдкреЛрдЦрд░реЛрдВ рдореЗрдВ рдЪрдмрд╛рддрд╛ рдерд╛!\n\nрд╡рд╣ рдШреВрдорддрд╛ рдФрд░ рдПрдХ рджрд╣рд╛рдбрд╝ рд▓рдЧрд╛рддрд╛,\nрдлрд┐рд░ рд▓реЛрдЧреЛрдВ рд╕реЗ рдкреВрдЫрддрд╛, \"рдФрд░ рдЪрд╛рд╣рд┐рдП рдХреНрдпрд╛?\"\nрд╕рдмрд╕реЗ рдорд┐рд▓рдирд╕рд╛рд░ рдбрд╛рдпрдирд╛рд╕реЛрд░ рдЬрд┐рд╕рд╕реЗ рдЖрдк рдорд┐рд▓ рд╕рдХрддреЗ рд╣реИрдВ,\nрд╡рд╣реА рдерд╛ рдЬрд┐рд╕рдХреЗ рдкреИрд░ рдЦреБрд╢ рдФрд░ рдирд╛рдЪрдиреЗ рд╡рд╛рд▓реЗ рдереЗред", funFact: "The name Dinosaur means 'terrible lizard' in Greek." },
+            { id: 174, title: "The Magic Teapot", title_hi: "рдЬрд╛рджреБрдИ рдЪрд╛рдпрджрд╛рдиреА", category: "Indian", icon: "ЁЯлЦ", tags: ["silly", "indian", "learning"], isExclusive: true, lyrics: "I have a magic teapot, small and round,\nIt makes a very happy whistling sound.\nWhen I pour the tea, what do I see?\nA tiny little rainbow, just for me!", lyrics_hi: "рдореЗрд░реЗ рдкрд╛рд╕ рд╣реИ рдЬрд╛рджреБрдИ рдЪрд╛рдпрджрд╛рдиреА, рдЧреЛрд▓ рдФрд░ рдЫреЛрдЯреА,\nрдЬрд┐рд╕рдХреА рд╕реАрдЯреА рдмрдЬрддреА рд╣реИ рдмрд╣реБрдд рд╣реА рдореАрдареАред\nрдЬрдм рдореИрдВ рдЪрд╛рдп рдбрд╛рд▓рддрд╛ рд╣реВрдБ, рддреЛ рдХреНрдпрд╛ рджреЗрдЦрддрд╛ рд╣реВрдБ?\nрдПрдХ рдирдиреНрд╣рд╛ рд╕рд╛ рдЗрдВрджреНрд░рдзрдиреБрд╖, рд╕рд┐рд░реНрдл рдЕрдкрдиреЗ рд▓рд┐рдП рдкрд╛рддрд╛ рд╣реВрдБ!", funFact: "Rainbows are formed when sunlight shines through tiny water droplets in the air, acting like a natural prism!" },
+            { id: 175, title: "The Jumping Mango", title_hi: "рдЙрдЫрд▓рддрд╛ рдЖрдо", category: "Indian", icon: "ЁЯен", tags: ["indian", "food", "action"], isExclusive: true, lyrics: "Yellow, yellow mango, sweet and bright,\nJumping in the basket with all its might.\nHop to the left, hop to the right,\nThe yummiest treat for a summer night!", lyrics_hi: "рдкреАрд▓рд╛, рдкреАрд▓рд╛ рдЖрдо, рдореАрдард╛ рдФрд░ рдЪрдордХреАрд▓рд╛,\nрдЯреЛрдХрд░реА рдореЗрдВ рдЙрдЫрд▓реЗ, рдЬреИрд╕реЗ рд╣реЛ рдирд╢реАрд▓рд╛ред\nрдмрд╛рдИрдВ рдУрд░ рдХреВрджреЗ, рджрд╛рдИрдВ рдУрд░ рдЬрд╛рдП,\nрдЧрд░реНрдорд┐рдпреЛрдВ рдХреА рд░рд╛рдд рдореЗрдВ, рд╕рдм ржоржЬреЗ рд╕реЗ рдЦрд╛рдПрдВ!", funFact: "The mango is the national fruit of India, and there are hundreds of different delicious varieties grown all over the country!" },
+            { id: 176, title: "Little Monsoon Cloud", title_hi: "рдирдиреНрд╣рд╛ рдорд╛рдирд╕реВрдиреА рдмрд╛рджрд▓", category: "Learning", icon: "ЁЯМзя╕П", tags: ["learning", "nature", "indian"], isExclusive: true, lyrics: "Little monsoon cloud, fluffy and gray,\nWandering in the sky, ready to play.\nSprinkle some water on the thirsty tree,\nPitter-patter raindrops for you and me!", lyrics_hi: "рдирдиреНрд╣рд╛ рдорд╛рдирд╕реВрдиреА рдмрд╛рджрд▓, рд░реБрдИ рд╕рд╛ рдФрд░ рднреВрд░рд╛,\nрдЖрд╕рдорд╛рди рдореЗрдВ рдШреВрдореЗ, рдЦреЗрд▓ рдХреЗ рд▓рд┐рдП рдкреВрд░рд╛ред\nрдкреНрдпрд╛рд╕реЗ рдкреЗрдбрд╝ рдкрд░ рдереЛрдбрд╝рд╛ рдкрд╛рдиреА рдЫрд┐рдбрд╝рдХреЗ,\nрдЯрд┐рдк-рдЯрд┐рдк рдмрд╛рд░рд┐рд╢ рдХреА рдмреВрдБрджреЗрдВ, рдореЗрд░реЗ рдФрд░ рддреБрдореНрд╣рд╛рд░реЗ рд▓рд┐рдП!", funFact: "Monsoons bring the heavy rains that help farmers grow crops and fill up the rivers during the rainy season!" }
+        ];
+    </script>
 
     <script src="/js/header-footer.js"></script>
     <script src="/js/global-script.js"></script>
