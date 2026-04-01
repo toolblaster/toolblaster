@@ -97,14 +97,14 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description (Mobile Stacked, Desktop Inline) -->
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description (WCAG Contrast: text-stone-600) -->
                 <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] sm:max-w-[50%] md:max-w-xl pointer-events-none">
                     <span class="font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate leading-tight">
                         ${centerTitle}
                     </span>
                     ${descTitle ? `
-                        <span class="hidden sm:inline text-stone-500 font-semibold tracking-widest text-[10px] ml-1.5 opacity-90 truncate">- ${descTitle}</span>
-                        <span class="sm:hidden text-stone-500 font-semibold tracking-widest text-[8px] opacity-90 truncate w-full leading-tight mt-0.5">${descTitle}</span>
+                        <span class="hidden sm:inline text-stone-600 font-semibold tracking-widest text-[10px] ml-1.5 truncate">- ${descTitle}</span>
+                        <span class="sm:hidden text-stone-600 font-semibold tracking-widest text-[8px] truncate w-full leading-tight mt-0.5">${descTitle}</span>
                     ` : ''}
                 </div>
 
@@ -169,8 +169,6 @@ function injectHeader() {
 
 /**
  * Secondary Nav (Tool App Switcher)
- * FLAWLESS JS STICKY LOGIC: Inner nav becomes fixed top-0 ONLY when user scrolls past 48px.
- * Kids Rhymes link correctly restored.
  */
 function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
@@ -200,7 +198,7 @@ function injectToolNav() {
                     <!-- Fixed Left Label -->
                     <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
                     
-                    <!-- App Links: Reduced text-size and perfectly centered -->
+                    <!-- App Links -->
                     <a href="/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
                     </a>
@@ -209,7 +207,6 @@ function injectToolNav() {
                         <i class="fa-solid fa-pen-to-square text-[12px]"></i> Notepad
                     </a>
 
-                    <!-- RESTORED & CORRECTED KIDS RHYMES LINK -->
                     <a href="/educational/nursery-rhymes-for-kids/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-music text-[12px]"></i> Kids Rhymes
                     </a>
@@ -229,8 +226,6 @@ function injectToolNav() {
         const innerNav = document.getElementById('sec-nav-inner');
         if (innerNav) {
             const handleScroll = () => {
-                // Main header is exactly 48px. If we scroll down 48px or more, 
-                // we lock the secondary nav to the very top.
                 if (window.scrollY >= 48) {
                     innerNav.classList.add('fixed', 'top-0', 'left-0');
                 } else {
@@ -238,73 +233,42 @@ function injectToolNav() {
                 }
             };
             window.addEventListener('scroll', handleScroll, { passive: true });
-            handleScroll(); // Check immediately on load
+            handleScroll();
         }
     }, 100); 
 }
 
 /**
  * Global Footer
- * Completely Redesigned: Compact, Grid-based, Left-Aligned (Mobile First), with Aesthetic Hover Effects.
+ * Ultra-Minimalist Redesign: Fixed bottom gap bug and seating logic.
+ * WCAG AA Compliance: High-contrast colors (stone-600) for text and links.
  */
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
     if (!footerContainer) return;
 
+    // CRITICAL: Ensure container is grounded with no bottom margin
+    footerContainer.className = "w-full mt-auto mb-0";
+
     footerContainer.innerHTML = `
-        <footer class="bg-white border-t border-stone-200 mt-auto relative z-50">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-10">
-                <!-- Switched to grid-cols-2 for mobile 2-column layout -->
-                <div class="grid grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-8 md:gap-12">
+        <footer class="bg-white border-t border-stone-200 w-full relative z-50">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+                <!-- Main Container: Unified horizontal line on desktop, clean centered stack on mobile -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                     
-                    <!-- Brand Section (Full width on mobile) -->
-                    <div class="col-span-2 md:col-span-5 lg:col-span-4">
-                        <div class="flex items-center gap-2 mb-4">
-                            <svg class="w-6 h-6 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
-                                <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
-                                <circle cx="256" cy="200" r="45" fill="white" stroke="#EF4444" stroke-width="12"/>
-                                <circle cx="256" cy="200" r="15" fill="#EF4444"/>
-                                <path d="M160 250L96 320V384H160V250Z" fill="#EF4444"/>
-                                <path d="M352 250L416 320V384H352V250Z" fill="#EF4444"/>
-                                <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
-                                <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
-                            </svg>
-                            <span class="font-black text-base tracking-tighter text-stone-900 uppercase">Toolblaster</span>
-                        </div>
-                        <p class="text-xs text-stone-600 leading-relaxed pr-4">
-                            Empowering your digital journey with smart utilities, financial calculators, and professional software analysis.
+                    <!-- Left: Copyright info (WCAG AA Contrast: text-stone-600) -->
+                    <div class="text-center md:text-left">
+                        <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
-                    <!-- Spacer for Desktop -->
-                    <div class="hidden lg:block lg:col-span-2"></div>
-
-                    <!-- Quick Links Section (1 column on mobile) -->
-                    <div class="col-span-1 md:col-span-4 lg:col-span-3">
-                        <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Quick Links</h3>
-                        <ul class="space-y-3">
-                            <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Online Notepad</a></li>
-                            <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Daily Focus</a></li>
-                            <li><a href="/educational/nursery-rhymes-for-kids/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Kids Rhymes Tool</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Legal Section (1 column on mobile) -->
-                    <div class="col-span-1 md:col-span-3 lg:col-span-3">
-                        <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Legal</h3>
-                        <ul class="space-y-3">
-                            <li><a href="/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Privacy Policy</a></li>
-                            <li><a href="/terms/terms.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Terms of Service</a></li>
-                            <li><a href="/terms/about.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">About Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Bottom Bar -->
-                <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <p class="text-[10px] text-stone-500 font-bold tracking-widest uppercase">© ${new Date().getFullYear()} TOOLBLASTER. ALL RIGHTS RESERVED.</p>
-                    <span class="text-[10px] text-stone-500 font-bold tracking-widest uppercase hidden md:inline-block">Built for Speed & Privacy</span>
+                    <!-- Right: Integrated Legal Links (WCAG AA Contrast: text-stone-600) -->
+                    <nav class="flex items-center gap-5 justify-center md:justify-end">
+                        <a href="/terms/about.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">About</a>
+                        <a href="/terms/privacy.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">Privacy</a>
+                        <a href="/terms/terms.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">Terms</a>
+                    </nav>
                 </div>
             </div>
         </footer>
@@ -312,7 +276,6 @@ function injectFooterAndModals() {
 }
 
 function injectBackToTop() {
-    // Standard back to top logic ensures we don't duplicate if another script creates one.
     if(document.getElementById('back-to-top')) return; 
 
     const btn = document.createElement('button');
