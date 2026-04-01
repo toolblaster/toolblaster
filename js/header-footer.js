@@ -27,6 +27,10 @@ function injectHeader() {
     const headerContainer = document.getElementById('app-header');
     if (!headerContainer) return;
 
+    // CRITICAL FIX: Ensure the placeholder keeps its height so the page doesn't jump
+    headerContainer.style.minHeight = '48px';
+    headerContainer.className = "w-full relative z-[100]";
+
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
@@ -72,12 +76,13 @@ function injectHeader() {
     }
 
     headerContainer.innerHTML = `
-        <nav class="w-full bg-white/95 backdrop-blur-md border-b border-stone-300 shadow-[0_2px_15px_-3px_rgba(239,68,68,0.12)] sticky top-0 z-[100] transition-all">
+        <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
+        <nav class="relative w-full bg-white border-b border-stone-300 shadow-sm z-[100]">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between relative">
                 
                 <!-- Left: Brand Logo -->
                 <div class="flex items-center flex-shrink-0">
-                    <a href="https://toolblaster.com/" aria-label="Toolblaster Home" class="flex items-center gap-2 group transition-transform hover:scale-105">
+                    <a href="/" aria-label="Toolblaster Home" class="flex items-center gap-2 group transition-transform hover:scale-105">
                         <svg class="w-6 h-6 drop-shadow-sm group-hover:scale-110 transition-transform duration-300" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
                             <path d="M256 32C322 32 352 128 352 192V288L384 320V352H320L256 32V32Z" fill="#EF4444" opacity="0.9"/>
@@ -92,17 +97,20 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description -->
-                <div class="absolute left-1/2 -translate-x-1/2 text-center flex items-center justify-center w-full max-w-[50%] md:max-w-xl pointer-events-none">
-                    <span class="font-inter font-extrabold text-[13px] md:text-sm tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate">
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description (Mobile Stacked, Desktop Inline) -->
+                <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] sm:max-w-[50%] md:max-w-xl pointer-events-none">
+                    <span class="font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate leading-tight">
                         ${centerTitle}
-                        ${descTitle ? `<span class="hidden md:inline text-stone-500 font-semibold tracking-widest text-[10px] ml-1.5 opacity-90">- ${descTitle}</span>` : ''}
                     </span>
+                    ${descTitle ? `
+                        <span class="hidden sm:inline text-stone-500 font-semibold tracking-widest text-[10px] ml-1.5 opacity-90 truncate">- ${descTitle}</span>
+                        <span class="sm:hidden text-stone-500 font-semibold tracking-widest text-[8px] opacity-90 truncate w-full leading-tight mt-0.5">${descTitle}</span>
+                    ` : ''}
                 </div>
 
                 <!-- Right: Desktop Action Button & Mobile Hamburger -->
                 <div class="flex items-center gap-3">
-                    <a href="https://toolblaster.com/#tools" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
+                    <a href="/#tools" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
                         Explore Tools
                     </a>
                     <button id="mobile-menu-btn" aria-label="Open Menu" class="sm:hidden text-stone-600 hover:text-stone-900 focus:outline-none transition-colors p-1">
@@ -122,10 +130,10 @@ function injectHeader() {
                 </button>
             </div>
             <div class="flex flex-col px-3 py-4 gap-2">
-                <a href="https://toolblaster.com/" class="flex items-center gap-3 text-sm font-bold text-stone-700 hover:text-red-600 transition-colors px-3 py-2.5 rounded-lg hover:bg-stone-50 border border-transparent hover:border-stone-200">
+                <a href="/" class="flex items-center gap-3 text-sm font-bold text-stone-700 hover:text-red-600 transition-colors px-3 py-2.5 rounded-lg hover:bg-stone-50 border border-transparent hover:border-stone-200">
                     <i class="fa-solid fa-house w-4 text-center text-base"></i> Home
                 </a>
-                <a href="https://toolblaster.com/#tools" class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
+                <a href="/#tools" class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
                     Explore Tools
                 </a>
             </div>
@@ -161,11 +169,16 @@ function injectHeader() {
 
 /**
  * Secondary Nav (Tool App Switcher)
- * Instant horizontal scrolling integration with Pill Design & Recessed Background.
+ * FLAWLESS JS STICKY LOGIC: Inner nav becomes fixed top-0 ONLY when user scrolls past 48px.
+ * Kids Rhymes link correctly restored.
  */
 function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
     if (!navContainer) return;
+
+    // Outer container keeps its height so the page doesn't jump when inner div becomes fixed
+    navContainer.style.minHeight = '48px';
+    navContainer.className = "w-full relative z-[90]";
 
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
@@ -178,33 +191,26 @@ function injectToolNav() {
     `;
 
     navContainer.innerHTML = style + `
-        <!-- Recessed Glassmorphism Background (bg-stone-100/90 + shadow-inner) -->
-        <div class="w-full bg-stone-100/90 backdrop-blur-md border-b border-stone-200 shadow-inner z-40 relative">
+        <!-- This inner wrapper will be toggled to fixed top-0 via JS on scroll -->
+        <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <!-- Increased height to h-12 for better mobile touch, added gap-2 -->
-                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar relative px-1">
+                <!-- Natively centered content -->
+                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
                     
                     <!-- Fixed Left Label -->
-                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/90 backdrop-blur-md pr-3 z-10 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)]">Apps</span>
+                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
                     
-                    <!-- App Links (Pill Style) -->
-                    <a href="/decide/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
+                    <!-- App Links: Reduced text-size and perfectly centered -->
+                    <a href="/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
                     </a>
                     
-                    <a href="https://gstbilling.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('gstbilling') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
-                        <i class="fa-solid fa-file-invoice text-[12px]"></i> GST Billing
-                    </a>
-                    
-                    <a href="https://sipcalculatorwithinflation.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('sipcalculator') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
-                        <i class="fa-solid fa-chart-line text-[12px]"></i> SIP Planner
-                    </a>
-                    
-                    <a href="https://onlinenotepad.toolblaster.com" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
+                    <a href="https://onlinenotepad.toolblaster.com" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-pen-to-square text-[12px]"></i> Notepad
                     </a>
 
-                    <a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="nav-item flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/50'}">
+                    <!-- RESTORED & CORRECTED KIDS RHYMES LINK -->
+                    <a href="/educational/nursery-rhymes-for-kids/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-music text-[12px]"></i> Kids Rhymes
                     </a>
                 </nav>
@@ -212,11 +218,27 @@ function injectToolNav() {
         </div>
     `;
 
-    // INSTANT Native Auto-Scroll Logic: Brings the active tool perfectly to the center
+    // JavaScript Scroll Logic for Flawless Sticky Behavior
     setTimeout(() => {
+        // Auto-scroll to active tool in mobile view
         const activeItem = document.querySelector('#secondary-scroll-nav .active-tool');
         if (activeItem) {
             activeItem.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+        }
+
+        const innerNav = document.getElementById('sec-nav-inner');
+        if (innerNav) {
+            const handleScroll = () => {
+                // Main header is exactly 48px. If we scroll down 48px or more, 
+                // we lock the secondary nav to the very top.
+                if (window.scrollY >= 48) {
+                    innerNav.classList.add('fixed', 'top-0', 'left-0');
+                } else {
+                    innerNav.classList.remove('fixed', 'top-0', 'left-0');
+                }
+            };
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll(); // Check immediately on load
         }
     }, 100); 
 }
@@ -232,10 +254,11 @@ function injectFooterAndModals() {
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-200 mt-auto relative z-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-10">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 md:gap-12">
+                <!-- Switched to grid-cols-2 for mobile 2-column layout -->
+                <div class="grid grid-cols-2 md:grid-cols-12 gap-x-4 gap-y-8 md:gap-12">
                     
-                    <!-- Brand Section -->
-                    <div class="sm:col-span-2 md:col-span-5 lg:col-span-4">
+                    <!-- Brand Section (Full width on mobile) -->
+                    <div class="col-span-2 md:col-span-5 lg:col-span-4">
                         <div class="flex items-center gap-2 mb-4">
                             <svg class="w-6 h-6 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
@@ -257,24 +280,23 @@ function injectFooterAndModals() {
                     <!-- Spacer for Desktop -->
                     <div class="hidden lg:block lg:col-span-2"></div>
 
-                    <!-- Quick Links Section -->
-                    <div class="md:col-span-4 lg:col-span-3">
+                    <!-- Quick Links Section (1 column on mobile) -->
+                    <div class="col-span-1 md:col-span-4 lg:col-span-3">
                         <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Quick Links</h3>
                         <ul class="space-y-3">
                             <li><a href="https://onlinenotepad.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Online Notepad</a></li>
-                            <li><a href="https://gstbilling.toolblaster.com" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">GST Billing</a></li>
                             <li><a href="/decide/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Daily Focus</a></li>
-                            <li><a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Kids Rhymes Tool</a></li>
+                            <li><a href="/educational/nursery-rhymes-for-kids/" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Kids Rhymes Tool</a></li>
                         </ul>
                     </div>
 
-                    <!-- Legal Section -->
-                    <div class="md:col-span-3 lg:col-span-3">
+                    <!-- Legal Section (1 column on mobile) -->
+                    <div class="col-span-1 md:col-span-3 lg:col-span-3">
                         <h3 class="text-stone-900 text-xs font-black uppercase tracking-widest mb-4">Legal</h3>
                         <ul class="space-y-3">
-                            <li><a href="https://toolblaster.com/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Privacy Policy</a></li>
-                            <li><a href="https://toolblaster.com/terms/terms.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Terms of Service</a></li>
-                            <li><a href="https://toolblaster.com/terms/about.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">About Us</a></li>
+                            <li><a href="/terms/privacy.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Privacy Policy</a></li>
+                            <li><a href="/terms/terms.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">Terms of Service</a></li>
+                            <li><a href="/terms/about.html" class="text-sm text-stone-600 hover:text-red-600 transition-all hover:translate-x-1 inline-block font-medium">About Us</a></li>
                         </ul>
                     </div>
                 </div>
