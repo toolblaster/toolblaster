@@ -97,7 +97,7 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description (WCAG Contrast: text-stone-600) -->
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description -->
                 <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] sm:max-w-[50%] md:max-w-xl pointer-events-none">
                     <span class="font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate leading-tight">
                         ${centerTitle}
@@ -174,7 +174,6 @@ function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
     if (!navContainer) return;
 
-    // Outer container keeps its height so the page doesn't jump when inner div becomes fixed
     navContainer.style.minHeight = '48px';
     navContainer.className = "w-full relative z-[90]";
 
@@ -189,16 +188,11 @@ function injectToolNav() {
     `;
 
     navContainer.innerHTML = style + `
-        <!-- This inner wrapper will be toggled to fixed top-0 via JS on scroll -->
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <!-- Natively centered content -->
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
-                    
-                    <!-- Fixed Left Label -->
                     <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
                     
-                    <!-- App Links -->
                     <a href="/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
                     </a>
@@ -215,9 +209,7 @@ function injectToolNav() {
         </div>
     `;
 
-    // JavaScript Scroll Logic for Flawless Sticky Behavior
     setTimeout(() => {
-        // Auto-scroll to active tool in mobile view
         const activeItem = document.querySelector('#secondary-scroll-nav .active-tool');
         if (activeItem) {
             activeItem.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
@@ -233,42 +225,64 @@ function injectToolNav() {
                 }
             };
             window.addEventListener('scroll', handleScroll, { passive: true });
-            handleScroll();
+            handleScroll(); 
         }
     }, 100); 
 }
 
 /**
  * Global Footer
- * Ultra-Minimalist Redesign: Fixed bottom gap bug and seating logic.
- * WCAG AA Compliance: High-contrast colors (stone-600) for text and links.
+ * Ultra-Minimalist Redesign: Integrated dynamic Social Sharing, perfectly centered.
  */
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
     if (!footerContainer) return;
 
-    // CRITICAL: Ensure container is grounded with no bottom margin
     footerContainer.className = "w-full mt-auto mb-0";
+
+    // Auto-capture current page URL for sharing
+    const currentUrl = encodeURIComponent(window.location.href);
+    const shareMsg = encodeURIComponent("Check out this useful tool on Toolblaster: ");
 
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-200 w-full relative z-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
-                <!-- Main Container: Unified horizontal line on desktop, clean centered stack on mobile -->
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <!-- 3-Column Layout: Stacks naturally on mobile, spreads evenly on desktop -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-4 w-full">
                     
-                    <!-- Left: Copyright info (WCAG AA Contrast: text-stone-600) -->
-                    <div class="text-center md:text-left">
+                    <!-- Left Group: Copyright (Order 3 on mobile, 1 on desktop) -->
+                    <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
                             © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
-                    <!-- Right: Integrated Legal Links (WCAG AA Contrast: text-stone-600) -->
-                    <nav class="flex items-center gap-5 justify-center md:justify-end">
+                    <!-- Center Group: Dynamic Social Share (Order 1 on mobile, 2 on desktop) -->
+                    <div class="w-full md:w-1/3 flex items-center justify-center gap-3 order-1 md:order-2">
+                        <span class="text-[9px] font-black text-stone-500 uppercase tracking-[0.2em]">Share:</span>
+                        <div class="flex items-center gap-4">
+                            <!-- WhatsApp -->
+                            <a href="https://api.whatsapp.com/send?text=${shareMsg}${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#25D366] hover:scale-110 transition-all duration-300" aria-label="Share on WhatsApp">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                            </a>
+                            <!-- X (Twitter) -->
+                            <a href="https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareMsg}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
+                                <i class="fa-brands fa-x-twitter text-sm"></i>
+                            </a>
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#1877F2] hover:scale-110 transition-all duration-300" aria-label="Share on Facebook">
+                                <i class="fa-brands fa-facebook-f text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Group: Legal Links (Order 2 on mobile, 3 on desktop) -->
+                    <nav class="w-full md:w-1/3 flex items-center gap-5 justify-center md:justify-end order-2 md:order-3">
                         <a href="/terms/about.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">About</a>
                         <a href="/terms/privacy.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">Privacy</a>
                         <a href="/terms/terms.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">Terms</a>
                     </nav>
+
                 </div>
             </div>
         </footer>
