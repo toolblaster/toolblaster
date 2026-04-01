@@ -18,14 +18,14 @@
     <meta property="og:url" content="https://toolblaster.com/decide/">
     <meta property="og:title" content="DECIDE. | Daily Priority Tool for Focus">
     <meta property="og:description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner designed to eliminate overwhelm and build consistent focus.">
-    <meta property="og:image" content="https://toolblaster.com/terms/favicon/web-app-manifest-512x512.png">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://toolblaster.com/decide/">
     <meta name="twitter:title" content="DECIDE. | Daily Priority Tool">
     <meta name="twitter:description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner to build consistent focus.">
-    <meta name="twitter:image" content="https://toolblaster.com/terms/favicon/web-app-manifest-512x512.png">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
 
     <meta name="theme-color" content="#FAFAF9">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -136,7 +136,16 @@
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
     <!-- Uniform Padding App Wrapper -->
-    <div class="flex-grow flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-8 pb-12 w-full max-w-7xl mx-auto">
+    <div class="flex-grow flex flex-col px-4 sm:px-6 lg:px-8 pt-6 pb-12 w-full max-w-7xl mx-auto">
+
+        <!-- Breadcrumb Navigation (Mobile & Desktop Optimized Size) aligned to left edge like Rhymes tool -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap">
+            <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+            </a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <span class="text-stone-900 font-bold">Daily Focus</span>
+        </nav>
 
         <main id="app" class="w-full max-w-lg mx-auto mt-0 relative z-10">
 
@@ -248,7 +257,7 @@
                     </p>
                     <p class="mt-4 mb-0 text-stone-600">
                         That’s it. No complicated systems, no endless backlogs, and definitely no guilt. Just clarity.
-                        <a href="pages/about.html" class="font-semibold text-accent-main hover:underline">Read our full story.</a>
+                        <a href="../terms/about.html" class="font-semibold text-accent-main hover:underline">Read our full story.</a>
                     </p>
                 </section>
                 
@@ -423,7 +432,7 @@
                         <div class="p-5 bg-stone-100 rounded-xl">
                             <h3 class="font-bold text-stone-900 mb-2 mt-0">4. Why only three priorities?</h3>
                             <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">Because focus is limited.</strong> Research and real-world experience show that most people can only make meaningful progress on 2–3 important things per day. Limiting choices forces clarity and prevents overwhelm.</p>
-                            <p class="text-sm mt-2"><a href="pages/why-three.html" class="underline hover:text-stone-900 font-medium">Read why this limit is a feature, not a bug.</a></p>
+                            <p class="text-sm mt-2"><a href="../terms/about.html" class="underline hover:text-stone-900 font-medium">Read why this limit is a core feature of our philosophy.</a></p>
                         </div>
 
                         <div class="p-5 bg-stone-100 rounded-xl">
