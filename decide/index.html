@@ -56,7 +56,7 @@
     }
     </script>
 
-    <!-- UPDATED: Correct Favicon Links pointing to js/favicon directory -->
+    <!-- Correct Favicon Links -->
     <link rel="icon" type="image/x-icon" href="../js/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="../js/favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="../js/favicon/favicon-48x48.png">
@@ -87,6 +87,11 @@
     
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
 
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #FAFAF9;
@@ -95,7 +100,7 @@
             --input-border: #d6d3d1;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
@@ -120,438 +125,404 @@
         
         .modal-backdrop {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 50; align-items: center; justify-content: center; padding: 1rem;
+            background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; padding: 1rem;
             backdrop-filter: blur(2px);
         }
         .modal-active { display: flex; }
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col overflow-x-hidden">
+<body class="min-h-screen flex flex-col overflow-x-hidden selection:bg-red-500 selection:text-white">
 
-    <!-- CLS Fix: Min height added to explicitly reserve space before JS injects header -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
-    
-    <!-- CLS Fix: Min height added to explicitly reserve space before JS injects secondary nav -->
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Uniform Padding App Wrapper -->
-    <div class="flex-grow flex flex-col px-4 sm:px-6 lg:px-8 pt-6 pb-12 w-full max-w-7xl mx-auto">
+    <!-- Main Workspace: Structure matched to Rhymes Tool -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 py-6 md:py-8 max-w-7xl relative z-10">
 
-        <!-- Breadcrumb Navigation (Mobile & Desktop Optimized Size) aligned to left edge like Rhymes tool -->
-        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap">
+        <!-- Breadcrumb Navigation: Exact location as requested -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-5 sm:mb-6 font-semibold fade-in px-1 flex items-center flex-wrap">
             <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
                 <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
             </a>
             <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <span class="text-stone-900 font-bold">Daily Focus</span>
+            <span class="text-stone-900 font-extrabold uppercase tracking-tight">Daily Focus</span>
         </nav>
 
-        <main id="app" class="w-full max-w-lg mx-auto mt-0 relative z-10">
+        <!-- Refined Compact Tool Station Container: Tight vertical spacing -->
+        <div class="bg-white border border-stone-200 rounded-[2rem] px-5 pt-4 pb-6 sm:px-10 sm:pt-6 sm:pb-8 md:px-14 md:pt-8 md:pb-10 shadow-sm mb-12 w-full max-w-2xl mx-auto fade-in">
+            <div id="app" class="w-full max-w-lg mx-auto mt-0 relative z-10">
 
-            <header id="date-header" class="mb-8 text-center fade-in relative scroll-mt-12">
-                <div class="flex justify-center items-center mb-2 px-1 relative">
-                    <span class="text-sm font-semibold tracking-widest text-stone-500 uppercase">DECIDE</span>
-                </div>
-                <div id="current-date-display" class="text-3xl font-bold text-stone-900" aria-live="polite">Today</div>
-            </header>
-
-            <div id="intro-block" class="text-center mb-10 fade-in">
-                <h1 class="text-2xl md:text-3xl text-stone-900 font-bold mb-3">
-                    Decide your day in 60 seconds.
-                </h1>
-                <p class="text-stone-600 text-sm leading-relaxed max-w-sm mx-auto">
-                    A simple daily priority tool to help you decide what truly matters today — without planners, to-do lists, or overwhelm.
-                </p>
-            </div>
-
-            <div id="yesterday-section" class="hidden-app mb-10 p-6 bg-white border border-stone-200 rounded-xl fade-in shadow-sm">
-                <h2 class="text-sm text-stone-700 mb-4 font-bold">Yesterday, you focused on:</h2>
-                <ul id="yesterday-list" class="space-y-3"></ul>
-            </div>
-
-            <form id="priority-form" class="space-y-8 fade-in">
-                <div class="space-y-6">
-                    <label id="greeting-label" class="block text-xl text-stone-900 font-bold mb-6 transition-opacity duration-300">What matters today?</label>
-                    
-                    <div class="relative group">
-                        <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                        <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm" aria-hidden="true">01</span>
-                        <input type="text" id="p1" name="p1" autocomplete="off" aria-label="Priority 1"
-                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-500 bg-transparent focus:ring-0"
-                            placeholder="Most important task..." required maxlength="60">
+                <header id="date-header" class="mb-4 text-center fade-in relative scroll-mt-24">
+                    <div class="flex justify-center items-center mb-1 px-1 relative text-stone-500 font-black uppercase tracking-[0.25em] text-[9px] sm:text-[10px]">
+                        Focus Mode
                     </div>
+                    <!-- Date size updated to 24px -->
+                    <div id="current-date-display" class="text-[24px] font-black text-stone-900 tracking-tight" aria-live="polite">Today</div>
+                </header>
 
-                    <div class="relative group">
-                        <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                        <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm" aria-hidden="true">02</span>
-                        <input type="text" id="p2" name="p2" autocomplete="off" aria-label="Priority 2"
-                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-500 bg-transparent focus:ring-0"
-                            placeholder="Quick win..." required maxlength="60">
-                    </div>
-
-                    <div class="relative group">
-                        <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                        <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm" aria-hidden="true">03</span>
-                        <input type="text" id="p3" name="p3" autocomplete="off" aria-label="Priority 3"
-                            class="priority-input w-full pl-8 py-2 text-lg font-medium text-stone-900 placeholder-stone-500 bg-transparent focus:ring-0"
-                            placeholder="Personal goal..." required maxlength="60">
-                    </div>
+                <div id="intro-block" class="text-center mb-6 fade-in">
+                    <!-- H1 size specifically updated to 26px for mobile so it fits on one line -->
+                    <h1 class="text-[26px] sm:text-[28px] text-stone-900 font-black mb-2 leading-tight tracking-tight">
+                        Decide your day in 60 seconds.
+                    </h1>
+                    <p class="text-stone-500 text-[13px] sm:text-sm leading-relaxed max-w-sm mx-auto font-medium">
+                        Choose what truly matters today — without lists or overwhelm.
+                    </p>
                 </div>
-                
-                <div class="pt-6 flex flex-col items-center space-y-4">
-                    <button type="submit" id="main-action-btn" title="Shortcut: Cmd/Ctrl + Enter"
-                        class="px-8 py-3 bg-stone-900 text-white rounded-full text-sm font-bold hover:bg-stone-800 active:scale-95 transition-all duration-300 w-full sm:w-auto shadow-md flex items-center justify-center gap-2">
-                        Decide Today <span>&rarr;</span>
-                    </button>
-                    <p id="trust-badges" class="text-xs text-stone-500 font-medium">No sign-up · Works offline · Free to use</p>
-                    <p id="streak-msg" class="hidden-app text-center text-xs text-stone-600 mt-4">You're building consistency.</p>
-                </div>
-            </form>
 
-            <div id="readonly-view" class="hidden-app space-y-8 fade-in">
-                <div class="space-y-6">
-                    <div class="flex justify-between items-end mb-6">
-                        <h2 class="block text-xl text-stone-900 font-bold">Today's Focus</h2>
-                        <div class="flex items-center space-x-4">
-                            <button id="copy-btn" class="text-xs text-stone-500 hover:text-stone-900 transition-colors flex items-center gap-1" aria-label="Copy to clipboard">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span id="copy-text" class="font-medium">Share</span>
-                            </button>
-                            <button id="edit-btn" class="text-xs font-medium text-stone-500 hover:text-stone-900 underline">Edit</button>
+                <div id="yesterday-section" class="hidden-app mb-6 p-4 bg-stone-50 border border-stone-200 rounded-xl fade-in shadow-sm">
+                    <h2 class="text-[11px] text-stone-700 mb-2 font-black uppercase tracking-widest">Previously focused on:</h2>
+                    <ul id="yesterday-list" class="space-y-2"></ul>
+                </div>
+
+                <form id="priority-form" class="space-y-6 fade-in">
+                    <div class="space-y-4">
+                        <label id="greeting-label" class="block text-lg sm:text-xl text-stone-900 font-black mb-4 transition-opacity duration-300 text-center">What matters today?</label>
+                        
+                        <div class="relative group">
+                            <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm font-bold" aria-hidden="true">01</span>
+                            <input type="text" id="p1" name="p1" autocomplete="off" aria-label="Priority 1"
+                                class="priority-input w-full pl-8 py-2 text-lg font-bold text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                                placeholder="Most important task..." required maxlength="60">
+                        </div>
+
+                        <div class="relative group">
+                            <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm font-bold" aria-hidden="true">02</span>
+                            <input type="text" id="p2" name="p2" autocomplete="off" aria-label="Priority 2"
+                                class="priority-input w-full pl-8 py-2 text-lg font-bold text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                                placeholder="Quick win..." required maxlength="60">
+                        </div>
+
+                        <div class="relative group">
+                            <span class="absolute left-0 top-2 text-stone-500 font-mono text-sm font-bold" aria-hidden="true">03</span>
+                            <input type="text" id="p3" name="p3" autocomplete="off" aria-label="Priority 3"
+                                class="priority-input w-full pl-8 py-2 text-lg font-bold text-stone-900 placeholder-stone-400 bg-transparent focus:ring-0"
+                                placeholder="Personal goal..." required maxlength="60">
                         </div>
                     </div>
-                    <div id="readonly-list" class="space-y-3"></div>
-                    <p class="text-[11px] text-stone-500 text-center mt-4 italic fade-in">Tip: Tap a priority to cross it off. Double-tap to edit.</p>
+                    
+                    <div class="pt-2 flex flex-col items-center space-y-3">
+                        <button type="submit" id="main-action-btn" title="Shortcut: Cmd/Ctrl + Enter"
+                            class="px-10 py-3.5 bg-stone-900 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest hover:bg-stone-800 active:scale-95 transition-all duration-300 w-full sm:w-auto shadow-lg flex items-center justify-center gap-2">
+                            Decide Today <span>&rarr;</span>
+                        </button>
+                        <p id="trust-badges" class="text-[10px] text-stone-400 font-black uppercase tracking-widest m-0">No sign-up · Offline · Free</p>
+                        <p id="streak-msg" class="hidden-app text-center text-xs text-stone-600 mt-2 font-bold">You're building consistency.</p>
+                    </div>
+                </form>
+
+                <div id="readonly-view" class="hidden-app space-y-6 fade-in">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl text-stone-900 font-black uppercase tracking-tight">Today's Focus</h2>
+                            <div class="flex items-center space-x-4">
+                                <button id="copy-btn" class="text-xs text-stone-500 hover:text-stone-900 transition-colors flex items-center gap-1.5 p-2 rounded-lg hover:bg-stone-100" aria-label="Copy to clipboard">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    <span id="copy-text" class="font-black uppercase tracking-wider text-[10px]">Share</span>
+                                </button>
+                                <button id="edit-btn" class="text-[10px] font-black text-stone-500 hover:text-stone-900 uppercase tracking-widest underline underline-offset-4 decoration-2">Edit</button>
+                            </div>
+                        </div>
+                        <div id="readonly-list" class="space-y-3"></div>
+                        <p class="text-[10px] text-stone-500 text-center mt-4 italic fade-in font-bold uppercase tracking-wider">Tip: Tap to cross off. Double-tap to edit.</p>
+                    </div>
+                    
+                    <div id="footer-status" class="mt-8 pb-1 text-center fade-in flex flex-col items-center space-y-4">
+                        <div id="status-text-container" class="inline-flex items-center space-x-2 text-stone-600 font-black uppercase tracking-tight text-xs sm:text-sm"></div>
+                        <div id="footer-controls" class="flex gap-6 text-[10px] text-stone-400 font-black uppercase tracking-widest"></div>
+                    </div>
                 </div>
-                
-                <div id="footer-status" class="mt-16 pb-8 text-center fade-in flex flex-col items-center space-y-6">
-                    <div id="status-text-container" class="inline-flex items-center space-x-2 text-stone-600 font-medium"></div>
-                    <div id="footer-controls" class="flex gap-6 text-sm text-stone-500 font-medium"></div>
+
+                <div id="weekly-glimpse" class="hidden-app mt-6 p-5 bg-stone-50 rounded-xl text-center fade-in"></div>
+
+                <div id="closure-section" class="hidden-app mt-8 pt-8 border-t border-stone-100 fade-in text-center">
+                    <h3 class="text-lg text-stone-900 mb-5 font-black">Did you do what mattered?</h3>
+                    <div class="flex flex-wrap justify-center gap-3" id="closure-buttons">
+                        <button data-val="yes" class="closure-btn px-6 py-2 border-2 border-stone-200 rounded-xl text-stone-800 text-xs font-black uppercase tracking-widest hover:border-stone-900 hover:bg-stone-50 transition-all">Yes</button>
+                        <button data-val="partial" class="closure-btn px-6 py-2 border-2 border-stone-200 rounded-xl text-stone-800 text-xs font-black uppercase tracking-widest hover:border-stone-900 hover:bg-stone-50 transition-all">Partially</button>
+                        <button data-val="no" class="closure-btn px-6 py-2 border-2 border-stone-200 rounded-xl text-stone-800 text-xs font-black uppercase tracking-widest hover:border-stone-900 hover:bg-stone-50 transition-all">Not really</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div id="weekly-glimpse" class="hidden-app mt-8 p-6 bg-stone-50 rounded-xl text-center fade-in"></div>
-
-            <div id="closure-section" class="hidden-app mt-12 pt-12 border-t border-stone-200 fade-in text-center">
-                <h3 class="text-lg text-stone-900 mb-6 font-bold">Did you do what mattered?</h3>
-                <div class="flex flex-wrap justify-center gap-3" id="closure-buttons">
-                    <button data-val="yes" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Yes</button>
-                    <button data-val="partial" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Partially</button>
-                    <button data-val="no" class="closure-btn px-5 py-2.5 border-2 border-stone-300 rounded-lg text-stone-800 text-sm font-bold hover:border-stone-500 hover:bg-stone-50 transition-all">Not really</button>
-                </div>
-            </div>
-        </main>
-
-        <article class="w-full max-w-2xl mx-auto mt-24 mb-16 prose prose-stone">
+        <!-- Article Sections: Full Non-Truncated Content -->
+        <article class="w-full max-w-2xl mx-auto mt-20 mb-16 prose prose-stone">
             <div class="space-y-8 text-stone-600">
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🧠</span> What is DECIDE?
                     </h2>
-                    <p class="leading-relaxed mb-4 text-stone-600">
+                    <p class="leading-relaxed mb-4 text-stone-600 text-sm font-medium">
                         Think of DECIDE as a quiet corner for your brain. It’s a simple tool designed to help you cut through the noise and figure out your top three priorities for the day—usually in less than a minute.
                     </p>
-                    <p class="font-medium text-stone-800 italic border-l-2 border-stone-300 pl-4 py-2 bg-stone-50 rounded-r-lg">
+                    <p class="font-bold text-stone-800 italic border-l-2 border-stone-300 pl-4 py-2 bg-stone-50 rounded-r-lg text-sm">
                         What are the three most important things today?
                     </p>
-                    <p class="mt-4 mb-0 text-stone-600">
+                    <p class="mt-4 mb-0 text-stone-600 text-sm font-medium">
                         That’s it. No complicated systems, no endless backlogs, and definitely no guilt. Just clarity.
-                        <a href="../terms/about.html" class="font-semibold text-accent-main hover:underline">Read our full story.</a>
+                        <a href="../terms/about.html" class="font-bold text-red-500 hover:underline">Read our story.</a>
                     </p>
                 </section>
                 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🎯</span> Why DECIDE is Different
                     </h2>
-                    <p class="mb-4 text-stone-600">Most daily planners focus on managing tasks. <strong class="text-stone-900">We focus on something else: making decisions.</strong></p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                    <p class="mb-4 text-stone-600 text-sm font-medium">Most daily planners focus on managing tasks. <strong class="text-stone-900 font-black">We focus on something else: making decisions.</strong></p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600 text-sm font-medium">
                         <li>We don't let you drown in tasks.</li>
                         <li>We don't ask you to schedule every minute.</li>
                         <li>We don't pester you with notifications.</li>
                     </ul>
-                    <p class="mt-4 mb-0 text-stone-600">
-                        It’s just one day, three clear goals, and a clear mind. It helps you start your day with intention and end it with a sense of closure.
+                    <p class="mt-4 mb-0 text-stone-600 text-sm font-medium">
+                        It’s just one day, three clear goals, and a clear mind. It helps you start your day with intention and end it with closure.
                     </p>
                 </section>
 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-6 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🆚</span> DECIDE vs Traditional Planners
                     </h2>
-                    <p class="mb-6 text-stone-600">We've all been there. You buy a planner, fill it out perfectly for three days, miss one day, feel guilty, and never open it again.</p>
+                    <p class="mb-6 text-stone-600 text-sm font-medium">We've all been there. You buy a planner, miss one day, feel guilty, and never open it again.</p>
                     
                     <div class="grid md:grid-cols-2 gap-8 mb-8">
-                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100">
-                            <h3 class="font-bold text-stone-800 mb-3 mt-0">❌ Traditional Planners</h3>
-                            <p class="text-sm mb-3 text-stone-600">Often feel like homework:</p>
-                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-stone-600">
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                            <h3 class="font-black text-stone-800 mb-3 mt-0 text-sm uppercase tracking-tight">❌ Traditional Planners</h3>
+                            <p class="text-xs mb-3 text-stone-600 font-medium">Homework feel:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-xs text-stone-600 font-medium">
                                 <li>List literally everything</li>
                                 <li>Color-code and categorize</li>
                                 <li>Feel bad about unfinished items</li>
                                 <li>Eventually get abandoned</li>
                             </ul>
-                            <p class="text-sm mt-4 font-medium text-stone-800">High effort, high guilt.</p>
+                            <p class="text-xs mt-4 font-black text-stone-800 uppercase tracking-tighter">High effort, high guilt.</p>
                         </div>
-                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100">
-                            <h3 class="font-bold text-stone-800 mb-3 mt-0">✅ DECIDE</h3>
-                            <p class="text-sm mb-3 text-stone-600">Feels like a fresh start:</p>
-                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-sm text-stone-600">
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-200">
+                            <h3 class="font-black text-stone-800 mb-3 mt-0 text-sm uppercase tracking-tight">✅ DECIDE</h3>
+                            <p class="text-xs mb-3 text-stone-600 font-medium">Fresh start:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-xs text-stone-600 font-medium">
                                 <li>Focus only on what matters</li>
                                 <li>Limit yourself to 3 wins</li>
                                 <li>Fresh slate every morning</li>
                                 <li>Zero judgment</li>
                             </ul>
-                            <p class="text-sm mt-4 font-medium text-stone-800">Low effort, high clarity.</p>
+                            <p class="text-xs mt-4 font-black text-stone-800 uppercase tracking-tighter">Low effort, high clarity.</p>
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto mb-6">
-                        <table class="w-full text-sm text-left border-collapse">
+                    <div class="overflow-x-auto mb-6 text-stone-700">
+                        <table class="w-full text-[13px] text-left border-collapse">
                             <thead>
-                                <tr class="border-b-2 border-stone-200">
-                                    <th class="py-3 font-bold text-stone-800">Feature</th>
-                                    <th class="py-3 font-bold text-stone-900">DECIDE</th>
-                                    <th class="py-3 font-bold text-stone-500">Traditional Planner</th>
+                                <tr class="border-b-2 border-stone-200 text-stone-900 font-black uppercase tracking-tighter">
+                                    <th class="py-3">Feature</th>
+                                    <th class="py-3">DECIDE</th>
+                                    <th class="py-3 font-medium text-stone-400">Others</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100">
+                            <tbody class="divide-y divide-stone-100 font-bold uppercase tracking-tight text-[11px]">
                                 <tr>
-                                    <td class="py-3 font-medium text-stone-700">Main Goal</td>
-                                    <td class="py-3 text-stone-900 font-medium">Clear decisions</td>
-                                    <td class="py-3 text-stone-500">Task management</td>
+                                    <td class="py-3 text-stone-700">Main Goal</td>
+                                    <td class="py-3 text-stone-900">Decisions</td>
+                                    <td class="py-3 text-stone-400">Tasks</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 font-medium text-stone-700">Scope</td>
-                                    <td class="py-3 text-stone-900 font-medium">Just today</td>
-                                    <td class="py-3 text-stone-500">Weeks / Months</td>
+                                    <td class="py-3 text-stone-700">Scope</td>
+                                    <td class="py-3 text-stone-900">Today</td>
+                                    <td class="py-3 text-stone-400">Weeks</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 font-medium text-stone-700">Limit</td>
-                                    <td class="py-3 text-stone-900 font-medium">Strictly 3 items</td>
-                                    <td class="py-3 text-stone-500">Unlimited</td>
+                                    <td class="py-3 text-stone-700">Limit</td>
+                                    <td class="py-3 text-stone-900">Strictly 3</td>
+                                    <td class="py-3 text-stone-400">None</td>
                                 </tr>
                                 <tr>
-                                    <td class="py-3 font-medium text-stone-700">Time needed</td>
-                                    <td class="py-3 text-stone-900 font-medium">~60 seconds</td>
-                                    <td class="py-3 text-stone-500">10–30 minutes</td>
+                                    <td class="py-3 text-stone-700">Time needed</td>
+                                    <td class="py-3 text-stone-900">~60 Secs</td>
+                                    <td class="py-3 text-stone-400">10-30 Mins</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </section>
 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>⏱️</span> Decide Your Day in 60 Seconds
                     </h2>
-                    <p class="mb-4 text-stone-600">It’s built to be the easiest habit you have:</p>
-                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                    <p class="mb-4 text-stone-600 text-sm font-medium">It’s built to be the easiest habit you have:</p>
+                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-4 text-stone-600 text-sm font-medium">
                         <li>Open the app (it loads instantly).</li>
                         <li>Type the 3 things that would make today a success.</li>
                         <li>Click Save. Go do them.</li>
                     </ol>
-                    <p class="mt-4 mb-0 text-stone-600">
+                    <p class="mt-4 mb-0 text-stone-600 text-sm font-medium">
                         The app resets itself at midnight. No cleanup required.
                     </p>
                 </section>
 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🔁</span> Built for Daily Use, Not Burnout
                     </h2>
-                    <p class="mb-4 text-stone-600">We designed this around how real people actually behave, not how "productivity gurus" say we should behave.</p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
-                        <li>Gentle Recall: We'll remind you what you focused on yesterday, just to keep the momentum going.</li>
-                        <li>Quiet Consistency: We track your streak internally to give you encouragement, but we won't flash big numbers at you if you break it.</li>
-                        <li>Weekly Glimpse: Once a week, we'll show you the themes you've been focusing on. No charts, just words.</li>
+                    <p class="mb-4 text-stone-600 text-sm font-medium">We designed this around how real people actually behave, not "productivity gurus".</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600 text-sm font-medium">
+                        <li>Gentle Recall: We'll remind you what you focused on yesterday.</li>
+                        <li>Quiet Consistency: We track your streak but won't flash numbers at you.</li>
+                        <li>Weekly Glimpse: Once a week, we'll show you themes. No charts, just words.</li>
                     </ul>
-                    <p class="mt-4 mb-0 text-stone-600">
-                        It's perfect for students, creators, parents, or anyone who just wants to feel a little more in control.
-                    </p>
                 </section>
 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🛠️</span> Who is DECIDE For?
                     </h2>
-                    <p class="mb-4 text-stone-600">DECIDE works best if you want to:</p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600">
+                    <p class="mb-4 text-stone-600 text-sm font-medium">DECIDE works best if you want to:</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-600 text-sm font-medium">
                         <li>Focus on what truly matters today</li>
                         <li>Reduce mental clutter and decision fatigue</li>
                         <li>Build a simple daily planning habit</li>
                         <li>Avoid complex productivity systems</li>
                     </ul>
-                    <p class="mt-4 mb-0 text-stone-600">
-                        If you’ve tried planners, to-do apps, or task managers and felt overwhelmed — DECIDE is for you.
+                    <p class="mt-4 mb-0 text-stone-600 text-sm font-medium">
+                        If you’ve tried planners and felt overwhelmed — DECIDE is for you.
                     </p>
                 </section>
 
-                <section class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-stone-900 mb-4 flex items-center gap-2 mt-0">
+                <section class="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🔒</span> Simple, Private, and Fast
                     </h2>
-                    <ul class="grid sm:grid-cols-2 gap-4 text-sm font-medium text-stone-700 mb-6">
-                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> No sign-up needed</li>
-                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Works totally offline</li>
-                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Data stays on your device</li>
-                        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-green-600 bg-green-50 rounded-full p-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Loads in milliseconds</li>
+                    <ul class="grid sm:grid-cols-2 gap-4 text-[10px] font-black text-stone-500 uppercase tracking-widest mb-6">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> No sign-up</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Totally offline</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Data stays local</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Loads instantly</li>
                     </ul>
-                    <p class="mt-4 text-sm font-medium text-stone-500 mb-0 bg-stone-50 p-3 rounded-lg text-center">
+                    <p class="mt-4 text-[11px] font-bold text-stone-500 mb-0 bg-stone-50 p-3 rounded-lg text-center uppercase tracking-tight">
                         We respect your attention. We won't sell your data.
                     </p>
                 </section>
 
-                <section>
-                    <h2 class="text-xl font-bold text-stone-900 mb-6 flex items-center gap-2">
+                <section id="faqs">
+                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
                         <span>❓</span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-4">
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">1. What is DECIDE?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">DECIDE is a daily priority tool that helps you decide your top three priorities for today in under 60 seconds. Instead of managing long to-do lists or planning weeks ahead, DECIDE focuses only on what truly matters today.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. What is DECIDE?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">DECIDE is a daily priority tool that helps you decide your top three priorities for today in under 60 seconds. Instead of managing long lists, DECIDE focuses on what truly matters now.</p>
                         </div>
-                        
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">2. Is DECIDE a daily planner or a to-do list?</h3>
-                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">No.</strong> DECIDE is not a traditional daily planner, to-do list, or task manager.</p>
-                            <ul class="list-disc list-outside ml-4 space-y-1 text-sm mb-2 text-stone-700">
-                                <li>It does not support unlimited tasks</li>
-                                <li>It does not include schedules or calendars</li>
-                                <li>It does not track task completion</li>
-                            </ul>
-                            <p class="text-sm leading-relaxed mt-2 mb-0 text-stone-700">DECIDE is designed purely for decision clarity, not task management.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Is DECIDE a daily planner?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">No. DECIDE is purely for decision clarity. It doesn't support unlimited tasks, schedules, or calendars. It is designed to be the starting point of your focus.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">3. How is DECIDE different from productivity apps?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Most productivity apps help you do more. <strong class="text-stone-900">DECIDE helps you choose better.</strong> By limiting you to just three priorities per day, DECIDE reduces decision fatigue and mental clutter, making it easier to focus and actually get started.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">3. How is it different from productivity apps?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Most apps help you do more. DECIDE helps you choose better. By limiting you to three priorities, it reduces decision fatigue and mental clutter.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">4. Why only three priorities?</h3>
-                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">Because focus is limited.</strong> Research and real-world experience show that most people can only make meaningful progress on 2–3 important things per day. Limiting choices forces clarity and prevents overwhelm.</p>
-                            <p class="text-sm mt-2"><a href="../terms/about.html" class="underline hover:text-stone-900 font-medium">Read why this limit is a core feature of our philosophy.</a></p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">4. Why only three priorities?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Focus is limited. Progress on 2–3 important things per day is more effective than starting 10 things. Limits force clarity.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">5. Do I need to create an account to use DECIDE?</h3>
-                            <p class="text-sm leading-relaxed mb-2 text-stone-700"><strong class="text-stone-900">No.</strong> DECIDE does not require sign-up or login. Your daily priorities are stored locally on your device. This keeps the app fast, private, and distraction-free.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">5. Do I need an account?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">No. DECIDE does not require sign-up. Your data is stored locally on your device for speed and privacy.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">6. Does DECIDE work offline?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE is a local-first tool and works offline once loaded. You can decide your day without an internet connection.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">6. Does it work offline?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. It is a local-first tool and works without an internet connection once loaded.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">7. What happens to yesterday’s priorities?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Yesterday’s priorities remain saved and read-only. DECIDE may gently show them as a reminder to help you maintain continuity, but it does not judge or score your performance.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">7. What happens to yesterday’s data?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yesterday's priorities are saved as history. We may show them as a gentle reminder but never as a judgment.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">8. Does DECIDE track streaks or performance?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">DECIDE tracks consistency internally to improve the experience, but it does not show streak numbers or productivity scores. There is no pressure, no guilt, and no gamification.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">8. Does it track streaks?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Consistency is tracked internally to help the experience, but we don't flash high-pressure streak numbers at you.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">9. Can I use DECIDE along with another planner or task app?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes — and that’s encouraged.</strong> DECIDE works best as a starting point, helping you decide what matters before you open planners, calendars, or task managers.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">9. Can I use it with other apps?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. DECIDE works best as a "pre-planning" step before you open your calendars or task managers.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">10. Is DECIDE free to use?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE is free to use. Any future premium features (such as exports or backups) will always be optional and non-intrusive.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">10. Is it free?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. DECIDE is free to use. Premium features like cloud-sync are optional and non-intrusive.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">11. Who should use DECIDE?</h3>
-                            <p class="text-sm leading-relaxed mb-2 text-stone-700">DECIDE is ideal for students, professionals, creators, founders, and anyone overwhelmed by to-do lists. If you want clarity instead of complexity, DECIDE is for you.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">11. Who is it for?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Ideal for students, professionals, and creators who are overwhelmed by lists and want clarity.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">12. Is my data private?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700"><strong class="text-stone-900">Yes.</strong> DECIDE does not upload your data to servers. Everything stays on your device unless you explicitly choose otherwise in the future.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">12. Is it private?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. Data never leaves your device unless you explicitly export or backup.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">13. How long does it take to use DECIDE each day?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">Most users complete their daily decision in under one minute. That’s the point.</p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">13. How long does it take?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Under one minute per day. That's the design core.</p>
                         </div>
-
-                        <div class="p-5 bg-stone-100 rounded-xl">
-                            <h3 class="font-bold text-stone-900 mb-2 mt-0">14. Are there any keyboard shortcuts?</h3>
-                            <p class="text-sm leading-relaxed mb-0 text-stone-700">
-                                <strong class="text-stone-900">Yes.</strong> For desktop power users who want to move fast without touching their mouse: <br><br>
-                                • Press <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Cmd + Enter</kbd> (Mac) or <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Ctrl + Enter</kbd> (Windows) to instantly save your priorities.<br>
-                                • Press <kbd class="px-1.5 py-0.5 bg-white border border-stone-200 rounded text-xs font-mono">Escape</kbd> to quickly close any open menus, popups, or to cancel editing your priorities.
-                            </p>
+                        <div class="p-5 bg-stone-100 rounded-2xl border border-stone-200/50">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">14. Keyboard shortcuts?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. Use Cmd/Ctrl + Enter to save, and Escape to close menus or cancel edits.</p>
                         </div>
                     </div>
                 </section>
 
-                <section class="mt-12 p-8 bg-stone-50 rounded-2xl border border-stone-200 shadow-sm text-center">
-                    <h2 class="text-xl font-bold text-stone-900 mb-3 mt-0">✅ Start with just one day</h2>
-                    <p class="mb-6 text-stone-600">You don’t need a complicated system. You just need a decision.</p>
-                    <button onclick="ui.scrollToTool()" class="text-stone-900 font-bold bg-white border border-stone-200 hover:bg-stone-100 px-8 py-3 rounded-xl transition-all shadow-sm">Decide your day now</button>
+                <section class="mt-12 p-8 bg-stone-900 rounded-[2rem] text-center shadow-xl">
+                    <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight">✅ Start with just one day</h2>
+                    <p class="mb-6 text-stone-400 text-sm font-medium">You don’t need a complicated system. You just need a decision.</p>
+                    <button onclick="ui.scrollToTool()" class="bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-md active:scale-95 uppercase tracking-widest text-[11px]">Decide your day now</button>
                 </section>
             </div>
         </article>
-
-    </div>
+    </main>
 
     <!-- Modals -->
     <div id="edit-modal" class="modal-backdrop">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl text-center border border-stone-200">
-            <h3 class="text-xl font-bold text-stone-900 mb-2">Edit priorities?</h3>
-            <p class="text-stone-500 text-sm mb-6">Editing is meant for small corrections, not replanning the day.</p>
+        <div class="bg-white p-8 rounded-[2.5rem] max-w-sm w-full shadow-2xl text-center border border-stone-200">
+            <h3 class="text-xl font-black text-stone-900 mb-2">Edit priorities?</h3>
+            <p class="text-stone-500 text-sm mb-8 font-medium leading-relaxed">Editing is meant for small corrections, not replanning the day.</p>
             <div class="flex gap-4 justify-center">
-                <button id="cancel-edit-btn" class="px-6 py-2 border-2 border-stone-200 rounded-xl text-stone-600 font-bold hover:bg-stone-50 hover:border-stone-300 transition-all">Cancel</button>
-                <button id="confirm-edit-btn" class="px-6 py-2 bg-stone-900 text-white rounded-xl font-bold hover:opacity-90 transition-opacity">Edit</button>
+                <button id="cancel-edit-btn" class="flex-1 px-6 py-3 border-2 border-stone-100 rounded-xl text-stone-400 font-bold uppercase tracking-widest text-[10px] hover:bg-stone-50 transition-all">Cancel</button>
+                <button id="confirm-edit-btn" class="flex-1 px-6 py-3 bg-stone-900 text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:opacity-90 transition-opacity">Edit</button>
             </div>
         </div>
     </div>
     
     <div id="export-options-modal" class="modal-backdrop">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl border border-stone-200">
-            <h3 class="text-xl font-bold text-stone-900 mb-4 text-center">Export & Backup</h3>
-            <p class="text-stone-500 text-sm mb-6 text-center">Download your history to keep it safe, or transfer it to a new device.</p>
+        <div class="bg-white p-8 rounded-[2.5rem] max-w-sm w-full shadow-2xl border border-stone-200">
+            <h3 class="text-xl font-black text-stone-900 mb-4 text-center uppercase tracking-tight">Export & Backup</h3>
+            <p class="text-stone-500 text-sm mb-8 text-center font-medium leading-relaxed">Download your history to keep it safe or transfer devices.</p>
             <div class="space-y-3">
-                <button id="export-csv" class="w-full py-3 px-4 border-2 border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl text-left font-bold text-stone-800 transition-all flex justify-between items-center">
-                    <span>Export CSV Spreadsheet</span>
-                    <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                    <svg class="w-4 h-4 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <button id="export-csv" class="w-full py-4 px-5 border border-stone-100 bg-stone-50 hover:bg-stone-100 rounded-2xl text-left font-bold text-stone-800 transition-all flex justify-between items-center group">
+                    <span class="text-xs uppercase tracking-tight font-black">Spreadsheet (.csv)</span>
+                    <i class="fa-solid fa-file-csv text-stone-400 group-hover:text-red-500 transition-colors"></i>
                 </button>
-                <button id="export-pdf" class="w-full py-3 px-4 border-2 border-stone-200 hover:border-stone-300 hover:bg-stone-50 rounded-xl text-left font-bold text-stone-800 transition-all flex justify-between items-center">
-                    <span>Export PDF Document</span>
-                    <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                    <svg class="w-4 h-4 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <button id="export-pdf" class="w-full py-4 px-5 border border-stone-100 bg-stone-50 hover:bg-stone-100 rounded-2xl text-left font-bold text-stone-800 transition-all flex justify-between items-center group">
+                    <span class="text-xs uppercase tracking-tight font-black">Document (.pdf)</span>
+                    <i class="fa-solid fa-file-pdf text-stone-400 group-hover:text-red-500 transition-colors"></i>
                 </button>
                 
-                <div class="pt-4 mt-4 border-t border-stone-200">
-                    <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                    <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-3">Device Portability</p>
-                    <button id="export-json" class="w-full py-3 px-4 bg-stone-50 hover:bg-stone-100 border border-stone-100 rounded-xl text-left font-bold text-stone-700 transition-colors flex justify-between items-center mb-3">
-                        <span>Download Backup (.json)</span>
-                        <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                        <svg class="w-4 h-4 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <div class="pt-6 mt-6 border-t border-stone-100">
+                    <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mb-4">Device Sync</p>
+                    <button id="export-json" class="w-full py-3 px-5 hover:text-red-600 text-stone-600 transition-colors flex justify-between items-center mb-2">
+                        <span class="text-[11px] font-black uppercase tracking-tight">Download JSON Backup</span>
+                        <i class="fa-solid fa-download text-[10px]"></i>
                     </button>
-                    <label class="w-full py-3 px-4 bg-stone-50 hover:bg-stone-100 border border-stone-100 rounded-xl text-left font-bold text-stone-700 transition-colors flex justify-between items-center cursor-pointer">
-                        <span>Restore from Backup</span>
-                        <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-                        <svg class="w-4 h-4 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <label class="w-full py-3 px-5 hover:text-red-600 text-stone-600 transition-colors flex justify-between items-center cursor-pointer">
+                        <span class="text-[11px] font-black uppercase tracking-tight">Restore Backup</span>
+                        <i class="fa-solid fa-upload text-[10px]"></i>
                         <input type="file" id="import-json" accept=".json" class="hidden">
                     </label>
                 </div>
             </div>
-            <!-- FIXED: Changed text-stone-400 to text-stone-500 for WCAG AA compliance -->
-            <button id="export-close-btn" class="mt-4 w-full py-2 text-stone-500 hover:text-stone-800 font-bold text-sm transition-colors">Cancel</button>
+            <button id="export-close-btn" class="mt-6 w-full py-2 text-stone-300 hover:text-stone-900 font-bold text-[10px] uppercase tracking-[0.3em] transition-colors">Cancel</button>
         </div>
     </div>
 
     <!-- Global Toolblaster Footer -->
-    <div id="app-footer" class="w-full relative z-[60]"></div>
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
 
     <script src="app.js"></script>
     <script src="../js/header-footer.js"></script>
