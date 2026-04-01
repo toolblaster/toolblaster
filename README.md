@@ -1,81 +1,114 @@
-Toolblaster Utility Hub
+🚀 Toolblaster
 
-Toolblaster is a professional digital utility hub and software analysis platform. It combines in-depth, unbiased reviews of web hosting and cybersecurity tools with a suite of lightweight, high-performance web applications designed for creators, students, and professionals.
+Smart Tools for Business, Finance & Life A high-performance digital utility station designed for speed, privacy, and precision.
 
-🚀 Project Vision
+🧠 The Philosophy
 
-To become a consolidated "Utility Hub" (similar to the QuillBot model), where multiple tools live under a single root domain to build massive SEO authority, user trust, and streamlined monetization via AdSense.
+Toolblaster was born from a simple frustration: essential digital tools are often too complex, riddled with ads, or hidden behind paywalls. We believe that calculating financial goals, managing daily priorities, or generating professional invoices shouldn't require a subscription or compromise your privacy.
 
-🏗️ Architecture
+Our Core Pillars:
 
-Toolblaster is built as a Static Utility Suite.
+🔒 Privacy-First (Local Storage): What happens on your device stays on your device. Tools like DECIDE use local browser storage. We do not track or upload your private input data to central servers.
 
-Frontend: Vanilla HTML5, JavaScript (ES6+).
+⚡ Built for Speed: Zero bloat, instant load times, and vanilla JavaScript for a seamless user experience.
 
-Styling: Tailwind CSS (configured via js/tailwind-config.js).
+🎯 No Distractions: 100% free tools with no forced logins, no paywalls, and no annoying pop-ups.
 
-Data Pattern: Local-First (Privacy-focused, no server-side databases for user data).
+📱 Mobile-Optimized: Every interface is built mobile-first with highly compact, thumb-friendly UI components.
 
-Global Components: Shared navigation and footers are injected via js/header-footer.js for site-wide consistency and "DRY" (Don't Repeat Yourself) development.
+🛠️ Tool Ecosystem & Directory
 
-📂 Directory Structure
+Toolblaster operates as a central hub, hosting various native applications and linking to specialized subdomains.
 
-/ (Root)
-├── index.html              # Main Hub Homepage
-├── robots.txt              # Global search engine instructions
-├── sitemap.xml             # Main sitemap linking sub-tools
-├── js/
-│   ├── tailwind-config.js  # Central brand styling & colors
-│   ├── header-footer.js    # Global navigation injection logic
-│   └── global-script.js    # Ad management & UI interactions
-├── decide/                 # DECIDE Tool Subfolder (Umbrella Pattern)
-│   ├── index.html          # Main tool interface
-│   ├── app.js              # Local storage & logic for DECIDE
-│   ├── sitemap.xml         # Tool-specific sitemap
-│   └── pages/              # Content-rich SEO subpages
-│       ├── about.html      # Project story
-│       └── why-three.html  # Philosophical/Scientific context
-└── reviews/                # Software Analysis Directory
-    ├── hosting/            # Hosting review categories
-    └── security/           # Cybersecurity review categories
+1. DECIDE (/decide/)
 
+Daily Priority Tool for Mental Clarity & Focus
+A minimalist daily planner designed to eliminate overwhelm.
 
-🎯 The "Umbrella" SEO Strategy
+Feature: Limits you to strictly 3 daily priorities.
 
-We have transitioned from subdomains (e.g., decide.toolblaster.com) to a Subfolder Structure (e.g., toolblaster.com/decide/).
+Tech: Uses LocalStorage for data persistence, Custom JSON export/import for backups, PDF/CSV generation.
 
-Benefits:
+Design: Premium Glassmorphism UI, WCAG AA compliant contrast.
 
-Consolidated Domain Authority: Backlinks to individual tools now power the entire toolblaster.com domain.
+2. Kids Rhymes (/educational/nursery-rhymes-for-kids/)
 
-Instant AdSense Approval: A single site verification covers all internal tools.
+Interactive Nursery Rhymes Tool
+A safe, educational tool for kids featuring rhymes in English and Hindi.
 
-User Retention: Shared headers and footers keep users within the Toolblaster ecosystem.
+Feature: Web Speech API integration for "Read Aloud" functionality, Custom queue/playlist management.
 
-🛠️ Featured Tool: DECIDE.
+Design: Playful ambient glassmorphism backgrounds, categorized filtering.
 
-DECIDE. is a minimalist daily priority tool. Unlike traditional planners that create overwhelm, DECIDE forces clarity by limiting users to exactly three priorities per day.
+3. Reviews Hub (/reviews/)
 
-Privacy: 100% Local-first. No data ever leaves the user's device.
+Expert Software & Service Reviews
+Unbiased, data-driven analysis of digital tools powering the modern web.
 
-Performance: Sub-100ms load times.
+Feature: Client-side category filtering, expandable image modals.
 
-PWA Ready: Installable on iOS and Android for offline use.
+4. External Utility Stations (Subdomains)
 
-🎨 Development Standards
+Notepad: Distraction-free browser notepad.
 
-Mobile-First: All components are designed for mobile interaction first, scaling up to desktop.
+SIP Planner: Advanced mutual fund returns calculator accounting for inflation.
 
-Typography: Strict enforcement of the official Inter brand font.
+GST Billing: Professional invoice generator for small businesses.
 
-SEO Limits: - Titles: < 60 characters.
+Agri Quiz: Mock exams and educational testing.
 
-Descriptions: < 160 characters.
+Percentage Calculator: Quick math utilities.
 
-Accessibility: Targeted WCAG AA compliance with high-contrast stone-palette themes.
+💻 Tech Stack & Architecture
 
-📜 Legal
+This project is built using a modern, lightweight, and framework-agnostic stack:
 
-Toolblaster and its associated tools are provided "as-is". User data for tools like DECIDE is stored in localStorage; users are responsible for their own backups using the built-in JSON export features.
+Frontend: HTML5, Vanilla JavaScript (ES6+).
 
-© 2026 Toolblaster. All Rights Reserved.
+Styling: Tailwind CSS (loaded via CDN for rapid prototyping).
+
+Typography: Official Brand Font: Inter (Google Fonts). Secondary Font: Hind.
+
+Icons: FontAwesome 6 (Solid & Brands).
+
+Utilities: jspdf and jspdf-autotable for client-side document generation.
+
+State Management: Native window.localStorage API.
+
+Global Components Strategy
+
+To maintain a DRY (Don't Repeat Yourself) codebase across static HTML files, global elements are injected via JavaScript:
+
+js/header-footer.js: Dynamically injects the global navigation bar, secondary app switcher, mobile sidebar, and global footer.
+
+js/tailwind-config.js: Centralized design system maintaining custom color palettes (e.g., stone-900, red-500), font settings, and glassmorphism shadows.
+
+🚦 Running Locally
+
+Because Toolblaster is a client-side static application, running it locally is incredibly simple:
+
+Clone the repository to your local machine.
+
+Open the project folder in your preferred code editor (e.g., VS Code).
+
+Use an extension like Live Server to serve the index.html file from the root directory.
+
+Note: Because some tools use modules and external CDNs, viewing them via the file:// protocol directly in the browser may cause CORS or pathing issues. Always use a local web server.
+
+🛡️ Accessibility (WCAG AA) & SEO
+
+Contrast: UI elements utilize stone-600 to stone-900 against light backgrounds to strictly meet or exceed the 4.5:1 contrast ratio required by WCAG AA standards.
+
+SEO: Implementations include accurate canonical tags, JSON-LD structured data (WebApplication & BreadcrumbList), and optimized Meta Titles (~60 chars) & Descriptions (~150 chars).
+
+✉️ Contact & Creator
+
+Built with focus and precision by Vikas Rana.
+
+X (Twitter): @Vikasrana03
+
+Email: hello@toolblaster.com
+
+Website: Toolblaster.com
+
+Copyright © 2026 Toolblaster.com | All Rights Reserved.
