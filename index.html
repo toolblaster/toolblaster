@@ -50,6 +50,17 @@
         }
         .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Card styling inspired by Quillbot/SmallPDF */
+        .premium-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e7e5e4;
+        }
+        .premium-card:hover {
+            border-color: #EF4444;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
@@ -62,7 +73,7 @@
     <main class="flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-16">
         
         <!-- Hero Section (Highly Compact for Mobile) -->
-        <div class="relative z-10 max-w-4xl mx-auto text-center pt-2 pb-4 md:pb-6 px-2 fade-in">
+        <div class="relative z-10 max-w-4xl mx-auto text-center pt-2 pb-6 md:pb-10 px-2 fade-in">
             <div class="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 mb-2 bg-white border border-stone-200 rounded-xl shadow-sm ring-1 ring-black/5">
                 <svg class="w-6 h-6 md:w-7 md:h-7 drop-shadow-sm" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M256 32C190 32 160 128 160 192V288L128 320V352H192L256 32V32Z" fill="#EF4444"/>
@@ -86,87 +97,86 @@
             </p>
         </div>
 
-        <!-- Tools Grid Section (Compact Rectangular Layout, No Bulky Hover Effects) -->
+        <!-- Tools Grid Section (2-Column Mobile Inline, 4-Column Desktop Horizontal) -->
         <section id="tools" class="mb-10 fade-in w-full">
-            <!-- Visually hidden H2 for strict semantic hierarchy -->
             <h2 class="sr-only font-inter">Our Digital Tools</h2>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
                 
                 <!-- GST Billing Tool -->
-                <a href="https://gstbilling.toolblaster.com" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-green-50 text-green-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-file-invoice text-lg sm:text-xl"></i>
+                <a href="https://gstbilling.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-green-50 text-green-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-file-invoice text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">GST Billing</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Professional invoice generator for Indian small businesses.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">GST Billing</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Professional invoice generator.</p>
                     </div>
                 </a>
 
                 <!-- Daily Focus (DECIDE) -->
-                <a href="/decide/" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-bullseye text-lg sm:text-xl"></i>
+                <a href="/decide/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-bullseye text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">Daily Focus</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Minimalist daily priority planner to build consistent focus.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Daily Focus</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Minimalist daily priority planner.</p>
                     </div>
                 </a>
 
                 <!-- SIP Planner -->
-                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-red-50 text-red-500 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-chart-line text-lg sm:text-xl"></i>
+                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-red-50 text-red-500 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-chart-line text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">SIP Planner</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Calculate mutual fund returns with strict inflation tracking.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">SIP Planner</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Mutual fund returns calculator.</p>
                     </div>
                 </a>
 
                 <!-- Kids Rhymes -->
-                <a href="/educational/nursery-rhymes-for-kids/" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-music text-lg sm:text-xl"></i>
+                <a href="/educational/nursery-rhymes-for-kids/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-music text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">Kids Rhymes</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Interactive nursery rhymes with read-aloud and playlists.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Kids Rhymes</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Interactive rhymes with playlists.</p>
                     </div>
                 </a>
 
                 <!-- Online Notepad -->
-                <a href="https://onlinenotepad.toolblaster.com" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-pen-to-square text-lg sm:text-xl"></i>
+                <a href="https://onlinenotepad.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-pen-to-square text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">Online Notepad</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">A fast, distraction-free browser notepad with auto-save.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Notepad</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Distraction-free browser notepad.</p>
                     </div>
                 </a>
 
                 <!-- Agri Mock Test -->
-                <a href="https://agriquiz.toolblaster.com" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-wheat-awn text-lg sm:text-xl"></i>
+                <a href="https://agriquiz.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-wheat-awn text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">Agri Mock Test</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Practice quizzes and mock exams for agriculture students.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Agri Quiz</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Mock exams for agriculture.</p>
                     </div>
                 </a>
 
                 <!-- Percentage Calc -->
-                <a href="https://percentagecalculator.toolblaster.com/" class="flex items-center p-3 sm:p-4 rounded-xl bg-white border border-stone-200 text-left w-full hover:bg-stone-50 transition-colors">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
-                        <i class="fa-solid fa-percent text-lg sm:text-xl"></i>
+                <a href="https://percentagecalculator.toolblaster.com/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
+                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
+                        <i class="fa-solid fa-percent text-sm lg:text-xl"></i>
                     </div>
-                    <div class="flex flex-col justify-center">
-                        <h3 class="text-sm sm:text-[15px] font-bold font-inter text-stone-900 leading-tight">Percentage Calc</h3>
-                        <p class="text-[11px] sm:text-xs font-inter text-stone-500 mt-0.5 leading-snug line-clamp-2">Quick and easy percentage calculations for daily math.</p>
+                    <div class="flex flex-col min-w-0">
+                        <h3 class="text-[12px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Percentage</h3>
+                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Quick math calculations.</p>
                     </div>
                 </a>
             </div>
@@ -174,7 +184,6 @@
 
         <!-- Trust Section: WHY CHOOSE US -->
         <section class="max-w-4xl mx-auto mb-12 fade-in">
-            <!-- STRICT SEO: H2 for Section -->
             <h2 class="text-center text-[10px] font-black font-inter tracking-[0.3em] text-stone-400 uppercase mb-6">Why Choose Toolblaster</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 px-2">
