@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- SEO Meta Tags (WCAG ane Best Practices mujab) -->
+    <title>Pomodoro Study Timer | Focus & Productivity Tool</title>
+    <meta name="title" content="Pomodoro Study Timer | Focus & Productivity Tool">
+    <meta name="description" content="Boost your focus with our free Pomodoro Study Timer. A perfect pomofocus alternative combining 25-minute sessions with breaks. No sign-up required.">
+    <meta name="author" content="ToolBlaster">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Updated Canonical URL for Silo -->
+    <link rel="canonical" href="https://toolblaster.com/productivity/pomodoro-study-timer/">
+
+    <!-- Open Graph / Facebook mate -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Study Timer">
+    <meta property="og:url" content="https://toolblaster.com/productivity/pomodoro-study-timer/">
+    <meta property="og:title" content="Pomodoro Study Timer | Focus & Productivity Tool">
+    <meta property="og:description" content="Boost your focus with our free Pomodoro Study Timer. A perfect pomofocus alternative combining 25-minute sessions with breaks. No sign-up required.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Twitter mate -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pomodoro Study Timer | Focus Tool">
+    <meta name="twitter:description" content="Boost your focus with our free Pomodoro Study Timer. Minimalist and distraction-free pomofocus alternative.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <meta name="theme-color" content="#FAFAF9">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Focus Timer">
+
+    <!-- JSON-LD Structured Data WebApplication mate -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Pomodoro Study Timer",
+      "url": "https://toolblaster.com/productivity/pomodoro-study-timer/",
+      "description": "A minimalist Pomodoro Study Timer designed for deep focus and productivity. Works offline.",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data HowTo mate -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Use the Pomodoro Study Timer for Maximum Focus",
+      "description": "A 4-step guide to using the Pomodoro technique to boost your productivity and eliminate distractions.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Pick a task",
+          "text": "Choose your top priority for the session."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set the Pomodoro",
+          "text": "Start the 25-minute timer and immerse yourself completely in the task. No phones, no social media."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Take a Short Break",
+          "text": "When the timer rings, take a 5-minute break. Stand up, stretch, or grab some water."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Take a Long Break",
+          "text": "After completing four 25-minute sessions (Pomodoros), reward yourself with a 15 to 30-minute long break."
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data FAQPage mate -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is it called 'Pomodoro'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "\"Pomodoro\" is the Italian word for tomato. The creator of the technique originally used a tomato-shaped kitchen timer to track his work sessions during university."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change the 25-minute time limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! While 25 minutes is the standard, everyone's attention span is different. You can use the settings icon below the timer to customize your study and break lengths to fit your personal workflow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool work offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Once the page is loaded, the timer runs entirely in your local browser. It requires zero internet connection to count down, ensuring you can disconnect from Wi-Fi for deeper focus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from a normal phone timer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Using your phone as a timer often leads to distractions (seeing notifications when you check the time). Our web-based study timer acts as a dedicated pomofocus environment that is distraction-free and integrates directly with your daily priorities."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link rel="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="../../js/favicon/decide.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="../../js/tailwind-config.js"></script>
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = window.tailwind.config || {};
+        window.tailwind.config.theme = window.tailwind.config.theme || {};
+        window.tailwind.config.theme.extend = window.tailwind.config.theme.extend || {};
+        window.tailwind.config.theme.extend.colors = window.tailwind.config.theme.extend.colors || {};
+        window.tailwind.config.theme.extend.colors.stone = {
+            ...(window.tailwind.config.theme.extend.colors.stone || {}),
+            850: '#1c1917', 
+            950: '#0c0a09'
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FAFAF9;
+            --text-main: #292524;
+            --accent: #1C1917;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .timer-text {
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+
+        .mode-btn.active {
+            background-color: #1C1917;
+            color: white;
+            border-color: #1C1917;
+            box-shadow: 0 4px 14px rgba(28,25,23,0.3);
+        }
+
+        /* Ambient Orbs Transitions mate */
+        .ambient-orb {
+            transition: background-color 1.5s ease-in-out;
+        }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; padding: 1rem;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-active { display: flex; opacity: 1; }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col overflow-x-hidden selection:bg-stone-900 selection:text-white relative">
+
+    <!-- Subtle Ambient Glassmorphism Background Orbs (Dynamic Theme mate) -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="orb-1" class="ambient-orb absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-stone-200/50 blur-[120px]"></div>
+        <div id="orb-2" class="ambient-orb absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-orange-100/40 blur-[100px]"></div>
+        <div id="orb-3" class="ambient-orb absolute top-[20%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-rose-100/30 blur-[80px]"></div>
+    </div>
+
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-6 md:pt-5 md:pb-8 max-w-7xl relative z-10">
+
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap relative z-10">
+            <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+            </a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <a href="/#tools" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <span class="text-stone-900 font-bold">Timer</span>
+        </nav>
+
+        <!-- Timer Station Container: Compact Frosted Glassmorphism with H1/H2 Inside -->
+        <div class="bg-white/70 backdrop-blur-2xl border border-white/80 rounded-[2rem] px-4 pt-6 pb-6 sm:px-10 md:px-12 md:pt-8 md:pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] mb-10 w-full max-w-2xl mx-auto fade-in relative z-10 text-center">
+            
+            <!-- H1 ane H2 SEO Headings moved inside container -->
+            <div class="text-center mb-4 relative z-10">
+                <h1 class="font-inter text-[28px] sm:text-[30px] font-black text-stone-900 leading-tight tracking-tight drop-shadow-sm">Pomodoro Study Timer</h1>
+                <h2 class="font-inter text-[13px] sm:text-sm font-medium text-stone-600 mt-1">Deep focus sessions with perfectly timed breaks.</h2>
+            </div>
+
+            <!-- Independent Task Input (Auto-syncs via LocalStorage if data exists) -->
+            <div class="mb-5 flex justify-center relative z-10">
+                <input type="text" id="focus-task-input" placeholder="What are you focusing on? (optional)" class="w-full max-w-sm bg-white/50 backdrop-blur-md border border-white/60 px-4 py-2.5 rounded-2xl shadow-sm text-center text-sm sm:text-base font-bold text-stone-900 placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-900 focus:bg-white/90 transition-all" autocomplete="off">
+            </div>
+
+            <!-- Timer na Modes -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-5">
+                <button class="mode-btn active px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-stone-900 text-white border border-stone-900 hover:bg-stone-800 shadow-[0_4px_14px_rgba(28,25,23,0.3)] transition-all" data-mode="pomodoro" data-time="25">Pomodoro</button>
+                <button class="mode-btn px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-stone-600 bg-white/60 border border-white/80 hover:bg-white transition-all" data-mode="shortBreak" data-time="5">Short Break</button>
+                <button class="mode-btn px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-stone-600 bg-white/60 border border-white/80 hover:bg-white transition-all" data-mode="longBreak" data-time="15">Long Break</button>
+            </div>
+
+            <!-- Massive Timer Display -->
+            <div class="mb-6 relative flex justify-center items-center">
+                <!-- Decorative subtle pulse ring behind timer -->
+                <div id="timer-pulse" class="absolute w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] bg-white/40 rounded-full blur-2xl opacity-0 transition-opacity duration-1000 pointer-events-none"></div>
+                <div id="timer-display" class="timer-text text-[70px] sm:text-[90px] md:text-[110px] font-black text-stone-900 leading-none drop-shadow-sm relative z-10">
+                    25:00
+                </div>
+            </div>
+
+            <!-- Controls (Start/Pause, Reset, Settings) -->
+            <div class="flex flex-row items-center justify-center gap-4 sm:gap-6 relative z-10">
+                <button id="reset-btn" class="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md border border-white/80 text-stone-600 hover:text-stone-900 hover:bg-white transition-all shadow-sm active:scale-95 flex-shrink-0" aria-label="Reset Timer">
+                    <i class="fa-solid fa-rotate-right text-lg"></i>
+                </button>
+                
+                <!-- Horizontal Inline Start Focus Button -->
+                <button id="start-pause-btn" class="px-8 py-3.5 sm:px-10 sm:py-4 bg-stone-900 text-white rounded-full text-sm sm:text-base font-black uppercase tracking-widest hover:bg-stone-800 active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(28,25,23,0.3)] flex flex-row items-center justify-center gap-2.5 min-w-[180px] sm:min-w-[200px] border border-stone-800 whitespace-nowrap flex-shrink-0">
+                    <i class="fa-solid fa-play" id="play-icon"></i>
+                    <span id="start-pause-text">Start Focus</span>
+                </button>
+                
+                <button id="settings-btn" class="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md border border-white/80 text-stone-600 hover:text-stone-900 hover:bg-white transition-all shadow-sm active:scale-95 flex-shrink-0" aria-label="Timer Settings">
+                    <i class="fa-solid fa-gear text-lg"></i>
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-stone-500 font-bold uppercase tracking-widest mt-5 mb-0 drop-shadow-sm">Stay focused. Stay present.</p>
+        </div>
+
+        <!-- SEO Optimized Article Sections -->
+        <article class="w-full max-w-2xl mx-auto mt-16 mb-16 prose prose-stone relative z-10">
+            <div class="space-y-8 text-stone-700">
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span>🍅</span> What is a Pomodoro Study Timer?
+                    </h2>
+                    <p class="leading-relaxed mb-4 text-stone-700 text-sm font-medium">
+                        The Pomodoro Study Timer is a powerful productivity tool based on the famous Pomodoro Technique developed by Francesco Cirillo in the late 1980s. It breaks your work or study time into highly focused, manageable chunks.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-700 text-sm font-medium">
+                        Whether you call it a traditional pomodoro timer, a study timer, or a <strong>pomofocus</strong> tool, the goal is exactly the same: to train your brain to focus completely for short bursts, knowing a rewarding break is coming soon. Instead of burning yourself out with endless hours of continuous study, this timer helps you work <em>with</em> time, rather than against it.
+                    </p>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span>🧠</span> How to Use the Timer for Maximum Focus
+                    </h2>
+                    <p class="mb-4 text-stone-700 text-sm font-medium">Using our study timer is incredibly simple. Just follow these 4 steps:</p>
+                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-0 text-stone-700 text-sm font-medium">
+                        <li><strong class="text-stone-900 font-black">Pick a task:</strong> Choose your top priority for the session.</li>
+                        <li><strong class="text-stone-900 font-black">Set the Pomodoro:</strong> Start the 25-minute timer and immerse yourself completely in the task. No phones, no social media.</li>
+                        <li><strong class="text-stone-900 font-black">Take a Short Break:</strong> When the timer rings, take a 5-minute break. Stand up, stretch, or grab some water.</li>
+                        <li><strong class="text-stone-900 font-black">Take a Long Break:</strong> After completing four 25-minute sessions (Pomodoros), reward yourself with a 15 to 30-minute long break.</li>
+                    </ol>
+                </section>
+
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
+                        <span>❓</span> Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. Why is it called 'Pomodoro'?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">"Pomodoro" is the Italian word for tomato. The creator of the technique originally used a tomato-shaped kitchen timer to track his work sessions during university.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Can I change the 25-minute time limit?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes! While 25 minutes is the standard, everyone's attention span is different. You can use the settings icon below the timer to customize your study and break lengths to fit your personal workflow.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">3. Does this tool work offline?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Absolutely. Once the page is loaded, the timer runs entirely in your local browser. It requires zero internet connection to count down, ensuring you can disconnect from Wi-Fi for deeper focus.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">4. How is this different from a normal phone timer?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Using your phone as a timer often leads to distractions (seeing notifications when you check the time). Our web-based study timer acts as a dedicated <strong>pomofocus</strong> environment that is distraction-free and integrates directly with your daily priorities.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-12 p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
+                    <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">🧠 Ready to eliminate distractions?</h2>
+                    <p class="mb-6 text-stone-300 text-sm font-medium relative z-10">Start your first focus session now.</p>
+                    <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Start Timer</button>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Settings Modal (Vertically Compacted) -->
+    <div id="settings-modal" class="modal-backdrop">
+        <div class="bg-white/90 backdrop-blur-2xl p-5 sm:p-6 rounded-[2rem] max-w-sm w-full shadow-2xl border border-white/80" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg sm:text-xl font-black text-stone-900 uppercase tracking-tight">Timer Settings</h3>
+                <button id="close-settings-x" class="text-stone-400 hover:text-red-500 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-stone-100" aria-label="Close Settings">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3 text-left">
+                <div>
+                    <label class="block text-[10px] sm:text-[11px] font-black text-stone-500 uppercase tracking-widest mb-1 flex justify-between">
+                        <span>Pomodoro</span> <span class="text-stone-400 font-medium lowercase">minutes</span>
+                    </label>
+                    <input type="number" id="setting-pomodoro" min="1" max="120" class="w-full bg-white/60 border border-stone-200 rounded-xl px-4 py-2 text-stone-900 font-bold focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent shadow-sm transition-all" value="25">
+                </div>
+                <div>
+                    <label class="block text-[10px] sm:text-[11px] font-black text-stone-500 uppercase tracking-widest mb-1 flex justify-between">
+                        <span>Short Break</span> <span class="text-stone-400 font-medium lowercase">minutes</span>
+                    </label>
+                    <input type="number" id="setting-short-break" min="1" max="60" class="w-full bg-white/60 border border-stone-200 rounded-xl px-4 py-2 text-stone-900 font-bold focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent shadow-sm transition-all" value="5">
+                </div>
+                <div>
+                    <label class="block text-[10px] sm:text-[11px] font-black text-stone-500 uppercase tracking-widest mb-1 flex justify-between">
+                        <span>Long Break</span> <span class="text-stone-400 font-medium lowercase">minutes</span>
+                    </label>
+                    <input type="number" id="setting-long-break" min="1" max="120" class="w-full bg-white/60 border border-stone-200 rounded-xl px-4 py-2 text-stone-900 font-bold focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent shadow-sm transition-all" value="15">
+                </div>
+            </div>
+            
+            <div class="flex gap-3 mt-5 pt-4 border-t border-stone-200/50">
+                <button id="cancel-settings-btn" class="flex-1 px-4 py-2.5 border border-stone-200 rounded-xl text-stone-600 font-black uppercase tracking-widest text-[10px] hover:bg-stone-50 hover:text-stone-900 transition-all shadow-sm">Cancel</button>
+                <button id="save-settings-btn" class="flex-1 px-4 py-2.5 bg-stone-900 text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-stone-800 transition-all shadow-[0_4px_14px_rgba(28,25,23,0.3)] border border-stone-800">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Toolblaster Footer -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+
+    <!-- Scripts -->
+    <!-- Note the updated path for JS files due to Silo structure -->
+    <script src="../../js/header-footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let timerInterval;
+            let isRunning = false;
+            let currentMode = 'pomodoro'; // pomodoro, shortBreak, longBreak
+            
+            // Settings State
+            let savedSettings = JSON.parse(localStorage.getItem('pomodoro_settings')) || {
+                pomodoro: 25,
+                shortBreak: 5,
+                longBreak: 15
+            };
+            
+            let timeLeft = savedSettings.pomodoro * 60; 
+
+            // DOM Elements
+            const display = document.getElementById('timer-display');
+            const startPauseBtn = document.getElementById('start-pause-btn');
+            const startPauseText = document.getElementById('start-pause-text');
+            const playIcon = document.getElementById('play-icon');
+            const resetBtn = document.getElementById('reset-btn');
+            const modeBtns = document.querySelectorAll('.mode-btn');
+            const timerPulse = document.getElementById('timer-pulse');
+            
+            // Settings Modal Elements
+            const settingsModal = document.getElementById('settings-modal');
+            const settingsBtn = document.getElementById('settings-btn');
+            const closeSettingsX = document.getElementById('close-settings-x');
+            const cancelSettingsBtn = document.getElementById('cancel-settings-btn');
+            const saveSettingsBtn = document.getElementById('save-settings-btn');
+            const inputPomodoro = document.getElementById('setting-pomodoro');
+            const inputShortBreak = document.getElementById('setting-short-break');
+            const inputLongBreak = document.getElementById('setting-long-break');
+            
+            // Ambient Orbs
+            const orb1 = document.getElementById('orb-1');
+            const orb2 = document.getElementById('orb-2');
+            const orb3 = document.getElementById('orb-3');
+            
+            // Apply Settings to Buttons mate
+            function applySettingsToButtons() {
+                document.querySelector('[data-mode="pomodoro"]').dataset.time = savedSettings.pomodoro;
+                document.querySelector('[data-mode="shortBreak"]').dataset.time = savedSettings.shortBreak;
+                document.querySelector('[data-mode="longBreak"]').dataset.time = savedSettings.longBreak;
+            }
+            applySettingsToButtons();
+
+            // Smart Fetching: Only autofills if data exists, otherwise remains empty
+            const taskInput = document.getElementById('focus-task-input');
+            try {
+                const dbData = localStorage.getItem('decide_data_v1');
+                if(dbData) {
+                    const parsedDb = JSON.parse(dbData);
+                    const d = new Date();
+                    const today = d.toLocaleDateString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                    
+                    if (parsedDb[today] && parsedDb[today].priorities) {
+                        const priorities = parsedDb[today].priorities;
+                        const completed = parsedDb[today].completed || [false, false, false];
+                        
+                        let activeTask = priorities[0]; 
+                        for(let i=0; i<priorities.length; i++) {
+                            if(!completed[i]) {
+                                activeTask = priorities[i];
+                                break;
+                            }
+                        }
+                        
+                        if(activeTask && activeTask.trim() !== "") {
+                            if(taskInput) taskInput.value = activeTask;
+                        }
+                    }
+                }
+            } catch(e) { console.log("No task data found yet."); }
+
+            // Web Audio API simple, fast bell sound mate
+            function playBell() {
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, ctx.currentTime); 
+                    
+                    gain.gain.setValueAtTime(0.5, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1);
+                    
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 1);
+                } catch (e) {
+                    console.log('Web Audio API not supported in this browser.');
+                }
+            }
+
+            function updateDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                display.textContent = formattedTime;
+                
+                // Dynamic Tab Title with Mode
+                let modeText = currentMode === 'pomodoro' ? 'Focus' : 'Break';
+                document.title = `${formattedTime} - ${modeText} | Pomodoro Timer`;
+            }
+
+            function toggleTimer() {
+                if (isRunning) {
+                    clearInterval(timerInterval);
+                    startPauseText.textContent = "Resume";
+                    playIcon.className = "fa-solid fa-play";
+                    timerPulse.classList.remove('opacity-100');
+                } else {
+                    timerInterval = setInterval(() => {
+                        if (timeLeft > 0) {
+                            timeLeft--;
+                            updateDisplay();
+                        } else {
+                            clearInterval(timerInterval);
+                            isRunning = false;
+                            startPauseText.textContent = currentMode === 'pomodoro' ? "Start Focus" : "Start Break";
+                            playIcon.className = "fa-solid fa-play";
+                            timerPulse.classList.remove('opacity-100');
+                            playBell();
+                            
+                            // Visual cue mate
+                            document.body.style.backgroundColor = "#fee2e2"; 
+                            setTimeout(() => { document.body.style.backgroundColor = "var(--bg-color)"; }, 300);
+                        }
+                    }, 1000);
+                    startPauseText.textContent = "Pause";
+                    playIcon.className = "fa-solid fa-pause";
+                    timerPulse.classList.add('opacity-100');
+                }
+                isRunning = !isRunning;
+            }
+
+            function resetTimer(newTime = null) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startPauseText.textContent = currentMode === 'pomodoro' ? "Start Focus" : "Start Break";
+                playIcon.className = "fa-solid fa-play";
+                timerPulse.classList.remove('opacity-100');
+                
+                if(newTime !== null) {
+                    timeLeft = newTime * 60;
+                } else {
+                    timeLeft = savedSettings[currentMode] * 60;
+                }
+                updateDisplay();
+            }
+
+            function updateTheme(mode) {
+                currentMode = mode;
+                orb1.className = "ambient-orb absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[120px]";
+                orb2.className = "ambient-orb absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full blur-[100px]";
+                orb3.className = "ambient-orb absolute top-[20%] right-[10%] w-[30vw] h-[30vw] rounded-full blur-[80px]";
+                
+                if (mode === 'pomodoro') {
+                    orb1.classList.add('bg-stone-200/50');
+                    orb2.classList.add('bg-orange-100/40');
+                    orb3.classList.add('bg-rose-100/30');
+                } else if (mode === 'shortBreak') {
+                    orb1.classList.add('bg-blue-100/50');
+                    orb2.classList.add('bg-cyan-100/40');
+                    orb3.classList.add('bg-sky-100/30');
+                } else if (mode === 'longBreak') {
+                    orb1.classList.add('bg-green-100/50');
+                    orb2.classList.add('bg-emerald-100/40');
+                    orb3.classList.add('bg-teal-100/30');
+                }
+            }
+
+            startPauseBtn.addEventListener('click', toggleTimer);
+            resetBtn.addEventListener('click', () => resetTimer());
+
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    modeBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-stone-900', 'text-white', 'border-stone-900', 'hover:bg-stone-800', 'shadow-[0_4px_14px_rgba(28,25,23,0.3)]');
+                        b.classList.add('bg-white/60', 'text-stone-600', 'border-white/80', 'hover:bg-white');
+                    });
+                    
+                    e.target.classList.remove('bg-white/60', 'text-stone-600', 'border-white/80', 'hover:bg-white');
+                    e.target.classList.add('active', 'bg-stone-900', 'text-white', 'border-stone-900', 'hover:bg-stone-800', 'shadow-[0_4px_14px_rgba(28,25,23,0.3)]');
+                    
+                    const newMode = e.target.dataset.mode;
+                    
+                    updateTheme(newMode);
+                    
+                    if(newMode === 'pomodoro') {
+                        startPauseText.textContent = "Start Focus";
+                    } else {
+                        startPauseText.textContent = "Start Break";
+                    }
+                    
+                    // Use saved setting for the clicked mode mate
+                    resetTimer(savedSettings[newMode]);
+                });
+            });
+
+            // --- Settings Modal Logic mate ---
+            function openSettings() {
+                inputPomodoro.value = savedSettings.pomodoro;
+                inputShortBreak.value = savedSettings.shortBreak;
+                inputLongBreak.value = savedSettings.longBreak;
+                settingsModal.classList.add('modal-active');
+            }
+
+            function closeSettings() {
+                settingsModal.classList.remove('modal-active');
+            }
+
+            function saveSettings() {
+                const newPomodoro = parseInt(inputPomodoro.value);
+                const newShort = parseInt(inputShortBreak.value);
+                const newLong = parseInt(inputLongBreak.value);
+
+                // Simple validation
+                if (newPomodoro > 0 && newShort > 0 && newLong > 0) {
+                    savedSettings = {
+                        pomodoro: newPomodoro,
+                        shortBreak: newShort,
+                        longBreak: newLong
+                    };
+                    localStorage.setItem('pomodoro_settings', JSON.stringify(savedSettings));
+                    applySettingsToButtons();
+                    resetTimer(); 
+                    closeSettings();
+                } else {
+                    alert("Please enter valid time in minutes (greater than 0).");
+                }
+            }
+
+            settingsBtn.addEventListener('click', openSettings);
+            closeSettingsX.addEventListener('click', closeSettings);
+            cancelSettingsBtn.addEventListener('click', closeSettings);
+            saveSettingsBtn.addEventListener('click', saveSettings);
+            
+            // Close modal on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && settingsModal.classList.contains('modal-active')) {
+                    closeSettings();
+                }
+            });
+            
+            // Close modal on outside click
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) {
+                    closeSettings();
+                }
+            });
+
+            // Init
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
