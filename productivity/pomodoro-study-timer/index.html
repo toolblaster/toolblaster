@@ -211,13 +211,13 @@
                 <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
             </a>
             <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
-            <a href="../decide/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
+            <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
             <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
             <span class="text-stone-900 font-bold">Timer</span>
         </nav>
 
         <!-- Timer Station Container -->
-        <div class="bg-white/70 backdrop-blur-2xl border border-white/80 rounded-[2rem] px-4 pt-6 pb-6 sm:px-10 md:px-12 md:pt-8 md:pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] mb-10 w-full max-w-2xl mx-auto fade-in relative z-10 text-center">
+        <div id="main-tool-station" class="bg-white/70 backdrop-blur-2xl border border-white/80 rounded-[2rem] px-4 pt-6 pb-6 sm:px-10 md:px-12 md:pt-8 md:pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] mb-10 w-full max-w-2xl mx-auto fade-in relative z-10 text-center scroll-mt-24 sm:scroll-mt-28">
             
             <div class="text-center mb-4 relative z-10">
                 <h1 class="font-inter text-[28px] sm:text-[30px] font-black text-stone-900 leading-tight tracking-tight drop-shadow-sm">Pomodoro Study Timer</h1>
@@ -380,7 +380,7 @@
                 <section class="mt-12 p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
                     <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">🧠 Ready to eliminate distractions?</h2>
                     <p class="mb-6 text-stone-300 text-sm font-medium relative z-10">Start your first focus session now.</p>
-                    <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Start Timer</button>
+                    <button onclick="document.getElementById('main-tool-station').scrollIntoView({behavior: 'smooth', block: 'start'})" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Start Timer</button>
                 </section>
             </div>
         </article>
