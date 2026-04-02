@@ -34,27 +34,30 @@ function injectHeader() {
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // Logic 1: URL-based explicit title matching
+    // SCALABLE LOGIC: Read from HTML Meta tags automatically!
     let centerTitle = "TOOLBLASTER"; 
-    
-    if (currentPath.includes('/decide/')) {
-        centerTitle = "DECIDE.";
-    } else if (currentPath.includes('/educational/nursery-rhymes')) {
-        centerTitle = "KIDS RHYMES";
-    } else if (currentPath.includes('/reviews/')) {
-        centerTitle = "REVIEWS";
-    } else if (currentHost.includes('gstbilling')) {
-        centerTitle = "GST BILLING";
-    } else if (currentHost.includes('agriquiz')) {
-        centerTitle = "AGRI QUIZ";
-    } else if (currentHost.includes('onlinenotepad')) {
-        centerTitle = "NOTEPAD";
-    } else if (currentHost.includes('sipcalculator')) {
-        centerTitle = "SIP PLANNER";
-    } else if (currentHost.includes('percentagecalculator')) {
-        centerTitle = "PERCENTAGE";
-    } else if (currentPath === '/' || currentPath === '/index.html') {
-        centerTitle = "HOME";
+    const appNameMeta = document.querySelector('meta[name="application-name"]');
+    const iosAppNameMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+
+    if (appNameMeta && appNameMeta.content) {
+        centerTitle = appNameMeta.content.toUpperCase();
+    } else if (iosAppNameMeta && iosAppNameMeta.content) {
+        centerTitle = iosAppNameMeta.content.toUpperCase();
+    } else {
+        // Fallback for older legacy pages
+        if (currentPath.includes('/decide/')) centerTitle = "DECIDE.";
+        else if (currentPath.includes('/pomodoro-study-timer/')) centerTitle = "STUDY TIMER";
+        else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
+        else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
+        else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
+        else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
+        else if (currentHost.includes('onlinenotepad')) centerTitle = "NOTEPAD";
+        else if (currentHost.includes('sipcalculator')) centerTitle = "SIP PLANNER";
+        else if (currentHost.includes('percentagecalculator')) centerTitle = "PERCENTAGE";
+        else if (currentPath === '/' || currentPath === '/index.html') centerTitle = "HOME";
+        else if (document.title) {
+            centerTitle = document.title.split(/\||-/)[0].trim().toUpperCase();
+        }
     }
 
     // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
@@ -180,6 +183,32 @@ function injectToolNav() {
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
+    // SMART APP SWITCHER CONFIGURATION
+    // Aage se koi bhi naya tool add karna ho, bas is list mein ek line badha dena!
+    const toolsList = [
+        { name: "DECIDE.", url: "/productivity/decide/", icon: "fa-bullseye", matchPath: "/decide/" },
+        { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", matchPath: "/pomodoro-study-timer/" },
+        { name: "Notepad", url: "https://onlinenotepad.toolblaster.com", icon: "fa-pen-to-square", matchHost: "onlinenotepad" },
+        { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", matchPath: "/educational/nursery-rhymes" }
+    ];
+
+    // Automatically generate links HTML
+    let linksHtml = '';
+    toolsList.forEach(tool => {
+        let isActive = false;
+        if (tool.matchPath && currentPath.includes(tool.matchPath)) isActive = true;
+        if (tool.matchHost && currentHost.includes(tool.matchHost)) isActive = true;
+
+        const activeClasses = "text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60";
+        const inactiveClasses = "font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60";
+
+        linksHtml += `
+            <a href="${tool.url}" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${isActive ? activeClasses : inactiveClasses}">
+                <i class="fa-solid ${tool.icon} text-[12px]"></i> ${tool.name}
+            </a>
+        `;
+    });
+
     const style = `
         <style>
             .hide-nav-scrollbar::-webkit-scrollbar { display: none; }
@@ -192,23 +221,7 @@ function injectToolNav() {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
                     <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
-                    
-                    <a href="/productivity/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
-                        <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
-                    </a>
-                    
-                    <!-- Pomodoro Study Timer Link Added -->
-                    <a href="/productivity/pomodoro-study-timer/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/pomodoro-study-timer/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
-                        <i class="fa-solid fa-stopwatch text-[12px]"></i> Study Timer
-                    </a>
-                    
-                    <a href="https://onlinenotepad.toolblaster.com" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
-                        <i class="fa-solid fa-pen-to-square text-[12px]"></i> Notepad
-                    </a>
-
-                    <a href="/educational/nursery-rhymes-for-kids/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/educational/nursery-rhymes') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
-                        <i class="fa-solid fa-music text-[12px]"></i> Kids Rhymes
-                    </a>
+                    ${linksHtml}
                 </nav>
             </div>
         </div>
