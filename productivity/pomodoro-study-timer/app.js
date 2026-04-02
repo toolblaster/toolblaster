@@ -1,7 +1,7 @@
 /**
  * Pomodoro Study Timer - Core Logic
  * Includes Advanced features: Auto-start, Web Audio Synthesis (Alarms & Focus Sounds),
- * Browser Notifications, Screen Wake Lock API, and Keyboard Shortcuts.
+ * Browser Notifications, Screen Wake Lock API, Keyboard Shortcuts, and Dynamic Favicons.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -60,6 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const orb2 = document.getElementById('orb-2');
     const orb3 = document.getElementById('orb-3');
 
+    // --- PRO FEATURE: DYNAMIC FAVICON ---
+    const faviconLink = document.getElementById('favicon-link');
+    const originalFavicon = "../../js/favicon/favicon.ico";
+
+    function setDynamicFavicon(emoji) {
+        if (!faviconLink) return;
+        const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${emoji}</text></svg>`;
+        faviconLink.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+    }
+
+    function restoreFavicon() {
+        if (!faviconLink) return;
+        faviconLink.href = originalFavicon;
+    }
+
     // Add UI Tooltips for Shortcuts automatically
     document.querySelector('[data-mode="pomodoro"]').title = "Pomodoro (Alt+P)";
     document.querySelector('[data-mode="shortBreak"]').title = "Short Break (Alt+S)";
@@ -90,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch(e) { /* Standalone fallback */ }
 
-    if(taskInput) taskInput.title = "Focus Task (T)";
+    if(taskInput) taskInput.title = "Focus Task (Alt+T)";
 
     // --- PRO FEATURE 1: Browser Notifications ---
     function requestNotificationPermission() {
@@ -103,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if ('Notification' in window && Notification.permission === 'granted') {
             new Notification(title, {
                 body: body,
-                icon: '/js/favicon/android-chrome-192x192.png',
+                icon: '../../js/favicon/android-chrome-192x192.png',
                 vibrate: [200, 100, 200]
             });
         }
@@ -304,6 +319,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         resetTimer(savedSettings[newMode]);
+        
+        if (isRunning) {
+            setDynamicFavicon(currentMode === 'pomodoro' ? '🍅' : '🌿');
+        }
     }
 
     function timerComplete() {
@@ -314,6 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playAlarm(savedSettings.alarmSound);
         stopFocusSound();
         releaseWakeLock(); // Release screen lock when done
+        restoreFavicon(); // Restore original favicon
 
         // Flash screen logic
         document.body.style.backgroundColor = "#fee2e2"; 
@@ -354,6 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerPulse.classList.remove('opacity-100');
             stopFocusSound();
             releaseWakeLock(); // User paused, screen can sleep
+            restoreFavicon(); // Restore original favicon
         } else {
             timerInterval = setInterval(() => {
                 if (timeLeft > 0) {
@@ -372,6 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentMode === 'pomodoro') {
                 startFocusSound(savedSettings.focusSound);
             }
+            
+            setDynamicFavicon(currentMode === 'pomodoro' ? '🍅' : '🌿');
         }
         isRunning = !isRunning;
     }
@@ -384,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timerPulse.classList.remove('opacity-100');
         stopFocusSound();
         releaseWakeLock();
+        restoreFavicon(); // Restore original favicon
         
         if(newTime !== null) {
             timeLeft = newTime * 60;
