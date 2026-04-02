@@ -11,12 +11,13 @@
     <meta name="author" content="ToolBlaster">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
-    <link rel="canonical" href="https://toolblaster.com/decide/pomodoro-study-timer/">
+    <!-- Updated Canonical URL for Silo -->
+    <link rel="canonical" href="https://toolblaster.com/productivity/pomodoro-study-timer/">
 
     <!-- Open Graph / Facebook mate -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="DECIDE. Timer">
-    <meta property="og:url" content="https://toolblaster.com/decide/pomodoro-study-timer/">
+    <meta property="og:site_name" content="Study Timer">
+    <meta property="og:url" content="https://toolblaster.com/productivity/pomodoro-study-timer/">
     <meta property="og:title" content="Pomodoro Study Timer | Focus & Productivity Tool">
     <meta property="og:description" content="Boost your focus with our free Pomodoro Study Timer. A perfect pomofocus alternative combining 25-minute sessions with breaks. No sign-up required.">
     <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
@@ -38,7 +39,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Pomodoro Study Timer",
-      "url": "https://toolblaster.com/decide/pomodoro-study-timer/",
+      "url": "https://toolblaster.com/productivity/pomodoro-study-timer/",
       "description": "A minimalist Pomodoro Study Timer designed for deep focus and productivity. Works offline.",
       "applicationCategory": "ProductivityApplication",
       "operatingSystem": "All",
@@ -60,8 +61,8 @@
       "step": [
         {
           "@type": "HowToStep",
-          "name": "Decide on a task",
-          "text": "Use our DECIDE tool to pick your top priority for the day."
+          "name": "Pick a task",
+          "text": "Choose your top priority for the session."
         },
         {
           "@type": "HowToStep",
@@ -219,7 +220,7 @@
                 <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
             </a>
             <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <a href="/decide/" class="hover:text-stone-900 transition-colors font-medium">Daily Focus</a>
+            <a href="/#tools" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
             <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
             <span class="text-stone-900 font-bold">Timer</span>
         </nav>
@@ -233,7 +234,7 @@
                 <h2 class="font-inter text-[13px] sm:text-sm font-medium text-stone-600 mt-1">Deep focus sessions with perfectly timed breaks.</h2>
             </div>
 
-            <!-- Independent Task Input (Auto-syncs with DECIDE if data exists) -->
+            <!-- Independent Task Input (Auto-syncs via LocalStorage if data exists) -->
             <div class="mb-5 flex justify-center relative z-10">
                 <input type="text" id="focus-task-input" placeholder="What are you focusing on? (optional)" class="w-full max-w-sm bg-white/50 backdrop-blur-md border border-white/60 px-4 py-2.5 rounded-2xl shadow-sm text-center text-sm sm:text-base font-bold text-stone-900 placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-900 focus:bg-white/90 transition-all" autocomplete="off">
             </div>
@@ -295,7 +296,7 @@
                     </h2>
                     <p class="mb-4 text-stone-700 text-sm font-medium">Using our study timer is incredibly simple. Just follow these 4 steps:</p>
                     <ol class="list-decimal list-outside ml-5 space-y-2 mb-0 text-stone-700 text-sm font-medium">
-                        <li><strong class="text-stone-900 font-black">Decide on a task:</strong> Use our <a href="/decide/" class="text-stone-900 underline decoration-stone-300 hover:decoration-stone-900 transition-colors">DECIDE tool</a> to pick your top priority for the day.</li>
+                        <li><strong class="text-stone-900 font-black">Pick a task:</strong> Choose your top priority for the session.</li>
                         <li><strong class="text-stone-900 font-black">Set the Pomodoro:</strong> Start the 25-minute timer and immerse yourself completely in the task. No phones, no social media.</li>
                         <li><strong class="text-stone-900 font-black">Take a Short Break:</strong> When the timer rings, take a 5-minute break. Stand up, stretch, or grab some water.</li>
                         <li><strong class="text-stone-900 font-black">Take a Long Break:</strong> After completing four 25-minute sessions (Pomodoros), reward yourself with a 15 to 30-minute long break.</li>
@@ -377,6 +378,7 @@
     <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
 
     <!-- Scripts -->
+    <!-- Note the updated path for JS files due to Silo structure -->
     <script src="../../js/header-footer.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -425,7 +427,7 @@
             }
             applySettingsToButtons();
 
-            // Smart Fetching: Only autofills if DECIDE data exists, otherwise remains empty
+            // Smart Fetching: Only autofills if data exists, otherwise remains empty
             const taskInput = document.getElementById('focus-task-input');
             try {
                 const dbData = localStorage.getItem('decide_data_v1');
@@ -451,7 +453,7 @@
                         }
                     }
                 }
-            } catch(e) { console.log("Standalone mode active."); }
+            } catch(e) { console.log("No task data found yet."); }
 
             // Web Audio API simple, fast bell sound mate
             function playBell() {
