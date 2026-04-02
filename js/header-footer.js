@@ -193,8 +193,13 @@ function injectToolNav() {
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
                     <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
                     
-                    <a href="/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
+                    <a href="/productivity/decide/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/decide/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
                         <i class="fa-solid fa-bullseye text-[12px]"></i> DECIDE.
+                    </a>
+                    
+                    <!-- Pomodoro Study Timer Link Added -->
+                    <a href="/productivity/pomodoro-study-timer/" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentPath.includes('/pomodoro-study-timer/') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
+                        <i class="fa-solid fa-stopwatch text-[12px]"></i> Study Timer
                     </a>
                     
                     <a href="https://onlinenotepad.toolblaster.com" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${currentHost.includes('onlinenotepad') ? 'text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60' : 'font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60'}">
@@ -265,9 +270,11 @@ function injectFooterAndModals() {
                             <a href="https://api.whatsapp.com/send?text=${shareMsg}${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#25D366] hover:scale-110 transition-all duration-300" aria-label="Share on WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-sm"></i>
                             </a>
-                            <!-- X (Twitter) -->
+                            <!-- X (Twitter) - Using Inline SVG instead of FontAwesome for robust rendering -->
                             <a href="https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareMsg}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
-                                <i class="fa-brands fa-x-twitter text-sm"></i>
+                                <svg class="w-3.5 h-3.5 fill-current inline-block pb-[1px]" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+                                </svg>
                             </a>
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#1877F2] hover:scale-110 transition-all duration-300" aria-label="Share on Facebook">
