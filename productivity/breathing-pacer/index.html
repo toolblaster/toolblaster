@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- SEO Meta Tags - Universal & Keyword Optimized -->
+    <title>Box Breathing Tool | Minimalist Meditation Pacer</title>
+    <meta name="title" content="Box Breathing Tool | Minimalist Meditation Pacer">
+    <meta name="description" content="Reduce stress with our free Box Breathing tool. Features 4-7-8, Triangle, and Custom paced breathing for deep relaxation and mental clarity. Works offline.">
+    <meta name="author" content="ToolBlaster">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="canonical" href="https://toolblaster.com/productivity/breathing-pacer/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolblaster.com/productivity/breathing-pacer/">
+    <meta property="og:title" content="Box Breathing Tool | Minimalist Meditation Pacer">
+    <meta property="og:description" content="Boost focus instantly with the Navy SEALs box breathing, 4-7-8 sleep technique, and more. Minimalist, private, and distraction-free.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://toolblaster.com/productivity/breathing-pacer/">
+    <meta name="twitter:title" content="Box Breathing Tool | Minimalist Meditation Pacer">
+    <meta name="twitter:description" content="Reduce stress with our free Box Breathing tool. Features 4-7-8, Triangle, and Custom paced breathing for deep relaxation and mental clarity. Works offline.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <meta name="theme-color" content="#FAFAF9">
+    <meta name="application-name" content="BREATHING PACER">
+
+    <!-- JSON-LD Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Box Breathing Tool",
+      "url": "https://toolblaster.com/productivity/breathing-pacer/",
+      "description": "A minimalist, offline-first visual breathing pacer designed to lower stress and enhance focus using the 4-7-8, Box Breathing, and Triangle techniques.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data: HowTo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Use the Breathing Pacer Tool",
+      "description": "Getting started with our meditation pacer takes less than a minute.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Select a Program",
+          "text": "Tap the settings icon to choose from Box Breathing, 4-7-8, Equal Breathing, Measured, or Triangle breathing."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set the Duration",
+          "text": "Pick a 1 to 5-minute timed session, or leave it on 'Endless' for a free-form break."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Customize your Experience",
+          "text": "Enable vocal cues or haptic vibration if you prefer to practice silent, eyes-closed meditation."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Follow the Pacer",
+          "text": "Tap 'Start Session'. A brief breath countdown timer will appear to help you settle in, and then you simply sync your inhales, holds, and exhales with the expanding and contracting animation."
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long should I use the pacer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For maximum benefit, set the timer to at least 3 to 5 minutes. You will feel a noticeable shift in your heart rate and mental clarity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this tool on my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Our breathing timer online is fully optimized for mobile devices. It even includes haptic vibration support so you can close your eyes and feel the breathing rhythm through your phone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this for breath retention practice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Because programs like the 4-7-8 or Box technique include built-in pauses, this tool functions perfectly as a hold your breath timer to help you safely practice and extend your breath retention."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 4-7-8 breathing technique used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 4-7-8 method is a relaxing breathing technique famously used to fall asleep faster and reduce severe anxiety. You inhale for 4 seconds, hold for 7, and exhale completely for 8 seconds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should I practice box breathing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the best results, try practicing for 3-5 minutes, 1 to 2 times a day. It is especially effective during a study break or right before a stressful meeting to clear mental clutter."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico" id="favicon-link">
+    <link rel="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+    <script src="../../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FAFAF9;
+            --text-main: #292524;
+            --accent: #1C1917;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Breathing Animation Core */
+        #breathing-circle {
+            transition-property: transform, opacity;
+            transition-timing-function: linear;
+            transform: scale(0.5);
+        }
+
+        .inhale { transform: scale(1.1) !important; }
+        .exhale { transform: scale(0.5) !important; }
+
+        .orb-animation {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        .step-active { color: #1C1917; font-weight: 900; transform: scale(1.05); }
+
+        .modal-backdrop {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; padding: 1rem;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-active { display: flex; opacity: 1; }
+
+        /* Custom Toggle Switch */
+        .toggle-checkbox:checked { right: 0; border-color: #1c1917; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #1c1917; }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col relative selection:bg-stone-900 selection:text-white">
+
+    <!-- Ambient Glassmorphism Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-100/40 blur-[120px] orb-animation"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-teal-50/40 blur-[100px] orb-animation" style="animation-delay: -2s;"></div>
+        <div class="absolute top-[20%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-stone-200/30 blur-[80px] orb-animation" style="animation-delay: -4s;"></div>
+    </div>
+
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-6 md:pt-5 md:pb-8 max-w-7xl relative z-10">
+        
+        <!-- Breadcrumb Navigation - URL FIXED TO /productivity/ -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap relative z-10">
+            <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+            </a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <span class="text-stone-900 font-bold">Breathing Pacer</span>
+        </nav>
+
+        <!-- Main Station Container -->
+        <div id="main-tool-station" class="bg-white/70 backdrop-blur-2xl border border-white/80 rounded-[2rem] px-4 pt-6 pb-6 sm:px-10 md:px-12 md:pt-8 md:pb-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] mb-10 w-full max-w-2xl mx-auto fade-in text-center relative overflow-hidden z-10 scroll-mt-24 sm:scroll-mt-28">
+            
+            <div class="relative z-10 mb-6 flex justify-between items-start">
+                <div class="text-left">
+                    <h1 class="text-[28px] sm:text-[30px] font-black text-stone-900 tracking-tight mb-1 drop-shadow-sm">Breathing Pacer</h1>
+                    <p id="current-program-name" class="text-[10px] sm:text-xs font-bold text-stone-500 uppercase tracking-[0.1em] mb-0">Box Breathing (4-4-4-4)</p>
+                </div>
+                <button id="settings-btn" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/60 border border-white/80 text-stone-600 hover:text-stone-900 hover:bg-white transition-all shadow-sm active:scale-95 flex-shrink-0" aria-label="Settings">
+                    <i class="fa-solid fa-sliders text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Pre-session Countdown Overlay -->
+            <div id="countdown-overlay" class="absolute inset-0 z-20 bg-white/80 backdrop-blur-md flex flex-col items-center justify-center hidden">
+                <p class="text-sm font-bold text-stone-500 uppercase tracking-widest mb-2">Get Ready</p>
+                <div id="countdown-number" class="text-6xl font-black text-stone-900">3</div>
+            </div>
+
+            <!-- Session Timer Display -->
+            <div id="session-timer-display" class="absolute top-8 left-1/2 -translate-x-1/2 z-10 hidden">
+                <span class="bg-stone-900/5 backdrop-blur border border-stone-200/50 text-stone-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest" id="session-time-left">Endless</span>
+            </div>
+
+            <!-- Breathing Visual Container -->
+            <div class="relative flex items-center justify-center h-52 sm:h-64 mb-5 mt-2">
+                <!-- Inner Glow Circle -->
+                <div id="breathing-circle-glow" class="absolute w-40 h-40 sm:w-48 sm:h-48 bg-blue-400/20 rounded-full blur-2xl transition-all duration-1000"></div>
+                
+                <!-- Main Breathing Orb -->
+                <div id="breathing-circle" class="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-white border-[6px] border-stone-900 flex items-center justify-center shadow-xl relative z-10 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-stone-50 to-transparent opacity-50"></div>
+                    <div id="seconds-counter" class="text-4xl sm:text-5xl font-black text-stone-900 tabular-nums">0</div>
+                </div>
+
+                <!-- Phase Indicators (Desktop Only for Layout) -->
+                <div class="hidden sm:block absolute inset-0 pointer-events-none">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 text-[10px] font-black text-stone-400 uppercase tracking-widest phase-label" id="phase-0">Inhale</div>
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-[10px] font-black text-stone-400 uppercase tracking-widest phase-label" id="phase-1">Hold</div>
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 text-[10px] font-black text-stone-400 uppercase tracking-widest phase-label" id="phase-2">Exhale</div>
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black text-stone-400 uppercase tracking-widest phase-label" id="phase-3">Hold</div>
+                </div>
+            </div>
+
+            <!-- Controls: START AND RESTART BUTTONS -->
+            <div class="flex flex-col items-center gap-4 relative z-10">
+                <p id="instruction-text" class="text-lg sm:text-xl font-black text-stone-800 tracking-tight h-8 mb-0">Ready?</p>
+                
+                <div class="flex flex-row items-center justify-center gap-3 sm:gap-5">
+                    <!-- Reset/Restart Button (Left side) -->
+                    <button id="reset-btn" class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md border border-white/80 text-stone-400 cursor-not-allowed transition-all shadow-sm flex-shrink-0" aria-label="Restart Session" disabled>
+                        <i class="fa-solid fa-rotate-right text-base sm:text-lg"></i>
+                    </button>
+                    
+                    <!-- Main Start/Stop Button (Center) -->
+                    <button id="start-btn" class="px-8 py-3 bg-stone-900 text-white rounded-full text-xs sm:text-sm font-black uppercase tracking-widest hover:bg-stone-800 active:scale-95 transition-all shadow-[0_4px_14px_rgba(28,25,23,0.3)] border border-stone-800 min-w-[160px] sm:min-w-[180px]">
+                        Start Session
+                    </button>
+                    
+                    <!-- Laps Counter (Right side, symmetrically matching the Restart button) -->
+                    <div id="cycle-counter-container" class="w-10 h-10 sm:w-12 sm:h-12 flex flex-col items-center justify-center rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-sm flex-shrink-0 opacity-100 transition-opacity duration-300">
+                        <span class="text-[7px] sm:text-[8px] font-black text-stone-500 uppercase tracking-widest leading-none mb-0.5">Laps</span>
+                        <span id="cycle-counter" class="text-xs sm:text-sm font-black text-stone-900 leading-none">0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SEO Article Content -->
+        <article class="w-full max-w-2xl mx-auto mt-16 mb-16 prose prose-stone relative z-10">
+            <div class="space-y-8 text-stone-700">
+                
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🌬️</span> What is a Breathing Pacer?</h2>
+                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                        A <strong>breathing pacer</strong> (often used as a dedicated <strong>breathing exercise timer</strong>) is a visual and audio guide designed to help you regulate your breathing rate effortlessly. By syncing your breath to a rhythmic animation, it activates your parasympathetic nervous system, instantly lowering stress, reducing your heart rate, and bringing your mind into a state of deep focus.
+                    </p>
+                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-0">
+                        Instead of counting seconds in your head and getting distracted, our digital <strong>breathing timer</strong> takes the guesswork out of breathwork. Simply follow the expanding and contracting circle to find your calm.
+                    </p>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🧘</span> Paced Breathing Programs</h2>
+                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                        Paced breathing is a scientifically proven technique to hack your nervous system. Our tool includes expertly designed patterns to help you reach your goals:
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-4 not-prose">
+                        <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
+                            <h3 class="text-sm font-black text-stone-900 mb-1">Box Breathing (4-4-4-4)</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">Also known as Navy SEAL or tactical breathing. Best for regaining calm and controlling racing thoughts under high stress.</p>
+                        </div>
+                        <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
+                            <h3 class="text-sm font-black text-stone-900 mb-1">Relaxing (4-7-8)</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">The ultimate sleep hack. Inhale for 4, hold for 7, exhale completely for 8. Best used right before bedtime to trigger deep relaxation.</p>
+                        </div>
+                        <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
+                            <h3 class="text-sm font-black text-stone-900 mb-1">Equal Breathing (4-4)</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">A pranayama practice (Sama Vritti). A balanced inhale and exhale to take your mind off distractions and improve daily focus.</p>
+                        </div>
+                        <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
+                            <h3 class="text-sm font-black text-stone-900 mb-1">Triangle (4-4-4)</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">Inhale, Exhale, Pause. Repeating this geometric pattern helps alleviate sudden anxiety and brings you back to the present moment.</p>
+                        </div>
+                        <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm sm:col-span-2">
+                            <h3 class="text-sm font-black text-stone-900 mb-1">HRV Resonance (5-7)</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">The scientific "Gold Standard". Paces you at exactly 5 breaths per minute (5s inhale, 7s exhale) to sync your heart, brain, and nervous system, instantly boosting Heart Rate Variability (HRV).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>⚙️</span> How to Use This Breathing Tool</h2>
+                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                        Getting started with our meditation pacer takes less than a minute:
+                    </p>
+                    <ol class="list-decimal list-outside ml-5 space-y-3 mb-0 text-stone-700 text-sm font-medium">
+                        <li><strong class="text-stone-900 font-black">Select a Program:</strong> Tap the settings icon to choose from Box Breathing, 4-7-8, Equal Breathing, Measured, HRV Resonance, or Triangle breathing.</li>
+                        <li><strong class="text-stone-900 font-black">Set the Duration:</strong> Pick a 1 to 5-minute timed session, or leave it on "Endless" for a free-form break.</li>
+                        <li><strong class="text-stone-900 font-black">Customize your Experience:</strong> Enable vocal cues or haptic vibration if you prefer to practice silent, eyes-closed meditation.</li>
+                        <li><strong class="text-stone-900 font-black">Follow the Pacer:</strong> Tap "Start Session". A brief <strong>breath countdown timer</strong> will appear to help you settle in, and then you simply sync your inhales, holds, and exhales with the expanding and contracting animation.</li>
+                    </ol>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🚀</span> Benefits for Productivity</h2>
+                    <p class="text-sm text-stone-700 font-medium mb-6">Scientific research shows that just a few minutes of paced breathing can:</p>
+                    <ul class="list-none p-0 space-y-4 m-0">
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
+                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Lower Cortisol Levels: Instant reduction in physical stress and anxiety.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
+                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Enhance Focus: Resets the nervous system during Pomodoro breaks.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
+                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Improve Sleep: Calms the "fight or flight" response before bed.</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
+                        <span>❓</span> Frequently Asked Questions
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. How long should I use the pacer?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">For maximum benefit, set the timer to at least 3 to 5 minutes. You will feel a noticeable shift in your heart rate and mental clarity.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Can I use this tool on my phone?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes! Our <strong>breathing timer online</strong> is fully optimized for mobile devices. It even includes haptic vibration support so you can close your eyes and feel the breathing rhythm through your phone.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">3. Can I use this for breath retention practice?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Absolutely. Because programs like the 4-7-8 or Box technique include built-in pauses, this tool functions perfectly as a <strong>hold your breath timer</strong> to help you safely practice and extend your breath retention.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">4. What is the 4-7-8 breathing technique used for?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">The 4-7-8 method is a relaxing breathing technique famously used to fall asleep faster and reduce severe anxiety. You inhale for 4 seconds, hold for 7, and exhale completely for 8 seconds.</p>
+                        </div>
+                        <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">5. How often should I practice box breathing?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">For the best results, try practicing for 3-5 minutes, 1 to 2 times a day. It is especially effective during a study break or right before a stressful meeting to clear mental clutter.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-12 p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
+                    <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">✅ Ready for Calm & Focus?</h2>
+                    <p class="mb-6 text-stone-300 text-sm font-medium relative z-10">Reduce your stress and boost your productivity. Take a quick breathing break now.</p>
+                    <button onclick="document.getElementById('main-tool-station').scrollIntoView({behavior: 'smooth', block: 'start'})" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Start Session Now</button>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-backdrop">
+        <div class="bg-white/95 backdrop-blur-2xl p-5 sm:p-6 rounded-[2rem] max-w-sm w-full shadow-2xl border border-white/80" onclick="event.stopPropagation()">
+            
+            <div class="flex justify-between items-center mb-4 border-b border-stone-200/60 pb-3">
+                <h3 class="text-lg font-black text-stone-900 uppercase tracking-tight">Pacer Settings</h3>
+                <button id="close-settings-x" class="text-stone-400 hover:text-red-500 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-stone-100" aria-label="Close Settings">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-5 text-left">
+                <!-- Program Selection -->
+                <div>
+                    <label class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-2">Breathing Program</label>
+                    <div class="relative">
+                        <select id="setting-program" class="w-full appearance-none bg-stone-100/50 border border-stone-200 text-stone-900 text-xs font-bold py-2.5 px-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-stone-900">
+                            <option value="box">Box Breathing (4-4-4-4)</option>
+                            <option value="relaxing">Relaxing (4-7-8)</option>
+                            <option value="equal">Equal Breathing (4-4)</option>
+                            <option value="measured">Measured (4-1-7)</option>
+                            <option value="triangle">Triangle (4-4-4)</option>
+                            <option value="hrv">HRV Resonance (5-7)</option>
+                            <option value="custom">Custom Pattern...</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-stone-500"><i class="fa-solid fa-chevron-down text-[10px]"></i></div>
+                    </div>
+                </div>
+
+                <!-- Custom Pattern Inputs (Hidden by default) -->
+                <div id="custom-pattern-settings" class="hidden mt-3 p-3 bg-stone-100/50 border border-stone-200 rounded-xl transition-all fade-in">
+                    <label class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-2">Set Custom Times (Seconds)</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div>
+                            <label class="block text-[9px] font-bold text-stone-600 mb-1 text-center">Inhale</label>
+                            <input type="number" id="custom-inhale" min="1" max="30" value="4" class="w-full bg-white border border-stone-200 rounded-lg px-1 py-1.5 text-stone-900 font-bold text-center focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-sm text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-stone-600 mb-1 text-center">Hold</label>
+                            <input type="number" id="custom-hold1" min="0" max="30" value="4" class="w-full bg-white border border-stone-200 rounded-lg px-1 py-1.5 text-stone-900 font-bold text-center focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-sm text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-stone-600 mb-1 text-center">Exhale</label>
+                            <input type="number" id="custom-exhale" min="1" max="30" value="4" class="w-full bg-white border border-stone-200 rounded-lg px-1 py-1.5 text-stone-900 font-bold text-center focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-sm text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-stone-600 mb-1 text-center">Hold</label>
+                            <input type="number" id="custom-hold2" min="0" max="30" value="4" class="w-full bg-white border border-stone-200 rounded-lg px-1 py-1.5 text-stone-900 font-bold text-center focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-sm text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duration Selection -->
+                <div>
+                    <label class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-2">Session Duration</label>
+                    <div class="relative">
+                        <select id="setting-duration" class="w-full appearance-none bg-stone-100/50 border border-stone-200 text-stone-900 text-xs font-bold py-2.5 px-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-stone-900">
+                            <option value="0">Endless (Free-form)</option>
+                            <option value="60">1 Minute</option>
+                            <option value="180">3 Minutes</option>
+                            <option value="300">5 Minutes</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-stone-500"><i class="fa-solid fa-chevron-down text-[10px]"></i></div>
+                    </div>
+                </div>
+
+                <!-- Toggles -->
+                <div class="space-y-4 pt-3 border-t border-stone-200/50">
+                    <div class="flex items-center justify-between">
+                        <label for="toggle-countdown" class="text-xs font-bold text-stone-700 cursor-pointer flex items-center gap-2"><i class="fa-solid fa-stopwatch text-stone-400"></i> 3-Second Countdown</label>
+                        <div class="relative inline-block w-8 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle-countdown" class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-2 border-stone-300 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" checked/>
+                            <label for="toggle-countdown" class="toggle-label block overflow-hidden h-4 rounded-full bg-stone-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <label for="toggle-voice" class="text-xs font-bold text-stone-700 cursor-pointer flex items-center gap-2"><i class="fa-solid fa-headset text-stone-400"></i> Guided Voice Cues</label>
+                        <div class="relative inline-block w-8 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle-voice" class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-2 border-stone-300 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out"/>
+                            <label for="toggle-voice" class="toggle-label block overflow-hidden h-4 rounded-full bg-stone-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <label for="toggle-bell" class="text-xs font-bold text-stone-700 cursor-pointer flex items-center gap-2"><i class="fa-regular fa-bell text-stone-400"></i> Zen Bell (Start/End)</label>
+                        <div class="relative inline-block w-8 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle-bell" class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-2 border-stone-300 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" checked/>
+                            <label for="toggle-bell" class="toggle-label block overflow-hidden h-4 rounded-full bg-stone-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <label for="toggle-vibration" class="text-xs font-bold text-stone-700 cursor-pointer flex items-center gap-2"><i class="fa-solid fa-mobile-screen text-stone-400"></i> Haptic Vibration</label>
+                        <div class="relative inline-block w-8 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle-vibration" class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-2 border-stone-300 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" checked/>
+                            <label for="toggle-vibration" class="toggle-label block overflow-hidden h-4 rounded-full bg-stone-300 cursor-pointer transition-colors duration-200 ease-in-out"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="save-settings-btn" class="w-full mt-6 px-4 py-3 bg-stone-900 text-white rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-stone-800 transition-all shadow-[0_4px_14px_rgba(28,25,23,0.3)] border border-stone-800">Done</button>
+        </div>
+    </div>
+
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
