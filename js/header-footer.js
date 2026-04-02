@@ -188,6 +188,7 @@ function injectToolNav() {
     const toolsList = [
         { name: "DECIDE.", url: "/productivity/decide/", icon: "fa-bullseye", matchPath: "/decide/" },
         { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", matchPath: "/pomodoro-study-timer/" },
+        { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", matchPath: "/breathing-pacer/" },
         { name: "Notepad", url: "https://onlinenotepad.toolblaster.com", icon: "fa-pen-to-square", matchHost: "onlinenotepad" },
         { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", matchPath: "/educational/nursery-rhymes" }
     ];
