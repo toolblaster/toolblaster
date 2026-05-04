@@ -68,7 +68,7 @@
         .category-btn { transition: all 0.2s ease-in-out; }
         .category-btn.active { background-color: #DC2626; color: white; border-color: #DC2626; box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3); }
         .action-btn { transition: all 0.2s ease-in-out; }
-        .action-btn:hover { background-color: rgba(255,255,255,0.9); color: #DC2626; transform: scale(1.05); }
+        .action-btn:hover { background-color: #f5f5f4; color: #DC2626; transform: scale(1.05); }
         
         #toast-notification {
             visibility: hidden; min-width: 200px; background-color: rgba(41, 37, 36, 0.95); backdrop-filter: blur(8px); color: #fff; text-align: center; border-radius: 12px;
@@ -101,12 +101,12 @@
 </head>
 <body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
 
-    <!-- NEW: Global Ambient Glassmorphism Background Orbs -->
+    <!-- Global Ambient Glassmorphism Background Orbs -->
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-200/40 blur-[120px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-100/50 blur-[100px]"></div>
-        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-yellow-100/40 blur-[80px]"></div>
-        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-pink-200/30 blur-[90px]"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-100/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-50/30 blur-[100px]"></div>
+        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-yellow-50/20 blur-[80px]"></div>
+        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-pink-100/20 blur-[90px]"></div>
     </div>
 
     <!-- Global Toolblaster Headers -->
@@ -127,20 +127,20 @@
             <span class="text-stone-900 font-bold">Kids Rhymes</span>
         </nav>
 
-        <!-- Local Tool Action Bar - Premium Glassmorphism -->
-        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/60 backdrop-blur-2xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden">
+        <!-- Local Tool Action Bar - High Contrast Glassmorphism -->
+        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/90 backdrop-blur-2xl border border-white shadow-md ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden">
             <div class="flex items-center gap-3 md:gap-4 relative z-10">
-                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/80 backdrop-blur-md text-red-600 flex items-center justify-center font-bold text-2xl md:text-3xl flex-shrink-0 shadow-[inset_0_2px_10px_rgba(255,255,255,0.8)] border border-white/50">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white border border-stone-100 text-red-600 flex items-center justify-center font-bold text-2xl md:text-3xl flex-shrink-0 shadow-sm">
                     🎵
                 </div>
                 <div class="flex flex-col justify-center">
-                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 leading-tight tracking-tight drop-shadow-sm">Interactive Nursery Rhymes for Kids</h1>
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 leading-tight tracking-tight">Interactive Nursery Rhymes for Kids</h1>
                     <h2 class="text-xs sm:text-sm text-stone-600 font-medium mt-0.5 leading-tight">Complete Rhymes collection in English & Hindi</h2>
                 </div>
             </div>
             
             <div class="w-full sm:w-auto flex-shrink-0 relative z-10">
-                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/80 backdrop-blur-md hover:bg-white text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop shadow-sm border border-white" aria-label="View Playlist">
+                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-50 text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop border border-stone-200 shadow-sm" aria-label="View Playlist">
                     <i class="fa-solid fa-list-ul"></i>
                     <span>Playlist</span>
                     <span id="playlist-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center shadow-md hidden animate-pop border-2 border-white">0</span>
@@ -148,31 +148,31 @@
             </div>
         </div>
 
-        <!-- Rhyme of the Day - Glassmorphism -->
+        <!-- Rhyme of the Day - High Contrast -->
         <section id="rhyme-of-the-day" class="mb-6 fade-in relative z-10">
-            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-red-50/60 backdrop-blur-lg border border-red-200/60 p-4 rounded-2xl cursor-pointer hover:border-red-300 hover:bg-red-50/80 transition-all duration-300 flex items-center justify-between gap-3 shadow-[0_8px_20px_rgba(239,68,68,0.05)]">
+            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-white/95 backdrop-blur-xl border border-red-200 p-4 rounded-2xl cursor-pointer hover:border-red-300 hover:shadow-lg transition-all duration-300 flex items-center justify-between gap-3 shadow-md">
                 <div class="flex items-center gap-3 overflow-hidden">
-                    <div class="text-2xl bg-white/90 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0 border border-white" id="rotd-icon"><span class="animate-pulse opacity-50">🎵</span></div>
+                    <div class="text-2xl bg-red-50 border border-red-100 w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" id="rotd-icon"><span class="animate-pulse opacity-80">🎵</span></div>
                     <div class="text-left overflow-hidden">
                         <h2 class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-0.5 block truncate">Featured Today</h2>
                         <h3 class="text-base sm:text-lg font-bold text-stone-900 truncate" id="rotd-title">Loading...</h3>
                     </div>
                 </div>
-                <div class="bg-white/90 backdrop-blur-sm text-red-600 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-100 shadow-sm whitespace-nowrap flex-shrink-0 hover:scale-105 transition-transform">
+                <div class="bg-red-50 text-red-600 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-200 shadow-sm whitespace-nowrap flex-shrink-0 hover:scale-105 transition-transform">
                     Read & Listen &rarr;
                 </div>
             </div>
         </section>
 
-        <!-- Controls Section - Glassmorphism -->
+        <!-- Controls Section - High Contrast -->
         <section id="controls-section" class="mb-8 fade-in relative z-10">
-            <div class="bg-white/50 backdrop-blur-xl border border-white/80 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 md:p-6">
+            <div class="bg-white/90 backdrop-blur-xl border border-stone-200 rounded-[2rem] shadow-md p-5 md:p-6">
                 <div class="flex flex-col md:flex-row items-center gap-4 mb-6">
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i class="fa-solid fa-magnifying-glass text-stone-400"></i>
                         </div>
-                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-white/70 backdrop-blur-sm border border-white shadow-inner rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:bg-white transition-all">
+                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-white border border-stone-200 shadow-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-all">
                     </div>
                     <button id="surprise-button" class="w-full md:w-auto flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-sm rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-shuffle"></i> Random Rhyme
@@ -181,13 +181,13 @@
 
                 <div id="category-filters">
                     <div class="flex flex-wrap items-center justify-start md:justify-center gap-2">
-                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Rhymes">All</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Favorites">Favorites ❤️</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Learning">Learning 🧠</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Animal">Animals 🐾</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Classic">Classics 📜</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Lullaby">Lullabies 🌙</button>
-                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/70 backdrop-blur-md rounded-full border border-white/50 hover:bg-white shadow-sm transition-all" data-category="Indian">Indian 🇮🇳</button>
+                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Rhymes">All</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Favorites">Favorites ❤️</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Learning">Learning 🧠</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Animal">Animals 🐾</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Classic">Classics 📜</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Lullaby">Lullabies 🌙</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold text-stone-600 bg-white/90 backdrop-blur-md rounded-full border border-stone-200 hover:border-red-300 hover:bg-white shadow-sm transition-all" data-category="Indian">Indian 🇮🇳</button>
                     </div>
                 </div>
             </div>
@@ -198,70 +198,70 @@
             <h2 id="gallery-title" class="text-lg md:text-xl font-black text-stone-900 text-center md:text-left mb-6 transition-opacity duration-300 px-2 drop-shadow-sm">All Rhymes</h2>
             
             <div id="rhyme-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[50vh]">
-                <!-- Glassmorphic Skeleton Loaders -->
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
-                <div class="bg-white/40 backdrop-blur-sm animate-pulse border border-white/50 rounded-2xl h-32 md:h-36"></div>
+                <!-- Glassmorphic Skeleton Loaders - Increased Opacity -->
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
             </div>
         </section>
 
-        <!-- Single Rhyme Detail View - Glassmorphism -->
+        <!-- Single Rhyme Detail View - High Contrast -->
         <section id="rhyme-detail" class="hidden min-h-[60vh] fade-in relative z-10">
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-wrap justify-between items-center gap-4 mb-6 print-hide">
-                    <button id="back-button" class="flex items-center gap-2 bg-white/60 backdrop-blur-md border border-white/80 shadow-sm rounded-lg text-stone-600 hover:text-red-600 hover:bg-white font-bold py-2 px-3 transition-all active:scale-95 text-sm">
+                    <button id="back-button" class="flex items-center gap-2 bg-white/90 backdrop-blur-md border border-stone-200 shadow-sm rounded-lg text-stone-600 hover:text-red-600 hover:bg-white font-bold py-2 px-3 transition-all active:scale-95 text-sm">
                         <i class="fa-solid fa-arrow-left"></i> Back to Gallery
                     </button>
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/60 backdrop-blur-md border border-white/80 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Prev</button>
-                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/60 backdrop-blur-md border border-white/80 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Next</button>
+                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/90 backdrop-blur-md border border-stone-200 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Prev</button>
+                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/90 backdrop-blur-md border border-stone-200 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider">Next</button>
                     </div>
                 </div>
 
-                <div class="bg-white/70 backdrop-blur-2xl p-6 md:p-10 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.06)] border border-white/80 relative overflow-hidden">
-                    <div class="text-center border-b border-stone-200/50 pb-5 mb-5 relative z-10">
-                        <h2 id="rhyme-title-en" class="text-2xl sm:text-[30px] font-black text-stone-900 mb-1.5 leading-tight drop-shadow-sm"></h2>
+                <div class="bg-white/95 backdrop-blur-2xl p-6 md:p-10 rounded-[2rem] shadow-xl border border-white relative overflow-hidden">
+                    <div class="text-center border-b border-stone-200 pb-5 mb-5 relative z-10">
+                        <h2 id="rhyme-title-en" class="text-2xl sm:text-[30px] font-black text-stone-900 mb-1.5 leading-tight"></h2>
                         <h3 id="rhyme-title-hi" class="text-lg sm:text-xl font-bold text-stone-600"></h3>
                         
                         <div id="learning-focus-badge-container" class="hidden mt-3">
-                            <span id="learning-focus-badge" class="inline-block bg-blue-50/80 backdrop-blur-sm text-blue-600 border border-blue-200/50 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm"></span>
+                            <span id="learning-focus-badge" class="inline-block bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm"></span>
                         </div>
 
                         <div class="flex justify-center items-center gap-3 mt-5 print-hide">
-                            <button id="read-aloud-btn-rhyme" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Read Aloud" aria-label="Read Aloud">📢</button>
-                            <button id="add-to-playlist-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full button-pop" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-700 text-base"></i></button>
-                            <button id="favorite-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Add to Favorites" aria-label="Add to Favorites">🤍</button>
-                            <button id="share-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Share" aria-label="Share">🔗</button>
-                            <button id="print-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-full text-lg button-pop" title="Print" aria-label="Print">🖨️</button>
+                            <button id="read-aloud-btn-rhyme" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop" title="Read Aloud" aria-label="Read Aloud">📢</button>
+                            <button id="add-to-playlist-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full button-pop" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-700 text-base"></i></button>
+                            <button id="favorite-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop" title="Add to Favorites" aria-label="Add to Favorites">🤍</button>
+                            <button id="share-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop" title="Share" aria-label="Share">🔗</button>
+                            <button id="print-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop" title="Print" aria-label="Print">🖨️</button>
                         </div>
                     </div>
                     
-                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-3 mb-6 bg-red-50/80 backdrop-blur-md py-2 px-4 rounded-xl border border-red-100 shadow-sm print-hide max-w-xs mx-auto relative z-10">
+                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-3 mb-6 bg-red-50 py-2 px-4 rounded-xl border border-red-200 shadow-sm print-hide max-w-xs mx-auto relative z-10">
                         <button id="prev-rhyme-btn" class="text-red-600 hover:text-red-800 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-backward-step text-sm"></i></button>
                         <span id="playlist-position" class="text-red-800 font-bold text-xs uppercase tracking-wider"></span>
                         <button id="next-rhyme-btn" class="text-red-600 hover:text-red-800 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-forward-step text-sm"></i></button>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                        <div class="bg-white/50 backdrop-blur-sm border border-white/60 p-5 rounded-2xl shadow-inner">
-                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4 border-b border-stone-200/50 pb-2">English</h3>
+                        <div class="bg-stone-50/90 border border-stone-200 p-5 rounded-2xl shadow-sm">
+                            <h3 class="text-xs font-black text-stone-500 uppercase tracking-[0.2em] mb-4 border-b border-stone-200 pb-2">English</h3>
                             <pre id="rhyme-lyrics-en" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans bg-transparent border-0 p-0"></pre>
                         </div>
-                        <div id="hindi-column" class="bg-white/50 backdrop-blur-sm border border-white/60 p-5 rounded-2xl shadow-inner">
-                            <h3 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-4 border-b border-stone-200/50 pb-2">Hindi</h3>
+                        <div id="hindi-column" class="bg-stone-50/90 border border-stone-200 p-5 rounded-2xl shadow-sm">
+                            <h3 class="text-xs font-black text-stone-500 uppercase tracking-[0.2em] mb-4 border-b border-stone-200 pb-2">Hindi</h3>
                             <pre id="rhyme-lyrics-hi" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans bg-transparent border-0 p-0"></pre>
                         </div>
                     </div>
                     
-                    <div id="fun-fact-container" class="mt-8 pt-8 border-t border-stone-200/50 hidden relative z-10">
-                        <details id="fun-fact-details" class="bg-white/60 backdrop-blur-md p-5 rounded-2xl cursor-pointer border border-white/80 shadow-sm group">
-                            <summary class="text-xs font-black text-stone-500 uppercase tracking-[0.2em] group-hover:text-red-600 transition-colors outline-none flex items-center">
+                    <div id="fun-fact-container" class="mt-8 pt-8 border-t border-stone-200 hidden relative z-10">
+                        <details id="fun-fact-details" class="bg-yellow-50/95 p-5 rounded-2xl cursor-pointer border border-yellow-200 shadow-md group">
+                            <summary class="text-xs font-black text-stone-600 uppercase tracking-[0.2em] group-hover:text-red-600 transition-colors outline-none flex items-center">
                                 <span class="mr-2 text-base">💡</span> Educational Fact
                             </summary>
-                            <p id="fun-fact-text" class="mt-4 text-[13px] sm:text-sm leading-relaxed text-stone-700 font-sans"></p>
+                            <p id="fun-fact-text" class="mt-4 text-[13px] sm:text-sm leading-relaxed text-stone-800 font-sans font-medium"></p>
                         </details>
                     </div>
 
@@ -279,16 +279,16 @@
     <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
 
     <!-- Modals & Overlays -->
-    <!-- Playlist Sidebar Glassmorphism -->
-    <div id="playlist-view" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[100] hidden flex justify-end transition-opacity duration-300">
-        <div class="bg-white/80 backdrop-blur-2xl shadow-[-10px_0_30px_rgba(0,0,0,0.1)] w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300 border-l border-white/50" id="playlist-sidebar">
-            <div class="flex justify-between items-center p-5 border-b border-stone-200/50 bg-white/50">
+    <!-- Playlist Sidebar - Increased Opacity -->
+    <div id="playlist-view" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex justify-end transition-opacity duration-300">
+        <div class="bg-white/95 backdrop-blur-2xl shadow-2xl w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300 border-l border-stone-200" id="playlist-sidebar">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200 bg-white">
                 <h2 class="text-lg font-black text-stone-900">Your Queue</h2>
                 <button id="close-playlist-btn" class="text-stone-400 hover:text-red-600 transition-colors p-2 text-xl" aria-label="Close Playlist"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div id="playlist-items" class="flex-grow p-4 space-y-3 overflow-y-auto"></div>
-            <div class="p-5 border-t border-stone-200/50 bg-white/50">
-                <button id="clear-playlist-btn" class="w-full bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 border border-stone-200 hover:border-red-600 font-bold py-3 px-4 rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
+            <div class="p-5 border-t border-stone-200 bg-stone-50">
+                <button id="clear-playlist-btn" class="w-full bg-stone-200 hover:bg-red-600 hover:text-white text-stone-700 font-bold py-3 px-4 rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
             </div>
         </div>
     </div>
