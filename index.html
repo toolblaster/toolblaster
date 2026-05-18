@@ -16,7 +16,7 @@
     <link rel="icon" type="image/x-icon" href="js/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="js/favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="js/favicon/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="js/favicon/android-chrome-192x192.png">
     <link rel="apple-touch-icon" href="js/favicon/android-chrome-192x192.png">
     <link rel="manifest" href="js/favicon/site.webmanifest">
 
@@ -51,15 +51,13 @@
         .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Premium Card styling inspired by Quillbot/SmallPDF */
+        /* Premium Card styling inspired by original compact design */
         .premium-card {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #e7e5e4;
         }
         .premium-card:hover {
             border-color: #EF4444;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
@@ -97,116 +95,106 @@
             </p>
         </div>
 
-        <!-- Tools Grid Section (2-Column Mobile Inline, 4-Column Desktop Horizontal) -->
+        <!-- Categorized Tools Grid Section -->
         <section id="tools" class="mb-10 fade-in w-full">
             <h2 class="sr-only font-inter">Our Digital Tools</h2>
             
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+            <!-- Category 1: Productivity -->
+            <!-- Reduced bottom margin -->
+            <div class="mb-5">
+                <div class="flex items-center gap-3 mb-3 px-1">
+                    <i class="fa-solid fa-bolt-lightning text-stone-400 text-sm"></i>
+                    <h3 class="text-[11px] font-black text-stone-500 uppercase tracking-[0.2em] m-0">Productivity</h3>
+                    <div class="flex-grow h-px bg-stone-200"></div>
+                </div>
                 
-                <!-- GST Billing Tool -->
-                <a href="https://gstbilling.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-green-50 text-green-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-file-invoice text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">GST Billing</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Professional invoice generator.</p>
-                    </div>
-                </a>
+                <!-- Reduced grid gap -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+                    <!-- Word Counter Tool -->
+                    <!-- Reduced padding and icon sizing/margins -->
+                    <a href="/productivity/word-counter/" class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-white text-left w-full group">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-red-100 transition-colors">
+                            <i class="fa-solid fa-file-word text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Word Counter</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">SEO density & grammar check.</p>
+                        </div>
+                    </a>
 
-                <!-- Daily Focus (DECIDE) -->
-                <a href="/productivity/decide/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-bullseye text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Daily Focus</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Minimalist daily priority planner.</p>
-                    </div>
-                </a>
+                    <!-- Daily Focus (DECIDE) -->
+                    <a href="/productivity/decide/" class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-white text-left w-full group">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-indigo-100 transition-colors">
+                            <i class="fa-solid fa-bullseye text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Daily Focus</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Minimalist priority planner.</p>
+                        </div>
+                    </a>
 
-                <!-- SIP Planner -->
-                <a href="https://sipcalculatorwithinflation.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-red-50 text-red-500 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-chart-line text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">SIP Planner</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Mutual fund returns calculator.</p>
-                    </div>
-                </a>
+                    <!-- Pomodoro Study Timer -->
+                    <a href="/productivity/pomodoro-study-timer/" class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-white text-left w-full group">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-orange-100 transition-colors">
+                            <i class="fa-solid fa-stopwatch text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Study Timer</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Pomodoro focus with breaks.</p>
+                        </div>
+                    </a>
 
-                <!-- Kids Rhymes -->
-                <a href="/educational/nursery-rhymes-for-kids/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-music text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Kids Rhymes</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Interactive rhymes with playlists.</p>
-                    </div>
-                </a>
-
-                <!-- Online Notepad -->
-                <a href="https://onlinenotepad.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-pen-to-square text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Notepad</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Distraction-free browser notepad.</p>
-                    </div>
-                </a>
-
-                <!-- Agri Mock Test -->
-                <a href="https://agriquiz.toolblaster.com" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-wheat-awn text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Agri Quiz</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Mock exams for agriculture.</p>
-                    </div>
-                </a>
-
-                <!-- Percentage Calc -->
-                <a href="https://percentagecalculator.toolblaster.com/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-percent text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Percentage</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Quick math calculations.</p>
-                    </div>
-                </a>
-
-                <!-- Pomodoro Study Timer -->
-                <a href="/productivity/pomodoro-study-timer/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full fade-in">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-stopwatch text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Study Timer</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Pomodoro focus with timed breaks.</p>
-                    </div>
-                </a>
-
-                <!-- NEW: Breathing Pacer -->
-                <a href="/productivity/breathing-pacer/" class="premium-card flex flex-row lg:flex-row items-center p-2.5 lg:p-4 rounded-xl bg-white text-left w-full fade-in">
-                    <div class="w-8 h-8 lg:w-11 lg:h-11 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 mr-2.5 lg:mr-4 shadow-inner">
-                        <i class="fa-solid fa-wind text-sm lg:text-xl"></i>
-                    </div>
-                    <div class="flex flex-col min-w-0">
-                        <h3 class="text-[14px] lg:text-[15px] font-black font-inter text-stone-900 leading-tight truncate">Breathing Pacer</h3>
-                        <p class="text-[9px] lg:text-xs font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Box breathing & 4-7-8 timer.</p>
-                    </div>
-                </a>
+                    <!-- Breathing Pacer -->
+                    <a href="/productivity/breathing-pacer/" class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-white text-left w-full group">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-cyan-100 transition-colors">
+                            <i class="fa-solid fa-wind text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Breathing Pacer</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Box breathing & relaxation.</p>
+                        </div>
+                    </a>
+                </div>
             </div>
+
+            <!-- Category 2: Educational -->
+            <div class="mb-3">
+                <div class="flex items-center gap-3 mb-3 px-1">
+                    <i class="fa-solid fa-graduation-cap text-stone-400 text-sm"></i>
+                    <h3 class="text-[11px] font-black text-stone-500 uppercase tracking-[0.2em] m-0">Educational</h3>
+                    <div class="flex-grow h-px bg-stone-200"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+                    <!-- Kids Rhymes -->
+                    <a href="/educational/nursery-rhymes-for-kids/" class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-white text-left w-full group">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-pink-100 transition-colors">
+                            <i class="fa-solid fa-music text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Kids Rhymes</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Interactive rhymes & playlists.</p>
+                        </div>
+                    </a>
+                    
+                    <!-- Coming Soon Placeholder (Maintains Grid Balance) -->
+                    <div class="premium-card flex flex-row items-center p-2 lg:p-3 rounded-xl bg-stone-50/50 text-left w-full border-dashed opacity-70">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-stone-200 text-stone-400 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner">
+                            <i class="fa-solid fa-hammer text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h3 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-700 leading-tight truncate">More Tools</h3>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Brewing in the lab...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
-        <!-- Trust Section: WHY CHOOSE US (Updated to be vertically compact) -->
+        <!-- Trust Section: WHY CHOOSE US (Vertically compact) -->
         <section class="max-w-4xl mx-auto mb-10 fade-in">
-            <h2 class="text-center text-[10px] font-black font-inter tracking-[0.3em] text-stone-400 uppercase mb-4">Why Choose Toolblaster</h2>
+            <h2 class="text-center text-[10px] font-black font-inter tracking-[0.3em] text-stone-400 uppercase mb-4 mt-12">Why Choose Toolblaster</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 px-2">
                 <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
