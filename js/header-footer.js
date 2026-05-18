@@ -1,7 +1,32 @@
 /**
  * Toolblaster Global Components (Header, Footer, Tool Nav, Back to Top)
- * Premium "Utility Station" styling with Dynamic Title Detection.
+ * Premium "Utility Station" styling with Dynamic Title Detection and Global App Menu.
  */
+
+// ==========================================
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
+// Ye array 100% dynamic hai. Yahan koi bhi naya tool add karein aur wo 
+// App Drawer aur Top Navigation dono jagah automatically render ho jayega!
+// ==========================================
+const TOOLBLASTER_APPS = [
+    {
+        category: "Productivity",
+        icon: "fa-bolt-lightning",
+        apps: [
+            { name: "Daily Focus", url: "/productivity/decide/", icon: "fa-bullseye", classes: "bg-indigo-50 border-indigo-100 text-indigo-600 group-hover:text-indigo-600", matchPath: "/decide/" },
+            { name: "Word Counter", url: "/productivity/word-counter/", icon: "fa-file-word", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/word-counter/" },
+            { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", classes: "bg-orange-50 border-orange-100 text-orange-600 group-hover:text-orange-600", matchPath: "/pomodoro-study-timer/" },
+            { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", classes: "bg-cyan-50 border-cyan-100 text-cyan-600 group-hover:text-cyan-600", matchPath: "/breathing-pacer/" }
+        ]
+    },
+    {
+        category: "Educational",
+        icon: "fa-graduation-cap",
+        apps: [
+            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes" }
+        ]
+    }
+];
 
 document.addEventListener('DOMContentLoaded', () => {
     safeRun(injectHeader);
@@ -21,7 +46,7 @@ function safeRun(fn) {
 /**
  * Header Injection
  * Center dynamically displays the active tool or page name.
- * Features a mobile-first slide-over hamburger menu.
+ * Features a universal slide-over Global App Menu (Mega Menu style).
  */
 function injectHeader() {
     const headerContainer = document.getElementById('app-header');
@@ -48,6 +73,8 @@ function injectHeader() {
         if (currentPath.includes('/decide/')) centerTitle = "DECIDE.";
         else if (currentPath.includes('/pomodoro-study-timer/')) centerTitle = "STUDY TIMER";
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
+        else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
+        else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
         else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
         else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
@@ -77,6 +104,35 @@ function injectHeader() {
             descTitle = document.title.trim();
         }
     }
+
+    // --- DYNAMICALLY GENERATE APP DRAWER HTML ---
+    let drawerCategoriesHtml = '';
+    TOOLBLASTER_APPS.forEach((cat, index) => {
+        if (index > 0) {
+            drawerCategoriesHtml += `<div class="px-6 my-1 border-t border-stone-100"></div>`;
+        }
+        
+        drawerCategoriesHtml += `
+            <div class="px-4 py-2">
+                <h3 class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
+                    <i class="fa-solid ${cat.icon}"></i> ${cat.category}
+                </h3>
+                <div class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2">
+        `;
+        
+        cat.apps.forEach(app => {
+            drawerCategoriesHtml += `
+                <a href="${app.url}" class="flex flex-col items-center justify-start p-1.5 rounded-lg hover:bg-stone-50 border border-transparent hover:border-stone-200 transition-all group text-center">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${app.classes} flex items-center justify-center group-hover:scale-105 transition-transform mb-1 shadow-inner border">
+                        <i class="fa-solid ${app.icon} text-[11px] sm:text-xs"></i>
+                    </div>
+                    <span class="text-[8px] sm:text-[9px] font-bold text-stone-700 leading-tight w-full line-clamp-2 ${app.classes.split(' ').find(c => c.startsWith('group-hover:text-'))} transition-colors">${app.name}</span>
+                </a>
+            `;
+        });
+        
+        drawerCategoriesHtml += `</div></div>`;
+    });
 
     headerContainer.innerHTML = `
         <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
@@ -111,43 +167,64 @@ function injectHeader() {
                     ` : ''}
                 </div>
 
-                <!-- Right: Desktop Action Button & Mobile Hamburger -->
+                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG -->
                 <div class="flex items-center gap-3">
-                    <a href="/#tools" class="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-lg transition-all shadow-md active:scale-95 whitespace-nowrap flex-shrink-0">
-                        Explore Tools
-                    </a>
-                    <button id="mobile-menu-btn" aria-label="Open Menu" class="sm:hidden text-stone-600 hover:text-stone-900 focus:outline-none transition-colors p-1">
-                        <i class="fa-solid fa-bars text-xl"></i>
+                    <button id="global-menu-btn" aria-label="Open App Menu" class="bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-800 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 flex items-center gap-2">
+                        <svg class="w-3.5 h-3.5 text-stone-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="4" cy="4" r="2"></circle>
+                            <circle cx="12" cy="4" r="2"></circle>
+                            <circle cx="20" cy="4" r="2"></circle>
+                            <circle cx="4" cy="12" r="2"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                            <circle cx="20" cy="12" r="2"></circle>
+                            <circle cx="4" cy="20" r="2"></circle>
+                            <circle cx="12" cy="20" r="2"></circle>
+                            <circle cx="20" cy="20" r="2"></circle>
+                        </svg>
+                        <span class="hidden sm:inline">Explore Tools</span>
                     </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Mobile Slide-over Menu (Sidebar) -->
-        <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-stone-900/50 z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
-        <div id="mobile-sidebar" class="fixed inset-y-0 right-0 w-60 bg-white z-[200] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-stone-200">
-                <span class="font-black text-stone-900 tracking-widest text-xs uppercase">Menu</span>
-                <button id="close-sidebar-btn" aria-label="Close Menu" class="text-stone-500 hover:text-red-600 p-1 transition-colors">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+        <!-- Global Slide-over App Menu (Grid Drawer Style) -->
+        <div id="global-sidebar-overlay" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+        <div id="global-sidebar" class="fixed inset-y-0 right-0 w-[300px] sm:w-[420px] bg-white z-[200] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl border-l border-stone-200">
+            
+            <!-- Sidebar Header with Perfectly Centered Home Link -->
+            <div class="grid grid-cols-3 items-center px-4 py-3 sm:px-5 sm:py-4 border-b border-stone-100 bg-stone-50/50">
+                <div class="flex justify-start">
+                    <span class="font-black text-stone-900 tracking-widest text-xs uppercase flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-rocket text-red-500"></i> <span class="hidden sm:inline">Drawer</span>
+                    </span>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="/" class="text-[10px] font-bold text-stone-500 hover:text-red-600 uppercase tracking-widest transition-colors flex items-center whitespace-nowrap">
+                        Home
+                    </a>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button id="close-sidebar-btn" aria-label="Close Menu" class="text-stone-400 hover:text-red-600 w-7 h-7 flex items-center justify-center rounded-full bg-white border border-stone-200 shadow-sm transition-colors">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
             </div>
-            <div class="flex flex-col px-3 py-4 gap-2">
-                <a href="/" class="flex items-center gap-3 text-sm font-bold text-stone-700 hover:text-red-600 transition-colors px-3 py-2.5 rounded-lg hover:bg-stone-50 border border-transparent hover:border-stone-200">
-                    <i class="fa-solid fa-house w-4 text-center text-base"></i> Home
-                </a>
-                <a href="/#tools" class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-[11px] font-black uppercase tracking-wider px-4 py-2.5 rounded-lg transition-all shadow-sm active:scale-95 w-full mt-1">
-                    Explore Tools
-                </a>
+            
+            <!-- Sidebar Scrollable Content (Dynamically Injected) -->
+            <div class="flex-col overflow-y-auto pb-8 custom-scrollbar mt-2">
+                ${drawerCategoriesHtml}
             </div>
+            
         </div>
     `;
 
-    // Mobile Menu Handlers
-    const menuBtn = document.getElementById('mobile-menu-btn');
+    // Global Menu Handlers
+    const menuBtn = document.getElementById('global-menu-btn');
     const closeBtn = document.getElementById('close-sidebar-btn');
-    const sidebar = document.getElementById('mobile-sidebar');
-    const overlay = document.getElementById('mobile-sidebar-overlay');
+    const sidebar = document.getElementById('global-sidebar');
+    const overlay = document.getElementById('global-sidebar-overlay');
 
     if(menuBtn && sidebar && overlay) {
         const openMenu = () => {
@@ -168,33 +245,63 @@ function injectHeader() {
         closeBtn?.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
     }
+
+    // Dynamic style for custom scrollbar inside sidebar
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+    `;
+    document.head.appendChild(style);
 }
 
 /**
- * Secondary Nav (Tool App Switcher)
+ * Secondary Nav (Tool App Switcher) - Vertical & Horizontally Compact
+ * DYNAMIC CONTEXT: Auto-detects current category and shows max 7 related tools.
  */
 function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
     if (!navContainer) return;
 
-    navContainer.style.minHeight = '48px';
+    // Height reduced to save vertical space
+    navContainer.style.minHeight = '36px';
     navContainer.className = "w-full relative z-[90]";
 
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // SMART APP SWITCHER CONFIGURATION
-    // Aage se koi bhi naya tool add karna ho, bas is list mein ek line badha dena!
-    const toolsList = [
-        { name: "DECIDE.", url: "/productivity/decide/", icon: "fa-bullseye", matchPath: "/decide/" },
-        { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", matchPath: "/pomodoro-study-timer/" },
-        { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", matchPath: "/breathing-pacer/" },
-        { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", matchPath: "/educational/nursery-rhymes" }
-    ];
+    // 1. Auto-Detect Current Active Category
+    let activeCategory = null;
+    for (const cat of TOOLBLASTER_APPS) {
+        for (const tool of cat.apps) {
+            if ((tool.matchPath && currentPath.includes(tool.matchPath)) || 
+                (tool.matchHost && currentHost.includes(tool.matchHost))) {
+                activeCategory = cat;
+                break;
+            }
+        }
+        if (activeCategory) break;
+    }
 
-    // Automatically generate links HTML
+    // 2. Select tools to show (Max 7 from active category, OR top 7 overall if on homepage)
+    let toolsToShow = [];
+    let categoryLabel = "Apps";
+    
+    if (activeCategory) {
+        toolsToShow = activeCategory.apps.slice(0, 7);
+        categoryLabel = activeCategory.category;
+    } else {
+        // Fallback for homepage or unknown pages: mix of top 7 tools
+        toolsToShow = TOOLBLASTER_APPS.flatMap(cat => cat.apps).slice(0, 7);
+        categoryLabel = "Top Apps";
+    }
+
     let linksHtml = '';
-    toolsList.forEach(tool => {
+    
+    // 3. Generate HTML for the selected tools
+    toolsToShow.forEach(tool => {
         let isActive = false;
         if (tool.matchPath && currentPath.includes(tool.matchPath)) isActive = true;
         if (tool.matchHost && currentHost.includes(tool.matchHost)) isActive = true;
@@ -202,9 +309,10 @@ function injectToolNav() {
         const activeClasses = "text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60";
         const inactiveClasses = "font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60";
 
+        // Compact font size (10px) and tighter padding (px-2 py-1)
         linksHtml += `
-            <a href="${tool.url}" class="inline-flex items-center justify-center gap-1.5 text-[11px] sm:text-xs transition-all duration-200 px-3 py-1.5 rounded-lg flex-shrink-0 ${isActive ? activeClasses : inactiveClasses}">
-                <i class="fa-solid ${tool.icon} text-[12px]"></i> ${tool.name}
+            <a href="${tool.url}" class="inline-flex items-center justify-center gap-1 text-[10px] transition-all duration-200 px-2 py-1 rounded-md flex-shrink-0 ${isActive ? activeClasses : inactiveClasses}">
+                <i class="fa-solid ${tool.icon} text-[10px]"></i> ${tool.name}
             </a>
         `;
     });
@@ -216,11 +324,12 @@ function injectToolNav() {
         </style>
     `;
 
+    // Compact container height (h-9 = 36px) and dynamic category label
     navContainer.innerHTML = style + `
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-2 h-12 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
-                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-3 z-10 py-3 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">Apps</span>
+                <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-1.5 h-9 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
+                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
                     ${linksHtml}
                 </nav>
             </div>
