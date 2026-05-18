@@ -4,11 +4,11 @@ Smart Tools for Business, Finance & Life A high-performance digital utility stat
 
 🧠 The Philosophy
 
-Toolblaster was born from a simple frustration: essential digital tools are often too complex, riddled with ads, or hidden behind paywalls. We believe that calculating financial goals, managing daily priorities, or generating professional invoices shouldn't require a subscription or compromise your privacy.
+Toolblaster was born from a simple frustration: essential digital tools are often too complex, riddled with ads, or hidden behind paywalls. We believe that managing daily priorities, executing deep work, or analyzing text shouldn't require a subscription or compromise your privacy.
 
 Our Core Pillars:
 
-🔒 Privacy-First (Local Storage): What happens on your device stays on your device. Tools like DECIDE use local browser storage. We do not track or upload your private input data to central servers.
+🔒 Privacy-First (Local Storage): What happens on your device stays on your device. All our productivity tools use local browser storage. We do not track or upload your private input data to central servers.
 
 ⚡ Built for Speed: Zero bloat, instant load times, and vanilla JavaScript for a seamless user experience.
 
@@ -18,46 +18,46 @@ Our Core Pillars:
 
 🛠️ Tool Ecosystem & Directory
 
-Toolblaster operates as a central hub, hosting various native applications and linking to specialized subdomains.
+Toolblaster operates as a central hub, hosting various native applications cleanly categorized into specific suites.
 
-1. DECIDE (/decide/)
+⚡ Productivity Suite
 
+DECIDE. (/productivity/decide/)
 Daily Priority Tool for Mental Clarity & Focus
-A minimalist daily planner designed to eliminate overwhelm.
 
-Feature: Limits you to strictly 3 daily priorities.
+Feature: Limits you to strictly 3 daily priorities to eliminate overwhelm.
 
-Tech: Uses LocalStorage for data persistence, Custom JSON export/import for backups, PDF/CSV generation.
+Tech: LocalStorage for persistence, Custom JSON export/import, PDF/CSV generation.
 
-Design: Premium Glassmorphism UI, WCAG AA compliant contrast.
+Smart Word Counter (/productivity/word-counter/)
+Advanced Text Analyzer & Word Counter
 
-2. Kids Rhymes (/educational/nursery-rhymes-for-kids/)
+Feature: Real-time multilingual counting, SEO keyword density, live grammar hints, reading time estimation, and goal tracking.
 
+Tech: Intl.Segmenter for CJK languages, advanced regex highlighting.
+
+Pomodoro Study Timer (/productivity/pomodoro-study-timer/)
+Distraction-Free Deep Focus Timer
+
+Feature: Auto-start intervals, customizable break rules, and keyboard shortcuts (Alt+P, Space).
+
+Tech: Web Audio API for ambient sounds (Brown/Pink noise), native push notifications, and Screen Wake Lock API.
+
+Breathing Pacer (/productivity/breathing-pacer/)
+Minimalist Box Breathing & Meditation Guide
+
+Feature: Visual pacing for 4-7-8, Box Breathing, and custom patterns with haptic feedback and Zen sounds to reduce stress.
+
+Tech: CSS custom keyframes, Navigator Vibration API.
+
+🎓 Educational Suite
+
+Kids Rhymes (/educational/nursery-rhymes-for-kids/)
 Interactive Nursery Rhymes Tool
-A safe, educational tool for kids featuring rhymes in English and Hindi.
 
-Feature: Web Speech API integration for "Read Aloud" functionality, Custom queue/playlist management.
+Feature: Read Aloud functionality, custom queue/playlist management, and dual-language (English/Hindi) support.
 
-Design: Playful ambient glassmorphism backgrounds, categorized filtering.
-
-3. Reviews Hub (/reviews/)
-
-Expert Software & Service Reviews
-Unbiased, data-driven analysis of digital tools powering the modern web.
-
-Feature: Client-side category filtering, expandable image modals.
-
-4. External Utility Stations (Subdomains)
-
-Notepad: Distraction-free browser notepad.
-
-SIP Planner: Advanced mutual fund returns calculator accounting for inflation.
-
-GST Billing: Professional invoice generator for small businesses.
-
-Agri Quiz: Mock exams and educational testing.
-
-Percentage Calculator: Quick math utilities.
+Tech: Web Speech API integration.
 
 💻 Tech Stack & Architecture
 
@@ -69,19 +69,17 @@ Styling: Tailwind CSS (loaded via CDN for rapid prototyping).
 
 Typography: Official Brand Font: Inter (Google Fonts). Secondary Font: Hind.
 
-Icons: FontAwesome 6 (Solid & Brands).
+Icons: FontAwesome 6 (Solid & Brands) and custom inline SVGs.
 
-Utilities: jspdf and jspdf-autotable for client-side document generation.
-
-State Management: Native window.localStorage API.
+Browser APIs Leveraged: localStorage, Web Audio API, Web Speech API, Screen Wake Lock API, Navigator.vibrate().
 
 Global Components Strategy
 
 To maintain a DRY (Don't Repeat Yourself) codebase across static HTML files, global elements are injected via JavaScript:
 
-js/header-footer.js: Dynamically injects the global navigation bar, secondary app switcher, mobile sidebar, and global footer.
+js/header-footer.js: Dynamically injects the global navigation bar, contextual app switcher (Top Nav), mobile sidebar, a globally accessible Mega Menu App Drawer, and the footer. It dynamically detects categories and limits nav items intelligently.
 
-js/tailwind-config.js: Centralized design system maintaining custom color palettes (e.g., stone-900, red-500), font settings, and glassmorphism shadows.
+js/tailwind-config.js: Centralized design system maintaining custom color palettes (e.g., stone-900, red-600), font settings, and glassmorphism shadows.
 
 🚦 Running Locally
 
@@ -97,9 +95,9 @@ Note: Because some tools use modules and external CDNs, viewing them via the fil
 
 🛡️ Accessibility (WCAG AA) & SEO
 
-Contrast: UI elements utilize stone-600 to stone-900 against light backgrounds to strictly meet or exceed the 4.5:1 contrast ratio required by WCAG AA standards.
+Contrast: UI elements utilize high-contrast pairings (e.g., stone-600 to stone-900 against light backgrounds) to strictly meet or exceed the 4.5:1 contrast ratio required by WCAG AA standards.
 
-SEO: Implementations include accurate canonical tags, JSON-LD structured data (WebApplication & BreadcrumbList), and optimized Meta Titles (~60 chars) & Descriptions (~150 chars).
+SEO: Implementations include accurate canonical tags, JSON-LD structured data (WebApplication, HowTo, FAQPage), and optimized Meta Titles & Descriptions.
 
 ✉️ Contact & Creator
 
