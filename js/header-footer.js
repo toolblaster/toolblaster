@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
 // Ye array 100% dynamic hai. Yahan koi bhi naya tool add karein aur wo 
 // App Drawer aur Top Navigation dono jagah automatically render ho jayega!
 // ==========================================
@@ -30,7 +30,7 @@ const TOOLBLASTER_APPS = [
         category: "Educational",
         icon: "fa-graduation-cap",
         apps: [
-            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes" }
+            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink- pink-600", matchPath: "/educational/nursery-rhymes" }
         ]
     }
 ];
@@ -140,9 +140,10 @@ function injectHeader() {
             drawerCategoriesHtml += `<div class="px-6 my-1 border-t border-stone-100"></div>`;
         }
         
+        // ACCESSIBILITY FIX: Changed category heading from text-stone-400 to text-stone-600 to satisfy WCAG AA contrast limits
         drawerCategoriesHtml += `
             <div class="px-4 py-2">
-                <h3 class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
+                <h3 class="text-[9px] font-black text-stone-600 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
                     <i class="fa-solid ${cat.icon}"></i> ${cat.category}
                 </h3>
                 <div class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2">
@@ -231,7 +232,8 @@ function injectHeader() {
                 </div>
                 
                 <div class="flex justify-center">
-                    <a href="/" class="text-[10px] font-bold text-stone-500 hover:text-red-600 uppercase tracking-widest transition-colors flex items-center whitespace-nowrap">
+                    <!-- ACCESSIBILITY FIX: Upgraded contrast on the Home link from text-stone-500 to text-stone-600 -->
+                    <a href="/" class="text-[10px] font-bold text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors flex items-center whitespace-nowrap">
                         Home
                     </a>
                 </div>
@@ -368,13 +370,14 @@ function injectToolNav() {
         </style>
     `;
 
-    // CRITICAL BUG FIX: Category Label (e.g. FINANCE) is now inline-block (sticky left pinned with nice shadow) 
+    // CRITICAL BUG FIX & ACCESSIBILITY FIX: Category Label (e.g. FINANCE) is now inline-block (sticky left pinned with nice shadow) 
+    // and styled with text-stone-600 (to achieve 6.6:1 contrast ratio against bg-stone-100)
     // to ensure mobile-first layout always displays active category clearly without wrapping.
     navContainer.innerHTML = style + `
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-1.5 h-9 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
-                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest inline-block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
+                    <span class="text-[9px] font-black text-stone-600 uppercase tracking-widest inline-block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
                     ${linksHtml}
                 </nav>
             </div>
@@ -425,7 +428,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright (Order 3 on mobile, 1 on desktop) -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
