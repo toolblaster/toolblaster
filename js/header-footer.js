@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
+// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
 // Ye array 100% dynamic hai. Yahan koi bhi naya tool add karein aur wo 
 // App Drawer aur Top Navigation dono jagah automatically render ho jayega!
 // ==========================================
@@ -17,6 +17,13 @@ const TOOLBLASTER_APPS = [
             { name: "Word Counter", url: "/productivity/word-counter/", icon: "fa-file-word", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/word-counter/" },
             { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", classes: "bg-orange-50 border-orange-100 text-orange-600 group-hover:text-orange-600", matchPath: "/pomodoro-study-timer/" },
             { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", classes: "bg-cyan-50 border-cyan-100 text-cyan-600 group-hover:text-cyan-600", matchPath: "/breathing-pacer/" }
+        ]
+    },
+    {
+        category: "Finance",
+        icon: "fa-wallet",
+        apps: [
+            { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" }
         ]
     },
     {
@@ -75,6 +82,7 @@ function injectHeader() {
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
+        else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
         else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
         else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
         else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
@@ -88,6 +96,7 @@ function injectHeader() {
     }
 
     // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
+    // CRITICAL FIX: Double title repetition ko rokne ke liye hum us part ko skip karenge jisme centerTitle content already shamil hai!
     let descTitle = "";
     if (document.title) {
         const titleParts = document.title.split(/\||-|:/);
@@ -95,10 +104,29 @@ function injectHeader() {
             let bestPart = "";
             titleParts.forEach(part => {
                 const cleanPart = part.trim();
-                if (cleanPart.toLowerCase() !== 'toolblaster' && cleanPart.length > bestPart.length) {
+                const lowerPart = cleanPart.toLowerCase();
+                const lowerCenter = centerTitle.toLowerCase();
+                
+                // Hum safe checks add karenge taaki "Investment Planner India" select na ho kar utility "SIP, Lumpsum, FD & RD" clean show ho sake
+                if (
+                    lowerPart !== 'toolblaster' && 
+                    !lowerPart.includes(lowerCenter) && 
+                    !lowerCenter.includes(lowerPart) && 
+                    cleanPart.length > bestPart.length
+                ) {
                     bestPart = cleanPart;
                 }
             });
+            
+            // Fallback agar saare parts filters me trigger ho jayein
+            if (!bestPart) {
+                titleParts.forEach(part => {
+                    const cleanPart = part.trim();
+                    if (cleanPart.toLowerCase() !== 'toolblaster' && cleanPart.length > bestPart.length) {
+                        bestPart = cleanPart;
+                    }
+                });
+            }
             descTitle = bestPart;
         } else {
             descTitle = document.title.trim();
@@ -134,6 +162,9 @@ function injectHeader() {
         drawerCategoriesHtml += `</div></div>`;
     });
 
+    // CRITICAL BUG FIX (COMPLETELY ACCESSIBILITY AND OVERLAP PROOF):
+    // .hidden par custom CSS !important rule bypass karne ke liye humne generic 'hidden sm:block' aur 'hidden sm:inline' ke bajaye
+    // 'max-sm:hidden sm:block' aur 'max-sm:hidden sm:inline' ka use kiya hai. Isse page-specific overrides fail ho jayengi!
     headerContainer.innerHTML = `
         <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
         <nav class="relative w-full bg-white border-b border-stone-300 shadow-sm z-[100]">
@@ -152,22 +183,22 @@ function injectHeader() {
                             <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
                             <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
                         </svg>
-                        <span class="font-inter font-black text-lg tracking-tighter text-stone-900 hidden sm:block">TOOL<span class="text-accent-main">BLASTER</span></span>
+                        <span class="font-inter font-black text-lg tracking-tighter text-stone-900 max-sm:hidden sm:block">TOOL<span class="text-accent-main">BLASTER</span></span>
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description -->
-                <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] sm:max-w-[50%] md:max-w-xl pointer-events-none">
-                    <span class="font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap truncate leading-tight">
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description (Pitched to fix flex-shrink issue) -->
+                <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[60%] sm:max-w-[55%] md:max-w-2xl pointer-events-none">
+                    <span class="flex-shrink-0 font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap leading-tight">
                         ${centerTitle}
                     </span>
                     ${descTitle ? `
-                        <span class="hidden sm:inline text-stone-600 font-semibold tracking-widest text-[10px] ml-1.5 truncate">- ${descTitle}</span>
-                        <span class="sm:hidden text-stone-600 font-semibold tracking-widest text-[8px] truncate w-full leading-tight mt-0.5">${descTitle}</span>
+                        <span class="max-sm:hidden sm:inline text-stone-600 font-semibold tracking-widest text-[10px] ml-1.5 truncate flex-shrink min-w-0">- ${descTitle}</span>
+                        <span class="sm:hidden text-stone-600 font-semibold tracking-widest text-[8px] truncate w-full leading-tight mt-0.5 flex-shrink min-w-0">${descTitle}</span>
                     ` : ''}
                 </div>
 
-                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG -->
+                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG (max-sm:hidden prevents the CSS important lock) -->
                 <div class="flex items-center gap-3">
                     <button id="global-menu-btn" aria-label="Open App Menu" class="bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-800 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 flex items-center gap-2">
                         <svg class="w-3.5 h-3.5 text-stone-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +212,7 @@ function injectHeader() {
                             <circle cx="12" cy="20" r="2"></circle>
                             <circle cx="20" cy="20" r="2"></circle>
                         </svg>
-                        <span class="hidden sm:inline">Explore Tools</span>
+                        <span class="max-sm:hidden sm:inline">Explore Tools</span>
                     </button>
                 </div>
             </div>
@@ -195,7 +226,7 @@ function injectHeader() {
             <div class="grid grid-cols-3 items-center px-4 py-3 sm:px-5 sm:py-4 border-b border-stone-100 bg-stone-50/50">
                 <div class="flex justify-start">
                     <span class="font-black text-stone-900 tracking-widest text-xs uppercase flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-rocket text-red-500"></i> <span class="hidden sm:inline">Drawer</span>
+                        <i class="fa-solid fa-rocket text-red-500"></i> <span class="max-sm:hidden sm:inline">Drawer</span>
                     </span>
                 </div>
                 
@@ -272,12 +303,19 @@ function injectToolNav() {
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // 1. Auto-Detect Current Active Category
+    // 1. Auto-Detect Current Active Category (CRITICAL BUG FIX: Slash-insensitive pattern matching)
     let activeCategory = null;
     for (const cat of TOOLBLASTER_APPS) {
         for (const tool of cat.apps) {
-            if ((tool.matchPath && currentPath.includes(tool.matchPath)) || 
-                (tool.matchHost && currentHost.includes(tool.matchHost))) {
+            if (tool.matchPath) {
+                const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
+                const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
+                if (cleanCurrentPath.includes(cleanMatchPath)) {
+                    activeCategory = cat;
+                    break;
+                }
+            }
+            if (tool.matchHost && currentHost.includes(tool.matchHost)) {
                 activeCategory = cat;
                 break;
             }
@@ -300,10 +338,16 @@ function injectToolNav() {
 
     let linksHtml = '';
     
-    // 3. Generate HTML for the selected tools
+    // 3. Generate HTML for the selected tools (CRITICAL BUG FIX: Slash-insensitive active highlight checks)
     toolsToShow.forEach(tool => {
         let isActive = false;
-        if (tool.matchPath && currentPath.includes(tool.matchPath)) isActive = true;
+        if (tool.matchPath) {
+            const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
+            const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
+            if (cleanCurrentPath.includes(cleanMatchPath)) {
+                isActive = true;
+            }
+        }
         if (tool.matchHost && currentHost.includes(tool.matchHost)) isActive = true;
 
         const activeClasses = "text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60";
@@ -324,12 +368,13 @@ function injectToolNav() {
         </style>
     `;
 
-    // Compact container height (h-9 = 36px) and dynamic category label
+    // CRITICAL BUG FIX: Category Label (e.g. FINANCE) is now inline-block (sticky left pinned with nice shadow) 
+    // to ensure mobile-first layout always displays active category clearly without wrapping.
     navContainer.innerHTML = style + `
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-1.5 h-9 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
-                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest hidden sm:block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
+                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest inline-block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
                     ${linksHtml}
                 </nav>
             </div>
@@ -380,7 +425,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright (Order 3 on mobile, 1 on desktop) -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
