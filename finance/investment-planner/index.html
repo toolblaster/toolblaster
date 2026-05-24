@@ -325,8 +325,210 @@
                 <!-- Main Columns layout -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                     <div class="space-y-3 print-hide">
-                        <!-- Dynamic Section Containers -->
-                        <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl"></div>
+                        <!-- Dynamic Section Containers - Pre-populated with Static matching default layouts to prevent CLS layout shift -->
+                        <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl">
+                            <!-- Monthly SIP Amount Slider -->
+                            <div>
+                                <label for="sipAmountInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="sipAmountLabel">
+                                    <span id="sipAmountLabelText">Monthly SIP Amount (₹)</span> 
+                                </label>
+                                <div class="input-group flex items-center space-x-2">
+                                    <input type="range" id="sipAmountSlider" min="500" max="50000" value="10000" step="500" class="w-full range-slider flex-grow" aria-label="Monthly SIP Amount" style="--fill-percentage: 19.1919%;">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="sipAmountDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                        <input type="number" id="sipAmountInput" class="manual-input" value="10000" min="500" max="50000" step="500" aria-label="Enter Monthly SIP Amount">
+                                        <button type="button" id="sipAmountIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-1.5 mt-1.5">
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="5000" title="Quickly add ₹5K to your investment amount">+ ₹5K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="10000" title="Quickly add ₹10K to your investment amount">+ ₹10K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="25000" title="Quickly add ₹25K to your investment amount">+ ₹25K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="50000" title="Quickly add ₹50K to your investment amount">+ ₹50K</button>
+                                </div>
+                                <p id="sipAmountError" class="input-error-message hidden" role="alert">Amount must be between ₹500 - ₹50,000.</p>
+                            </div>
+
+                            <!-- Frequency Select -->
+                            <div>
+                                <label for="sipFrequency" class="block text-xs font-bold text-stone-700 mb-1">Frequency</label>
+                                <select id="sipFrequency" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
+                                    <option value="monthly" selected>Monthly</option>
+                                    <option value="quarterly">Quarterly</option>
+                                    <option value="half-yearly">Half-Yearly</option>
+                                </select>
+                            </div>
+
+                            <!-- Add Initial Lumpsum Toggle Section -->
+                            <div class="pt-1">
+                                <label class="flex items-center justify-between cursor-pointer" for="sipInitialLumpsumToggle">
+                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                        Add Initial Lumpsum <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                Add a one-time initial amount
+                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <div class="relative inline-flex items-center">
+                                        <input type="checkbox" id="sipInitialLumpsumToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Add Initial Lumpsum">
+                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                                    </div>
+                                </label>
+                                <div id="sipInitialLumpsumGroup" class="hidden mt-2 space-y-3">
+                                    <div>
+                                        <label for="sipInitialLumpsumInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="sipInitialLumpsumLabel">
+                                            <span id="sipInitialLumpsumLabelText">Initial Lumpsum Amount (₹)</span> 
+                                        </label>
+                                        <div class="input-group flex items-center space-x-2">
+                                            <input type="range" id="sipInitialLumpsumSlider" min="5000" max="10000000" value="50000" step="1000" class="w-full range-slider flex-grow" aria-label="Initial Lumpsum Amount" style="--fill-percentage: 0.450225%;">
+                                            <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                                <button type="button" id="sipInitialLumpsumDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                                <input type="number" id="sipInitialLumpsumInput" class="manual-input" value="50000" min="5000" max="10000000" step="1000" aria-label="Enter Initial Lumpsum Amount">
+                                                <button type="button" id="sipInitialLumpsumIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                            </div>
+                                        </div>
+                                        <p id="sipInitialLumpsumError" class="input-error-message hidden" role="alert">Amount must be between ₹5,000 - ₹1 Crore.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Enable Annual Step-up Toggle Section -->
+                            <div class="pt-1">
+                                <label class="flex items-center justify-between cursor-pointer" for="sipStepUpToggle">
+                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                        Enable Annual Step-up <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                Automatically increase SIP amount
+                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <div class="relative inline-flex items-center">
+                                        <input type="checkbox" id="sipStepUpToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Enable Annual Step-up">
+                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                                    </div>
+                                </label>
+                                <div id="sipStepUpGroup" class="hidden mt-2 space-y-3">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1">
+                                            <label for="sipIncreaseRateInput" class="block text-xs font-bold text-stone-700 flex items-center" id="sipIncreaseRateLabel">
+                                                <span id="sipIncreaseRateLabelText">Annual Increase (%)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                        The percentage rate at which you plan to scale up your monthly SIP amount every year.
+                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                                    </span>
+                                                </span>
+                                            </label>
+                                            <div class="step-up-toggle-container">
+                                                <label class="step-up-toggle" for="sipIncreaseTypeToggle">
+                                                    <input type="checkbox" id="sipIncreaseTypeToggle" class="sr-only" role="switch" aria-checked="false" aria-label="Toggle rate type for annual increase">
+                                                    <div class="toggle-track">
+                                                        <div class="toggle-thumb">
+                                                            <span class="toggle-icon toggle-icon-percent">%</span>
+                                                            <span class="toggle-icon toggle-icon-rupee">₹</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group flex items-center space-x-2">
+                                            <input type="range" id="sipIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual Increase" style="--fill-percentage: 0%;">
+                                            <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                                <button type="button" id="sipIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                                <input type="number" id="sipIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1" aria-label="Enter Annual Increase">
+                                                <button type="button" id="sipIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                            </div>
+                                        </div>
+                                        <p id="sipIncreaseRateError" class="input-error-message hidden" role="alert">Value must be between 0 and 20.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Capital Gains Tax Toggle Section -->
+                            <div class="pt-1">
+                                <label class="flex items-center justify-between cursor-pointer" for="sipEquityTaxToggle">
+                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                        Estimate MF Capital Gains Tax (LTCG)
+                                    </span>
+                                    <div class="relative inline-flex items-center">
+                                        <input type="checkbox" id="sipEquityTaxToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Estimate MF Capital Gains Tax (LTCG)">
+                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                                    </div>
+                                </label>
+                                <div id="sipEquityTaxGroup" class="hidden mt-2 space-y-3">
+                                    <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
+                                        <strong class="text-stone-800">FY 2024-25/25-26 Rules:</strong> Long Term Capital Gains (LTCG) on Equity mutual funds are taxed at <strong class="text-stone-800">12.5%</strong> on gains exceeding <strong class="text-stone-800">₹1.25 Lakh</strong> per financial year (holding > 12 months).
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SIP to SWP Pension Bridge Toggle Section -->
+                            <div class="pt-1">
+                                <label class="flex items-center justify-between cursor-pointer" for="sipSwpBridgeToggle">
+                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                        Plan Retirement (SIP to SWP Pension Bridge) <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                Transition your accumulated SIP wealth smoothly into a monthly pension (SWP) to fund your retirement years securely.
+                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <div class="relative inline-flex items-center">
+                                        <input type="checkbox" id="sipSwpBridgeToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Plan Retirement (SIP to SWP Pension Bridge)">
+                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
+                                    </div>
+                                </label>
+                                <div id="sipSwpBridgeGroup" class="hidden mt-2 space-y-3">
+                                    <div class="space-y-3 border-t border-stone-200/50 pt-2">
+                                        <div>
+                                            <label for="bridgePeriodInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="bridgePeriodLabel">
+                                                <span id="bridgePeriodLabelText">Pension Duration (Years)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                        The number of years you plan to withdraw your monthly pension after retirement.
+                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                                    </span>
+                                                </span>
+                                            </label>
+                                            <div class="input-group flex items-center space-x-2">
+                                                <input type="range" id="bridgePeriodSlider" min="5" max="40" value="20" step="1" class="w-full range-slider flex-grow" aria-label="Pension Duration" style="--fill-percentage: 42.8571%;">
+                                                <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                                    <button type="button" id="bridgePeriodDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                                    <input type="number" id="bridgePeriodInput" class="manual-input" value="20" min="5" max="40" step="1" aria-label="Enter Pension Duration">
+                                                    <button type="button" id="bridgePeriodIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                                </div>
+                                            </div>
+                                            <p id="bridgePeriodError" class="input-error-message hidden" role="alert">Pension duration must be between 5 - 40 years.</p>
+                                        </div>
+                                        <div>
+                                            <label for="bridgeRateInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="bridgeRateLabel">
+                                                <span id="bridgeRateLabelText">Conservative Pension Yield (% p.a.)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
+                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
+                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
+                                                        The expected annual return rate on your accumulated wealth during the pension/withdrawal phase (typically conservative, e.g., 6% to 8% in debt/arbitrage funds).
+                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
+                                                    </span>
+                                                </span>
+                                            </label>
+                                            <div class="input-group flex items-center space-x-2">
+                                                <input type="range" id="bridgeRateSlider" min="4" max="12" value="8" step="0.5" class="w-full range-slider flex-grow" aria-label="Conservative Pension Yield" style="--fill-percentage: 50%;">
+                                                <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                                    <button type="button" id="bridgeRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                                    <input type="number" id="bridgeRateInput" class="manual-input" value="8" min="4" max="12" step="0.5" aria-label="Enter Conservative Pension Yield">
+                                                    <button type="button" id="bridgeRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                                </div>
+                                            </div>
+                                            <p id="bridgeRateError" class="input-error-message hidden" role="alert">Expected yield must be between 4% - 12%.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="lumpsumSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
                         <div id="rdSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
                         <div id="fdSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
@@ -349,8 +551,40 @@
                              <div id="goalDynamicInputs" class="space-y-3 mt-2"></div>
                         </div>
 
-                        <!-- GENERAL INPUTS CONTAINER -->
-                        <div id="generalInputsSection" class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3"></div>
+                        <!-- GENERAL INPUTS CONTAINER - Pre-populated with Static matching default layouts to prevent CLS layout shift -->
+                        <div id="generalInputsSection" class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
+                            <!-- Expected Return Rate (p.a. %) Slider -->
+                            <div>
+                                <label for="returnRateInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="returnRateLabel">
+                                    <span id="returnRateLabelText">Expected Return Rate (p.a. %)</span> 
+                                </label>
+                                <div class="input-group flex items-center space-x-2">
+                                    <input type="range" id="returnRateSlider" min="1" max="30" value="12" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Return Rate" style="--fill-percentage: 37.931%;">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="returnRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                        <input type="number" id="returnRateInput" class="manual-input" value="12" min="1" max="30" step="0.1" aria-label="Enter Expected Return Rate">
+                                        <button type="button" id="returnRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                    </div>
+                                </div>
+                                <p id="returnRateError" class="input-error-message hidden" role="alert">Rate must be between 1.0% - 30.0%.</p>
+                            </div>
+
+                            <!-- Investment Period (Years) Slider -->
+                            <div>
+                                <label for="investmentPeriodInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="investmentPeriodLabel">
+                                    <span id="investmentPeriodLabelText">Investment Period (Years)</span> 
+                                </label>
+                                <div class="input-group flex items-center space-x-2">
+                                    <input type="range" id="investmentPeriodSlider" min="1" max="40" value="10" step="1" class="w-full range-slider flex-grow" aria-label="Investment Period" style="--fill-percentage: 23.0769%;">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="investmentPeriodDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                        <input type="number" id="investmentPeriodInput" class="manual-input" value="10" min="1" max="40" step="1" aria-label="Enter Investment Period">
+                                        <button type="button" id="investmentPeriodIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                    </div>
+                                </div>
+                                <p id="investmentPeriodError" class="input-error-message hidden" role="alert">Period must be between 1 - 40 years.</p>
+                            </div>
+                        </div>
 
                         <!-- INFLATION TOGGLE SECTION -->
                         <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl">
@@ -370,7 +604,23 @@
                                     <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
                                 </div>
                             </label>
-                            <div id="inflationInputGroup" class="mt-3 hidden"></div>
+                            <div id="inflationInputGroup" class="mt-3 hidden">
+                                <!-- Inflation Rate (p.a. %) Slider -->
+                                <div>
+                                    <label for="inflationRateInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="inflationRateLabel">
+                                        <span id="inflationRateLabelText">Inflation Rate (p.a. %)</span> 
+                                    </label>
+                                    <div class="input-group flex items-center space-x-2">
+                                        <input type="range" id="inflationRateSlider" min="0" max="15" value="5" step="0.1" class="w-full range-slider flex-grow" aria-label="Inflation Rate" style="--fill-percentage: 33.3333%;">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" id="inflationRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                            <input type="number" id="inflationRateInput" class="manual-input" value="5" min="0" max="15" step="0.1" aria-label="Enter Inflation Rate">
+                                            <button type="button" id="inflationRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                        </div>
+                                    </div>
+                                    <p id="inflationRateError" class="input-error-message hidden" role="alert">Rate must be between 0.0% - 15.0%.</p>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- REAL-TIME DYNAMIC VALIDATION WARNINGS -->
@@ -388,7 +638,51 @@
                         </div>
 
                         <!-- DYNAMIC SUMMARY CONTAINERS INJECTED HERE -->
-                        <div id="dynamicSummariesContainer" class="space-y-3"></div>
+                        <div id="dynamicSummariesContainer" class="space-y-3">
+                            <div id="sipSummary" class="summary-card rounded-2xl" aria-live="polite">
+                                <div class="summary-header">
+                                    <h2>SIP Summary</h2>
+                                    <button class="share-btn rounded-full p-1 bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Share SIP Summary results" title="Share calculation details with friends">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="summary-grid">
+                                    <div class="summary-item rounded-xl">
+                                        <span class="summary-label">Invested</span>
+                                        <span id="investedAmountSIP" class="summary-value invested">₹12,00,000</span>
+                                    </div>
+                                    <div class="summary-item rounded-xl">
+                                        <span class="summary-label">Returns</span>
+                                        <span id="estimatedReturnsSIP" class="summary-value returns">₹11,23,391</span>
+                                    </div>
+                                </div>
+                                <div class="summary-total rounded-xl">
+                                    <span class="summary-label">Total Value</span>
+                                    <span id="totalValueSIP" class="summary-value total">₹23,23,391</span>
+                                </div>
+                                
+                                <div id="realValueSectionSIP" class="summary-extra hidden">
+                                    <span class="summary-label" title="Value after adjusting expected inflation">Real Value (Today's Worth) ℹ</span>
+                                    <span id="realTotalValueSIP" class="summary-value real">₹0</span>
+                                </div>
+                                <div id="ltcgTaxSectionSIP" class="summary-extra hidden">
+                                    <span class="summary-label" title="Equity LTCG tax estimation at 12.5% on returns above ₹1.25 Lakh exemption threshold">Estimated LTCG Tax (12.5%) ⚖</span>
+                                    <span id="ltcgTaxSIP" class="summary-value tax">₹0</span>
+                                </div>
+                                <div id="postTaxSectionSIP" class="summary-extra hidden">
+                                    <span class="summary-label">Post-Tax Accumulated Corpus 💰</span>
+                                    <span id="postTaxCorpusSIP" class="summary-value returns font-bold text-emerald-800">₹0</span>
+                                </div>
+                                <div id="bridgeSectionSIP" class="summary-extra hidden">
+                                    <span class="summary-label" title="Monthly pension yielded by transitioning accumulated SIP corpus directly into a conservative SWP scheme">Est. Monthly Retirement Pension 🚀</span>
+                                    <span id="monthlyPensionSIP" class="summary-value withdrawn font-bold text-red-600">₹0</span>
+                                </div>
+                                <div id="realBridgeSectionSIP" class="summary-extra hidden">
+                                    <span class="summary-label" title="Monthly retirement SWP pension adjusted for historical inflation">Real Pension (Today's Worth) ℹ</span>
+                                    <span id="realMonthlyPensionSIP" class="summary-value real">₹0</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Real-Time Smart Insight Banner -->
                         <div id="smartInsight" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs font-semibold text-blue-900 flex items-start gap-2 hidden print-hide" aria-live="polite">
