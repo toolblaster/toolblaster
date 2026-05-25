@@ -29,8 +29,8 @@
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
     <link rel="manifest" href="../../js/favicon/site.webmanifest">
 
@@ -276,7 +276,15 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white">
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+
+    <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
+        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-cyan-50/15 blur-[80px]"></div>
+        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-teal-50/20 blur-[90px]"></div>
+    </div>
 
     <!-- Global App Header -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
@@ -304,7 +312,7 @@
 
         <!-- Dynamic Calculator Main Card -->
         <div id="calculator" class="financial-calculator-wrapper mt-1">
-            <div class="bg-white shadow-md shadow-stone-200 rounded-3xl p-3 sm:p-5 w-full border-2 border-stone-200 mx-auto my-0 calculator-container relative">
+            <div class="bg-white/90 backdrop-blur-xl shadow-md shadow-stone-200 rounded-3xl p-3 sm:p-5 w-full border-2 border-stone-200 mx-auto my-0 calculator-container relative">
 
                 <!-- Standout Header H1 -->
                 <h1 id="calculatorTitle" class="text-[20px] sm:text-[22px] font-extrabold text-stone-900 text-center mb-1">SIP Calculator with Inflation</h1>
@@ -760,6 +768,30 @@
                 </div>
 
             </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <!-- Naya internal link box, visually premium, high-contrast aur print-hide support ke sath -->
+        <!-- TWEAK: Set max-width of this container strictly to 950px as per request -->
+        <div class="max-w-[950px] mx-auto mb-6 print-hide">
+            <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                        <!-- Custom SVG graph comparison icon for high quality rendering -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Compare Yields</span>
+                        <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
+                        <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Ek hi screen par compare karein mutual funds, bank fixed deposits aur recurring deposits ka compound growth!</p>
+                    </div>
+                </div>
+                <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                    Check Now <span class="text-sm">&rarr;</span>
+                </div>
+            </a>
         </div>
 
         <!-- SEO Article (Safely hidden in print view via print-hide) -->
