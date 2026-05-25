@@ -23,14 +23,15 @@ const TOOLBLASTER_APPS = [
         category: "Finance",
         icon: "fa-wallet",
         apps: [
-            { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" }
+            { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" },
+            { name: "SIP vs FD vs RD", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" }
         ]
     },
     {
         category: "Educational",
         icon: "fa-graduation-cap",
         apps: [
-            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink- pink-600", matchPath: "/educational/nursery-rhymes" }
+            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes" }
         ]
     }
 ];
@@ -83,6 +84,7 @@ function injectHeader() {
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
+        else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "SIP VS FD VS RD";
         else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
         else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
         else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
@@ -96,29 +98,39 @@ function injectHeader() {
     }
 
     // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
-    // CRITICAL FIX: Double title repetition ko rokne ke liye hum us part ko skip karenge jisme centerTitle content already shamil hai!
+    // CRITICAL FIX: Cleaned-Length Priority Algorithm is applied here to auto-detect and strip duplicate words.
     let descTitle = "";
     if (document.title) {
         const titleParts = document.title.split(/\||-|:/);
         if (titleParts.length > 1) {
             let bestPart = "";
+            let bestCleanedLength = 0;
+            
             titleParts.forEach(part => {
                 const cleanPart = part.trim();
-                const lowerPart = cleanPart.toLowerCase();
-                const lowerCenter = centerTitle.toLowerCase();
+                if (cleanPart.toLowerCase() === 'toolblaster') return;
                 
-                // Hum safe checks add karenge taaki "Investment Planner India" select na ho kar utility "SIP, Lumpsum, FD & RD" clean show ho sake
-                if (
-                    lowerPart !== 'toolblaster' && 
-                    !lowerPart.includes(lowerCenter) && 
-                    !lowerCenter.includes(lowerPart) && 
-                    cleanPart.length > bestPart.length
-                ) {
+                // Temp clean contents to test real description value
+                let temp = cleanPart;
+                const wordsToStrip = [centerTitle, "toolblaster"];
+                if (centerTitle.includes(" ")) {
+                    wordsToStrip.push(...centerTitle.split(" "));
+                }
+                wordsToStrip.forEach(word => {
+                    if (word.length > 2) {
+                        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                        temp = temp.replace(regex, '');
+                    }
+                });
+                const cleaned = temp.replace(/^[\s\-|:|,\/]+|[\s\-|:|,\/]+$/g, '').trim();
+                
+                if (cleaned.length > bestCleanedLength) {
                     bestPart = cleanPart;
+                    bestCleanedLength = cleaned.length;
                 }
             });
             
-            // Fallback agar saare parts filters me trigger ho jayein
+            // Fallback
             if (!bestPart) {
                 titleParts.forEach(part => {
                     const cleanPart = part.trim();
@@ -127,7 +139,21 @@ function injectHeader() {
                     }
                 });
             }
-            descTitle = bestPart;
+            
+            // Strip centerTitle words dynamically from bestPart to avoid repetitive visual bloat
+            let tempDesc = bestPart;
+            const wordsToStrip = [centerTitle, "toolblaster"];
+            if (centerTitle.includes(" ")) {
+                wordsToStrip.push(...centerTitle.split(" "));
+            }
+            wordsToStrip.forEach(word => {
+                if (word.length > 2) {
+                    const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                    tempDesc = tempDesc.replace(regex, '');
+                }
+            });
+            
+            descTitle = tempDesc.replace(/^[\s\-|:|,\/]+|[\s\-|:|,\/]+$/g, '').trim();
         } else {
             descTitle = document.title.trim();
         }
@@ -167,6 +193,15 @@ function injectHeader() {
     // .hidden par custom CSS !important rule bypass karne ke liye humne generic 'hidden sm:block' aur 'hidden sm:inline' ke bajaye
     // 'max-sm:hidden sm:block' aur 'max-sm:hidden sm:inline' ka use kiya hai. Isse page-specific overrides fail ho jayengi!
     headerContainer.innerHTML = `
+        <style>
+            @media (max-width: 639px) {
+                .tb-desktop-only { display: none !important; }
+            }
+            @media (min-width: 640px) {
+                .tb-mobile-only { display: none !important; }
+            }
+        </style>
+        
         <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
         <nav class="relative w-full bg-white border-b border-stone-300 shadow-sm z-[100]">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between relative">
@@ -184,7 +219,7 @@ function injectHeader() {
                             <rect x="224" y="352" width="64" height="20" fill="#EF4444"/>
                             <path d="M235 380 L256 460 L277 380 Z" fill="#EF4444"/>
                         </svg>
-                        <span class="font-inter font-black text-lg tracking-tighter text-stone-900 max-sm:hidden sm:block">TOOL<span class="text-accent-main">BLASTER</span></span>
+                        <span class="font-inter font-black text-lg tracking-tighter text-stone-900 tb-desktop-only sm:block">TOOL<span class="text-accent-main">BLASTER</span></span>
                     </a>
                 </div>
 
@@ -194,12 +229,12 @@ function injectHeader() {
                         ${centerTitle}
                     </span>
                     ${descTitle ? `
-                        <span class="max-sm:hidden sm:inline text-stone-600 font-semibold tracking-widest text-[10px] ml-1.5 truncate flex-shrink min-w-0">- ${descTitle}</span>
-                        <span class="sm:hidden text-stone-600 font-semibold tracking-widest text-[8px] truncate w-full leading-tight mt-0.5 flex-shrink min-w-0">${descTitle}</span>
+                        <span class="tb-desktop-only sm:inline-block text-stone-600 font-semibold tracking-widest text-[10px] ml-1.5 truncate flex-shrink min-w-0">- ${descTitle}</span>
+                        <span class="tb-mobile-only text-stone-600 font-semibold tracking-widest text-[8px] truncate w-full leading-tight mt-0.5 flex-shrink min-w-0">${descTitle}</span>
                     ` : ''}
                 </div>
 
-                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG (max-sm:hidden prevents the CSS important lock) -->
+                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG (tb-desktop-only prevents the CSS important lock) -->
                 <div class="flex items-center gap-3">
                     <button id="global-menu-btn" aria-label="Open App Menu" class="bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-800 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 flex items-center gap-2">
                         <svg class="w-3.5 h-3.5 text-stone-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -213,7 +248,7 @@ function injectHeader() {
                             <circle cx="12" cy="20" r="2"></circle>
                             <circle cx="20" cy="20" r="2"></circle>
                         </svg>
-                        <span class="max-sm:hidden sm:inline">Explore Tools</span>
+                        <span class="tb-desktop-only sm:inline">Explore Tools</span>
                     </button>
                 </div>
             </div>
@@ -227,7 +262,7 @@ function injectHeader() {
             <div class="grid grid-cols-3 items-center px-4 py-3 sm:px-5 sm:py-4 border-b border-stone-100 bg-stone-50/50">
                 <div class="flex justify-start">
                     <span class="font-black text-stone-900 tracking-widest text-xs uppercase flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-rocket text-red-500"></i> <span class="max-sm:hidden sm:inline">Drawer</span>
+                        <i class="fa-solid fa-rocket text-red-500"></i> <span class="tb-desktop-only sm:inline">Drawer</span>
                     </span>
                 </div>
                 
