@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>PPF Calculator | Calculate Maturity, Loan & Extension Online</title>
+    <meta name="description" content="Calculate your PPF maturity amount with our advanced Public Provident Fund calculator. Features extension planning, detailed yearly growth, and loan details.">
+    <meta name="keywords" content="ppf calculator, public provident fund, ppf interest rate, ppf maturity amount, tax saving schemes">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/ppf-calculator" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolblaster.com/finance/ppf-calculator">
+    <meta property="og:title" content="Advanced PPF Calculator with Extension & Loan Details - India">
+    <meta property="og:description" content="Calculate your PPF maturity amount with our advanced Public Provident Fund calculator. Features extension planning and loan details.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:alt" content="Visual Investment Comparison Tool Logo">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://toolblaster.com/finance/ppf-calculator">
+    <meta name="twitter:title" content="Advanced PPF Calculator with Extension & Loan Details - India">
+    <meta name="twitter:description" content="Calculate your PPF maturity amount with our advanced Public Provident Fund calculator. Features extension planning and loan details.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata for Header Title -->
+    <meta name="application-name" content="PPF Calculator">
+    <meta name="apple-mobile-web-app-title" content="PPF Calculator">
+
+    <!-- Schema.org JSON-LD structured metadata - Upgraded to WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Advanced PPF Calculator with Extension & Loan Details - India",
+          "description": "Calculate your PPF maturity amount with our advanced Public Provident Fund calculator. Features extension planning, detailed yearly growth, and loan details.",
+          "url": "https://toolblaster.com/finance/ppf-calculator",
+          "inLanguage": "en-IN",
+          "mainEntity": {
+            "@id": "#ppf-calculator"
+          }
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "#ppf-calculator",
+          "name": "Public Provident Fund (PPF) Calculator",
+          "description": "An online tool to calculate PPF investment compounding milestones, extension block growth rates, partial withdrawal thresholds, and interest loan eligibility values.",
+          "brand": {
+            "@type": "Brand",
+            "name": "toolblaster.com"
+          },
+          "url": "https://toolblaster.com/finance/ppf-calculator",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "toolblaster.com"
+          },
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "Web"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and Icons -->
+    <script src="../../js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Custom Variables (High contrast, modern presets) --- */
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; /* Darkened primary text for AA compliance */
+            --text-color-muted: #1f2937;
+            --accent-color: #E34037;
+            --accent-color-dark: #B91C1C;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --header-bg: #ffffff;
+            --link-hover-bg: #fef2f2;
+            --section-bg-alt: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+
+        /* --- Sliders customization with dynamic background fill --- */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #94a3b8; /* Darkened background track for WCAG compliance */
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark, #B91C1C), var(--accent-color-dark, #B91C1C));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: var(--accent-color-dark, #B91C1C); /* Replaced with darker accent for robust contrast */
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -4.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* --- Input group & stepper button overrides --- */
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8; /* Heightened border contrast */
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+        }
+        .stepper-button {
+            background-color: #e5e7eb; /* Slightly darker gray for WCAG AA standard */
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.1s;
+        }
+        .stepper-button:hover:not(:disabled) {
+            background-color: #cbd5e1;
+        }
+        .stepper-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* --- CLS & BREATHING SPACE UPGRADES: Stepper Inputs and spin overrides --- */
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827; /* Enhanced Darker Text */
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 82px;
+            padding: 0 4px;
+        }
+        @media (min-width: 640px) {
+            html body .manual-input {
+                width: 96px;
+            }
+        }
+        
+        /* BREATHING ROOM IMPLEMENTATION: Custom input field width logic */
+        html body .extension-blocks-input-field {
+            width: 10rem;
+        }
+        @media (min-width: 640px) {
+            html body .extension-blocks-input-field {
+                width: 11rem;
+            }
+        }
+
+        /* Completely eliminate spinners from taking space */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        html body .input-error {
+            border-color: #b91c1c; /* Higher contrast red-700 */
+            background-color: #fef2f2;
+        }
+
+        /* --- Toggle switch tabs (WCAG AA Compliant Overrides) --- */
+        html body .toggle-btn {
+            background-color: #e5e7eb;
+            color: #111827; /* Darkened for compliance */
+            border-color: #94a3b8;
+            transition: all 0.2s ease-in-out;
+        }
+        html body .toggle-btn.active {
+            background-color: var(--accent-color-dark, #B91C1C);
+            color: #ffffff;
+            border-color: var(--accent-color-dark, #B91C1C);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+        html body .toggle-btn:not(.active):hover {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-color: #fca5a5;
+        }
+
+        /* Preset/Historical Rate Buttons styling */
+        .preset-btn {
+            background-color: #e5e7eb;
+            color: #111827; /* High contrast text */
+            border: 1px solid #94a3b8;
+            transition: all 0.2s ease-in-out;
+        }
+        .preset-btn.active {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Segmented Deposit Toggle */
+        .deposit-toggle-btn {
+            background-color: transparent;
+            color: #1f2937; /* Upgraded to high contrast gray-850 from #4b5563 */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .deposit-toggle-btn.active {
+            background-color: #ffffff;
+            color: #111827;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        /* --- Ledger Scroll & Sticky headers --- */
+        .ledger-scroll-container {
+            max-height: 350px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .ledger-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e5e7eb; /* Upgraded header background for superb contrast */
+            z-index: 20;
+            box-shadow: inset 0 -1px 0 #94a3b8, inset 0 1px 0 #94a3b8;
+        }
+        .ledger-scroll-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* --- Tooltip Helpers --- */
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827; /* Darkened icon for contrast */
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 185px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -92px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* --- Share Report Dialog Modal --- */
+        .share-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 1rem;
+        }
+        .share-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .share-modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 460px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-modal.active .share-modal-content {
+            transform: scale(1);
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .close-modal-btn:hover {
+            color: #000000;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .modal-report-content h2 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .modal-report-content ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+        .modal-report-content li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #111827; /* Strict dark black for contrast compliant results */
+        }
+        .share-url-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #94a3b8;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #111827;
+            background: #f8fafc;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        .modal-btn {
+            background-color: var(--accent-color-dark, #B91C1C);
+            color: #ffffff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .modal-btn:hover {
+            background-color: #991b1b;
+        }
+
+        .input-error-message {
+            color: #b91c1c; /* High contrast red-700 */
+            font-size: 0.6rem;
+            margin-top: 0.15rem;
+            font-weight: 600;
+        }
+
+        /* --- SELECTOR FOR ENHANCED CONTRAST PRESETS (WCAG AA COMPLIANT) --- */
+        html body .text-xxs {
+            font-size: 0.72rem;
+            line-height: 1rem;
+        }
+
+        /* Inline editable investment styling */
+        .yearly-invest-input {
+            transition: all 0.2s ease-in-out;
+        }
+        .yearly-invest-input:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Notification Toast Styling */
+        #notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #notification-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- PDF PRINT OVERRIDES STYLE SHEET (Completely free of !important) --- */
+        @media print {
+            html body {
+                background: white;
+                color: black;
+                font-family: 'Inter', sans-serif;
+                font-size: 11pt;
+                margin: 0;
+                padding: 1.5cm;
+            }
+            html body main.container, html body #ppf-calculator, html body .bg-white {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            /* Hiding inputs grid, presets, banners and active UI elements completely during print */
+            html body .preset-btn, 
+            html body .input-stepper-group, 
+            html body input[type="range"], 
+            html body select,
+            html body #presets-container,
+            html body #calculator-main-grid,
+            html body #toggleLedgerBtn,
+            html body #sponsorship-banner,
+            html body .toggle-btn, 
+            html body .chart-container, 
+            html body canvas, 
+            html body #shareReportBtn, 
+            html body #shareModal, 
+            html body #notification-toast,
+            html body .flex.flex-wrap.justify-between.items-center,
+            html body .bg-blue-50, 
+            html body .bg-green-50, 
+            html body hr, 
+            html body #decreaseExtension, 
+            html body #increaseExtension,
+            html body .print-hide {
+                display: none;
+            }
+            html body #yearlyGrowthContainer {
+                display: block;
+                border-top: none;
+                padding: 0;
+                margin-top: 15px;
+            }
+            html body #ledgerContent {
+                display: block;
+                border-top: none;
+                padding: 0;
+                margin: 0;
+            }
+            html body .ledger-scroll-container {
+                max-height: none;
+                overflow-y: visible;
+                border: none;
+                box-shadow: none;
+            }
+            html body .ledger-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+            html body .ledger-table th, html body .ledger-table td {
+                border: 1px solid #cbd5e1;
+                padding: 8px 10px;
+                font-size: 9pt;
+                color: black;
+                text-align: left;
+            }
+            html body .ledger-table thead th {
+                background-color: #f1f5f9;
+                font-weight: bold;
+            }
+            html body .print-title {
+                display: block;
+                font-size: 16pt;
+                font-weight: 800;
+                text-align: center;
+                margin-bottom: 25px;
+                border-bottom: 2px solid #b91c1c;
+                padding-bottom: 10px;
+                color: #111827;
+            }
+        }
+        @media screen {
+            .print-title {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+
+    <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
+        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-cyan-50/15 blur-[80px]"></div>
+        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-teal-50/20 blur-[90px]"></div>
+    </div>
+
+    <!-- Global App Header -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace -->
+    <main class="container flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-16">
+
+        <!-- Breadcrumb Navigation (Safely hidden in print view via print-hide) -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="https://toolblaster.com/finance/" class="hover:text-red-600 transition-colors">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">PPF Calculator</span>
+            </div>
+            <!-- Dynamic Badge -->
+            <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-piggy-bank"></i> Sovereign Savings
+            </div>
+        </nav>
+
+        <!-- Dynamic print-only title header block -->
+        <div class="print-title">
+            Public Provident Fund (PPF) Milestone Report
+            <p style="font-size: 9pt; font-weight: normal; margin-top: 5px; color: #111827;">Generated on toolblaster.com</p>
+        </div>
+
+        <!-- CALCULATOR SECTION -->
+        <div id="ppf-calculator" class="w-full">
+             <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
+
+                <!-- Header Block -->
+                <div class="text-center mb-1">
+                    <h1 class="text-base sm:text-lg font-extrabold text-gray-900">PPF Calculator: Calculate Maturity, Loan & Extension</h1>
+                </div>
+                <p class="text-center text-gray-600 mb-2.5 text-xxs font-medium">Calculate Public Provident Fund maturity with extension planning, partial withdrawals, and loan values.</p>
+
+                <!-- Interest Rates Outlook Presets -->
+                <div id="presets-container" class="flex items-center justify-between flex-wrap gap-2 pb-2.5 mb-1.5 border-b border-gray-200">
+                    <span class="text-xxs font-extrabold text-gray-700">PPF Interest Rate Presets:</span>
+                    <div class="flex gap-1.5">
+                        <button type="button" id="presetCurrent" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all active">Current FY Rate (7.1%)</button>
+                        <button type="button" id="presetHistHigh" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all">Hist. Peak (8.0%)</button>
+                        <button type="button" id="presetHistLow" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all">Hist. Base (6.5%)</button>
+                    </div>
+                </div>
+
+                <!-- MAIN INTERACTION GRID -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+                    <!-- Left Column: Inputs -->
+                    <div class="space-y-3">
+                        <!-- PPF Core Details Section (Solid light blue bg-blue-50) -->
+                        <div class="bg-gradient-to-br from-indigo-50/80 to-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl space-y-2 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5">PPF Capital Settings</h2>
+                            
+                            <!-- INTEREST OPTIMIZATION TOGGLE (Deposit Timing) -->
+                            <div class="bg-white p-2 rounded-xl border border-blue-100 space-y-1">
+                                <div class="flex justify-between items-center h-4">
+                                    <span class="flex items-center gap-1">
+                                        <span class="block text-xxs font-bold text-gray-900">Deposit Timing (Interest Optimization)</span>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">PPF calculates interest on the lowest balance between the 5th and end of each month. Depositing on or before April 5th maximizes interest for the full financial year. Delaying it loses April's interest.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="bg-gray-100 p-0.5 rounded-lg flex relative">
+                                    <button type="button" id="depositBeforeBtn" class="deposit-toggle-btn active flex-1 text-center py-1 text-xxs font-extrabold rounded-md transition-all">
+                                        On/Before April 5th
+                                    </button>
+                                    <button type="button" id="depositAfterBtn" class="deposit-toggle-btn flex-1 text-center py-1 text-xxs font-extrabold rounded-md transition-all">
+                                        After April 5th
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1">
+                                        <label id="annualInvestmentLabel" for="annualInvestmentInput" class="block text-xxs font-bold text-gray-900">Yearly Investment Default (₹)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The default amount you invest in your PPF account each financial year. You can customize individual years dynamically in the YoY Growth Ledger below. Minimum ₹500 and maximum ₹1,50,000 per year as per Section 80C tax rules.</span>
+                                        </span>
+                                    </span>
+                                    <span id="annualInvestmentWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="annualInvestmentSlider" min="500" max="150000" value="150000" step="500" class="w-full flex-grow range-slider" aria-label="Yearly Investment Amount Default" aria-labelledby="annualInvestmentLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="annualInvestmentDecrement" class="stepper-button decrement" aria-label="Decrease Yearly Investment">-</button>
+                                        <input type="number" id="annualInvestmentInput" class="manual-input text-center" value="150000" min="500" max="150000" step="500">
+                                        <button type="button" id="annualInvestmentIncrement" class="stepper-button increment" aria-label="Increase Yearly Investment">+</button>
+                                    </div>
+                                </div>
+                                <p id="annualInvestmentError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-700 invisible">Amount must be between ₹500 - ₹1,50,000.</p>
+                            </div>
+
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1">
+                                        <label id="interestRateLabel" for="interestRateInput" class="block text-xxs font-bold text-gray-900">Interest Rate (% p.a.)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The annual compounding interest rate determined by the Government of India. It is reviewed quarterly.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="interestRateSlider" min="5" max="10" value="7.1" step="0.1" class="w-full range-slider flex-grow" aria-label="PPF Interest Rate Percentage Slider" aria-labelledby="interestRateLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="interestRateDecrement" class="stepper-button decrement" aria-label="Decrease Interest Rate">-</button>
+                                        <input type="number" id="interestRateInput" class="manual-input text-center" value="7.1" min="5" max="10" step="0.1">
+                                        <button type="button" id="interestRateIncrement" class="stepper-button increment" aria-label="Increase Interest Rate">+</button>
+                                    </div>
+                                </div>
+                                <p id="interestRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-700 invisible">Rate must be between 5.0% - 10.0%.</p>
+                            </div>
+                        </div>
+
+                        <!-- PPF Extension Details Section (Solid light blue bg-blue-50) -->
+                        <div class="bg-gradient-to-br from-slate-50/90 to-blue-50/40 border border-blue-100/80 p-3 rounded-2xl space-y-2 shadow-[inset_0_1px_2px_rgba(0,0,0,0.01)]">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Extension Blocks Planner</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="16" x2="12" y2="12"/>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Plan extensions of your PPF account beyond the 15-year maturity mark in blocks of 5 years each. Fresh contributions can optionally continue or stop.</span>
+                                </span>
+                            </h2>
+                            <div class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1">
+                                        <label for="extensionBlocksInput" class="block text-xxs font-bold text-gray-900">Extend in Blocks of 5 Years</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">After the initial 15-year maturity, you can extend your PPF account indefinitely in blocks of 5 years. This planner supports up to 4 blocks (20 years).</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-3">
+                                    <button type="button" id="decreaseExtension" class="stepper-button font-extrabold w-8 h-8 rounded-lg border border-gray-300" aria-label="Decrease extension blocks">-</button>
+                                    <input type="text" id="extensionBlocksInput" class="manual-input text-center bg-white border border-gray-300 rounded-lg h-8 cursor-default extension-blocks-input-field" value="0 blocks (0 yrs)" readonly>
+                                    <button type="button" id="increaseExtension" class="stepper-button font-extrabold w-8 h-8 rounded-lg border border-gray-300" aria-label="Increase extension blocks">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Single wrapping label compliant structure (Replaced sibling wrapper elements to resolve WCAG failures) -->
+                            <label id="extensionContributionDiv" for="contributionToggle" class="pt-2.5 mt-3 border-t border-blue-200 flex items-center justify-between opacity-70 pointer-events-none transition-opacity duration-200 cursor-pointer" aria-disabled="true">
+                                <span class="flex items-center gap-1.5 text-xxs font-bold text-gray-900">
+                                    Continue contributions during extension?
+                                    <span class="tooltip-icon" onclick="event.stopPropagation();">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <line x1="12" y1="16" x2="12" y2="12"/>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Untick to stop fresh annual deposits during extensions. Your existing balance continues to earn tax-free interest compounding annually.</span>
+                                    </span>
+                                </span>
+                                <span class="relative inline-flex items-center select-none">
+                                    <input type="checkbox" id="contributionToggle" class="sr-only peer" disabled>
+                                    <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- Loan & Withdrawal Audit Section (Solid light green bg-green-50) -->
+                        <div class="bg-gradient-to-br from-teal-50/80 to-emerald-50/40 border border-teal-100 p-3 rounded-2xl space-y-2 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+                            <h2 class="text-xs font-bold text-green-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Loan & Partial Withdrawal Check</span>
+                                <span class="tooltip-icon">
+                                    <svg class="text-green-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="16" x2="12" y2="12"/>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Monitor dynamic loan eligibility and tax-free partial withdrawal thresholds based on strict government timeline rules relative to your account opening year.</span>
+                                </span>
+                            </h2>
+                            <div class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1">
+                                        <label id="lwYearLabel" for="lwYearSlider" class="block text-xxs font-bold text-green-950">Select Audit Financial Year</label>
+                                        <span class="tooltip-icon">
+                                            <svg class="text-green-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Select a specific financial year to check loan or partial withdrawal eligibility based on standard PPF rules.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 1</span>
+                                    <input type="range" id="lwYearSlider" min="1" max="15" value="7" step="1" class="w-full range-slider flex-grow accent-green-800" aria-label="Check loan eligibility year slider" aria-labelledby="lwYearLabel">
+                                    <span id="lwYearMaxLabel" class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 15</span>
+                                </div>
+                                <p class="text-center font-bold text-green-950 text-xs mt-1.5">Checking Limits for: Year <span id="lwYearDisplay">7</span></p>
+                            </div>
+                             <div class="grid grid-cols-2 gap-2 text-center text-xs mt-1">
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-green-100">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Eligible Loan</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Available from the 3rd to the 6th financial year. The loan amount is capped at 25% of the closing balance of the second preceding financial year.</span>
+                                        </span>
+                                    </span>
+                                    <p id="eligibleLoanAmount" class="font-extrabold text-green-950 text-sm sm:text-base">₹0</p>
+                                    <p class="text-[9px] text-gray-800 mt-0.5 leading-none">(Available: Yr 3 to 6)</p>
+                                </div>
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-green-100">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Max Withdrawal</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Allowed once every year from the 7th financial year onwards. Capped at 50% of the preceding year's balance or the 4th preceding year's balance, whichever is lower.</span>
+                                        </span>
+                                    </span>
+                                    <p id="maxWithdrawalAmount" class="font-extrabold text-green-950 text-sm sm:text-base">₹0</p>
+                                    <p class="text-[9px] text-gray-800 mt-0.5 leading-none">(Available: Yr 7 onwards)</p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visual Dashboard Results -->
+                    <div class="flex flex-col space-y-3">
+                         <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <!-- Share report button inside summary card header -->
+                            <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
+                                <h2 class="text-xs font-bold text-blue-950 text-center sm:text-left font-extrabold">PPF Maturity Summary</h2>
+                                <button id="shareReportBtn" class="p-1 text-gray-700 hover:text-red-800 transition-colors flex-shrink-0 print-hide" aria-label="Share calculation results">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- INTEREST OPTIMIZATION VALUE CALLOUT BADGE -->
+                            <div id="optimizationBadge" class="p-2.5 rounded-xl border mb-2 text-center transition-all">
+                                <!-- Dynamically populated in JavaScript based on calculation loops -->
+                            </div>
+
+                            <!-- RESULTS GRID -->
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Total Investment</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The sum of all annual deposits made over your entire selected PPF tenure, including any extended years.</span>
+                                        </span>
+                                    </span>
+                                    <p id="totalInvestment" class="text-xs sm:text-sm font-extrabold text-blue-950">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Total Interest</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The total interest accrued and compounded annually over the entire tenure. This amount is completely tax-exempt under EEE status.</span>
+                                        </span>
+                                    </span>
+                                    <p id="totalInterest" class="text-xs sm:text-sm font-extrabold text-green-950">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Maturity Term</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The standard lock-in period for a PPF account is 15 years, which increases dynamically based on the number of extended blocks.</span>
+                                        </span>
+                                    </span>
+                                    <p id="maturityTermDisplay" class="text-xs sm:text-sm font-extrabold text-indigo-950">15 Years</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Wealth Multiplier</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The growth factor showing how many times your total invested capital has multiplied upon maturity.</span>
+                                        </span>
+                                    </span>
+                                    <p id="wealthMultiplierDisplay" class="text-xs sm:text-sm font-extrabold text-amber-950">1.0x</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Section 80C Tax Saved calculation panel -->
+                            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex justify-between items-center px-4">
+                                <div class="text-left">
+                                    <span class="flex items-center gap-1">
+                                        <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">Yearly Tax Saved (Sec 80C)</p>
+                                        <span class="tooltip-icon">
+                                            <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Annual income tax savings calculated on your PPF deposit based on Section 80C provisions and your current tax slab.</span>
+                                        </span>
+                                    </span>
+                                    <!-- Tax Slab Selection -->
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <label for="taxSlabSelect" class="text-[9px] text-emerald-950 leading-none">Your Tax Bracket:</label>
+                                        <select id="taxSlabSelect" class="bg-white border border-emerald-300 rounded text-[9px] px-1 font-bold text-emerald-950 h-4 outline-none">
+                                            <option value="0">0% Ex.</option>
+                                            <option value="0.05">5% Slab</option>
+                                            <option value="0.1">10% Slab</option>
+                                            <option value="0.2" selected>20% Slab</option>
+                                            <option value="0.3">30% Slab</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p id="taxSavedDisplay" class="text-xs sm:text-sm font-extrabold text-emerald-950">₹30,000</p>
+                            </div>
+
+                            <!-- Projected Tax-Free Maturity Value panel with maximized contrast color (purple-950) -->
+                            <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                 <span class="flex items-center justify-center gap-1">
+                                     <p class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Projected Tax-Free Maturity Value</p>
+                                     <span class="tooltip-icon">
+                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                             <circle cx="12" cy="12" r="10"/>
+                                             <line x1="12" y1="16" x2="12" y2="12"/>
+                                             <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                         </svg>
+                                         <span class="tooltip-text">The final tax-free closing balance at maturity (Investment + Interest). PPF features fully exempt EEE status.</span>
+                                     </span>
+                                 </span>
+                                 <p id="maturityValue" class="text-base sm:text-lg font-extrabold text-purple-950">₹0</p>
+                            </div>
+                        </div>
+
+                        <!-- Graphical Chart Representation -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-200 flex flex-col justify-center items-center shadow-sm h-36 sm:h-44 md:h-48 relative print-hide">
+                            <canvas id="ppfDoughnutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Ledger Tab -->
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                    <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px] print-hide">
+                        <span class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="3" y1="15" x2="21" y2="15"/>
+                                <line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                            View Year-on-Year Growth Ledger (Editable Yearly Investments)
+                        </span>
+                        <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-500">▼</span>
+                    </button>
+                    
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                        <p class="text-[11px] text-blue-950 mb-3 bg-blue-100 p-2.5 rounded-lg border border-blue-200 leading-relaxed font-semibold print-hide">
+                            💡 <strong>Flexible Planning:</strong> Click on any year's <strong>"Invested Capital"</strong> input to change its specific amount. The calculator will instantly re-compounding everything dynamically! PPF Rules validate inputs to be either ₹0 or between ₹500 and ₹1,50,000.
+                        </p>
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-4 border-b border-gray-200 pb-3 print-hide">
+                            <div>
+                                <button type="button" id="resetDefaultsBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-gray-700 hover:bg-gray-800 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                        <polyline points="3 3 3 8 8 8"/>
+                                    </svg>
+                                    Reset All Custom Years
+                                </button>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14 2 14 8 20 8"/>
+                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                    </svg>
+                                    Export CSV
+                                </button>
+                                <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-rose-850 hover:bg-rose-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="6 9 6 2 18 2 18 9"/>
+                                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                                        <rect x="6" y="14" width="12" height="8"/>
+                                    </svg>
+                                    Print / Save PDF
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- SCROLL CONTAINER UPGRADE -->
+                        <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
+                            <table class="w-full text-left border-collapse text-xs ledger-table">
+                                <thead>
+                                    <tr class="border-b border-gray-300 text-gray-900 bg-gray-100">
+                                        <th scope="col" class="p-3 font-extrabold">Year</th>
+                                        <th scope="col" class="p-3 font-extrabold">Opening Balance</th>
+                                        <th scope="col" class="p-3 font-extrabold text-right">Invested Capital (Editable)</th>
+                                        <th scope="col" class="p-3 font-extrabold">Est. Interest Earned</th>
+                                        <th scope="col" class="p-3 font-extrabold">Closing Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-stone-700 bg-white">
+                                    <!-- Dynamic rows mapped via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Broker/Platform Sponsorship Banner (Upstox link removed) -->
+                <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700 print-hide">
+                    <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
+                        Start investing with 5paisa
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Indian Regulatory Compliance AMFI & SEBI Disclaimer Card -->
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-left text-gray-900 text-[10px] leading-relaxed print-hide">
+                    <p class="font-bold text-gray-950 mb-0.5">AMFI & SEBI Regulatory Cautionary Statement:</p>
+                    <p class="mb-1.5">Public Provident Fund (PPF) is a statutory sovereign tax-saving instrument framed under the Government of India PPF Scheme, 2019. It offers capital protection and fixed interest income quarterly announced by the Ministry of Finance. PPF is not a market-linked mutual fund scheme and does not carry market volatility risks.</p>
+                    <p>Calculations displayed on this platform are for educational projection purposes only and do not constitute direct AMFI/SEBI financial advise or portfolio solicitation. Investors are advised to align investments with individual risk horizons under Section 80C.</p>
+                </div>
+
+                <!-- Disclaimer -->
+                 <p class="text-center text-gray-900 text-[10px] leading-relaxed px-2 mt-3 border-t border-gray-200 pt-3">
+                    <strong>Disclaimer:</strong> This calculator is for informational purposes only. PPF interest rates are set by the government quarterly and are subject to change. Maturity and partial withdrawal calculations assume standard compounding intervals.
+                 </p>
+             </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <!-- Locked strictly to 950px max-width to align perfectly with the calculator container above -->
+        <div class="max-w-[950px] mx-auto mb-6 print-hide px-1 mt-6">
+            <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Yield Comparison</span>
+                        <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
+                        <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, Recurring Deposits, and Fixed Deposits under custom tax slabs.</p>
+                    </div>
+                </div>
+                <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                    Check Now <span class="text-sm">&rarr;</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- SEO Article (Safely hidden in print view via print-hide) -->
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
+            <div class="space-y-6 text-stone-800">
+                
+                <!-- Section 1: Introduction -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-vault"></i></span> Sovereign Wealth: Why PPF is the Ultimate Tax-Saving Instrument
+                    </h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
+                        The <strong>Public Provident Fund (PPF)</strong> is a highly secure, sovereign-backed savings scheme introduced by the Ministry of Finance in India. Designed to encourage long-term retirement planning, it features the coveted <strong>Exempt-Exempt-Exempt (EEE)</strong> status under Section 80C of the Income Tax Act.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
+                        This means the principal amount invested (up to ₹1.5 Lakh per financial year), the interest earned annually, and the final maturity proceeds are completely tax-exempt. While standard banking instruments are subject to annual TDS, PPF compounds purely tax-free, allowing for exponential long-term wealth growth.
+                    </p>
+                </section>
+
+                <!-- Section 2: How to use -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-gears"></i></span> How to Use the PPF Calculator
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        Plan your retirement timeline and calculate potential tax-free proceeds step-by-step:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 1. Set Annual Contribution & Rates
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Specify your planned yearly deposit. Minimum statutory deposit limit is ₹500, and maximum is ₹1,50,000 per financial year. Adjust the interest rate slider based on the government's quarterly announced yield rates (preset at the current 7.1%).
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 2. Plan Extensions
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                PPF matures in 15 years. You can extend this timeline indefinitely in blocks of 5 years. Use the Extension Blocks Planner to simulate holding periods up to 35 years, with or without continuing fresh annual deposits.
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 3. Audit Loans & Withdrawals
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Need liquidity? Slide the audit timeline to a specific year. The calculator determines if you are eligible for an interest-bearing loan (available Years 3 to 6) or tax-free partial withdrawals (available Year 7 onwards).
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Mathematical Formulas -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics of PPF
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        The Public Provident Fund compounds interest annually. However, interest calculations are executed monthly based on specific timing rules:
+                    </p>
+
+                    <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
+                        
+                        <!-- Compound formula -->
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">1. Annual Compounding Formula</h3>
+                            <p class="mb-2">For structured, consistent annual deposits compounding once at the end of each financial year:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$F = P \times \frac{(1 + r)^n - 1}{r} \times (1 + r)$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $F$ is the closing maturity balance, $P$ is the annual deposit amount, $r$ is the declared annual rate of interest, and $n$ is the investment period in years.
+                            </p>
+                        </div>
+
+                        <!-- Timing Rules -->
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">2. The "April 5th" Monthly Interest Rule</h3>
+                            <p class="mb-2">By law, interest is calculated on the lowest balance in your account between the 5th and the last day of each month. If you deposit your annual lump sum after April 5th:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$\text{Accrued Interest} = (\text{Opening Balance} \times r) + \left(P \times r \times \frac{11}{12}\right)$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Depositing after April 5th means you miss out on interest accrual for the first month (April), which can significantly reduce compound efficiency over a 15-year tenure.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Side-by-Side Comparison Table (Evergreen Feature) -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Side-by-Side Comparison: PPF vs ELSS vs NPS
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse border border-stone-200">
+                            <thead>
+                                <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
+                                    <th class="p-2.5">Feature</th>
+                                    <th class="p-2.5">Sovereign PPF</th>
+                                    <th class="p-2.5">ELSS Mutual Funds</th>
+                                    <th class="p-2.5">National Pension System (NPS)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200 text-stone-700 font-medium">
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Risk Profile</td>
+                                    <td class="p-2.5 text-green-700 font-bold">Zero Risk (Government backed)</td>
+                                    <td class="p-2.5 text-red-700 font-bold">High (Equity-linked market risk)</td>
+                                    <td class="p-2.5 text-amber-700 font-bold">Moderate (Market-linked)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Expected Returns</td>
+                                    <td class="p-2.5 font-bold text-stone-800">7.1% (Fixed quarterly)</td>
+                                    <td class="p-2.5 font-bold text-stone-800">12% - 15% (Variable)</td>
+                                    <td class="p-2.5 font-bold text-stone-800">9% - 12% (Variable)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Tax Status (EEE/EET)</td>
+                                    <td class="p-2.5 text-green-700 font-bold">EEE (100% Tax-Free)</td>
+                                    <td class="p-2.5">LTCG Tax on gains &gt; ₹1.25L</td>
+                                    <td class="p-2.5">60% Tax-Free on retirement lump sum</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Lock-in Period</td>
+                                    <td class="p-2.5">15 Years (Partial options apply)</td>
+                                    <td class="p-2.5 text-green-700 font-bold">3 Years (Shortest for tax-savers)</td>
+                                    <td class="p-2.5">Retirement (Up to Age 60)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 5: FAQs Section (TWEAK: h2 updated to text-base i.e. 16px) -->
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. Is PPF interest completely tax-free?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes. The Public Provident Fund carries Exempt-Exempt-Exempt (EEE) status. Under Section 80C, your initial annual deposit, the compounding interest earned each year, and the final maturity amount are completely exempt from tax.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. Can I extend my PPF account after the 15-year maturity?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes, you can extend your PPF account indefinitely in blocks of 5 years each. You must submit Form 15H to your bank or post office within one year of maturity to extend with fresh deposits. Alternatively, you can extend without contributions and continue to earn tax-free compounding interest.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Can I withdraw money or take a loan against my PPF balance?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes. You can apply for a loan from the 3rd to the 6th financial year, capped at 25% of the closing balance of the second preceding financial year. From the 7th financial year onwards, you are eligible for tax-free partial withdrawals once a year, capped based on timeline balance rules.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Share Report dialog Modal (Linked via aria-labelledby to the header id modalTitle) -->
+    <div id="shareModal" class="share-modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+        <div class="share-modal-content">
+            <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
+            <h2 id="modalTitle" class="modal-title font-extrabold">Your PPF Investment Plan</h2>
+            <div id="modalReportContent" class="modal-report-content border-b border-gray-200 pb-2 mb-2">
+                <!-- Dynamic report content injected via Javascript -->
+            </div>
+            <div class="modal-share-section mt-4">
+                <label for="shareUrlInput" class="block text-xxs font-bold text-gray-900 mb-1">Shareable Link</label>
+                <input type="text" id="shareUrlInput" class="share-url-input" readonly>
+                <div class="modal-actions flex justify-end gap-2">
+                    <button id="copyUrlBtn" class="modal-btn px-4 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold shadow transition-all border-none cursor-pointer">Copy Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+    <div id="notification-toast" role="status" aria-live="polite"></div>
+
+    <!-- Global Layout Injectors -->
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
