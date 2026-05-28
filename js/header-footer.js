@@ -4,9 +4,9 @@
  */
 
 // ==========================================
-// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
-// Ye array 100% dynamic hai. Yahan koi bhi naya tool add karein aur wo 
-// App Drawer aur Top Navigation dono jagah automatically render ho jayega!
+// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// This array is 100% dynamic. Add any new tool here, and it will
+// automatically render in both the App Drawer and Top Navigation!
 // ==========================================
 const TOOLBLASTER_APPS = [
     {
@@ -24,7 +24,8 @@ const TOOLBLASTER_APPS = [
         icon: "fa-wallet",
         apps: [
             { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" },
-            { name: "SIP vs FD vs RD", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" }
+            { name: "Compare Investment", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" },
+            { name: "PPF Calculator", url: "/finance/ppf-calculator/", icon: "fa-piggy-bank", classes: "bg-blue-50 border-blue-100 text-blue-600 group-hover:text-blue-600", matchPath: "/ppf-calculator/" }
         ]
     },
     {
@@ -84,7 +85,8 @@ function injectHeader() {
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
-        else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "SIP VS FD VS RD";
+        else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "COMPARE INVESTMENT";
+        else if (currentPath.includes('/finance/ppf-calculator')) centerTitle = "PPF CALCULATOR";
         else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
         else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
         else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
@@ -190,15 +192,16 @@ function injectHeader() {
     });
 
     // CRITICAL BUG FIX (COMPLETELY ACCESSIBILITY AND OVERLAP PROOF):
-    // .hidden par custom CSS !important rule bypass karne ke liye humne generic 'hidden sm:block' aur 'hidden sm:inline' ke bajaye
-    // 'max-sm:hidden sm:block' aur 'max-sm:hidden sm:inline' ka use kiya hai. Isse page-specific overrides fail ho jayengi!
+    // Uses semantic custom queries to prevent third-party visual CSS breaks or component blocks.
     headerContainer.innerHTML = `
         <style>
             @media (max-width: 639px) {
+                .tb-mobile-only { display: block !important; }
                 .tb-desktop-only { display: none !important; }
             }
             @media (min-width: 640px) {
                 .tb-mobile-only { display: none !important; }
+                .tb-desktop-only { display: block !important; }
             }
         </style>
         
@@ -234,7 +237,7 @@ function injectHeader() {
                     ` : ''}
                 </div>
 
-                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG (tb-desktop-only prevents the CSS important lock) -->
+                <!-- Right: Universal App Menu Button with Modern 9-Dot SVG -->
                 <div class="flex items-center gap-3">
                     <button id="global-menu-btn" aria-label="Open App Menu" class="bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-800 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 flex items-center gap-2">
                         <svg class="w-3.5 h-3.5 text-stone-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -463,7 +466,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright (Order 3 on mobile, 1 on desktop) -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
