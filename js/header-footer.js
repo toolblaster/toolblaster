@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
+// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
 // This array is 100% dynamic. Add any new tool here, and it will
 // automatically render in both the App Drawer and Top Navigation!
 // ==========================================
@@ -481,7 +481,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
