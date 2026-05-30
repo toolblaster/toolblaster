@@ -150,17 +150,17 @@ function syncSliderAndInput({ sliderId, inputId, decrementId, incrementId, updat
 // FACTORY PATTERN IMPLEMENTATION - Factory vidhanam amalu
 // ==========================================
 
-// Mobile mariyu Desktop browsers kosam samacharam icon
-// Premium tooltip with explicit higher z-index (z-50) & pointer-events prevention
+// Recreated with premium vector circular SVG to align with PPF style guidelines perfectly
 function createTooltipHtml(text) {
     if (!text) return '';
     return `
-        <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                ${text}
-                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-            </span>
+        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <span class="tooltip-text">${text}</span>
         </span>
     `;
 }
@@ -760,7 +760,7 @@ function initializeCalculator() {
               getElem('estimatedReturnsSIP').textContent = formatCurrency(currentCorpus - investedAmount);
               getElem('totalValueSIP').textContent = formatCurrency(currentCorpus);
 
-              // 1. MF LTCG Tax Estimator (collapsible/toggle check)
+              // 1. MF LTCG Tax Estimator
               let isMFTaxActive = getElem('sipEquityTaxToggle')?.checked;
               let postTaxCorpus = currentCorpus;
               if (isMFTaxActive) {
@@ -777,7 +777,7 @@ function initializeCalculator() {
                   getElem('postTaxSectionSIP').classList.add('hidden');
               }
               
-              // 2. SIP-to-SWP Retirement Pension Bridge (collapsible/toggle check)
+              // 2. SIP-to-SWP Retirement Pension Bridge
               let isBridgeActive = getElem('sipSwpBridgeToggle')?.checked;
               if (isBridgeActive) {
                   const baseCorpus = isMFTaxActive ? postTaxCorpus : currentCorpus;
@@ -1274,7 +1274,6 @@ function initializeCalculator() {
         const link = document.createElement("a");
         link.setAttribute("href", url);
         link.setAttribute("download", `InvestmentPlanner_${currentMode.toUpperCase()}_Breakdown.csv`);
-        link.setAttribute("download", `InvestmentPlanner_${currentMode.toUpperCase()}_Breakdown.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -1467,3 +1466,17 @@ function initializeCalculator() {
         }
     } catch (error) { console.log("Calc Error:", error); }
 }
+
+// Stop tooltip click event from bubbling up to parent label elements (preventing accidental toggle activation)
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.tooltip-icon')) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+}, { capture: true });
+
+document.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.tooltip-icon')) {
+        e.stopPropagation();
+    }
+}, { capture: true, passive: true });
