@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO aur Canonical Metadata (Title < 60 chars, Desc < 160 chars) -->
-    <title>SIP, Lumpsum, FD & RD | Investment Planner India</title>
+    <!-- SEO aur Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>SIP, Lumpsum, FD & RD Calculator | Investment Planner India.</title>
     <meta name="description" content="Calculate SIP, RD, FD, SWP & Goal investments using India's best free Investment Planner. Plan with inflation adjustments and slab-wise tax estimates.">
     <meta name="keywords" content="investment planner, financial calculator, sip calculator, lumpsum calculator, tax calculator, emi calculator, rd calculator, fd calculator, goal planner, personal finance india">
     <link rel="canonical" href="https://toolblaster.com/finance/investment-planner/">
@@ -295,12 +295,12 @@
         .summary-total .summary-label { color: #991b1b; font-size: 0.7rem; } 
         .summary-total .summary-value.total { font-size: 1.1rem; font-weight: 800; }
         .summary-total .summary-value.goal { font-size: 1.25rem; font-weight: 800; color: #065f46; } 
-        
+         
         .summary-extra { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0.5rem; border-top: 1px dashed #d6d3d1; } 
         .summary-extra .summary-label { font-size: 0.7rem; font-weight: 600; color: #44403c; } 
         .summary-extra .summary-value.real { font-size: 0.9rem; font-weight: 700; color: #b45309; } 
         .summary-extra .summary-value.tax { font-size: 0.9rem; font-weight: 700; color: #9a3412; } 
-        
+         
         .preset-btn { transition: all 0.2s; cursor: pointer; }
 
         #growthTableContainer { max-height: 300px; overflow-y: auto; }
@@ -314,6 +314,11 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #fafaf9; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
+
+        /* Custom responsive badge: visible on desktop screens & split-pane previews, hidden on mobile portrait */
+        @media (max-width: 479px) {
+            .custom-desktop-badge { display: none !important; }
+        }
 
         @media print {
             html { font-size: 12px !important; } 
@@ -356,8 +361,8 @@
                 <span class="mx-1.5 text-stone-300">/</span>
                 <span class="text-stone-900 font-bold">Investment Planner</span>
             </div>
-            <!-- Static Badge matching the PPF screenshot badge exactly (Always visible, red high contrast style) -->
-            <div class="flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+            <!-- Static Badge (Visible only on desktop & split previews, hidden on mobile portrait) -->
+            <div class="custom-desktop-badge flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
                 <i class="fa-solid fa-chart-line text-[10px]"></i> WEALTH CREATION
             </div>
         </nav>
@@ -383,7 +388,7 @@
                     </div>
                 </div>
 
-                <!-- Main Columns layout -->
+                <!-- Main Interaction Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                     <div class="space-y-3 print-hide">
                         <!-- Dynamic Section Containers -->
