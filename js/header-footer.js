@@ -1,10 +1,10 @@
 /**
- * Toolblaster Global Components (Header, Footer, Tool Nav, Back to Top)
+ * Toolblaster Shared Design System (Header, Footer, Tool Nav, Back to Top)
  * Premium "Utility Station" styling with Dynamic Title Detection and Global App Menu.
  */
 
 // ==========================================
-// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
 // This array is 100% dynamic. Add any new tool here, and it will
 // automatically render in both the App Drawer and Top Navigation!
 // ==========================================
@@ -100,7 +100,6 @@ function injectHeader() {
     }
 
     // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
-    // CRITICAL FIX: Cleaned-Length Priority Algorithm is applied here to auto-detect and strip duplicate words.
     let descTitle = "";
     if (document.title) {
         const titleParts = document.title.split(/\||-|:/);
@@ -203,6 +202,15 @@ function injectHeader() {
                 .tb-mobile-only { display: none !important; }
                 .tb-desktop-only { display: block !important; }
             }
+            /* PREMIUM VISIBILITY CLIP TRAP: Completely silences the off-screen sidebar from mobile browser canvas */
+            #global-sidebar {
+                visibility: hidden;
+                transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            #global-sidebar.active {
+                visibility: visible;
+                transform: translateX(0) !important;
+            }
         </style>
         
         <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
@@ -226,9 +234,9 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description (Pitched to fix flex-shrink issue) -->
-                <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[60%] sm:max-w-[55%] md:max-w-2xl pointer-events-none">
-                    <span class="flex-shrink-0 font-inter font-extrabold text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase whitespace-nowrap leading-tight">
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description (sm:whitespace-nowrap used to avoid horizontal text overflow on 320px devices) -->
+                <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] xs:max-w-[62%] sm:max-w-[70%] md:max-w-2xl pointer-events-none">
+                    <span class="flex-shrink-0 font-inter font-extrabold text-[10px] xs:text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase sm:whitespace-nowrap leading-tight text-center">
                         ${centerTitle}
                     </span>
                     ${descTitle ? `
@@ -259,7 +267,7 @@ function injectHeader() {
 
         <!-- Global Slide-over App Menu (Grid Drawer Style) -->
         <div id="global-sidebar-overlay" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
-        <div id="global-sidebar" class="fixed inset-y-0 right-0 w-[300px] sm:w-[420px] bg-white z-[200] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl border-l border-stone-200">
+        <div id="global-sidebar" class="fixed inset-y-0 right-0 w-[300px] sm:w-[420px] bg-white z-[200] flex flex-col shadow-2xl border-l border-stone-200 translate-x-full">
             
             <!-- Sidebar Header with Perfectly Centered Home Link -->
             <div class="grid grid-cols-3 items-center px-4 py-3 sm:px-5 sm:py-4 border-b border-stone-100 bg-stone-50/50">
@@ -301,14 +309,14 @@ function injectHeader() {
         const openMenu = () => {
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             overlay.classList.add('opacity-100');
-            sidebar.classList.remove('translate-x-full');
+            sidebar.classList.add('active');
             document.body.style.overflow = 'hidden';
         };
 
         const closeMenu = () => {
             overlay.classList.remove('opacity-100');
             overlay.classList.add('opacity-0', 'pointer-events-none');
-            sidebar.classList.add('translate-x-full');
+            sidebar.classList.remove('active');
             document.body.style.overflow = '';
         };
 
@@ -343,7 +351,7 @@ function injectToolNav() {
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // 1. Auto-Detect Current Active Category (CRITICAL BUG FIX: Slash-insensitive pattern matching)
+    // 1. Auto-Detect Current Active Category
     let activeCategory = null;
     for (const cat of TOOLBLASTER_APPS) {
         for (const tool of cat.apps) {
@@ -371,14 +379,14 @@ function injectToolNav() {
         toolsToShow = activeCategory.apps.slice(0, 7);
         categoryLabel = activeCategory.category;
     } else {
-        // Fallback for homepage or unknown pages: mix of top 7 tools
+        // Fallback for homepage or unknown pages
         toolsToShow = TOOLBLASTER_APPS.flatMap(cat => cat.apps).slice(0, 7);
         categoryLabel = "Top Apps";
     }
 
     let linksHtml = '';
     
-    // 3. Generate HTML for the selected tools (CRITICAL BUG FIX: Slash-insensitive active highlight checks)
+    // 3. Generate HTML for the selected tools
     toolsToShow.forEach(tool => {
         let isActive = false;
         if (tool.matchPath) {
@@ -393,7 +401,6 @@ function injectToolNav() {
         const activeClasses = "text-red-600 font-bold active-tool bg-white shadow-sm ring-1 ring-stone-200/60";
         const inactiveClasses = "font-medium text-stone-600 hover:text-stone-900 hover:bg-stone-200/60";
 
-        // Compact font size (10px) and tighter padding (px-2 py-1)
         linksHtml += `
             <a href="${tool.url}" class="inline-flex items-center justify-center gap-1 text-[10px] transition-all duration-200 px-2 py-1 rounded-md flex-shrink-0 ${isActive ? activeClasses : inactiveClasses}">
                 <i class="fa-solid ${tool.icon} text-[10px]"></i> ${tool.name}
@@ -424,17 +431,26 @@ function injectToolNav() {
 
     setTimeout(() => {
         const activeItem = document.querySelector('#secondary-scroll-nav .active-tool');
-        if (activeItem) {
-            activeItem.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+        const navScrollContainer = document.getElementById('secondary-scroll-nav');
+        
+        // BUG FIX: Removed standard .scrollIntoView() which shifts viewport window on mobiles.
+        if (activeItem && navScrollContainer) {
+            const containerRect = navScrollContainer.getBoundingClientRect();
+            const itemRect = activeItem.getBoundingClientRect();
+            
+            // Determine the precise scroll offset required to center the active tool element inside sub-nav
+            const targetScrollLeft = navScrollContainer.scrollLeft + (itemRect.left - containerRect.left) - (containerRect.width / 2) + (itemRect.width / 2);
+            navScrollContainer.scrollLeft = targetScrollLeft;
         }
 
         const innerNav = document.getElementById('sec-nav-inner');
         if (innerNav) {
             const handleScroll = () => {
                 if (window.scrollY >= 48) {
-                    innerNav.classList.add('fixed', 'top-0', 'left-0');
+                    // Added top-0, left-0, right-0, w-full explicitly to enforce absolute viewport locking
+                    innerNav.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'w-full');
                 } else {
-                    innerNav.classList.remove('fixed', 'top-0', 'left-0');
+                    innerNav.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'w-full');
                 }
             };
             window.addEventListener('scroll', handleScroll, { passive: true });
@@ -460,17 +476,16 @@ function injectFooterAndModals() {
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-200 w-full relative z-50">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
-                <!-- 3-Column Layout: Stacks naturally on mobile, spreads evenly on desktop -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-4 w-full">
                     
-                    <!-- Left Group: Copyright (Order 3 on mobile, 1 on desktop) -->
+                    <!-- Left Group: Copyright -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
-                    <!-- Center Group: Dynamic Social Share (Order 1 on mobile, 2 on desktop) -->
+                    <!-- Center Group: Dynamic Social Share -->
                     <div class="w-full md:w-1/3 flex items-center justify-center gap-3 order-1 md:order-2">
                         <span class="text-[9px] font-black text-stone-500 uppercase tracking-[0.2em]">Share:</span>
                         <div class="flex items-center gap-4">
@@ -478,7 +493,7 @@ function injectFooterAndModals() {
                             <a href="https://api.whatsapp.com/send?text=${shareMsg}${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#25D366] hover:scale-110 transition-all duration-300" aria-label="Share on WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-sm"></i>
                             </a>
-                            <!-- X (Twitter) - Using Inline SVG instead of FontAwesome for robust rendering -->
+                            <!-- X (Twitter) -->
                             <a href="https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareMsg}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
                                 <svg class="w-3.5 h-3.5 fill-current inline-block pb-[1px]" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
@@ -491,7 +506,7 @@ function injectFooterAndModals() {
                         </div>
                     </div>
 
-                    <!-- Right Group: Legal Links (Order 2 on mobile, 3 on desktop) -->
+                    <!-- Right Group: Legal Links -->
                     <nav class="w-full md:w-1/3 flex items-center gap-5 justify-center md:justify-end order-2 md:order-3">
                         <a href="/terms/about.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">About</a>
                         <a href="/terms/privacy.html" class="text-[10px] font-black text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors">Privacy</a>
