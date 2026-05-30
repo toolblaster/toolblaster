@@ -167,8 +167,9 @@ function createTooltipHtml(text) {
 function createSliderGroup(config) {
     let presetsHtml = '';
     if (config.presets) {
+        // Dynamic preset generation to use red high-contrast classes to prevent gray overwrite
         presetsHtml = `<div class="flex flex-wrap gap-1.5 mt-1.5">` + 
-            config.presets.map(p => `<button type="button" class="preset-btn px-2.5 py-0.5 bg-stone-100 text-stone-800 border border-stone-200/60 rounded text-[10px] font-bold hover:bg-stone-200/50" data-target="${config.id}Input" data-val="${p.val}" title="Quickly add ₹${p.label} to your investment amount">+ ₹${p.label}</button>`).join('') + 
+            config.presets.map(p => `<button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="${config.id}Input" data-val="${p.val}" title="Quickly add ₹${p.label} to your investment amount">+ ₹${p.label}</button>`).join('') + 
             `</div>`;
     }
 
@@ -189,7 +190,8 @@ function createSliderGroup(config) {
     }
 
     let tooltipHtml = config.infoTitle ? createTooltipHtml(config.infoTitle) : '';
-    let labelHtml = `<label for="${config.id}Input" class="block text-xs font-bold flex items-center ${toggleHtml ? '' : 'mb-1'}" id="${config.id}Label">
+    // Converted to text-xxs class to strictly follow 11.52px sizing criteria
+    let labelHtml = `<label for="${config.id}Input" class="block text-xxs font-bold flex items-center ${toggleHtml ? '' : 'mb-1'}" id="${config.id}Label">
         <span id="${config.id}LabelText">${config.label}</span> ${tooltipHtml}
     </label>`;
     let headerHtml = toggleHtml ? `<div class="flex justify-between items-center mb-1">${labelHtml}${toggleHtml}</div>` : labelHtml;
@@ -215,8 +217,8 @@ function createSelectGroup(config) {
     const optionsHtml = config.options.map(opt => `<option value="${opt.value}" ${opt.selected ? 'selected' : ''}>${opt.label}</option>`).join('');
     return `
         <div>
-            <label for="${config.id}" class="block text-xs font-bold mb-1">${config.label}</label>
-            <select id="${config.id}" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
+            <label for="${config.id}" class="block text-xxs font-bold mb-1">${config.label}</label>
+            <select id="${config.id}" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xxs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
                 ${optionsHtml}
             </select>
         </div>
@@ -227,7 +229,7 @@ function createToggleSection(config) {
     return `
         <div class="pt-1">
             <label class="flex items-center justify-between cursor-pointer" for="${config.id}">
-                <span class="text-xs font-bold flex items-center">
+                <span class="text-xxs font-bold flex items-center">
                     ${config.label} ${config.infoTitle ? createTooltipHtml(config.infoTitle) : ''}
                 </span>
                 <div class="relative inline-flex items-center">
@@ -246,7 +248,7 @@ function createTaxRegimeMarkup(prefix) {
     return `
         <div class="space-y-3 border-t border-stone-200/50 pt-2">
             <div class="flex items-center justify-between pb-1">
-                <span class="text-[11px] font-bold">Tax Regime Slabs</span>
+                <span class="text-xxs font-bold text-stone-600">Tax Regime Slabs</span>
                 <div class="inline-flex bg-stone-200 p-0.5 rounded-lg text-[10px] font-bold text-stone-900">
                     <button type="button" id="${prefix}TaxRegimeNew" class="px-2 py-0.5 rounded bg-white text-stone-900 shadow-sm focus:outline-none" aria-label="Select New Income Tax Regime">New Regime</button>
                     <button type="button" id="${prefix}TaxRegimeOld" class="px-2 py-0.5 rounded text-stone-600 hover:text-stone-900 focus:outline-none" aria-label="Select Old Income Tax Regime">Old Regime</button>
@@ -299,7 +301,7 @@ function createSummaryCard(config) {
     return `
         <div id="${config.id}" class="summary-card ${config.cardClass} ${config.hidden ? 'hidden' : ''}" aria-live="polite">
             <div class="summary-header">
-                <h2>${config.title}</h2>
+                <h2 class="text-xs font-extrabold">${config.title}</h2>
                 <button class="share-btn rounded-full p-1 bg-white/40 hover:bg-white/70 transition-colors" aria-label="Share ${config.title} results" title="Share calculation details with friends">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
                 </button>
