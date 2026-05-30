@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth h-full">
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,7 +89,8 @@
         
         .input-error-message { color: #dc2626; font-size: 0.65rem; margin-top: 0.15rem; font-weight: 600; }
 
-        .financial-calculator-wrapper { box-sizing: border-box; width: 100%; max-width: 1000px; margin: 0.5rem auto 1rem; }
+        /* Match PPF Calculator's layout standard width bounds */
+        .financial-calculator-wrapper { box-sizing: border-box; width: 100%; margin: 0.5rem auto 1rem; }
         .calculator-container { width: 100%; background-color: #ffffff; }
 
         /* Premium range slider style - Pure Red Theme */
@@ -186,13 +187,53 @@
             outline: none !important;
         }
 
-        .custom-tooltip-group {
+        /* --- Unified Premium Tooltips to match PPF Calculator styles and eliminate layout shifts --- */
+        .tooltip-icon {
             position: relative;
+            display: inline-block;
+            cursor: help;
         }
-        .custom-tooltip-group:hover .custom-tooltip-content {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827;
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            display: none; /* Layout-safe initialization */
+            width: 185px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 100;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -92px; /* Center-aligning */
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-transform: none;
+            white-space: normal;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            display: block;
+            opacity: 1;
         }
 
         .goal-templates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
@@ -276,7 +317,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
 
     <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
@@ -290,8 +331,8 @@
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-6 md:pb-8 max-w-7xl relative z-10">
+    <!-- Main Workspace (Enforced exact class alignment to preserve uniform maximum width layout) -->
+    <main class="container flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-16">
         
         <!-- Breadcrumb Navigation (Safely hidden in print view via print-hide) -->
         <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
@@ -310,9 +351,10 @@
             </div>
         </nav>
 
-        <!-- Dynamic Calculator Main Card -->
-        <div id="calculator" class="financial-calculator-wrapper mt-1">
-            <div class="bg-white/90 backdrop-blur-xl shadow-md shadow-stone-200 rounded-3xl p-3 sm:p-5 w-full border-2 border-stone-200 mx-auto my-0 calculator-container relative">
+        <!-- Dynamic Calculator Main Card (Alighted wrapper width safely to scale dynamically with parent bounds) -->
+        <div id="calculator" class="w-full text-left mt-1">
+            <!-- Upgraded strictly to align with standard high-end container design parameters and rings of PPF tool -->
+            <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
 
                 <!-- Standout Header H1 -->
                 <h1 id="calculatorTitle" class="text-[20px] sm:text-[22px] font-extrabold text-stone-900 text-center mb-1">SIP Calculator with Inflation</h1>
@@ -333,7 +375,7 @@
                 <!-- Main Columns layout -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                     <div class="space-y-3 print-hide">
-                        <!-- Dynamic Section Containers - Pre-populated with Static matching default layouts to prevent CLS layout shift -->
+                        <!-- Dynamic Section Containers -->
                         <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl">
                             <!-- Monthly SIP Amount Slider -->
                             <div>
@@ -371,12 +413,14 @@
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipInitialLumpsumToggle">
                                     <span class="text-xs font-bold text-stone-700 flex items-center">
-                                        Add Initial Lumpsum <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                Add a one-time initial amount
-                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                            </span>
+                                        Add Initial Lumpsum 
+                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Add a one-time initial amount</span>
                                         </span>
                                     </span>
                                     <div class="relative inline-flex items-center">
@@ -406,12 +450,14 @@
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipStepUpToggle">
                                     <span class="text-xs font-bold text-stone-700 flex items-center">
-                                        Enable Annual Step-up <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                Automatically increase SIP amount
-                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                            </span>
+                                        Enable Annual Step-up 
+                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Automatically increase SIP amount</span>
                                         </span>
                                     </span>
                                     <div class="relative inline-flex items-center">
@@ -423,12 +469,14 @@
                                     <div>
                                         <div class="flex justify-between items-center mb-1">
                                             <label for="sipIncreaseRateInput" class="block text-xs font-bold text-stone-700 flex items-center" id="sipIncreaseRateLabel">
-                                                <span id="sipIncreaseRateLabelText">Annual Increase (%)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                        The percentage rate at which you plan to scale up your monthly SIP amount every year.
-                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                                    </span>
+                                                <span id="sipIncreaseRateLabelText">Annual Increase (%)</span> 
+                                                <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <line x1="12" y1="16" x2="12" y2="12"/>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                                    </svg>
+                                                    <span class="tooltip-text">The percentage rate at which you plan to scale up your monthly SIP amount every year.</span>
                                                 </span>
                                             </label>
                                             <div class="step-up-toggle-container">
@@ -478,12 +526,14 @@
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipSwpBridgeToggle">
                                     <span class="text-xs font-bold text-stone-700 flex items-center">
-                                        Plan Retirement (SIP to SWP Pension Bridge) <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                            <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                            <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                Transition your accumulated SIP wealth smoothly into a monthly pension (SWP) to fund your retirement years securely.
-                                                <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                            </span>
+                                        Plan Retirement (SIP to SWP Pension Bridge) 
+                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Transition your accumulated SIP wealth smoothly into a monthly pension (SWP) to fund your retirement years securely.</span>
                                         </span>
                                     </span>
                                     <div class="relative inline-flex items-center">
@@ -493,46 +543,7 @@
                                 </label>
                                 <div id="sipSwpBridgeGroup" class="hidden mt-2 space-y-3">
                                     <div class="space-y-3 border-t border-stone-200/50 pt-2">
-                                        <div>
-                                            <label for="bridgePeriodInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="bridgePeriodLabel">
-                                                <span id="bridgePeriodLabelText">Pension Duration (Years)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                        The number of years you plan to withdraw your monthly pension after retirement.
-                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                                    </span>
-                                                </span>
-                                            </label>
-                                            <div class="input-group flex items-center space-x-2">
-                                                <input type="range" id="bridgePeriodSlider" min="5" max="40" value="20" step="1" class="w-full range-slider flex-grow" aria-label="Pension Duration" style="--fill-percentage: 42.8571%;">
-                                                <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                                    <button type="button" id="bridgePeriodDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
-                                                    <input type="number" id="bridgePeriodInput" class="manual-input" value="20" min="5" max="40" step="1" aria-label="Enter Pension Duration">
-                                                    <button type="button" id="bridgePeriodIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
-                                                </div>
-                                            </div>
-                                            <p id="bridgePeriodError" class="input-error-message hidden" role="alert">Pension duration must be between 5 - 40 years.</p>
-                                        </div>
-                                        <div>
-                                            <label for="bridgeRateInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="bridgeRateLabel">
-                                                <span id="bridgeRateLabelText">Conservative Pension Yield (% p.a.)</span> <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                                    <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                                    <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                                        The expected annual return rate on your accumulated wealth during the pension/withdrawal phase (typically conservative, e.g., 6% to 8% in debt/arbitrage funds).
-                                                        <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                                    </span>
-                                                </span>
-                                            </label>
-                                            <div class="input-group flex items-center space-x-2">
-                                                <input type="range" id="bridgeRateSlider" min="4" max="12" value="8" step="0.5" class="w-full range-slider flex-grow" aria-label="Conservative Pension Yield" style="--fill-percentage: 50%;">
-                                                <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                                    <button type="button" id="bridgeRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
-                                                    <input type="number" id="bridgeRateInput" class="manual-input" value="8" min="4" max="12" step="0.5" aria-label="Enter Conservative Pension Yield">
-                                                    <button type="button" id="bridgeRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
-                                                </div>
-                                            </div>
-                                            <p id="bridgeRateError" class="input-error-message hidden" role="alert">Expected yield must be between 4% - 12%.</p>
-                                        </div>
+                                        <!-- Will be injected by app.js -->
                                     </div>
                                 </div>
                             </div>
@@ -559,7 +570,7 @@
                              <div id="goalDynamicInputs" class="space-y-3 mt-2"></div>
                         </div>
 
-                        <!-- GENERAL INPUTS CONTAINER - Pre-populated with Static matching default layouts to prevent CLS layout shift -->
+                        <!-- GENERAL INPUTS CONTAINER -->
                         <div id="generalInputsSection" class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
                             <!-- Expected Return Rate (p.a. %) Slider -->
                             <div>
@@ -599,12 +610,13 @@
                             <label class="flex items-center justify-between cursor-pointer" for="inflationToggle">
                                 <span class="text-xs font-bold text-stone-700 flex items-center">
                                     Adjust for Inflation 
-                                    <span class="relative inline-block custom-tooltip-group cursor-pointer ml-1 select-none">
-                                        <span class="inline-flex items-center justify-center w-3.5 h-3.5 text-[9px] font-bold rounded-full bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors" style="font-family: monospace; transform: translateY(-0.5px);">i</span>
-                                        <span class="custom-tooltip-content pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 hidden group-hover:block bg-stone-900 text-white text-[10px] font-semibold rounded py-1 px-2 w-44 text-center leading-normal z-[100] shadow-lg normal-case tracking-normal">
-                                            Adjust the final value based on expected average inflation to see true purchasing power.
-                                            <span class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900"></span>
-                                        </span>
+                                    <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <line x1="12" y1="16" x2="12" y2="12"/>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Adjust the final value based on expected average inflation to see true purchasing power.</span>
                                     </span>
                                 </span>
                                 <div class="relative inline-flex items-center">
@@ -647,49 +659,7 @@
 
                         <!-- DYNAMIC SUMMARY CONTAINERS INJECTED HERE -->
                         <div id="dynamicSummariesContainer" class="space-y-3">
-                            <div id="sipSummary" class="summary-card rounded-2xl" aria-live="polite">
-                                <div class="summary-header">
-                                    <h2>SIP Summary</h2>
-                                    <button class="share-btn rounded-full p-1 bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Share SIP Summary results" title="Share calculation details with friends">
-                                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="summary-grid">
-                                    <div class="summary-item rounded-xl">
-                                        <span class="summary-label">Invested</span>
-                                        <span id="investedAmountSIP" class="summary-value invested">₹12,00,000</span>
-                                    </div>
-                                    <div class="summary-item rounded-xl">
-                                        <span class="summary-label">Returns</span>
-                                        <span id="estimatedReturnsSIP" class="summary-value returns">₹11,23,391</span>
-                                    </div>
-                                </div>
-                                <div class="summary-total rounded-xl">
-                                    <span class="summary-label">Total Value</span>
-                                    <span id="totalValueSIP" class="summary-value total">₹23,23,391</span>
-                                </div>
-                                
-                                <div id="realValueSectionSIP" class="summary-extra hidden">
-                                    <span class="summary-label" title="Value after adjusting expected inflation">Real Value (Today's Worth) ℹ</span>
-                                    <span id="realTotalValueSIP" class="summary-value real">₹0</span>
-                                </div>
-                                <div id="ltcgTaxSectionSIP" class="summary-extra hidden">
-                                    <span class="summary-label" title="Equity LTCG tax estimation at 12.5% on returns above ₹1.25 Lakh exemption threshold">Estimated LTCG Tax (12.5%) ⚖</span>
-                                    <span id="ltcgTaxSIP" class="summary-value tax">₹0</span>
-                                </div>
-                                <div id="postTaxSectionSIP" class="summary-extra hidden">
-                                    <span class="summary-label">Post-Tax Accumulated Corpus 💰</span>
-                                    <span id="postTaxCorpusSIP" class="summary-value returns font-bold text-emerald-800">₹0</span>
-                                </div>
-                                <div id="bridgeSectionSIP" class="summary-extra hidden">
-                                    <span class="summary-label" title="Monthly pension yielded by transitioning accumulated SIP corpus directly into a conservative SWP scheme">Est. Monthly Retirement Pension 🚀</span>
-                                    <span id="monthlyPensionSIP" class="summary-value withdrawn font-bold text-red-600">₹0</span>
-                                </div>
-                                <div id="realBridgeSectionSIP" class="summary-extra hidden">
-                                    <span class="summary-label" title="Monthly retirement SWP pension adjusted for historical inflation">Real Pension (Today's Worth) ℹ</span>
-                                    <span id="realMonthlyPensionSIP" class="summary-value real">₹0</span>
-                                </div>
-                            </div>
+                            <!-- Will be injected via app.js -->
                         </div>
 
                         <!-- Real-Time Smart Insight Banner -->
@@ -771,27 +741,47 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- Naya internal link box, visually premium, high-contrast aur print-hide support ke sath -->
-        <!-- TWEAK: Set max-width of this container strictly to 950px as per request -->
-        <div class="max-w-[950px] mx-auto mb-6 print-hide">
-            <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-                        <!-- Custom SVG graph comparison icon for high quality rendering -->
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+        <!-- Visually Premium, Double-Card Responsive Grid exactly matching the design token properties of PPF calculator -->
+        <div class="max-w-[950px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+                <!-- Card 1: SIP vs FD vs RD -->
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Compare Yields</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, FD, and RD side-by-side.</p>
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Compare Yields</span>
-                        <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
-                        <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Ek hi screen par compare karein mutual funds, bank fixed deposits aur recurring deposits ka compound growth!</p>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                        Compare Now <span class="text-sm">&rarr;</span>
                     </div>
-                </div>
-                <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                    Check Now <span class="text-sm">&rarr;</span>
-                </div>
-            </a>
+                </a>
+
+                <!-- Card 2: PPF Calculator (New Dynamic interlink integration) -->
+                <a href="https://toolblaster.com/finance/ppf-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest block">Sovereign Savings</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">PPF Calculator</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Calculate PPF maturity, interest compounding, loan details, and extension blocks.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                        Plan Now <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <!-- SEO Article (Safely hidden in print view via print-hide) -->
@@ -800,13 +790,13 @@
                 
                 <!-- Section 1: Introduction -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-chart-line"></i></span> Ultimate Investment Planner India
                     </h2>
-                    <p class="leading-relaxed mb-3 text-stone-800 text-sm font-medium">
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
                         Financial independence begins with a clear roadmap. Whether you are planning for early retirement, your child's higher education, purchasing your dream home, or generating stable monthly cash flows, our comprehensive <strong>Investment Planner</strong> empowers you with advanced, SEBI-aligned forecasting models.
                     </p>
-                    <p class="leading-relaxed mb-0 text-stone-800 text-sm font-medium">
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
                         This free interactive tool combines five distinct financial calculators—Systematic Investment Plan (SIP), Lumpsum compounding, Recurring Deposit (RD), Fixed Deposit (FD), and Systematic Withdrawal Plan (SWP)—along with an integrated <strong>Goal Planner</strong>. Track your real-world progress with real-time inflation adjustments, slab-wise tax liabilities, and live SEBI compliance parameters.
                     </p>
                 </section>
@@ -884,7 +874,7 @@
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">Lumpsum (Compound Interest) Formula</h3>
                             <p class="mb-2">For a one-time capital investment compounding annually:</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$A = P \times (1 + r)^t$$
+                                $A = P \times (1 + r)^t$
                             </div>
                             <p class="mt-2 text-[11px] text-stone-600">
                                 Where $A$ is the final maturity value, $P$ is the principal invested, $r$ is the annual rate of interest, and $t$ is the holding period in years.
@@ -896,7 +886,7 @@
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">SIP (Future Value of Annuity) Formula</h3>
                             <p class="mb-2">When investments are made regularly at periodic intervals (e.g., monthly):</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$M = P \times \frac{(1 + i)^n - 1}{i} \times (1 + i)$$
+                                $M = P \times \frac{(1 + i)^n - 1}{i} \times (1 + i)$
                             </div>
                             <p class="mt-2 text-[11px] text-stone-600">
                                 Where $M$ is the cumulative maturity amount, $P$ is the monthly contribution, $i$ is the periodic rate of return ($i = r / 12$), and $n$ is the total number of monthly payments ($n = t \times 12$).
@@ -908,7 +898,7 @@
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">Fixed Deposit (FD) Quarterly Compounding Formula</h3>
                             <p class="mb-2">Indian banking fixed deposits typically compound interest on a quarterly basis:</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$M = P \times \left(1 + \frac{r}{4}\right)^{4 \times t}$$
+                                $M = P \times \left(1 + \frac{r}{4}\right)^{4 \times t}$
                             </div>
                             <p class="mt-2 text-[11px] text-stone-600">
                                 Where compounding frequency is locked to $4$ times a year. For Recurring Deposits (RD), the compounding is also executed quarterly using the composite recurring annuity method.
@@ -920,7 +910,7 @@
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">Inflation Adjustment (Real Purchasing Power) Formula</h3>
                             <p class="mb-2">To measure the true future value of your money against cost inflation index (CII) erosion:</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$$
+                                $\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$
                             </div>
                             <p class="mt-2 text-[11px] text-stone-600">
                                 Where $\text{inf}$ is the expected average annual rate of inflation (historically 5% to 6% in India) and $t$ is the holding period in years.
@@ -997,7 +987,7 @@
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. How is Mutual Fund LTCG tax calculated in the planner?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Under Section 112A capital gains tax rules in India, long-term capital gains (LTCG) on equity-oriented mutual funds held for over 12 months are exempt up to ₹1.25 Lakh per financial year. Any returns exceeding this threshold are taxed at a flat rate of 12.5% (updated for FY 2024-25/2025-26 budget guidelines).</p>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Under Section 112A capital gains tax rules in India, long-term capital gains (LTCG) on equity-oriented mutual funds held for over 12 months are exempt up to ₹1.25 Lakh per financial year. Any returns exceeding this threshold are taxed at a flat rate of 12.5% (updated for FY 2024-25/25-26 budget guidelines).</p>
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. What is the SEBI compliance advisory for return assumptions?</h3>
