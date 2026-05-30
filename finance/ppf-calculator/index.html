@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth h-full">
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
     <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
-    <link class="manifest" href="../../js/favicon/site.webmanifest">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
 
     <!-- Application Brand Metadata for Header Title -->
     <meta name="application-name" content="PPF Calculator">
@@ -269,7 +269,10 @@
         .ledger-scroll-container {
             max-height: 350px;
             overflow-y: auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             position: relative;
+            width: 100%;
         }
         .ledger-table thead th {
             position: sticky;
@@ -294,7 +297,7 @@
             background: #94a3b8;
         }
 
-        /* --- Tooltip Helpers --- */
+        /* --- Tooltip Helpers (display: none prevents off-screen layout overflow inside Safari rendering pipelines) --- */
         .tooltip-icon {
             cursor: help;
             position: relative;
@@ -307,7 +310,7 @@
             vertical-align: middle;
         }
         .tooltip-text {
-            visibility: hidden;
+            display: none; /* Changed from visibility:hidden to display:none */
             width: 185px;
             background-color: #111827;
             color: #ffffff;
@@ -337,6 +340,7 @@
             border-color: #111827 transparent transparent transparent;
         }
         .tooltip-icon:hover .tooltip-text {
+            display: block; /* Force layout activation on hover */
             visibility: visible;
             opacity: 1;
         }
@@ -584,7 +588,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
 
     <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
@@ -625,8 +629,9 @@
         </div>
 
         <!-- CALCULATOR SECTION -->
-        <div id="ppf-calculator" class="w-full">
-             <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
+        <div id="ppf-calculator" class="w-full text-left">
+             <!-- BUG FIX: Changed ring-8 to ring-4 sm:ring-8 to prevent the outline ring from overlapping on tight mobile viewports -->
+             <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
 
                 <!-- Header Block -->
                 <div class="text-center mb-1">
@@ -635,9 +640,9 @@
                 <p class="text-center text-gray-600 mb-2.5 text-xxs font-medium">Calculate Public Provident Fund maturity with extension planning, partial withdrawals, and loan values.</p>
 
                 <!-- Interest Rates Outlook Presets -->
-                <div id="presets-container" class="flex items-center justify-between flex-wrap gap-2 pb-2.5 mb-1.5 border-b border-gray-200">
+                <div id="presets-container" class="flex items-center justify-between flex-wrap gap-2 pb-2.5 mb-1.5 border-b border-gray-200 text-left">
                     <span class="text-xxs font-extrabold text-gray-700">PPF Interest Rate Presets:</span>
-                    <div class="flex gap-1.5">
+                    <div class="flex flex-wrap gap-1.5 justify-start sm:justify-end">
                         <button type="button" id="presetCurrent" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all active">Current FY Rate (7.1%)</button>
                         <button type="button" id="presetHistHigh" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all">Hist. Peak (8.0%)</button>
                         <button type="button" id="presetHistLow" class="preset-btn px-2.5 py-0.5 text-xxs font-extrabold rounded-lg transition-all">Hist. Base (6.5%)</button>
@@ -700,7 +705,7 @@
                                         <button type="button" id="annualInvestmentIncrement" class="stepper-button increment" aria-label="Increase Yearly Investment">+</button>
                                     </div>
                                 </div>
-                                <p id="annualInvestmentError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-700 invisible">Amount must be between ₹500 - ₹1,50,000.</p>
+                                <p id="annualInvestmentError" class="input-error-message absolute bottom-0 left-0 right-0 text-[10px] leading-none text-red-700 invisible">Amount must be between ₹500 - ₹1,50,000.</p>
                             </div>
 
                             <div class="relative pb-1.5">
@@ -725,7 +730,7 @@
                                         <button type="button" id="interestRateIncrement" class="stepper-button increment" aria-label="Increase Interest Rate">+</button>
                                     </div>
                                 </div>
-                                <p id="interestRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-700 invisible">Rate must be between 5.0% - 10.0%.</p>
+                                <p id="interestRateError" class="input-error-message absolute bottom-0 left-0 right-0 text-[10px] leading-none text-red-700 invisible">Rate must be between 5.0% - 10.0%.</p>
                             </div>
                         </div>
 
@@ -763,9 +768,8 @@
                                 </div>
                             </div>
 
-                            <!-- Single wrapping label compliant structure (Replaced sibling wrapper elements to resolve WCAG failures) -->
                             <label id="extensionContributionDiv" for="contributionToggle" class="pt-2.5 mt-3 border-t border-blue-200 flex items-center justify-between opacity-70 pointer-events-none transition-opacity duration-200 cursor-pointer" aria-disabled="true">
-                                <span class="flex items-center gap-1.5 text-xxs font-bold text-gray-900">
+                                <span class="flex-shrink min-w-0 flex items-center gap-1.5 text-xxs font-bold text-gray-900">
                                     Continue contributions during extension?
                                     <span class="tooltip-icon" onclick="event.stopPropagation();">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -812,7 +816,7 @@
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 1</span>
-                                    <input type="range" id="lwYearSlider" min="1" max="15" value="7" step="1" class="w-full range-slider flex-grow accent-green-800" aria-label="Check loan eligibility year slider" aria-labelledby="lwYearLabel">
+                                    <input type="range" id="lwYearSlider" min="1" max="15" value="7" step="1" class="w-full range-slider flex-grow " aria-label="Check loan eligibility year slider" aria-labelledby="lwYearLabel">
                                     <span id="lwYearMaxLabel" class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 15</span>
                                 </div>
                                 <p class="text-center font-bold text-green-950 text-xs mt-1.5">Checking Limits for: Year <span id="lwYearDisplay">7</span></p>
@@ -931,7 +935,7 @@
                             </div>
                             
                             <!-- Section 80C Tax Saved calculation panel -->
-                            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex justify-between items-center px-4">
+                            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-wrap justify-between items-center px-3 py-2 gap-2">
                                 <div class="text-left">
                                     <span class="flex items-center gap-1">
                                         <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">Yearly Tax Saved (Sec 80C)</p>
@@ -959,7 +963,7 @@
                                 <p id="taxSavedDisplay" class="text-xs sm:text-sm font-extrabold text-emerald-950">₹30,000</p>
                             </div>
 
-                            <!-- Projected Tax-Free Maturity Value panel with maximized contrast color (purple-950) -->
+                            <!-- Projected Tax-Free Maturity Value panel -->
                             <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
                                  <span class="flex items-center justify-center gap-1">
                                      <p class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Projected Tax-Free Maturity Value</p>
@@ -984,7 +988,7 @@
                 </div>
 
                 <!-- Accordion Ledger Tab -->
-                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm text-left">
                     <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px] print-hide">
                         <span class="flex items-center gap-1.5">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -998,7 +1002,7 @@
                         <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-500">▼</span>
                     </button>
                     
-                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200 max-w-full overflow-hidden">
                         <p class="text-[11px] text-blue-950 mb-3 bg-blue-100 p-2.5 rounded-lg border border-blue-200 leading-relaxed font-semibold print-hide">
                             💡 <strong>Flexible Planning:</strong> Click on any year's <strong>"Invested Capital"</strong> input to change its specific amount. The calculator will instantly re-compounding everything dynamically! PPF Rules validate inputs to be either ₹0 or between ₹500 and ₹1,50,000.
                         </p>
@@ -1053,19 +1057,19 @@
                     </div>
                 </div>
 
-                <!-- Broker/Platform Sponsorship Banner (Upstox link removed) -->
+                <!-- Broker/Platform Sponsorship Banner -->
                 <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700 print-hide">
                     <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
                         Start investing with 5paisa
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
 
                 <!-- Indian Regulatory Compliance AMFI & SEBI Disclaimer Card -->
-                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-left text-gray-900 text-[10px] leading-relaxed print-hide">
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-center text-gray-900 text-[10px] leading-relaxed print-hide">
                     <p class="font-bold text-gray-950 mb-0.5">AMFI & SEBI Regulatory Cautionary Statement:</p>
                     <p class="mb-1.5">Public Provident Fund (PPF) is a statutory sovereign tax-saving instrument framed under the Government of India PPF Scheme, 2019. It offers capital protection and fixed interest income quarterly announced by the Ministry of Finance. PPF is not a market-linked mutual fund scheme and does not carry market volatility risks.</p>
-                    <p>Calculations displayed on this platform are for educational projection purposes only and do not constitute direct AMFI/SEBI financial advise or portfolio solicitation. Investors are advised to align investments with individual risk horizons under Section 80C.</p>
+                    <p class="m-0">Calculations displayed on this platform are for educational projection purposes only and do not constitute direct AMFI/SEBI financial advise or portfolio solicitation. Investors are advised to align investments with individual risk horizons under Section 80C.</p>
                 </div>
 
                 <!-- Disclaimer -->
@@ -1076,25 +1080,46 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- Locked strictly to 950px max-width to align perfectly with the calculator container above -->
-        <div class="max-w-[950px] mx-auto mb-6 print-hide px-1 mt-6">
-            <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+        <div class="max-w-[950px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+                <!-- Card 1: SIP vs FD vs RD -->
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Yield Comparison</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, Recurring Deposits, and Fixed Deposits side-by-side.</p>
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Yield Comparison</span>
-                        <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
-                        <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, Recurring Deposits, and Fixed Deposits under custom tax slabs.</p>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                        Compare Now <span class="text-sm">&rarr;</span>
                     </div>
-                </div>
-                <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                    Check Now <span class="text-sm">&rarr;</span>
-                </div>
-            </a>
+                </a>
+
+                <!-- Card 2: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-emerald-600 uppercase tracking-widest block">Comprehensive Planner</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Investment Planner & Goal Tracker</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Plan custom SIP goals, calculate long-term retirement pension, and SWP plans.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
+                        Plan Now <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <!-- SEO Article (Safely hidden in print view via print-hide) -->
@@ -1190,7 +1215,7 @@
                     </div>
                 </section>
 
-                <!-- Section 4: Side-by-Side Comparison Table (Evergreen Feature) -->
+                <!-- Section 4: Side-by-Side Comparison Table -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Side-by-Side Comparison: PPF vs ELSS vs NPS
@@ -1235,7 +1260,7 @@
                     </div>
                 </section>
 
-                <!-- Section 5: FAQs Section (TWEAK: h2 updated to text-base i.e. 16px) -->
+                <!-- Section 5: FAQs Section -->
                 <section id="faqs" class="bg-transparent">
                     <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
@@ -1259,7 +1284,7 @@
         </article>
     </main>
 
-    <!-- Share Report dialog Modal (Linked via aria-labelledby to the header id modalTitle) -->
+    <!-- Share Report dialog Modal -->
     <div id="shareModal" class="share-modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle">
         <div class="share-modal-content">
             <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
