@@ -150,7 +150,6 @@ function syncSliderAndInput({ sliderId, inputId, decrementId, incrementId, updat
 // FACTORY PATTERN IMPLEMENTATION - Factory vidhanam amalu
 // ==========================================
 
-// Recreated with premium vector circular SVG to align with PPF style guidelines perfectly
 function createTooltipHtml(text) {
     if (!text) return '';
     return `
@@ -169,7 +168,7 @@ function createSliderGroup(config) {
     let presetsHtml = '';
     if (config.presets) {
         presetsHtml = `<div class="flex flex-wrap gap-1.5 mt-1.5">` + 
-            config.presets.map(p => `<button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="${config.id}Input" data-val="${p.val}" title="Quickly add ₹${p.label} to your investment amount">+ ₹${p.label}</button>`).join('') + 
+            config.presets.map(p => `<button type="button" class="preset-btn px-2.5 py-0.5 bg-stone-100 text-stone-800 border border-stone-200/60 rounded text-[10px] font-bold hover:bg-stone-200/50" data-target="${config.id}Input" data-val="${p.val}" title="Quickly add ₹${p.label} to your investment amount">+ ₹${p.label}</button>`).join('') + 
             `</div>`;
     }
 
@@ -190,7 +189,7 @@ function createSliderGroup(config) {
     }
 
     let tooltipHtml = config.infoTitle ? createTooltipHtml(config.infoTitle) : '';
-    let labelHtml = `<label for="${config.id}Input" class="block text-xs font-bold text-stone-700 flex items-center ${toggleHtml ? '' : 'mb-1'}" id="${config.id}Label">
+    let labelHtml = `<label for="${config.id}Input" class="block text-xs font-bold flex items-center ${toggleHtml ? '' : 'mb-1'}" id="${config.id}Label">
         <span id="${config.id}LabelText">${config.label}</span> ${tooltipHtml}
     </label>`;
     let headerHtml = toggleHtml ? `<div class="flex justify-between items-center mb-1">${labelHtml}${toggleHtml}</div>` : labelHtml;
@@ -216,7 +215,7 @@ function createSelectGroup(config) {
     const optionsHtml = config.options.map(opt => `<option value="${opt.value}" ${opt.selected ? 'selected' : ''}>${opt.label}</option>`).join('');
     return `
         <div>
-            <label for="${config.id}" class="block text-xs font-bold text-stone-700 mb-1">${config.label}</label>
+            <label for="${config.id}" class="block text-xs font-bold mb-1">${config.label}</label>
             <select id="${config.id}" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
                 ${optionsHtml}
             </select>
@@ -228,7 +227,7 @@ function createToggleSection(config) {
     return `
         <div class="pt-1">
             <label class="flex items-center justify-between cursor-pointer" for="${config.id}">
-                <span class="text-xs font-bold text-stone-700 flex items-center">
+                <span class="text-xs font-bold flex items-center">
                     ${config.label} ${config.infoTitle ? createTooltipHtml(config.infoTitle) : ''}
                 </span>
                 <div class="relative inline-flex items-center">
@@ -247,8 +246,8 @@ function createTaxRegimeMarkup(prefix) {
     return `
         <div class="space-y-3 border-t border-stone-200/50 pt-2">
             <div class="flex items-center justify-between pb-1">
-                <span class="text-[11px] font-bold text-stone-600">Tax Regime Slabs</span>
-                <div class="inline-flex bg-stone-200 p-0.5 rounded-lg text-[10px] font-bold">
+                <span class="text-[11px] font-bold">Tax Regime Slabs</span>
+                <div class="inline-flex bg-stone-200 p-0.5 rounded-lg text-[10px] font-bold text-stone-900">
                     <button type="button" id="${prefix}TaxRegimeNew" class="px-2 py-0.5 rounded bg-white text-stone-900 shadow-sm focus:outline-none" aria-label="Select New Income Tax Regime">New Regime</button>
                     <button type="button" id="${prefix}TaxRegimeOld" class="px-2 py-0.5 rounded text-stone-600 hover:text-stone-900 focus:outline-none" aria-label="Select Old Income Tax Regime">Old Regime</button>
                 </div>
@@ -298,10 +297,10 @@ function createSummaryCard(config) {
     ` : '';
 
     return `
-        <div id="${config.id}" class="summary-card rounded-2xl ${config.hidden ? 'hidden' : ''}" aria-live="polite">
+        <div id="${config.id}" class="summary-card ${config.cardClass} ${config.hidden ? 'hidden' : ''}" aria-live="polite">
             <div class="summary-header">
                 <h2>${config.title}</h2>
-                <button class="share-btn rounded-full p-1 bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Share ${config.title} results" title="Share calculation details with friends">
+                <button class="share-btn rounded-full p-1 bg-white/40 hover:bg-white/70 transition-colors" aria-label="Share ${config.title} results" title="Share calculation details with friends">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path></svg>
                 </button>
             </div>
@@ -360,7 +359,7 @@ document.getElementById('sipSection').innerHTML =
         label: 'Plan Retirement (SIP to SWP Pension Bridge)', 
         groupId: 'sipSwpBridgeGroup', 
         innerHtml: `
-            <div class="space-y-3 border-t border-stone-200/50 pt-2">
+            <div class="space-y-3 border-t border-emerald-200/40 pt-2">
                 ${createSliderGroup(allInputConfigs[16])}
                 ${createSliderGroup(allInputConfigs[17])}
             </div>
@@ -407,28 +406,28 @@ document.getElementById('generalInputsSection').innerHTML = createSliderGroup(al
 
 document.getElementById('inflationInputGroup').innerHTML = createSliderGroup(allInputConfigs[15]);
 
-// Build Output Summaries Card Grid Templates with custom targeted collapsible nodes
+// Build Output Summaries Card Grid Templates with custom targeted collapsible nodes (Integrated with compliance gradients)
 const summaryConfigs = [
-    { id: 'sipSummary', title: 'SIP Summary', grid: [{label:'Invested', id:'investedAmountSIP', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsSIP', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueSIP', colorClass:'total'}, extras: [
+    { id: 'sipSummary', title: 'SIP Summary', cardClass: 'bg-gradient-to-br from-emerald-50 to-teal-50/50 border-emerald-100 text-emerald-950', grid: [{label:'Invested', id:'investedAmountSIP', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsSIP', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueSIP', colorClass:'total'}, extras: [
         {id:'realTotalValueSIP', containerId:'realValueSectionSIP', label:'Real Value (Today\'s Worth) ℹ', colorClass:'real', hidden:true, title:'Value after adjusting expected inflation'},
         {id:'ltcgTaxSIP', containerId:'ltcgTaxSectionSIP', label:'Estimated LTCG Tax (12.5%) ⚖', colorClass:'tax', hidden:true, title:'Equity LTCG tax estimation at 12.5% on returns above ₹1.25 Lakh exemption threshold'},
         {id:'postTaxCorpusSIP', containerId:'postTaxSectionSIP', label:'Post-Tax Accumulated Corpus 💰', colorClass:'returns font-bold text-emerald-800', hidden:true},
         {id:'monthlyPensionSIP', containerId:'bridgeSectionSIP', label:'Est. Monthly Retirement Pension 🚀', colorClass:'withdrawn font-bold text-red-600', hidden:true, title:'Monthly pension yielded by transitioning accumulated SIP corpus directly into a conservative SWP scheme'},
         {id:'realMonthlyPensionSIP', containerId:'realBridgeSectionSIP', label:'Real Pension (Today\'s Worth) ℹ', colorClass:'real', hidden:true, title:'Monthly retirement SWP pension adjusted for historical inflation'}
     ] },
-    { id: 'lumpsumSummary', title: 'Lumpsum Summary', hidden: true, grid: [{label:'Invested', id:'investedAmountLumpsum', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsLumpsum', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueLumpsum', colorClass:'total'}, extras: [
+    { id: 'lumpsumSummary', title: 'Lumpsum Summary', cardClass: 'bg-gradient-to-br from-blue-50 to-indigo-50/50 border-blue-100 text-indigo-950', hidden: true, grid: [{label:'Invested', id:'investedAmountLumpsum', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsLumpsum', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueLumpsum', colorClass:'total'}, extras: [
         {id:'realTotalValueLumpsum', containerId:'realValueSectionLumpsum', label:'Real Value (Today\'s Worth) ℹ', colorClass:'real', hidden:true},
         {id:'ltcgTaxLumpsum', containerId:'ltcgTaxSectionLumpsum', label:'Estimated LTCG Tax (12.5%) ⚖', colorClass:'tax', hidden:true},
         {id:'postTaxCorpusLumpsum', containerId:'postTaxSectionLumpsum', label:'Post-Tax Lumpsum Corpus 💰', colorClass:'returns font-bold text-emerald-800', hidden:true}
     ] },
-    { id: 'rdSummary', title: 'RD Summary', hidden: true, grid: [{label:'Invested', id:'investedAmountRD', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsRD', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueRD', colorClass:'total'}, extras: [{id:'postTaxTotalValueRD', containerId:'postTaxSectionRD', label:'Post-Tax Total (Slab Deducted)', colorClass:'tax', hidden:true}, {id:'realTotalValueRD', containerId:'realValueSectionRD', label:'Real Value', colorClass:'real', hidden:true}] },
-    { id: 'fdSummary', title: 'FD Summary', hidden: true, grid: [{label:'Invested', id:'investedAmountFD', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsFD', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueFD', colorClass:'total'}, extras: [{id:'postTaxTotalValueFD', containerId:'postTaxSectionFD', label:'Post-Tax Total (Slab Deducted)', colorClass:'tax', hidden:true}, {id:'realTotalValueFD', containerId:'realValueSectionFD', label:'Real Value', colorClass:'real', hidden:true}] },
-    { id: 'swpSummary', title: 'SWP Summary', hidden: true, isSwp: true, grid: [{label:'Initial Corpus', id:'initialCorpusSWP', colorClass:'invested'}, {label:'Total Withdrawn', id:'totalWithdrawnSWP', colorClass:'withdrawn'}, {label:'Total Interest', id:'totalInterestSWP', colorClass:'interest'}, {label:'Remaining', id:'remainingCorpusSWP', colorClass:'remaining'}], extras: [
+    { id: 'rdSummary', title: 'RD Summary', cardClass: 'bg-gradient-to-br from-slate-50 to-stone-50/50 border-stone-200 text-stone-900', hidden: true, grid: [{label:'Invested', id:'investedAmountRD', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsRD', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueRD', colorClass:'total'}, extras: [{id:'postTaxTotalValueRD', containerId:'postTaxSectionRD', label:'Post-Tax Total (Slab Deducted)', colorClass:'tax', hidden:true}, {id:'realTotalValueRD', containerId:'realValueSectionRD', label:'Real Value', colorClass:'real', hidden:true}] },
+    { id: 'fdSummary', title: 'FD Summary', cardClass: 'bg-gradient-to-br from-slate-50 to-stone-50/50 border-stone-200 text-stone-900', hidden: true, grid: [{label:'Invested', id:'investedAmountFD', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsFD', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueFD', colorClass:'total'}, extras: [{id:'postTaxTotalValueFD', containerId:'postTaxSectionFD', label:'Post-Tax Total (Slab Deducted)', colorClass:'tax', hidden:true}, {id:'realTotalValueFD', containerId:'realValueSectionFD', label:'Real Value', colorClass:'real', hidden:true}] },
+    { id: 'swpSummary', title: 'SWP Summary', cardClass: 'bg-gradient-to-br from-amber-50 to-orange-50/50 border-amber-150 text-amber-950', hidden: true, isSwp: true, grid: [{label:'Initial Corpus', id:'initialCorpusSWP', colorClass:'invested'}, {label:'Total Withdrawn', id:'totalWithdrawnSWP', colorClass:'withdrawn'}, {label:'Total Interest', id:'totalInterestSWP', colorClass:'interest'}, {label:'Remaining', id:'remainingCorpusSWP', colorClass:'remaining'}], extras: [
         {id:'exhaustionPeriodSWP', containerId:'corpusExhaustedInfo', label:'Corpus Exceeded After', colorClass:'real', hidden:true, default:''}, 
         {id:'realRemainingCorpusSWP', containerId:'realValueSectionSWP', label:'Real Remaining', colorClass:'real', hidden:true},
         {id:'ltcgTaxSWP', containerId:'ltcgTaxSectionSWP', label:'Annual Est. LTCG Tax on Withdrawals ⚖', colorClass:'tax', hidden:true, title:'Est. annualized 12.5% taxation on systematic equity mutual fund gains withdrawals'}
     ] },
-    { id: 'goalSummary', title: 'Goal Planner Summary', hidden: true, grid: [{label:'Target Amount', id:'targetAmountGoal', colorClass:'total'}, {label:'Total Investment', id:'totalInvestmentGoal', colorClass:'invested'}], total: {label:'Monthly Investment Needed', id:'monthlyInvestmentGoal', colorClass:'goal'}, extras: [
+    { id: 'goalSummary', title: 'Goal Planner Summary', cardClass: 'bg-gradient-to-br from-purple-50 to-pink-50/50 border-purple-100 text-purple-950', hidden: true, grid: [{label:'Target Amount', id:'targetAmountGoal', colorClass:'total'}, {label:'Total Investment', id:'totalInvestmentGoal', colorClass:'invested'}], total: {label:'Monthly Investment Needed', id:'monthlyInvestmentGoal', colorClass:'goal'}, extras: [
         {id:'expectedReturnsGoal', containerId:'', label:'Expected Returns', colorClass:'returns'},
         {id:'ltcgTaxGoal', containerId:'ltcgTaxSectionGoal', label:'Estimated LTCG Tax (12.5%) ⚖', colorClass:'tax', hidden:true},
         {id:'postTaxCorpusGoal', containerId:'postTaxSectionGoal', label:'Post-Tax Goal Value 💰', colorClass:'returns font-bold text-emerald-800', hidden:true}
@@ -814,7 +813,8 @@ function initializeCalculator() {
                 getElem('realValueSectionSIP').classList.remove('hidden');
               } else { getElem('realValueSectionSIP').classList.add('hidden'); }
               
-              updateDoughnutChart([investedAmount, Math.max(0, currentCorpus - investedAmount)], ['Invested', 'Returns'], ['#78716c', '#065f46']); 
+              // Dynamic Premium Green/Teal Chart Colors for Wealth Generation
+              updateDoughnutChart([investedAmount, Math.max(0, currentCorpus - investedAmount)], ['Invested', 'Returns'], ['#334155', '#0d9488']); 
               generateGrowthTable(yearlyGrowthData, currentCorpus);
 
               // Real-time Insights (Rule of 72 compound speed details)
@@ -849,7 +849,8 @@ function initializeCalculator() {
                   getElem('realValueSectionLumpsum').classList.remove('hidden');
                 } else { getElem('realValueSectionLumpsum').classList.add('hidden'); }
                 
-                updateDoughnutChart([investedAmount, Math.max(0, totalValue - investedAmount)], ['Invested', 'Returns'], ['#78716c', '#065f46']);
+                // Dynamic Indigo/Royal Blue Chart Colors for Core Capital
+                updateDoughnutChart([investedAmount, Math.max(0, totalValue - investedAmount)], ['Invested', 'Returns'], ['#1e3a8a', '#3b82f6']);
                 let currentCorpus = investedAmount;
                 for (let year = 1; year <= investmentPeriodYears; year++) { currentCorpus *= (1 + annualReturnRate); yearlyGrowthData.push({ year, invested: investedAmount, returns: currentCorpus - investedAmount, total: currentCorpus }); }
                 generateGrowthTable(yearlyGrowthData, totalValue);
@@ -898,7 +899,8 @@ function initializeCalculator() {
                   getElem('realValueSectionRD').classList.remove('hidden');
                 } else { getElem('realValueSectionRD').classList.add('hidden'); }
                 
-                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#78716c', '#065f46']); 
+                // Slate / Gray Chart Colors for RD
+                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#334155', '#64748b']); 
                 generateGrowthTable(yearlyGrowthData, currentCorpus);
 
                 // Dynamic compounding target speed alert
@@ -928,7 +930,8 @@ function initializeCalculator() {
                   getElem('realValueSectionFD').classList.remove('hidden');
                 } else { getElem('realValueSectionFD').classList.add('hidden'); }
                 
-                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#78716c', '#065f46']);
+                // Slate / Gray Chart Colors for FD
+                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#334155', '#64748b']);
                 let currentCorpus = investedAmount;
                 for (let year = 1; year <= investmentPeriodYears; year++) { currentCorpus *= (1 + annualReturnRate); yearlyGrowthData.push({ year, invested: investedAmount, returns: currentCorpus - investedAmount, total: currentCorpus }); }
                 generateGrowthTable(yearlyGrowthData, totalValue);
@@ -1025,7 +1028,8 @@ function initializeCalculator() {
                     getElem('ltcgTaxSectionSWP').classList.add('hidden');
                 }
 
-                updateDoughnutChart([totalWithdrawn, Math.max(0, totalInterest), Math.max(0, corpus)], ['Withdrawn', 'Interest', 'Remaining'], ['#dc2626', '#065f46', '#78716c']); 
+                // SWP Drawdown Amber/Orange Custom Chart Shades
+                updateDoughnutChart([totalWithdrawn, Math.max(0, totalInterest), Math.max(0, corpus)], ['Withdrawn', 'Interest', 'Remaining'], ['#b45309', '#f59e0b', '#78716c']); 
                 generateGrowthTable(yearlyGrowthData, initialCorpus);
                 
                 // SWP 4% Safe Withdrawal Rate (SWR) Dynamic Color Analytics Engine
@@ -1085,7 +1089,8 @@ function initializeCalculator() {
                     getElem('postTaxSectionGoal').classList.add('hidden');
                 }
 
-                updateDoughnutChart([Math.max(0, totalInvestment), Math.max(0, expectedReturns)], ['Total Investment', 'Expected Returns'], ['#78716c', '#065f46']); 
+                // Goal Purple / Fuchsia Custom Chart Shades
+                updateDoughnutChart([Math.max(0, totalInvestment), Math.max(0, expectedReturns)], ['Total Investment', 'Expected Returns'], ['#581c87', '#a21caf']); 
 
                 // Delay Procrastination alert sandharbham
                 const nextDelayedMonths = (years - 2) * 12;
