@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO aur Canonical Metadata (Title < 60 chars, Desc < 160 chars) -->
+    <!-- SEO aur Canonical Metadata -->
     <title>SIP, Lumpsum, FD & RD | Investment Planner India</title>
     <meta name="description" content="Calculate SIP, RD, FD, SWP & Goal investments using India's best free Investment Planner. Plan with inflation adjustments and slab-wise tax estimates.">
     <meta name="keywords" content="investment planner, financial calculator, sip calculator, lumpsum calculator, tax calculator, emi calculator, rd calculator, fd calculator, goal planner, personal finance india">
@@ -196,7 +196,7 @@
         .tooltip-icon svg {
             width: 0.8rem;
             height: 0.8rem;
-            color: #111827;
+            color: currentColor;
             vertical-align: middle;
         }
         .tooltip-text {
@@ -269,26 +269,27 @@
         .step-up-toggle input:checked + .toggle-track .toggle-thumb .toggle-icon-percent { opacity: 0; }
         .step-up-toggle input:checked + .toggle-track .toggle-thumb .toggle-icon-rupee { opacity: 1; }
 
-        .summary-card { background-color: #f5f5f4; border-radius: 0.5rem; padding: 0.5rem; border: 1px solid #d6d3d1; transition: opacity 0.3s ease-in-out; } 
-        .summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .summary-header h2 { font-size: 0.8rem; font-weight: 700; color: #1c1917; margin: 0; } 
+        /* Summary Cards - Beautiful, dynamic with high compliance text colors */
+        .summary-card { border-radius: 1rem; padding: 0.75rem; border: 1px solid transparent; transition: all 0.3s ease-in-out; } 
+        .summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; border-b: 1px solid rgba(0,0,0,0.06); padding-bottom: 0.35rem; }
+        .summary-header h2 { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; tracking-wider; margin: 0; } 
         .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
         .summary-grid.swp-grid { grid-template-columns: 1fr 1fr; }
-        .summary-item { background-color: #ffffff; padding: 0.4rem; border-radius: 0.25rem; text-align: center; border: 1px solid #e7e5e4; } 
-        .summary-label { display: block; font-size: 0.6rem; font-weight: 600; color: #292524; margin-bottom: 0.1rem; } 
-        .summary-value { display: block; font-size: 0.9rem; font-weight: 700; }
-        .summary-value.invested { color: #44403c; } 
+        .summary-item { background-color: #ffffff; padding: 0.5rem; border-radius: 0.5rem; text-align: center; border: 1px solid rgba(0,0,0,0.05); } 
+        .summary-label { display: block; font-size: 0.65rem; font-weight: 700; color: inherit; opacity: 0.85; margin-bottom: 0.1rem; } 
+        .summary-value { display: block; font-size: 0.95rem; font-weight: 800; }
+        .summary-value.invested { color: #1e293b; } 
         .summary-value.returns { color: #065f46; } 
-        .summary-value.withdrawn { color: #dc2626; } 
-        .summary-total { background-color: #fef2f2; color: #991b1b; padding: 0.5rem; border-radius: 0.25rem; text-align: center; margin-bottom: 0.5rem; border: 1px solid #fecaca;}
-        .summary-total .summary-label { color: #991b1b; font-size: 0.7rem; } 
-        .summary-total .summary-value.total { font-size: 1.1rem; font-weight: 800; }
+        .summary-value.withdrawn { color: #991b1b; } 
+        .summary-total { background-color: #ffffff; padding: 0.6rem; border-radius: 0.5rem; text-align: center; margin-bottom: 0.5rem; border: 1.5px solid rgba(0,0,0,0.06); }
+        .summary-total .summary-label { font-size: 0.7rem; } 
+        .summary-total .summary-value.total { font-size: 1.15rem; font-weight: 800; }
         .summary-total .summary-value.goal { font-size: 1.25rem; font-weight: 800; color: #065f46; } 
         
-        .summary-extra { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0.5rem; border-top: 1px dashed #d6d3d1; } 
-        .summary-extra .summary-label { font-size: 0.7rem; font-weight: 600; color: #44403c; } 
-        .summary-extra .summary-value.real { font-size: 0.9rem; font-weight: 700; color: #b45309; } 
-        .summary-extra .summary-value.tax { font-size: 0.9rem; font-weight: 700; color: #9a3412; } 
+        .summary-extra { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.5rem; border-top: 1px dashed rgba(0,0,0,0.08); } 
+        .summary-extra .summary-label { font-size: 0.7rem; font-weight: 700; color: inherit; opacity: 0.9; } 
+        .summary-extra .summary-value.real { font-size: 0.9rem; font-weight: 800; color: #92400e; } 
+        .summary-extra .summary-value.tax { font-size: 0.9rem; font-weight: 800; color: #9a3412; } 
         
         .preset-btn { transition: all 0.2s; cursor: pointer; }
 
@@ -375,11 +376,11 @@
                 <!-- Main Columns layout -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                     <div class="space-y-3 print-hide">
-                        <!-- Dynamic Section Containers -->
-                        <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl">
+                        <!-- Dynamic Section Containers (Enriched with beautiful, high-contrast WCAG-compliant mode gradients) -->
+                        <div id="sipSection" class="space-y-3 bg-gradient-to-br from-emerald-50/70 to-teal-50/30 border border-emerald-100 p-3 rounded-2xl text-emerald-950">
                             <!-- Monthly SIP Amount Slider -->
                             <div>
-                                <label for="sipAmountInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="sipAmountLabel">
+                                <label for="sipAmountInput" class="block text-xs font-bold text-emerald-900 flex items-center mb-1" id="sipAmountLabel">
                                     <span id="sipAmountLabelText">Monthly SIP Amount (₹)</span> 
                                 </label>
                                 <div class="input-group flex items-center space-x-2">
@@ -391,17 +392,17 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-wrap gap-1.5 mt-1.5">
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="5000" title="Quickly add ₹5K to your investment amount">+ ₹5K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="10000" title="Quickly add ₹10K to your investment amount">+ ₹10K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="25000" title="Quickly add ₹25K to your investment amount">+ ₹25K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="50000" title="Quickly add ₹50K to your investment amount">+ ₹50K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-white text-emerald-900 border border-emerald-100 rounded text-[10px] font-bold hover:bg-emerald-50" data-target="sipAmountInput" data-val="5000" title="Quickly add ₹5K to your investment amount">+ ₹5K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-white text-emerald-900 border border-emerald-100 rounded text-[10px] font-bold hover:bg-emerald-50" data-target="sipAmountInput" data-val="10000" title="Quickly add ₹10K to your investment amount">+ ₹10K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-white text-emerald-900 border border-emerald-100 rounded text-[10px] font-bold hover:bg-emerald-50" data-target="sipAmountInput" data-val="25000" title="Quickly add ₹25K to your investment amount">+ ₹25K</button>
+                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-white text-emerald-900 border border-emerald-100 rounded text-[10px] font-bold hover:bg-emerald-50" data-target="sipAmountInput" data-val="50000" title="Quickly add ₹50K to your investment amount">+ ₹50K</button>
                                 </div>
                                 <p id="sipAmountError" class="input-error-message hidden" role="alert">Amount must be between ₹500 - ₹50,000.</p>
                             </div>
 
                             <!-- Frequency Select -->
                             <div>
-                                <label for="sipFrequency" class="block text-xs font-bold text-stone-700 mb-1">Frequency</label>
+                                <label for="sipFrequency" class="block text-xs font-bold text-emerald-900 mb-1">Frequency</label>
                                 <select id="sipFrequency" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
                                     <option value="monthly" selected>Monthly</option>
                                     <option value="quarterly">Quarterly</option>
@@ -412,7 +413,7 @@
                             <!-- Add Initial Lumpsum Toggle Section -->
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipInitialLumpsumToggle">
-                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                    <span class="text-xs font-bold text-emerald-900 flex items-center">
                                         Add Initial Lumpsum 
                                         <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -430,7 +431,7 @@
                                 </label>
                                 <div id="sipInitialLumpsumGroup" class="hidden mt-2 space-y-3">
                                     <div>
-                                        <label for="sipInitialLumpsumInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="sipInitialLumpsumLabel">
+                                        <label for="sipInitialLumpsumInput" class="block text-xs font-bold text-emerald-900 flex items-center mb-1" id="sipInitialLumpsumLabel">
                                             <span id="sipInitialLumpsumLabelText">Initial Lumpsum Amount (₹)</span> 
                                         </label>
                                         <div class="input-group flex items-center space-x-2">
@@ -449,7 +450,7 @@
                             <!-- Enable Annual Step-up Toggle Section -->
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipStepUpToggle">
-                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                    <span class="text-xs font-bold text-emerald-900 flex items-center">
                                         Enable Annual Step-up 
                                         <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -468,7 +469,7 @@
                                 <div id="sipStepUpGroup" class="hidden mt-2 space-y-3">
                                     <div>
                                         <div class="flex justify-between items-center mb-1">
-                                            <label for="sipIncreaseRateInput" class="block text-xs font-bold text-stone-700 flex items-center" id="sipIncreaseRateLabel">
+                                            <label for="sipIncreaseRateInput" class="block text-xs font-bold text-emerald-900 flex items-center" id="sipIncreaseRateLabel">
                                                 <span id="sipIncreaseRateLabelText">Annual Increase (%)</span> 
                                                 <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -507,7 +508,7 @@
                             <!-- Capital Gains Tax Toggle Section -->
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipEquityTaxToggle">
-                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                    <span class="text-xs font-bold text-emerald-900 flex items-center">
                                         Estimate MF Capital Gains Tax (LTCG)
                                     </span>
                                     <div class="relative inline-flex items-center">
@@ -525,7 +526,7 @@
                             <!-- SIP to SWP Pension Bridge Toggle Section -->
                             <div class="pt-1">
                                 <label class="flex items-center justify-between cursor-pointer" for="sipSwpBridgeToggle">
-                                    <span class="text-xs font-bold text-stone-700 flex items-center">
+                                    <span class="text-xs font-bold text-emerald-900 flex items-center">
                                         Plan Retirement (SIP to SWP Pension Bridge) 
                                         <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -542,22 +543,22 @@
                                     </div>
                                 </label>
                                 <div id="sipSwpBridgeGroup" class="hidden mt-2 space-y-3">
-                                    <div class="space-y-3 border-t border-stone-200/50 pt-2">
+                                    <div class="space-y-3 border-t border-emerald-200/40 pt-2">
                                         <!-- Will be injected by app.js -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="lumpsumSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
-                        <div id="rdSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
-                        <div id="fdSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
-                        <div id="swpSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
+                        <div id="lumpsumSection" class="space-y-3 bg-gradient-to-br from-blue-50/70 to-indigo-50/30 border border-blue-100 p-3 rounded-2xl hidden text-indigo-950"></div>
+                        <div id="rdSection" class="space-y-3 bg-gradient-to-br from-slate-50/80 to-stone-50/40 border border-stone-200 p-3 rounded-2xl hidden text-stone-900"></div>
+                        <div id="fdSection" class="space-y-3 bg-gradient-to-br from-slate-50/80 to-stone-50/40 border border-stone-200 p-3 rounded-2xl hidden text-stone-900"></div>
+                        <div id="swpSection" class="space-y-3 bg-gradient-to-br from-amber-50/70 to-orange-50/30 border border-amber-100 p-3 rounded-2xl hidden text-amber-950"></div>
 
                         <!-- GOAL PLANNER MODULE SECTION -->
-                        <div id="goalSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden">
+                        <div id="goalSection" class="space-y-3 bg-gradient-to-br from-purple-50/70 to-pink-50/30 border border-purple-100 p-3 rounded-2xl hidden text-purple-950">
                              <!-- Goal Templates Grid -->
                              <div class="mb-3">
-                                <label class="block text-xs font-black text-stone-800 mb-2 text-center uppercase tracking-wider">Kickstart with a Goal Template</label>
+                                <label class="block text-xs font-black text-purple-900 mb-2 text-center uppercase tracking-wider">Kickstart with a Goal Template</label>
                                 <div class="goal-templates-grid">
                                     <button class="goal-template-btn rounded-xl" data-goal="retirement" aria-label="Apply Retirement goal template"><div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="text-wrapper"><span class="title">Retirement</span><span class="subtitle">Plan golden years</span></div></button>
                                     <button class="goal-template-btn rounded-xl" data-goal="education" aria-label="Apply Child's Education goal template"><div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="text-wrapper"><span class="title">Education</span><span class="subtitle">For child's future</span></div></button>
@@ -571,7 +572,7 @@
                         </div>
 
                         <!-- GENERAL INPUTS CONTAINER -->
-                        <div id="generalInputsSection" class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
+                        <div id="generalInputsSection" class="bg-gradient-to-br from-stone-50/80 to-stone-100/40 border border-stone-200/60 p-3 rounded-2xl space-y-3">
                             <!-- Expected Return Rate (p.a. %) Slider -->
                             <div>
                                 <label for="returnRateInput" class="block text-xs font-bold text-stone-700 flex items-center mb-1" id="returnRateLabel">
@@ -606,7 +607,7 @@
                         </div>
 
                         <!-- INFLATION TOGGLE SECTION -->
-                        <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl">
+                        <div class="bg-gradient-to-br from-stone-50/80 to-stone-100/40 border border-stone-200/60 p-3 rounded-2xl">
                             <label class="flex items-center justify-between cursor-pointer" for="inflationToggle">
                                 <span class="text-xs font-bold text-stone-700 flex items-center">
                                     Adjust for Inflation 
@@ -910,7 +911,7 @@
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">Inflation Adjustment (Real Purchasing Power) Formula</h3>
                             <p class="mb-2">To measure the true future value of your money against cost inflation index (CII) erosion:</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$
+                                $$\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$$
                             </div>
                             <p class="mt-2 text-[11px] text-stone-600">
                                 Where $\text{inf}$ is the expected average annual rate of inflation (historically 5% to 6% in India) and $t$ is the holding period in years.
