@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Title (Exactly 60 Characters for optimal SEO) -->
+    <title>EMI Calculator - Calculate Home, Car, Bike & Mobile Loan EMI</title>
+    <!-- Meta Description (Maximum 160 Characters) -->
+    <meta name="description" content="Advanced multi-loan EMI calculator for Home, Car, Bike, Personal & Mobile loans. Features No-Cost EMI logic, dynamic amortization charts, and CSV exports.">
+    <meta name="keywords" content="emi calculator, home loan emi, car loan emi, bike loan emi, mobile emi calculator, no cost emi, loan amortization schedule">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/emi-calculator" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; 
+            --accent-color-dark: #B91C1C;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Safeguards mobile viewports against rendering shifts */
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fef2f2 10%, #f9fafb 70%);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main.container {
+            width: 95%;
+            max-width: 1080px;
+            margin-left: auto;
+            margin-right: auto;
+            flex-grow: 1;
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #cbd5e1; /* Darkened track for robust WCAG contrast */
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark, #B91C1C), var(--accent-color-dark, #B91C1C));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: var(--accent-color-dark, #B91C1C);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -4.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+        }
+        .stepper-button {
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 85px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .loan-tab-btn {
+            color: #1f2937;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+        }
+        .loan-tab-btn.active {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+        }
+
+        .ledger-scroll-container {
+            max-height: 380px;
+            overflow-y: auto;
+            overflow-x: auto; /* isolates wide table scrolling to prevent layout breaking on mobile */
+            -webkit-overflow-scrolling: touch;
+        }
+        .ledger-table {
+            min-width: 480px; /* guarantees headers do not collapse on tight viewports */
+        }
+        .ledger-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e5e7eb;
+            z-index: 20;
+            box-shadow: inset 0 -1px 0 #94a3b8, inset 0 1px 0 #94a3b8;
+        }
+
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827;
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            max-width: 200px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%); /* perfect centering, prevents absolute horizontal shifts */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .share-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 1rem;
+        }
+        .share-modal.active { opacity: 1; pointer-events: auto; }
+        .share-modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 480px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-modal.active .share-modal-content {
+            transform: scale(1);
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .close-modal-btn:hover {
+            color: #000000;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .modal-report-content h3 {
+            font-size: 0.85rem;
+            font-weight: 850;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .modal-report-content ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+        .modal-report-content li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #111827;
+        }
+        .share-url-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #111827;
+            background: #f8fafc;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+
+        /* Toast notification styling */
+        #notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #notification-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        html body .text-xxs {
+            font-size: 0.72rem;
+            line-height: 1rem;
+        }
+
+        @media screen {
+            .print-only {
+                display: none !important;
+            }
+        }
+
+        @media print {
+            /* Swap interactive viewports with the white high-contrast print report */
+            #loan-calculator, 
+            #shareModal, 
+            #notification-toast {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+            }
+
+            /* Prevent table elements from breaking mid-page */
+            table {
+                page-break-inside: auto;
+            }
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            thead {
+                display: table-header-group;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <main class="container">
+        
+        <!-- SCREEN ONLY CALCULATOR WORKSPACE -->
+        <div id="loan-calculator" class="w-full">
+            <div class="bg-white shadow-xl rounded-3xl p-4 sm:p-6 w-full border border-gray-200/80 mx-auto">
+                
+                <!-- Unified Header -->
+                <h1 class="text-base sm:text-lg font-extrabold text-gray-900 text-center mb-1">Advanced 5-in-1 Multi-Loan EMI Calculator</h1>
+                <p class="text-center text-gray-900 mb-4 text-xxs font-medium">Calculate Equated Monthly Installments for Indian Home, Car, Bike, Personal, and Mobile loans safely.</p>
+
+                <!-- DUAL MODE SELECTOR BUTTONS (Target EMI / Max Eligibility Toggle) -->
+                <div class="flex p-1 bg-gray-100 rounded-xl mb-4 max-w-md mx-auto" role="group" aria-label="Calculation Mode">
+                    <button type="button" id="modeEmiBtn" class="flex-1 py-1.5 text-xxs font-extrabold rounded-lg text-white bg-blue-900 shadow text-center transition-all duration-200" aria-pressed="true">
+                        Calculate EMI
+                    </button>
+                    <button type="button" id="modeEligibleBtn" class="flex-1 py-1.5 text-xxs font-bold rounded-lg text-gray-800 text-center transition-all duration-200" aria-pressed="false">
+                        Check Max Eligibility
+                    </button>
+                </div>
+
+                <!-- LOAN TYPE SPECIFIC SELECTOR TABS -->
+                <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5 mb-4 p-1 bg-gray-100 rounded-xl" role="tablist" aria-label="Loan Categories">
+                    <button type="button" role="tab" id="tab-home" class="loan-tab-btn active text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="true">Home Loan</button>
+                    <button type="button" role="tab" id="tab-car" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Car Loan</button>
+                    <button type="button" role="tab" id="tab-bike" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Bike Loan</button>
+                    <button type="button" role="tab" id="tab-personal" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Personal</button>
+                    <button type="button" role="tab" id="tab-mobile" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Mobile EMI</button>
+                </div>
+
+                <!-- MAIN WORKSPACE CORE GRID (Balanced height layout using items-start) -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5 items-start">
+                    
+                    <!-- Left Section: Adjustable Params -->
+                    <div class="space-y-3">
+                        
+                        <!-- Principal Capital Block -->
+                        <div class="bg-blue-50 p-3 rounded-2xl space-y-2">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Core Loan Variables</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Adjust fundamental principal values, minimizing interest rates, and loan durations.</span>
+                                </span>
+                            </h2>
+
+                            <!-- Principal Input Field / Target Monthly EMI -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanAmountLabel" for="loanAmountInput" class="block text-xxs font-bold text-gray-900">Sanctioned Principal (₹)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text" id="loanAmountTooltipText">The sanctioned loan principal capital sanctioned by the lending bank.</span>
+                                        </span>
+                                    </span>
+                                    <span id="loanAmountWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanAmountSlider" min="50000" max="50000000" value="3000000" step="10000" class="w-full flex-grow" aria-labelledby="loanAmountLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanAmountDecrement" class="stepper-button" aria-label="Decrease Amount">-</button>
+                                        <input type="number" id="loanAmountInput" class="manual-input text-center" value="3000000" min="50000" max="50000000" step="10000">
+                                        <button type="button" id="loanAmountIncrement" class="stepper-button" aria-label="Increase Amount">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interest Input Field -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanInterestLabel" for="loanInterestInput" class="block text-xxs font-bold text-gray-900">Reducing Interest Rate (% p.a.)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The annual reducing balance rate charged by banks. EMI drops as principal outstanding decreases monthly.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanInterestSlider" min="5" max="35" value="8.5" step="0.05" class="w-full flex-grow" aria-labelledby="loanInterestLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanInterestDecrement" class="stepper-button" aria-label="Decrease Interest">-</button>
+                                        <input type="number" id="loanInterestInput" class="manual-input text-center" value="8.5" min="5" max="35" step="0.05">
+                                        <button type="button" id="loanInterestIncrement" class="stepper-button" aria-label="Increase Interest">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tenure Input Field -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanTenureLabel" for="loanTenureInput" class="block text-xxs font-bold text-gray-900">Repayment Period Tenure</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The time frame given to repay the loan. Shown in Years for Home/Car/Personal and in Months for Mobile EMIs.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanTenureSlider" min="1" max="30" value="20" step="1" class="w-full flex-grow" aria-labelledby="loanTenureLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanTenureDecrement" class="stepper-button" aria-label="Decrease Tenure">-</button>
+                                        <input type="number" id="loanTenureInput" class="manual-input text-center" value="20" min="1" max="30" step="1">
+                                        <button type="button" id="loanTenureIncrement" class="stepper-button" aria-label="Increase Tenure">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- MODERN START DATE PICKER (Integrated Dropdowns - Blazing Fast) -->
+                            <div class="relative pb-1 bg-white border border-blue-100 rounded-xl p-2.5 shadow-inner">
+                                <div class="flex items-center gap-1.5 mb-1">
+                                    <span class="block text-xxs font-extrabold text-blue-950 uppercase tracking-wide">Loan Repayment Start Date</span>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Required to compile repayment schedules inside official Indian Financial Years (April to March) for accurate income tax deductions.</span>
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label for="loanStartMonth" class="sr-only">Repayment Start Month</label>
+                                        <select id="loanStartMonth" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                            <option value="0">January</option>
+                                            <option value="1">February</option>
+                                            <option value="2">March</option>
+                                            <option value="3" selected>April</option>
+                                            <option value="4">May</option>
+                                            <option value="5">June</option>
+                                            <option value="6">July</option>
+                                            <option value="7">August</option>
+                                            <option value="8">September</option>
+                                            <option value="9">October</option>
+                                            <option value="10">November</option>
+                                            <option value="11">December</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="loanStartYear" class="sr-only">Repayment Start Year</label>
+                                        <select id="loanStartYear" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                            <option value="2026" selected>2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                            <option value="2031">2031</option>
+                                            <option value="2032">2032</option>
+                                            <option value="2033">2033</option>
+                                            <option value="2034">2034</option>
+                                            <option value="2035">2035</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADVANCED POWER-USER TOGGLE WRAPPER (Strictly labels only on slider to prevent click-throughs) -->
+                        <div id="togglePowerUserDiv" class="bg-gray-100 p-2.5 rounded-2xl border border-gray-300 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="text-xxs font-bold text-gray-900 whitespace-nowrap">🚀 Advanced Power Controls</span>
+                                <span class="tooltip-icon flex-shrink-0" onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Toggle to enable step-up EMIs, rate shock floating models, ancillary costs, skip moratoriums, and tax filing regimes.</span>
+                                </span>
+                            </div>
+                            <!-- FIXED ACCESSIBILITY BOUNDS: Form element now has explicit aria labels satisfying scanner rules -->
+                            <label for="powerUserToggle" class="relative inline-flex items-center flex-shrink-0 select-none cursor-pointer" aria-label="Toggle Advanced Power Controls">
+                                <input type="checkbox" id="powerUserToggle" class="sr-only peer" aria-label="Toggle Advanced Power Controls">
+                                <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                            </label>
+                        </div>
+
+                        <!-- POWER-USER ADVANCED PANEL (Hidden by Default, Modern Color-coded cards) -->
+                        <div id="advancedSettingsPanel" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
+                            <h3 class="text-xs font-bold text-gray-900 text-center border-b border-gray-200 pb-1.5 flex items-center justify-center gap-1">
+                                <span>Power-User Advanced Settings</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Fine-tune advanced conditions like annual payment increments, payment holidays, processing charges, and interest shocks.</span>
+                                </span>
+                            </h3>
+
+                            <!-- Step Up & Moratorium -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- 1. Step-Up EMI (Indigo Colored Card) -->
+                                <div class="bg-indigo-50/70 p-3 rounded-2xl border border-indigo-200 text-indigo-950 flex flex-col justify-between space-y-1.5 shadow-sm">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="stepUpRateInput" class="text-[10px] font-extrabold tracking-wider uppercase text-indigo-900">Annual Step-Up EMI</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-indigo-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Increase your monthly payment by a fixed percentage annually (models salary increments) to pay off loan years faster. Not available in Eligibility Mode.</span>
+                                        </span>
+                                    </span>
+                                    <div class="flex items-center bg-white border border-indigo-200 rounded-xl px-3 py-1.5 focus-within:ring-2 focus-within:ring-indigo-400 focus-within:border-indigo-400 transition-all shadow-inner">
+                                        <input type="number" id="stepUpRateInput" class="w-full bg-transparent text-xs font-black text-indigo-950 outline-none" value="0" min="0" max="25" step="1">
+                                        <span class="text-[10px] font-black text-indigo-600 ml-1 select-none whitespace-nowrap">% p.a.</span>
+                                    </div>
+                                </div>
+
+                                <!-- 2. Moratorium Months (Amber Colored Card) -->
+                                <div class="bg-amber-50/70 p-3 rounded-2xl border border-amber-200 text-amber-950 flex flex-col justify-between space-y-1.5 shadow-sm">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="moratoriumInput" class="text-[10px] font-extrabold tracking-wider uppercase text-amber-900">EMI Moratorium</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-amber-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Skip paying EMIs for initial months. Accrued interest is added to your outstanding balance, raising total costs.</span>
+                                        </span>
+                                    </span>
+                                    <div class="flex items-center bg-white border border-amber-200 rounded-xl px-3 py-1.5 focus-within:ring-2 focus-within:ring-amber-400 focus-within:border-amber-400 transition-all shadow-inner">
+                                        <input type="number" id="moratoriumInput" class="w-full bg-transparent text-xs font-black text-amber-950 outline-none" value="0" min="0" max="6" step="1">
+                                        <span class="text-[10px] font-black text-amber-600 ml-1 select-none whitespace-nowrap">Months</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ancillary Costs & Interest Shock -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- 3. Ancillary Costs (Rose Colored Card) -->
+                                <div class="bg-rose-50/70 p-3 rounded-2xl border border-rose-200 text-rose-950 flex flex-col justify-between space-y-1.5 shadow-sm">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="ancillaryCostInput" class="text-[10px] font-extrabold tracking-wider uppercase text-rose-900">Ancillary Costs</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-rose-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Add dynamic ancillary costs such as stamp duty, loan processing insurance, and registration fee structures directly to principal.</span>
+                                        </span>
+                                    </span>
+                                    <div class="flex items-center bg-white border border-rose-200 rounded-xl px-3 py-1.5 focus-within:ring-2 focus-within:ring-rose-400 focus-within:border-rose-400 transition-all shadow-inner">
+                                        <input type="number" id="ancillaryCostInput" class="w-full bg-transparent text-xs font-black text-rose-950 outline-none" value="0" min="0" max="10" step="0.5">
+                                        <span class="text-[10px] font-black text-rose-600 ml-1 select-none whitespace-nowrap">% Loan</span>
+                                    </div>
+                                </div>
+
+                                <!-- 4. Interest Rate Shock (Purple/Violet Colored Card) -->
+                                <div class="bg-purple-50/70 p-3 rounded-2xl border border-purple-200 text-purple-950 flex flex-col justify-between space-y-1.5 shadow-sm">
+                                    <span class="flex items-center gap-1.5">
+                                        <span class="text-[10px] font-extrabold tracking-wider uppercase text-purple-900">Rate Shock Floating Simulator</span>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-purple-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Simulate a floating interest rate shock (e.g. RBI rate hike of +1.5%) happening at a specific year in your schedule.</span>
+                                        </span>
+                                    </span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="flex items-center bg-white border border-purple-200 rounded-xl px-2.5 py-1.5 focus-within:ring-2 focus-within:ring-purple-400 focus-within:border-purple-400 transition-all shadow-inner">
+                                            <input type="number" id="rateShockAmountInput" class="w-full bg-transparent text-xs font-black text-purple-950 outline-none" value="0" min="0" max="10" step="0.1" placeholder="Rate">
+                                            <span class="text-[9px] font-black text-purple-600 ml-1 select-none whitespace-nowrap">+%</span>
+                                        </div>
+                                        <div class="flex items-center bg-white border border-purple-200 rounded-xl px-2.5 py-1.5 focus-within:ring-2 focus-within:ring-purple-400 focus-within:border-purple-400 transition-all shadow-inner">
+                                            <input type="number" id="rateShockYearInput" class="w-full bg-transparent text-xs font-black text-purple-950 outline-none" value="3" min="1" max="30" step="1" placeholder="Year" aria-label="Rate Shock Year">
+                                            <span class="text-[9px] font-black text-purple-600 ml-1 select-none whitespace-nowrap">Year</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 5. Prepayments & Part-Payments (Vibrant Sky Blue Theme) -->
+                            <div class="bg-sky-50/75 p-3 rounded-2xl border border-sky-200 text-sky-950 flex flex-col justify-between space-y-1.5 shadow-sm">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="text-[10px] font-extrabold tracking-wider uppercase text-sky-900">Prepayment & Foreclosure Planner</span>
+                                    <span class="tooltip-icon flex-shrink-0">
+                                        <svg class="text-sky-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Plan debt foreclosure. Entering an annual prepayment amount or a scheduled one-time lumpsum directly pays down principal, slashing loan tenures.</span>
+                                    </span>
+                                </span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <div class="flex flex-col">
+                                        <label for="recurringPrepayInput" class="text-[9px] font-bold text-sky-900 mb-0.5 flex items-center gap-1">
+                                            <span>Recurring Annual Prepay (₹)</span>
+                                            <span class="tooltip-icon">
+                                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                                </svg>
+                                                <span class="tooltip-text text-[9px] p-1.5">An extra payment made automatically once every year to quickly bring down the outstanding principal.</span>
+                                            </span>
+                                        </label>
+                                        <div class="flex items-center bg-white border border-sky-200 rounded-xl px-2.5 py-1.5 focus-within:ring-2 focus-within:ring-sky-400 transition-all shadow-inner">
+                                            <input type="number" id="recurringPrepayInput" class="w-full bg-transparent text-xs font-black text-sky-950 outline-none" value="0" min="0" max="1000000" step="5000">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="lumpsumPrepayInput" class="text-[9px] font-bold text-sky-900 mb-0.5 flex items-center gap-1">
+                                            <span>One-time Lumpsum Prepay (₹)</span>
+                                            <span class="tooltip-icon">
+                                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                                </svg>
+                                                <span class="tooltip-text text-[9px] p-1.5">A single one-time heavy prepayment made in a chosen year to reduce future interest burden dramatically.</span>
+                                            </span>
+                                        </label>
+                                        <div class="flex gap-1">
+                                            <div class="flex-1 flex items-center bg-white border border-sky-200 rounded-xl px-2.5 py-1.5 focus-within:ring-2 focus-within:ring-sky-400 transition-all shadow-inner">
+                                                <input type="number" id="lumpsumPrepayInput" class="w-full bg-transparent text-xs font-black text-sky-950 outline-none" value="0" min="0" max="5000000" step="10000" placeholder="Amt">
+                                            </div>
+                                            <div class="w-1/3 flex items-center bg-white border border-sky-200 rounded-xl px-1 py-1 focus-within:ring-2 focus-within:ring-sky-400 transition-all shadow-inner">
+                                                <input type="number" id="lumpsumPrepayYearInput" class="w-full bg-transparent text-xs font-black text-sky-950 outline-none text-center" value="2" min="1" max="30" step="1" aria-label="Lumpsum Prepay Year">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 6. Tax Regime Selector (Emerald Colored Card) -->
+                            <div class="bg-emerald-50/70 p-3 rounded-2xl border border-emerald-200 text-emerald-950 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0 shadow-sm">
+                                <span class="flex items-center gap-1.5 flex-shrink-0">
+                                    <span class="text-[10px] font-extrabold tracking-wider uppercase text-emerald-900">Income Tax Regime</span>
+                                    <span class="tooltip-icon flex-shrink-0">
+                                        <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Home loan tax deductions are only accessible under the Old Regime. Switching to New Regime zeroes tax savings automatically.</span>
+                                    </span>
+                                </span>
+                                <div class="bg-white/90 p-1 rounded-xl flex gap-1 select-none border border-emerald-200 flex-shrink-0 w-full sm:w-auto">
+                                    <button type="button" id="regimeOldBtn" class="flex-1 sm:flex-initial px-4 py-1 text-xxs font-black rounded-lg bg-emerald-800 text-white shadow transition-all duration-200">Old</button>
+                                    <button type="button" id="regimeNewBtn" class="flex-1 sm:flex-initial px-4 py-1 text-xxs font-black rounded-lg text-emerald-950 transition-all duration-200">New</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Core Metric Cards + Visual Displays -->
+                    <div class="flex flex-col space-y-3">
+                        <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
+                                <h2 class="text-xs font-bold text-blue-950 font-extrabold flex items-center gap-1">
+                                    <span>Loan Liquidation Summary</span>
+                                    <span class="tooltip-icon">
+                                        <svg class="text-blue-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Bird's-eye projection summing overall base principal costs, total accrued minimizing interests, and tax optimizations.</span>
+                                    </span>
+                                </h2>
+                                <button id="shareReportBtn" class="p-1 text-gray-700 hover:text-red-800 transition-colors flex-shrink-0" aria-label="Share calculations link">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true">
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- DYNAMIC ADVISORY POWER SAVINGS BADGE -->
+                            <div id="powerSavingsBadge" class="p-2.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xxs text-center mb-2 transition-all hidden">
+                                <!-- Populated dynamically when Step-Up, Moratorium or Prepayments changes -->
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p id="totalInvestmentCardTitle" class="text-[10px] font-bold text-gray-800">Sanctioned Principal</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Sum of the sanctioned base loan capital (includes ancillary costs).</span>
+                                        </span>
+                                    </span>
+                                    <p id="totalInvestment" class="text-xs sm:text-sm font-extrabold text-blue-950">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Total Interest Paid</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Cumulative absolute interest paid across skipped moratorium periods, floating rate shock events, or accelerated prepayment schedules.</span>
+                                        </span>
+                                    </span>
+                                    <p id="totalInterest" class="text-xs sm:text-sm font-extrabold text-green-950">₹0</p>
+                                </div>
+                            </div>
+
+                            <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p id="targetValueCardTitle" class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Calculated Monthly Loan EMI</p>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">The projected target financial value based on calculations (Calculated EMI or Calculated Eligible Loan Principal).</span>
+                                    </span>
+                                </span>
+                                <p id="maturityValue" class="text-base sm:text-lg font-extrabold text-purple-950">₹0</p>
+                            </div>
+
+                            <!-- INCOME TAX BENEFIT BADGE (Estimated Home Loan benefit under Sec 24b & Sec 80C) -->
+                            <div id="taxBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-4 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-left">
+                                        <span class="flex items-center gap-1">
+                                            <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">Yearly Tax Saved (Sec 24b & 80C)</p>
+                                            <span class="tooltip-icon">
+                                                <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                                </svg>
+                                                <span class="tooltip-text">Deductions calculated for Old Tax Regime: Sec 24b (Interest up to ₹2 Lakhs) and Sec 80C (Principal up to ₹1.5 Lakhs). Assumes 31.2% tax slab rate. Zeroed instantly under the New Tax Regime.</span>
+                                            </span>
+                                        </span>
+                                        <span id="taxBenefitDetails" class="text-[9px] text-emerald-800 block leading-tight">Sec 24b: ₹0 | Sec 80C: ₹0</span>
+                                    </div>
+                                    <p id="taxBenefitDisplay" class="text-xs sm:text-sm font-extrabold text-emerald-950">₹0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Graph Card -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-200 flex flex-col justify-center items-center shadow-sm h-36 sm:h-44 relative chart-card print:hidden">
+                            <canvas id="emiDoughnutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMORTIZATION BREAKDOWN SCHEDULE LEDGER Section -->
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                    <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px]">
+                        <span class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                            View Year-on-Year Growth Ledger (Detailed Amortization Schedule)
+                        </span>
+                        <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-800">▼</span>
+                    </button>
+                    
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-4 border-b border-gray-200 pb-3">
+                            <p class="text-[11px] text-gray-700 font-medium">Repayments compiled inside actual calendar-based Indian Financial Years (April to March).</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Export CSV</button>
+                                <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Print PDF</button>
+                            </div>
+                        </div>
+
+                        <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
+                            <table class="w-full text-left border-collapse text-xs ledger-table">
+                                <thead>
+                                    <tr class="border-b border-gray-300 text-gray-900 bg-gray-100">
+                                        <th scope="col" class="p-3 font-extrabold">Year/Period</th>
+                                        <th scope="col" class="p-3 font-extrabold">Principal Repaid</th>
+                                        <th scope="col" class="p-3 font-extrabold">Interest Charged</th>
+                                        <th scope="col" class="p-3 font-extrabold">Total Outflow</th>
+                                        <th scope="col" class="p-3 font-extrabold">Outstanding Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-gray-900">
+                                    <!-- Populated programmatically inside calculations -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sponsorship Links -->
+                <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700">
+                    <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
+                        Invest surplus savings with 5paisa to liquidate debt faster
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Footer Disclaimers -->
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-center text-gray-900 text-[10px] leading-relaxed">
+                    <p class="font-bold text-gray-950 mb-0.5">AMFI & SEBI Regulatory Cautionary Note:</p>
+                    <p class="mb-2">Loan calculations & tax estimations are strictly projected on classical minimizing accounting balance structures. Real interest rates and processing metrics depend directly upon your bank and individual credit profiling trackers.</p>
+                    <p class="text-[9px] text-gray-700 italic"><strong>Disclaimer:</strong> This calculator is designed for illustrative and educational projection purposes only. It does not constitute financial, legal, or tax solicitation. All calculated loan EMI repayments, step-up savings, and income tax benefits under Section 80C and Section 24(b) are estimates subject to changing commercial bank policies, actual credit ratings, and statutory tax rules.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRINT ONLY HIGH-CONTRAST STATEMENT TEMPLATE -->
+        <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
+             <!-- Header -->
+             <div class="text-center border-b-2 border-red-700 pb-4 mb-6">
+                 <h1 class="text-2xl font-extrabold uppercase tracking-wide">Loan Repayment & Amortization Report</h1>
+                 <p class="text-xs text-gray-600 mt-1">Generated electronically on toolblaster.com</p>
+             </div>
+             
+             <!-- Configuration details -->
+             <div class="grid grid-cols-2 gap-6 mb-6">
+                 <!-- Left: Inputs -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Loan Parameters</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Loan Category:</td><td id="printLoanCategory" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Requested Principal:</td><td id="printRequestedPrincipal" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Annual Interest Rate:</td><td id="printInterestRate" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Loan Tenure:</td><td id="printTenure" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowAncillary" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Ancillary Costs:</td><td id="printAncillary" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowStepUp" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Annual Step-Up Rate:</td><td id="printStepUp" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowMoratorium" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Moratorium Months:</td><td id="printMoratorium" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowRateShock" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Floating Rate Shock:</td><td id="printRateShock" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowPrepayments" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Part prepayments applied?</td><td id="printPrepaymentsApplied" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     </table>
+                 </div>
+                 
+                 <!-- Right: Repayment Metrics -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Repayment Projection</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Equated Monthly EMI:</td><td id="printEMIValue" class="text-right py-1.5 font-extrabold text-blue-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Borrowed Principal:</td><td id="printTotalPrincipal" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Reducing Interest:</td><td id="printTotalInterest" class="text-right py-1.5 font-semibold text-green-950">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Cumulative Outflow:</td><td id="printTotalOutflow" class="text-right py-1.5 font-bold text-gray-900">-</td></tr>
+                         <tr id="printRowTax" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Average Annual Tax Saved:</td><td id="printTaxSaved" class="text-right py-1.5 text-emerald-800 font-semibold">-</td></tr>
+                     </table>
+                 </div>
+              </div>
+
+             <!-- Ledger Schedule -->
+             <div>
+                 <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Amortization Ledger Schedule (Financial Years)</h2>
+                 <table class="w-full text-left border-collapse text-xs border">
+                     <thead>
+                         <tr class="border-b bg-gray-100 text-gray-900">
+                             <th class="p-2 border">Year/Period</th>
+                             <th class="p-2 border">Principal Repaid</th>
+                             <th class="p-2 border">Interest Charged</th>
+                             <th class="p-2 border">Total Outflow</th>
+                             <th class="p-2 border">Outstanding Balance</th>
+                         </tr>
+                     </thead>
+                     <tbody id="printLedgerBody" class="divide-y text-gray-900">
+                         <!-- Injected inside JavaScript loops -->
+                     </tbody>
+                 </table>
+             </div>
+
+             <!-- Regulatory Notes -->
+             <div class="mt-8 text-center text-gray-600 text-[9px] border-t pt-4">
+                 <p class="font-semibold">Regulatory Cautionary Disclaimer Statement:</p>
+                 <p class="mt-1">This report is an educational, illustrative projection based on classical minimizing reducing balance accounts. Actual rates, loan covenants, and charges depend on statutory terms of the issuing lender and financial rules under Section 80C and Section 24(b).</p>
+             </div>
+        </div>
+
+        <!-- Share Modal dialog Container -->
+        <div id="shareModal" class="share-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="share-modal-content">
+                <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
+                <h2 id="modalTitle" class="modal-title font-extrabold">Your Structured Repayment Overview</h2>
+                <div id="modalReportContent" class="modal-report-content border-b border-gray-200 pb-2 mb-2"></div>
+                <div class="modal-share-section mt-4">
+                    <label for="shareUrlInput" class="block text-xxs font-bold text-gray-900 mb-1">Shareable Link Reference</label>
+                    <input type="text" id="shareUrlInput" class="share-url-input" readonly>
+                    <div class="modal-actions flex justify-end gap-2">
+                        <button id="copyUrlBtn" class="modal-btn px-4 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold border-none cursor-pointer">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification-toast"></div>
+    </main>
+
+    <script>
+        const configPresets = {
+            'tab-home':     { minP: 500000, maxP: 50000000, valP: 3000000, stepP: 5000, minR: 7,   maxR: 15, valR: 8.5,  minT: 1, maxT: 30, valT: 20, stepT: 1, type: 'Y' },
+            'tab-car':      { minP: 100000, maxP: 5000000,  valP: 800000,  stepP: 5000, minR: 8,   maxR: 18, valR: 9.5,  minT: 1, maxT: 7,  valT: 5,  stepT: 1, type: 'Y' },
+            'tab-bike':     { minP: 20000,  maxP: 500000,   valP: 120000,  stepP: 1000,  minR: 9,   maxR: 24, valR: 12.5, minT: 1, maxT: 5,  valT: 3,  stepT: 1, type: 'Y' },
+            'tab-personal': { minP: 50000,  maxP: 4000000,  valP: 500000,  stepP: 2000,  minR: 10,  maxR: 28, valR: 14.5, minT: 1, maxT: 5,  valT: 3,  stepT: 1, type: 'Y' },
+            'tab-mobile':   { minP: 5000,   maxP: 200000,   valP: 45000,   stepP: 500,  minR: 0,   maxR: 35, valR: 16,   minT: 3, maxT: 36, valT: 12, stepT: 3, type: 'M' }
+        };
+
+        // Reversed Configuration Boundaries for Loan Eligibility Mode
+        const eligibilityLimits = {
+            'tab-home':     { minE: 5000, maxE: 500000, valE: 30000, stepE: 1000 },
+            'tab-car':      { minE: 2000, maxE: 150000, valE: 15000, stepE: 500 },
+            'tab-bike':     { minE: 1000, maxE: 30000,  valE: 5000,  stepE: 250 },
+            'tab-personal': { minE: 2000, maxE: 200000, valE: 15000, stepE: 500 },
+            'tab-mobile':   { minE: 500,  maxE: 25000,  valE: 4000,  stepE: 250 }
+        };
+
+        let currentActiveTab = 'tab-home';
+        let emiDoughnutChart;
+        let isPowerUserActive = false;
+        let selectedTaxRegime = 'old'; // 'old' or 'new'
+        let cachedSchedule = [];
+        let isEligibilityMode = false; // 'EMI' Mode by default, flips to 'Eligibility' Mode on request
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(Math.round(num));
+        }
+
+        function convertToIndianWords(value) {
+            if (isNaN(value) || value <= 0) return "";
+            if (value >= 10000000) return `(₹${(value / 10000000).toFixed(2)} Crore)`;
+            if (value >= 100000) return `(₹${(value / 100000).toFixed(2)} Lakh)`;
+            if (value >= 1000) return `(₹${(value / 1000).toFixed(1)} K)`;
+            return `(₹${value})`;
+        }
+
+        function updateSliderFill(slider) {
+            if (!slider) return;
+            const percentage = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            slider.style.setProperty('--fill-percentage', `${percentage}%`);
+        }
+
+        function triggerCalculation() {
+            const rawP = Math.max(0, parseFloat(document.getElementById('loanAmountInput').value) || 0);
+            const annualR = Math.max(0, parseFloat(document.getElementById('loanInterestInput').value) || 0);
+            const T = Math.max(1, parseFloat(document.getElementById('loanTenureInput').value) || 1);
+
+            const isMonthlyTenure = configPresets[currentActiveTab].type === 'M';
+            const totalMonths = isMonthlyTenure ? T : T * 12;
+            const baseMonthlyR = (annualR / 12) / 100;
+
+            let basicP = rawP;
+            let targetEmi = 0;
+
+            if (isEligibilityMode) {
+                // REVERSE CALCULATOR LOGIC (Finding Maximum Principal P from Target monthly EMI E)
+                const E = rawP; // In Eligibility mode, the principal slider acts as Target EMI input
+                if (baseMonthlyR === 0) {
+                    basicP = E * totalMonths;
+                } else {
+                    basicP = E * (Math.pow(1 + baseMonthlyR, totalMonths) - 1) / (baseMonthlyR * Math.pow(1 + baseMonthlyR, totalMonths));
+                }
+                targetEmi = E;
+            } else {
+                // NORMAL CALCULATOR LOGIC
+                if (basicP > 0) {
+                    if (baseMonthlyR === 0) {
+                        targetEmi = basicP / totalMonths;
+                    } else {
+                        targetEmi = basicP * baseMonthlyR * Math.pow(1 + baseMonthlyR, totalMonths) / (Math.pow(1 + baseMonthlyR, totalMonths) - 1);
+                    }
+                }
+            }
+
+            // Read advanced power-user parameters if settings block is active
+            let ancillaryCostPct = 0;
+            let stepUpRate = 0;
+            let moratoriumMonths = 0;
+            let rateShockAmount = 0;
+            let rateShockYear = 3;
+            let recurringPrepayment = 0;
+            let lumpsumPrepayment = 0;
+            let lumpsumYear = 2;
+
+            if (isPowerUserActive) {
+                ancillaryCostPct = Math.max(0, parseFloat(document.getElementById('ancillaryCostInput').value) || 0);
+                stepUpRate = isEligibilityMode ? 0 : Math.max(0, parseFloat(document.getElementById('stepUpRateInput').value) || 0); // Disable Step-Up inside Reverse mode to prevent recursive loops
+                moratoriumMonths = Math.max(0, parseInt(document.getElementById('moratoriumInput').value) || 0);
+                rateShockAmount = Math.max(0, parseFloat(document.getElementById('rateShockAmountInput').value) || 0);
+                rateShockYear = Math.max(1, parseInt(document.getElementById('rateShockYearInput').value) || 3);
+                recurringPrepayment = Math.max(0, parseFloat(document.getElementById('recurringPrepayInput').value) || 0);
+                lumpsumPrepayment = Math.max(0, parseFloat(document.getElementById('lumpsumPrepayInput').value) || 0);
+                lumpsumYear = Math.max(1, parseInt(document.getElementById('lumpsumPrepayYearInput').value) || 2);
+            }
+
+            // Adjust actual simulated principal P based on bundled ancillary stamp duty / registration / insurance costs
+            const P = basicP * (1 + (ancillaryCostPct / 100));
+
+            // Recalculate monthly rates when interest shock is simulated
+            const shockedAnnualR = annualR + rateShockAmount;
+            const shockedMonthlyR = (shockedAnnualR / 12) / 100;
+
+            // Running Month-on-Month amortization simulation with step-up & prepayments
+            let remainingBalance = P;
+            let totalInterestPaid = 0;
+            let schedule = [];
+            let activeEmi = targetEmi;
+            let finalMonthsElapsed = 0;
+
+            // Handles compound capitalization of skipped moratorium interest
+            if (moratoriumMonths > 0 && moratoriumMonths < totalMonths) {
+                for (let m = 1; m <= moratoriumMonths; m++) {
+                    let interestThisMonth = remainingBalance * baseMonthlyR;
+                    remainingBalance += interestThisMonth;
+                    totalInterestPaid += interestThisMonth;
+                    schedule.push({
+                        month: m,
+                        principalRepaid: 0,
+                        interestCharged: interestThisMonth,
+                        totalPaid: 0,
+                        balance: remainingBalance
+                    });
+                }
+
+                // Recalculate adjusted EMI after Moratorium period
+                const remainingMonths = totalMonths - moratoriumMonths;
+                if (baseMonthlyR === 0) {
+                    activeEmi = remainingBalance / remainingMonths;
+                } else {
+                    activeEmi = remainingBalance * baseMonthlyR * Math.pow(1 + baseMonthlyR, remainingMonths) / (Math.pow(1 + baseMonthlyR, remainingMonths) - 1);
+                }
+            }
+
+            const startMonth = moratoriumMonths + 1;
+            let currentEmiPaid = activeEmi;
+
+            for (let m = startMonth; m <= totalMonths; m++) {
+                if (remainingBalance <= 0) break;
+
+                finalMonthsElapsed = m;
+
+                // Adjust interest rate for floating interest rate shock events
+                let currentMonthlyR = baseMonthlyR;
+                if (rateShockAmount > 0 && m > (rateShockYear * 12)) {
+                    currentMonthlyR = shockedMonthlyR;
+                }
+
+                // Apply stepped-up payments annually (e.g. Month 13, 25, 37...)
+                if (stepUpRate > 0 && m > startMonth && ((m - startMonth) % 12 === 0)) {
+                    currentEmiPaid = currentEmiPaid * (1 + (stepUpRate / 100));
+                }
+
+                let interestThisMonth = remainingBalance * currentMonthlyR;
+                let principalThisMonth = currentEmiPaid - interestThisMonth;
+
+                // Apply Prepayments (Annual recurring & Scheduled one-time lumpsum)
+                let extraPrincipalRepayment = 0;
+                if (recurringPrepayment > 0 && m > startMonth && ((m - startMonth) % 12 === 0)) {
+                    extraPrincipalRepayment += recurringPrepayment;
+                }
+                if (lumpsumPrepayment > 0 && m === (lumpsumYear * 12)) {
+                    extraPrincipalRepayment += lumpsumPrepayment;
+                }
+
+                principalThisMonth += extraPrincipalRepayment;
+
+                if (principalThisMonth > remainingBalance) {
+                    principalThisMonth = remainingBalance;
+                    currentEmiPaid = principalThisMonth + interestThisMonth;
+                } else {
+                    currentEmiPaid = (currentEmiPaid - extraPrincipalRepayment) + principalThisMonth;
+                }
+
+                remainingBalance -= principalThisMonth;
+                totalInterestPaid += interestThisMonth;
+
+                schedule.push({
+                    month: m,
+                    principalRepaid: principalThisMonth,
+                    interestCharged: interestThisMonth,
+                    totalPaid: currentEmiPaid,
+                    balance: Math.max(0, remainingBalance)
+                });
+            }
+
+            cachedSchedule = schedule;
+
+            // Power-User Dynamic Advisory Badge Output (Displays savings from prepayments/stepups)
+            const powerSavingsBadge = document.getElementById('powerSavingsBadge');
+            if (isPowerUserActive && (stepUpRate > 0 || moratoriumMonths > 0 || recurringPrepayment > 0 || lumpsumPrepayment > 0)) {
+                powerSavingsBadge.classList.remove('hidden');
+                
+                let normalInterest = 0;
+                if (baseMonthlyR === 0) {
+                    normalInterest = 0;
+                } else {
+                    const normalTotalRepayment = activeEmi * (totalMonths - moratoriumMonths);
+                    normalInterest = Math.max(0, normalTotalRepayment - P);
+                }
+
+                if ((stepUpRate > 0 || recurringPrepayment > 0 || lumpsumPrepayment > 0) && finalMonthsElapsed < totalMonths) {
+                    const monthsSaved = totalMonths - finalMonthsElapsed;
+                    const interestSaved = Math.max(0, normalInterest - totalInterestPaid);
+                    powerSavingsBadge.innerHTML = `🚀 <strong>Foreclosure Accelerator Active!</strong> You cut your tenure by <span class="font-extrabold">${monthsSaved} months</span> and saved <span class="font-extrabold">${formatCurrency(interestSaved)}</span> in interest outflow.`;
+                } else if (moratoriumMonths > 0) {
+                    powerSavingsBadge.innerHTML = `🏖️ <strong>Moratorium Active!</strong> Skipping ${moratoriumMonths} months added <span class="font-extrabold">${formatCurrency(totalInterestPaid - normalInterest)}</span> to your total interest due to compound capitalization.`;
+                } else {
+                    powerSavingsBadge.classList.add('hidden');
+                }
+            } else {
+                powerSavingsBadge.classList.add('hidden');
+            }
+
+            // Summary Metric display mapping (Alters depending on active Mode)
+            document.getElementById('totalInvestment').textContent = formatCurrency(P);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterestPaid);
+            
+            if (isEligibilityMode) {
+                document.getElementById('targetValueCardTitle').textContent = "Eligible Loan Principal";
+                document.getElementById('maturityValue').textContent = formatCurrency(basicP);
+            } else {
+                document.getElementById('targetValueCardTitle').textContent = "Calculated Monthly Loan EMI";
+                document.getElementById('maturityValue').textContent = `${formatCurrency(activeEmi)} / Month`;
+            }
+
+            // Tax Benefit Calculator Logic (Section 24b and Section 80C)
+            const taxBenefitCard = document.getElementById('taxBenefitCard');
+            let totalTaxSaved = 0;
+            let interestTaxSaved = 0;
+            let principalTaxSaved = 0;
+
+            if (currentActiveTab === 'tab-home' && selectedTaxRegime === 'old') {
+                taxBenefitCard.style.display = 'flex';
+                const avgAnnualInterest = Math.min(200000, totalInterestPaid / (totalMonths / 12));
+                interestTaxSaved = avgAnnualInterest * 0.312;
+
+                const avgAnnualPrincipal = Math.min(150000, P / (totalMonths / 12));
+                principalTaxSaved = avgAnnualPrincipal * 0.312;
+
+                totalTaxSaved = interestTaxSaved + principalTaxSaved;
+
+                document.getElementById('taxBenefitDetails').innerHTML = `Sec 24b: ${formatCurrency(interestTaxSaved)} | Sec 80C: ${formatCurrency(principalTaxSaved)}`;
+                document.getElementById('taxBenefitDisplay').textContent = formatCurrency(totalTaxSaved);
+            } else {
+                taxBenefitCard.style.display = 'none';
+            }
+
+            // Doughnut Chart update mapping
+            const graphContainer = document.getElementById('emiDoughnutChart');
+            const chartData = [P, totalInterestPaid];
+            if (emiDoughnutChart) {
+                emiDoughnutChart.data.datasets[0].data = chartData;
+                emiDoughnutChart.update();
+            } else {
+                emiDoughnutChart = new Chart(graphContainer.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Principal Amount', 'Total Interest'],
+                        datasets: [{ data: chartData, backgroundColor: ['#2563EB', '#16A34A'], hoverOffset: 4 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
+
+            // POPULATING COMPREHENSIVE PRINT PREVIEW DOCUMENT
+            const activeTabName = document.getElementById(currentActiveTab).textContent;
+            document.getElementById('printLoanCategory').textContent = activeTabName;
+            document.getElementById('printRequestedPrincipal').textContent = formatCurrency(basicP);
+            document.getElementById('printInterestRate').textContent = `${annualR}% p.a.`;
+            document.getElementById('printTenure').textContent = `${T} ${isMonthlyTenure ? 'Months' : 'Years'}`;
+
+            if (isPowerUserActive) {
+                if (ancillaryCostPct > 0) {
+                    document.getElementById('printRowAncillary').classList.remove('hidden');
+                    document.getElementById('printAncillary').textContent = `${ancillaryCostPct}% (₹${formatCurrency(basicP * ancillaryCostPct / 100)})`;
+                } else {
+                    document.getElementById('printRowAncillary').classList.add('hidden');
+                }
+                if (stepUpRate > 0) {
+                    document.getElementById('printRowStepUp').classList.remove('hidden');
+                    document.getElementById('printStepUp').textContent = `${stepUpRate}% Annually`;
+                } else {
+                    document.getElementById('printRowStepUp').classList.add('hidden');
+                }
+                if (moratoriumMonths > 0) {
+                    document.getElementById('printRowMoratorium').classList.remove('hidden');
+                    document.getElementById('printMoratorium').textContent = `${moratoriumMonths} Months`;
+                } else {
+                    document.getElementById('printRowMoratorium').classList.add('hidden');
+                }
+                if (rateShockAmount > 0) {
+                    document.getElementById('printRowRateShock').classList.remove('hidden');
+                    document.getElementById('printRateShock').textContent = `+${rateShockAmount}% Starting Yr ${rateShockYear}`;
+                } else {
+                    document.getElementById('printRowRateShock').classList.add('hidden');
+                }
+                if (recurringPrepayment > 0 || lumpsumPrepayment > 0) {
+                    document.getElementById('printRowPrepayments').classList.remove('hidden');
+                    document.getElementById('printPrepaymentsApplied').textContent = `Yes (Annual: ${formatCurrency(recurringPrepayment)}, Lumpsum: ${formatCurrency(lumpsumPrepayment)})`;
+                } else {
+                    document.getElementById('printRowPrepayments').classList.add('hidden');
+                }
+            } else {
+                document.getElementById('printRowAncillary').classList.add('hidden');
+                document.getElementById('printRowStepUp').classList.add('hidden');
+                document.getElementById('printRowMoratorium').classList.add('hidden');
+                document.getElementById('printRowRateShock').classList.add('hidden');
+                document.getElementById('printRowPrepayments').classList.add('hidden');
+            }
+
+            document.getElementById('printEMIValue').textContent = `${formatCurrency(activeEmi)} / Month`;
+            document.getElementById('printTotalPrincipal').textContent = formatCurrency(P);
+            document.getElementById('printTotalInterest').textContent = formatCurrency(totalInterestPaid);
+            document.getElementById('printTotalOutflow').textContent = formatCurrency(P + totalInterestPaid);
+
+            if (currentActiveTab === 'tab-home' && selectedTaxRegime === 'old') {
+                document.getElementById('printRowTax').classList.remove('hidden');
+                document.getElementById('printTaxSaved').textContent = formatCurrency(totalTaxSaved);
+            } else {
+                document.getElementById('printRowTax').classList.add('hidden');
+            }
+
+            renderAmortizationLedger(schedule, isMonthlyTenure);
+        }
+
+        function renderAmortizationLedger(schedule, isMonthlyTenure) {
+            const tableBody = document.getElementById('ledgerTableBody');
+            const printTableBody = document.getElementById('printLedgerBody');
+            
+            tableBody.innerHTML = '';
+            printTableBody.innerHTML = '';
+
+            if (schedule.length === 0) return;
+
+            // Fetch start Month & Year from Date selectors
+            const startMonthZeroBased = parseInt(document.getElementById('loanStartMonth').value);
+            const startYear = parseInt(document.getElementById('loanStartYear').value);
+
+            if (isMonthlyTenure) {
+                // Populate month-on-month schedule for mobile EMI
+                schedule.forEach(row => {
+                    let currentMonthIndex = startMonthZeroBased + row.month - 1;
+                    let calendarMonth = currentMonthIndex % 12;
+                    let calendarYear = startYear + Math.floor(currentMonthIndex / 12);
+                    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                    const rowHtml = `
+                        <td class="p-3 font-semibold text-gray-900">${monthNames[calendarMonth]} ${calendarYear}</td>
+                        <td class="p-3">${formatCurrency(row.principalRepaid)}</td>
+                        <td class="p-3 text-red-900">${formatCurrency(row.interestCharged)}</td>
+                        <td class="p-3 font-medium">${formatCurrency(row.totalPaid)}</td>
+                        <td class="p-3 text-indigo-900 font-bold">${formatCurrency(row.balance)}</td>
+                    `;
+                    
+                    const screenTr = document.createElement('tr');
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.innerHTML = rowHtml;
+                    tableBody.appendChild(screenTr);
+
+                    const printTr = document.createElement('tr');
+                    printTr.className = "border-b border-gray-200";
+                    printTr.innerHTML = rowHtml;
+                    printTableBody.appendChild(printTr);
+                });
+            } else {
+                // Compiles monthly rows inside actual calendar Indian Financial Years (April to March)
+                let fyMap = {};
+
+                schedule.forEach(row => {
+                    let currentMonthIndex = startMonthZeroBased + row.month - 1;
+                    let calendarMonth = currentMonthIndex % 12;
+                    let calendarYear = startYear + Math.floor(currentMonthIndex / 12);
+
+                    // Indian Financial Year rule mapping: April starts a new fiscal cycle
+                    let fiscalYearStart = (calendarMonth >= 3) ? calendarYear : calendarYear - 1;
+                    let fyLabel = `FY ${fiscalYearStart}-${String(fiscalYearStart + 1).slice(-2)}`;
+
+                    if (!fyMap[fyLabel]) {
+                        fyMap[fyLabel] = {
+                            label: fyLabel,
+                            principalPaid: 0,
+                            interestCharged: 0,
+                            totalOutflow: 0,
+                            finalBalance: 0
+                        };
+                    }
+
+                    fyMap[fyLabel].principalPaid += row.principalRepaid;
+                    fyMap[fyLabel].interestCharged += row.interestCharged;
+                    fyMap[fyLabel].totalOutflow += row.totalPaid;
+                    fyMap[fyLabel].finalBalance = row.balance; // Closing balance of the last month of that FY
+                });
+
+                Object.keys(fyMap).forEach(key => {
+                    const fy = fyMap[key];
+                    const rowHtml = `
+                        <td class="p-3 font-semibold text-gray-900">${fy.label}</td>
+                        <td class="p-3">${formatCurrency(fy.principalPaid)}</td>
+                        <td class="p-3 text-red-900">${formatCurrency(fy.interestCharged)}</td>
+                        <td class="p-3 font-medium">${formatCurrency(fy.totalOutflow)}</td>
+                        <td class="p-3 text-indigo-900 font-bold">${formatCurrency(fy.finalBalance)}</td>
+                    `;
+
+                    const screenTr = document.createElement('tr');
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.innerHTML = rowHtml;
+                    tableBody.appendChild(screenTr);
+
+                    const printTr = document.createElement('tr');
+                    printTr.className = "border-b border-gray-200";
+                    printTr.innerHTML = rowHtml;
+                    printTableBody.appendChild(printTr);
+                });
+            }
+        }
+
+        function switchLoanTab(tabId) {
+            currentActiveTab = tabId;
+            document.querySelectorAll('.loan-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            const clickedButton = document.getElementById(tabId);
+            clickedButton.classList.add('active');
+            clickedButton.setAttribute('aria-selected', 'true');
+
+            // Set visual step-up configurations
+            const stepUpInput = document.getElementById('stepUpRateInput');
+            if (stepUpInput) {
+                if (isEligibilityMode) {
+                    stepUpInput.value = "0";
+                    stepUpInput.disabled = true;
+                    stepUpInput.closest('.bg-indigo-50\\/70').classList.add('opacity-40');
+                } else {
+                    stepUpInput.disabled = false;
+                    stepUpInput.closest('.bg-indigo-50\\/70').classList.remove('opacity-40');
+                }
+            }
+
+            const preset = configPresets[tabId];
+            const eligPreset = eligibilityLimits[tabId];
+            
+            // Reconfigure Labels based on tenure unit (Years vs Months)
+            const tenureLabel = document.querySelector('label[for="loanTenureInput"]');
+            tenureLabel.textContent = preset.type === 'M' ? 'Repayment Period Tenure (Months)' : 'Repayment Period Tenure (Years)';
+
+            // Re-assign boundaries mapping safely
+            const pLabel = document.getElementById('loanAmountLabel');
+            const pSlider = document.getElementById('loanAmountSlider');
+            const pInput = document.getElementById('loanAmountInput');
+            const pTooltip = document.getElementById('loanAmountTooltipText');
+
+            if (isEligibilityMode) {
+                pLabel.textContent = "Target Monthly Budget (₹)";
+                pSlider.min = eligPreset.minE; pSlider.max = eligPreset.maxE; pSlider.value = eligPreset.valE; pSlider.step = eligPreset.stepE;
+                pInput.min = eligPreset.minE; pInput.max = eligPreset.maxE; pInput.value = eligPreset.valE; pInput.step = eligPreset.stepE;
+                document.getElementById('totalInvestmentCardTitle').textContent = "Calculated Sanctioned Principal";
+                if (pTooltip) pTooltip.textContent = "Enter your desired target monthly EMI budget. The calculator will reverse-engineer the max eligible loan amount.";
+            } else {
+                pLabel.textContent = "Sanctioned Principal (₹)";
+                pSlider.min = preset.minP; pSlider.max = preset.maxP; pSlider.value = preset.valP; pSlider.step = preset.stepP;
+                pInput.min = preset.minP; pInput.max = preset.maxP; pInput.value = preset.valP; pInput.step = preset.stepP;
+                document.getElementById('totalInvestmentCardTitle').textContent = "Sanctioned Principal";
+                if (pTooltip) pTooltip.textContent = "The sanctioned loan principal capital sanctioned by the lending bank.";
+            }
+
+            const iSlider = document.getElementById('loanInterestSlider');
+            const iInput = document.getElementById('loanInterestInput');
+            iSlider.min = preset.minR; iSlider.max = preset.maxR; iSlider.value = preset.valR;
+            iInput.min = preset.minR; iInput.max = preset.maxR; iInput.value = preset.valR;
+
+            const tSlider = document.getElementById('loanTenureSlider');
+            const tInput = document.getElementById('loanTenureInput');
+            tSlider.min = preset.minT; tSlider.max = preset.maxT; tSlider.value = preset.valT; tSlider.step = preset.stepT;
+            tInput.min = preset.minT; tInput.max = preset.maxT; tInput.value = preset.valT; tInput.step = preset.stepT;
+
+            const currentVal = isEligibilityMode ? eligPreset.valE : preset.valP;
+            document.getElementById('loanAmountWord').textContent = convertToIndianWords(currentVal);
+
+            updateSliderFill(pSlider);
+            updateSliderFill(iSlider);
+            updateSliderFill(tSlider);
+
+            triggerCalculation();
+        }
+
+        function setupSyncFramework(sliderId, inputId, decId, incId, wordId) {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            const dec = document.getElementById(decId);
+            const inc = document.getElementById(incId);
+
+            const performSync = () => {
+                let val = parseFloat(input.value);
+                if (isNaN(val)) {
+                    val = parseFloat(input.min) || 0;
+                }
+                const clampedVal = Math.max(parseFloat(input.min) || 0, Math.min(parseFloat(input.max) || Infinity, val));
+                slider.value = clampedVal;
+                updateSliderFill(slider);
+                if (wordId) {
+                    document.getElementById(wordId).textContent = convertToIndianWords(clampedVal);
+                }
+                triggerCalculation();
+            };
+
+            slider.addEventListener('input', () => {
+                input.value = slider.value;
+                performSync();
+            });
+
+            input.addEventListener('input', () => {
+                let tempVal = parseFloat(input.value);
+                if (tempVal < 0) {
+                    input.value = 0;
+                }
+                performSync();
+            });
+
+            input.addEventListener('blur', () => {
+                let val = parseFloat(input.value);
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || Infinity;
+                if (isNaN(val) || input.value.trim() === '' || val < min) {
+                    input.value = min;
+                } else if (val > max) {
+                    input.value = max;
+                }
+                performSync();
+            });
+
+            dec.addEventListener('click', () => {
+                const min = parseFloat(input.min) || 0;
+                const step = parseFloat(input.step) || 1;
+                let currentVal = parseFloat(input.value) || min;
+                input.value = Math.max(min, currentVal - step);
+                performSync();
+            });
+
+            inc.addEventListener('click', () => {
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || Infinity;
+                const step = parseFloat(input.step) || 1;
+                let currentVal = parseFloat(input.value) || min;
+                input.value = Math.min(max, currentVal + step);
+                performSync();
+            });
+
+            updateSliderFill(slider);
+        }
+
+        // CSV Export Tool
+        function exportToCSV() {
+            if (cachedSchedule.length === 0) return;
+            let csvRows = [["Period", "Principal Repaid (₹)", "Interest Charged (₹)", "Total Repayment (₹)", "Outstanding Balance (₹)"]];
+            cachedSchedule.forEach(row => {
+                csvRows.push([`Month ${row.month}`, Math.round(row.principalRepaid), Math.round(row.interestCharged), Math.round(row.totalPaid), Math.round(row.balance)]);
+            });
+            const csvContent = "data:text/csv;charset=utf-8," + csvRows.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Loan_Repayment_Amortization_Schedule.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function showNotification(message) {
+            const toast = document.getElementById('notification-toast');
+            if (toast) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function loadFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            
+            // Set dynamic date pickers to 2026/Current Month default standard values
+            if (params.has('sd')) {
+                const [y, m] = params.get('sd').split('-').map(Number);
+                document.getElementById('loanStartYear').value = y;
+                document.getElementById('loanStartMonth').value = m - 1;
+            } else {
+                const now = new Date();
+                document.getElementById('loanStartYear').value = now.getFullYear();
+                document.getElementById('loanStartMonth').value = now.getMonth();
+            }
+
+            if (params.get('mode') === 'eligibility') {
+                isEligibilityMode = true;
+                const modeEmiBtn = document.getElementById('modeEmiBtn');
+                const modeEligibleBtn = document.getElementById('modeEligibleBtn');
+                modeEmiBtn.className = "flex-1 py-1.5 text-xxs font-bold rounded-lg text-gray-800 text-center transition-all duration-200";
+                modeEmiBtn.setAttribute('aria-pressed', 'false');
+                modeEligibleBtn.className = "flex-1 py-1.5 text-xxs font-extrabold rounded-lg text-white bg-blue-900 shadow text-center transition-all duration-200";
+                modeEligibleBtn.setAttribute('aria-pressed', 'true');
+            }
+
+            if (params.has('tab')) {
+                const tabId = params.get('tab');
+                if (configPresets[tabId]) {
+                    currentActiveTab = tabId;
+                }
+            }
+            
+            switchLoanTab(currentActiveTab);
+
+            if (params.has('p')) {
+                document.getElementById('loanAmountInput').value = params.get('p');
+                document.getElementById('loanAmountSlider').value = params.get('p');
+            }
+            if (params.has('r')) {
+                document.getElementById('loanInterestInput').value = params.get('r');
+                document.getElementById('loanInterestSlider').value = params.get('r');
+            }
+            if (params.has('t')) {
+                document.getElementById('loanTenureInput').value = params.get('t');
+                document.getElementById('loanTenureSlider').value = params.get('t');
+            }
+
+            if (params.get('pu') === 'true') {
+                document.getElementById('powerUserToggle').checked = true;
+                isPowerUserActive = true;
+                document.getElementById('advancedSettingsPanel').classList.remove('hidden');
+                
+                if (params.has('su')) document.getElementById('stepUpRateInput').value = params.get('su');
+                if (params.has('mo')) document.getElementById('moratoriumInput').value = params.get('mo');
+                if (params.has('ac')) document.getElementById('ancillaryCostInput').value = params.get('ac');
+                if (params.has('rs')) document.getElementById('rateShockAmountInput').value = params.get('rs');
+                if (params.has('ry')) document.getElementById('rateShockYearInput').value = params.get('ry');
+                if (params.has('rcp')) document.getElementById('recurringPrepayInput').value = params.get('rcp');
+                if (params.has('lsp')) document.getElementById('lumpsumPrepayInput').value = params.get('lsp');
+                if (params.has('lsy')) document.getElementById('lumpsumPrepayYearInput').value = params.get('lsy');
+                
+                if (params.has('tr')) {
+                    selectedTaxRegime = params.get('tr');
+                    if (selectedTaxRegime === 'new') {
+                        document.getElementById('regimeNewBtn').click();
+                    } else {
+                        document.getElementById('regimeOldBtn').click();
+                    }
+                }
+            }
+
+            // Sync slider positions and recalculate
+            updateSliderFill(document.getElementById('loanAmountSlider'));
+            updateSliderFill(document.getElementById('loanInterestSlider'));
+            updateSliderFill(document.getElementById('loanTenureSlider'));
+            triggerCalculation();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSyncFramework('loanAmountSlider', 'loanAmountInput', 'loanAmountDecrement', 'loanAmountIncrement', 'loanAmountWord');
+            setupSyncFramework('loanInterestSlider', 'loanInterestInput', 'loanInterestDecrement', 'loanInterestIncrement', null);
+            setupSyncFramework('loanTenureSlider', 'loanTenureInput', 'loanTenureDecrement', 'loanTenureIncrement', null);
+
+            document.querySelectorAll('.loan-tab-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => switchLoanTab(e.target.id));
+            });
+
+            // Date picker dropdown selection changed listeners
+            document.getElementById('loanStartMonth').addEventListener('change', triggerCalculation);
+            document.getElementById('loanStartYear').addEventListener('change', triggerCalculation);
+
+            // Calculation Mode Handlers
+            const modeEmiBtn = document.getElementById('modeEmiBtn');
+            const modeEligibleBtn = document.getElementById('modeEligibleBtn');
+
+            modeEmiBtn.addEventListener('click', () => {
+                if (isEligibilityMode) {
+                    isEligibilityMode = false;
+                    modeEmiBtn.className = "flex-1 py-1.5 text-xxs font-extrabold rounded-lg text-white bg-blue-900 shadow text-center transition-all duration-200";
+                    modeEmiBtn.setAttribute('aria-pressed', 'true');
+                    modeEligibleBtn.className = "flex-1 py-1.5 text-xxs font-bold rounded-lg text-gray-800 text-center transition-all duration-200";
+                    modeEligibleBtn.setAttribute('aria-pressed', 'false');
+                    switchLoanTab(currentActiveTab);
+                }
+            });
+
+            modeEligibleBtn.addEventListener('click', () => {
+                if (!isEligibilityMode) {
+                    isEligibilityMode = true;
+                    modeEligibleBtn.className = "flex-1 py-1.5 text-xxs font-extrabold rounded-lg text-white bg-blue-900 shadow text-center transition-all duration-200";
+                    modeEligibleBtn.setAttribute('aria-pressed', 'true');
+                    modeEmiBtn.className = "flex-1 py-1.5 text-xxs font-bold rounded-lg text-gray-800 text-center transition-all duration-200";
+                    modeEmiBtn.setAttribute('aria-pressed', 'false');
+                    switchLoanTab(currentActiveTab);
+                }
+            });
+
+            // Toggle power user panel
+            const powerUserToggle = document.getElementById('powerUserToggle');
+            const advancedSettingsPanel = document.getElementById('advancedSettingsPanel');
+            powerUserToggle.addEventListener('change', () => {
+                isPowerUserActive = powerUserToggle.checked;
+                advancedSettingsPanel.classList.toggle('hidden', !isPowerUserActive);
+                triggerCalculation();
+            });
+
+            // Handle tax regime buttons
+            const regimeOldBtn = document.getElementById('regimeOldBtn');
+            const regimeNewBtn = document.getElementById('regimeNewBtn');
+            regimeOldBtn.addEventListener('click', () => {
+                selectedTaxRegime = 'old';
+                regimeOldBtn.classList.add('bg-emerald-800', 'text-white', 'shadow');
+                regimeOldBtn.classList.remove('text-emerald-950');
+                regimeNewBtn.classList.remove('bg-emerald-800', 'text-white', 'shadow');
+                regimeNewBtn.classList.add('text-emerald-950');
+                triggerCalculation();
+            });
+            regimeNewBtn.addEventListener('click', () => {
+                selectedTaxRegime = 'new';
+                regimeNewBtn.classList.add('bg-emerald-800', 'text-white', 'shadow');
+                regimeNewBtn.classList.remove('text-emerald-950');
+                regimeOldBtn.classList.remove('bg-emerald-800', 'text-white', 'shadow');
+                regimeOldBtn.classList.add('text-emerald-950');
+                triggerCalculation();
+            });
+
+            // Add standard input listeners to Advanced controls
+            const advControlIds = ['stepUpRateInput', 'moratoriumInput', 'ancillaryCostInput', 'rateShockAmountInput', 'rateShockYearInput', 'recurringPrepayInput', 'lumpsumPrepayInput', 'lumpsumPrepayYearInput'];
+            advControlIds.forEach(id => {
+                const elem = document.getElementById(id);
+                elem.addEventListener('input', () => {
+                    let val = parseFloat(elem.value);
+                    if (val < 0) {
+                        elem.value = 0; // Prevent negative keystrokes instantly
+                    }
+                    triggerCalculation();
+                });
+                elem.addEventListener('blur', () => {
+                    let val = parseFloat(elem.value);
+                    const min = parseFloat(elem.min) || 0;
+                    const max = parseFloat(elem.max) || Infinity;
+                    if (isNaN(val) || elem.value.trim() === '' || val < min) {
+                        elem.value = min;
+                    } else if (val > max) {
+                        elem.value = max;
+                    }
+                    triggerCalculation();
+                });
+            });
+
+            document.getElementById('toggleLedgerBtn').addEventListener('click', () => {
+                const content = document.getElementById('ledgerContent');
+                const isHidden = content.classList.toggle('hidden');
+                document.getElementById('ledgerChevron').style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+
+            document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+            document.getElementById('printPdfBtn').addEventListener('click', () => window.print());
+
+            // Dialog Modal Handlers
+            const modal = document.getElementById('shareModal');
+            document.getElementById('shareReportBtn').addEventListener('click', () => {
+                // Build dynamic query parameters for sharing
+                const params = new URLSearchParams();
+                params.set('tab', currentActiveTab);
+                params.set('p', document.getElementById('loanAmountInput').value);
+                params.set('r', document.getElementById('loanInterestInput').value);
+                params.set('t', document.getElementById('loanTenureInput').value);
+                
+                // Get selected Start Date string formatted
+                const sdYearVal = document.getElementById('loanStartYear').value;
+                const sdMonthVal = String(Number(document.getElementById('loanStartMonth').value) + 1).padStart(2, '0');
+                params.set('sd', `${sdYearVal}-${sdMonthVal}`);
+
+                if (isEligibilityMode) {
+                    params.set('mode', 'eligibility');
+                }
+                
+                if (isPowerUserActive) {
+                    params.set('pu', 'true');
+                    params.set('su', document.getElementById('stepUpRateInput').value);
+                    params.set('mo', document.getElementById('moratoriumInput').value);
+                    params.set('ac', document.getElementById('ancillaryCostInput').value);
+                    params.set('rs', document.getElementById('rateShockAmountInput').value);
+                    params.set('ry', document.getElementById('rateShockYearInput').value);
+                    params.set('rcp', document.getElementById('recurringPrepayInput').value);
+                    params.set('lsp', document.getElementById('lumpsumPrepayInput').value);
+                    params.set('lsy', document.getElementById('lumpsumPrepayYearInput').value);
+                    params.set('tr', selectedTaxRegime);
+                }
+                
+                const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+                document.getElementById('shareUrlInput').value = shareUrl;
+
+                // Build HTML Report Summary to show inside modal
+                const activeTabName = document.getElementById(currentActiveTab).textContent;
+                const inputLabelName = isEligibilityMode ? "Target Monthly Budget" : "Sanctioned Principal";
+                const loanAmountVal = formatCurrency(parseFloat(document.getElementById('loanAmountInput').value));
+                const interestRateVal = document.getElementById('loanInterestInput').value + "%";
+                const tenureText = document.getElementById('loanTenureInput').value + (configPresets[currentActiveTab].type === 'M' ? " Months" : " Years");
+                const mainTargetVal = document.getElementById('maturityValue').textContent.split(" / ")[0];
+                const totalP = document.getElementById('totalInvestment').textContent;
+                const totalI = document.getElementById('totalInterest').textContent;
+
+                let extraReportHtml = '';
+                if (isPowerUserActive) {
+                    const stepUpVal = document.getElementById('stepUpRateInput').value;
+                    const morMonths = document.getElementById('moratoriumInput').value;
+                    const shockAmount = document.getElementById('rateShockAmountInput').value;
+                    const recurPrepay = document.getElementById('recurringPrepayInput').value;
+                    const lumpPrepay = document.getElementById('lumpsumPrepayInput').value;
+
+                    if (parseFloat(stepUpVal) > 0 && !isEligibilityMode) extraReportHtml += `<li class="flex justify-between border-b border-gray-100 pb-1"><span class="text-xxs text-gray-900 font-extrabold">Annual Step-Up:</span><span class="text-xxs font-extrabold text-gray-900">${stepUpVal}%</span></li>`;
+                    if (parseInt(morMonths) > 0) extraReportHtml += `<li class="flex justify-between border-b border-gray-100 pb-1"><span class="text-xxs text-gray-900 font-extrabold">Moratorium skipped:</span><span class="text-xxs font-extrabold text-gray-900">${morMonths} months</span></li>`;
+                    if (parseFloat(shockAmount) > 0) extraReportHtml += `<li class="flex justify-between border-b border-gray-100 pb-1"><span class="text-xxs text-gray-900 font-extrabold">Interest Rate Shock:</span><span class="text-xxs font-extrabold text-gray-900">+${shockAmount}%</span></li>`;
+                    if (parseFloat(recurPrepay) > 0) extraReportHtml += `<li class="flex justify-between border-b border-gray-100 pb-1"><span class="text-xxs text-gray-900 font-extrabold">Recurring Prepay:</span><span class="text-xxs font-extrabold text-gray-900">${formatCurrency(recurPrepay)}/yr</span></li>`;
+                    if (parseFloat(lumpPrepay) > 0) extraReportHtml += `<li class="flex justify-between border-b border-gray-100 pb-1"><span class="text-xxs text-gray-900 font-extrabold">One-time Prepay:</span><span class="text-xxs font-extrabold text-gray-900">${formatCurrency(lumpPrepay)}</span></li>`;
+                }
+
+                const reportHtml = `
+                    <h3 class="text-xs font-bold text-gray-900 mb-2 font-extrabold">Summary of Loan Details</h3>
+                    <ul class="flex flex-col gap-2 mt-1">
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Loan Category:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${activeTabName}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Mode:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${isEligibilityMode ? 'Loan Eligibility Mode' : 'Standard EMI Mode'}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">${inputLabelName}:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${loanAmountVal}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Interest Rate:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${interestRateVal}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Tenure:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${tenureText}</span>
+                        </li>
+                        ${extraReportHtml}
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Total Borrowed Principal:</span> 
+                            <span class="text-xxs font-extrabold text-gray-900">${totalP}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1">
+                            <span class="text-xxs text-gray-900 font-extrabold">Total Interest Paid:</span> 
+                            <span class="text-xxs font-extrabold text-green-950">${totalI}</span>
+                        </li>
+                        <li class="flex justify-between pt-1">
+                            <span class="text-xxs text-indigo-950 font-black">${isEligibilityMode ? 'Eligible Loan Principal' : 'Calculated Monthly EMI'}:</span> 
+                            <span class="text-xxs font-black text-indigo-950">${mainTargetVal}</span>
+                        </li>
+                    </ul>
+                `;
+
+                document.getElementById('modalReportContent').innerHTML = reportHtml;
+                modal.classList.add('active');
+            });
+            document.getElementById('closeModalBtn').addEventListener('click', () => modal.classList.remove('active'));
+
+            // Close dialog when clicking outside content box
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            // Copy Link Handler
+            document.getElementById('copyUrlBtn').addEventListener('click', () => {
+                try {
+                    const shareUrlInput = document.getElementById('shareUrlInput');
+                    shareUrlInput.select();
+                    document.execCommand('copy');
+                    showNotification('Link copied to clipboard!');
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                    showNotification('Could not copy link.');
+                }
+            });
+
+            loadFromUrl();
+        });
+    </script>
+</body>
+</html>
