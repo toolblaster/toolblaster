@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
 // This array is 100% dynamic. Add any new tool here, and it will
 // automatically render in both the App Drawer and Top Navigation!
 // ==========================================
@@ -215,7 +215,8 @@ function injectHeader() {
         
         <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
         <nav class="relative w-full bg-white border-b border-stone-300 shadow-sm z-[100]">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between relative">
+            <!-- CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment -->
+            <div class="mx-auto w-[95%] max-w-[1080px] h-12 flex items-center justify-between relative">
                 
                 <!-- Left: Brand Logo -->
                 <div class="flex items-center flex-shrink-0">
@@ -234,7 +235,7 @@ function injectHeader() {
                     </a>
                 </div>
 
-                <!-- Center: Dynamic Page Name + Contextual Auto-Description (sm:whitespace-nowrap used to avoid horizontal text overflow on 320px devices) -->
+                <!-- Center: Dynamic Page Name + Contextual Auto-Description -->
                 <div class="absolute left-1/2 -translate-x-1/2 text-center flex flex-col sm:flex-row items-center justify-center w-full max-w-[55%] xs:max-w-[62%] sm:max-w-[70%] md:max-w-2xl pointer-events-none">
                     <span class="flex-shrink-0 font-inter font-extrabold text-[10px] xs:text-[11px] sm:text-[13px] md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-stone-900 uppercase sm:whitespace-nowrap leading-tight text-center">
                         ${centerTitle}
@@ -415,12 +416,13 @@ function injectToolNav() {
         </style>
     `;
 
-    // CRITICAL BUG FIX & ACCESSIBILITY FIX: Category Label (e.g. FINANCE) is now inline-block (sticky left pinned with nice shadow) 
+    // CRITICAL BUG FIX & ACCESSIBILITY FIX: Category Label is now inline-block (sticky left pinned with nice shadow) 
     // and styled with text-stone-600 (to achieve 6.6:1 contrast ratio against bg-stone-100)
     // to ensure mobile-first layout always displays active category clearly without wrapping.
+    // CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment
     navContainer.innerHTML = style + `
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto w-[95%] max-w-[1080px]">
                 <nav id="secondary-scroll-nav" class="flex items-center md:justify-center gap-1.5 h-9 overflow-x-auto whitespace-nowrap hide-nav-scrollbar px-1">
                     <span class="text-[9px] font-black text-stone-600 uppercase tracking-widest inline-block sticky left-0 bg-stone-100/95 backdrop-blur-md pr-2 z-10 py-2 shadow-[8px_0_10px_-5px_rgba(245,245,244,1)] flex-shrink-0">${categoryLabel}</span>
                     ${linksHtml}
@@ -473,15 +475,16 @@ function injectFooterAndModals() {
     const currentUrl = encodeURIComponent(window.location.href);
     const shareMsg = encodeURIComponent("Check out this useful tool on Toolblaster: ");
 
+    // CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-200 w-full relative z-50">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+            <div class="mx-auto w-[95%] max-w-[1080px] py-5">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-4 w-full">
                     
                     <!-- Left Group: Copyright -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
