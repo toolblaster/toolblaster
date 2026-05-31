@@ -112,9 +112,8 @@
 
         /* --- Sliders customization with dynamic background fill --- */
         input[type="range"] {
-            -webkit-appearance: none;
+            -webkit-appearance: none; appearance: none; background: transparent;
             width: 100%;
-            background: transparent;
         }
         input[type="range"]:focus {
             outline: none;
@@ -602,8 +601,8 @@
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace -->
-    <main class="container flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-16">
+    <!-- Main Workspace (CHANGED: Removed 'container' & padding to lock width at exact 95% and max-width 1080px) -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
 
         <!-- Breadcrumb Navigation (Safely hidden in print view via print-hide) -->
         <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
@@ -816,7 +815,7 @@
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 1</span>
-                                    <input type="range" id="lwYearSlider" min="1" max="15" value="7" step="1" class="w-full range-slider flex-grow " aria-label="Check loan eligibility year slider" aria-labelledby="lwYearLabel">
+                                    <input type="range" id="lwYearSlider" min="1" max="15" value="7" step="1" class="w-full range-slider flex-grow" aria-label="Check loan eligibility year slider" aria-labelledby="lwYearLabel">
                                     <span id="lwYearMaxLabel" class="text-xxs font-bold text-green-950 whitespace-nowrap flex-shrink-0">Yr 15</span>
                                 </div>
                                 <p class="text-center font-bold text-green-950 text-xs mt-1.5">Checking Limits for: Year <span id="lwYearDisplay">7</span></p>
@@ -1026,7 +1025,7 @@
                                     </svg>
                                     Export CSV
                                 </button>
-                                <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-rose-850 hover:bg-rose-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">
+                                <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-rose-700 hover:bg-rose-800 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <polyline points="6 9 6 2 18 2 18 9"/>
                                         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
@@ -1061,7 +1060,7 @@
                 <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700 print-hide">
                     <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
                         Start investing with 5paisa
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
 
@@ -1192,7 +1191,7 @@
                         <!-- Compound formula -->
                         <div class="border-b border-stone-200 pb-4">
                             <h3 class="text-xs font-bold text-stone-900 mb-1.5">1. Annual Compounding Formula</h3>
-                            <p class="mb-2">For structured, consistent annual deposits compounding once at the end of each financial year:</p>
+                            <p class="mb-2">For a one-time capital investment compounding annually:</p>
                             <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
                                 $$F = P \times \frac{(1 + r)^n - 1}{r} \times (1 + r)$$
                             </div>
