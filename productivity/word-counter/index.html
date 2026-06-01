@@ -45,7 +45,7 @@
     <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
-    <link rel="manifest" href="../../js/favicon/site.webmanifest">
+    <link class="rounded-full" rel="manifest" href="../../js/favicon/site.webmanifest">
 
     <!-- Tailwind & Fonts -->
     <script src="../../js/tailwind-config.js"></script>
@@ -246,7 +246,6 @@
                     </div>
 
                     <!-- Formatting Toolbar (UNIFIED INLINE DESKTOP LAYOUT) -->
-                    <!-- CHANGED: Added md:flex-nowrap and overflow-x handling to prevent second row wrapping on desktop -->
                     <div class="bg-stone-50/80 backdrop-blur-sm border-b border-stone-200 px-3 py-1.5 flex flex-wrap md:flex-nowrap items-center gap-1.5 relative z-[40] md:overflow-x-auto lg:overflow-x-visible hide-scrollbar">
                         
                         <div class="flex items-center gap-1.5 bg-white border border-stone-200 px-1.5 py-1 rounded-lg shadow-sm flex-shrink-0">
@@ -291,7 +290,6 @@
                         <div class="flex-grow"></div>
                         
                         <!-- Action Buttons including Document Import, Export & Print -->
-                        <!-- CHANGED: Enforced flex-nowrap and removed desktop vertical spacing limits to fit in the single row cleanly -->
                         <div class="flex flex-nowrap gap-1.5 items-center flex-shrink-0">
                             
                             <!-- Document Import Button -->
@@ -339,7 +337,6 @@
                     </div>
 
                     <!-- Find & Replace Panel (Hidden by default) -->
-                    <!-- CHANGED: Replaced flex-wrap with md:flex-nowrap to sit strictly inline on desktop -->
                     <div id="find-replace-panel" class="hidden bg-stone-100/90 backdrop-blur-md border-b-2 border-stone-200 px-4 py-1.5 flex flex-wrap md:flex-nowrap items-center gap-2 relative z-[30] transition-all shadow-inner">
                         <div class="flex items-center gap-2 flex-grow sm:flex-grow-0 w-full sm:w-auto bg-white border border-stone-200 rounded-lg px-2 shadow-sm focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-400 transition-all">
                             <i class="fa-solid fa-magnifying-glass text-blue-600 text-[10px]"></i>
@@ -559,6 +556,46 @@
             </div>
         </div>
 
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <!-- CHANGED: Constrained width from max-w-[1080px] to max-w-3xl to match bottom SEO section -->
+        <div class="max-w-3xl mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Card 1: DECIDE (Daily Focus) -->
+                <a href="../decide/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-indigo-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-bullseye text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-indigo-600 uppercase tracking-widest block">Daily Priority</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Daily Focus (DECIDE)</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Set your top 3 daily priorities in under 60 seconds.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Decide <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Breathing Pacer -->
+                <a href="../breathing-pacer/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-cyan-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-wind text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-cyan-600 uppercase tracking-widest block">Mindful Breath</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Breathing Pacer</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Regain calm and lower stress with visual box breathing.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Pace <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- SEO Article (Evergreen Format) -->
         <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10">
             <div class="space-y-6 text-stone-800">
@@ -637,9 +674,7 @@
                 </section>
 
                 <section id="faqs" class="bg-transparent">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
-                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions
-                    </h2>
+                    <h2 class="text-[16px] font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions</h2>
                     <div class="space-y-3">
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. Does this word counter work offline?</h3>
