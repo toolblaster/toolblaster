@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
-    <title>DECIDE. | Daily Priority Tool for Focus</title>
-    <meta name="title" content="DECIDE. | Daily Priority Tool for Focus">
+    <!-- SEO & Canonical Metadata (Title exactly 58 chars, Desc under 160 chars) -->
+    <title>DECIDE | Daily Priority Planner & Focus Tool Online</title>
+    <meta name="title" content="DECIDE | Daily Priority Planner & Focus Tool Online">
     <meta name="description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner designed to eliminate overwhelm and build consistent focus. Works offline.">
     <meta name="author" content="ToolBlaster">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="DECIDE.">
     <meta property="og:url" content="https://toolblaster.com/productivity/decide/">
-    <meta property="og:title" content="DECIDE. | Daily Priority Tool for Focus">
+    <meta property="og:title" content="DECIDE | Daily Priority Planner & Focus Tool Online">
     <meta property="og:description" content="Decide your top 3 priorities today. A minimalist, local-first daily planner designed to eliminate overwhelm and build consistent focus.">
     <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
 
@@ -62,10 +63,10 @@
 
     <!-- Correct Favicon Links (Updated to ../../ due to new folder depth) -->
     <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
     <link rel="manifest" href="../../js/favicon/decide.webmanifest">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -148,18 +149,24 @@
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-6 md:pt-5 md:pb-8 max-w-7xl relative z-10">
+    <!-- Main Workspace (CHANGED: Locked strictly to fluid w-[95%] max-w-[1080px] mx-auto for absolute consistency) -->
+    <main class="flex-grow w-[95%] max-w-[1080px] mx-auto pt-3 pb-16 relative z-10">
 
-        <!-- Breadcrumb Navigation -->
-        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap relative z-10">
-            <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
-                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
-            </a>
-            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
-            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <span class="text-stone-900 font-bold">Daily Focus</span>
+        <!-- Breadcrumb Navigation with aligned Standalone Badge -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-700 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center justify-between flex-wrap sm:flex-nowrap relative z-10">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                    <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
+                <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
+                <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
+                <span class="text-stone-900 font-bold">Daily Focus</span>
+            </div>
+            <!-- Standalone Badge -->
+            <div class="hidden sm:flex items-center gap-1.5 bg-indigo-50 text-indigo-700 border border-indigo-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-bullseye"></i> DAILY FOCUS
+            </div>
         </nav>
 
         <!-- Refined Compact Tool Station Container: Frosted Glassmorphism -->
@@ -268,68 +275,108 @@
             </div>
         </div>
 
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <div class="max-w-3xl mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Card 1: Study Timer -->
+                <a href="../pomodoro-study-timer/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-orange-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-stopwatch text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-orange-600 uppercase tracking-widest block">Deep Focus</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Study Timer</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Time your deep work and breaks.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Start <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Breathing Pacer -->
+                <a href="../breathing-pacer/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-cyan-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-wind text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-cyan-600 uppercase tracking-widest block">Mindful Breath</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Breathing Pacer</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Regain calm with box breathing.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Pace <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <!-- Article Sections: Frosted Glassmorphism Applied -->
-        <article class="w-full max-w-2xl mx-auto mt-20 mb-16 prose prose-stone relative z-10">
-            <div class="space-y-8 text-stone-700">
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span>🧠</span> What is DECIDE?
+        <article class="w-full max-w-3xl mx-auto mt-20 mb-16 prose prose-stone relative z-10">
+            <div class="space-y-6 text-stone-800">
+                
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-file-lines"></i></span> What is DECIDE?
                     </h2>
-                    <p class="leading-relaxed mb-4 text-stone-700 text-sm font-medium">
+                    <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         Think of DECIDE as a quiet corner for your brain. It’s a simple tool designed to help you cut through the noise and figure out your top three priorities for the day—usually in less than a minute.
                     </p>
-                    <p class="font-bold text-stone-900 italic border-l-2 border-stone-400 pl-4 py-2 bg-white/50 backdrop-blur-md rounded-r-lg text-sm shadow-inner">
+                    <p class="font-bold text-stone-900 italic border-l-2 border-stone-400 pl-4 py-2 bg-white/50 backdrop-blur-md rounded-r-lg text-[13px] shadow-inner">
                         What are the three most important things today?
                     </p>
-                    <p class="mt-4 mb-0 text-stone-700 text-sm font-medium">
+                    <p class="mt-4 mb-0 text-stone-800 text-[13px] font-medium">
                         That’s it. No complicated systems, no endless backlogs, and definitely no guilt. Just clarity.
                         <a href="../../terms/about.html" class="font-bold text-stone-900 underline decoration-stone-300 hover:decoration-stone-900 transition-colors">Read our story.</a>
                     </p>
                 </section>
                 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🎯</span> Why DECIDE is Different
                     </h2>
-                    <p class="mb-4 text-stone-700 text-sm font-medium">Most daily planners focus on managing tasks. <strong class="text-stone-900 font-black">We focus on something else: making decisions.</strong></p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-700 text-sm font-medium">
+                    <p class="mb-4 text-stone-800 text-[13px] font-medium">Most daily planners focus on managing tasks. <strong class="text-stone-900 font-black">We focus on something else: making decisions.</strong></p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-800 text-[13px] font-medium">
                         <li>We don't let you drown in tasks.</li>
                         <li>We don't ask you to schedule every minute.</li>
                         <li>We don't pester you with notifications.</li>
                     </ul>
-                    <p class="mt-4 mb-0 text-stone-700 text-sm font-medium">
+                    <p class="mt-4 mb-0 text-stone-800 text-[13px] font-medium">
                         It’s just one day, three clear goals, and a clear mind. It helps you start your day with intention and end it with closure.
                     </p>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🆚</span> DECIDE vs Traditional Planners
                     </h2>
-                    <p class="mb-6 text-stone-700 text-sm font-medium">We've all been there. You buy a planner, miss one day, feel guilty, and never open it again.</p>
+                    <p class="mb-6 text-stone-800 text-[13px] font-medium">We've all been there. You buy a planner, miss one day, feel guilty, and never open it again.</p>
                     
                     <div class="grid md:grid-cols-2 gap-8 mb-8">
                         <div class="bg-white/50 backdrop-blur-md p-5 rounded-xl border border-white/60 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-3 mt-0 text-sm uppercase tracking-tight">❌ Traditional Planners</h3>
-                            <p class="text-xs mb-3 text-stone-700 font-medium">Homework feel:</p>
-                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-xs text-stone-700 font-medium">
+                            <p class="text-xs mb-3 text-stone-800 font-medium">Homework feel:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-[12px] text-stone-700 font-medium">
                                 <li>List literally everything</li>
                                 <li>Color-code and categorize</li>
                                 <li>Feel bad about unfinished items</li>
                                 <li>Eventually get abandoned</li>
                             </ul>
-                            <p class="text-xs mt-4 font-black text-stone-900 uppercase tracking-tighter">High effort, high guilt.</p>
+                            <p class="text-[12px] mt-4 font-black text-stone-900 uppercase tracking-tighter">High effort, high guilt.</p>
                         </div>
                         <div class="bg-white/50 backdrop-blur-md p-5 rounded-xl border border-white/60 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-3 mt-0 text-sm uppercase tracking-tight">✅ DECIDE</h3>
-                            <p class="text-xs mb-3 text-stone-700 font-medium">Fresh start:</p>
-                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-xs text-stone-700 font-medium">
+                            <p class="text-xs mb-3 text-stone-800 font-medium">Fresh start:</p>
+                            <ul class="list-disc list-outside ml-4 space-y-1.5 text-[12px] text-stone-700 font-medium">
                                 <li>Focus only on what matters</li>
                                 <li>Limit yourself to 3 wins</li>
                                 <li>Fresh slate every morning</li>
                                 <li>Zero judgment</li>
                             </ul>
-                            <p class="text-xs mt-4 font-black text-stone-900 uppercase tracking-tighter">Low effort, high clarity.</p>
+                            <p class="text-[12px] mt-4 font-black text-stone-900 uppercase tracking-tighter">Low effort, high clarity.</p>
                         </div>
                     </div>
 
@@ -338,7 +385,7 @@
                             <thead>
                                 <tr class="border-b-2 border-stone-300/50 text-stone-900 font-black uppercase tracking-tighter">
                                     <th class="py-3">Feature</th>
-                                    <th class="py-3">DECIDE</th>
+                                    <th class="py-3 text-[13px]">DECIDE</th>
                                     <th class="py-3 font-medium text-stone-500">Others</th>
                                 </tr>
                             </thead>
@@ -368,51 +415,51 @@
                     </div>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>⏱️</span> Decide Your Day in 60 Seconds
                     </h2>
-                    <p class="mb-4 text-stone-700 text-sm font-medium">It’s built to be the easiest habit you have:</p>
-                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-4 text-stone-700 text-sm font-medium">
+                    <p class="mb-4 text-stone-800 text-[13px] font-medium">It’s built to be the easiest habit you have:</p>
+                    <ol class="list-decimal list-outside ml-5 space-y-2 mb-4 text-stone-800 text-[13px] font-medium">
                         <li>Open the app (it loads instantly).</li>
                         <li>Type the 3 things that would make today a success.</li>
                         <li>Click Save. Go do them.</li>
                     </ol>
-                    <p class="mt-4 mb-0 text-stone-700 text-sm font-medium">
+                    <p class="mt-4 mb-0 text-stone-800 text-[13px] font-medium">
                         The app resets itself at midnight. No cleanup required.
                     </p>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🔁</span> Built for Daily Use, Not Burnout
                     </h2>
-                    <p class="mb-4 text-stone-700 text-sm font-medium">We designed this around how real people actually behave, not "productivity gurus".</p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-700 text-sm font-medium">
+                    <p class="mb-4 text-stone-800 text-[13px] font-medium">We designed this around how real people actually behave, not "productivity gurus".</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-800 text-[13px] font-medium">
                         <li>Gentle Recall: We'll remind you what you focused on yesterday.</li>
                         <li>Quiet Consistency: We track your streak but won't flash numbers at you.</li>
                         <li>Weekly Glimpse: Once a week, we'll show you themes. No charts, just words.</li>
                     </ul>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🛠️</span> Who is DECIDE For?
                     </h2>
-                    <p class="mb-4 text-stone-700 text-sm font-medium">DECIDE works best if you want to:</p>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-700 text-sm font-medium">
+                    <p class="mb-4 text-stone-800 text-[13px] font-medium">DECIDE works best if you want to:</p>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-800 text-[13px] font-medium">
                         <li>Focus on what truly matters today</li>
                         <li>Reduce mental clutter and decision fatigue</li>
                         <li>Build a simple daily planning habit</li>
                         <li>Avoid complex productivity systems</li>
                     </ul>
-                    <p class="mt-4 mb-0 text-stone-700 text-sm font-medium">
+                    <p class="mt-4 mb-0 text-stone-800 text-[13px] font-medium">
                         If you’ve tried planners and felt overwhelmed — DECIDE is for you.
                     </p>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🔒</span> Simple, Private, and Fast
                     </h2>
                     <ul class="grid sm:grid-cols-2 gap-4 text-[10px] font-black text-stone-600 uppercase tracking-widest mb-6">
@@ -427,73 +474,73 @@
                 </section>
 
                 <section id="faqs">
-                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
                         <span>❓</span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-4">
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. What is DECIDE?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">DECIDE is a daily priority tool that helps you decide your top three priorities for today in under 60 seconds. Instead of managing long lists, DECIDE focuses on what truly matters now.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">DECIDE is a daily priority tool that helps you decide your top three priorities for today in under 60 seconds. Instead of managing long lists, DECIDE focuses on what truly matters now.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Is DECIDE a daily planner?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">No. DECIDE is purely for decision clarity. It doesn't support unlimited tasks, schedules, or calendars. It is designed to be the starting point of your focus.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">No. DECIDE is purely for decision clarity. It doesn't support unlimited tasks, schedules, or calendars. It is designed to be the starting point of your focus.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">3. How is it different from productivity apps?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Most apps help you do more. DECIDE helps you choose better. By limiting you to three priorities, it reduces decision fatigue and mental clutter.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Most apps help you do more. DECIDE helps you choose better. By limiting you to three priorities, it reduces decision fatigue and mental clutter.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">4. Why only three priorities?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Focus is limited. Progress on 2–3 important things per day is more effective than starting 10 things. Limits force clarity.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Focus is limited. Progress on 2–3 important things per day is more effective than starting 10 things. Limits force clarity.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">5. Do I need an account?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">No. DECIDE does not require sign-up. Your data is stored locally on your device for speed and privacy.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">No. DECIDE does not require sign-up. Your data is stored locally on your device for speed and privacy.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">6. Does it work offline?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. It is a local-first tool and works without an internet connection once loaded.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. It is a local-first tool and works without an internet connection once loaded.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">7. What happens to yesterday’s data?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yesterday's priorities are saved as history. We may show them as a gentle reminder but never as a judgment.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yesterday's priorities are saved as history. We may show them as a gentle reminder but never as a judgment.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">8. Does it track streaks?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Consistency is tracked internally to help the experience, but we don't flash high-pressure streak numbers at you.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Consistency is tracked internally to help the experience, but we don't flash high-pressure streak numbers at you.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">9. Can I use it with other apps?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. DECIDE works best as a "pre-planning" step before you open your calendars or task managers.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. DECIDE works best as a "pre-planning" step before you open your calendars or task managers.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">10. Is it free?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. DECIDE is free to use. Premium features like cloud-sync are optional and non-intrusive.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. DECIDE is free to use. Premium features like cloud-sync are optional and non-intrusive.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">11. Who is it for?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Ideal for students, professionals, and creators who are overwhelmed by lists and want clarity.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Ideal for students, professionals, and creators who are overwhelmed by lists and want clarity.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">12. Is it private?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. Data never leaves your device unless you explicitly export or backup.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Data never leaves your device unless you explicitly export or backup.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">13. How long does it take?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Under one minute per day. That's the design core.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Under one minute per day. That's the design core.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">14. Keyboard shortcuts?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes. Use Cmd/Ctrl + Enter to save, and Escape to close menus or cancel edits.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Use Cmd/Ctrl + Enter to save, and Escape to close menus or cancel edits.</p>
                         </div>
                     </div>
                 </section>
 
                 <!-- Dark Glassmorphism for the CTA -->
                 <section class="mt-12 p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
-                    <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">✅ Start with just one day</h2>
-                    <p class="mb-6 text-stone-300 text-sm font-medium relative z-10">You don’t need a complicated system. You just need a decision.</p>
+                    <h2 class="text-[16px] font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10"> sky-high focus with simplicity</h2>
+                    <p class="mb-6 text-stone-300 text-[13px] font-medium relative z-10">You don’t need a complicated system. You just need a decision.</p>
                     <button onclick="ui.scrollToTool()" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Decide your day now</button>
                 </section>
             </div>
