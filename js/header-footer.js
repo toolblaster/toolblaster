@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
 // This array is 100% dynamic. Add any new tool here, and it will
 // automatically render in both the App Drawer and Top Navigation!
 // ==========================================
@@ -25,7 +25,8 @@ const TOOLBLASTER_APPS = [
         apps: [
             { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" },
             { name: "Compare Investment", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" },
-            { name: "PPF Calculator", url: "/finance/ppf-calculator/", icon: "fa-piggy-bank", classes: "bg-blue-50 border-blue-100 text-blue-600 group-hover:text-blue-600", matchPath: "/ppf-calculator/" }
+            { name: "PPF Calculator", url: "/finance/ppf-calculator/", icon: "fa-piggy-bank", classes: "bg-blue-50 border-blue-100 text-blue-600 group-hover:text-blue-600", matchPath: "/ppf-calculator/" },
+            { name: "EMI Calculator", url: "/finance/emi-calculator/", icon: "fa-calculator", classes: "bg-purple-50 border-purple-100 text-purple-600 group-hover:text-purple-600", matchPath: "/emi-calculator/" }
         ]
     },
     {
@@ -87,6 +88,7 @@ function injectHeader() {
         else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
         else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "COMPARE INVESTMENT";
         else if (currentPath.includes('/finance/ppf-calculator')) centerTitle = "PPF CALCULATOR";
+        else if (currentPath.includes('/finance/emi-calculator')) centerTitle = "EMI CALCULATOR";
         else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
         else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
         else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
@@ -484,7 +486,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
