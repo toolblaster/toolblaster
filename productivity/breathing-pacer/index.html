@@ -208,18 +208,24 @@
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-6 md:pt-5 md:pb-8 max-w-7xl relative z-10">
+    <!-- Main Workspace (CHANGED: Locked strictly to fluid w-[95%] max-w-[1080px] mx-auto for absolute consistency) -->
+    <main class="flex-grow w-[95%] max-w-[1080px] mx-auto pt-3 pb-16 relative z-10">
         
-        <!-- Breadcrumb Navigation - URL FIXED TO /productivity/ -->
-        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-500 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center flex-wrap relative z-10">
-            <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
-                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
-            </a>
-            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
-            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
-            <span class="text-stone-900 font-bold">Breathing Pacer</span>
+        <!-- Breadcrumb Navigation with aligned Standalone Badge -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-700 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center justify-between flex-wrap sm:flex-nowrap relative z-10">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                    <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
+                <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
+                <span class="mx-1.5 sm:mx-2 text-stone-400">/</span>
+                <span class="text-stone-900 font-bold">Pacer</span>
+            </div>
+            <!-- Standalone Badge -->
+            <div class="hidden sm:flex items-center gap-1.5 bg-cyan-50 text-cyan-700 border border-cyan-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-wind"></i> MINDFUL BREATH
+            </div>
         </nav>
 
         <!-- Main Station Container -->
@@ -291,56 +297,56 @@
 
         </div>
 
-        <!-- SEO Article Content -->
-        <article class="w-full max-w-2xl mx-auto mt-16 mb-16 prose prose-stone relative z-10">
-            <div class="space-y-8 text-stone-700">
+        <!-- SEO Article Content (CHANGED: Adjusted widths to match exactly max-w-3xl) -->
+        <article class="w-full max-w-3xl mx-auto mt-16 mb-16 prose prose-stone relative z-10">
+            <div class="space-y-6 text-stone-800">
                 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🌬️</span> What is a Breathing Pacer?</h2>
-                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-3 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🌬️</span> What is a Breathing Pacer?</h2>
+                    <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         A <strong>breathing pacer</strong> (often used as a dedicated <strong>breathing exercise timer</strong>) is a visual and audio guide designed to help you regulate your breathing rate effortlessly. By syncing your breath to a rhythmic animation, it activates your parasympathetic nervous system, instantly lowering stress, reducing your heart rate, and bringing your mind into a state of deep focus.
                     </p>
-                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-0">
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
                         Instead of counting seconds in your head and getting distracted, our digital <strong>breathing timer</strong> takes the guesswork out of breathwork. Simply follow the expanding and contracting circle to find your calm.
                     </p>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🧘</span> Paced Breathing Programs</h2>
-                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🧘</span> Paced Breathing Programs</h2>
+                    <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         Paced breathing is a scientifically proven technique to hack your nervous system. Our tool includes expertly designed patterns to help you reach your goals:
                     </p>
                     
                     <div class="grid sm:grid-cols-2 gap-4 not-prose">
                         <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
-                            <h3 class="text-sm font-black text-stone-900 mb-1">Box Breathing (4-4-4-4)</h3>
-                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">Also known as Navy SEAL or tactical breathing. Best for regaining calm and controlling racing thoughts under high stress.</p>
+                            <h3 class="text-xs font-black text-stone-900 mb-1">Box Breathing (4-4-4-4)</h3>
+                            <p class="text-[12px] text-stone-600 leading-relaxed mb-0 font-medium">Also known as Navy SEAL or tactical breathing. Best for regaining calm and controlling racing thoughts under high stress.</p>
                         </div>
                         <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
-                            <h3 class="text-sm font-black text-stone-900 mb-1">Relaxing (4-7-8)</h3>
-                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">The ultimate sleep hack. Inhale for 4, hold for 7, exhale completely for 8. Best used right before bedtime to trigger deep relaxation.</p>
+                            <h3 class="text-xs font-black text-stone-900 mb-1">Relaxing (4-7-8)</h3>
+                            <p class="text-[12px] text-stone-600 leading-relaxed mb-0 font-medium">The ultimate sleep hack. Inhale for 4, hold for 7, exhale completely for 8. Best used right before bedtime to trigger deep relaxation.</p>
                         </div>
                         <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
-                            <h3 class="text-sm font-black text-stone-900 mb-1">Equal Breathing (4-4)</h3>
-                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">A pranayama practice (Sama Vritti). A balanced inhale and exhale to take your mind off distractions and improve daily focus.</p>
+                            <h3 class="text-xs font-black text-stone-900 mb-1">Equal Breathing (4-4)</h3>
+                            <p class="text-[12px] text-stone-600 leading-relaxed mb-0 font-medium">A pranayama practice (Sama Vritti). A balanced inhale and exhale to take your mind off distractions and improve daily focus.</p>
                         </div>
                         <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm">
-                            <h3 class="text-sm font-black text-stone-900 mb-1">Triangle (4-4-4)</h3>
-                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">Inhale, Exhale, Pause. Repeating this geometric pattern helps alleviate sudden anxiety and brings you back to the present moment.</p>
+                            <h3 class="text-xs font-black text-stone-900 mb-1">Triangle (4-4-4)</h3>
+                            <p class="text-[12px] text-stone-600 leading-relaxed mb-0 font-medium">Inhale, Exhale, Pause. Repeating this geometric pattern helps alleviate sudden anxiety and brings you back to the present moment.</p>
                         </div>
                         <div class="bg-white/50 backdrop-blur-md p-4 border border-white/60 rounded-xl shadow-sm sm:col-span-2">
-                            <h3 class="text-sm font-black text-stone-900 mb-1">HRV Resonance (5-7)</h3>
-                            <p class="text-xs text-stone-600 leading-relaxed mb-0 font-medium">The scientific "Gold Standard". Paces you at exactly 5 breaths per minute (5s inhale, 7s exhale) to sync your heart, brain, and nervous system, instantly boosting Heart Rate Variability (HRV).</p>
+                            <h3 class="text-xs font-black text-stone-900 mb-1">HRV Resonance (5-7)</h3>
+                            <p class="text-[12px] text-stone-600 leading-relaxed mb-0 font-medium">The scientific "Gold Standard". Paces you at exactly 5 breaths per minute (5s inhale, 7s exhale) to sync your heart, brain, and nervous system, instantly boosting Heart Rate Variability (HRV).</p>
                         </div>
                     </div>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>⚙️</span> How to Use This Breathing Tool</h2>
-                    <p class="text-sm leading-relaxed text-stone-700 font-medium mb-4">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>⚙️</span> How to Use This Breathing Tool</h2>
+                    <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         Getting started with our meditation pacer takes less than a minute:
                     </p>
-                    <ol class="list-decimal list-outside ml-5 space-y-3 mb-0 text-stone-700 text-sm font-medium">
+                    <ol class="list-decimal list-outside ml-5 space-y-3 mb-0 text-stone-800 text-[13px] font-medium">
                         <li><strong class="text-stone-900 font-black">Select a Program:</strong> Tap the settings icon to choose from Box Breathing, 4-7-8, Equal Breathing, Measured, HRV Resonance, or Triangle breathing.</li>
                         <li><strong class="text-stone-900 font-black">Set the Duration:</strong> Pick a 1 to 5-minute timed session, or leave it on "Endless" for a free-form break.</li>
                         <li><strong class="text-stone-900 font-black">Customize your Experience:</strong> Enable vocal cues or haptic vibration if you prefer to practice silent, eyes-closed meditation.</li>
@@ -348,55 +354,55 @@
                     </ol>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🚀</span> Benefits for Productivity</h2>
-                    <p class="text-sm text-stone-700 font-medium mb-6">Scientific research shows that just a few minutes of paced breathing can:</p>
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 mt-0 uppercase tracking-tight flex items-center gap-2"><span>🚀</span> Benefits for Productivity</h2>
+                    <p class="text-[13px] text-stone-800 font-medium mb-6">Scientific research shows that just a few minutes of paced breathing can:</p>
                     <ul class="list-none p-0 space-y-4 m-0">
                         <li class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
-                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Lower Cortisol Levels: Instant reduction in physical stress and anxiety.</span>
+                            <span class="text-[13px] text-stone-800 font-bold leading-relaxed">Lower Cortisol Levels: Instant reduction in physical stress and anxiety.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
-                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Enhance Focus: Resets the nervous system during Pomodoro breaks.</span>
+                            <span class="text-[13px] text-stone-800 font-bold leading-relaxed">Enhance Focus: Resets the nervous system during Pomodoro breaks.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-check text-green-600 text-[10px]"></i></div>
-                            <span class="text-sm text-stone-700 font-bold leading-relaxed">Improve Sleep: Calms the "fight or flight" response before bed.</span>
+                            <span class="text-[13px] text-stone-800 font-bold leading-relaxed">Improve Sleep: Calms the "fight or flight" response before bed.</span>
                         </li>
                     </ul>
                 </section>
 
                 <section id="faqs" class="bg-transparent">
-                    <h2 class="text-xl font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
                         <span>❓</span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-4">
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. How long should I use the pacer?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">For maximum benefit, set the timer to at least 3 to 5 minutes. You will feel a noticeable shift in your heart rate and mental clarity.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">For maximum benefit, set the timer to at least 3 to 5 minutes. You will feel a noticeable shift in your heart rate and mental clarity.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Can I use this tool on my phone?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Yes! Our <strong>breathing timer online</strong> is fully optimized for mobile devices. It even includes haptic vibration support so you can close your eyes and feel the breathing rhythm through your phone.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes! Our <strong>breathing timer online</strong> is fully optimized for mobile devices. It even includes haptic vibration support so you can close your eyes and feel the breathing rhythm through your phone.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">3. Can I use this for breath retention practice?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">Absolutely. Because programs like the 4-7-8 or Box technique include built-in pauses, this tool functions perfectly as a <strong>hold your breath timer</strong> to help you safely practice and extend your breath retention.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Absolutely. Because programs like the 4-7-8 or Box technique include built-in pauses, this tool functions perfectly as a <strong>hold your breath timer</strong> to help you safely practice and extend your breath retention.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">4. What is the 4-7-8 breathing technique used for?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">The 4-7-8 method is a relaxing breathing technique famously used to fall asleep faster and reduce severe anxiety. You inhale for 4 seconds, hold for 7, and exhale completely for 8 seconds.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">The 4-7-8 method is a relaxing breathing technique famously used to fall asleep faster and reduce severe anxiety. You inhale for 4 seconds, hold for 7, and exhale completely for 8 seconds.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">5. How often should I practice box breathing?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-700 font-medium">For the best results, try practicing for 3-5 minutes, 1 to 2 times a day. It is especially effective during a study break or right before a stressful meeting to clear mental clutter.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">For the best results, try practicing for 3-5 minutes, 1 to 2 times a day. It is especially effective during a study break or right before a stressful meeting to clear mental clutter.</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="mt-12 p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
-                    <h2 class="text-xl font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">✅ Ready for Calm & Focus?</h2>
+                    <h2 class="text-[16px] font-black text-white mb-3 mt-0 uppercase tracking-tight relative z-10">✅ Ready for Calm & Focus?</h2>
                     <p class="mb-6 text-stone-300 text-sm font-medium relative z-10">Reduce your stress and boost your productivity. Take a quick breathing break now.</p>
                     <button onclick="document.getElementById('main-tool-station').scrollIntoView({behavior: 'smooth', block: 'start'})" class="relative z-10 bg-white text-stone-900 font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">Start Session Now</button>
                 </section>
