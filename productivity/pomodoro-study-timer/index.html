@@ -115,7 +115,7 @@
     <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
-    <link class="manifest" href="../../js/favicon/decide.webmanifest">
+    <link rel="manifest" href="../../js/favicon/decide.webmanifest">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -206,7 +206,7 @@
     <!-- Main Workspace (CHANGED: Locked strictly to fluid w-[95%] max-w-[1080px] mx-auto for absolute consistency) -->
     <main class="flex-grow w-[95%] max-w-[1080px] mx-auto pt-3 pb-16 relative z-10">
 
-        <!-- Breadcrumb Navigation with aligned Standalone Badge -->
+        <!-- Breadcrumb Navigation -->
         <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-700 mb-4 sm:mb-5 font-medium fade-in px-1 flex items-center justify-between flex-wrap sm:flex-nowrap relative z-10">
             <div class="flex items-center flex-wrap">
                 <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
@@ -270,7 +270,46 @@
             <p id="pomodoro-counter" class="text-[10px] text-stone-600 font-bold uppercase tracking-widest mt-5 mb-0 drop-shadow-sm">#1 Focus Session</p>
         </div>
 
-        <!-- SEO Article Sections (CHANGED: Enforced max-w-3xl for exact consistent layout bounds) -->
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <div class="max-w-3xl mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Card 1: DECIDE (Daily Focus) -->
+                <a href="../decide/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-indigo-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-bullseye text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-indigo-600 uppercase tracking-widest block">Daily Priority</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Daily Focus (DECIDE)</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Set your top 3 daily priorities in under 60 seconds.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Decide <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Breathing Pacer -->
+                <a href="../breathing-pacer/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-cyan-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <i class="fa-solid fa-wind text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[9px] font-black text-cyan-600 uppercase tracking-widest block">Mindful Breath</span>
+                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Breathing Pacer</h3>
+                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Regain calm and lower stress with visual box breathing.</p>
+                        </div>
+                    </div>
+                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
+                        Pace <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- SEO Article Sections -->
         <article class="w-full max-w-3xl mx-auto mt-16 mb-16 prose prose-stone relative z-10">
             <div class="space-y-6 text-stone-800">
                 <!-- Section 1 -->
