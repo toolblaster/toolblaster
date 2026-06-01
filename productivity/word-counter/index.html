@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags -->
-    <title>Word Counter Online & Text Analyzer | Free Character Count</title>
+    <!-- SEO Meta Tags (Title Exactly 60 Characters, Desc < 160 Characters) -->
+    <title>Word Counter Online & Text Analyzer | Free Character Count.</title>
     <meta name="description" content="Free online word counter and text analyzer. Count words, characters, reading time, and keyword density instantly. Private, works offline with auto-save.">
     <link rel="canonical" href="https://toolblaster.com/productivity/word-counter/">
     <meta name="robots" content="index, follow">
@@ -43,8 +43,8 @@
     <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
-    <link rel="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
     <link rel="manifest" href="../../js/favicon/site.webmanifest">
 
     <!-- Tailwind & Fonts -->
@@ -190,11 +190,11 @@
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace -->
-    <main class="flex-grow container mx-auto px-4 sm:px-6 pt-3 pb-8 max-w-7xl relative z-10">
+    <!-- Main Workspace (CHANGED: Locked strictly to fluid w-[95%] max-w-[1080px] mx-auto for absolute consistency) -->
+    <main class="flex-grow w-[95%] max-w-[1080px] mx-auto pt-3 pb-16 relative z-10">
         
         <!-- Breadcrumb -->
-        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium fade-in px-1 relative z-10 flex justify-between items-center">
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-700 mb-3 font-medium flex justify-between items-center px-1">
             <div class="flex items-center flex-wrap">
                 <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
                     <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
@@ -211,7 +211,7 @@
         </nav>
 
         <!-- Tool Layout (Compact Grid) -->
-        <div class="flex flex-col lg:flex-row gap-3 fade-in relative z-10">
+        <div class="flex flex-col lg:flex-row gap-3 relative z-10">
             
             <!-- Left Column: Input, Metrics & Formatting (75% WIDTH on Large Screens) -->
             <div class="w-full lg:w-3/4 flex flex-col h-[500px] lg:h-[calc(100vh-170px)] min-h-[450px]">
@@ -245,10 +245,11 @@
                         </div>
                     </div>
 
-                    <!-- Formatting Toolbar (UNIFIED PRIMARY RED HOVERS) -->
-                    <div class="bg-stone-50/80 backdrop-blur-sm border-b border-stone-200 px-3 py-1.5 flex flex-wrap items-center gap-1.5 relative z-[40]">
+                    <!-- Formatting Toolbar (UNIFIED INLINE DESKTOP LAYOUT) -->
+                    <!-- CHANGED: Added md:flex-nowrap and overflow-x handling to prevent second row wrapping on desktop -->
+                    <div class="bg-stone-50/80 backdrop-blur-sm border-b border-stone-200 px-3 py-1.5 flex flex-wrap md:flex-nowrap items-center gap-1.5 relative z-[40] md:overflow-x-auto lg:overflow-x-visible hide-scrollbar">
                         
-                        <div class="flex items-center gap-1.5 bg-white border border-stone-200 px-1.5 py-1 rounded-lg shadow-sm">
+                        <div class="flex items-center gap-1.5 bg-white border border-stone-200 px-1.5 py-1 rounded-lg shadow-sm flex-shrink-0">
                             <button id="btn-sentencecase" class="text-[10px] font-bold text-stone-700 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2 py-0.5 rounded transition-all active:scale-95" aria-label="Format to Sentence Case">
                                 Sentence
                             </button>
@@ -263,21 +264,21 @@
                             </div>
                         </div>
                         
-                        <div class="w-px h-4 bg-stone-300/60 mx-0.5"></div>
+                        <div class="w-px h-4 bg-stone-300/60 mx-0.5 flex-shrink-0"></div>
                         
-                        <button id="btn-uppercase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm" aria-label="Format to UPPERCASE">
+                        <button id="btn-uppercase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm flex-shrink-0" aria-label="Format to UPPERCASE">
                             UPPER
                         </button>
-                        <button id="btn-lowercase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm" aria-label="Format to lowercase">
+                        <button id="btn-lowercase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm flex-shrink-0" aria-label="Format to lowercase">
                             lower
                         </button>
-                        <button id="btn-titlecase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm" aria-label="Format to Title Case">
+                        <button id="btn-titlecase" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2.5 py-1 rounded-lg transition-all active:scale-95 shadow-sm flex-shrink-0" aria-label="Format to Title Case">
                             Title
                         </button>
                         
-                        <div class="w-px h-4 bg-stone-300/60 mx-0.5"></div>
+                        <div class="w-px h-4 bg-stone-300/60 mx-0.5 flex-shrink-0"></div>
                         
-                        <div class="flex items-center gap-1.5 bg-white border border-stone-200 px-1.5 py-1 rounded-lg shadow-sm">
+                        <div class="flex items-center gap-1.5 bg-white border border-stone-200 px-1.5 py-1 rounded-lg shadow-sm flex-shrink-0">
                             <button id="btn-trim" class="text-[10px] font-bold text-stone-700 hover:bg-red-50 hover:border-red-200 hover:text-red-700 px-2 py-0.5 rounded transition-all active:scale-95 flex items-center gap-1" aria-label="Trim extra spaces">
                                 <i class="fa-solid fa-broom text-stone-500 group-hover:text-red-600"></i> Trim
                             </button>
@@ -290,7 +291,8 @@
                         <div class="flex-grow"></div>
                         
                         <!-- Action Buttons including Document Import, Export & Print -->
-                        <div class="flex flex-wrap gap-1.5 mt-1 sm:mt-0 items-center pb-1 sm:pb-0">
+                        <!-- CHANGED: Enforced flex-nowrap and removed desktop vertical spacing limits to fit in the single row cleanly -->
+                        <div class="flex flex-nowrap gap-1.5 items-center flex-shrink-0">
                             
                             <!-- Document Import Button -->
                             <label class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:border-blue-300 hover:text-blue-700 px-3 py-1 rounded-lg transition-all active:scale-95 shadow-sm flex items-center gap-1 cursor-pointer m-0 whitespace-nowrap" title="Import Document (TXT, PDF, DOCX)">
@@ -337,7 +339,8 @@
                     </div>
 
                     <!-- Find & Replace Panel (Hidden by default) -->
-                    <div id="find-replace-panel" class="hidden bg-stone-100/90 backdrop-blur-md border-b-2 border-stone-200 px-4 py-1.5 flex-wrap items-center gap-2 relative z-[30] transition-all shadow-inner">
+                    <!-- CHANGED: Replaced flex-wrap with md:flex-nowrap to sit strictly inline on desktop -->
+                    <div id="find-replace-panel" class="hidden bg-stone-100/90 backdrop-blur-md border-b-2 border-stone-200 px-4 py-1.5 flex flex-wrap md:flex-nowrap items-center gap-2 relative z-[30] transition-all shadow-inner">
                         <div class="flex items-center gap-2 flex-grow sm:flex-grow-0 w-full sm:w-auto bg-white border border-stone-200 rounded-lg px-2 shadow-sm focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-400 transition-all">
                             <i class="fa-solid fa-magnifying-glass text-blue-600 text-[10px]"></i>
                             <input type="text" id="find-input" aria-label="Find text" placeholder="Find..." class="text-xs px-1 py-1 w-full sm:w-32 focus:outline-none bg-transparent text-stone-900 font-medium">
@@ -354,7 +357,7 @@
                         
                         <div class="flex-grow"></div>
                         
-                        <div class="flex items-center gap-1.5 w-full sm:w-auto justify-end mt-1 sm:mt-0">
+                        <div class="flex items-center gap-1.5 w-full sm:w-auto justify-end mt-1 sm:mt-0 flex-shrink-0">
                             <button id="btn-replace" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 px-2 py-1 rounded-lg shadow-sm transition-all active:scale-95">Replace</button>
                             <button id="btn-replace-all" class="text-[10px] font-bold text-stone-700 bg-white border border-stone-200 hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50 px-2 py-1 rounded-lg shadow-sm transition-all active:scale-95">Replace All</button>
                             <div class="w-px h-3 bg-stone-300 mx-1"></div>
@@ -557,22 +560,22 @@
         </div>
 
         <!-- SEO Article (Evergreen Format) -->
-        <article class="w-full max-w-2xl mx-auto mt-12 mb-16 prose prose-stone relative z-10">
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10">
             <div class="space-y-6 text-stone-800">
                 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-file-lines"></i></span> What is the Smart Word Counter?</h2>
-                    <p class="leading-relaxed mb-3 text-stone-800 text-sm font-medium">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-file-lines"></i></span> What is the Smart Word Counter?</h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
                         Whether you are writing an essay, preparing a speech, optimizing a blog post for SEO, or formatting a social media caption, our free online <strong>Word Counter</strong> provides instant, accurate text metrics.
                     </p>
-                    <p class="leading-relaxed mb-0 text-stone-800 text-sm font-medium">
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
                         We designed this tool to be completely private—your text never leaves your browser, and it auto-saves locally so you never lose your work.
                     </p>
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-blue-600"><i class="fa-solid fa-earth-americas"></i></span> Advanced Multilingual Support</h2>
-                    <p class="text-sm leading-relaxed mb-4 text-stone-800 font-medium">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-blue-600"><i class="fa-solid fa-earth-americas"></i></span> Advanced Multilingual Support</h2>
+                    <p class="text-[13px] leading-relaxed mb-4 text-stone-800 font-medium">
                         Unlike basic counters that only look for spaces between English words, our <strong>Smart Multilingual Engine</strong> utilizes native NLP (Natural Language Processing) to accurately segment and count words in complex character systems.
                     </p>
                     <div class="grid sm:grid-cols-2 gap-4 not-prose mb-4">
@@ -585,13 +588,13 @@
                             <p class="text-xs text-stone-800 leading-relaxed mb-0">Accurate counting and intelligent stop-word filtering for <strong>Hindi (हिंदी)</strong>, <strong>Urdu (اردو)</strong>, and <strong>Russian (Русский)</strong>.</p>
                         </div>
                     </div>
-                    <p class="text-xs leading-relaxed mb-0 text-stone-600 italic">
+                    <p class="text-[12px] leading-relaxed mb-0 text-stone-600 italic">
                         * The Keyword Density tool also includes dedicated stop-word dictionaries for English, Hindi, Urdu, Russian, Japanese, Chinese, and Tagalog (Filipino).
                     </p>
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-users"></i></span> Who Needs a Word Counter?</h2>
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-users"></i></span> Who Needs a Word Counter?</h2>
                     <div class="grid sm:grid-cols-2 gap-4 not-prose">
                         <div class="bg-white/50 border border-stone-200/50 p-4 rounded-xl shadow-sm hover:border-red-200 transition-colors">
                             <h3 class="text-sm font-bold text-stone-900 mb-1.5 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-red-600"></i> Students & Educators</h3>
@@ -613,8 +616,8 @@
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-rocket"></i></span> Key Features</h2>
-                    <ul class="list-disc list-outside ml-5 space-y-2 mb-0 text-stone-800 text-sm font-medium">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-red-600"><i class="fa-solid fa-rocket"></i></span> Key Features</h2>
+                    <ul class="list-disc list-outside ml-5 space-y-2 mb-0 text-stone-800 text-[13px] font-medium">
                         <li><strong class="text-stone-900">Real-time Metrics:</strong> Instantly check your word count, character count (with and without spaces), sentences, and paragraphs right above your editor.</li>
                         <li><strong class="text-stone-900">Export Options:</strong> Instantly download your work as a .TXT text file, .DOC Word document, or .PDF right from the editor toolbar.</li>
                         <li><strong class="text-stone-900">Live Grammar & Spell Check:</strong> Our engine automatically highlights <strong>duplicate words</strong> (e.g. "the the") with a red wavy underline, and spacing errors with an orange underline, acting as a lightweight free grammar checker.</li>
@@ -627,40 +630,40 @@
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-xl font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-emerald-600"><i class="fa-solid fa-shield-halved"></i></span> Privacy First & Offline Support</h2>
-                    <p class="text-sm leading-relaxed text-stone-800 font-medium mb-0">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight"><span class="text-emerald-600"><i class="fa-solid fa-shield-halved"></i></span> Privacy First & Offline Support</h2>
+                    <p class="text-[13px] leading-relaxed text-stone-800 font-medium mb-0">
                         This tool runs entirely on client-side JavaScript. Your text is never transmitted to any external server, ensuring 100% data privacy for confidential documents and scripts. The auto-save functionality utilizes your browser's local storage to prevent data loss.
                     </p>
                 </section>
 
                 <section id="faqs" class="bg-transparent">
-                    <h2 class="text-xl font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-3">
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. Does this word counter work offline?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes. Once the page is loaded, the word counting and text analysis algorithms run completely offline in your browser.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Once the page is loaded, the word counting and text analysis algorithms run completely offline in your browser.</p>
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. Does it accurately count Chinese or Japanese characters?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes. Unlike standard counters that rely on spaces between words, our tool uses modern natural language processing (Intl.Segmenter) to accurately determine word boundaries in CJK (Chinese, Japanese, Korean) languages.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Unlike standard counters that rely on spaces between words, our tool uses modern natural language processing (Intl.Segmenter) to accurately determine word boundaries in CJK (Chinese, Japanese, Korean) languages.</p>
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. How does the Find & Replace work?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Click the "Find" button in the toolbar to open the panel. You can search for any word (with optional Case Matching). Matches are highlighted in blue. You can then replace them one by one or all at once.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Click the "Find" button in the toolbar to open the panel. You can search for any word (with optional Case Matching). Matches are highlighted in blue. You can then replace them one by one or all at once.</p>
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">4. How does the live grammar check work?</h3>
-                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">As you type, our engine scans for common errors like accidental duplicate words (e.g. "the the") and improper spacing before punctuation. These are highlighted with a red wavy underline, just like a traditional word processor.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">As you type, our engine scans for common errors like accidental duplicate words (e.g. "the the") and improper spacing before punctuation. These are highlighted with a red wavy underline, just like a traditional word processor.</p>
                         </div>
                     </div>
                 </section>
 
                 <section class="mt-10 p-6 sm:p-8 bg-stone-900/95 backdrop-blur-2xl rounded-[2rem] text-center shadow-2xl border border-stone-700/50 relative overflow-hidden">
-                    <h2 class="text-xl font-black text-white mb-2 mt-0 uppercase tracking-tight relative z-10">Ready to write?</h2>
-                    <p class="mb-5 text-stone-300 text-sm font-medium relative z-10">Start typing or paste your document above to get instant metrics.</p>
-                    <button onclick="document.getElementById('main-textarea').focus()" class="relative z-10 bg-red-600 text-white font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:bg-red-700 border border-red-600">Start Typing</button>
+                    <h2 class="text-[16px] font-black text-white mb-2 mt-0 uppercase tracking-tight relative z-10">Ready to write?</h2>
+                    <p class="mb-5 text-stone-300 text-[13px] font-medium relative z-10">Start typing or paste your document above to get instant metrics.</p>
+                    <button type="button" onclick="document.getElementById('main-textarea').focus()" class="relative z-10 bg-red-600 text-white font-black px-8 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(220,38,38,0.3)] active:scale-95 uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] hover:bg-red-700 border border-red-600">Start Typing</button>
                 </section>
             </div>
         </article>
