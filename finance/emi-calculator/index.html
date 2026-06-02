@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>EMI Calculator - Calculate Home, Car, Bike & Mobile Loan EMI</title>
+    <meta name="description" content="Advanced multi-loan EMI calculator for Home, Car, Bike, Personal & Mobile loans. Features No-Cost EMI logic, dynamic amortization charts, and CSV exports.">
+    <meta name="keywords" content="emi calculator, home loan emi, car loan emi, bike loan emi, mobile emi calculator, no cost emi, loan amortization schedule">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/emi-calculator" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Advanced 5-in-1 Multi-Loan EMI Calculator with Prepayments">
+    <meta property="og:description" content="Calculate Home, Car, Bike, Personal & Mobile Loan EMIs. Simulate prepayments, interest shock rates, ancillary cost bundles, and skip periods.">
+    <meta property="og:url" content="https://toolblaster.com/finance/emi-calculator">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:width" content="192">
+    <meta property="og:image:height" content="192">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Advanced 5-in-1 Multi-Loan EMI Calculator with Prepayments">
+    <meta name="twitter:description" content="Calculate Home, Car, Bike, Personal & Mobile Loan EMIs. Simulate prepayments, interest shock rates, and skipped moratorium terms.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata for Header Title -->
+    <meta name="application-name" content="EMI Calculator">
+    <meta name="apple-mobile-web-app-title" content="EMI Calculator">
+
+    <!-- Schema.org JSON-LD structured metadata -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Advanced 5-in-1 Multi-Loan EMI Calculator",
+          "description": "Calculate your loan repayments with our advanced multi-loan calculator supporting Home, Car, Bike, Personal, and Mobile loans with prepayments.",
+          "url": "https://toolblaster.com/finance/emi-calculator",
+          "inLanguage": "en-IN",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "mainEntity": {
+            "@id": "#loan-calculator"
+          }
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "#loan-calculator",
+          "name": "Multi-Loan Amortization EMI Calculator",
+          "description": "An online financial application to plan loan liquidation paths, annual step-up EMI adjustments, floating rate shocks, and Section 80C tax benefits.",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "toolblaster.com"
+          },
+          "url": "https://toolblaster.com/finance/emi-calculator",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "toolblaster.com"
+          },
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "Web"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; 
+            --accent-color: #E34037;
+            --accent-color-dark: #B91C1C;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Safeguards mobile viewports against rendering shifts */
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+
+        /* Sliders customization with dynamic background fill */
+        input[type="range"] {
+            -webkit-appearance: none; appearance: none; background: transparent;
+            width: 100%;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #94a3b8; /* Darkened track for WCAG contrast */
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark, #B91C1C), var(--accent-color-dark, #B91C1C));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: var(--accent-color-dark, #B91C1C);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -4.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* Steppers */
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .stepper-button {
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.1s;
+        }
+        .stepper-button:hover:not(:disabled) {
+            background-color: #cbd5e1;
+        }
+        .stepper-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 82px;
+            padding: 0 4px;
+            transition: all 0.2s ease-in-out;
+        }
+        @media (min-width: 640px) {
+            html body .manual-input {
+                width: 96px;
+            }
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .loan-tab-btn {
+            color: #1f2937;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+        }
+        .loan-tab-btn.active {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        /* Amortization Ledger styling */
+        .ledger-scroll-container {
+            max-height: 380px;
+            overflow-y: auto;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            width: 100%;
+        }
+        .ledger-scroll-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .ledger-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .ledger-table {
+            min-width: 480px;
+        }
+        .ledger-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e5e7eb;
+            z-index: 20;
+            box-shadow: inset 0 -1px 0 #94a3b8, inset 0 1px 0 #94a3b8;
+        }
+
+        /* Tooltip Helper */
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827;
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            display: none;
+            width: 180px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Modal Share styling */
+        .share-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 1rem;
+        }
+        .share-modal.active { opacity: 1; pointer-events: auto; }
+        .share-modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 480px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-modal.active .share-modal-content {
+            transform: scale(1);
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .close-modal-btn:hover {
+            color: #000000;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .modal-report-content h3 {
+            font-size: 0.85rem;
+            font-weight: 850;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .modal-report-content ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+        .modal-report-content li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #111827;
+        }
+        .share-url-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #94a3b8;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #111827;
+            background: #f8fafc;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+        .modal-btn {
+            background-color: var(--accent-color-dark, #B91C1C);
+            color: #ffffff;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        .modal-btn:hover {
+            background-color: #991b1b;
+        }
+
+        /* Power User Cards Design Tokens */
+        .adv-card {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            border-width: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.375rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .card-indigo {
+            background-color: rgba(238, 242, 255, 0.7);
+            border-color: #c7d2fe;
+            color: #312e81;
+        }
+        .card-amber {
+            background-color: rgba(254, 243, 199, 0.7);
+            border-color: #fde68a;
+            color: #78350f;
+        }
+        .card-rose {
+            background-color: rgba(254, 242, 242, 0.7);
+            border-color: #fecdd3;
+            color: #4c0519;
+        }
+        .card-purple {
+            background-color: rgba(243, 232, 255, 0.7);
+            border-color: #e9d5ff;
+            color: #3b0764;
+        }
+        .card-sky {
+            background-color: rgba(240, 249, 255, 0.75);
+            border-color: #bae6fd;
+            color: #083344;
+        }
+        .card-emerald {
+            background-color: rgba(236, 253, 245, 0.7);
+            border-color: #a7f3d0;
+            color: #064e3b;
+        }
+
+        .pill-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-width: 1px;
+            border-radius: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease-in-out;
+        }
+        .pill-indigo { border-color: #c7d2fe; }
+        .pill-indigo:focus-within {
+            border-color: #818cf8;
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 2px #818cf8, inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+        .pill-amber { border-color: #fde68a; }
+        .pill-amber:focus-within {
+            border-color: #fbbf24;
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 2px #fbbf24, inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+        .pill-rose { border-color: #fecdd3; }
+        .pill-rose:focus-within {
+            border-color: #fb7185;
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 2px #fb7185, inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+        .pill-purple { border-color: #e9d5ff; }
+        .pill-purple:focus-within {
+            border-color: #c084fc;
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 2px #c084fc, inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+        .pill-sky { border-color: #bae6fd; }
+        .pill-sky:focus-within {
+            border-color: #38bdf8;
+            outline: 2px solid transparent;
+            box-shadow: 0 0 0 2px #38bdf8, inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            #loan-calculator, #shareModal, #notification-toast, .print-hide {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+            }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            thead { display: table-header-group; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Global Background Ambient Orbs (Same premium feeling) -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
+    </div>
+
+    <!-- Layout Navigation Headers placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Breadcrumbs Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="https://toolblaster.com/finance/" class="hover:text-red-600 transition-colors">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">EMI Calculator</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-calculator"></i> Smart Borrowing
+            </div>
+        </nav>
+
+        <!-- SCREEN CALCULATOR PANEL -->
+        <div id="loan-calculator" class="w-full text-left">
+            <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
+                
+                <!-- Header Block -->
+                <div class="text-center mb-1">
+                    <h1 class="text-base sm:text-lg font-extrabold text-gray-900">EMI Calculator - Calculate Home, Car, Bike & Mobile Loan EMI</h1>
+                </div>
+                <p class="text-center text-gray-600 mb-2.5 text-xxs font-medium">Calculate monthly loan repayments instantly with amortization tables, floating interest shock, prepayments, and tax relief.</p>
+
+                <!-- Calculation Mode (EMI vs Eligibility) -->
+                <div class="flex p-1 bg-gray-100 rounded-xl mb-4 max-w-md mx-auto" role="group" aria-label="Calculation Mode">
+                    <button type="button" id="modeEmiBtn" class="flex-1 py-1.5 text-xxs font-extrabold rounded-lg text-white bg-blue-900 shadow text-center transition-all duration-200" aria-pressed="true">
+                        Calculate EMI
+                    </button>
+                    <button type="button" id="modeEligibleBtn" class="flex-1 py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg text-gray-800 text-center transition-all duration-200" aria-pressed="false">
+                        Check Max Eligibility
+                    </button>
+                </div>
+
+                <!-- Category Switcher Tabs -->
+                <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5 mb-4 p-1 bg-gray-100 rounded-xl" role="tablist" aria-label="Loan Categories">
+                    <button type="button" role="tab" id="tab-home" class="loan-tab-btn active text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="true">Home Loan</button>
+                    <button type="button" role="tab" id="tab-car" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Car Loan</button>
+                    <button type="button" role="tab" id="tab-bike" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Bike Loan</button>
+                    <button type="button" role="tab" id="tab-personal" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Personal</button>
+                    <button type="button" role="tab" id="tab-mobile" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false">Mobile EMI</button>
+                </div>
+
+                <!-- MAIN CORE WORKSPACE GRID -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5 items-start">
+                    
+                    <!-- Left Settings Panel -->
+                    <div class="space-y-3">
+                        <div class="bg-gradient-to-br from-indigo-50/80 to-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl space-y-2 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Core Loan Settings</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Fundaments variables affecting EMI calculations.</span>
+                                </span>
+                            </h2>
+
+                            <!-- Principal Value -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanAmountLabel" for="loanAmountInput" class="block text-xxs font-bold text-gray-900">Sanctioned Principal (₹)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text" id="loanAmountTooltipText">The base loan capital sanctioned by the lending institution.</span>
+                                        </span>
+                                    </span>
+                                    <span id="loanAmountWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanAmountSlider" min="50000" max="50000000" value="3000000" step="10000" class="w-full flex-grow" aria-labelledby="loanAmountLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanAmountDecrement" class="stepper-button" aria-label="Decrease Amount">-</button>
+                                        <input type="number" id="loanAmountInput" class="manual-input text-center" value="3000000" min="50000" max="50000000" step="10000">
+                                        <button type="button" id="loanAmountIncrement" class="stepper-button" aria-label="Increase Amount">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interest Rate -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanInterestLabel" for="loanInterestInput" class="block text-xxs font-bold text-gray-900">Reducing Interest Rate (% p.a.)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The reducing balance rate charged annually by the lender.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanInterestSlider" min="5" max="35" value="8.5" step="0.05" class="w-full flex-grow" aria-labelledby="loanInterestLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanInterestDecrement" class="stepper-button" aria-label="Decrease Interest">-</button>
+                                        <input type="number" id="loanInterestInput" class="manual-input text-center" value="8.5" min="5" max="35" step="0.05">
+                                        <button type="button" id="loanInterestIncrement" class="stepper-button" aria-label="Increase Interest">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tenure -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="loanTenureLabel" for="loanTenureInput" class="block text-xxs font-bold text-gray-900">Repayment Period Tenure</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">The loan tenure in years (months for short-term).</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="loanTenureSlider" min="1" max="30" value="20" step="1" class="w-full flex-grow" aria-labelledby="loanTenureLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="loanTenureDecrement" class="stepper-button" aria-label="Decrease Tenure">-</button>
+                                        <input type="number" id="loanTenureInput" class="manual-input text-center" value="20" min="1" max="30" step="1">
+                                        <button type="button" id="loanTenureIncrement" class="stepper-button" aria-label="Increase Tenure">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Start Date -->
+                            <div class="relative pb-1 bg-white border border-blue-100 rounded-xl p-2.5 shadow-inner">
+                                <div class="flex items-center gap-1.5 mb-1">
+                                    <span class="block text-xxs font-extrabold text-blue-950 uppercase tracking-wide">Loan Repayment Start Date</span>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Used to align date mappings on the amortization table.</span>
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label for="loanStartMonth" class="sr-only">Repayment Start Month</label>
+                                        <select id="loanStartMonth" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                            <option value="0">January</option>
+                                            <option value="1">February</option>
+                                            <option value="2">March</option>
+                                            <option value="3">April</option>
+                                            <option value="4">May</option>
+                                            <option value="5">June</option>
+                                            <option value="6">July</option>
+                                            <option value="7">August</option>
+                                            <option value="8">September</option>
+                                            <option value="9">October</option>
+                                            <option value="10">November</option>
+                                            <option value="11">December</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="loanStartYear" class="sr-only">Repayment Start Year</label>
+                                        <select id="loanStartYear" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-1.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                            <!-- Injected via JS -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Power Controls Toggle -->
+                        <div id="togglePowerUserDiv" class="bg-gray-100 p-2.5 rounded-2xl border border-gray-300 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="text-xxs font-bold text-gray-900 whitespace-nowrap">🚀 Advanced Power Controls</span>
+                                <span class="tooltip-icon flex-shrink-0" onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Activate step-up payments, interest shocks, prepayments, and taxes.</span>
+                                </span>
+                            </div>
+                            <label for="powerUserToggle" class="relative inline-flex items-center flex-shrink-0 select-none cursor-pointer" aria-label="Toggle Advanced Power Controls">
+                                <input type="checkbox" id="powerUserToggle" class="sr-only peer">
+                                <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                            </label>
+                        </div>
+
+                        <!-- Advanced settings fields panel -->
+                        <div id="advancedSettingsPanel" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
+                            <h3 class="text-xs font-bold text-gray-900 text-center border-b border-gray-200 pb-1.5 flex items-center justify-center gap-1">
+                                <span>Power-User Advanced Settings</span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Step-Up Rate -->
+                                <div class="adv-card card-indigo" id="stepUpCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="stepUpRateInput" class="text-[10px] font-extrabold tracking-wider uppercase text-indigo-950">Annual Step-Up EMI</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-indigo-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Increase EMI value by a fixed percentage annually (not available in eligibility mode).</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-indigo" id="stepUpPillBox">
+                                        <input type="number" id="stepUpRateInput" class="w-full bg-transparent text-xs font-black outline-none text-indigo-950" value="0" min="0" max="25" step="1">
+                                        <span class="text-[10px] font-black text-indigo-600 ml-1 select-none whitespace-nowrap">% p.a.</span>
+                                    </div>
+                                </div>
+
+                                <!-- Moratorium Months -->
+                                <div class="adv-card card-amber" id="moratoriumCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="moratoriumInput" class="text-[10px] font-extrabold tracking-wider uppercase text-amber-950">EMI Moratorium</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-amber-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Repayment holiday months. Interest accumulates on balance capital.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-amber" id="moratoriumPillBox">
+                                        <input type="number" id="moratoriumInput" class="w-full bg-transparent text-xs font-black outline-none text-amber-950" value="0" min="0" max="6" step="1">
+                                        <span class="text-[10px] font-black text-amber-600 ml-1 select-none whitespace-nowrap">Months</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Ancillary Charges -->
+                                <div class="adv-card card-rose" id="ancillaryCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="ancillaryCostInput" class="text-[10px] font-extrabold tracking-wider uppercase text-rose-950">Ancillary Costs</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-rose-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Dynamic charges such as stamp duty, processing, registration added directly to principal.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-rose" id="ancillaryPillBox">
+                                        <input type="number" id="ancillaryCostInput" class="w-full bg-transparent text-xs font-black outline-none text-rose-950" value="0" min="0" max="10" step="0.5">
+                                        <span class="text-[10px] font-black text-rose-600 ml-1 select-none whitespace-nowrap">% Loan</span>
+                                    </div>
+                                </div>
+
+                                <!-- Floating Rate Shock -->
+                                <div class="adv-card card-purple" id="rateShockCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <span class="text-[10px] font-extrabold tracking-wider uppercase text-purple-950">Rate Shock Simulator</span>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-purple-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Simulates floating rate increases occurring at a given year.</span>
+                                        </span>
+                                    </span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="pill-container pill-purple" id="rateShockAmtPillBox">
+                                            <input type="number" id="rateShockAmountInput" class="w-full bg-transparent text-xs font-black outline-none text-purple-950 text-center" value="0" min="0" max="10" step="0.1" placeholder="Rate">
+                                            <span class="text-[9px] font-black text-purple-600 ml-1 select-none whitespace-nowrap">+%</span>
+                                        </div>
+                                        <div class="pill-container pill-purple" id="rateShockYrPillBox">
+                                            <input type="number" id="rateShockYearInput" class="w-full bg-transparent text-xs font-black outline-none text-purple-950 text-center" value="3" min="1" max="30" step="1" aria-label="Rate Shock Year">
+                                            <span class="text-[9px] font-black text-purple-600 ml-1 select-none whitespace-nowrap">Yr</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Prepayment Forester Planner -->
+                            <div class="adv-card card-sky">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="text-[10px] font-extrabold tracking-wider uppercase text-sky-950">Prepayment & Foreclosure Planner</span>
+                                    <span class="tooltip-icon flex-shrink-0">
+                                        <svg class="text-sky-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Simulate extra payments towards principal to drop tenure.</span>
+                                    </span>
+                                </span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <div class="flex flex-col space-y-1.5 rounded-xl p-1" id="recurPrepayCardWrapper">
+                                        <label for="recurringPrepayInput" class="text-[9px] font-bold text-sky-950 flex items-center gap-1">
+                                            <span>Recurring Annual Prepay (₹)</span>
+                                        </label>
+                                        <div class="pill-container pill-sky" id="recurPrepayPillBox">
+                                            <input type="number" id="recurringPrepayInput" class="w-full bg-transparent text-xs font-black outline-none text-sky-950" value="0" min="0" max="1000000" step="5000">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col space-y-1.5 rounded-xl p-1" id="lumpsumPrepayCardWrapper">
+                                        <label for="lumpsumPrepayInput" class="text-[9px] font-bold text-sky-950 flex items-center gap-1">
+                                            <span>One-time Lumpsum Prepay (₹)</span>
+                                        </label>
+                                        <div class="flex gap-1">
+                                            <div class="flex-grow pill-container pill-sky" id="lumpsumPrepayPillBox">
+                                                <input type="number" id="lumpsumPrepayInput" class="w-full bg-transparent text-xs font-black outline-none text-sky-950" value="0" min="0" max="5000000" step="10000" placeholder="Amt">
+                                            </div>
+                                            <div class="w-1/3 pill-container pill-sky" id="lumpsumPrepayYrPillBox">
+                                                <input type="number" id="lumpsumPrepayYearInput" class="w-full bg-transparent text-xs font-black outline-none text-sky-950 text-center" value="2" min="1" max="30" step="1" aria-label="Lumpsum Prepay Year">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Income Tax Regime -->
+                            <div class="adv-card card-emerald sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0">
+                                <span class="flex items-center gap-1.5 flex-shrink-0">
+                                    <span class="text-[10px] font-extrabold tracking-wider uppercase text-emerald-950 font-black">Income Tax Regime</span>
+                                    <span class="tooltip-icon flex-shrink-0">
+                                        <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Home loan tax deductions apply on Old Regime only (Sec 24b/80C).</span>
+                                    </span>
+                                </span>
+                                <div class="bg-white/90 p-1 rounded-xl flex gap-1 border border-emerald-200 flex-shrink-0 w-full sm:w-auto">
+                                    <button type="button" id="regimeOldBtn" class="flex-1 sm:flex-initial px-4 py-1 text-xxs font-black rounded-lg bg-emerald-800 text-white shadow transition-all duration-200">Old</button>
+                                    <button type="button" id="regimeNewBtn" class="flex-1 sm:flex-initial px-4 py-1 text-xxs font-black rounded-lg text-emerald-950 transition-all duration-200">New</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Analytical Output Panel -->
+                    <div class="flex flex-col space-y-3">
+                        <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
+                                <h2 class="text-xs font-bold text-blue-950 font-extrabold flex items-center gap-1">
+                                    <span>Loan Liquidation Summary</span>
+                                </h2>
+                                <button id="shareReportBtn" class="p-1 text-gray-700 hover:text-red-800 transition-colors flex-shrink-0 print-hide" aria-label="Share calculations link">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true">
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Accelerator indicator bar -->
+                            <div id="powerSavingsBadge" class="p-2.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xxs text-center mb-2 transition-all hidden"></div>
+
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p id="totalInvestmentCardTitle" class="text-[10px] font-bold text-gray-800">Sanctioned Principal</p>
+                                    </span>
+                                    <p id="totalInvestment" class="text-xs sm:text-sm font-extrabold text-blue-950">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Total Interest Paid</p>
+                                    </span>
+                                    <p id="totalInterest" class="text-xs sm:text-sm font-extrabold text-green-950">₹0</p>
+                                </div>
+                            </div>
+
+                            <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p id="targetValueCardTitle" class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Calculated Monthly Loan EMI</p>
+                                </span>
+                                <p id="maturityValue" class="text-base sm:text-lg font-extrabold text-purple-950">₹0</p>
+                            </div>
+
+                            <!-- Tax Benefit Badge -->
+                            <div id="taxBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-4 space-y-1">
+                                <div class="flex flex-col space-y-1">
+                                    <div class="flex justify-between items-center">
+                                        <div class="text-left">
+                                            <span class="flex items-center gap-1">
+                                                <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">Yearly Tax Saved (Sec 24b & 80C)</p>
+                                            </span>
+                                            <span id="taxBenefitDetails" class="text-[9px] text-emerald-800 block leading-tight">Sec 24b: ₹0 | Sec 80C: ₹0</span>
+                                        </div>
+                                        <p id="taxBenefitDisplay" class="text-xs sm:text-sm font-extrabold text-emerald-950">₹0</p>
+                                    </div>
+                                    <p class="text-[9px] text-emerald-800 italic mt-1.5 border-t border-emerald-250 pt-1 text-center leading-tight">
+                                        Deductions calculated based on active Old Tax Regime limits.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Integrated Debt ratio checking panel -->
+                            <div class="mt-3 p-3 bg-white border border-blue-100 rounded-2xl shadow-sm space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="monthlyIncomeInput" class="text-xxs font-bold text-gray-900">Net Monthly Take-Home Income (₹)</label>
+                                    </span>
+                                </div>
+                                <input type="number" id="monthlyIncomeInput" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-1.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" value="75000" min="1" placeholder="Enter income">
+                                <div id="affordabilityBadge" class="p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200"></div>
+                            </div>
+                        </div>
+
+                        <!-- Graph Section -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-250 shadow-sm print-hide">
+                            <div class="flex justify-between items-center mb-2 border-b pb-1">
+                                <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Visual Repayment Break-up</span>
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
+                                    <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
+                                    <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Yearly Curve</button>
+                                </div>
+                            </div>
+                            <div id="chartDoughnutContainer" class="h-36 sm:h-44 flex items-center justify-center">
+                                <canvas id="emiDoughnutChart"></canvas>
+                            </div>
+                            <div id="chartBarContainer" class="h-36 sm:h-44 hidden">
+                                <canvas id="emiBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured Repayment Accordion Schedule -->
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                    <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px] print-hide">
+                        <span class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                            View Structured Amortization Repayment Schedule
+                        </span>
+                        <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-800">▼</span>
+                    </button>
+                    
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b border-gray-200 pb-3">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-[11px] text-gray-700 font-medium">Detailed monthly breakdown of principal reduction and interest amortizations.</p>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span id="totalRowsBadge" class="inline-flex items-center px-2 py-0.5 rounded text-xxs font-extrabold bg-blue-100 text-blue-800"></span>
+                                    <span id="scrollNoticeBadge" class="inline-flex items-center text-[10px] text-gray-500 italic animate-pulse"></span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- Month-wise / Year-wise Toggle -->
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-xxs font-bold print-hide" role="group" aria-label="Amortization Table Mode">
+                                    <button type="button" id="toggleViewMonthBtn" class="px-3 py-1 rounded-md bg-blue-900 text-white shadow transition-all duration-150">Month-wise</button>
+                                    <button type="button" id="toggleViewYearBtn" class="px-3 py-1 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-150">Year-wise</button>
+                                </div>
+                                <div class="flex gap-2 print-hide">
+                                    <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Export CSV</button>
+                                    <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Print PDF</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
+                            <table class="w-full text-left border-collapse text-xs ledger-table">
+                                <thead>
+                                    <tr class="border-b border-gray-300 text-gray-900 bg-gray-100">
+                                        <th scope="col" id="ledgerPeriodHeader" class="p-3 font-extrabold">Month</th>
+                                        <th scope="col" class="p-3 font-extrabold">Principal Paid</th>
+                                        <th scope="col" class="p-3 font-extrabold">Interest Charged</th>
+                                        <th scope="col" id="ledgerTotalHeader" class="p-3 font-extrabold">Total Payment</th>
+                                        <th scope="col" id="ledgerBalanceHeader" class="p-3 font-extrabold">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-gray-900">
+                                    <!-- Populated in JS loops -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surplus Integration Banner -->
+                <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700 print-hide">
+                    <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
+                        Invest surplus savings with 5paisa to liquidate debt faster
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Compliance disclaimer bar -->
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-center text-gray-900 text-[10px] leading-relaxed print-hide">
+                    <p class="font-bold text-gray-950 mb-0.5">AMFI & SEBI Regulatory Cautionary Note:</p>
+                    <p class="mb-2">Calculations displayed on this platform are for analytical projection purposes only and do not constitute direct AMFI/SEBI financial advise. Real interest rates and terms depend directly upon your bank.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section (Isolates during printing) -->
+        <div class="max-w-[1080px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: PPF Calculator -->
+                <a href="https://toolblaster.com/finance/ppf-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">PPF Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate maturity and tax benefits.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: SIP vs FD vs RD -->
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-100">
+                            <i class="fa-solid fa-chart-simple text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">SIP vs FD vs RD</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Compare compound yields side-by-side.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Investment Planner</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Plan custom wealth and retirement goals.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sleek & Minimal Ecosystem SEO Article (Safely isolated during printing via print-hide) -->
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
+            <div class="space-y-6 text-stone-800">
+                
+                <!-- Section 1: Demystifying Debt Amortization -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-chart-line"></i></span> Strategic Repayment: The Power of Smart Loan Amortization
+                    </h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
+                        Loans are essential financial instruments for milestones like purchasing a home, acquiring a vehicle, or financing short-term electronics. However, the true cost of borrowing lies in the repayment strategy. Standard repayments are mapped on an <strong>amortization schedule</strong> using reducing balance calculations, where the interest component of your monthly payment decreases over time as your outstanding principal reduces.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
+                        Our advanced 5-in-1 calculator is designed to provide complete transparency over this compound liquidation path. By simulating pre-payments, annual step-up adjustments, and float rate shocks, you can forecast precisely how to accelerate foreclosure paths, minimize outflow, and unlock maximum tax deductions on interest components.
+                    </p>
+                </section>
+
+                <!-- Section 2: How to Use the Advanced Controls -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-gears"></i></span> How to Leverage Advanced Repayment Controls
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        This simulator features a comprehensive "Power-User" control suite. Here is how you can use each parameter to model real-world borrowing scenarios:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 1. Core Variables & Eligibility Check
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Slide or type in your Sanctioned Principal, Reducing Interest Rate, and Tenure. Toggle to "Check Max Eligibility" to reverse-engineer how much principal amount you can borrow based purely on your desired monthly budget limit.
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 2. Moratorium & Annual Step-Ups
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Simulate an EMI Moratorium holiday during financial crunches, noting how unpaid accumulated interest adds back to the outstanding capital. Conversely, configure an Annual Step-Up percentage to raise your EMI alongside salary increments, shortening the borrowing term.
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 3. Floating Shock & Foreclosure Planner
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Model floating interest rate volatility by applying a positive rate shock at a chosen year of the schedule. Use the Prepayment Planner to input recurring annual or single lumpsum payments, immediately lowering your interest outflow.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Mathematical Formulas (Symmetric LaTeX Enclosures) -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Amortization Mathematics: How EMIs are Calculated
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        Reducing balance interest models calculate repayments continuously on outstanding balances. The standard formula for Equated Monthly Installment (EMI) is as follows:
+                    </p>
+
+                    <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">1. Standard EMI Amortization Formula</h3>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$E = P \times \frac{r \times (1 + r)^n}{(1 + r)^n - 1}$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $E$ is the calculated Equated Monthly Installment, $P$ is the base principal capital borrowed (plus any ancillary processing costs), $r$ is the monthly interest rate calculated as $r = \frac{\text{Annual Interest Rate}}{12 \times 100}$, and $n$ represents the total repayment tenure in months ($T \times 12$ for tenure in years).
+                            </p>
+                        </div>
+
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">2. Monthly Interest Component Calculation</h3>
+                            <p class="mb-2">For any given month, the interest segment of the payment is derived from the current unpaid balance:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$I_m = B_{m-1} \times r$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $I_m$ is the interest component for the active month, and $B_{m-1}$ represents the outstanding balance remaining from the previous cycle. The principal repayment portion for that month is subsequently calculated as $P_m = E_m - I_m$, continuously accelerating debt reduction.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Side-by-Side Comparison: Reducing vs Flat vs No-Cost EMI -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Loan Product Comparison: Reducing vs Flat vs No-Cost EMI
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse border border-stone-200">
+                            <thead>
+                                <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
+                                    <th class="p-2.5">Repayment Scheme</th>
+                                    <th class="p-2.5">Interest Calculation Base</th>
+                                    <th class="p-2.5">Effective APR Impact</th>
+                                    <th class="p-2.5">Prepayment Support</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200 text-stone-700 font-medium">
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Reducing Balance</td>
+                                    <td class="p-2.5">Outstanding monthly principal balance</td>
+                                    <td class="p-2.5 text-green-700 font-bold">Fair (Highly Transparent)</td>
+                                    <td class="p-2.5">Supported (Reduces future interest immediately)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Flat Rate Loan</td>
+                                    <td class="p-2.5">Initial sanctioned principal throughout tenure</td>
+                                    <td class="p-2.5 text-red-700 font-bold">Unfavorable (Hidden high real rate)</td>
+                                    <td class="p-2.5">Limited (Usually incurs penalty rates)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">No-Cost EMI</td>
+                                    <td class="p-2.5">Upfront discount equal to interest component</td>
+                                    <td class="p-2.5 text-amber-700 font-bold">Moderate (Subject to processing fee tax)</td>
+                                    <td class="p-2.5">Not Applicable (Short-term consumer credits)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 5: Frequently Asked Questions (FAQ) -->
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. What is the difference between a Reducing Balance Rate and a Flat Rate?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">A reducing balance rate calculates monthly interest only on the remaining unpaid principal amount. A flat interest rate continues calculating interest on the entire initial borrowed principal throughout the tenure. Flat rate loans look cheap but possess a much higher real annual percentage rate (APR) compared to reducing balance loans.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. How do part-prepayments save interest?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Any part-prepayment you make goes directly toward paying down the outstanding principal loan amount. This lowers the outstanding base principal immediately, which mathematically slashes the interest component charged in subsequent months, bringing down your remaining tenure or monthly EMI value.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Can I claim income tax deductions on Home Loan EMIs in India?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes, under the Old Tax Regime. You can claim tax benefits up to ₹2,00,000 annually under Section 24(b) on the interest paid component. Additionally, the principal repayment component can be claimed up to ₹1,50,000 under Section 80C. Under the New Tax Regime, these deductions are not allowed.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <!-- PRINT ONLY HIGH-CONTRAST STATEMENT REPORT TEMPLATE -->
+        <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
+             <div class="text-center border-b-2 border-red-700 pb-4 mb-6">
+                 <h1 class="text-2xl font-extrabold uppercase tracking-wide">Loan Repayment & Amortization Report</h1>
+                 <p class="text-xs text-gray-600 mt-1">Generated electronically on toolblaster.com</p>
+             </div>
+             
+             <div class="grid grid-cols-2 gap-6 mb-6">
+                 <!-- Left: Inputs -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Loan Parameters</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Loan Category:</td><td id="printLoanCategory" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Requested Principal:</td><td id="printRequestedPrincipal" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Annual Interest Rate:</td><td id="printInterestRate" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Loan Tenure:</td><td id="printTenure" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowAncillary" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Ancillary Costs:</td><td id="printAncillary" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowStepUp" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Annual Step-Up Rate:</td><td id="printStepUp" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowMoratorium" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Moratorium Months:</td><td id="printMoratorium" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowRateShock" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Floating Rate Shock:</td><td id="printRateShock" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowPrepayments" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Part prepayments applied?</td><td id="printPrepaymentsApplied" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     </table>
+                 </div>
+                 
+                 <!-- Right: Repayment Metrics -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Repayment Projection</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Equated Monthly EMI:</td><td id="printEMIValue" class="text-right py-1.5 font-extrabold text-blue-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Borrowed Principal:</td><td id="printTotalPrincipal" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Interest Paid:</td><td id="printTotalInterest" class="text-right py-1.5 font-semibold text-green-950">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Cumulative Outflow:</td><td id="printTotalOutflow" class="text-right py-1.5 font-bold text-gray-900">-</td></tr>
+                         <tr id="printRowTax" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Average Annual Tax Saved:</td><td id="printTaxSaved" class="text-right py-1.5 text-emerald-800 font-semibold">-</td></tr>
+                     </table>
+                 </div>
+              </div>
+
+              <!-- Print Amortization Table -->
+              <div>
+                  <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Amortization Schedule</h2>
+                  <table class="w-full text-left border-collapse text-xs border">
+                      <thead>
+                          <tr class="border-b bg-gray-100 text-gray-900">
+                              <th class="p-2 border">Period / Month</th>
+                              <th class="p-2 border">Principal Paid</th>
+                              <th class="p-2 border">Interest Charged</th>
+                              <th class="p-2 border">Total Payment</th>
+                              <th class="p-2 border">Balance</th>
+                          </tr>
+                      </thead>
+                      <tbody id="printLedgerBody" class="divide-y text-gray-900">
+                          <!-- Filled in JS calculations -->
+                      </tbody>
+                  </table>
+              </div>
+        </div>
+
+        <!-- Share Modal container -->
+        <div id="shareModal" class="share-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="share-modal-content">
+                <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
+                <h2 id="modalTitle" class="modal-title font-extrabold">Your Structured Repayment Overview</h2>
+                <div id="modalReportContent" class="modal-report-content border-b border-gray-200 pb-2 mb-2"></div>
+                <div class="modal-share-section mt-4">
+                    <label for="shareUrlInput" class="block text-xxs font-bold text-gray-900 mb-1">Shareable Link Reference</label>
+                    <input type="text" id="shareUrlInput" class="share-url-input" readonly>
+                    <div class="modal-actions flex justify-end gap-2">
+                        <button id="copyUrlBtn" class="modal-btn px-4 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold border-none cursor-pointer">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification-toast"></div>
+    </main>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+
+    <!-- Global Layout Injectors & Logic Modules -->
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
