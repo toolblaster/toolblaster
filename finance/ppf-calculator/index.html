@@ -80,7 +80,6 @@
     </script>
 
     <!-- Tailwind, Chart.js, and Icons -->
-    <script src="../../js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1079,43 +1078,62 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <div class="max-w-[950px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+        <div class="max-w-[1080px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
                 <!-- Card 1: SIP vs FD vs RD -->
-                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Yield Comparison</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, Recurring Deposits, and Fixed Deposits side-by-side.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-red-600 uppercase tracking-widest block leading-none mb-0.5">Yield Comparison</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">SIP vs FD vs RD</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Compare FD, RD, and SIP mutual funds side-by-side.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                        Compare Now <span class="text-sm">&rarr;</span>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
 
                 <!-- Card 2: Investment Planner -->
-                <a href="https://toolblaster.com/finance/investment-planner/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-emerald-600 uppercase tracking-widest block">Comprehensive Planner</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Investment Planner & Goal Tracker</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Plan custom SIP goals, calculate long-term retirement pension, and SWP plans.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-emerald-600 uppercase tracking-widest block leading-none mb-0.5">Comprehensive Planner</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">Investment Planner</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Plan long-term goals, SWPs, and retirement funds.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                        Plan Now <span class="text-sm">&rarr;</span>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="https://toolblaster.com/finance/emi-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-purple-600 uppercase tracking-widest block leading-none mb-0.5">Loan Repayment</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">EMI Calculator</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Calculate Home, Car, Bike & Mobile Loan EMIs.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
             </div>
