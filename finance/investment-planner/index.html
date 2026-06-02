@@ -32,7 +32,7 @@
     <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
-    <link class="manifest" href="../../js/favicon/site.webmanifest">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
 
     <!-- Header Title ke liye Application Brand Metadata -->
     <meta name="application-name" content="Investment Planner">
@@ -56,8 +56,7 @@
     }
     </script>
 
-    <!-- Tailwind, Chart.js aur Icons -->
-    <script src="../../js/tailwind-config.js"></script>
+    <!-- Tailwind, Chart.js aur Icons (Removed deleted tailwind-config.js) -->
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -388,8 +387,8 @@
                     </div>
                 </div>
 
-                <!-- Main Interaction Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+                <!-- MAIN INTERACTION GRID -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
                     <div class="space-y-3 print-hide">
                         <!-- Dynamic Section Containers -->
                         <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl">
@@ -757,45 +756,63 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- Visually Premium, Double-Card Responsive Grid exactly matching the design token properties of PPF calculator -->
-        <!-- BUG FIX: Descriptions have been shortened to highly informative single lines as requested -->
-        <div class="max-w-[950px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
+        <!-- Visually Premium, Triple-Card Responsive Grid exactly matching the design token properties of PPF/EMI calculator -->
+        <div class="max-w-[1080px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
                 <!-- Card 1: SIP vs FD vs RD -->
-                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-red-600 uppercase tracking-widest block">Compare Yields</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">SIP vs FD vs RD Calculator</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Compare compounding returns of Mutual Funds, FD, and RD side-by-side.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-red-600 uppercase tracking-widest block leading-none mb-0.5">Yield Comparison</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">SIP vs FD vs RD</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Compare FD, RD, and SIP mutual funds side-by-side.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                        Compare Now <span class="text-sm">&rarr;</span>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
 
-                <!-- Card 2: PPF Calculator (New Dynamic interlink integration) -->
-                <a href="https://toolblaster.com/finance/ppf-calculator" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Card 2: PPF Calculator -->
+                <a href="https://toolblaster.com/finance/ppf-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest block">Sovereign Savings</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">PPF Calculator</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Calculate PPF maturity, interest compounding, loan details, and extension blocks.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-blue-600 uppercase tracking-widest block leading-none mb-0.5">Sovereign Savings</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">PPF Calculator</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Calculate PPF maturity, interest & loan blocks.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                        Plan Now <span class="text-sm">&rarr;</span>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="https://toolblaster.com/finance/emi-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-purple-600 uppercase tracking-widest block leading-none mb-0.5">Loan Repayment</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">EMI Calculator</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Calculate Home, Car, Bike & Mobile Loan EMIs.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
             </div>
@@ -880,10 +897,10 @@
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <!-- Updated H2 to exact 16px to unify across SEO articles -->
                     <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Mathematical Formulas & Compounding Theory
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics of PPF
                     </h2>
                     <p class="text-sm leading-relaxed mb-4 text-stone-800 font-medium">
-                        To maintain strict mathematical transparency, our planner uses standard financial industry formulas for discrete compound intervals:
+                        To maintain strict financial industry formulas for discrete compound intervals:
                     </p>
 
                     <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
