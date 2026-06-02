@@ -1,89 +1,138 @@
 🚀 Toolblaster
 
-Smart Tools for Business, Finance & Life A high-performance digital utility station designed for speed, privacy, and precision.
+Smart Tools for Business, Finance & Life
+
+A high-performance digital utility station designed for speed, privacy, and precision.
 
 🧠 The Philosophy
 
-Toolblaster was born from a simple frustration: essential digital tools are often too complex, riddled with ads, or hidden behind paywalls. We believe that managing daily priorities, executing deep work, or analyzing text shouldn't require a subscription or compromise your privacy.
+Toolblaster was born from a simple frustration: essential digital utilities and financial calculators are often over-engineered, riddled with ads, or hidden behind paywalls. We believe that managing daily priorities, executing deep work, or planning your long-term wealth shouldn't require a subscription or compromise your privacy.
 
 Our Core Pillars:
 
-🔒 Privacy-First (Local Storage): What happens on your device stays on your device. All our productivity tools use local browser storage. We do not track or upload your private input data to central servers.
+🔒 Privacy-First (Local Storage): What happens on your device stays on your device. All our productivity and calculation tools run completely client-side. We do not track, upload, or process your private financial inputs on central servers.
 
-⚡ Built for Speed: Zero bloat, instant load times, and vanilla JavaScript for a seamless user experience.
+⚡ Built for Speed: Zero bloat, instant load times, and vanilla JavaScript compiled logic for a seamless user experience.
 
 🎯 No Distractions: 100% free tools with no forced logins, no paywalls, and no annoying pop-ups.
 
-📱 Mobile-Optimized: Every interface is built mobile-first with highly compact, thumb-friendly UI components.
+📱 Mobile-First Responsive Design: Every interface is built to adapt dynamically to all modern mobile viewports with highly compact, thumb-friendly UI components.
 
 🛠️ Tool Ecosystem & Directory
 
-Toolblaster operates as a central hub, hosting various native applications cleanly categorized into specific suites.
+Toolblaster operates as a centralized hub, hosting specialized applications categorized into targeted suites.
 
 ⚡ Productivity Suite
 
 DECIDE. (/productivity/decide/)
+
 Daily Priority Tool for Mental Clarity & Focus
 
-Feature: Limits you to strictly 3 daily priorities to eliminate overwhelm.
+Feature: Limits you to strictly 3 daily priorities to eliminate task overload and anxiety.
 
-Tech: LocalStorage for persistence, Custom JSON export/import, PDF/CSV generation.
+Tech: localStorage persistence, custom JSON imports/exports, and high-fidelity PDF/CSV print generations.
 
 Smart Word Counter (/productivity/word-counter/)
+
 Advanced Text Analyzer & Word Counter
 
-Feature: Real-time multilingual counting, SEO keyword density, live grammar hints, reading time estimation, and goal tracking.
+Feature: Real-time multilingual counting, SEO keyword density audits, live grammar suggestions, reading time estimation, and custom goal trackers.
 
-Tech: Intl.Segmenter for CJK languages, advanced regex highlighting.
+Tech: Intl.Segmenter for seamless CJK (Chinese, Japanese, Korean) language parsing, advanced regex highlighting.
 
 Pomodoro Study Timer (/productivity/pomodoro-study-timer/)
+
 Distraction-Free Deep Focus Timer
 
-Feature: Auto-start intervals, customizable break rules, and keyboard shortcuts (Alt+P, Space).
+Feature: Auto-start intervals, customizable break rules, and native keyboard hotkey bindings (Alt + P, Space).
 
-Tech: Web Audio API for ambient sounds (Brown/Pink noise), native push notifications, and Screen Wake Lock API.
+Tech: Web Audio API for synthetic ambient sounds (Brown/Pink/White noise), native push notifications, and Screen Wake Lock API.
 
 Breathing Pacer (/productivity/breathing-pacer/)
+
 Minimalist Box Breathing & Meditation Guide
 
-Feature: Visual pacing for 4-7-8, Box Breathing, and custom patterns with haptic feedback and Zen sounds to reduce stress.
+Feature: Visual pacing for the 4-7-8 method, classic Box Breathing, and custom cycles. Leverages Zen-inspired sound blocks.
 
 Tech: CSS custom keyframes, Navigator Vibration API.
+
+📈 Finance Suite
+
+PPF Calculator (/finance/ppf-calculator/)
+
+Sovereign Wealth Maturity, Loan & Extension Planner
+
+Feature: Plan extensions in blocks of 5 years (up to 20 years) with or without fresh contributions. Includes a government-rule loan auditor (eligible Years 3-6) and tax-free partial withdrawal thresholds tracker (eligible Year 7+).
+
+Advanced Logic: Built-in "April 5th" interest timing optimization algorithm to compare lump-sum yield losses against late deposits. Includes an editable YoY growth ledger allowing users to input specific custom annual investments.
+
+Tech: Chart.js dynamic doughnut mapping, custom CSV exports, tax bracket slab selectors (Section 80C integration), and high-contrast print layouts.
+
+EMI Calculator (/finance/emi-calculator/)
+
+Advanced 5-in-1 Multi-Loan Repayment & Amortization Suite
+
+Feature: Unified calculator supporting Home, Car, Bike, Personal, and Mobile loans. Includes a toggle to check "Max Loan Eligibility" based on target budgets.
+
+Power-User Controls: Simulate step-up annual repayment increments, skipped moratorium months (payment holidays), ancillary fee bundling, and floating rate interest shocks. Features a foreclosure part-payment/lumpsum scheduler.
+
+Tech: Dual-chart visualizers (Doughnut split and stacked YoY Bar charts), Old vs. New Income Tax regime calculators (Section 24b/80C tax saved mapping), and automated PDF statements generator.
+
+Compare Investment (/finance/sip-vs-fd-vs-rd-calculator/)
+
+Visual Compound Yield Comparison
+
+Feature: Compare Mutual Fund SIPs, Recurring Deposits, Lumpsum investments, and Fixed Deposits side-by-side.
+
+Investment Planner (/finance/investment-planner/)
+
+Comprehensive Pension & Goal Tracker
+
+Feature: Plan long-term wealth milestones, calculate compound yields, and structure Systematic Withdrawal Plans (SWP).
 
 🎓 Educational Suite
 
 Kids Rhymes (/educational/nursery-rhymes-for-kids/)
-Interactive Nursery Rhymes Tool
 
-Feature: Read Aloud functionality, custom queue/playlist management, and dual-language (English/Hindi) support.
+Interactive Nursery Rhymes & Playlist Manager
+
+Feature: Interactive Read Aloud, customizable playlist queue, and dual-language (English/Hindi) text structures.
 
 Tech: Web Speech API integration.
 
 💻 Tech Stack & Architecture
 
-This project is built using a modern, lightweight, and framework-agnostic stack:
+This project is built using a modern, lightweight, and framework-agnostic stack for maximum performance:
 
 Frontend: HTML5, Vanilla JavaScript (ES6+).
 
-Styling: Tailwind CSS (loaded via CDN for rapid prototyping).
+Styling: Tailwind CSS (configured for rapid CDN compilation and utility-first delivery).
 
-Typography: Official Brand Font: Inter (Google Fonts). Secondary Font: Hind.
+Charts & Graphs: Chart.js CDN for robust rendering of amortization schedules and compound interest arcs.
 
-Icons: FontAwesome 6 (Solid & Brands) and custom inline SVGs.
+Typography: Google Fonts: Inter (Primary brand typography) and Hind (Secondary readable script).
 
-Browser APIs Leveraged: localStorage, Web Audio API, Web Speech API, Screen Wake Lock API, Navigator.vibrate().
+Icons: FontAwesome 6 (Solid & Brands) and carefully crafted custom inline SVGs.
+
+Browser APIs Leveraged: localStorage, Web Audio API, Web Speech API, Screen Wake Lock API, Canvas API, Navigator.vibrate().
 
 Global Components Strategy
 
-To maintain a DRY (Don't Repeat Yourself) codebase across static HTML files, global elements are injected via JavaScript:
+To maintain a highly DRY (Don't Repeat Yourself) codebase across static HTML directories, global structural modules are injected dynamically:
 
-js/header-footer.js: Dynamically injects the global navigation bar, contextual app switcher (Top Nav), mobile sidebar, a globally accessible Mega Menu App Drawer, and the footer. It dynamically detects categories and limits nav items intelligently.
+js/header-footer.js: The brain of the design system layout. Dynamically injects:
 
-js/tailwind-config.js: Centralized design system maintaining custom color palettes (e.g., stone-900, red-600), font settings, and glassmorphism shadows.
+The primary brand header.
+
+A category-based secondary navigation bar (Top sub-nav) that auto-scrolls to center active items and sticky-locks (fixed top-0) on mobile and desktop scroll.
+
+An off-screen sidebar Mega Menu App Drawer (powered by TOOLBLASTER_APPS centralized array directory).
+
+Centered social sharing integrations and legal footers.
 
 🚦 Running Locally
 
-Because Toolblaster is a client-side static application, running it locally is incredibly simple:
+Because Toolblaster is a client-side static application, running it locally is simple:
 
 Clone the repository to your local machine.
 
@@ -91,13 +140,15 @@ Open the project folder in your preferred code editor (e.g., VS Code).
 
 Use an extension like Live Server to serve the index.html file from the root directory.
 
-Note: Because some tools use modules and external CDNs, viewing them via the file:// protocol directly in the browser may cause CORS or pathing issues. Always use a local web server.
+⚠️ Note: Because several tools rely on ES modules, external assets, and absolute/relative path queries, launching static files via the file:// protocol directly in the browser will cause CORS or broken pathing issues. Always serve using a local web server.
 
 🛡️ Accessibility (WCAG AA) & SEO
 
-Contrast: UI elements utilize high-contrast pairings (e.g., stone-600 to stone-900 against light backgrounds) to strictly meet or exceed the 4.5:1 contrast ratio required by WCAG AA standards.
+WCAG AA Compliance: Color pairings are reviewed meticulously. Headings, labels, and text colors have been upgraded (e.g., from stone-400 to high-contrast stone-600 or stone-900 against light backgrounds) to meet the strict 4.5:1 contrast ratio benchmark. Input boxes feature precise aria labels and step validations.
 
-SEO: Implementations include accurate canonical tags, JSON-LD structured data (WebApplication, HowTo, FAQPage), and optimized Meta Titles & Descriptions.
+Print Optimization: Custom @media print style sheets swap out interactive controls and sliders with high-contrast, clean-cut statement templates (#print-report and #yearlyGrowthContainer) specifically designed for neat A4 PDF saving.
+
+SEO & Structure: Implemented standardized meta titles (strictly capped at 60 characters for SERP) and meta descriptions under 160 characters. Backed by extensive Schema.org JSON-LD structured data graphs (FinancialProduct and WebApplication) for rich snippet results.
 
 ✉️ Contact & Creator
 
