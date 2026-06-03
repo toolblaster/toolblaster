@@ -38,7 +38,7 @@
     <meta name="application-name" content="Compare Investment">
     <meta name="apple-mobile-web-app-title" content="Compare Investment">
 
-    <!-- Schema.org JSON-LD structured metadata - Upgraded to WebApplication Schema -->
+    <!-- Schema.org JSON-LD structured metadata -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -209,7 +209,7 @@
             border-radius: 9999px;
             transition: background-color 0.2s;
         }
-        .step-up-toggle  input:checked + .toggle-track {
+        .step-up-toggle input:checked + .toggle-track {
             background-color: var(--accent-color, #E34037);
         }
         .toggle-thumb {
@@ -299,14 +299,15 @@
             font-weight: 700;
             color: #1f2937;
             text-align: right;
+            white-space: nowrap; /* PREVENT CRORE SCALING TEXT WRAPPING */
         }
         .result-value.total {
             font-size: 0.8rem;
-            color: #1e40af; /* Deep Blue for Pre-Tax Value */
+            color: #1e40af;
         }
         .result-value.post-tax {
             font-size: 0.8rem;
-            color: #5b21b6; /* Deep Purple for Post-Tax Value */
+            color: #5b21b6;
         }
         .result-value.real {
             font-size: 0.65rem;
@@ -378,7 +379,7 @@
             border-color: var(--accent-color-dark, #B91C1C);
         }
 
-        /* --- NEW UPGRADE: Internal Scroll Custom styling for Growth Ledger Table --- */
+        /* --- Internal Scroll Custom styling for Growth Ledger Table --- */
         .ledger-scroll-container {
             max-height: 290px;
             overflow-y: auto;
@@ -531,7 +532,6 @@
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 0.5rem;
         }
-        /* ACCESSIBILITY: Upgraded inner modal title selection to h2 */
         .modal-report-content h2 {
             font-size: 0.85rem;
             font-weight: 800;
@@ -606,7 +606,6 @@
             font-weight: 500;
         }
 
-        /* Notification Toast Styling */
         #notification-toast {
             position: fixed;
             bottom: 20px;
@@ -630,7 +629,6 @@
         }
 
         /* --- PDF PRINT OVERRIDES STYLE SHEET --- */
-        /* CRITICAL PRINT FIXES: Safely hide all platform navigational, structural, background decorative, and auxiliary form control containers */
         @media print {
             html { font-size: 12px !important; } 
             body {
@@ -704,7 +702,7 @@
 </head>
 <body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
 
-    <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
+    <!-- Global Ambient Decorative Background Orbs -->
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
         <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
@@ -712,14 +710,14 @@
         <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-teal-50/20 blur-[90px]"></div>
     </div>
 
-    <!-- Global App Header -->
+    <!-- Global Header Placeholders -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace (CHANGED: Locked strictly to fluid w-[95%] max-w-[1080px] mx-auto for absolute consistency) -->
+    <!-- Main Workspace -->
     <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
 
-        <!-- Breadcrumb Navigation (Safely hidden in print view via print-hide) -->
+        <!-- Breadcrumb Navigation -->
         <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
             <div class="flex items-center flex-wrap">
                 <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
@@ -730,26 +728,23 @@
                 <span class="mx-1.5 text-stone-300">/</span>
                 <span class="text-stone-900 font-bold">Compare Investment</span>
             </div>
-            <!-- Dynamic Badge -->
             <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
                 <i class="fa-solid fa-chart-simple"></i> Yield Comparison
             </div>
         </nav>
 
-        <!-- Dynamic print-only title header block -->
+        <!-- Print-only Title Header -->
         <div class="print-title">
             Compare Investments: SIP vs RD vs Lumpsum vs FD vs Debt
             <p style="font-size: 9pt; font-weight: normal; margin-top: 5px; color: #4b5563;">Ledger Audit Report - Generated on toolblaster.com</p>
         </div>
 
-        <!-- CALCULATOR SECTION -->
+        <!-- CALCULATOR CONTAINER -->
         <div id="investment-comparison-calculator" class="w-full">
-             <!-- TWEAK: Added ring properties and updated shadow bounds to give a deep embossed popup (ubhra hua) structure -->
              <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
 
                 <!-- Header Block -->
                 <div class="flex justify-between items-center mb-1">
-                    <!-- SEO & USER-FRIENDLY H1 BLOCK -->
                     <h1 class="text-base sm:text-lg font-extrabold text-gray-800 text-center flex-grow">Compare Investments: SIP vs RD vs Lumpsum vs FD vs Debt</h1>
                     <button id="shareReportBtn" class="p-1.5 text-gray-400 hover:text-red-600 transition-colors flex-shrink-0" aria-label="Share calculation results">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -757,10 +752,9 @@
                         </svg>
                     </button>
                 </div>
-                <!-- ACCESSIBILITY FIX: Upgraded text-gray-500 to text-gray-600 for AA Contrast compliance -->
                 <p class="text-center text-gray-600 mb-2.5 text-xxs">Compare different investment outcomes for a single scenario with advanced options.</p>
                 
-                <!-- NEW UPGRADE: Quick Outlook Presets Bar -->
+                <!-- Quick Outlook Presets Bar -->
                 <div class="flex items-center justify-between flex-wrap gap-2 pb-2 mb-2 border-b border-gray-100">
                     <span class="text-xxs font-extrabold text-gray-700">Set Growth Outlook Presets:</span>
                     <div class="flex gap-1.5">
@@ -770,312 +764,366 @@
                     </div>
                 </div>
 
-                <!-- Input Panel 1: Scenario Inputs -->
-                <!-- TWEAK: Changed background to a soft cool indigo gradient with distinct border styling to make section elements pop -->
-                <div class="bg-gradient-to-br from-indigo-50/80 to-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl space-y-1.5 mb-3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] uniform-section-labels">
-                    <h2 class="text-xs font-bold text-blue-800 text-center mb-0.5">Investment Scenario</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                        <!-- CLS & Sleekness Optimization -->
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="initialLumpsumInput" class="block text-xxs font-bold text-gray-700">Initial Lumpsum (₹, Optional)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">Your initial one-time lumpsum investment amount, if any.</span>
-                                    </span>
-                                </span>
-                                <span id="initialLumpsumWord" class="text-xxs font-bold text-red-800 transition-all block h-4"></span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="initialLumpsumSlider" min="0" max="5000000" value="0" step="10000" class="w-full range-slider flex-grow" aria-label="Initial Lumpsum Amount">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="initialLumpsumDecrement" class="stepper-button decrement" aria-label="Decrease Initial Lumpsum">-</button>
-                                    <input type="number" id="initialLumpsumInput" class="manual-input" value="0" min="0" max="5000000" step="10000">
-                                    <button type="button" id="initialLumpsumIncrement" class="stepper-button increment" aria-label="Increase Initial Lumpsum">+</button>
+                <!-- Scenario and Rate Settings Horizontal Columns Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4 items-stretch">
+                    
+                    <!-- Column 1: Scenario Inputs -->
+                    <div class="bg-gradient-to-br from-indigo-50/80 to-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] uniform-section-labels">
+                        <div>
+                            <h2 class="text-xs font-bold text-blue-800 text-center mb-2.5">Investment Scenario</h2>
+                            <div class="space-y-3">
+                                <!-- Initial Lumpsum -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="initialLumpsumInput" class="block text-xxs font-bold text-gray-700">Initial Lumpsum (₹, Optional)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Your initial one-time lumpsum investment amount, if any.</span>
+                                            </span>
+                                        </span>
+                                        <span id="initialLumpsumWord" class="text-xxs font-bold text-red-800 transition-all block h-4"></span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="initialLumpsumSlider" min="0" max="5000000" value="0" step="10000" class="w-full range-slider flex-grow" aria-label="Initial Lumpsum Amount">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="initialLumpsumDecrement" class="stepper-button decrement" aria-label="Decrease Initial Lumpsum">-</button>
+                                            <input type="number" id="initialLumpsumInput" class="manual-input" value="0" min="0" max="5000000" step="10000">
+                                            <button type="button" id="initialLumpsumIncrement" class="stepper-button increment" aria-label="Increase Initial Lumpsum">+</button>
+                                        </div>
+                                    </div>
+                                    <p id="initialLumpsumError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Amount must be between ₹0 - ₹50 Lakh.</p>
+                                </div>
+
+                                <!-- Monthly Investment -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="monthlyInvestmentInput" class="block text-xxs font-bold text-gray-700">Monthly Investment (₹)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">The investment amount to be contributed every month.</span>
+                                            </span>
+                                        </span>
+                                        <span id="monthlyInvestmentWord" class="text-xxs font-bold text-red-800 transition-all block h-4"></span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="monthlyInvestmentSlider" min="500" max="100000" value="10000" step="500" class="w-full range-slider flex-grow" aria-label="Monthly Investment Amount">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="monthlyInvestmentDecrement" class="stepper-button decrement" aria-label="Decrease Monthly Investment">-</button>
+                                            <input type="number" id="monthlyInvestmentInput" class="manual-input" value="10000" min="500" max="100000" step="500">
+                                            <button type="button" id="monthlyInvestmentIncrement" class="stepper-button increment" aria-label="Increase Monthly Investment">+</button>
+                                        </div>
+                                    </div>
+                                     <p id="monthlyInvestmentError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Amount must be between ₹500 - ₹1 Lakh.</p>
+                                </div>
+
+                                <!-- Investment Period -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="investmentPeriodInput" class="block text-xxs font-bold text-gray-700">Investment Period (Years)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">The number of years you want to maintain this investment.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="investmentPeriodSlider" min="1" max="40" value="15" step="1" class="w-full range-slider flex-grow" aria-label="Investment Period in Years">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="investmentPeriodDecrement" class="stepper-button decrement" aria-label="Decrease Investment Period">-</button>
+                                            <input type="number" id="investmentPeriodInput" class="manual-input" value="15" min="1" max="40" step="1">
+                                            <button type="button" id="investmentPeriodIncrement" class="stepper-button increment" aria-label="Increase Investment Period">+</button>
+                                        </div>
+                                    </div>
+                                    <p id="investmentPeriodError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Period must be between 1 - 40 years.</p>
                                 </div>
                             </div>
-                            <!-- CLS FIX: Absolute positioning inside parent prevents text layout shifting -->
-                            <p id="initialLumpsumError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Amount must be between ₹0 - ₹50 Lakh.</p>
                         </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="monthlyInvestmentInput" class="block text-xxs font-bold text-gray-700">Monthly Investment (₹)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The investment amount to be contributed every month.</span>
+
+                        <!-- Step-up Inputs (Docked at the bottom of the card) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-blue-200 mt-4">
+                             <div class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-5">
+                                    <span class="flex items-center gap-1">
+                                        <label for="sipIncreaseRateInput" class="block text-xxs font-bold text-gray-700" id="sipIncreaseLabel">SIP Annual Increase (%)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                            </svg>
+                                            <span class="tooltip-text">The rate of annual increase for your monthly SIP contribution (in percentage or rupees).</span>
+                                        </span>
                                     </span>
-                                </span>
-                                <span id="monthlyInvestmentWord" class="text-xxs font-bold text-red-800 transition-all block h-4"></span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="monthlyInvestmentSlider" min="500" max="100000" value="10000" step="500" class="w-full range-slider flex-grow" aria-label="Monthly Investment Amount">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="monthlyInvestmentDecrement" class="stepper-button decrement" aria-label="Decrease Monthly Investment">-</button>
-                                    <input type="number" id="monthlyInvestmentInput" class="manual-input" value="10000" min="500" max="100000" step="500">
-                                    <button type="button" id="monthlyInvestmentIncrement" class="stepper-button increment" aria-label="Increase Monthly Investment">+</button>
+                                    <div class="step-up-toggle-container">
+                                        <label class="step-up-toggle" for="sipIncreaseTypeToggle">
+                                            <input type="checkbox" id="sipIncreaseTypeToggle" class="sr-only" aria-label="Toggle SIP increase type">
+                                            <div class="toggle-track">
+                                                <div class="toggle-thumb">
+                                                    <span class="toggle-icon toggle-icon-percent">%</span>
+                                                    <span class="toggle-icon toggle-icon-rupee">₹</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="sipIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual SIP Increase Rate">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="sipIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease SIP Increase Rate">-</button>
+                                        <input type="number" id="sipIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1">
+                                        <button type="button" id="sipIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase SIP Increase Rate">+</button>
+                                    </div>
+                                </div>
+                                <p id="sipIncreaseRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Value must be between 0 and 20% or ₹5,000.</p>
                             </div>
-                             <p id="monthlyInvestmentError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Amount must be between ₹500 - ₹1 Lakh.</p>
-                        </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="investmentPeriodInput" class="block text-xxs font-bold text-gray-700">Investment Period (Years)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The number of years you want to maintain this investment.</span>
+                             <div class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-5">
+                                    <span class="flex items-center gap-1">
+                                        <label for="rdIncreaseRateInput" class="block text-xxs font-bold text-gray-700" id="rdIncreaseLabel">RD Annual Increase (%)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                            </svg>
+                                            <span class="tooltip-text">The nominal rate to systematically increase RD deposits every year.</span>
+                                        </span>
                                     </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="investmentPeriodSlider" min="1" max="40" value="15" step="1" class="w-full range-slider flex-grow" aria-label="Investment Period in Years">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="investmentPeriodDecrement" class="stepper-button decrement" aria-label="Decrease Investment Period">-</button>
-                                    <input type="number" id="investmentPeriodInput" class="manual-input" value="15" min="1" max="40" step="1">
-                                    <button type="button" id="investmentPeriodIncrement" class="stepper-button increment" aria-label="Increase Investment Period">+</button>
+                                    <div class="step-up-toggle-container">
+                                        <label class="step-up-toggle" for="rdIncreaseTypeToggle">
+                                            <input type="checkbox" id="rdIncreaseTypeToggle" class="sr-only" aria-label="Toggle RD increase type">
+                                            <div class="toggle-track">
+                                                <div class="toggle-thumb">
+                                                    <span class="toggle-icon toggle-icon-percent">%</span>
+                                                    <span class="toggle-icon toggle-icon-rupee">₹</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="rdIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual Recurring Deposit Increase Rate">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="rdIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease RD Increase Rate">-</button>
+                                        <input type="number" id="rdIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1">
+                                        <button type="button" id="rdIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase RD Increase Rate">+</button>
+                                    </div>
+                                </div>
+                                <p id="rdIncreaseRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Value must be between 0 and 20% or ₹5,000.</p>
                             </div>
-                            <p id="investmentPeriodError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Period must be between 1 - 40 years.</p>
                         </div>
                     </div>
 
-                    <!-- Step-up Inputs -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-blue-200">
-                         <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-5">
-                                <span class="flex items-center gap-1">
-                                    <label for="sipIncreaseRateInput" class="block text-xxs font-bold text-gray-700" id="sipIncreaseLabel">SIP Annual Increase (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The rate of annual increase for your monthly SIP contribution (in percentage or rupees).</span>
-                                    </span>
-                                </span>
-                                <div class="step-up-toggle-container">
-                                    <label class="step-up-toggle" for="sipIncreaseTypeToggle">
-                                        <input type="checkbox" id="sipIncreaseTypeToggle" class="sr-only" aria-label="Toggle SIP increase type">
-                                        <div class="toggle-track">
-                                            <div class="toggle-thumb">
-                                                <span class="toggle-icon toggle-icon-percent">%</span>
-                                                <span class="toggle-icon toggle-icon-rupee">₹</span>
-                                            </div>
+                    <!-- Column 2: Rates, Tax & Inflation Slabs -->
+                    <div class="bg-gradient-to-br from-teal-50/80 to-emerald-50/40 border border-teal-100 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] uniform-section-labels">
+                        <div class="h-full flex flex-col justify-between">
+                            <h2 class="text-xs font-bold text-emerald-800 text-center mb-2.5">Expected Annual Returns, Tax & Inflation</h2>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2.5 flex-grow content-around">
+                                <!-- SIP Return -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="sipReturnInput" class="block text-xxs font-bold text-gray-700">SIP Return (%)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Estimated annual returns from equity mutual funds. Historical benchmark is 12% - 15%.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="sipReturnSlider" min="1" max="25" value="13" step="0.5" class="w-full range-slider flex-grow" aria-label="Expected SIP Return Percentage">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="sipReturnDecrement" class="stepper-button decrement" aria-label="Decrease SIP Return">-</button>
+                                            <input type="number" id="sipReturnInput" class="manual-input" value="13" min="1" max="25" step="0.5">
+                                            <button type="button" id="sipReturnIncrement" class="stepper-button increment" aria-label="Increase SIP Return">+</button>
                                         </div>
-                                    </label>
+                                    </div>
+                                    <p id="sipReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 25.0%.</p>
                                 </div>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="sipIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual SIP Increase Rate">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="sipIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease SIP Increase Rate">-</button>
-                                    <input type="number" id="sipIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1">
-                                    <button type="button" id="sipIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase SIP Increase Rate">+</button>
-                                </div>
-                            </div>
-                            <p id="sipIncreaseRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Value must be between 0 and 20% or ₹5,000.</p>
-                        </div>
-                         <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-5">
-                                <span class="flex items-center gap-1">
-                                    <label for="rdIncreaseRateInput" class="block text-xxs font-bold text-gray-700" id="rdIncreaseLabel">RD Annual Increase (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The nominal rate to systematically increase RD deposits every year.</span>
-                                    </span>
-                                </span>
-                                <div class="step-up-toggle-container">
-                                    <label class="step-up-toggle" for="rdIncreaseTypeToggle">
-                                        <input type="checkbox" id="rdIncreaseTypeToggle" class="sr-only" aria-label="Toggle RD increase type">
-                                        <div class="toggle-track">
-                                            <div class="toggle-thumb">
-                                                <span class="toggle-icon toggle-icon-percent">%</span>
-                                                <span class="toggle-icon toggle-icon-rupee">₹</span>
-                                            </div>
+
+                                <!-- RD Return -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="rdReturnInput" class="block text-xxs font-bold text-gray-700">RD Return (%)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">The bank interest rate for Recurring Deposits.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="rdReturnSlider" min="1" max="10" value="7.0" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected RD Return Percentage">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="rdReturnDecrement" class="stepper-button decrement" aria-label="Decrease RD Return">-</button>
+                                            <input type="number" id="rdReturnInput" class="manual-input" value="7.0" min="1" max="10" step="0.1">
+                                            <button type="button" id="rdReturnIncrement" class="stepper-button increment" aria-label="Increase RD Return">+</button>
                                         </div>
-                                    </label>
+                                    </div>
+                                    <p id="rdReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 10.0%.</p>
+                                </div>
+
+                                <!-- FD Return -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="fdReturnInput" class="block text-xxs font-bold text-gray-700">FD Return (%)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">The interest rate of Fixed Deposits.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="fdReturnSlider" min="1" max="10" value="7.2" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected FD Return Percentage">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="fdReturnDecrement" class="stepper-button decrement" aria-label="Decrease FD Return">-</button>
+                                            <input type="number" id="fdReturnInput" class="manual-input" value="7.2" min="1" max="10" step="0.1">
+                                            <button type="button" id="fdReturnIncrement" class="stepper-button increment" aria-label="Increase FD Return">+</button>
+                                        </div>
+                                    </div>
+                                    <p id="fdReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 10.0%.</p>
+                                </div>
+
+                                <!-- Debt Return -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="debtReturnInput" class="block text-xxs font-bold text-gray-700">Debt Return (%)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Estimated returns from Debt Mutual Funds.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="debtReturnSlider" min="1" max="12" value="7.5" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Debt Fund Return Percentage">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="debtReturnDecrement" class="stepper-button decrement" aria-label="Decrease Debt Fund Return">-</button>
+                                            <input type="number" id="debtReturnInput" class="manual-input" value="7.5" min="1" max="12" step="0.1">
+                                            <button type="button" id="debtReturnIncrement" class="stepper-button increment" aria-label="Increase Debt Fund Return">+</button>
+                                        </div>
+                                    </div>
+                                    <p id="debtReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 12.0%.</p>
+                                </div>
+
+                                <!-- Income Tax Slab -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="taxSlabSelect" class="block text-xxs font-bold text-gray-700">Income Tax Slab</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Interest from FDs/RDs is taxed annually at your slab, while Debt gains are taxed upon redemption.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <select id="taxSlabSelect" class="w-full p-1 border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 focus:ring-red-500 focus:border-red-500 bg-white shadow-sm h-8">
+                                        <option value="0">0% (Exempt)</option>
+                                        <option value="0.05">5%</option>
+                                        <option value="0.1">10%</option>
+                                        <option value="0.2">20%</option>
+                                        <option value="0.3" selected>30% (Standard High)</option>
+                                    </select>
+                                    <div class="flex items-center mt-2.5 pt-1 border-t border-teal-100/30">
+                                        <input type="checkbox" id="taxToggle" class="h-3.5 w-3.5 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2 cursor-pointer" checked>
+                                        <label for="taxToggle" class="text-xxs font-bold text-gray-700 cursor-pointer select-none">Apply income tax slabs?</label>
+                                    </div>
+                                </div>
+
+                                <!-- Inflation Rate -->
+                                <div class="relative pb-1">
+                                    <div class="flex justify-between items-center mb-0.5 h-4">
+                                        <span class="flex items-center gap-1">
+                                            <label for="inflationRateInput" class="block text-xxs font-bold text-gray-700">Inflation Rate (%)</label>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="tooltip-text">Inflation rate adjusts purchasing power. Indian historical average is 5% - 6%.</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="inflationRateSlider" min="0" max="15" value="6" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Inflation Rate Percentage">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                            <button type="button" id="inflationRateDecrement" class="stepper-button decrement" aria-label="Decrease Inflation Rate">-</button>
+                                            <input type="number" id="inflationRateInput" class="manual-input" value="6" min="0" max="15" step="0.1">
+                                            <button type="button" id="inflationRateIncrement" class="stepper-button increment" aria-label="Increase Inflation Rate">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mt-2.5 pt-1 border-t border-teal-100/30">
+                                        <input type="checkbox" id="inflationToggle" class="h-3.5 w-3.5 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2 cursor-pointer" checked>
+                                        <label for="inflationToggle" class="text-xxs font-bold text-gray-700 cursor-pointer select-none">Adjust results for inflation?</label>
+                                    </div>
+                                    <p id="inflationRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 0.0% - 15.0%.</p>
                                 </div>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="rdIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual Recurring Deposit Increase Rate">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="rdIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease RD Increase Rate">-</button>
-                                    <input type="number" id="rdIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1">
-                                    <button type="button" id="rdIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase RD Increase Rate">+</button>
-                                </div>
-                            </div>
-                            <p id="rdIncreaseRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Value must be between 0 and 20% or ₹5,000.</p>
                         </div>
                     </div>
                 </div>
 
-                <hr class="border-t border-dashed border-gray-300 my-2">
-
-                <!-- Input Panel 2: Rates & Slabs -->
-                <!-- TWEAK: Changed background to a highly distinct, punchy teal/emerald gradient card to instantly separate it from Scenario parameters -->
-                <div class="bg-gradient-to-br from-teal-50/80 to-emerald-50/40 border border-teal-100 p-3 sm:p-4 rounded-2xl space-y-1.5 mb-3 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] uniform-section-labels">
-                     <h2 class="text-xs font-bold text-emerald-800 text-center mb-0.5">Expected Annual Returns, Tax & Inflation</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="sipReturnInput" class="block text-xxs font-bold text-gray-700">SIP Return (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">Estimated annual returns from equity mutual funds. The historical benchmark is 12% - 15%.</span>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="sipReturnSlider" min="1" max="25" value="13" step="0.5" class="w-full range-slider flex-grow" aria-label="Expected SIP Return Percentage">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="sipReturnDecrement" class="stepper-button decrement" aria-label="Decrease SIP Return">-</button>
-                                    <input type="number" id="sipReturnInput" class="manual-input" value="13" min="1" max="25" step="0.5">
-                                    <button type="button" id="sipReturnIncrement" class="stepper-button increment" aria-label="Increase SIP Return">+</button>
-                                </div>
-                            </div>
-                            <p id="sipReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 25.0%.</p>
-                        </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="rdReturnInput" class="block text-xxs font-bold text-gray-700">RD Return (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The bank interest rate for Recurring Deposits (typically slightly lower than Fixed Deposits).</span>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="rdReturnSlider" min="1" max="10" value="7.0" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected RD Return Percentage">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="rdReturnDecrement" class="stepper-button decrement" aria-label="Decrease RD Return">-</button>
-                                    <input type="number" id="rdReturnInput" class="manual-input" value="7.0" min="1" max="10" step="0.1">
-                                    <button type="button" id="rdReturnIncrement" class="stepper-button increment" aria-label="Increase RD Return">+</button>
-                                </div>
-                            </div>
-                            <p id="rdReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 10.0%.</p>
-                        </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="fdReturnInput" class="block text-xxs font-bold text-gray-700">FD Return (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The interest rate of Fixed Deposits, designed for safe and steady compound growth.</span>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="fdReturnSlider" min="1" max="10" value="7.2" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected FD Return Percentage">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="fdReturnDecrement" class="stepper-button decrement" aria-label="Decrease FD Return">-</button>
-                                    <input type="number" id="fdReturnInput" class="manual-input" value="7.2" min="1" max="10" step="0.1">
-                                    <button type="button" id="fdReturnIncrement" class="stepper-button increment" aria-label="Increase FD Return">+</button>
-                                </div>
-                            </div>
-                            <p id="fdReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 10.0%.</p>
-                        </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="debtReturnInput" class="block text-xxs font-bold text-gray-700">Debt Return (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">Estimated returns from Debt Mutual Funds, primarily holding safe credit-linked instruments.</span>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="debtReturnSlider" min="1" max="12" value="7.5" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Debt Fund Return Percentage">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="debtReturnDecrement" class="stepper-button decrement" aria-label="Decrease Debt Fund Return">-</button>
-                                    <input type="number" id="debtReturnInput" class="manual-input" value="7.5" min="1" max="12" step="0.1">
-                                    <button type="button" id="debtReturnIncrement" class="stepper-button increment" aria-label="Increase Debt Fund Return">+</button>
-                                </div>
-                            </div>
-                            <p id="debtReturnError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 1.0% - 12.0%.</p>
-                        </div>
-                        <div class="relative pb-1.5">
-                             <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="taxSlabSelect" class="block text-xxs font-bold text-gray-700">Income Tax Slab</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">Interest from FDs/RDs is taxed annually at your selected slab rate, while Debt Mutual Fund gains are taxed upon redemption.</span>
-                                    </span>
-                                </span>
-                             </div>
-                            <select id="taxSlabSelect" class="w-full p-1 border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 focus:ring-red-500 focus:border-red-500 bg-white shadow-sm h-8">
-                                <option value="0">0% (Exempt)</option>
-                                <option value="0.05">5%</option>
-                                <option value="0.1">10%</option>
-                                <option value="0.2">20%</option>
-                                <option value="0.3" selected>30% (Standard High)</option>
-                            </select>
-                        </div>
-                        <div class="relative pb-1.5">
-                            <div class="flex justify-between items-center mb-0.5 h-4">
-                                <span class="flex items-center gap-1">
-                                    <label for="inflationRateInput" class="block text-xxs font-bold text-gray-700">Inflation Rate (%)</label>
-                                    <span class="tooltip-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
-                                        </svg>
-                                        <span class="tooltip-text">The expected inflation rate to adjust the future purchasing power of your money. Indian historical average is 5% - 6%.</span>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <input type="range" id="inflationRateSlider" min="0" max="15" value="6" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Inflation Rate Percentage">
-                                <div class="input-stepper-group flex-shrink-0 rounded-lg">
-                                    <button type="button" id="inflationRateDecrement" class="stepper-button decrement" aria-label="Decrease Inflation Rate">-</button>
-                                    <input type="number" id="inflationRateInput" class="manual-input" value="6" min="0" max="15" step="0.1">
-                                    <button type="button" id="inflationRateIncrement" class="stepper-button increment" aria-label="Increase Inflation Rate">+</button>
-                                </div>
-                            </div>
-                            <!-- FIXED STICKING: Wrapped the checkbox in a well-spaced element with a subtle top border, so it never sticks to the slider above -->
-                             <div class="flex items-center mt-2.5 pt-1.5 border-t border-blue-100/30">
-                                <input type="checkbox" id="inflationToggle" class="h-3.5 w-3.5 text-red-600 border-gray-300 rounded focus:ring-red-500 mr-2 cursor-pointer" checked>
-                                <label for="inflationToggle" class="text-xxs font-bold text-gray-700 cursor-pointer select-none">Adjust results for inflation?</label>
-                             </div>
-                            <p id="inflationRateError" class="input-error-message absolute bottom-0 left-0 text-[10px] leading-none text-red-600 invisible">Rate must be between 0.0% - 15.0%.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="border-t border-dashed border-gray-300 my-2.5">
+                <hr class="border-t border-dashed border-gray-300 my-4">
 
                 <!-- Outputs Panel (Side-by-side Result Cards) -->
+                <!-- ALIGNMENT FIX: Swapped "Maturity Value" to "Maturity" to save text width and prevent vertical shifting when value exceeds 1 Crore -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
                     <!-- SIP Result Card -->
                     <div id="sipResult" class="result-card">
-                        <!-- ACCESSIBILITY FIX: Upgraded result card headers from h3 to h2 -->
                         <h2 class="bg-blue-50 border-b border-blue-200">SIP (Mutual Fund)</h2>
                         <div class="result-item"><span class="result-label">Invested</span><span id="sipInvested" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label">Est. Returns (Pre-Tax)</span><span id="sipReturns" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label font-bold">Total Pre-Tax Value</span><span id="sipTotal" class="result-value total">₹0</span></div>
-                        <!-- NEW UPGRADE: Post-Tax representation inside Mutual Fund cards -->
-                        <div class="result-item"><span class="result-label font-bold text-purple-800">Post-Tax Value*</span><span id="sipTotalPostTax" class="result-value post-tax">₹0</span></div>
+                        <div class="result-item">
+                            <span class="result-label">
+                                Est. Returns (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Estimated returns calculated prior to capital gains deduction.</span>
+                                </span>
+                            </span>
+                            <span id="sipReturns" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold">
+                                Maturity (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Total maturity amount without deducting any taxes.</span>
+                                </span>
+                            </span>
+                            <span id="sipTotal" class="result-value total">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold text-purple-800">
+                                Maturity (Post-Tax*)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Actual take-home money after applying equity capital gains tax (LTCG / STCG).</span>
+                                </span>
+                            </span>
+                            <span id="sipTotalPostTax" class="result-value post-tax">₹0</span>
+                        </div>
                         <div class="result-item transition-all duration-300" id="sipRealValueItem">
                             <span class="result-label">
                                 Real Value 
@@ -1093,13 +1141,56 @@
 
                     <!-- RD Result Card -->
                     <div id="rdResult" class="result-card">
-                         <!-- ACCESSIBILITY FIX: Upgraded result card headers from h3 to h2 -->
                          <h2 class="bg-yellow-50 border-b border-yellow-200">Recurring Deposit (RD)</h2>
                         <div class="result-item"><span class="result-label">Invested</span><span id="rdInvested" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label">Est. Returns</span><span id="rdReturns" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label">Post-Tax Returns</span><span id="rdReturnsPostTax" class="result-value post-tax">₹0</span></div>
-                        <div class="result-item"><span class="result-label font-bold">Total Value</span><span id="rdTotal" class="result-value total">₹0</span></div>
-                        <div class="result-item"><span class="result-label font-bold">Post-Tax Value</span><span id="rdTotalPostTax" class="result-value total post-tax">₹0</span></div>
+                        <div class="result-item">
+                            <span class="result-label">
+                                Est. Returns (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Estimated returns calculated prior to slab tax deduction.</span>
+                                </span>
+                            </span>
+                            <span id="rdReturns" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">
+                                Post-Tax Returns
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Interest returns remaining after annual income tax slab deductions.</span>
+                                </span>
+                            </span>
+                            <span id="rdReturnsPostTax" class="result-value post-tax">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold">
+                                Maturity (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Total maturity amount without deducting any taxes.</span>
+                                </span>
+                            </span>
+                            <span id="rdTotal" class="result-value total">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold text-purple-800">
+                                Maturity (Post-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Actual take-home money after deducting interest taxes.</span>
+                                </span>
+                            </span>
+                            <span id="rdTotalPostTax" class="result-value total post-tax">₹0</span>
+                        </div>
                         <div class="result-item transition-all duration-300" id="rdRealValueItem">
                             <span class="result-label">
                                 Real Value (Post-Tax) 
@@ -1117,13 +1208,44 @@
 
                     <!-- Lumpsum Result Card -->
                     <div id="lumpsumResult" class="result-card">
-                         <!-- ACCESSIBILITY FIX: Upgraded result card headers from h3 to h2 -->
                          <h2 class="bg-green-50 border-b border-green-200">Lumpsum (Equity)</h2>
                         <div class="result-item"><span class="result-label">Invested</span><span id="lumpsumInvested" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label">Est. Returns (Pre-Tax)</span><span id="lumpsumReturns" class="result-value">₹0</span></div>
-                        <div class="result-item"><span class="result-label font-bold">Total Pre-Tax Value</span><span id="lumpsumTotal" class="result-value total">₹0</span></div>
-                        <!-- NEW UPGRADE: Post-Tax representation inside Mutual Fund cards -->
-                        <div class="result-item"><span class="result-label font-bold text-purple-800">Post-Tax Value*</span><span id="lumpsumTotalPostTax" class="result-value post-tax">₹0</span></div>
+                        <div class="result-item">
+                            <span class="result-label">
+                                Est. Returns (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Estimated returns calculated prior to capital gains deduction.</span>
+                                </span>
+                            </span>
+                            <span id="lumpsumReturns" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold">
+                                Maturity (Pre-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Total maturity amount without deducting any taxes.</span>
+                                </span>
+                            </span>
+                            <span id="lumpsumTotal" class="result-value total">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold text-purple-800">
+                                Maturity (Post-Tax*)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Actual take-home money after applying equity capital gains tax (LTCG / STCG).</span>
+                                </span>
+                            </span>
+                            <span id="lumpsumTotalPostTax" class="result-value post-tax">₹0</span>
+                        </div>
                         <div class="result-item transition-all duration-300" id="lumpsumRealValueItem">
                             <span class="result-label">
                                 Real Value 
@@ -1142,11 +1264,32 @@
 
                     <!-- FD/Debt Fund Result Card -->
                      <div id="fdDebtResult" class="result-card">
-                         <!-- ACCESSIBILITY FIX: Upgraded result card headers from h3 to h2 -->
-                         <h2 class="bg-gray-100 border-b border-gray-200">FD vs Debt Fund (Post-Tax)</h2>
+                         <h2 class="bg-gray-100 border-b border-gray-200">FD vs Debt (Post-Tax)</h2>
                          <p class="text-xxs text-center text-stone-600 mb-1">For equivalent Lumpsum investment.</p>
-                        <div class="result-item"><span class="result-label">FD Returns (Post-Tax)</span><span id="fdReturnsPostTax" class="result-value post-tax">₹0</span></div>
-                        <div class="result-item"><span class="result-label font-bold">FD Value (Post-Tax)</span><span id="fdTotalPostTax" class="result-value total post-tax">₹0</span></div>
+                        <div class="result-item">
+                            <span class="result-label">
+                                Net Interest (Post-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">FD interest/profit remaining after income tax slab deductions.</span>
+                                </span>
+                            </span>
+                            <span id="fdReturnsPostTax" class="result-value post-tax">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label font-bold text-purple-800">
+                                Maturity (Post-Tax)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Actual take-home money from FD (Principal + Net Interest) after slab taxes.</span>
+                                </span>
+                            </span>
+                            <span id="fdTotalPostTax" class="result-value total post-tax">₹0</span>
+                        </div>
                          <div class="result-item transition-all duration-300" id="fdRealValueItem">
                              <span class="result-label">
                                  FD Real Value 
@@ -1159,8 +1302,30 @@
                              </span>
                              <span id="fdRealValue" class="result-value real">₹0</span>
                          </div>
-                        <div class="result-item mt-1 pt-1 border-t border-gray-200"><span class="result-label">Debt Fund Returns (Post-Tax*)</span><span id="debtReturnsPostTax" class="result-value post-tax">₹0</span></div>
-                         <div class="result-item"><span class="result-label font-bold">Debt Fund Value (Post-Tax*)</span><span id="debtTotalPostTax" class="result-value total post-tax">₹0</span></div>
+                        <div class="result-item mt-1 pt-1 border-t border-gray-200">
+                            <span class="result-label">
+                                Net Gains (Post-Tax*)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Debt Fund capital gains/profit remaining after redemption tax.</span>
+                                </span>
+                            </span>
+                            <span id="debtReturnsPostTax" class="result-value post-tax">₹0</span>
+                        </div>
+                         <div class="result-item">
+                            <span class="result-label font-bold text-purple-800">
+                                Maturity (Post-Tax*)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0zm-8.25.75h-.01a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zM8 4a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5A.75.75 0 0 0 8 4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">Actual take-home money from Debt Funds (Principal + Net Gains) after redemption tax.</span>
+                                </span>
+                            </span>
+                            <span id="debtTotalPostTax" class="result-value total post-tax">₹0</span>
+                        </div>
                          <div class="result-item transition-all duration-300" id="debtRealValueItem">
                              <span class="result-label">
                                  Debt Real Value 
@@ -1182,7 +1347,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
                     <!-- Chart 1: Final Value Comparison -->
                     <div class="bg-white p-2.5 rounded-2xl shadow-sm border border-gray-200">
-                        <!-- ACCESSIBILITY FIX: Upgraded chart headings from h4 to h2 -->
                         <h2 class="text-xs font-bold text-gray-800 text-center mb-1">Final Value Comparison (Post-Tax/Inflation Adjusted)</h2>
                         <div class="chart-container">
                             <canvas id="finalValueChart"></canvas>
@@ -1191,7 +1355,6 @@
                     </div>
                     <!-- Chart 2: Growth Over Time -->
                      <div class="bg-white p-2.5 rounded-2xl shadow-sm border border-gray-200">
-                        <!-- ACCESSIBILITY FIX: Upgraded chart headings from h4 to h2 -->
                         <h2 class="text-xs font-bold text-gray-800 text-center mb-1">Investment Growth Over Time (Adjusted)</h2>
                          <div class="flex justify-center gap-1 mb-1">
                             <button data-chart="sip" class="toggle-btn active px-2.5 py-0.5 rounded text-xxs border font-bold transition-all">SIP</button>
@@ -1207,7 +1370,7 @@
                     </div>
                 </div>
 
-                <!-- NEW UPGRADE: Collapsible accordion breakdown table ledger (Scroll limits applied) -->
+                <!-- Year-on-Year Growth Ledger -->
                 <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
                     <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-800 text-xs sm:text-sm">
                         <span class="flex items-center gap-1.5">
@@ -1219,7 +1382,6 @@
                         <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-500">▼</span>
                     </button>
                     <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
-                        <!-- EXPORT UTILITY HEADER BAR: Placed right next to tabs with full high-contrast, sequentially structured export handlers (Hidden in print via print-hide) -->
                         <div class="flex flex-wrap justify-between items-center gap-2 mb-4 border-b border-gray-100 pb-3 print-hide">
                             <div class="flex flex-wrap gap-1.5">
                                 <button type="button" data-ledger="sip" class="ledger-tab-btn active px-3.5 py-1 rounded-lg text-xxs font-extrabold transition-all">SIP</button>
@@ -1244,11 +1406,9 @@
                             </div>
                         </div>
 
-                        <!-- SCROLL CONTAINER UPGRADE: Added max-height vertical scrolling, custom scrollbar and fixed/sticky headers -->
                         <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
                             <table class="w-full text-left border-collapse text-xs ledger-table">
                                 <thead>
-                                    <!-- CLS FIX: Static pre-rendered table headers matching exact metadata structures -->
                                     <tr class="border-b border-gray-200 text-gray-800 bg-gray-100/75">
                                         <th class="p-3 font-extrabold">Year</th>
                                         <th class="p-3 font-extrabold">Invested Capital</th>
@@ -1258,32 +1418,8 @@
                                         <th class="p-3 font-extrabold">Real Value (Post-Tax)</th>
                                     </tr>
                                 </thead>
-                                <!-- CLS FIX: Static placeholders pre-allocated in HTML to ensure zero-shift container loading -->
                                 <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-stone-700 bg-white">
-                                    <tr class="hover:bg-gray-50/75 border-b border-gray-100 transition-colors">
-                                        <td class="p-3 font-semibold text-gray-900">Year 1</td>
-                                        <td class="p-3 text-gray-700">₹1,20,000</td>
-                                        <td class="p-3 text-gray-700 font-medium">₹1,28,000</td>
-                                        <td class="p-3 text-red-600 font-medium">₹1,600</td>
-                                        <td class="p-3 text-indigo-900 font-bold">₹1,26,400</td>
-                                        <td class="p-3 text-amber-700 font-bold">₹1,19,245</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/75 border-b border-gray-100 transition-colors">
-                                        <td class="p-3 font-semibold text-gray-900">Year 2</td>
-                                        <td class="p-3 text-gray-700">₹2,40,000</td>
-                                        <td class="p-3 text-gray-700 font-medium">₹2,72,000</td>
-                                        <td class="p-3 text-red-600 font-medium">₹4,000</td>
-                                        <td class="p-3 text-indigo-900 font-bold">₹2,68,000</td>
-                                        <td class="p-3 text-amber-700 font-bold">₹2,38,500</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/75 border-b border-gray-100 transition-colors">
-                                        <td class="p-3 font-semibold text-gray-900">Year 3</td>
-                                        <td class="p-3 text-gray-700">... Loading Plan ...</td>
-                                        <td class="p-3 text-gray-700 font-medium">-</td>
-                                        <td class="p-3 text-red-600 font-medium">-</td>
-                                        <td class="p-3 text-indigo-900 font-bold">-</td>
-                                        <td class="p-3 text-amber-700 font-bold">-</td>
-                                    </tr>
+                                    <!-- Dynamic rows from JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -1298,32 +1434,61 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- Locked strictly to 950px max-width to align perfectly with the calculator container above -->
-        <div class="max-w-[950px] mx-auto mb-6 print-hide px-1 mt-6">
-            <a href="https://toolblaster.com/finance/investment-planner" class="flex flex-col sm:flex-row items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+        <div class="max-w-[1080px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Investment Planner</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Plan custom wealth and retirement goals.</p>
+                        </div>
                     </div>
-                    <div class="text-left">
-                        <span class="text-[9px] font-black text-emerald-600 uppercase tracking-widest block">Comprehensive Planner</span>
-                        <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Indian Investment Planner & Goal Tracker</h3>
-                        <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Plan custom SIP goals, calculate long-term retirement pension, SWP plans, and indexation tax slabs with SEBI-compliant models!</p>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
                     </div>
-                </div>
-                <div class="text-emerald-600 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center">
-                    Try Planner <span class="text-sm">&rarr;</span>
-                </div>
-            </a>
+                </a>
+
+                <!-- Card 2: PPF Calculator -->
+                <a href="https://toolblaster.com/finance/ppf-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">PPF Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate maturity and tax benefits.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="https://toolblaster.com/finance/emi-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">EMI Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate home, car, and personal loan EMIs.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
-        <!-- SEO Article (Safely hidden in print view via print-hide) -->
+        <!-- SEO Article Section -->
         <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
             <div class="space-y-6 text-stone-800">
-                
-                <!-- Section 1: Introduction (TWEAK: Paragraph text strictly at text-[13px] on all screens, H2 updated to text-base i.e., 16px) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-chart-pie"></i></span> Why Compare SIP, RD, Lumpsum, & FD Side-by-Side?
@@ -1336,7 +1501,6 @@
                     </p>
                 </section>
 
-                <!-- Section 2: How to use (TWEAK: h2 updated to text-base i.e. 16px) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-square-poll-horizontal"></i></span> How to Use the Comparison Tool
@@ -1375,7 +1539,6 @@
                     </div>
                 </section>
 
-                <!-- Section 3: Mathematical Formulas (TWEAK: h2 updated to text-base i.e. 16px) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Mathematical Formulas & Compounding Theory
@@ -1433,11 +1596,9 @@
                                 Where $\text{inf}$ is the expected average annual rate of inflation, and $t$ is the holding period in years.
                             </p>
                         </div>
-
                     </div>
                 </section>
 
-                <!-- Section 4: Real-world examples and case studies (TWEAK: h2 updated to text-base i.e. 16px) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
@@ -1447,7 +1608,6 @@
                     </p>
 
                     <div class="space-y-4">
-                        <!-- Example 1 -->
                         <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
                             <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
                                 <span class="text-emerald-700">💼 Case Study 1:</span> Retiring with ₹1.5 Crore via Step-up SIP
@@ -1462,7 +1622,6 @@
                             </ul>
                         </div>
 
-                        <!-- Example 2 -->
                         <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
                             <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
                                 <span class="text-blue-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
@@ -1478,7 +1637,6 @@
                     </div>
                 </section>
 
-                <!-- Section 5: Side-by-Side Comparison Table (Evergreen Feature) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Quick Reference: SIP vs RD vs FD vs Debt
@@ -1523,7 +1681,276 @@
                     </div>
                 </section>
 
-                <!-- Section 6: FAQs Section (TWEAK: h2 updated to text-base i.e. 16px) -->
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. Which option among SIP, RD, and FD is best for me?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">If your investment horizon is long-term (5+ years) and you can tolerate market volatility, SIP is the best option. If you prefer safe and guaranteed returns for the short-to-medium term, Fixed Deposits (for lump sum amounts) or Recurring Deposits (for monthly savings) are highly secure.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. How do inflation-adjusted calculations change the investment results?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Inflation gradually reduces the purchasing power of your money over time. If your nominal return rate is 8% and inflation is 6%, your real rate of return is effectively 2%. Enabling the inflation adjustment feature shows the true value of your future accumulated wealth in today's terms.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Is interest earned on bank FDs and RDs taxable?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes, interest earned on bank FDs and RDs is taxable according to your individual income tax slab rate (10%, 20%, or 30%), which banks deduct annually as TDS. By selecting your tax slab in this comparison tool, you can see your actual post-tax maturity value directly.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <div class="max-w-[1080px] mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Investment Planner</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Plan custom wealth and retirement goals.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: PPF Calculator -->
+                <a href="https://toolblaster.com/finance/ppf-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">PPF Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate maturity and tax benefits.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="https://toolblaster.com/finance/emi-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">EMI Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate home, car, and personal loan EMIs.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- SEO Article Section -->
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
+            <div class="space-y-6 text-stone-800">
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-chart-pie"></i></span> Why Compare SIP, RD, Lumpsum, & FD Side-by-Side?
+                    </h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
+                        Choosing the right financial instrument is a balancing act between <strong>risk, liquidity, and post-tax yields</strong>. While high-growth mutual fund SIPs compound aggressively over long horizons, fixed income vehicles like Fixed Deposits (FD) and Recurring Deposits (RD) provide unmatched capital safety.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
+                        Our advanced <strong>SIP vs FD vs RD Comparison Calculator</strong> acts as an intelligent playground. For any chosen timeframe, you can visually compare how a regular monthly investment behaves in an equity-oriented SIP vs a secure banking RD, and simultaneously evaluate how a bulk lumpsum principal compounds in an FD vs a post-tax inflation-adjusted Debt Fund portfolio.
+                    </p>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-square-poll-horizontal"></i></span> How to Use the Comparison Tool
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        Enter your baseline parameters to check live comparative projections across all schemes instantly:
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 1. Scenario Baseline
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Specify your <strong>Initial Lumpsum (Optional)</strong> and <strong>Monthly Investment</strong> limits. These bounds are used uniformly across all monthly calculators (SIP, RD) and bulk sum compounding calculators (Lumpsum, FD, Debt) to maintain baseline mathematical parity.
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 2. Set Return Targets
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Customize the expected annual yields for each scheme. Alternatively, click the <strong>Growth Outlook Presets</strong> (Conservative, Balanced, Aggressive) to apply standard, SEBI-compliant market reference returns with one click.
+                            </p>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
+                            <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-red-600"></span> 3. Tax and Inflation adjustments
+                            </h3>
+                            <p class="text-xs text-stone-700 leading-relaxed m-0 font-medium">
+                                Select your exact <strong>Income Tax Slab</strong> to calculate accurate post-tax cash maturity. Check the <strong>"Adjust results for inflation?"</strong> box to convert nominal future values into real purchasing power in today's terms.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Mathematical Formulas & Compounding Theory
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        To maintain strict mathematical transparency, our planner uses standard financial industry formulas for discrete compound intervals:
+                    </p>
+
+                    <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
+                        
+                        <!-- Lumpsum formula -->
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Lumpsum (Compound Interest) Formula</h3>
+                            <p class="mb-2">For a one-time capital investment compounding annually:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$A = P \times (1 + r)^t$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $A$ is the final maturity value, $P$ is the principal invested, $r$ is the annual rate of interest, and $t$ is the holding period in years.
+                            </p>
+                        </div>
+
+                        <!-- SIP Formula -->
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">SIP (Future Value of Annuity) Formula</h3>
+                            <p class="mb-2">When investments are made regularly at periodic intervals (e.g., monthly):</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$M = P \times \frac{(1 + i)^n - 1}{i} \times (1 + i)$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $M$ is the cumulative maturity amount, $P$ is the monthly contribution, $i$ is the periodic rate of return ($i = r / 12$), and $n$ is the total number of monthly payments ($n = t \times 12$).
+                            </p>
+                        </div>
+
+                        <!-- Fixed Deposit Formula -->
+                        <div class="border-b border-stone-200 pb-4">
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Fixed Deposit (FD) Quarterly Compounding Formula</h3>
+                            <p class="mb-2">Fixed deposits compound interest quarterly under standard Indian banking guidelines:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$M = P \times \left(1 + \frac{r}{4}\right)^{4 \times t}$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where compounding frequency is locked to $4$ times a year. RD calculations follow identical quarterly compounding protocols.
+                            </p>
+                        </div>
+
+                        <!-- Inflation Adjustment Formula -->
+                        <div>
+                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Inflation Adjustment (Real Purchasing Power) Formula</h3>
+                            <p class="mb-2">Erosion of purchase power by inflation is determined by:</p>
+                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
+                                $$\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$$
+                            </div>
+                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
+                                Where $\text{inf}$ is the expected average annual rate of inflation, and $t$ is the holding period in years.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        Review these realistic, practical examples to align your investment strategies with real Indian market trends:
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
+                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
+                                <span class="text-emerald-700">💼 Case Study 1:</span> Retiring with ₹1.5 Crore via Step-up SIP
+                            </h3>
+                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                                A 25-year-old financial analyst starts an equity mutual fund SIP of <strong>₹10,000 per month</strong> at an expected CAGR of <strong>12%</strong>.
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
+                                <li><strong class="text-stone-800">Without Step-up:</strong> In 25 years, the total principal invested is ₹30 Lacs, and the accumulated corpus is <strong>₹1.89 Crore</strong>.</li>
+                                <li><strong class="text-stone-800">With 10% Annual Step-up:</strong> By stepping up the monthly contribution by 10% each year as their salary grows, the final corpus balloons to <strong>₹4.48 Crore</strong>!</li>
+                                <li><strong class="text-stone-800">Real Value (5% Inflation adjusted):</strong> The purchasing power of that ₹4.48 Crore in today's money is worth approximately <strong>₹1.32 Crore</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
+                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
+                                <span class="text-blue-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
+                            </h3>
+                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                                A parent estimates they will need <strong>₹50 Lacs</strong> in 10 years for their child's professional degree. They select the <strong>Goal Planner</strong> mode assuming a moderate mutual fund return rate of <strong>11% p.a.</strong>
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
+                                <li><strong class="text-stone-800">Standard Goal calculation:</strong> They must invest <strong>₹23,086 per month</strong> for 10 years to reach ₹50 Lacs.</li>
+                                <li><strong class="text-stone-800">Adjusted for Inflation (5%):</strong> In 10 years, educational costs will rise. The real target becomes <strong>₹81.4 Lacs</strong>. To reach this adjusted goal, they need to save <strong>₹37,597 per month</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Quick Reference: SIP vs RD vs FD vs Debt
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse border border-stone-200">
+                            <thead>
+                                <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
+                                    <th class="p-2.5">Feature</th>
+                                    <th class="p-2.5">Equity SIP</th>
+                                    <th class="p-2.5">Fixed/RD Deposit</th>
+                                    <th class="p-2.5">Debt Mutual Funds</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-stone-200 text-stone-700 font-medium">
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Risk Profile</td>
+                                    <td class="p-2.5 text-red-700 font-bold">High (Market linked)</td>
+                                    <td class="p-2.5 text-green-700 font-bold">Risk-Free (DICGC insured)</td>
+                                    <td class="p-2.5 text-amber-700 font-bold">Low to Moderate</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Avg. Payout (p.a.)</td>
+                                    <td class="p-2.5 text-stone-800 font-bold">12% - 15%</td>
+                                    <td class="p-2.5 text-stone-800">6.0% - 7.5%</td>
+                                    <td class="p-2.5 text-stone-800">7.0% - 8.5%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Income Tax Logic</td>
+                                    <td class="p-2.5">12.5% LTCG on gains &gt; ₹1.25L</td>
+                                    <td class="p-2.5 text-red-700 font-bold">Taxed annually at slab rate</td>
+                                    <td class="p-2.5">Taxed on redemption at slab rate</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Compounding</td>
+                                    <td class="p-2.5">Continuous Growth</td>
+                                    <td class="p-2.5">Quarterly Compounding</td>
+                                    <td class="p-2.5">Continuous Growth</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
                 <section id="faqs" class="bg-transparent">
                     <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
@@ -1550,7 +1977,6 @@
     <!-- Share Report dialog Modal -->
     <div id="shareModal" class="share-modal hidden">
         <div class="share-modal-content">
-            <!-- ACCESSIBILITY FIX: Upgraded modal title from h3 to h2 -->
             <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
             <h2 class="modal-title">Your Investment Comparison</h2>
             <div id="modalReportContent" class="modal-report-content">
