@@ -1,6 +1,9 @@
-// ==========================================
-// MODULE: UTILS.JS - Sahaya paddhatulu
-// ==========================================
+/**
+ * Investment Planner Application Logic
+ * Integrates multi-mode investment plans, dynamic formatting,
+ * responsive visual rendering graphs, and automated data exports.
+ */
+
 function formatCurrency(num) {
     if (isNaN(num) || num === Infinity || num === -Infinity) return '₹0';
     return new Intl.NumberFormat('en-IN', {
@@ -117,13 +120,19 @@ function syncSliderAndInput({ sliderId, inputId, decrementId, incrementId, updat
             : Math.round(value / step) * step;
 
         value = Math.max(min, Math.min(max, parseFloat(correctedValue)));
+        
+        // Check if value actually changed to prevent redundant chart reloading
+        const oldValue = parseFloat(slider.value);
         input.value = value;
         slider.value = value;
 
         updateSliderFill(slider);
         updateAriaValueText();
         validate();
-        instantUpdate();
+        
+        if (value !== oldValue) {
+            instantUpdate();
+        }
     });
 
     if (decrementBtn) {
@@ -147,7 +156,7 @@ function syncSliderAndInput({ sliderId, inputId, decrementId, incrementId, updat
 }
 
 // ==========================================
-// FACTORY PATTERN IMPLEMENTATION - Factory vidhanam amalu
+// FACTORY PATTERN IMPLEMENTATION
 // ==========================================
 
 function createTooltipHtml(text) {
@@ -167,7 +176,7 @@ function createTooltipHtml(text) {
 function createSliderGroup(config) {
     let presetsHtml = '';
     if (config.presets) {
-        // Dynamic preset generation to use red high-contrast classes to prevent gray overwrite
+        // Uniform presets using RED highlights
         presetsHtml = `<div class="flex flex-wrap gap-1.5 mt-1.5">` + 
             config.presets.map(p => `<button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="${config.id}Input" data-val="${p.val}" title="Quickly add ₹${p.label} to your investment amount">+ ₹${p.label}</button>`).join('') + 
             `</div>`;
@@ -190,7 +199,6 @@ function createSliderGroup(config) {
     }
 
     let tooltipHtml = config.infoTitle ? createTooltipHtml(config.infoTitle) : '';
-    // Converted to text-xxs class to strictly follow 11.52px sizing criteria
     let labelHtml = `<label for="${config.id}Input" class="block text-xxs font-bold flex items-center ${toggleHtml ? '' : 'mb-1'}" id="${config.id}Label">
         <span id="${config.id}LabelText">${config.label}</span> ${tooltipHtml}
     </label>`;
@@ -215,9 +223,12 @@ function createSliderGroup(config) {
 
 function createSelectGroup(config) {
     const optionsHtml = config.options.map(opt => `<option value="${opt.value}" ${opt.selected ? 'selected' : ''}>${opt.label}</option>`).join('');
+    let tooltipHtml = config.infoTitle ? createTooltipHtml(config.infoTitle) : '';
     return `
         <div>
-            <label for="${config.id}" class="block text-xxs font-bold mb-1">${config.label}</label>
+            <label for="${config.id}" class="block text-xxs font-bold mb-1 flex items-center">
+                <span>${config.label}</span> ${tooltipHtml}
+            </label>
             <select id="${config.id}" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xxs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
                 ${optionsHtml}
             </select>
@@ -228,15 +239,15 @@ function createSelectGroup(config) {
 function createToggleSection(config) {
     return `
         <div class="pt-1">
-            <label class="flex items-center justify-between cursor-pointer" for="${config.id}">
-                <span class="text-xxs font-bold flex items-center">
+            <div class="flex items-center justify-between">
+                <span class="text-xxs font-bold text-stone-700 flex items-center">
                     ${config.label} ${config.infoTitle ? createTooltipHtml(config.infoTitle) : ''}
                 </span>
-                <div class="relative inline-flex items-center">
+                <label class="relative inline-flex items-center cursor-pointer" for="${config.id}">
                     <input type="checkbox" id="${config.id}" class="sr-only peer" role="switch" aria-checked="false" aria-label="${config.label}">
                     <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                </div>
-            </label>
+                </label>
+            </div>
             <div id="${config.groupId}" class="hidden mt-2 space-y-3">
                 ${config.innerHtml}
             </div>
@@ -313,13 +324,15 @@ function createSummaryCard(config) {
     `;
 }
 
-// --- Configurations for Inputs ---
+// ==========================================
+// CONFIGURATIONS FOR INPUTS
+// ==========================================
 const allInputConfigs = [
     { id: 'sipAmount', label: 'Monthly SIP Amount (₹)', min: 500, max: 50000, value: 10000, step: 500, errorMsg: 'Amount must be between ₹500 - ₹50,000.', presets: [{label: '5K', val: 5000}, {label: '10K', val: 10000}, {label: '25K', val: 25000}, {label: '50K', val: 50000}] },
     { id: 'sipInitialLumpsum', label: 'Initial Lumpsum Amount (₹)', min: 5000, max: 10000000, value: 50000, step: 1000, errorMsg: 'Amount must be between ₹5,000 - ₹1 Crore.' },
     { id: 'sipIncreaseRate', label: 'Annual Increase (%)', min: 0, max: 20, value: 0, step: 1, errorMsg: 'Value must be between 0 and 20.', toggleId: 'sipIncreaseTypeToggle', infoTitle: 'The percentage rate at which you plan to scale up your monthly SIP amount every year.' },
     
-    { id: 'lumpsumAmount', label: 'Lumpsum Amount (₹)', min: 5000, max: 10000000, value: 500000, step: 1000, errorMsg: 'Amount must be between ₹5,000 - ₹1 Crore.', presets: [{label: '50K', val: 50000}, {label: '1L', val: 100000}, {label: '5L', val: 500000}] },
+    { id: 'lumpsumAmount', label: 'Lumpsum Amount (₹)', min: 5000, max: 10000000, value: 500000, step: 1000, errorMsg: 'Amount must be between ₹5,000 - ₹1 Crore.', presets: [{label: '50K', val: 50000}, {label: '1L', val: 100000}, {label: '5L', val: 500000}], infoTitle: 'A one-time initial lumpsum investment amount to be compounded over your chosen holding period.' },
     
     { id: 'rdAmount', label: 'Monthly RD Amount (₹)', min: 100, max: 50000, value: 5000, step: 100, errorMsg: 'Amount must be between ₹100 - ₹50,000.' },
     { id: 'rdIncreaseRate', label: 'Annual Increase (%)', min: 0, max: 20, value: 0, step: 1, errorMsg: 'Value must be between 0 and 20.', toggleId: 'rdIncreaseTypeToggle', infoTitle: 'The percentage rate at which you plan to scale up your Recurring Deposit amount every year.' },
@@ -338,14 +351,13 @@ const allInputConfigs = [
     { id: 'investmentPeriod', label: 'Investment Period (Years)', min: 1, max: 40, value: 10, step: 1, errorMsg: 'Period must be between 1 - 40 years.', labelId: 'periodLabel' },
     { id: 'inflationRate', label: 'Inflation Rate (p.a. %)', min: 0, max: 15, value: 5, step: 0.1, errorMsg: 'Rate must be between 0.0% - 15.0%.' },
     
-    // Advanced gatisheela bridge inputs
     { id: 'bridgePeriod', label: 'Pension Duration (Years)', min: 5, max: 40, value: 20, step: 1, errorMsg: 'Pension duration must be between 5 - 40 years.', infoTitle: 'The number of years you plan to withdraw your monthly pension after retirement.' },
-    { id: 'bridgeRate', label: 'Conservative Pension Yield (% p.a.)', min: 4, max: 12, value: 8, step: 0.5, errorMsg: 'Expected yield must be between 4% - 12%.', infoTitle: 'The expected annual return rate on your accumulated wealth during the pension/withdrawal phase (typically conservative, e.g., 6% to 8% in debt/arbitrage funds).' }
+    { id: 'bridgeRate', label: 'Conservative Pension Yield (% p.a.)', min: 4, max: 12, value: 8, step: 0.5, errorMsg: 'Expected yield must be between 4% - 12%.', infoTitle: 'The expected annual return rate on your accumulated wealth during the pension/withdrawal phase.' }
 ];
 
 const freqSelectHtml = (id) => createSelectGroup({ id: id, label: 'Frequency', options: [{label:'Monthly', value:'monthly'}, {label:'Quarterly', value:'quarterly'}, {label:'Half-Yearly', value:'half-yearly'}] });
 
-// Injecting HTML Inputs Configurations Dynamically with context-sensitive collapsible toggles
+// Injecting HTML Inputs Configurations Dynamically
 document.getElementById('sipSection').innerHTML = 
     createSliderGroup(allInputConfigs[0]) + 
     freqSelectHtml('sipFrequency') + 
@@ -355,13 +367,13 @@ document.getElementById('sipSection').innerHTML =
         <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
             <strong class="text-stone-800">FY 2024-25/25-26 Rules:</strong> Long Term Capital Gains (LTCG) on Equity mutual funds are taxed at <strong class="text-stone-800">12.5%</strong> on gains exceeding <strong class="text-stone-800">₹1.25 Lakh</strong> per financial year (holding > 12 months).
         </div>
-    ` }) +
+    `, infoTitle: 'Estimates your 12.5% Long Term Capital Gains tax liability on equity returns exceeding the ₹1.25 Lakh annual exemption limit.' }) +
     createToggleSection({ 
         id: 'sipSwpBridgeToggle', 
         label: 'Plan Retirement (SIP to SWP Pension Bridge)', 
         groupId: 'sipSwpBridgeGroup', 
         innerHtml: `
-            <div class="space-y-3 border-t border-emerald-200/40 pt-2">
+            <div class="space-y-3 border-t border-blue-200/40 pt-2">
                 ${createSliderGroup(allInputConfigs[16])}
                 ${createSliderGroup(allInputConfigs[17])}
             </div>
@@ -375,26 +387,26 @@ document.getElementById('lumpsumSection').innerHTML =
         <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
             <strong class="text-stone-800">FY 2024-25/25-26 Rules:</strong> Long Term Capital Gains (LTCG) on Equity mutual funds are taxed at <strong class="text-stone-800">12.5%</strong> on gains exceeding <strong class="text-stone-800">₹1.25 Lakh</strong> per financial year.
         </div>
-    ` });
+    `, infoTitle: 'Estimates your 12.5% Long Term Capital Gains tax liability on compounded lumpsum equity gains exceeding ₹1.25 Lakh per financial year.' });
 
 document.getElementById('rdSection').innerHTML = 
     createSliderGroup(allInputConfigs[4]) + freqSelectHtml('rdFrequency') +
     createToggleSection({ id: 'rdStepUpToggle', label: 'Enable Annual Step-up', groupId: 'rdStepUpGroup', innerHtml: createSliderGroup(allInputConfigs[5]), infoTitle: 'Automatically increase RD investment amount' }) +
-    createToggleSection({ id: 'rdTaxToggle', label: 'Calculate Post-Tax Returns (Slab Wise)', groupId: 'rdTaxGroup', innerHtml: createTaxRegimeMarkup('rd') });
+    createToggleSection({ id: 'rdTaxToggle', label: 'Calculate Post-Tax Returns (Slab Wise)', groupId: 'rdTaxGroup', innerHtml: createTaxRegimeMarkup('rd'), infoTitle: 'Calculates the real maturity amount of your RD after deducting TDS/slab-rate tax based on your annual income tax bracket.' });
 
 document.getElementById('fdSection').innerHTML = 
     createSliderGroup(allInputConfigs[6]) +
-    createToggleSection({ id: 'fdTaxToggle', label: 'Calculate Post-Tax Returns (Slab Wise)', groupId: 'fdTaxGroup', innerHtml: createTaxRegimeMarkup('fd') });
+    createToggleSection({ id: 'fdTaxToggle', label: 'Calculate Post-Tax Returns (Slab Wise)', groupId: 'fdTaxGroup', innerHtml: createTaxRegimeMarkup('fd'), infoTitle: 'Calculates the real maturity amount of your FD after deducting TDS/slab-rate tax based on your annual income tax bracket.' });
 
 document.getElementById('swpSection').innerHTML = 
     createSliderGroup(allInputConfigs[7]) + createSliderGroup(allInputConfigs[8]) +
     createToggleSection({ id: 'swpStepUpToggle', label: 'Enable Annual Step-up', groupId: 'swpStepUpGroup', innerHtml: createSliderGroup(allInputConfigs[9]), infoTitle: 'Automatically increase withdrawal amount' }) +
-    createSelectGroup({ id: 'withdrawalFrequency', label: 'Withdrawal Frequency', options: [{label:'Monthly', value:'monthly'}, {label:'Quarterly', value:'quarterly'}, {label:'Half-Yearly', value:'half-yearly'}, {label:'Yearly', value:'yearly'}] }) +
+    createSelectGroup({ id: 'withdrawalFrequency', label: 'Withdrawal Frequency', options: [{label:'Monthly', value:'monthly'}, {label:'Quarterly', value:'quarterly'}, {label:'Half-Yearly', value:'half-yearly'}, {label:'Yearly', value:'yearly'}], infoTitle: 'Set the payout intervals (Monthly, Quarterly, or Yearly) to receive systematic retirement cash flows.' }) +
     createToggleSection({ id: 'swpEquityTaxToggle', label: 'Estimate Annual MF Capital Gains Tax (LTCG)', groupId: 'swpEquityTaxGroup', innerHtml: `
         <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
             Estimates estimated annual capital gains tax liability of <strong class="text-stone-800">12.5%</strong> on withdrawal yields exceeding the threshold of <strong class="text-stone-800">₹1.25 Lakh</strong> per FY.
         </div>
-    ` });
+    `, infoTitle: 'Calculates the estimated annual LTCG tax liability on the capital gains proportion of your systematic SWP withdrawals.' });
 
 document.getElementById('goalDynamicInputs').innerHTML = 
     createSliderGroup(allInputConfigs[10]) + createSliderGroup(allInputConfigs[11]) + createSliderGroup(allInputConfigs[12]) +
@@ -402,22 +414,22 @@ document.getElementById('goalDynamicInputs').innerHTML =
         <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
             Estimates capital gains liability using current equity mutual fund rules of <strong class="text-stone-800">12.5%</strong> taxation on cumulative gains exceeding <strong class="text-stone-800">₹1.25 Lakh</strong>.
         </div>
-    ` });
+    `, infoTitle: 'Estimates the 12.5% capital gains tax liability on accumulated returns when you liquidate the portfolio to achieve this goal.' });
 
 document.getElementById('generalInputsSection').innerHTML = createSliderGroup(allInputConfigs[13]) + createSliderGroup(allInputConfigs[14]);
 
 document.getElementById('inflationInputGroup').innerHTML = createSliderGroup(allInputConfigs[15]);
 
-// Build Output Summaries Card Grid Templates with custom targeted collapsible nodes (Integrated with compliance gradients)
+// Build Output Summaries Card Grid Templates (cohesive dark slate/blue highlights)
 const summaryConfigs = [
-    { id: 'sipSummary', title: 'SIP Summary', cardClass: 'bg-gradient-to-br from-emerald-50 to-teal-50/50 border-emerald-100 text-emerald-950', grid: [{label:'Invested', id:'investedAmountSIP', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsSIP', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueSIP', colorClass:'total'}, extras: [
+    { id: 'sipSummary', title: 'SIP Summary', cardClass: 'bg-gradient-to-br from-red-50/50 to-stone-50/30 border-red-100 text-stone-900', grid: [{label:'Invested', id:'investedAmountSIP', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsSIP', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueSIP', colorClass:'total'}, extras: [
         {id:'realTotalValueSIP', containerId:'realValueSectionSIP', label:'Real Value (Today\'s Worth) ℹ', colorClass:'real', hidden:true, title:'Value after adjusting expected inflation'},
         {id:'ltcgTaxSIP', containerId:'ltcgTaxSectionSIP', label:'Estimated LTCG Tax (12.5%) ⚖', colorClass:'tax', hidden:true, title:'Equity LTCG tax estimation at 12.5% on returns above ₹1.25 Lakh exemption threshold'},
         {id:'postTaxCorpusSIP', containerId:'postTaxSectionSIP', label:'Post-Tax Accumulated Corpus 💰', colorClass:'returns font-bold text-emerald-800', hidden:true},
-        {id:'monthlyPensionSIP', containerId:'bridgeSectionSIP', label:'Est. Monthly Retirement Pension 🚀', colorClass:'withdrawn font-bold text-red-600', hidden:true, title:'Monthly pension yielded by transitioning accumulated SIP corpus directly into a conservative SWP scheme'},
+        {id:'monthlyPensionSIP', containerId:'bridgeSectionSIP', label:'Est. Monthly Retirement Pension 🚀', colorClass:'withdrawn font-bold text-red-700', hidden:true, title:'Monthly pension yielded by transitioning accumulated SIP corpus directly into a conservative SWP scheme'},
         {id:'realMonthlyPensionSIP', containerId:'realBridgeSectionSIP', label:'Real Pension (Today\'s Worth) ℹ', colorClass:'real', hidden:true, title:'Monthly retirement SWP pension adjusted for historical inflation'}
     ] },
-    { id: 'lumpsumSummary', title: 'Lumpsum Summary', cardClass: 'bg-gradient-to-br from-blue-50 to-indigo-50/50 border-blue-100 text-indigo-950', hidden: true, grid: [{label:'Invested', id:'investedAmountLumpsum', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsLumpsum', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueLumpsum', colorClass:'total'}, extras: [
+    { id: 'lumpsumSummary', title: 'Lumpsum Summary', cardClass: 'bg-gradient-to-br from-red-50/50 to-stone-50/30 border-red-100 text-stone-900', hidden: true, grid: [{label:'Invested', id:'investedAmountLumpsum', colorClass:'invested'}, {label:'Returns', id:'estimatedReturnsLumpsum', colorClass:'returns'}], total: {label:'Total Value', id:'totalValueLumpsum', colorClass:'total'}, extras: [
         {id:'realTotalValueLumpsum', containerId:'realValueSectionLumpsum', label:'Real Value (Today\'s Worth) ℹ', colorClass:'real', hidden:true},
         {id:'ltcgTaxLumpsum', containerId:'ltcgTaxSectionLumpsum', label:'Estimated LTCG Tax (12.5%) ⚖', colorClass:'tax', hidden:true},
         {id:'postTaxCorpusLumpsum', containerId:'postTaxSectionLumpsum', label:'Post-Tax Lumpsum Corpus 💰', colorClass:'returns font-bold text-emerald-800', hidden:true}
@@ -439,7 +451,7 @@ const summaryConfigs = [
 document.getElementById('dynamicSummariesContainer').innerHTML = summaryConfigs.map(createSummaryCard).join('');
 
 // ==========================================
-// MODULE: FINANCIAL-CALCULATOR.JS - Lekkaise paddhati
+// MODULE: FINANCIAL-CALCULATOR.JS
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.calculator-container')) {
@@ -464,12 +476,10 @@ function initializeCalculator() {
     let doughnutCtx = doughnutCanvas ? doughnutCanvas.getContext('2d') : null;
     let currentMode = 'sip';
 
-    // Risk pranthala bhatti Smart Insight Box Shailini gatisheelamga marchu function
     function updateSmartInsightColorTheme(themeClass) {
         const insightBox = getElem('smartInsight');
         if (!insightBox) return;
         
-        // Unna background/border/text rangu prabhavalanu tholaginchandi
         insightBox.classList.remove(
             'bg-blue-50', 'border-blue-200', 'text-blue-900',
             'bg-teal-50', 'border-teal-200', 'text-teal-900',
@@ -491,7 +501,6 @@ function initializeCalculator() {
         }
     }
 
-    // Accessibility Switchlanu pramanikarinchandi
     document.querySelectorAll('input[role="switch"]').forEach(toggle => {
         toggle.addEventListener('change', (e) => e.target.setAttribute('aria-checked', e.target.checked));
     });
@@ -519,7 +528,6 @@ function initializeCalculator() {
                 const addDetail = (label, value) => { printContent.innerHTML += `<div class="mb-1"><span class="font-semibold text-stone-900">${label}:</span> ${value}</div>`; };
                 const formatPct = (val) => `${val}%`;
                 
-                // Samacharam surakshitamga pondadaniki sahaya paddhatulu
                 const getVal = (id) => getElem(id) ? getElem(id).value : '0';
                 const isChecked = (id) => getElem(id) ? getElem(id).checked : false;
                 const getSelectText = (id) => {
@@ -527,7 +535,6 @@ function initializeCalculator() {
                     return el && el.options ? el.options[el.selectedIndex].text : '';
                 };
 
-                // Active mode bhatti vivaralanu gatisheelamga cherchandi
                 if (currentMode === 'sip') {
                     addDetail('Mode', 'SIP (Systematic Investment Plan)');
                     addDetail('Monthly Amount', formatCurrency(getVal('sipAmountInput')));
@@ -568,7 +575,6 @@ function initializeCalculator() {
                     addDetail('Time Period', `${getVal('goalPeriodInput')} Years`);
                 }
 
-                // Toggles
                 if(isChecked('inflationToggle')) addDetail('Inflation Adjusted', `Yes (${getVal('inflationRateInput')}%)`);
                 if(currentMode==='rd' && isChecked('rdTaxToggle')) {
                     const isNew = getElem('rdTaxRegimeNew')?.classList.contains('bg-white');
@@ -602,7 +608,6 @@ function initializeCalculator() {
       if (investmentDoughnutChart) { investmentDoughnutChart.data = chartData; investmentDoughnutChart.update(); }
       else { investmentDoughnutChart = new Chart(doughnutCtx, { type: 'doughnut', data: chartData, options: chartOptions }); }
 
-      // Accessibility fallback setup
       const formatTextSummary = labels.map((label, idx) => `${label}: ${formatCurrency(data[idx])}`).join(', ');
       getElem('investmentDoughnutChart').setAttribute('aria-label', `Investment Breakdown doughnut chart displaying: ${formatTextSummary}`);
     }
@@ -639,7 +644,6 @@ function initializeCalculator() {
 
     let yearlyGrowthData = [];
 
-    // Dynamic Real-time expectations validator engine (SEBI compliant)
     function checkRealFinancialValidation(annualReturnRate, annualInflationRate) {
         const warningBox = getElem('smartFinancialValidation');
         if (!warningBox) return;
@@ -651,7 +655,6 @@ function initializeCalculator() {
         const returnPercent = (annualReturnRate * 100).toFixed(1);
         const inflationPercent = (annualInflationRate * 100).toFixed(1);
 
-        // Return rules logic based on Indian finance context
         if (currentMode === 'sip' || currentMode === 'lumpsum' || currentMode === 'goal') {
             if (parseFloat(returnPercent) > 15.0) {
                 warnings.push({
@@ -668,7 +671,7 @@ function initializeCalculator() {
             if (parseFloat(returnPercent) > 8.0) {
                 warnings.push({
                     type: 'warning',
-                    text: `<strong>Atypical Fixed Income Yield (${returnPercent}%):</strong> Scheduled commercial banks in India (SBI, HDFC, ICICI) typically cap FD/RD interest rates between 6.0% and 7.5% p.a. Assumed rates above 8% generally involve Corporate FDs or Small Finance Banks, which feature higher credit risk.`
+                    text: `<strong>Atypical Fixed Income Yield (${returnPercent}%):</strong> Scheduled commercial banks in India typically cap FD/RD interest rates between 6.0% and 7.5% p.a. Assumed rates above 8% generally involve Corporate FDs or Small Finance Banks.`
                 });
             }
         } else if (currentMode === 'swp') {
@@ -680,23 +683,21 @@ function initializeCalculator() {
             }
         }
 
-        // Inflation guidelines validation
         const inflationToggle = getElem('inflationToggle');
         if (inflationToggle && inflationToggle.checked) {
             if (parseFloat(inflationPercent) < 4.0) {
                 warnings.push({
                     type: 'info',
-                    text: `<strong>Optimistic Inflation Projection (${inflationPercent}%):</strong> India's historical retail Consumer Price Index (CPI) averages around 5% to 6%. The RBI officially targets keeping core inflation at 4.0% with a variance band of +/-2%.`
+                    text: `<strong>Optimistic Inflation Projection (${inflationPercent}%):</strong> India's historical retail Consumer Price Index (CPI) averages around 5% to 6%.`
                 });
             } else if (parseFloat(inflationPercent) > 8.0) {
                 warnings.push({
                     type: 'warning',
-                    text: `<strong>Hyper-conservative Inflation (${inflationPercent}%):</strong> Modeling inflation above 8% p.a. results in aggressive erosion of your real future purchasing power. Highly useful for stress-testing, but may demand an unmanageable monthly savings burden.`
+                    text: `<strong>Hyper-conservative Inflation (${inflationPercent}%):</strong> Modeling inflation above 8% p.a. results in aggressive erosion of your real future purchasing power.`
                 });
             }
         }
 
-        // Render warning panels
         if (warnings.length > 0) {
             warningBox.classList.remove('hidden');
             warnings.forEach(w => {
@@ -711,7 +712,6 @@ function initializeCalculator() {
         }
     }
 
-    // Helper to get slab-based tax rate contextually for RD/FD
     function getSlabTaxRate(prefix) {
         if (!getElem(`${prefix}TaxToggle`)?.checked) return 0;
         const isNew = getElem(`${prefix}TaxRegimeNew`)?.classList.contains('bg-white');
@@ -727,9 +727,8 @@ function initializeCalculator() {
             const annualInflationRate = getElem('inflationToggle')?.checked ? parseFloat(getElem('inflationRateInput').value) / 100 : 0;
             const smartInsight = getElem('smartInsight');
             smartInsight.classList.add('hidden');
-            updateSmartInsightColorTheme('default'); // reset default
+            updateSmartInsightColorTheme('default');
 
-            // Trigger SEBI-style expectation validation check
             checkRealFinancialValidation(annualReturnRate, annualInflationRate);
 
             if (currentMode === 'sip') {
@@ -815,11 +814,10 @@ function initializeCalculator() {
                 getElem('realValueSectionSIP').classList.remove('hidden');
               } else { getElem('realValueSectionSIP').classList.add('hidden'); }
               
-              // Dynamic Premium Green/Teal Chart Colors for Wealth Generation
-              updateDoughnutChart([investedAmount, Math.max(0, currentCorpus - investedAmount)], ['Invested', 'Returns'], ['#334155', '#0d9488']); 
+              // Red theme chart color matching
+              updateDoughnutChart([investedAmount, Math.max(0, currentCorpus - investedAmount)], ['Invested', 'Returns'], ['#1e293b', '#b91c1c']); 
               generateGrowthTable(yearlyGrowthData, currentCorpus);
 
-              // Real-time Insights (Rule of 72 compound speed details)
               const doublingYears = (72 / (annualReturnRate * 100)).toFixed(1);
               getElem('smartInsightText').innerHTML = `At this rate, compounding speeds will double your principal sum approximately every <strong>${doublingYears} years</strong>!`;
               smartInsight.classList.remove('hidden');
@@ -851,13 +849,11 @@ function initializeCalculator() {
                   getElem('realValueSectionLumpsum').classList.remove('hidden');
                 } else { getElem('realValueSectionLumpsum').classList.add('hidden'); }
                 
-                // Dynamic Indigo/Royal Blue Chart Colors for Core Capital
-                updateDoughnutChart([investedAmount, Math.max(0, totalValue - investedAmount)], ['Invested', 'Returns'], ['#1e3a8a', '#3b82f6']);
+                updateDoughnutChart([investedAmount, Math.max(0, totalValue - investedAmount)], ['Invested', 'Returns'], ['#1e293b', '#b91c1c']);
                 let currentCorpus = investedAmount;
                 for (let year = 1; year <= investmentPeriodYears; year++) { currentCorpus *= (1 + annualReturnRate); yearlyGrowthData.push({ year, invested: investedAmount, returns: currentCorpus - investedAmount, total: currentCorpus }); }
                 generateGrowthTable(yearlyGrowthData, totalValue);
 
-                // Dynamic Doubling Speed Nudge
                 const doublingYears = (72 / (annualReturnRate * 100)).toFixed(1);
                 getElem('smartInsightText').innerHTML = `Compounding logic estimates that your lumpsum initial capital will double itself every <strong>${doublingYears} years</strong>.`;
                 smartInsight.classList.remove('hidden');
@@ -901,11 +897,9 @@ function initializeCalculator() {
                   getElem('realValueSectionRD').classList.remove('hidden');
                 } else { getElem('realValueSectionRD').classList.add('hidden'); }
                 
-                // Slate / Gray Chart Colors for RD
-                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#334155', '#64748b']); 
+                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#1e293b', '#64748b']); 
                 generateGrowthTable(yearlyGrowthData, currentCorpus);
 
-                // Dynamic compounding target speed alert
                 const doublingYears = (72 / (annualReturnRate * 100)).toFixed(1);
                 getElem('smartInsightText').innerHTML = `Under current recurring deposits parameters, your investment yield compound doubles cycles speed is approx. <strong>${doublingYears} years</strong>.`;
                 smartInsight.classList.remove('hidden');
@@ -932,13 +926,11 @@ function initializeCalculator() {
                   getElem('realValueSectionFD').classList.remove('hidden');
                 } else { getElem('realValueSectionFD').classList.add('hidden'); }
                 
-                // Slate / Gray Chart Colors for FD
-                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#334155', '#64748b']);
+                updateDoughnutChart([investedAmount, Math.max(0, estimatedReturns)], ['Invested', 'Returns'], ['#1e293b', '#64748b']);
                 let currentCorpus = investedAmount;
                 for (let year = 1; year <= investmentPeriodYears; year++) { currentCorpus *= (1 + annualReturnRate); yearlyGrowthData.push({ year, invested: investedAmount, returns: currentCorpus - investedAmount, total: currentCorpus }); }
                 generateGrowthTable(yearlyGrowthData, totalValue);
 
-                // FD Color-Coded Advisories
                 const fdRatePercentage = annualReturnRate * 100;
                 let postTaxYieldRate = fdRatePercentage;
                 if (getElem('fdTaxToggle')?.checked) {
@@ -1034,7 +1026,6 @@ function initializeCalculator() {
                 updateDoughnutChart([totalWithdrawn, Math.max(0, totalInterest), Math.max(0, corpus)], ['Withdrawn', 'Interest', 'Remaining'], ['#b45309', '#f59e0b', '#78716c']); 
                 generateGrowthTable(yearlyGrowthData, initialCorpus);
                 
-                // SWP 4% Safe Withdrawal Rate (SWR) Dynamic Color Analytics Engine
                 const swrPercentage = ((initialWithdrawalAmount * 12) / initialCorpus) * 100;
 
                 if (exhaustionYear > 0) {
@@ -1091,10 +1082,8 @@ function initializeCalculator() {
                     getElem('postTaxSectionGoal').classList.add('hidden');
                 }
 
-                // Goal Purple / Fuchsia Custom Chart Shades
-                updateDoughnutChart([Math.max(0, totalInvestment), Math.max(0, expectedReturns)], ['Total Investment', 'Expected Returns'], ['#581c87', '#a21caf']); 
+                updateDoughnutChart([Math.max(0, totalInvestment), Math.max(0, expectedReturns)], ['Total Investment', 'Expected Returns'], ['#4c1d95', '#a21caf']); 
 
-                // Delay Procrastination alert sandharbham
                 const nextDelayedMonths = (years - 2) * 12;
                 let delayedMonthlyNeeded = monthlyInvestment;
                 if (years > 2) {
@@ -1118,7 +1107,7 @@ function initializeCalculator() {
             url.searchParams.set('mode', newMode);
             window.history.pushState({}, '', url);
         } catch (e) {
-            // Safe bypass if blocked inside cross-origin iframe context
+            // Blocked inside cross-origin iframe context fallback
         }
 
         ['sip', 'lumpsum', 'rd', 'fd', 'swp', 'goal'].forEach(el => {
@@ -1127,20 +1116,17 @@ function initializeCalculator() {
         });
         getElem('generalInputsSection')?.classList.toggle('hidden', newMode === 'goal');
 
-        const activeClasses = 'bg-red-600 text-white shadow-md shadow-red-100 scale-[1.03]'.split(' ');
-        const inactiveClasses = 'text-stone-700 hover:text-stone-900 hover:bg-stone-200/50'.split(' ');
-        
+        // Dynamic standard category switcher update (no complex inline overwriting)
         ['sip', 'lumpsum', 'rd', 'fd', 'swp', 'goal'].forEach(m => {
             const btn = getElem(m+'ModeBtn');
             if(btn) {
-                btn.classList.remove(...activeClasses, ...inactiveClasses);
+                btn.classList.remove('active');
                 if(m === newMode) { 
-                    btn.classList.add(...activeClasses); 
+                    btn.classList.add('active'); 
                     btn.setAttribute('aria-selected', 'true');
                     btn.setAttribute('tabindex', '0');
                     btn.focus();
                 } else { 
-                    btn.classList.add(...inactiveClasses); 
                     btn.setAttribute('aria-selected', 'false');
                     btn.setAttribute('tabindex', '-1');
                 }
@@ -1157,44 +1143,44 @@ function initializeCalculator() {
         }
 
         getElem(`${newMode}Section`)?.classList.remove('hidden');
-        getElem(`${newMode}Summary`)?.classList.remove('hidden');
+    getElem(`${newMode}Summary`)?.classList.remove('hidden');
 
-        const calculatorTitle = getElem('calculatorTitle');
-        const calculatorDescription = getElem('calculatorDescription');
-        const periodLabel = getElem('investmentPeriodLabel'); 
-        const growthTableHeader = getElem('growthTableHeader');
+    const calculatorTitle = getElem('calculatorTitle');
+    const calculatorDescription = getElem('calculatorDescription');
+    const periodLabelText = getElem('investmentPeriodLabelText'); 
+    const growthTableHeader = getElem('growthTableHeader');
 
-        if (newMode === 'sip') { 
-            if(calculatorTitle) calculatorTitle.textContent = 'SIP Calculator with Inflation'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Plan your investments with our advanced SIP Calculator.'; 
-            if(periodLabel) periodLabel.textContent = 'Investment Period (Years)'; 
-        }
-        else if (newMode === 'lumpsum') { 
-            if(calculatorTitle) calculatorTitle.textContent = 'Lumpsum Calculator'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Calculate the future value of your one-time investment.'; 
-            if(periodLabel) periodLabel.textContent = 'Investment Period (Years)'; 
-        }
-        else if (newMode === 'rd') { 
-            if(calculatorTitle) calculatorTitle.textContent = 'RD Calculator'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Calculate the maturity amount of your Recurring Deposit.'; 
-            if(periodLabel) periodLabel.textContent = 'Investment Period (Years)'; 
-        }
-        else if (newMode === 'fd') { 
-            if(calculatorTitle) calculatorTitle.textContent = 'FD Calculator'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Calculate the maturity amount of your Fixed Deposit.'; 
-            if(periodLabel) periodLabel.textContent = 'Investment Period (Years)'; 
-        }
-        else if (newMode === 'swp') {
-            if(calculatorTitle) calculatorTitle.textContent = 'SWP Calculator'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Plan post-retirement income with a Systematic Withdrawal Plan.'; 
-            if(periodLabel) periodLabel.textContent = 'Withdrawal Period (Years)';
-        }
-        else if (newMode === 'goal') { 
-            if(calculatorTitle) calculatorTitle.textContent = 'Goal Planner'; 
-            if(calculatorDescription) calculatorDescription.textContent = 'Calculate the monthly investment needed to reach your financial goal.'; 
-        }
+    if (newMode === 'sip') { 
+        if(calculatorTitle) calculatorTitle.textContent = 'SIP Calculator with Inflation'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Plan your investments with our advanced SIP Calculator.'; 
+        if(periodLabelText) periodLabelText.textContent = 'Investment Period (Years)'; 
+    }
+    else if (newMode === 'lumpsum') { 
+        if(calculatorTitle) calculatorTitle.textContent = 'Lumpsum Calculator'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Calculate the future value of your one-time investment.'; 
+        if(periodLabelText) periodLabelText.textContent = 'Investment Period (Years)'; 
+    }
+    else if (newMode === 'rd') { 
+        if(calculatorTitle) calculatorTitle.textContent = 'RD Calculator'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Calculate the maturity amount of your Recurring Deposit.'; 
+        if(periodLabelText) periodLabelText.textContent = 'Investment Period (Years)'; 
+    }
+    else if (newMode === 'fd') { 
+        if(calculatorTitle) calculatorTitle.textContent = 'FD Calculator'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Calculate the maturity amount of your Fixed Deposit.'; 
+        if(periodLabelText) periodLabelText.textContent = 'Investment Period (Years)'; 
+    }
+    else if (newMode === 'swp') {
+        if(calculatorTitle) calculatorTitle.textContent = 'SWP Calculator'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Plan post-retirement income with a Systematic Withdrawal Plan.'; 
+        if(periodLabelText) periodLabelText.textContent = 'Withdrawal Period (Years)';
+    }
+    else if (newMode === 'goal') { 
+        if(calculatorTitle) calculatorTitle.textContent = 'Goal Planner'; 
+        if(calculatorDescription) calculatorDescription.textContent = 'Calculate the monthly investment needed to reach your financial goal.'; 
+    }
 
-        if (newMode !== 'swp' && growthTableHeader) {
+    if (newMode !== 'swp' && growthTableHeader) {
             const mainHeader = (newMode === 'fd' || newMode === 'lumpsum') ? 'Principal' : 'Invested';
             growthTableHeader.innerHTML = `<tr>
                 <th class="px-3 py-2 text-left text-[10px] font-black text-stone-700 uppercase tracking-wider w-[15%]">Year</th>
@@ -1275,7 +1261,7 @@ function initializeCalculator() {
         });
 
         const csvContent = csvRows.join('\n');
-        const BOM = "\uFEFF"; // Excel compatible UTF-8 marker byte
+        const BOM = "\uFEFF";
         const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -1287,7 +1273,6 @@ function initializeCalculator() {
         showNotification(`CSV Exported successfully for ${currentMode.toUpperCase()} breakdown!`);
     }
 
-    // Global delegate for tax regime buttons (RD and FD contextual toggles)
     document.body.addEventListener('click', (e) => {
         if (e.target.id && (e.target.id.endsWith('TaxRegimeNew') || e.target.id.endsWith('TaxRegimeOld'))) {
             const isNew = e.target.id.endsWith('TaxRegimeNew');
@@ -1320,7 +1305,6 @@ function initializeCalculator() {
             }
         });
 
-        // Handle keydown arrow-keys navigation on mode tabs
         const tabButtons = ['sip', 'lumpsum', 'rd', 'fd', 'swp', 'goal'];
         tabButtons.forEach((tabId, index) => {
             const btn = getElem(tabId+'ModeBtn');
@@ -1382,7 +1366,6 @@ function initializeCalculator() {
                     url: window.location.href
                 };
 
-                // Check if native sharing module is active
                 if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
                     try {
                         await navigator.share(shareData);
@@ -1392,12 +1375,11 @@ function initializeCalculator() {
                         if (err.name !== 'AbortError') {
                             console.log("Native Share Failed. Using Fallback Clipboard copy:", err);
                         } else {
-                            return; // User cancelled
+                            return;
                         }
                     }
                 }
 
-                // System Clipboard Backup Fallback
                 const dummyInput = document.createElement('input');
                 document.body.appendChild(dummyInput);
                 dummyInput.value = window.location.href;
@@ -1462,8 +1444,6 @@ function initializeCalculator() {
 
     try {
         setupEventListeners();
-        
-        // URL parameter state nundi prarambha modeni thasdeeq cheyandi
         const params = new URLSearchParams(window.location.search);
         const urlMode = params.get('mode');
         if (urlMode) {
@@ -1474,7 +1454,6 @@ function initializeCalculator() {
     } catch (error) { console.log("Calc Error:", error); }
 }
 
-// Stop tooltip click event from bubbling up to parent label elements (preventing accidental toggle activation)
 document.addEventListener('click', (e) => {
     if (e.target.closest('.tooltip-icon')) {
         e.preventDefault();
