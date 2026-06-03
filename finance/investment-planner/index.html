@@ -56,7 +56,7 @@
     }
     </script>
 
-    <!-- Tailwind, Chart.js aur Icons (Removed deleted tailwind-config.js) -->
+    <!-- Tailwind, Chart.js aur Icons -->
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -64,8 +64,10 @@
 
     <style>
         :root { 
-            --bg-color: #FAFAF9; 
-            --text-main: #292524; 
+            --bg-color: #f9fafb; 
+            --text-main: #111827; 
+            --accent-color: #dc2626;
+            --accent-color-dark: #b91c1c;
         }
         body { 
             background-color: var(--bg-color); 
@@ -73,7 +75,7 @@
             font-family: 'Inter', sans-serif; 
             margin: 0;
             line-height: 1.4;
-            font-size: 13px; /* 13px default body to match PPF style sheet */
+            font-size: 13px;
         }
 
         .hidden { display: none !important; }
@@ -81,7 +83,7 @@
         /* Custom premium notification toast styles */
         #notification-toast {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background-color: #1c1917; color: white; padding: 12px 24px;
+            background-color: #111827; color: white; padding: 12px 24px;
             border-radius: 12px; z-index: 1000; opacity: 0; visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -89,68 +91,72 @@
         }
         #notification-toast.show { opacity: 1; visibility: visible; }
         
-        .input-error-message { color: #dc2626; font-size: 0.65rem; margin-top: 0.15rem; font-weight: 600; }
+        .input-error-message { color: #b91c1c; font-size: 0.65rem; margin-top: 0.15rem; font-weight: 600; }
 
-        /* Match PPF Calculator's layout standard width bounds */
+        /* Layout standard width bounds */
         .financial-calculator-wrapper { box-sizing: border-box; width: 100%; margin: 0.5rem auto 1rem; }
         .calculator-container { width: 100%; background-color: #ffffff; }
 
-        /* Premium range slider style - Pure Red Theme */
+        /* Premium range slider style - Pure Red Theme matching EMI style */
         .range-slider {
             -webkit-appearance: none; appearance: none; background: transparent;
             cursor: pointer; height: 6px; flex-grow: 1; min-width: 100px; 
         }
         .range-slider::-webkit-slider-runnable-track {
             width: 100%; height: 6px; border-radius: 3px;
-            background: linear-gradient(to right, #dc2626 var(--fill-percentage, 0%), #d6d3d1 var(--fill-percentage, 0%)); 
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%)); 
         }
         .range-slider::-moz-range-track {
             width: 100%; height: 6px; border-radius: 3px;
-            background: linear-gradient(to right, #dc2626 var(--fill-percentage, 0%), #d6d3d1 var(--fill-percentage, 0%));
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%));
         }
         .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none; margin-top: -7px;
-            width: 20px; height: 20px; border-radius: 50%; background: #b91c1c; 
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3); 
+            -webkit-appearance: none; appearance: none; margin-top: -4.5px;
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark); 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
         }
         .range-slider::-moz-range-thumb {
-            width: 20px; height: 20px; border-radius: 50%; background: #b91c1c;
-            border: none; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark);
+            border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         .range-slider:focus { outline: none; }
-        .range-slider:focus-visible::-webkit-slider-thumb {
-            box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.5);
-        }
 
         .slider-input-container { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
         
+        /* Steppers */
         .input-stepper-group {
-            display: flex; align-items: center; border: 1px solid #878680; 
-            border-radius: 0.375rem; overflow: hidden; background-color: #fafaf9; 
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); 
-            transition: all 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
             height: 1.85rem;
+            transition: all 0.2s ease-in-out;
         }
         
         .manual-input {
-            width: 70px; padding: 0.25rem 0.1rem; border: none; 
-            border-left: 1px solid #d6d3d1; border-right: 1px solid #d6d3d1; 
-            font-size: 0.7rem; font-weight: 600; text-align: center;
-            background-color: #ffffff; color: #292524; 
-            -moz-appearance: textfield;
-            outline: none !important;
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
             height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 82px;
+            padding: 0 4px;
+            transition: all 0.2s ease-in-out;
         }
         .manual-input::-webkit-outer-spin-button, .manual-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         
         .input-stepper-group:focus-within {
-            border-color: #dc2626 !important;
-            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+            border-color: var(--accent-color-dark) !important;
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2) !important;
         }
 
         .input-stepper-group.input-error {
-            border-color: #dc2626 !important;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 0 0 2px rgba(220, 38, 38, 0.3) !important;
+            border-color: #b91c1c !important;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 0 0 2px rgba(185, 28, 28, 0.3) !important;
         }
         .input-stepper-group.input-error .manual-input { box-shadow: none !important; }
 
@@ -163,39 +169,40 @@
             outline: none !important;
         }
         .modern-select:focus {
-            border-color: #dc2626 !important;
-            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+            border-color: var(--accent-color-dark) !important;
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2) !important;
         }
 
         .stepper-button {
-            background-color: #f5f5f4; border: none; color: #44403c; padding: 0.25rem 0.5rem; 
-            cursor: pointer; font-size: 1rem; line-height: 1; height: 100%; min-height: 28px;
-            display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease, color 0.2s ease;
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.1s;
             outline: none !important;
         }
-        .stepper-button:hover { background-color: #e7e5e4; color: #292524; } 
-        .stepper-button:active { background-color: #d6d3d1; } 
-        .stepper-button:disabled { opacity: 0.5; cursor: not-allowed; background-color: #fafaf9; color: #a8a29e; } 
+        .stepper-button:hover:not(:disabled) { background-color: #cbd5e1; } 
+        .stepper-button:disabled { opacity: 0.5; cursor: not-allowed; background-color: #f3f4f6; color: #9ca3af; } 
 
         @media (min-width: 640px) {
-            .manual-input { width: 80px; font-size: 0.75rem; }
-            .stepper-button { padding: 0.25rem 0.6rem; }
+            .manual-input { width: 96px; }
         }
         @media (max-width: 639px) {
-            .stepper-button { min-height: 44px; min-width: 44px; }
-            .manual-input { min-height: 44px; }
-            .modern-select { min-height: 44px; }
+            .stepper-button { min-height: 28px; }
         }
 
-        *:focus {
-            outline: none !important;
-        }
-
-        /* --- Tooltip scaling metrics fully locked on PPF style standards --- */
+        /* --- Unified EMI Tooltip Design --- */
         .tooltip-icon {
+            cursor: help;
             position: relative;
             display: inline-block;
-            cursor: help;
         }
         .tooltip-icon svg {
             width: 0.8rem;
@@ -204,35 +211,34 @@
             vertical-align: middle;
         }
         .tooltip-text {
-            display: none; /* Layout-safe initialization */
-            width: 185px;
+            display: none;
+            width: 180px;
             background-color: #111827;
             color: #ffffff;
             text-align: center;
             border-radius: 4px;
             padding: 6px 10px;
             position: absolute;
-            z-index: 100;
+            z-index: 50;
             bottom: 125%;
             left: 50%;
-            margin-left: -92px; /* Center-aligning */
+            transform: translateX(-50%);
             opacity: 0;
-            transition: opacity 0.25s ease;
+            transition: opacity 0.2s ease;
             font-size: 0.65rem;
             font-weight: 500;
             line-height: 1.4;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
             text-transform: none;
             white-space: normal;
         }
         .tooltip-text::after {
             content: "";
             position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
             border-color: #111827 transparent transparent transparent;
         }
         .tooltip-icon:hover .tooltip-text {
@@ -240,10 +246,25 @@
             opacity: 1;
         }
 
-        /* Standard 11.52px compact scale override for uniform visual density */
+        /* Standard compact scale override */
         html body .text-xxs {
-            font-size: 0.72rem; /* Exactly 11.52px */
+            font-size: 0.72rem; 
             line-height: 1rem;
+        }
+
+        /* Modern unified Category Switcher Tab design - Red Theme Matching EMI Tab buttons */
+        .loan-tab-btn {
+            color: #1f2937;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .loan-tab-btn.active {
+            background-color: var(--accent-color-dark);
+            color: #ffffff;
+            border-color: var(--accent-color-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
         }
 
         .goal-templates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
@@ -265,56 +286,55 @@
         .goal-template-btn .subtitle { font-size: 0.55rem; color: #57534e; line-height: 1.1; } 
         .goal-template-btn.active { background-color: #fef2f2; border-color: #ef4444; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.07); } 
         .goal-template-btn.active .icon-wrapper { background-color: #ef4444; color: #ffffff; } 
-        .goal-template-btn.active .title { color: #991b1b; }
+        .goal-template-btn.active .title { color: #b91c1c; }
 
         .step-up-toggle-container { display: flex; align-items: center; }
         .step-up-toggle { position: relative; display: inline-block; width: 50px; height: 24px; }
         .step-up-toggle input { opacity: 0; width: 0; height: 0; }
         .toggle-track { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #a8a29e; transition: .4s; border-radius: 24px; } 
         .toggle-thumb { position: absolute; content: ''; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.7rem; font-weight: bold; color: #1c1917; } 
-        .step-up-toggle input:checked + .toggle-track { background-color: #1c1917; } 
+        .step-up-toggle input:checked + .toggle-track { background-color: var(--accent-color-dark); } 
         .step-up-toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(26px); }
         .toggle-icon { position: absolute; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; transition: opacity 0.2s ease; }
         .toggle-icon-rupee { opacity: 0; }
         .step-up-toggle input:checked + .toggle-track .toggle-thumb .toggle-icon-percent { opacity: 0; }
         .step-up-toggle input:checked + .toggle-track .toggle-thumb .toggle-icon-rupee { opacity: 1; }
 
-        .summary-card { background-color: #f5f5f4; border-radius: 0.5rem; padding: 0.5rem; border: 1px solid #d6d3d1; transition: opacity 0.3s ease-in-out; } 
+        .summary-card { background-color: #f3f4f6; border-radius: 0.5rem; padding: 0.5rem; border: 1px solid #e5e7eb; transition: opacity 0.3s ease-in-out; } 
         .summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .summary-header h2 { font-size: 0.8rem; font-weight: 700; color: #1c1917; margin: 0; } 
+        .summary-header h2 { font-size: 0.8rem; font-weight: 700; color: #111827; margin: 0; } 
         .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem; }
         .summary-grid.swp-grid { grid-template-columns: 1fr 1fr; }
-        .summary-item { background-color: #ffffff; padding: 0.4rem; border-radius: 0.25rem; text-align: center; border: 1px solid #e7e5e4; } 
-        .summary-label { display: block; font-size: 0.6rem; font-weight: 600; color: #292524; margin-bottom: 0.1rem; } 
+        .summary-item { background-color: #ffffff; padding: 0.4rem; border-radius: 0.25rem; text-align: center; border: 1px solid #e5e7eb; } 
+        .summary-label { display: block; font-size: 0.6rem; font-weight: 600; color: #4b5563; margin-bottom: 0.1rem; } 
         .summary-value { display: block; font-size: 0.9rem; font-weight: 700; }
-        .summary-value.invested { color: #44403c; } 
+        .summary-value.invested { color: #111827; } 
         .summary-value.returns { color: #065f46; } 
-        .summary-value.withdrawn { color: #dc2626; } 
-        .summary-total { background-color: #fef2f2; color: #991b1b; padding: 0.5rem; border-radius: 0.25rem; text-align: center; margin-bottom: 0.5rem; border: 1px solid #fecaca;}
-        .summary-total .summary-label { color: #991b1b; font-size: 0.7rem; } 
+        .summary-value.withdrawn { color: #b91c1c; } 
+        .summary-total { background-color: #fef2f2; color: #b91c1c; padding: 0.5rem; border-radius: 0.25rem; text-align: center; margin-bottom: 0.5rem; border: 1px solid #fecaca;}
+        .summary-total .summary-label { color: #b91c1c; font-size: 0.7rem; } 
         .summary-total .summary-value.total { font-size: 1.1rem; font-weight: 800; }
         .summary-total .summary-value.goal { font-size: 1.25rem; font-weight: 800; color: #065f46; } 
          
-        .summary-extra { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0.5rem; border-top: 1px dashed #d6d3d1; } 
-        .summary-extra .summary-label { font-size: 0.7rem; font-weight: 600; color: #44403c; } 
+        .summary-extra { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0.5rem; border-top: 1px dashed #cbd5e1; } 
+        .summary-extra .summary-label { font-size: 0.7rem; font-weight: 600; color: #4b5563; } 
         .summary-extra .summary-value.real { font-size: 0.9rem; font-weight: 700; color: #b45309; } 
-        .summary-extra .summary-value.tax { font-size: 0.9rem; font-weight: 700; color: #9a3412; } 
+        .summary-extra .summary-value.tax { font-size: 0.9rem; font-weight: 700; color: #c2410c; } 
          
         .preset-btn { transition: all 0.2s; cursor: pointer; }
 
         #growthTableContainer { max-height: 300px; overflow-y: auto; }
         #growthTableContainer table { width: 100%; border-collapse: separate; border-spacing: 0; }
-        #growthTableContainer th { position: sticky; top: 0; z-index: 10; background-color: #f5f5f4; border-bottom: 1px solid #e7e5e4; }
-        #growthTableContainer table tbody { color: #292524; } 
-        .progress-bar-bg { background-color: #fca5a5; height: 4px; border-radius: 2px; margin-top: 3px; overflow: hidden; width: 100%; }
-        .progress-bar-fill { background-color: #dc2626; height: 100%; }
+        #growthTableContainer th { position: sticky; top: 0; z-index: 10; background-color: #f3f4f6; border-bottom: 1px solid #e5e7eb; }
+        #growthTableContainer table tbody { color: #111827; } 
+        .progress-bar-bg { background-color: #fee2e2; height: 4px; border-radius: 2px; margin-top: 3px; overflow: hidden; width: 100%; }
+        .progress-bar-fill { background-color: var(--accent-color-dark); height: 100%; }
 
         .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #fafaf9; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d6d3d1; }
 
-        /* Custom responsive badge: visible on desktop screens & split-pane previews, hidden on mobile portrait */
         @media (max-width: 479px) {
             .custom-desktop-badge { display: none !important; }
         }
@@ -334,56 +354,52 @@
 </head>
 <body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
 
-    <!-- Global Ambient Glassmorphism Background Orbs (Light Teal & Emerald) - Purely visual, hidden during printing -->
+    <!-- Global Ambient Background Orbs -->
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
-        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
-        <div class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-cyan-50/15 blur-[80px]"></div>
-        <div class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-teal-50/20 blur-[90px]"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-50/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-stone-100/30 blur-[100px]"></div>
     </div>
 
     <!-- Global App Header -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
     <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
 
-    <!-- Main Workspace (FIXED: Removed 'container' & horizontal padding to match EMI Calculator's exact 95% and 1080px flow) -->
+    <!-- Main Workspace -->
     <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
         
-        <!-- Breadcrumb Navigation (Safely hidden in print view via print-hide) -->
+        <!-- Breadcrumb Navigation -->
         <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
             <div class="flex items-center flex-wrap">
-                <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
+                <a href="/" class="hover:text-blue-700 transition-colors inline-flex items-center gap-1.5">
                     <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
                 </a>
                 <span class="mx-1.5 text-stone-300">/</span>
-                <a href="https://toolblaster.com/finance/" class="hover:text-red-600 transition-colors">Finance</a>
+                <a href="https://toolblaster.com/finance/" class="hover:text-blue-700 transition-colors">Finance</a>
                 <span class="mx-1.5 text-stone-300">/</span>
                 <span class="text-stone-900 font-bold">Investment Planner</span>
             </div>
-            <!-- Static Badge (Visible only on desktop & split previews, hidden on mobile portrait) -->
-            <div class="custom-desktop-badge flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+            <div class="custom-desktop-badge flex items-center gap-1.5 bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
                 <i class="fa-solid fa-chart-line text-[10px]"></i> WEALTH CREATION
             </div>
         </nav>
 
-        <!-- Dynamic Calculator Main Card (Alighted wrapper width safely to scale dynamically with parent bounds) -->
+        <!-- Dynamic Calculator Main Card -->
         <div id="calculator" class="w-full text-left mt-1">
-            <!-- Upgraded strictly to align with standard high-end container design parameters and rings of PPF tool -->
             <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
 
-                <!-- Standout Header H1 (Updated to match PPF size criteria - exactly 18px on desktop, base on mobile) -->
+                <!-- Standout Header H1 -->
                 <h1 id="calculatorTitle" class="text-base sm:text-[18px] font-extrabold text-stone-900 text-center mb-1">SIP Calculator with Inflation</h1>
-                <p id="calculatorDescription" class="text-center text-stone-600 mb-3 text-xxs font-medium">Plan your investments with our advanced SIP Calculator.</p>
+                <p id="calculatorDescription" class="text-center text-stone-600 mb-4 text-xxs font-medium">Plan your investments with our advanced SIP Calculator.</p>
 
-                <!-- TAB MODES CONTAINER (Red Themed Toggles - set compact text size matching PPF standards) -->
-                <div class="flex justify-center mb-3.5 print-hide">
-                    <div class="inline-flex bg-stone-100 p-1 rounded-full border border-stone-200 flex-wrap justify-center max-w-full overflow-x-auto gap-1" role="tablist" aria-label="Calculator Modes">
-                        <button id="sipModeBtn" role="tab" aria-selected="true" tabindex="0" class="px-3.5 py-1.5 rounded-full text-xxs font-bold transition-all duration-200 bg-red-600 text-white shadow-md shadow-red-100 scale-[1.03] focus:outline-none" title="Switch to Systematic Investment Plan (SIP) mode">SIP</button>
-                        <button id="lumpsumModeBtn" role="tab" aria-selected="false" tabindex="-1" class="px-3.5 py-1.5 rounded-full text-xxs font-semibold transition-all duration-200 text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 focus:outline-none" title="Switch to Lumpsum (One-Time Investment) mode">Lumpsum</button>
-                        <button id="swpModeBtn" role="tab" aria-selected="false" tabindex="-1" class="px-3.5 py-1.5 rounded-full text-xxs font-semibold transition-all duration-200 text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 focus:outline-none" title="Switch to Systematic Withdrawal Plan (SWP) mode">SWP</button>
-                        <button id="rdModeBtn" role="tab" aria-selected="false" tabindex="-1" class="px-3.5 py-1.5 rounded-full text-xxs font-semibold transition-all duration-200 text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 focus:outline-none" title="Switch to Recurring Deposit (RD) mode">RD</button>
-                        <button id="fdModeBtn" role="tab" aria-selected="false" tabindex="-1" class="px-3.5 py-1.5 rounded-full text-xxs font-semibold transition-all duration-200 text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 focus:outline-none" title="Switch to Fixed Deposit (FD) mode">FD</button>
-                        <button id="goalModeBtn" role="tab" aria-selected="false" tabindex="-1" class="px-3.5 py-1.5 rounded-full text-xxs font-semibold transition-all duration-200 text-stone-700 hover:text-stone-900 hover:bg-stone-200/50 focus:outline-none" title="Switch to Financial Goal Planner mode">Goal Planner</button>
+                <!-- TAB MODES CONTAINER (Category Switcher Grid layout matches EMI perfectly but in elegant half-space) -->
+                <div class="flex justify-center mb-4 print-hide">
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 p-1 bg-gray-100 rounded-xl w-full max-w-xl mx-auto" role="tablist" aria-label="Calculator Modes">
+                        <button type="button" role="tab" id="sipModeBtn" class="loan-tab-btn active text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="true" title="Switch to Systematic Investment Plan (SIP) mode">SIP</button>
+                        <button type="button" role="tab" id="lumpsumModeBtn" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false" title="Switch to Lumpsum (One-Time Investment) mode">Lumpsum</button>
+                        <button type="button" role="tab" id="swpModeBtn" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false" title="Switch to Systematic Withdrawal Plan (SWP) mode">SWP</button>
+                        <button type="button" role="tab" id="rdModeBtn" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false" title="Switch to Recurring Deposit (RD) mode">RD</button>
+                        <button type="button" role="tab" id="fdModeBtn" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false" title="Switch to Fixed Deposit (FD) mode">FD</button>
+                        <button type="button" role="tab" id="goalModeBtn" class="loan-tab-btn text-center py-1.5 text-[10px] sm:text-xxs font-bold rounded-lg transition-all" aria-selected="false" title="Switch to Financial Goal Planner mode">Goal Planner</button>
                     </div>
                 </div>
 
@@ -392,176 +408,7 @@
                     <div class="space-y-3 print-hide">
                         <!-- Dynamic Section Containers -->
                         <div id="sipSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl">
-                            <!-- Monthly SIP Amount Slider -->
-                            <div>
-                                <label id="sipAmountLabel" for="sipAmountInput" class="block text-xxs font-bold text-stone-700 flex items-center mb-1">
-                                    <span id="sipAmountLabelText">Monthly SIP Amount (₹)</span> 
-                                </label>
-                                <div class="input-group flex items-center space-x-2">
-                                    <input type="range" id="sipAmountSlider" min="500" max="50000" value="10000" step="500" class="w-full range-slider flex-grow" aria-label="Monthly SIP Amount" style="--fill-percentage: 19.1919%;">
-                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" id="sipAmountDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
-                                        <input type="number" id="sipAmountInput" class="manual-input" value="10000" min="500" max="50000" step="500" aria-label="Enter Monthly SIP Amount">
-                                        <button type="button" id="sipAmountIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
-                                    </div>
-                                </div>
-                                <div class="flex flex-wrap gap-1.5 mt-1.5">
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="5000" title="Quickly add ₹5K to your investment amount">+ ₹5K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="10000" title="Quickly add ₹10K to your investment amount">+ ₹10K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="25000" title="Quickly add ₹25K to your investment amount">+ ₹25K</button>
-                                    <button type="button" class="preset-btn px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold hover:bg-red-100" data-target="sipAmountInput" data-val="50000" title="Quickly add ₹50K to your investment amount">+ ₹50K</button>
-                                </div>
-                                <p id="sipAmountError" class="input-error-message hidden" role="alert">Amount must be between ₹500 - ₹50,000.</p>
-                            </div>
-
-                            <!-- Frequency Select -->
-                            <div>
-                                <label for="sipFrequency" class="block text-xxs font-bold text-stone-700 mb-1">Frequency</label>
-                                <select id="sipFrequency" class="modern-select w-full p-1 border border-stone-300 rounded-xl text-xxs font-semibold text-stone-700 focus:ring-red-500 focus:border-red-500 bg-stone-50 shadow-sm h-8">
-                                    <option value="monthly" selected>Monthly</option>
-                                    <option value="quarterly">Quarterly</option>
-                                    <option value="half-yearly">Half-Yearly</option>
-                                </select>
-                            </div>
-
-                            <!-- Add Initial Lumpsum Toggle Section -->
-                            <div class="pt-1">
-                                <label class="flex items-center justify-between cursor-pointer" for="sipInitialLumpsumToggle">
-                                    <span class="text-xxs font-bold text-stone-700 flex items-center">
-                                        Add Initial Lumpsum 
-                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10"/>
-                                                <line x1="12" y1="16" x2="12" y2="12"/>
-                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                            </svg>
-                                            <span class="tooltip-text">Add a one-time initial amount</span>
-                                        </span>
-                                    </span>
-                                    <div class="relative inline-flex items-center">
-                                        <input type="checkbox" id="sipInitialLumpsumToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Add Initial Lumpsum">
-                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                                    </div>
-                                </label>
-                                <div id="sipInitialLumpsumGroup" class="hidden mt-2 space-y-3">
-                                    <div>
-                                        <label for="sipInitialLumpsumInput" class="block text-xxs font-bold text-stone-700 flex items-center mb-1" id="sipInitialLumpsumLabel">
-                                            <span id="sipInitialLumpsumLabelText">Initial Lumpsum Amount (₹)</span> 
-                                        </label>
-                                        <div class="input-group flex items-center space-x-2">
-                                            <input type="range" id="sipInitialLumpsumSlider" min="5000" max="10000000" value="50000" step="1000" class="w-full range-slider flex-grow" aria-label="Initial Lumpsum Amount" style="--fill-percentage: 0.450225%;">
-                                            <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                                <button type="button" id="sipInitialLumpsumDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
-                                                <input type="number" id="sipInitialLumpsumInput" class="manual-input" value="50000" min="5000" max="10000000" step="1000" aria-label="Enter Initial Lumpsum Amount">
-                                                <button type="button" id="sipInitialLumpsumIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
-                                            </div>
-                                        </div>
-                                        <p id="sipInitialLumpsumError" class="input-error-message hidden" role="alert">Amount must be between ₹5,000 - ₹1 Crore.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Enable Annual Step-up Toggle Section -->
-                            <div class="pt-1">
-                                <label class="flex items-center justify-between cursor-pointer" for="sipStepUpToggle">
-                                    <span class="text-xxs font-bold text-stone-700 flex items-center">
-                                        Enable Annual Step-up 
-                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10"/>
-                                                <line x1="12" y1="16" x2="12" y2="12"/>
-                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                            </svg>
-                                            <span class="tooltip-text">Automatically increase SIP amount</span>
-                                        </span>
-                                    </span>
-                                    <div class="relative inline-flex items-center">
-                                        <input type="checkbox" id="sipStepUpToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Enable Annual Step-up">
-                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                                    </div>
-                                </label>
-                                <div id="sipStepUpGroup" class="hidden mt-2 space-y-3">
-                                    <div>
-                                        <div class="flex justify-between items-center mb-1">
-                                            <label for="sipIncreaseRateInput" class="block text-xxs font-bold text-stone-700 flex items-center" id="sipIncreaseRateLabel">
-                                                <span id="sipIncreaseRateLabelText">Annual Increase (%)</span> 
-                                                <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                        <circle cx="12" cy="12" r="10"/>
-                                                        <line x1="12" y1="16" x2="12" y2="12"/>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                                    </svg>
-                                                    <span class="tooltip-text">The percentage rate at which you plan to scale up your monthly SIP amount every year.</span>
-                                                </span>
-                                            </label>
-                                            <div class="step-up-toggle-container">
-                                                <label class="step-up-toggle" for="sipIncreaseTypeToggle">
-                                                    <input type="checkbox" id="sipIncreaseTypeToggle" class="sr-only" role="switch" aria-checked="false" aria-label="Toggle rate type for annual increase">
-                                                    <div class="toggle-track">
-                                                        <div class="toggle-thumb">
-                                                            <span class="toggle-icon toggle-icon-percent">%</span>
-                                                            <span class="toggle-icon toggle-icon-rupee">₹</span>
-                                                        </div>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="input-group flex items-center space-x-2">
-                                            <input type="range" id="sipIncreaseRateSlider" min="0" max="20" value="0" step="1" class="w-full range-slider flex-grow" aria-label="Annual Increase" style="--fill-percentage: 0%;">
-                                            <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                                <button type="button" id="sipIncreaseRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
-                                                <input type="number" id="sipIncreaseRateInput" class="manual-input" value="0" min="0" max="20" step="1" aria-label="Enter Annual Increase">
-                                                <button type="button" id="sipIncreaseRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
-                                            </div>
-                                        </div>
-                                        <p id="sipIncreaseRateError" class="input-error-message hidden" role="alert">Value must be between 0 and 20.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Capital Gains Tax Toggle Section -->
-                            <div class="pt-1">
-                                <label class="flex items-center justify-between cursor-pointer" for="sipEquityTaxToggle">
-                                    <span class="text-xxs font-bold text-stone-700 flex items-center">
-                                        Estimate MF Capital Gains Tax (LTCG)
-                                    </span>
-                                    <div class="relative inline-flex items-center">
-                                        <input type="checkbox" id="sipEquityTaxToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Estimate MF Capital Gains Tax (LTCG)">
-                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                                    </div>
-                                </label>
-                                <div id="sipEquityTaxGroup" class="hidden mt-2 space-y-3">
-                                    <div class="p-2 bg-stone-100 rounded-lg text-[10px] text-stone-600 leading-relaxed border border-stone-200">
-                                        <strong class="text-stone-800">FY 2024-25/25-26 Rules:</strong> Long Term Capital Gains (LTCG) on Equity mutual funds are taxed at <strong class="text-stone-800">12.5%</strong> on gains exceeding <strong class="text-stone-800">₹1.25 Lakh</strong> per financial year (holding > 12 months).
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- SIP to SWP Pension Bridge Toggle Section -->
-                            <div class="pt-1">
-                                <label class="flex items-center justify-between cursor-pointer" for="sipSwpBridgeToggle">
-                                    <span class="text-xxs font-bold text-stone-700 flex items-center">
-                                        Plan Retirement (SIP to SWP Pension Bridge) 
-                                        <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10"/>
-                                                <line x1="12" y1="16" x2="12" y2="12"/>
-                                                <line x1="12" y1="8" x2="12.01" y2="8"/>
-                                            </svg>
-                                            <span class="tooltip-text">Transition your accumulated SIP wealth smoothly into a monthly pension (SWP) to fund your retirement years securely.</span>
-                                        </span>
-                                    </span>
-                                    <div class="relative inline-flex items-center">
-                                        <input type="checkbox" id="sipSwpBridgeToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Plan Retirement (SIP to SWP Pension Bridge)">
-                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                                    </div>
-                                </label>
-                                <div id="sipSwpBridgeGroup" class="hidden mt-2 space-y-3">
-                                    <div class="space-y-3 border-t border-stone-200/50 pt-2">
-                                        <!-- Will be injected by app.js -->
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Populated dynamically via app.js -->
                         </div>
                         <div id="lumpsumSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
                         <div id="rdSection" class="space-y-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl hidden"></div>
@@ -591,13 +438,21 @@
                             <div>
                                 <label for="returnRateInput" class="block text-xxs font-bold text-stone-700 flex items-center mb-1" id="returnRateLabel">
                                     <span id="returnRateLabelText">Expected Return Rate (p.a. %)</span> 
+                                    <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <line x1="12" y1="16" x2="12" y2="12"/>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">The expected annualized rate of return you anticipate from your investment portfolio over the tenure.</span>
+                                    </span>
                                 </label>
                                 <div class="input-group flex items-center space-x-2">
                                     <input type="range" id="returnRateSlider" min="1" max="30" value="12" step="0.1" class="w-full range-slider flex-grow" aria-label="Expected Return Rate" style="--fill-percentage: 37.931%;">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" id="returnRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                        <button type="button" id="returnRateDecrement" class="stepper-button" aria-label="Decrease value">-</button>
                                         <input type="number" id="returnRateInput" class="manual-input" value="12" min="1" max="30" step="0.1" aria-label="Enter Expected Return Rate">
-                                        <button type="button" id="returnRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                        <button type="button" id="returnRateIncrement" class="stepper-button" aria-label="Increase value">+</button>
                                     </div>
                                 </div>
                                 <p id="returnRateError" class="input-error-message hidden" role="alert">Rate must be between 1.0% - 30.0%.</p>
@@ -607,13 +462,21 @@
                             <div>
                                 <label for="investmentPeriodInput" class="block text-xxs font-bold text-stone-700 flex items-center mb-1" id="investmentPeriodLabel">
                                     <span id="investmentPeriodLabelText">Investment Period (Years)</span> 
+                                    <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <line x1="12" y1="16" x2="12" y2="12"/>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">The number of years you plan to accumulate your investments or execute your systematic retirement withdrawals.</span>
+                                    </span>
                                 </label>
                                 <div class="input-group flex items-center space-x-2">
                                     <input type="range" id="investmentPeriodSlider" min="1" max="40" value="10" step="1" class="w-full range-slider flex-grow" aria-label="Investment Period" style="--fill-percentage: 23.0769%;">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" id="investmentPeriodDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                        <button type="button" id="investmentPeriodDecrement" class="stepper-button" aria-label="Decrease value">-</button>
                                         <input type="number" id="investmentPeriodInput" class="manual-input" value="10" min="1" max="40" step="1" aria-label="Enter Investment Period">
-                                        <button type="button" id="investmentPeriodIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                        <button type="button" id="investmentPeriodIncrement" class="stepper-button" aria-label="Increase value">+</button>
                                     </div>
                                 </div>
                                 <p id="investmentPeriodError" class="input-error-message hidden" role="alert">Period must be between 1 - 40 years.</p>
@@ -622,7 +485,7 @@
 
                         <!-- INFLATION TOGGLE SECTION -->
                         <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl">
-                            <label class="flex items-center justify-between cursor-pointer" for="inflationToggle">
+                            <div class="flex items-center justify-between">
                                 <span class="text-xxs font-bold text-stone-700 flex items-center">
                                     Adjust for Inflation 
                                     <span class="tooltip-icon relative inline-block cursor-pointer ml-1 select-none">
@@ -634,11 +497,11 @@
                                         <span class="tooltip-text">Adjust the final value based on expected average inflation to see true purchasing power.</span>
                                     </span>
                                 </span>
-                                <div class="relative inline-flex items-center">
+                                <label class="relative inline-flex items-center cursor-pointer" for="inflationToggle">
                                     <input type="checkbox" id="inflationToggle" class="sr-only peer" role="switch" aria-checked="false" aria-label="Adjust calculations for inflation">
-                                    <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                                </div>
-                            </label>
+                                    <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-stone-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-900"></div>
+                                </label>
+                            </div>
                             <div id="inflationInputGroup" class="mt-3 hidden">
                                 <!-- Inflation Rate (p.a. %) Slider -->
                                 <div>
@@ -648,9 +511,9 @@
                                     <div class="input-group flex items-center space-x-2">
                                         <input type="range" id="inflationRateSlider" min="0" max="15" value="5" step="0.1" class="w-full range-slider flex-grow" aria-label="Inflation Rate" style="--fill-percentage: 33.3333%;">
                                         <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                            <button type="button" id="inflationRateDecrement" class="stepper-button decrement" aria-label="Decrease value">-</button>
+                                            <button type="button" id="inflationRateDecrement" class="stepper-button" aria-label="Decrease value">-</button>
                                             <input type="number" id="inflationRateInput" class="manual-input" value="5" min="0" max="15" step="0.1" aria-label="Enter Inflation Rate">
-                                            <button type="button" id="inflationRateIncrement" class="stepper-button increment" aria-label="Increase value">+</button>
+                                            <button type="button" id="inflationRateIncrement" class="stepper-button" aria-label="Increase value">+</button>
                                         </div>
                                     </div>
                                     <p id="inflationRateError" class="input-error-message hidden" role="alert">Rate must be between 0.0% - 15.0%.</p>
@@ -659,9 +522,7 @@
                         </div>
 
                         <!-- REAL-TIME DYNAMIC VALIDATION WARNINGS -->
-                        <div id="smartFinancialValidation" class="space-y-1.5 mt-2 hidden print-hide transition-all duration-300">
-                            <!-- Populated Dynamically with SEBI-style limits -->
-                        </div>
+                        <div id="smartFinancialValidation" class="space-y-1.5 mt-2 hidden print-hide transition-all duration-300"></div>
 
                     </div>
 
@@ -674,7 +535,7 @@
 
                         <!-- DYNAMIC SUMMARY CONTAINERS INJECTED HERE -->
                         <div id="dynamicSummariesContainer" class="space-y-3">
-                            <!-- Will be injected via app.js -->
+                            <!-- Populated via app.js -->
                         </div>
 
                         <!-- Real-Time Smart Insight Banner -->
@@ -692,12 +553,12 @@
                 
                 <!-- Dynamic Actions Panel -->
                 <div class="flex flex-wrap justify-center gap-2 mt-4 mb-2 print-hide">
-                    <button id="toggleGrowthTableBtn" class="preset-btn px-4 py-1.5 bg-stone-900 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out hover:bg-stone-800 active:scale-[0.95] focus:outline-none" aria-label="Toggle Growth Table display" title="Click to show or hide the detailed year-by-year calculation grid">Show Yearly Growth</button>
-                    <button id="printReportBtn" class="preset-btn px-4 py-1.5 bg-red-600 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out hover:bg-red-700 active:scale-[0.95] focus:outline-none flex items-center" aria-label="Print or Export PDF" title="Download or print a beautiful, printer-friendly PDF copy of your calculation">
+                    <button id="toggleGrowthTableBtn" class="px-4 py-1.5 bg-stone-900 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out hover:bg-stone-800 active:scale-[0.95] focus:outline-none" aria-label="Toggle Growth Table display" title="Click to show or hide the detailed year-by-year calculation grid">Show Yearly Growth</button>
+                    <button id="printReportBtn" class="px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out active:scale-[0.95] focus:outline-none flex items-center" aria-label="Print or Export PDF" title="Download or print a beautiful, printer-friendly PDF copy of your calculation">
                         <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         Print/PDF Report
                     </button>
-                    <button id="exportCsvBtn" class="preset-btn px-4 py-1.5 bg-emerald-700 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out hover:bg-emerald-800 active:scale-[0.95] focus:outline-none flex items-center" aria-label="Export to Excel/CSV" title="Export this calculation's year-by-year breakdown straight into Microsoft Excel / CSV">
+                    <button id="exportCsvBtn" class="px-4 py-1.5 bg-emerald-700 text-white rounded-xl text-[11px] font-semibold transition-all duration-200 ease-in-out hover:bg-emerald-800 active:scale-[0.95] focus:outline-none flex items-center" aria-label="Export to Excel/CSV" title="Export this calculation's year-by-year breakdown straight into Microsoft Excel / CSV">
                         <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17h18a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         Export CSV
                     </button>
@@ -732,10 +593,8 @@
                     </a>
                 </div>
 
-                <!-- Sleek mariyu Integrated Indian Benchmarks Vibhagam -->
+                <!-- SEBI benchmarks -->
                 <div class="bg-stone-50 border border-stone-200 rounded-xl p-3 text-[10px] leading-relaxed text-stone-600 mt-3 space-y-2 print-hide text-center">
-                    
-                    <!-- Subhramaina Reference Bar -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-1.5 border-b border-stone-200/50 pb-2.5 text-center">
                         <div class="text-center"><strong class="text-stone-800">Nifty 50 CAGR:</strong> <span class="text-emerald-800 font-bold">12% - 14%</span></div>
                         <div class="text-center"><strong class="text-stone-700">FD Rate:</strong> <span class="text-blue-800 font-bold">6% - 7.5% p.a.</span></div>
@@ -756,7 +615,6 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- Visually Premium, Triple-Card Responsive Grid exactly matching the design token properties of PPF/EMI calculator -->
         <div class="max-w-[1080px] mx-auto mb-6 print-hide px-1 mt-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
                 <!-- Card 1: SIP vs FD vs RD -->
@@ -792,7 +650,7 @@
                             <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Calculate PPF maturity, interest & loan blocks.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                    <div class="text-blue-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
                         <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
@@ -800,25 +658,25 @@
                 <!-- Card 3: EMI Calculator -->
                 <a href="https://toolblaster.com/finance/emi-calculator" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                             </svg>
                         </div>
                         <div class="text-left min-w-0">
-                            <span class="text-[8px] font-black text-purple-600 uppercase tracking-widest block leading-none mb-0.5">Loan Repayment</span>
+                            <span class="text-[8px] font-black text-blue-600 uppercase tracking-widest block leading-none mb-0.5">Loan Repayment</span>
                             <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">EMI Calculator</h3>
                             <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Calculate Home, Car, Bike & Mobile Loan EMIs.</p>
                         </div>
                     </div>
-                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                    <div class="text-blue-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
                         <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
             </div>
         </div>
 
-        <!-- SEO Article (Safely hidden in print view via print-hide) -->
+        <!-- SEO Article -->
         <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
             <div class="space-y-6 text-stone-800">
                 
@@ -837,7 +695,6 @@
 
                 <!-- Section 2: How to use -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <!-- Updated H2 to exact 16px to unify across SEO articles -->
                     <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-square-poll-horizontal"></i></span> How to Use the Investment Planner
                     </h2>
@@ -895,7 +752,6 @@
 
                 <!-- Section 3: Formulas and Financial Theory -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <!-- Updated H2 to exact 16px to unify across SEO articles -->
                     <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics of PPF
                     </h2>
@@ -958,7 +814,6 @@
 
                 <!-- Section 4: Real-world examples and case studies -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <!-- Updated H2 to exact 16px to unify across SEO articles -->
                     <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
                     </h2>
@@ -985,7 +840,7 @@
                         <!-- Example 2 -->
                         <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
                             <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-blue-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
+                                <span class="text-red-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
                             </h3>
                             <p class="text-stone-700 leading-relaxed mb-2 font-medium">
                                 A parent estimates they will need <strong>₹50 Lacs</strong> in 10 years for their child's professional degree. They select the <strong>Goal Planner</strong> mode assuming a moderate mutual fund return rate of <strong>11% p.a.</strong>
@@ -1014,7 +869,6 @@
 
                 <!-- FAQs Section -->
                 <section id="faqs" class="bg-transparent">
-                    <!-- Updated H2 to exact 16px to unify across SEO articles -->
                     <h2 class="text-[16px] font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions
                     </h2>
