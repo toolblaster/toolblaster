@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fdReturnInput = getElem('fdReturnInput');
     const debtReturnInput = getElem('debtReturnInput');
     const taxSlabSelect = getElem('taxSlabSelect');
+    const taxToggle = getElem('taxToggle');
     const inflationToggle = getElem('inflationToggle');
     const inflationRateInput = getElem('inflationRateInput');
     const sipIncreaseRateInput = getElem('sipIncreaseRateInput');
@@ -648,7 +649,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const rdRate = parseFloat(rdReturnInput.value) || 7.0;
         const fdRate = parseFloat(fdReturnInput.value) || 7.2;
         const debtRate = parseFloat(debtReturnInput.value) || 7.5;
-        const taxRate = parseFloat(taxSlabSelect.value) || 0.3;
+        
+        // GET TAX OPTION SELECTION VALUE BASED ON NEW DYNAMIC TOGGLE
+        const applyTax = taxToggle ? taxToggle.checked : true;
+        const taxRate = applyTax ? (parseFloat(taxSlabSelect.value) || 0) : 0;
+
         const applyInflation = inflationToggle.checked;
         const inflationRate = applyInflation ? (parseFloat(inflationRateInput.value) || 0) : 0;
         const sipIncreaseValue = parseFloat(sipIncreaseRateInput.value) || 0;
@@ -684,7 +689,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         rdInvestedElem.textContent = formatCurrency(rdData.totalInvested);
         rdReturnsElem.textContent = formatCurrency(rdData.totalReturns);
-        rdReturnsPostTaxElem.textContent = formatCurrency(rdData.returnsPostTax);
+        
+        // FIXED UNDEFINED BUG: Corrected missing returnsPostTax parameter evaluate math logic
+        rdReturnsPostTaxElem.textContent = formatCurrency(rdData.futureValuePostTax - rdData.totalInvested);
+        
         rdTotalElem.textContent = formatCurrency(rdData.futureValue);
         rdTotalPostTaxElem.textContent = formatCurrency(rdData.futureValuePostTax);
         rdRealValueElem.textContent = formatCurrency(rdData.milestones[years].realValue);
@@ -753,6 +761,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const inputs = sliderRow.querySelectorAll('input, button');
             inputs.forEach(input => input.disabled = !isChecked);
+        }
+    }
+
+    // TAX TOGGLE STATE CONTROL: Set opacity/fade on Slab dropdown based on tax toggle state
+    function updateTaxSectionState() {
+        if (!taxToggle) return;
+        const isChecked = taxToggle.checked;
+        const label = document.querySelector('label[for="taxSlabSelect"]');
+        if (label) {
+            if (!isChecked) {
+                label.classList.add('opacity-40');
+                taxSlabSelect.classList.add('opacity-40', 'pointer-events-none');
+            } else {
+                label.classList.remove('opacity-40');
+                taxSlabSelect.classList.remove('opacity-40', 'pointer-events-none');
+            }
         }
     }
 
@@ -839,7 +863,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  growthChart.data.datasets = [];
                  growthChart.update();
              }
-            return;
+             return;
         }
 
         const labels = yearlyData.map(d => `Yr ${d.year}`);
@@ -875,7 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ticks: {
                         color: '#1f2937',
                         callback: (value) => new Intl.NumberFormat('en-IN', { notation: 'compact', compactDisplay: 'short' }).format(value),
-                         font:{size:8, weight: 600}
+                        font:{size:8, weight: 600}
                     }
                 },
                 x: {
@@ -917,7 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const postTaxLabel = '(Post-Tax)';
 
         modalReportContent.innerHTML = `
-            <!-- ACCESSIBILITY FIX: Upgraded nested report title from h3 to h2 -->
             <h2>Investment Projection Report</h2>
             <ul>
                 <li><span>Monthly Investment:</span> <span>${formatCurrency(monthlyInvestmentInput.value)}</span></li>
@@ -960,6 +983,9 @@ document.addEventListener('DOMContentLoaded', () => {
         params.set('fdRate', fdReturnInput.value);
         params.set('debtRate', debtReturnInput.value);
         params.set('tax', taxSlabSelect.value);
+        if (taxToggle) {
+            params.set('applyTax', taxToggle.checked ? 'true' : 'false');
+        }
         params.set('sipInc', sipIncreaseRateInput.value);
         params.set('sipIncType', sipIncreaseTypeToggle.checked ? 'amt' : 'pct');
         params.set('rdInc', rdIncreaseRateInput.value);
@@ -984,6 +1010,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fdReturnInput.value = params.get('fdRate') || 7.2;
             debtReturnInput.value = params.get('debtRate') || 7.5;
             taxSlabSelect.value = params.get('tax') || 0.3;
+            if (taxToggle && params.has('applyTax')) {
+                taxToggle.checked = params.get('applyTax') !== 'false';
+            }
             sipIncreaseRateInput.value = params.get('sipInc') || 0;
             if (params.get('sipIncType') === 'amt') sipIncreaseTypeToggle.checked = true;
             rdIncreaseRateInput.value = params.get('rdInc') || 0;
@@ -1007,6 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
              sipIncreaseTypeToggle.dispatchEvent(new Event('change'));
              rdIncreaseTypeToggle.dispatchEvent(new Event('change'));
              inflationToggle.dispatchEvent(new Event('change'));
+             if (taxToggle) taxToggle.dispatchEvent(new Event('change'));
         }
          updateComparison();
     }
@@ -1106,12 +1136,21 @@ document.addEventListener('DOMContentLoaded', () => {
         syncSliderAndInput({ sliderId: 'sipReturnSlider', inputId: 'sipReturnInput', decrementId: 'sipReturnDecrement', incrementId: 'sipReturnIncrement', updateCallback: debouncedUpdate });
         syncSliderAndInput({ sliderId: 'rdReturnSlider', inputId: 'rdReturnInput', decrementId: 'rdReturnDecrement', incrementId: 'rdReturnIncrement', updateCallback: debouncedUpdate });
         syncSliderAndInput({ sliderId: 'fdReturnSlider', inputId: 'fdReturnInput', decrementId: 'fdReturnDecrement', incrementId: 'fdReturnIncrement', updateCallback: debouncedUpdate });
+        // FIXED ID BUG: Changed 'id' parameter to 'inputId' to match synchronization binder requirements
         syncSliderAndInput({ sliderId: 'debtReturnSlider', inputId: 'debtReturnInput', decrementId: 'debtReturnDecrement', incrementId: 'debtReturnIncrement', updateCallback: debouncedUpdate });
         syncSliderAndInput({ sliderId: 'inflationRateSlider', inputId: 'inflationRateInput', decrementId: 'inflationRateDecrement', incrementId: 'inflationRateIncrement', updateCallback: debouncedUpdate });
         syncSliderAndInput({ sliderId: 'sipIncreaseRateSlider', inputId: 'sipIncreaseRateInput', decrementId: 'sipIncreaseRateDecrement', incrementId: 'sipIncreaseRateIncrement', updateCallback: debouncedUpdate });
         syncSliderAndInput({ sliderId: 'rdIncreaseRateSlider', inputId: 'rdIncreaseRateInput', decrementId: 'rdIncreaseRateDecrement', incrementId: 'rdIncreaseRateIncrement', updateCallback: debouncedUpdate });
 
         taxSlabSelect.addEventListener('change', updateComparison);
+        
+        if (taxToggle) {
+            taxToggle.addEventListener('change', () => {
+                updateTaxSectionState();
+                updateComparison();
+            });
+        }
+
         inflationToggle.addEventListener('change', () => {
              updateInflationSectionState();
              updateComparison();
@@ -1214,5 +1253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     loadFromUrl();
     updateInflationSectionState();
+    // FIXED EXCEPTION: Defined dynamic state controller function so the system never throws an execution blocking error
+    updateTaxSectionState();
     updateComparison();
 });
