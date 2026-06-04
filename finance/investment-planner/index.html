@@ -28,7 +28,7 @@
 
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
@@ -753,115 +753,183 @@
                 <!-- Section 3: Formulas and Financial Theory -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics of PPF
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Mathematical Compounding & Formulas
                     </h2>
                     <p class="text-sm leading-relaxed mb-4 text-stone-800 font-medium">
-                        To maintain strict financial industry formulas for discrete compound intervals:
+                        Standardized wealth forecasting formulas used within modern financial planning modules:
                     </p>
 
                     <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
                         
                         <!-- Lumpsum formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Lumpsum (Compound Interest) Formula</h3>
-                            <p class="mb-2">For a one-time capital investment compounding annually:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $A = P \times (1 + r)^t$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. Lumpsum (One-Time Compound Interest) Formula</h3>
+                            <p class="mb-3 text-stone-700">For a single bulk-sum capital investment compounding annually:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none">
+                                    <span class="font-black text-red-700">A</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span>(1 + r)<sup>t</sup></span>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600">
-                                Where $A$ is the final maturity value, $P$ is the principal invested, $r$ is the annual rate of interest, and $t$ is the holding period in years.
+                            
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">A</strong> is the final wealth maturity amount, <strong class="text-stone-800">P</strong> represents your initial lumpsum investment principal, <strong class="text-stone-800">r</strong> is the annualized expected return rate, and <strong class="text-stone-800">t</strong> is the cumulative tenure in years.
                             </p>
                         </div>
 
                         <!-- SIP Formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">SIP (Future Value of Annuity) Formula</h3>
-                            <p class="mb-2">When investments are made regularly at periodic intervals (e.g., monthly):</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $M = P \times \frac{(1 + i)^n - 1}{i} \times (1 + i)$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">2. SIP (Systematic Future Value of Annuity) Formula</h3>
+                            <p class="mb-3 text-stone-700">For recurring monthly contributions utilizing high frequency compound yields:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner overflow-x-auto custom-scrollbar">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center whitespace-nowrap">
+                                    <span class="font-black text-red-700">M</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5">
+                                        <span class="border-b-2 border-stone-800 px-3 pb-0.5 text-center font-bold">
+                                            (1 + i)<sup>n</sup> - 1
+                                        </span>
+                                        <span class="pt-0.5 text-center font-bold">
+                                            i
+                                        </span>
+                                    </div>
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span>(1 + i)</span>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600">
-                                Where $M$ is the cumulative maturity amount, $P$ is the monthly contribution, $i$ is the periodic rate of return ($i = r / 12$), and $n$ is the total number of monthly payments ($n = t \times 12$).
+                            
+                            <!-- Fixed Inline Fraction rendering error here -->
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">M</strong> represents your total accrued systematic maturity sum, <strong class="text-stone-800">P</strong> is the fixed monthly contribution amount, <strong class="text-stone-800">i</strong> is the periodic monthly returns rate <span class="inline-flex items-center align-middle font-serif mx-1"><span class="italic font-bold text-stone-800">i</span><span class="mx-1 text-[10px] font-bold text-stone-600">=</span><span class="inline-flex flex-col items-center justify-center text-[9px] leading-none"><span class="border-b border-stone-700 pb-0.5 font-bold text-stone-800">r</span><span class="font-bold text-stone-800">12</span></span></span>, and <strong class="text-stone-800">n</strong> indicates the absolute number of installments over the duration (<span class="font-serif italic font-bold text-stone-800">n</span> = <span class="font-serif italic font-bold text-stone-800">t</span> × 12).
                             </p>
                         </div>
 
                         <!-- Fixed Deposit Formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Fixed Deposit (FD) Quarterly Compounding Formula</h3>
-                            <p class="mb-2">Indian banking fixed deposits typically compound interest on a quarterly basis:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $M = P \times \left(1 + \frac{r}{4}\right)^{4 \times t}$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">3. Fixed Deposit (FD) Quarterly Compound Formula</h3>
+                            <p class="mb-3 text-stone-700">Commercial fixed income bank deposits in India compound interests on quarterly intervals:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center">
+                                    <span class="font-black text-red-700">M</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span class="text-lg sm:text-2xl font-light">(</span> 
+                                    <span class="mx-1">1 +</span> 
+                                    <div class="inline-flex flex-col items-center mx-1">
+                                        <span class="border-b border-stone-800 px-2 text-center font-bold">r</span>
+                                        <span class="text-center font-bold">4</span>
+                                    </div>
+                                    <span class="text-lg sm:text-2xl font-light">)</span> 
+                                    <sup class="font-bold ml-0.5">4 × t</sup>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600">
-                                Where compounding frequency is locked to $4$ times a year. For Recurring Deposits (RD), the compounding is also executed quarterly using the composite recurring annuity method.
+                            
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where interest components are executed <strong class="text-stone-800">4 times</strong> per year. Recurring Deposits (RD) calculate quarterly compound returns based on a staggered composite series of quarterly investments.
                             </p>
                         </div>
 
                         <!-- Inflation Adjustment Formula -->
                         <div>
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Inflation Adjustment (Real Purchasing Power) Formula</h3>
-                            <p class="mb-2">To measure the true future value of your money against cost inflation index (CII) erosion:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">4. Inflation Purchasing Power Adjustment Formula</h3>
+                            <p class="mb-3 text-stone-700">Calculates true purchasing power by eliminating the erosive effects of consumer price inflation:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center">
+                                    <span class="font-black text-red-700">Real Value</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5">
+                                        <span class="border-b-2 border-stone-800 px-3 pb-0.5 text-center font-bold">Nominal Value</span>
+                                        <span class="pt-0.5 text-center font-bold">(1 + inf)<sup>t</sup></span>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600">
-                                Where $\text{inf}$ is the expected average annual rate of inflation (historically 5% to 6% in India) and $t$ is the holding period in years.
+                            
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">inf</strong> is the anticipated average annual inflation index (generally hovering around 4.5% to 6% in Indian market scenarios) and <strong class="text-stone-800">t</strong> is the dynamic timeframe in years.
                             </p>
                         </div>
 
                     </div>
                 </section>
 
-                <!-- Section 4: Real-world examples and case studies -->
-                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <!-- Section 4: Real-world examples and case studies (Mobile Optimized Grid & Layout) -->
+                <section class="bg-white/70 backdrop-blur-xl p-5 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-[16px] font-black text-stone-900 mb-5 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
                     </h2>
-                    <p class="text-sm leading-relaxed mb-4 text-stone-800 font-medium">
-                        Review these realistic, practical examples to align your investment strategies with real Indian market trends:
+                    <p class="text-xs sm:text-sm leading-relaxed mb-5 text-stone-800 font-medium">
+                        Explore these highly optimized, practical instances to understand how inflation adjustments and contribution scaling function in the real market:
                     </p>
 
-                    <div class="space-y-4">
-                        <!-- Example 1 -->
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-emerald-700">💼 Case Study 1:</span> Retiring with ₹1.5 Crore via Step-up SIP
-                            </h3>
-                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                    <div class="space-y-5">
+                        <!-- Case Study 1 -->
+                        <div class="bg-stone-50/70 p-4 sm:p-5 rounded-2xl border border-stone-200/80">
+                            <!-- Responsive Flex Header for Case Studies -->
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-[10px]">1</span>
+                                    Retiring with ₹1.5 Crore via Step-up SIP
+                                </h3>
+                                <span class="bg-emerald-50 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Step-up Strategy</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
                                 A 25-year-old financial analyst starts an equity mutual fund SIP of <strong>₹10,000 per month</strong> at an expected CAGR of <strong>12%</strong>.
                             </p>
-                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
-                                <li><strong class="text-stone-800">Without Step-up:</strong> In 25 years, the total principal invested is ₹30 Lacs, and the accumulated corpus is <strong>₹1.89 Crore</strong>.</li>
-                                <li><strong class="text-stone-800">With 10% Annual Step-up:</strong> By stepping up the monthly contribution by 10% each year as their salary grows, the final corpus balloons to <strong>₹4.48 Crore</strong>!</li>
-                                <li><strong class="text-stone-800">Real Value (5% Inflation adjusted):</strong> The purchasing power of that ₹4.48 Crore in today's money is worth approximately <strong>₹1.32 Crore</strong>.</li>
+                            <!-- Fixed: Bullet point alignment on mobile -->
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Without Step-up:</strong> In 25 years, the total principal invested is ₹30 Lacs, and the absolute accumulated corpus reaches <strong>₹1.89 Crore</strong>.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">With 10% Annual Step-up:</strong> By scaling the monthly investment amount by 10% each year as active income rises, the cumulative capital grows to <strong>₹4.48 Crore</strong>!</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Real Value (5% Inflation adjusted):</strong> The actual buying capacity of that ₹4.48 Crore in today's economy is equivalent to <strong>₹1.32 Crore</strong>.</li>
                             </ul>
                         </div>
 
-                        <!-- Example 2 -->
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-red-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
-                            </h3>
-                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                        <!-- Case Study 2 -->
+                        <div class="bg-stone-50/70 p-4 sm:p-5 rounded-2xl border border-stone-200/80">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-red-100 text-red-800 font-bold text-[10px]">2</span>
+                                    Funding Child's Higher Education Abroad
+                                </h3>
+                                <span class="bg-red-50 text-red-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Goal Target</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
                                 A parent estimates they will need <strong>₹50 Lacs</strong> in 10 years for their child's professional degree. They select the <strong>Goal Planner</strong> mode assuming a moderate mutual fund return rate of <strong>11% p.a.</strong>
                             </p>
-                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
-                                <li><strong class="text-stone-800">Standard Goal calculation:</strong> They must invest <strong>₹23,086 per month</strong> for 10 years to reach ₹50 Lacs.</li>
-                                <li><strong class="text-stone-800">Adjusted for Inflation (5%):</strong> In 10 years, educational costs will rise. The real target becomes <strong>₹81.4 Lacs</strong>. To reach this adjusted goal, they need to save <strong>₹37,597 per month</strong>.</li>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Standard Goal calculation:</strong> They must invest <strong>₹23,086 per month</strong> for 10 years to reach the ₹50 Lacs milestone.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Adjusted for Inflation (5%):</strong> In 10 years, educational costs will rise. The real target becomes <strong>₹81.4 Lacs</strong>. To reach this adjusted goal, they need to save <strong>₹37,597 per month</strong>.</li>
                             </ul>
                         </div>
 
-                        <!-- Example 3 -->
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-amber-700">🏠 Case Study 3:</span> Safe Systematic Withdrawal (SWP) in Retirement
-                            </h3>
-                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                        <!-- Case Study 3 -->
+                        <div class="bg-stone-50/70 p-4 sm:p-5 rounded-2xl border border-stone-200/80">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-amber-100 text-amber-800 font-bold text-[10px]">3</span>
+                                    Safe Systematic Withdrawal (SWP) in Retirement
+                                </h3>
+                                <span class="bg-amber-50 text-amber-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Pension Bridge</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
                                 A senior citizen retires with a debt mutual fund/arbitrage corpus of <strong>₹50 Lacs</strong>. They want to set up a monthly SWP pension of <strong>₹30,000</strong> at a conservative expected return of <strong>7.5% p.a.</strong>
                             </p>
-                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
-                                <li><strong class="text-stone-800">Analysis:</strong> Their annual withdrawal rate is 7.2% of the principal sum.</li>
-                                <li><strong class="text-stone-800">Maturity Status:</strong> Since the withdrawal speed exceeds the safe withdrawal rate (SWR), their remaining principal balance will slowly shrink. After 20 years, their remaining corpus will be approximately <strong>₹35.2 Lacs</strong>, keeping their pension active but moderately eroding initial capital.</li>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Analysis:</strong> Their annual withdrawal rate represents 7.2% of the total principal sum.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Maturity Status:</strong> Since the withdrawal speed exceeds the safe withdrawal rate (SWR), their remaining principal balance will slowly shrink. After 20 years, their remaining corpus will be approximately <strong>₹35.2 Lacs</strong>, keeping their pension active but moderately eroding initial capital.</li>
                             </ul>
                         </div>
                     </div>
