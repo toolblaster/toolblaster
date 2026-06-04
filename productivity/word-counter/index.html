@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags (Title Exactly 60 Characters, Desc < 160 Characters) -->
-    <title>Word Counter Online & Text Analyzer | Free Character Count.</title>
+    <title>Word Counter Online & Text Analyzer | Free Character Counter</title>
     <meta name="description" content="Free online word counter and text analyzer. Count words, characters, reading time, and keyword density instantly. Private, works offline with auto-save.">
     <link rel="canonical" href="https://toolblaster.com/productivity/word-counter/">
     <meta name="robots" content="index, follow">
@@ -42,7 +42,7 @@
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
     <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
     <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
     <link class="rounded-full" rel="manifest" href="../../js/favicon/site.webmanifest">
@@ -557,40 +557,56 @@
         </div>
 
         <!-- Sleek and Minimal Ecosystem Internal Link Section -->
-        <!-- CHANGED: Constrained width from max-w-[1080px] to max-w-3xl to match bottom SEO section -->
         <div class="max-w-3xl mx-auto mb-6 print-hide px-4 sm:px-1 mt-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <!-- Card 1: DECIDE (Daily Focus) -->
-                <a href="../decide/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-indigo-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <i class="fa-solid fa-bullseye text-lg"></i>
+                <a href="../decide/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-indigo-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-indigo-100">
+                            <i class="fa-solid fa-bullseye text-xs"></i>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-indigo-600 uppercase tracking-widest block">Daily Priority</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Daily Focus (DECIDE)</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Set your top 3 daily priorities in under 60 seconds.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-indigo-600 uppercase tracking-widest block">Daily Priority</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Daily Focus (DECIDE)</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Set top 3 daily priorities.</p>
                         </div>
                     </div>
-                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
-                        Decide <span class="text-sm">&rarr;</span>
+                    <div class="text-indigo-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
 
                 <!-- Card 2: Breathing Pacer -->
-                <a href="../breathing-pacer/" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-cyan-500 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group gap-4 cursor-pointer">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
-                            <i class="fa-solid fa-wind text-lg"></i>
+                <a href="../breathing-pacer/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-cyan-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-cyan-100">
+                            <i class="fa-solid fa-wind text-xs"></i>
                         </div>
-                        <div class="text-left">
-                            <span class="text-[9px] font-black text-cyan-600 uppercase tracking-widest block">Mindful Breath</span>
-                            <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0">Breathing Pacer</h3>
-                            <p class="text-[10px] sm:text-[11px] font-medium text-stone-600 mt-0.5 leading-tight">Regain calm and lower stress with visual box breathing.</p>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-cyan-600 uppercase tracking-widest block">Mindful Breath</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Breathing Pacer</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Regain calm with box breathing.</p>
                         </div>
                     </div>
-                    <div class="text-stone-950 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform self-end sm:self-center whitespace-nowrap">
-                        Pace <span class="text-sm">&rarr;</span>
+                    <div class="text-cyan-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Study Timer -->
+                <a href="../pomodoro-study-timer/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-orange-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-orange-100">
+                            <i class="fa-solid fa-stopwatch text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-orange-600 uppercase tracking-widest block">Deep Focus</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Study Timer</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Time deep work and breaks.</p>
+                        </div>
+                    </div>
+                    <div class="text-orange-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
             </div>
@@ -682,7 +698,7 @@
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. Does it accurately count Chinese or Japanese characters?</h3>
-                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Unlike standard counters that rely on spaces between words, our tool uses modern natural language processing (Intl.Segmenter) to accurately determine word boundaries in CJK (Chinese, Japanese, Korean) languages.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">Yes. Unlike basic counters that rely on spaces between words, our tool uses modern natural language processing (Intl.Segmenter) to accurately determine word boundaries in CJK (Chinese, Japanese, Korean) languages.</p>
                         </div>
                         <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. How does the Find & Replace work?</h3>
