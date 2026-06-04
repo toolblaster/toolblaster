@@ -1195,7 +1195,7 @@
                     </div>
                 </section>
 
-                <!-- Section 3: Mathematical Formulas -->
+                <!-- Section 3: Mathematical Formulas (Completely aligned and redesigned via high-contrast inline-flex CSS) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics of PPF
@@ -1207,26 +1207,67 @@
                     <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
                         
                         <!-- Compound formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">1. Annual Compounding Formula</h3>
-                            <p class="mb-2">For a one-time capital investment compounding annually:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$F = P \times \frac{(1 + r)^n - 1}{r} \times (1 + r)$$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. Annual Compounding Formula (Future Value of Annuity)</h3>
+                            <p class="mb-3 text-stone-700">When regular yearly contributions are made at the start of each fiscal period:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner overflow-x-auto custom-scrollbar">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center whitespace-nowrap">
+                                    <span class="font-black text-red-700">F</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5">
+                                        <span class="border-b-2 border-stone-800 px-3 pb-0.5 text-center font-bold">
+                                            (1 + r)<sup>n</sup> - 1
+                                        </span>
+                                        <span class="pt-0.5 text-center font-bold">
+                                            r
+                                        </span>
+                                    </div>
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span>(1 + r)</span>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $F$ is the closing maturity balance, $P$ is the annual deposit amount, $r$ is the declared annual rate of interest, and $n$ is the investment period in years.
+                            
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">F</strong> represents the final accumulated maturity balance, <strong class="text-stone-800">P</strong> is your annual deposit principal amount, <strong class="text-stone-800">r</strong> is the declared annual rate of interest, and <strong class="text-stone-800">n</strong> is the cumulative holding period in years.
                             </p>
                         </div>
 
                         <!-- Timing Rules -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">2. The "April 5th" Monthly Interest Rule</h3>
-                            <p class="mb-2">By law, interest is calculated on the lowest balance in your account between the 5th and the last day of each month. If you deposit your annual lump sum after April 5th:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$\text{Accrued Interest} = (\text{Opening Balance} \times r) + \left(P \times r \times \frac{11}{12}\right)$$
+                        <div class="pb-2">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">2. The "April 5th" Monthly Interest Rule</h3>
+                            <p class="mb-3 text-stone-700">By regulatory guidelines, PPF interest accrues on the lowest balance between the 5th and the end of each month. If you make your annual lump sum deposit after April 5th:</p>
+                            
+                            <!-- Beautiful CSS Formula Display Box (Optimized with standard mathematical variables + legend grid for mobile responsive screens) -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
+                                    <span class="font-black text-red-700">I</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <span>(B × r)</span>
+                                    <span class="mx-2 font-bold">+</span>
+                                    <span class="text-lg sm:text-2xl font-light">(</span>
+                                    <span class="mx-1">P × r ×</span>
+                                    <div class="inline-flex flex-col items-center mx-1 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-700 pb-0.5 font-bold text-stone-800 text-[10px] sm:text-xs">11</span>
+                                        <span class="font-bold text-stone-800 text-[10px] sm:text-xs pt-0.5">12</span>
+                                    </div>
+                                    <span class="text-lg sm:text-2xl font-light">)</span>
+                                </div>
+
+                                <!-- Highly legible, mobile-aligned Legend Grid -->
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-sm mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">I</strong><span>= Accrued Interest</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">B</strong><span>= Opening Balance</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">P</strong><span>= Yearly Deposit Principal</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">r</strong><span>= Interest Rate (% p.a.)</span></div>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Depositing after April 5th means you miss out on interest accrual for the first month (April), which can significantly reduce compound efficiency over a 15-year tenure.
+                            
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Depositing after April 5th means you completely lose interest returns for the first month (April), which noticeably scales down the compounding yield efficiency over a long-term 15-year horizon.
                             </p>
                         </div>
                     </div>
