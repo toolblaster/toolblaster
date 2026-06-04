@@ -207,6 +207,7 @@
             border: 1px solid #cbd5e1;
             background-color: #ffffff;
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
         }
         .loan-tab-btn.active {
             background-color: #1e3a8a;
@@ -788,7 +789,7 @@
                                         <svg class="text-sky-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                             <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
                                         </svg>
-                                        <span class="tooltip-text">Simulate extra payments towards principal to drop tenure.</span>
+                                        <span class="tooltip-text">Simulates extra payments towards principal to drop tenure.</span>
                                     </span>
                                 </span>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -906,11 +907,14 @@
 
                         <!-- Graph Section -->
                         <div class="bg-white p-3 rounded-2xl border border-gray-250 shadow-sm print-hide">
-                            <div class="flex justify-between items-center mb-2 border-b pb-1">
-                                <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Visual Repayment Break-up</span>
-                                <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
-                                    <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
-                                    <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Yearly Curve</button>
+                            <div class="flex justify-between items-center mb-2.5 border-b pb-1.5 gap-2">
+                                <!-- Fixed title: Sizing and tracking adapted to never wrap onto the next line on tiny devices -->
+                                <span class="text-[10px] sm:text-xxs font-extrabold text-gray-900 uppercase tracking-tight sm:tracking-wider truncate">Repayment Break-up</span>
+                                
+                                <!-- Redesigned Switch Toggle: Perfect alignments with smooth transitions and tight custom touch area -->
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] sm:text-[10px] font-bold border border-gray-200/60 flex-shrink-0" role="group" aria-label="Chart Toggle">
+                                    <button type="button" id="chartToggleShare" class="px-2.5 py-1 rounded-md bg-blue-900 text-white shadow-sm transition-all duration-150 ease-in-out">Share Split</button>
+                                    <button type="button" id="chartToggleSchedule" class="px-2.5 py-1 rounded-md text-gray-700 hover:text-gray-900 ml-0.5 transition-all duration-150 ease-in-out">Yearly Curve</button>
                                 </div>
                             </div>
                             <div id="chartDoughnutContainer" class="h-36 sm:h-44 flex items-center justify-center">
@@ -930,7 +934,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
                             </svg>
-                            View Structured Amortization Repayment Schedule
+                            View Amortization Repayment Schedule
                         </span>
                         <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-800">▼</span>
                     </button>
@@ -1101,34 +1105,79 @@
                     </div>
                 </section>
 
-                <!-- Section 3: Mathematical Formulas (Symmetric LaTeX Enclosures) -->
+                <!-- Section 3: Mathematical Formulas (Symmetric LaTeX Enclosures Replaced with Premium CSS Flexbox Equations) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Amortization Mathematics: How EMIs are Calculated
                     </h2>
                     <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
-                        Reducing balance interest models calculate repayments continuously on outstanding balances. The standard formula for Equated Monthly Installment (EMI) is as follows:
+                        Reducing balance interest models calculate repayments continuously on outstanding balances. The standard formula for Equated Monthly Installment (EMI) is structured below:
                     </p>
 
                     <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">1. Standard EMI Amortization Formula</h3>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$E = P \times \frac{r \times (1 + r)^n}{(1 + r)^n - 1}$$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. Standard EMI Amortization Formula</h3>
+                            
+                            <!-- Premium CSS-Flexbox Mathematical Equation Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
+                                    <span class="font-black text-red-700">E</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-2 font-bold">×</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-800 px-3 pb-1.5 font-bold text-stone-800">
+                                            r × (1 + r)<sup>n</sup>
+                                        </span>
+                                        <span class="pt-1.5 font-bold text-stone-800">
+                                            (1 + r)<sup>n</sup> - 1
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Responsive High-Contrast Legend Grid -->
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-sm mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">E</strong><span>= Monthly Loan EMI</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">P</strong><span>= Borrowed Principal</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">r</strong><span>= Monthly Interest Rate</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">n</strong><span>= Total Tenure (Months)</span></div>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $E$ is the calculated Equated Monthly Installment, $P$ is the base principal capital borrowed (plus any ancillary processing costs), $r$ is the monthly interest rate calculated as $r = \frac{\text{Annual Interest Rate}}{12 \times 100}$, and $n$ represents the total repayment tenure in months ($T \times 12$ for tenure in years).
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">E</strong> is the calculated monthly installment, <strong class="text-stone-800">P</strong> represents base sanctioned principal, and <strong class="text-stone-800">r</strong> represents the monthly reducing interest rate fraction, calculated systematically as: 
+                                <span class="inline-flex items-center align-middle font-serif mx-1"><span class="italic font-bold text-stone-800">r</span><span class="mx-1 text-[10px] font-bold text-stone-600">=</span><span class="inline-flex flex-col items-center justify-center text-[9px] leading-none"><span class="border-b border-stone-700 pb-0.5 font-bold text-stone-800">Annual Rate</span><span class="font-bold text-stone-800">12 × 100</span></span></span>.
                             </p>
                         </div>
 
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">2. Monthly Interest Component Calculation</h3>
-                            <p class="mb-2">For any given month, the interest segment of the payment is derived from the current unpaid balance:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$I_m = B_{m-1} \times r$$
+                        <div class="pb-2">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">2. Monthly Interest Component Calculation</h3>
+                            <p class="mb-3 text-stone-700">For any given cycle, the interest portion is continuously derived from the preceding unpaid balance:</p>
+                            
+                            <!-- Premium CSS-Flexbox Mathematical Equation Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
+                                    <span class="font-black text-red-700">I<sub>m</sub></span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <span class="font-bold">B<sub>m-1</sub></span> 
+                                    <span class="mx-2 font-bold">×</span> 
+                                    <span class="font-bold">r</span>
+                                </div>
+
+                                <div class="font-serif text-stone-900 text-[10px] sm:text-xs md:text-sm select-none inline-flex items-center whitespace-nowrap mb-4 text-stone-600 italic">
+                                    Principal Repaid (P<sub>m</sub>) = Monthly EMI (E) - Monthly Interest Paid (I<sub>m</sub>)
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-sm mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">I<sub>m</sub></strong><span>= Interest of the active month</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">B<sub>m-1</sub></strong><span>= Previous balance remaining</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">P<sub>m</sub></strong><span>= Principal repaid for month</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">r</strong><span>= Monthly interest fraction</span></div>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $I_m$ is the interest component for the active month, and $B_{m-1}$ represents the outstanding balance remaining from the previous cycle. The principal repayment portion for that month is subsequently calculated as $P_m = E_m - I_m$, continuously accelerating debt reduction.
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                As the principal balance <strong class="text-stone-800">B</strong> drops over the amortized months, the monthly interest segments decrease, allowing larger portions of your fixed installment to directly pay down the capital.
                             </p>
                         </div>
                     </div>
@@ -1139,37 +1188,108 @@
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Loan Product Comparison: Reducing vs Flat vs No-Cost EMI
                     </h2>
-                    <div class="overflow-x-auto">
+                    
+                    <!-- Desktop Elegant Table (Hidden on Mobile view, Visible on md view and larger) -->
+                    <div class="hidden md:block overflow-x-auto">
                         <table class="w-full text-left text-xs border-collapse border border-stone-200">
                             <thead>
                                 <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
-                                    <th class="p-2.5">Repayment Scheme</th>
-                                    <th class="p-2.5">Interest Calculation Base</th>
-                                    <th class="p-2.5">Effective APR Impact</th>
-                                    <th class="p-2.5">Prepayment Support</th>
+                                    <th class="p-3">Repayment Scheme</th>
+                                    <th class="p-3">Interest Calculation Base</th>
+                                    <th class="p-3">Effective APR Impact</th>
+                                    <th class="p-3">Prepayment Support</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-stone-200 text-stone-700 font-medium">
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Reducing Balance</td>
-                                    <td class="p-2.5">Outstanding monthly principal balance</td>
-                                    <td class="p-2.5 text-green-700 font-bold">Fair (Highly Transparent)</td>
-                                    <td class="p-2.5">Supported (Reduces future interest immediately)</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Reducing Balance</td>
+                                    <td class="p-3">Outstanding monthly principal balance</td>
+                                    <td class="p-3 text-green-700 font-bold">Fair (Highly Transparent)</td>
+                                    <td class="p-3">Supported (Reduces future interest immediately)</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Flat Rate Loan</td>
-                                    <td class="p-2.5">Initial sanctioned principal throughout tenure</td>
-                                    <td class="p-2.5 text-red-700 font-bold">Unfavorable (Hidden high real rate)</td>
-                                    <td class="p-2.5">Limited (Usually incurs penalty rates)</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Flat Rate Loan</td>
+                                    <td class="p-3">Initial sanctioned principal throughout tenure</td>
+                                    <td class="p-3 text-red-700 font-bold">Unfavorable (Hidden high real rate)</td>
+                                    <td class="p-3">Limited (Usually incurs penalty rates)</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">No-Cost EMI</td>
-                                    <td class="p-2.5">Upfront discount equal to interest component</td>
-                                    <td class="p-2.5 text-amber-700 font-bold">Moderate (Subject to processing fee tax)</td>
-                                    <td class="p-2.5">Not Applicable (Short-term consumer credits)</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">No-Cost EMI</td>
+                                    <td class="p-3">Upfront discount equal to interest component</td>
+                                    <td class="p-3 text-amber-700 font-bold">Moderate (Subject to processing fee tax)</td>
+                                    <td class="p-3">Not Applicable (Short-term consumer credits)</td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Mobile Fluid Cards (Visible on Mobile view, Hidden on Desktop view) -->
+                    <div class="block md:hidden space-y-4">
+                        <!-- Card 1: Reducing Balance -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-emerald-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">Reducing Balance</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-100 text-emerald-800 uppercase tracking-wider">Recommended</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Interest Calculation Base</span>
+                                    <span class="text-stone-800 font-semibold">Outstanding monthly principal balance</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Effective APR Impact</span>
+                                    <span class="text-green-700 font-bold">Fair (Highly Transparent)</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Prepayment Support</span>
+                                    <span class="text-stone-700 font-semibold">Supported (Reduces future interest immediately)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Flat Rate Loan -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-red-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">Flat Rate Loan</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-red-100 text-red-800 uppercase tracking-wider">High Real Cost</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Interest Calculation Base</span>
+                                    <span class="text-stone-800 font-semibold">Initial sanctioned principal throughout tenure</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Effective APR Impact</span>
+                                    <span class="text-red-700 font-bold">Unfavorable (Hidden high real rate)</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Prepayment Support</span>
+                                    <span class="text-stone-700 font-semibold">Limited (Usually incurs penalty rates)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: No-Cost EMI -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-amber-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">No-Cost EMI</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-amber-100 text-amber-800 uppercase tracking-wider">Retail Credit</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Interest Calculation Base</span>
+                                    <span class="text-stone-800 font-semibold">Upfront discount equal to interest component</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Effective APR Impact</span>
+                                    <span class="text-amber-700 font-bold">Moderate (Subject to processing fee tax)</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Prepayment Support</span>
+                                    <span class="text-stone-700 font-semibold">Not Applicable (Short-term consumer credits)</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -1194,7 +1314,7 @@
                     </div>
                 </section>
             </div>
-        </article>
+        </div>
 
         <!-- PRINT ONLY HIGH-CONTRAST STATEMENT REPORT TEMPLATE -->
         <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
