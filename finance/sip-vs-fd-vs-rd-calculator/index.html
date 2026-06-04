@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO and Canonical Metadata (Title < 60 chars, Desc < 160 chars) -->
-    <title>SIP vs FD vs RD Calculator | Compare Returns After Inflation</title>
+    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>SIP vs FD vs RD Calculator | Compare Investment Returns India</title>
     <meta name="description" content="Visually compare investment growth in India! See SIP vs RD vs Lumpsum & FD vs Debt Fund (post-tax) side-by-side with charts. Make smarter decisions.">
     <meta name="keywords" content="investment comparison tool, compare sip rd lumpsum, fd vs debt fund calculator, visual investment calculator, india investment comparison, post tax return calculator, inflation adjusted return calculator">
     <link rel="canonical" href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator" />
@@ -661,6 +661,7 @@
                 border-top: none !important;
                 padding: 0 !important;
                 margin-top: 15px !important;
+                box-shadow: none !important;
             }
             .ledger-scroll-container {
                 max-height: none !important;
@@ -1541,145 +1542,290 @@
                     </div>
                 </section>
 
+                <!-- Section 3: Mathematical Formulas (Redesigned with Premium CSS Fractions for seamless Mobile display) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Mathematical Formulas & Compounding Theory
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics & Investment Formulas
                     </h2>
                     <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
-                        To maintain strict mathematical transparency, our planner uses standard financial industry formulas for discrete compound intervals:
+                        Standardized mathematical compounding structures loaded natively within other comparative tools:
                     </p>
 
                     <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
                         
                         <!-- Lumpsum formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Lumpsum (Compound Interest) Formula</h3>
-                            <p class="mb-2">For a one-time capital investment compounding annually:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$A = P \times (1 + r)^t$$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. Lumpsum (Compound Interest) Formula</h3>
+                            <p class="mb-3 text-stone-700">For a single bulk one-time capital investment compounding annually:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none">
+                                    <span class="font-black text-red-700">A</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span>(1 + r)<sup>t</sup></span>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $A$ is the final maturity value, $P$ is the principal invested, $r$ is the annual rate of interest, and $t$ is the holding period in years.
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">A</strong> is the final wealth maturity amount, <strong class="text-stone-800">P</strong> represents your initial lumpsum investment principal, <strong class="text-stone-800">r</strong> is the annualized expected return rate, and <strong class="text-stone-800">t</strong> is the cumulative tenure in years.
                             </p>
                         </div>
 
                         <!-- SIP Formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">SIP (Future Value of Annuity) Formula</h3>
-                            <p class="mb-2">When investments are made regularly at periodic intervals (e.g., monthly):</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$M = P \times \frac{(1 + i)^n - 1}{i} \times (1 + i)$$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">2. SIP (Future Value of Annuity) Formula</h3>
+                            <p class="mb-3 text-stone-700">For systematic recurring monthly contributions compounding at regular intervals:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner overflow-x-auto custom-scrollbar">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center whitespace-nowrap">
+                                    <span class="font-black text-red-700">M</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5">
+                                        <span class="border-b-2 border-stone-800 px-3 pb-0.5 text-center font-bold">
+                                            (1 + i)<sup>n</sup> - 1
+                                        </span>
+                                        <span class="pt-0.5 text-center font-bold">
+                                            i
+                                        </span>
+                                    </div>
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span>(1 + i)</span>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $M$ is the cumulative maturity amount, $P$ is the monthly contribution, $i$ is the periodic rate of return ($i = r / 12$), and $n$ is the total number of monthly payments ($n = t \times 12$).
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">M</strong> represents your total accrued systematic maturity sum, <strong class="text-stone-800">P</strong> is the fixed monthly contribution amount, <strong class="text-stone-800">i</strong> is the periodic monthly returns rate <span class="inline-flex items-center align-middle font-serif mx-1"><span class="italic font-bold text-stone-800">i</span><span class="mx-1 text-[10px] font-bold text-stone-600">=</span><span class="inline-flex flex-col items-center justify-center text-[9px] leading-none"><span class="border-b border-stone-700 pb-0.5 font-bold text-stone-800">r</span><span class="font-bold text-stone-800">12</span></span></span>, and <strong class="text-stone-800">n</strong> indicates the absolute number of installments over the duration (<span class="font-serif italic font-bold text-stone-800">n</span> = <span class="font-serif italic font-bold text-stone-800">t</span> × 12).
                             </p>
                         </div>
 
                         <!-- Fixed Deposit Formula -->
-                        <div class="border-b border-stone-200 pb-4">
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Fixed Deposit (FD) Quarterly Compounding Formula</h3>
-                            <p class="mb-2">Fixed deposits compound interest quarterly under standard Indian banking guidelines:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$M = P \times \left(1 + \frac{r}{4}\right)^{4 \times t}$$
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">3. Fixed Deposit (FD) Quarterly Compounding Formula</h3>
+                            <p class="mb-3 text-stone-700">Fixed income bank deposits compound interests quarterly under Indian commercial banking standards:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center">
+                                    <span class="font-black text-red-700">M</span> 
+                                    <span class="mx-1.5 font-bold">=</span> 
+                                    <span class="font-bold">P</span> 
+                                    <span class="mx-1.5 font-bold">×</span> 
+                                    <span class="text-lg sm:text-2xl font-light">(</span> 
+                                    <span class="mx-1">1 +</span> 
+                                    <div class="inline-flex flex-col items-center mx-1">
+                                        <span class="border-b border-stone-800 px-2 text-center font-bold">r</span>
+                                        <span class="text-center font-bold">4</span>
+                                    </div>
+                                    <span class="text-lg sm:text-2xl font-light">)</span> 
+                                    <sup class="font-bold ml-0.5">4 × t</sup>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where compounding frequency is locked to $4$ times a year. RD calculations follow identical quarterly compounding protocols.
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where the compounding cycle is executed <strong class="text-stone-800">4 times</strong> per year. Recurring Deposit (RD) models calculate quarterly compound interests based on standard composite staggered series values.
                             </p>
                         </div>
 
                         <!-- Inflation Adjustment Formula -->
                         <div>
-                            <h3 class="text-xs font-bold text-stone-900 mb-1.5">Inflation Adjustment (Real Purchasing Power) Formula</h3>
-                            <p class="mb-2">Erosion of purchase power by inflation is determined by:</p>
-                            <div class="bg-stone-50/70 p-3 rounded-lg text-center font-mono my-2 text-sm">
-                                $$\text{Real Value} = \frac{\text{Nominal Value}}{(1 + \text{inf})^t}$$
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">4. Inflation Adjustment (Real Purchasing Power) Formula</h3>
+                            <p class="mb-3 text-stone-700">Measures the erosive effect of consumer price inflation over time:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-sm sm:text-base md:text-lg select-none inline-flex items-center">
+                                    <span class="font-black text-red-700">Real Value</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5">
+                                        <span class="border-b-2 border-stone-800 px-3 pb-0.5 text-center font-bold">Nominal Value</span>
+                                        <span class="pt-0.5 text-center font-bold">(1 + inf)<sup>t</sup></span>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="mt-2 text-[11px] text-stone-600 font-medium">
-                                Where $\text{inf}$ is the expected average annual rate of inflation, and $t$ is the holding period in years.
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">inf</strong> is the expected average annual rate of consumer price index inflation ( CPI, historically 4.5% - 6% in India) and <strong class="text-stone-800">t</strong> is the cumulative tenure in years.
                             </p>
                         </div>
                     </div>
                 </section>
 
-                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                <!-- Section 4: Real-World Examples and Case Studies (Mobile Optimized Layout) -->
+                <section class="bg-white/70 backdrop-blur-xl p-5 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
                     </h2>
-                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                    <p class="text-xs sm:text-sm leading-relaxed mb-5 text-stone-800 font-medium">
                         Review these realistic, practical examples to align your investment strategies with real Indian market trends:
                     </p>
 
-                    <div class="space-y-4">
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-emerald-700">💼 Case Study 1:</span> Retiring with ₹1.5 Crore via Step-up SIP
-                            </h3>
-                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                    <div class="space-y-5">
+                        <!-- Case Study 1 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-[10px]">1</span>
+                                    Retiring with ₹1.5 Crore via Step-up SIP
+                                </h3>
+                                <span class="bg-emerald-50 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Step-up Strategy</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
                                 A 25-year-old financial analyst starts an equity mutual fund SIP of <strong>₹10,000 per month</strong> at an expected CAGR of <strong>12%</strong>.
                             </p>
-                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
-                                <li><strong class="text-stone-800">Without Step-up:</strong> In 25 years, the total principal invested is ₹30 Lacs, and the accumulated corpus is <strong>₹1.89 Crore</strong>.</li>
-                                <li><strong class="text-stone-800">With 10% Annual Step-up:</strong> By stepping up the monthly contribution by 10% each year as their salary grows, the final corpus balloons to <strong>₹4.48 Crore</strong>!</li>
-                                <li><strong class="text-stone-800">Real Value (5% Inflation adjusted):</strong> The purchasing power of that ₹4.48 Crore in today's money is worth approximately <strong>₹1.32 Crore</strong>.</li>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Without Step-up:</strong> In 25 years, the total principal invested is ₹30 Lacs, and the accumulated corpus is <strong>₹1.89 Crore</strong>.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">With 10% Annual Step-up:</strong> By stepping up the monthly contribution by 10% each year as their salary grows, the final corpus balloons to <strong>₹4.48 Crore</strong>!</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Real Value (5% Inflation adjusted):</strong> The purchasing power of that ₹4.48 Crore in today's money is worth approximately <strong>₹1.32 Crore</strong>.</li>
                             </ul>
                         </div>
 
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                            <h3 class="text-xs font-black text-stone-950 mb-1.5 flex items-center gap-2">
-                                <span class="text-blue-700">🎓 Case Study 2:</span> Funding Child's Higher Education Abroad
-                            </h3>
-                            <p class="text-stone-700 leading-relaxed mb-2 font-medium">
+                        <!-- Case Study 2 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-100 text-blue-800 font-bold text-[10px]">2</span>
+                                    Funding Child's Higher Education Abroad
+                                </h3>
+                                <span class="bg-blue-50 text-blue-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Goal Target</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
                                 A parent estimates they will need <strong>₹50 Lacs</strong> in 10 years for their child's professional degree. They select the <strong>Goal Planner</strong> mode assuming a moderate mutual fund return rate of <strong>11% p.a.</strong>
                             </p>
-                            <ul class="list-disc list-inside space-y-1 text-stone-600 mb-0 font-medium">
-                                <li><strong class="text-stone-800">Standard Goal calculation:</strong> They must invest <strong>₹23,086 per month</strong> for 10 years to reach ₹50 Lacs.</li>
-                                <li><strong class="text-stone-800">Adjusted for Inflation (5%):</strong> In 10 years, educational costs will rise. The real target becomes <strong>₹81.4 Lacs</strong>. To reach this adjusted goal, they need to save <strong>₹37,597 per month</strong>.</li>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Standard Goal calculation:</strong> They must invest <strong>₹23,086 per month</strong> for 10 years to reach ₹50 Lacs.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Adjusted for Inflation (5%):</strong> In 10 years, educational costs will rise. The real target becomes <strong>₹81.4 Lacs</strong>. To reach this adjusted goal, they need to save <strong>₹37,597 per month</strong>.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
+                <!-- Section 5: Side-by-Side Comparison (Desktop vs Mobile stacked cards) -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Quick Reference: SIP vs RD vs FD vs Debt
+                        <span class="text-red-600"><i class="fa-solid fa-list-check"></i></span> Side-by-Side Comparison: SIP vs RD vs FD vs Debt
                     </h2>
-                    <div class="overflow-x-auto">
+                    
+                    <!-- Desktop Elegant Table (Hidden on Mobile view, Visible on md view and larger) -->
+                    <div class="hidden md:block overflow-x-auto">
                         <table class="w-full text-left text-xs border-collapse border border-stone-200">
                             <thead>
                                 <tr class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
-                                    <th class="p-2.5">Feature</th>
-                                    <th class="p-2.5">Equity SIP</th>
-                                    <th class="p-2.5">Fixed/RD Deposit</th>
-                                    <th class="p-2.5">Debt Mutual Funds</th>
+                                    <th class="p-3">Feature</th>
+                                    <th class="p-3">Equity SIP</th>
+                                    <th class="p-3">Fixed/RD Deposit</th>
+                                    <th class="p-3">Debt Mutual Funds</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-stone-200 text-stone-700 font-medium">
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Risk Profile</td>
-                                    <td class="p-2.5 text-red-700 font-bold">High (Market linked)</td>
-                                    <td class="p-2.5 text-green-700 font-bold">Risk-Free (DICGC insured)</td>
-                                    <td class="p-2.5 text-amber-700 font-bold">Low to Moderate</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Risk Profile</td>
+                                    <td class="p-3 text-red-700 font-bold">High (Market linked)</td>
+                                    <td class="p-3 text-green-700 font-bold">Risk-Free (DICGC insured)</td>
+                                    <td class="p-3 text-amber-700 font-bold">Low to Moderate</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Avg. Payout (p.a.)</td>
-                                    <td class="p-2.5 text-stone-800 font-bold">12% - 15%</td>
-                                    <td class="p-2.5 text-stone-800">6.0% - 7.5%</td>
-                                    <td class="p-2.5 text-stone-800">7.0% - 8.5%</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Avg. Payout (p.a.)</td>
+                                    <td class="p-3 text-stone-800 font-bold">12% - 15%</td>
+                                    <td class="p-3 text-stone-800">6.0% - 7.5%</td>
+                                    <td class="p-3 text-stone-800">7.0% - 8.5%</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Income Tax Logic</td>
-                                    <td class="p-2.5">12.5% LTCG on gains &gt; ₹1.25L</td>
-                                    <td class="p-2.5 text-red-700 font-bold">Taxed annually at slab rate</td>
-                                    <td class="p-2.5">Taxed on redemption at slab rate</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Income Tax Logic</td>
+                                    <td class="p-3">12.5% LTCG on gains &gt; ₹1.25L</td>
+                                    <td class="p-3 text-red-700 font-bold">Taxed annually at slab rate</td>
+                                    <td class="p-3">Taxed on redemption at slab rate</td>
                                 </tr>
                                 <tr>
-                                    <td class="p-2.5 font-bold text-stone-900 bg-stone-50/50">Compounding</td>
-                                    <td class="p-2.5">Continuous Growth</td>
-                                    <td class="p-2.5">Quarterly Compounding</td>
-                                    <td class="p-2.5">Continuous Growth</td>
+                                    <td class="p-3 font-bold text-stone-900 bg-stone-50/50">Compounding</td>
+                                    <td class="p-3">Continuous Growth</td>
+                                    <td class="p-3">Quarterly Compounding</td>
+                                    <td class="p-3">Continuous Growth</td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Mobile Fluid Cards (Visible on Mobile view, Hidden on Desktop view) -->
+                    <div class="block md:hidden space-y-4">
+                        <!-- Card 1: Equity SIP -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-red-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">Equity SIP</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-red-100 text-red-800 uppercase tracking-wider">Market Linked</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Risk Profile</span>
+                                    <span class="text-red-700 font-bold">High (Market linked)</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Avg. Payout (p.a.)</span>
+                                    <span class="text-stone-800 font-bold">12% - 15%</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Income Tax Logic</span>
+                                    <span class="text-stone-700 font-semibold">12.5% LTCG on gains &gt; ₹1.25L</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Compounding</span>
+                                    <span class="text-stone-700 font-semibold">Continuous Growth</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Fixed / RD Deposit -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-emerald-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">Fixed/RD Deposit</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-100 text-emerald-800 uppercase tracking-wider">Sovereign Safe</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Risk Profile</span>
+                                    <span class="text-green-700 font-bold">Risk-Free (DICGC insured)</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Avg. Payout (p.a.)</span>
+                                    <span class="text-stone-800 font-bold">6.0% - 7.5%</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Income Tax Logic</span>
+                                    <span class="text-red-700 font-bold">Taxed annually at slab rate</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Compounding</span>
+                                    <span class="text-stone-700 font-semibold">Quarterly Compounding</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Debt Mutual Funds -->
+                        <div class="border border-stone-200 rounded-2xl overflow-hidden shadow-sm bg-stone-50/40">
+                            <div class="bg-amber-50 p-3 border-b border-stone-200 flex justify-between items-center">
+                                <span class="font-extrabold text-xs text-stone-900">Debt Mutual Funds</span>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-amber-100 text-amber-800 uppercase tracking-wider">Flexible Payout</span>
+                            </div>
+                            <div class="p-3.5 space-y-3 text-[11px] leading-relaxed">
+                                <div>
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Risk Profile</span>
+                                    <span class="text-amber-700 font-bold">Low to Moderate</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Avg. Payout (p.a.)</span>
+                                    <span class="text-stone-800 font-bold">7.0% - 8.5%</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Income Tax Logic</span>
+                                    <span class="text-stone-700 font-semibold">Taxed on redemption at slab rate</span>
+                                </div>
+                                <div class="border-t border-stone-200/50 pt-2">
+                                    <span class="block text-[9px] uppercase tracking-wider text-stone-500 font-extrabold mb-0.5">Compounding</span>
+                                    <span class="text-stone-700 font-semibold">Continuous Growth</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
