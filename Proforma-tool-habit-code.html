@@ -55,7 +55,41 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "featureList": "Local-first storage, Build and Break habits, Skip day override, Reorder priorities, Reflection Notes, Synthesized Chime Engine, Zen Achievements Deck"
+      "featureList": "Local-first storage, Build and Break habits, Skip day override, Reorder priorities, Reflection Notes, Synthesized Chime Engine, Zen Achievements Deck, Weekly Analytics Report"
+    }
+    </script>
+
+    <!-- JSON-LD Structured Data for FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my habit data shared with any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Sleek Daily Habit Tracker runs completely client-side. Your check-in history stays local to your browser using secure LocalStorage. You can export a local backup to swap devices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the app limit me to only five habits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Behavioral science states that tracking too many targets dilutes attention. By enforcing a limit of five high-value anchors, you make real progress on what matters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are streaks calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An active streak is calculated by tracking continuous consecutive completions up to today. If a daily habit hasn't been completed today or yesterday, the active streak breaks to 0."
+          }
+        }
+      ]
     }
     </script>
 
@@ -69,22 +103,6 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="../../js/tailwind-config.js"></script>
-
-    <script>
-        window.tailwind = window.tailwind || {};
-        window.tailwind.config = window.tailwind.config || {};
-        window.tailwind.config.theme = window.tailwind.config.theme || {};
-        window.tailwind.config.theme.extend = window.tailwind.config.theme.extend || {};
-        window.tailwind.config.theme.extend.colors = window.tailwind.config.theme.extend.colors || {};
-        
-        window.tailwind.config.theme.extend.colors.stone = {
-            ...(window.tailwind.config.theme.extend.colors.stone || {}),
-            850: '#1c1917', 
-            950: '#0c0a09'
-        };
-    </script>
-    
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
 
     <!-- Google Font: Inter -->
@@ -167,7 +185,7 @@
     <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-stone-200/50 blur-[120px]"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-rose-100/40 blur-[100px]"></div>
-        <div class="absolute top-[20%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-indigo-100/30 blur-[80px]"></div>
+        <div class="absolute top-[20%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-stone-100/30 blur-[80px]"></div>
     </div>
 
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
@@ -182,13 +200,13 @@
                 <a href="/" class="hover:text-stone-900 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
                     <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
                 </a>
-                <span class="mx-1.5 sm:mx-2 text-stone-400" aria-hidden="true">/</span>
+                <span class="mx-1.5 sm:mx-2 text-stone-500" aria-hidden="true">/</span>
                 <a href="/productivity/" class="hover:text-stone-900 transition-colors font-medium">Productivity</a>
-                <span class="mx-1.5 sm:mx-2 text-stone-400" aria-hidden="true">/</span>
+                <span class="mx-1.5 sm:mx-2 text-stone-500" aria-hidden="true">/</span>
                 <span class="text-stone-900 font-bold" aria-current="page">Habit Tracker</span>
             </div>
             <!-- Standalone Badge -->
-            <div class="hidden sm:flex items-center gap-1.5 bg-rose-50 text-rose-700 border border-rose-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+            <div class="hidden sm:flex items-center gap-1.5 bg-rose-50 text-rose-800 border border-rose-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
                 <i class="fa-solid fa-fire" aria-hidden="true"></i> DAILY RETENTION
             </div>
         </nav>
@@ -200,13 +218,13 @@
 
                 <!-- Header Block -->
                 <header class="mb-3 text-center">
-                    <div class="flex justify-center items-center mb-0.5 text-stone-500 font-black uppercase tracking-[0.25em] text-[9px] sm:text-[10px] drop-shadow-sm">
+                    <div class="flex justify-center items-center mb-0.5 text-stone-700 font-black uppercase tracking-[0.25em] text-[9px] sm:text-[10px] drop-shadow-sm">
                         Consistency Chain
                     </div>
                     <h1 class="text-[24px] sm:text-[26px] text-stone-900 font-black mb-1 leading-tight tracking-tight drop-shadow-sm">
                         Sleek Daily Habit Tracker
                     </h1>
-                    <p class="text-stone-600 text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto font-medium">
+                    <p class="text-stone-700 text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto font-medium">
                         Don't break the chain. Anchor 5 routines to form habits or break bad ones.
                     </p>
                 </header>
@@ -214,27 +232,32 @@
                 <!-- Dashboard Stats Card -->
                 <div class="grid grid-cols-3 gap-2.5 mb-4 text-center">
                     <div class="bg-stone-50/50 backdrop-blur-md border border-stone-200/40 rounded-2xl p-2 sm:p-2.5 shadow-sm">
-                        <span class="block text-[8px] font-black text-stone-500 uppercase tracking-widest mb-0.5">Today's Rate</span>
+                        <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">Today's Rate</span>
                         <span id="stat-today-completion" class="text-base font-black text-stone-900 leading-none" aria-live="polite">0%</span>
                     </div>
                     <div class="bg-stone-50/50 backdrop-blur-md border border-stone-200/40 rounded-2xl p-2 sm:p-2.5 shadow-sm">
-                        <span class="block text-[8px] font-black text-stone-500 uppercase tracking-widest mb-0.5">Longest Chain</span>
-                        <span id="stat-longest-streak" class="text-base font-black text-rose-700 leading-none" aria-live="polite">0d</span>
+                        <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">Longest Chain</span>
+                        <span id="stat-longest-streak" class="text-base font-black text-rose-800 leading-none" aria-live="polite">0d</span>
                     </div>
                     <div class="bg-stone-50/50 backdrop-blur-md border border-stone-200/40 rounded-2xl p-2 sm:p-2.5 shadow-sm">
-                        <span class="block text-[8px] font-black text-stone-500 uppercase tracking-widest mb-0.5">Total Clears</span>
+                        <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">Total Clears</span>
                         <span id="stat-total-completions" class="text-base font-black text-indigo-800 leading-none" aria-live="polite">0</span>
                     </div>
                 </div>
 
                 <!-- Achievements Mini-Banner & Quick Settings -->
-                <div class="flex justify-between items-center bg-stone-50 border border-stone-200/40 p-2 rounded-xl mb-3 text-xs font-semibold">
-                    <button id="btn-view-achievements" class="text-[10px] font-black text-stone-600 hover:text-stone-900 uppercase tracking-wider flex items-center gap-1.5" aria-haspopup="dialog" aria-label="Open milestones and achievements overlay">
-                        <i class="fa-solid fa-award text-amber-500" aria-hidden="true"></i> Zen Milestones <span id="badge-count-unlocked" class="bg-amber-100 text-amber-800 text-[8px] font-black px-1.5 py-0.5 rounded-full">0/6</span>
-                    </button>
+                <div class="flex flex-wrap justify-between items-center bg-stone-50 border border-stone-200/40 p-2 rounded-xl mb-3 text-xs font-semibold gap-2">
+                    <div class="flex items-center gap-3">
+                        <button id="btn-view-achievements" class="text-[10px] font-black text-stone-700 hover:text-stone-955 uppercase tracking-wider flex items-center gap-1.5" aria-haspopup="dialog" aria-label="Open milestones and achievements overlay">
+                            <i class="fa-solid fa-award text-amber-800" aria-hidden="true"></i> Zen Milestones <span id="badge-count-unlocked" class="bg-amber-100 text-amber-900 text-[8px] font-black px-1.5 py-0.5 rounded-full">0/6</span>
+                        </button>
+                        <button id="btn-view-analytics" class="text-[10px] font-black text-stone-700 hover:text-stone-955 uppercase tracking-wider flex items-center gap-1.5" aria-haspopup="dialog" aria-label="Open analytics and progress reports dashboard">
+                            <i class="fa-solid fa-chart-line text-indigo-800" aria-hidden="true"></i> Analytics Hub
+                        </button>
+                    </div>
                     
                     <div class="flex items-center gap-2">
-                        <label for="audio-theme-selector" class="text-[9px] uppercase tracking-wider text-stone-500 font-black">Chime:</label>
+                        <label for="audio-theme-selector" class="text-[9px] uppercase tracking-wider text-stone-700 font-black">Chime:</label>
                         <select id="audio-theme-selector" class="bg-white border border-stone-200 text-[10px] font-black rounded px-1.5 py-0.5 focus:outline-none focus:ring-1 focus:ring-stone-950">
                             <option value="bowl">Singing Bowl</option>
                             <option value="wood">Wood Block</option>
@@ -246,18 +269,18 @@
                 </div>
 
                 <!-- Habits List Panel (Optimized vertical lists) -->
-                <div class="space-y-2.5 mb-4 animate-fade-in" id="habits-container" role="region" aria-label="Active Habit List">
+                <div class="space-y-2.5 mb-4" id="habits-container" role="region" aria-label="Active Habit List">
                     <!-- Dynamic Habits injected by JS -->
                 </div>
 
                 <!-- Add/Config Panel Controls -->
                 <div class="flex justify-between items-center pt-2.5 border-t border-stone-200/50">
-                    <button id="btn-export-backup" class="text-[10px] font-black text-stone-500 hover:text-stone-900 uppercase tracking-widest flex items-center gap-1.5 transition-colors" aria-haspopup="dialog" aria-label="Open backup and export options">
+                    <button id="btn-export-backup" class="text-[10px] font-black text-stone-600 hover:text-stone-955 uppercase tracking-widest flex items-center gap-1.5 transition-colors" aria-haspopup="dialog" aria-label="Open backup and export options">
                         <i class="fa-solid fa-download" aria-hidden="true"></i> Backup / Export
                     </button>
                     
                     <button id="btn-add-habit" class="bg-stone-900 text-white font-black uppercase text-[10px] tracking-widest px-4 py-2 rounded-xl hover:bg-stone-850 transition-all flex items-center gap-1.5 active:scale-95 shadow-md" aria-haspopup="dialog" aria-label="Add a new habit card">
-                        <i class="fa-solid fa-plus text-[9px]" aria-hidden="true"></i> Add Habit <span class="text-[9px] text-stone-400" id="habit-count-badge" aria-hidden="true">(0/5)</span>
+                        <i class="fa-solid fa-plus text-[9px]" aria-hidden="true"></i> Add Habit <span class="text-[9px] text-stone-300" id="habit-count-badge" aria-hidden="true">(0/5)</span>
                     </button>
                 </div>
 
@@ -270,16 +293,16 @@
                 <!-- Card 1: DECIDE (Daily Focus) -->
                 <a href="../decide/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-indigo-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-indigo-100">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-indigo-100">
                             <i class="fa-solid fa-bullseye text-xs" aria-hidden="true"></i>
                         </div>
                         <div class="text-left min-w-0">
-                            <span class="text-[8px] font-black text-indigo-600 uppercase tracking-widest block">Daily Priority</span>
+                            <span class="text-[8px] font-black text-indigo-800 uppercase tracking-widest block">Daily Priority</span>
                             <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0 leading-tight">Daily Focus (DECIDE)</h3>
-                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Set top 3 daily priorities.</p>
+                            <p class="text-[10px] text-stone-600 mt-0.5 leading-tight truncate">Set top 3 daily priorities.</p>
                         </div>
                     </div>
-                    <div class="text-indigo-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                    <div class="text-indigo-800 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
                         <span class="text-sm" aria-hidden="true">&rarr;</span>
                     </div>
                 </a>
@@ -287,16 +310,16 @@
                 <!-- Card 2: Study Timer -->
                 <a href="../pomodoro-study-timer/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-orange-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-orange-100">
+                        <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-orange-100">
                             <i class="fa-solid fa-stopwatch text-xs" aria-hidden="true"></i>
                         </div>
                         <div class="text-left min-w-0">
-                            <span class="text-[8px] font-black text-orange-600 uppercase tracking-widest block">Deep Focus</span>
+                            <span class="text-[8px] font-black text-orange-800 uppercase tracking-widest block">Deep Focus</span>
                             <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0 leading-tight">Study Timer</h3>
-                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Time deep work and breaks.</p>
+                            <p class="text-[10px] text-stone-600 mt-0.5 leading-tight truncate">Time deep work and breaks.</p>
                         </div>
                     </div>
-                    <div class="text-orange-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                    <div class="text-orange-800 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
                         <span class="text-sm" aria-hidden="true">&rarr;</span>
                     </div>
                 </a>
@@ -304,16 +327,16 @@
                 <!-- Card 3: Word Counter -->
                 <a href="../word-counter/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-purple-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
                             <i class="fa-solid fa-keyboard text-xs" aria-hidden="true"></i>
                         </div>
                         <div class="text-left min-w-0">
-                            <span class="text-[8px] font-black text-purple-600 uppercase tracking-widest block">Text Analyzer</span>
+                            <span class="text-[8px] font-black text-purple-800 uppercase tracking-widest block">Text Analyzer</span>
                             <h3 class="text-xs sm:text-sm font-black text-stone-900 m-0 leading-tight">Word Counter</h3>
-                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Analyze length, density & timing.</p>
+                            <p class="text-[10px] text-stone-600 mt-0.5 leading-tight truncate">Analyze length, density & timing.</p>
                         </div>
                     </div>
-                    <div class="text-purple-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                    <div class="text-purple-800 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
                         <span class="text-sm" aria-hidden="true">&rarr;</span>
                     </div>
                 </a>
@@ -325,13 +348,13 @@
             <div class="space-y-6 text-stone-800">
                 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span class="text-rose-600"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></span> Seinfeld's "Don't Break the Chain" Philosophy
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-rose-800"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></span> Seinfeld's "Don't Break the Chain" Philosophy
                     </h2>
                     <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         The secret behind building consistency isn't massive willpower—it's simple, visual feedback. Comedian Jerry Seinfeld's famous advice on writing better was to get a giant calendar and mark a red "X" for every day he wrote. Within a few days, a chain of days begins to form. Your only job from that point on? <strong>Don't break the chain.</strong>
                     </p>
-                    <p class="font-bold text-stone-900 italic border-l-2 border-stone-400 pl-4 py-2 bg-white/50 backdrop-blur-md rounded-r-lg text-[13px] shadow-inner">
+                    <p class="font-bold text-stone-900 italic border-l-2 border-stone-500 pl-4 py-2 bg-white/50 backdrop-blur-md rounded-r-lg text-[13px] shadow-inner">
                         The mathematical model of compound consistency is clear:
                     </p>
                     <p class="mt-4 mb-0 text-stone-800 text-[13px] font-medium">
@@ -340,22 +363,22 @@
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                    <h3 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🧠</span> The Science of Habit Loops: An Atomic Blueprint for Success
-                    </h2>
+                    </h3>
                     <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
                         According to cognitive behavioral science and James Clear's famous framework in <em>Atomic Habits</em>, a habit is a brain-automated behavior triggered by a continuous four-step feedback loop: <strong>Cue, Craving, Response, and Reward</strong>.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose mb-5">
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/40">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
                             <h4 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-1">1. Cue & Craving (The Problem)</h4>
-                            <p class="text-[11px] text-stone-600 leading-relaxed mb-0 font-medium">
+                            <p class="text-[11px] text-stone-755 leading-relaxed mb-0 font-medium">
                                 The <strong>Cue</strong> triggers your brain to initiate a behavior (e.g., waking up). The <strong>Craving</strong> is the motivational force behind it (e.g., wanting to feel alert).
                             </p>
                         </div>
-                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/40">
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-200/60">
                             <h4 class="text-xs font-black text-stone-900 uppercase tracking-wider mb-1">2. Response & Reward (The Solution)</h4>
-                            <p class="text-[11px] text-stone-600 leading-relaxed mb-0 font-medium">
+                            <p class="text-[11px] text-stone-755 leading-relaxed mb-0 font-medium">
                                 The <strong>Response</strong> is the actual habit you perform (e.g., drinking coffee). The <strong>Reward</strong> is the end goal that satisfies the craving (e.g., feeling energized).
                             </p>
                         </div>
@@ -372,10 +395,10 @@
                 </section>
                 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span>🎯</span> Why the Max-5 Guardrail Works
                     </h2>
-                    <p class="mb-4 text-stone-800 text-[13px] font-medium">Traditional habit trackers let you list dozens of items, causing immediate planning fatigue. <strong class="text-stone-900 font-black">Streak enforces a strict limit of 5 habits.</strong></p>
+                    <p class="mb-4 text-stone-800 text-[13px] font-medium">Traditional habit trackers let you list dozens of items, causing immediate planning fatigue. <strong class="text-stone-900 font-black">This Habit Tracker enforces a strict limit of 5 habits.</strong></p>
                     <ul class="list-disc list-outside ml-5 space-y-2 mb-4 text-stone-800 text-[13px] font-medium">
                         <li><strong>Prevents Overwhelm:</strong> Choosing five specific priorities forces you to decide what actually matters.</li>
                         <li><strong>Builds Deep Anchor Routines:</strong> Focuses your energy on key anchors (such as reading, exercising, or writing) rather than trivial chores.</li>
@@ -384,40 +407,40 @@
                 </section>
 
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
-                        <span>🆚</span> Streak vs Complex Habit Apps
+                    <h2 class="text-base font-black text-stone-900 mb-6 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span>🆚</span> Sleek Habit Tracker vs Complex Apps
                     </h2>
-                    <p class="mb-6 text-stone-800 text-[13px] font-medium">Complex apps pester you with notifications, try to gamify routines with unnecessary levels, or hide data behind paywalls. Streak respects your intelligence and attention.</p>
+                    <p class="mb-6 text-stone-800 text-[13px] font-medium">Complex apps pester you with notifications, try to gamify routines with unnecessary levels, or hide data behind paywalls. This Sleek Habit Tracker respects your intelligence and attention.</p>
                     
                     <div class="overflow-x-auto mb-6 text-stone-800">
                         <table class="w-full text-[13px] text-left border-collapse">
                             <thead>
                                 <tr class="border-b-2 border-stone-300/50 text-stone-900 font-black uppercase tracking-tighter">
                                     <th class="py-3">Feature</th>
-                                    <th class="py-3 text-[13px]">STREAK</th>
-                                    <th class="py-3 font-medium text-stone-500">Other Apps</th>
+                                    <th class="py-3 text-[13px]">HABIT TRACKER</th>
+                                    <th class="py-3 font-semibold text-stone-600">Other Apps</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-stone-200/50 font-bold uppercase tracking-tight text-[11px]">
                                 <tr>
                                     <td class="py-3 text-stone-800">Habit Limits</td>
                                     <td class="py-3 text-stone-900">Max 5 (Curated Focus)</td>
-                                    <td class="py-3 text-stone-500">Unlimited (Overwhelming)</td>
+                                    <td class="py-3 text-stone-600">Unlimited (Overwhelming)</td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 text-stone-800">Visual Insights</td>
                                     <td class="py-3 text-stone-900">26-Week Git Contribution Grid</td>
-                                    <td class="py-3 text-stone-500">Complicated line charts</td>
+                                    <td class="py-3 text-stone-600">Complicated line charts</td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 text-stone-800">Data Privacy</td>
                                     <td class="py-3 text-stone-900">100% LocalStorage / Offline</td>
-                                    <td class="py-3 text-stone-500">Cloud servers / Trackers</td>
+                                    <td class="py-3 text-stone-600">Cloud servers / Trackers</td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 text-stone-800">Zen Feedback</td>
                                     <td class="py-3 text-stone-900">Synthesized audio bell chime</td>
-                                    <td class="py-3 text-stone-500">Vibrating buzz alerts</td>
+                                    <td class="py-3 text-stone-600">Vibrating buzz alerts</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -425,13 +448,13 @@
                 </section>
 
                 <section id="faqs">
-                    <h2 class="text-[16px] font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
+                    <h2 class="text-base font-black text-stone-900 mb-6 flex items-center gap-2 uppercase tracking-tight">
                         <span>❓</span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-4">
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">1. Is my habit data shared with any server?</h3>
-                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">No. Streak runs completely client-side. Your check-in history stays local to your browser using secure LocalStorage. You can export a local backup to swap devices.</p>
+                            <p class="text-[12px] leading-relaxed mb-0 text-stone-800 font-medium">No. Sleek Daily Habit Tracker runs completely client-side. Your check-in history stays local to your browser using secure LocalStorage. You can export a local backup to swap devices.</p>
                         </div>
                         <div class="p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
                             <h3 class="font-black text-stone-900 mb-2 mt-0 text-sm">2. Why does the app limit me to only five habits?</h3>
@@ -447,84 +470,84 @@
         </article>
     </main>
 
-    <!-- Modals (Equipped with full accessible properties: role="dialog" aria-modal="true" aria-hidden="true") -->
+    <!-- Modals -->
 
     <!-- 1. Add/Edit Habit Modal (Supports Emoji Picker, Build vs. Break selection) -->
-    <div id="add-habit-modal" class="modal-backdrop z-[210]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-form-title" aria-describedby="add-habit-desc">
+    <div id="add-habit-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-form-title" aria-describedby="add-habit-desc">
         <div class="bg-white/95 backdrop-blur-2xl p-5 sm:p-6 rounded-[2rem] max-w-sm w-full shadow-2xl border border-white/50 relative overflow-y-auto max-h-[90vh] hide-scrollbar" onclick="event.stopPropagation()">
             <h3 id="modal-form-title" class="text-base font-black text-stone-900 mb-1 uppercase tracking-tight">Create Anchor Habit</h3>
-            <p id="add-habit-desc" class="text-stone-500 text-xs mb-4 font-semibold">Decide on a single atomic routine that takes under 5 minutes to start.</p>
+            <p id="add-habit-desc" class="text-stone-700 text-xs mb-4 font-semibold">Decide on a single atomic routine that takes under 5 minutes to start.</p>
             
             <form id="add-habit-form" class="space-y-3.5 text-left">
                 <input type="hidden" id="edit-habit-id" value="">
                 
                 <!-- Quick Emoji Picker indicator -->
                 <div>
-                    <span class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1.5" id="emoji-picker-label">Pick Icon (Emoji)</span>
+                    <span class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1.5" id="emoji-picker-label">Pick Icon (Emoji)</span>
                     <div class="space-y-2 mb-2 p-2 bg-stone-50/50 rounded-2xl max-h-[135px] overflow-y-auto hide-scrollbar border border-stone-200/50" role="group" aria-labelledby="emoji-picker-label">
                         <!-- Wellness Category -->
                         <div class="flex flex-col gap-1">
-                            <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider">Active & Wellness</span>
+                            <span class="text-[8px] font-black text-stone-600 uppercase tracking-wider">Active & Wellness</span>
                             <div class="flex flex-wrap gap-1.5">
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧘" aria-label="Yoga meditation emoji">🧘</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🏃" aria-label="Running emoji">🏃</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🏋️" aria-label="Weightlifter emoji">🏋️</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💧" aria-label="Water droplet emoji">💧</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🥗" aria-label="Green salad emoji">🥗</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚴" aria-label="Bicycling emoji">🚴</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚶" aria-label="Pedestrian walking emoji">🚶</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💤" aria-label="Sleeping sleeping emoji">💤</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧘" aria-label="Meditating yoga posture emoji">🧘</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🏃" aria-label="Running athlete emoji">🏃</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🏋️" aria-label="Weight lifter emoji">🏋️</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💧" aria-label="Water droplet hygiene emoji">💧</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🥗" aria-label="Healthy salad emoji">🥗</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚴" aria-label="Cycling athlete emoji">🚴</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚶" aria-label="Walking pedestrian emoji">🚶</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💤" aria-label="Sleeping snoring emoji">💤</button>
                             </div>
                         </div>
 
                         <!-- Mind & Focus Category -->
                         <div class="flex flex-col gap-1 mt-2">
-                            <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider">Mind & Focus</span>
+                            <span class="text-[8px] font-black text-stone-600 uppercase tracking-wider">Mind & Focus</span>
                             <div class="flex flex-wrap gap-1.5">
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💻" aria-label="Laptop coding emoji">💻</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="📚" aria-label="Books reading emoji">📚</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="✍️" aria-label="Writing journal emoji">✍️</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧠" aria-label="Brain psychology emoji">🧠</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎨" aria-label="Art palette emoji">🎨</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎯" aria-label="Bullseye focus emoji">🎯</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="📅" aria-label="Calendar schedule emoji">📅</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎹" aria-label="Piano keyboard emoji">🎹</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="💻" aria-label="Laptop coder computer emoji">💻</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="📚" aria-label="Reading book library emoji">📚</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="✍️" aria-label="Writing pencil journal emoji">✍️</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧠" aria-label="Brain psychology logic emoji">🧠</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎨" aria-label="Artist palette paint emoji">🎨</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎯" aria-label="Bullseye target goal emoji">🎯</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="📅" aria-label="Calendar deadline organizer emoji">📅</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🎹" aria-label="Musical keyboard piano emoji">🎹</button>
                             </div>
                         </div>
 
                         <!-- Routines & Breaks Category -->
                         <div class="flex flex-col gap-1 mt-2">
-                            <span class="text-[8px] font-black text-stone-400 uppercase tracking-wider">Routines & Breaks</span>
+                            <span class="text-[8px] font-black text-stone-600 uppercase tracking-wider">Routines & Breaks</span>
                             <div class="flex flex-wrap gap-1.5">
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚭" aria-label="No smoking emoji">🚭</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🚭" aria-label="Stop smoking symbol emoji">🚭</button>
                                 <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🍔" aria-label="Fast food hamburger emoji">🍔</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="📱" aria-label="Mobile phone screen emoji">📱</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🍺" aria-label="Beer glass mug emoji">🍺</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧹" aria-label="Broom cleaner emoji">🧹</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🍳" aria-label="Cooking frying pan emoji">🍳</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🌿" aria-label="Green herb plant emoji">🌿</button>
-                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🪙" aria-label="Golden coin money emoji">🪙</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-955 transition-all active:scale-95" data-emoji="📱" aria-label="Mobile phone screen emoji">📱</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🍺" aria-label="Alcohol beer mug emoji">🍺</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🧹" aria-label="Cleaning broom sweep emoji">🧹</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🍳" aria-label="Cooking egg pan emoji">🍳</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🌿" aria-label="Green herb foliage botanical emoji">🌿</button>
+                                <button type="button" class="emoji-select-btn w-7 h-7 flex items-center justify-center text-sm rounded-lg bg-white border border-stone-200 hover:border-stone-900 transition-all active:scale-95" data-emoji="🪙" aria-label="Golden coin currency emoji">🪙</button>
                             </div>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
                         <input type="text" id="habit-emoji" maxlength="2" placeholder="🧘" aria-label="Custom emoji keyboard entry"
                             class="w-12 text-center bg-stone-100/50 border border-stone-200 focus:border-stone-900 focus:ring-0 focus:outline-none rounded-xl px-2 py-1.5 text-xs font-bold text-stone-900">
-                        <span class="text-[9px] text-stone-400 font-bold uppercase">Or type your own custom emoji above</span>
+                        <span class="text-[9px] text-stone-700 font-bold uppercase">Or type your own custom emoji above</span>
                     </div>
                 </div>
 
                 <div>
-                    <label for="habit-name" class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1">Habit Name</label>
+                    <label for="habit-name" class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1">Habit Name</label>
                     <input type="text" id="habit-name" required maxlength="30" placeholder="e.g., Read 10 Pages, Write journal"
                         class="w-full bg-stone-100/50 border border-stone-200 focus:border-stone-900 focus:ring-0 focus:outline-none rounded-xl px-3 py-2 text-xs font-bold text-stone-900">
                 </div>
 
                 <!-- Build vs Break selection -->
                 <div>
-                    <span class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1" id="habit-strategy-label">Habit Strategy</span>
+                    <span class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1" id="habit-strategy-label">Habit Strategy</span>
                     <div class="grid grid-cols-2 gap-2" role="group" aria-labelledby="habit-strategy-label">
-                        <button type="button" id="strat-build" class="py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all flex items-center justify-center gap-1" aria-label="Set strategy to build a positive habit">
+                        <button type="button" id="strat-build" class="py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-955 bg-stone-900 text-white transition-all flex items-center justify-center gap-1" aria-label="Set strategy to build a positive habit">
                             <i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Build Habit
                         </button>
                         <button type="button" id="strat-break" class="py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all flex items-center justify-center gap-1" aria-label="Set strategy to break a negative habit">
@@ -535,58 +558,58 @@
 
                 <!-- Advanced Scheduling Frequency Selector -->
                 <div>
-                    <span class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1" id="schedule-label">Schedule / Frequency</span>
+                    <span class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1" id="schedule-label">Schedule / Frequency</span>
                     <div class="grid grid-cols-2 gap-2 mb-1.5" role="group" aria-labelledby="schedule-label">
-                        <button type="button" id="freq-daily" class="py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all" aria-label="Schedule habit for every day">Every Day</button>
-                        <button type="button" id="freq-custom" class="py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all" aria-label="Schedule habit for custom specific days">Specific Days</button>
+                        <button type="button" id="freq-daily" class="py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-955 bg-stone-900 text-white transition-all" aria-label="Schedule habit for every day">Every Day</button>
+                        <button type="button" id="freq-custom" class="py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-700 bg-transparent transition-all" aria-label="Schedule habit for custom specific days">Specific Days</button>
                     </div>
                     
                     <!-- Weekdays Selector Grid (Hidden unless custom) -->
                     <div id="weekday-selector-wrapper" class="hidden grid grid-cols-7 gap-1 mt-1.5" role="group" aria-label="Select weekdays to perform habit">
-                        <button type="button" data-day="1" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Monday">M</button>
-                        <button type="button" data-day="2" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Tuesday">T</button>
-                        <button type="button" data-day="3" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Wednesday">W</button>
-                        <button type="button" data-day="4" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Thursday">T</button>
-                        <button type="button" data-day="5" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Friday">F</button>
-                        <button type="button" data-day="6" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Saturday">S</button>
-                        <button type="button" data-day="0" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400" aria-label="Sunday">S</button>
+                        <button type="button" data-day="1" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Monday">M</button>
+                        <button type="button" data-day="2" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Tuesday">T</button>
+                        <button type="button" data-day="3" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Wednesday">W</button>
+                        <button type="button" data-day="4" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Thursday">T</button>
+                        <button type="button" data-day="5" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Friday">F</button>
+                        <button type="button" data-day="6" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Saturday">S</button>
+                        <button type="button" data-day="0" class="day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400" aria-label="Sunday">S</button>
                     </div>
                 </div>
 
                 <!-- Custom Daily Alarm Reminder -->
                 <div>
-                    <label for="habit-reminder" class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1">Reminder (Optional)</label>
+                    <label for="habit-reminder" class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1">Reminder (Optional)</label>
                     <input type="time" id="habit-reminder" class="w-full bg-stone-100/50 border border-stone-200 focus:border-stone-900 focus:ring-0 focus:outline-none rounded-xl px-3 py-1.5 text-xs font-bold text-stone-900">
                 </div>
 
                 <div>
-                    <span class="block text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1" id="accent-colors-group">Zen Color Accent</span>
+                    <span class="block text-[10px] font-black text-stone-700 uppercase tracking-widest mb-1" id="accent-colors-group">Zen Color Accent</span>
                     <div class="flex gap-2.5" role="radiogroup" aria-labelledby="accent-colors-group">
                         <label class="cursor-pointer">
                             <input type="radio" name="habit-color" value="indigo" checked class="sr-only peer">
-                            <span class="w-5 h-5 rounded-full bg-indigo-600 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Indigo color accent"></span>
+                            <span class="w-5 h-5 rounded-full bg-indigo-700 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Indigo color accent"></span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="habit-color" value="emerald" class="sr-only peer">
-                            <span class="w-5 h-5 rounded-full bg-emerald-600 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Emerald color accent"></span>
+                            <span class="w-5 h-5 rounded-full bg-emerald-700 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Emerald color accent"></span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="habit-color" value="rose" class="sr-only peer">
-                            <span class="w-5 h-5 rounded-full bg-rose-600 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Rose color accent"></span>
+                            <span class="w-5 h-5 rounded-full bg-rose-700 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Rose color accent"></span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="habit-color" value="amber" class="sr-only peer">
-                            <span class="w-5 h-5 rounded-full bg-amber-600 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Amber color accent"></span>
+                            <span class="w-5 h-5 rounded-full bg-amber-500 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Amber color accent"></span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="radio" name="habit-color" value="purple" class="sr-only peer">
-                            <span class="w-5 h-5 rounded-full bg-purple-600 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Purple color accent"></span>
+                            <span class="w-5 h-5 rounded-full bg-purple-700 block border-2 border-transparent peer-checked:border-stone-900 transition-all" aria-label="Purple color accent"></span>
                         </label>
                     </div>
                 </div>
 
                 <div class="flex gap-3 pt-2.5 border-t border-stone-200/50">
-                    <button type="button" id="btn-cancel-add" class="flex-1 py-2 bg-stone-100 border border-stone-200 rounded-xl text-stone-500 text-[10px] font-black uppercase tracking-widest hover:bg-stone-200 transition-all">Cancel</button>
+                    <button type="button" id="btn-cancel-add" class="flex-1 py-2 bg-stone-100 border border-stone-200 rounded-xl text-stone-600 text-[10px] font-black uppercase tracking-widest hover:bg-stone-200 transition-all">Cancel</button>
                     <button type="submit" class="flex-1 py-2 bg-stone-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-stone-800 transition-all">Save Habit</button>
                 </div>
             </form>
@@ -597,7 +620,7 @@
     <div id="checkin-note-modal" class="modal-backdrop z-[215]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="checkin-title" aria-describedby="checkin-desc">
         <div class="bg-white/95 backdrop-blur-2xl p-5 rounded-[2rem] max-w-sm w-full shadow-2xl border border-white/50 relative" onclick="event.stopPropagation()">
             <h3 class="text-sm font-black text-stone-900 mb-0.5 uppercase tracking-tight" id="checkin-title">Check-In Reflection</h3>
-            <p id="checkin-desc" class="text-stone-500 text-[10px] mb-3 font-bold uppercase tracking-wider">Log a quick win, metric, or feeling for today (Optional)</p>
+            <p id="checkin-desc" class="text-stone-700 text-[10px] mb-3 font-bold uppercase tracking-wider">Log a quick win, metric, or feeling for today (Optional)</p>
             
             <div class="space-y-3.5 text-left">
                 <input type="hidden" id="checkin-habit-id" value="">
@@ -605,9 +628,8 @@
                     class="w-full h-16 bg-stone-100/50 border border-stone-200 focus:border-stone-900 focus:ring-0 focus:outline-none rounded-xl px-3 py-1.5 text-xs font-semibold text-stone-900 resize-none" aria-label="Reflection details text field"></textarea>
                 
                 <div class="flex gap-2">
-                    <button id="btn-skip-note" class="flex-1 py-2 bg-stone-100 border border-stone-200 rounded-xl text-stone-500 text-[10px] font-black uppercase tracking-widest hover:bg-stone-200 transition-all">Just Check</button>
-                    <button id="btn-skip-day-action" class="flex-1 py-2 bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-100 transition-all" aria-label="Mark habit as skipped/paused for today">Skip Day (Pause)</button>
-                    <button id="btn-save-note" class="flex-grow py-2 bg-stone-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-stone-850 transition-all">Log & Complete</button>
+                    <button id="btn-cancel-note" class="flex-1 py-2 bg-stone-100 border border-stone-200 rounded-xl text-stone-600 text-[10px] font-black uppercase tracking-widest hover:bg-stone-200 transition-all">Cancel</button>
+                    <button id="btn-save-note" class="flex-grow py-2 bg-stone-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-stone-850 transition-all">Save Note</button>
                 </div>
             </div>
         </div>
@@ -616,15 +638,15 @@
     <!-- 3. Detail Analysis Modal -->
     <div id="detail-habit-modal" class="modal-backdrop z-[210]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="detail-habit-title" aria-describedby="detail-habit-schedule-text">
         <div class="bg-white/95 backdrop-blur-2xl p-5 rounded-[2.5rem] max-w-md w-full shadow-2xl border border-white/50 relative overflow-hidden" onclick="event.stopPropagation()">
-            <button id="btn-close-detail" class="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors" aria-label="Close detailed habit view"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+            <button id="btn-close-detail" class="absolute top-4 right-4 text-stone-600 hover:text-stone-900 transition-colors" aria-label="Close detailed habit view"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
             
             <div id="detail-modal-header" class="text-left mb-3 flex justify-between items-start pr-6">
                 <div>
-                    <span id="detail-category" class="inline-block text-[8px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded bg-stone-100 text-stone-500 mb-0.5">Mind</span>
-                    <h3 id="detail-habit-title" class="text-lg font-black text-stone-900">Habit Title</h3>
-                    <p id="detail-habit-schedule-text" class="text-[10px] text-stone-500 font-bold uppercase tracking-wide mt-0.5">Scheduled: Every Day</p>
+                    <span id="detail-category" class="inline-block text-[8px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded bg-stone-100 text-stone-700 mb-0.5 font-bold">Mind</span>
+                    <h2 id="detail-habit-title" class="text-lg font-black text-stone-900">Habit Title</h2>
+                    <p id="detail-habit-schedule-text" class="text-[10px] text-stone-750 font-bold uppercase tracking-wide mt-0.5">Scheduled: Every Day</p>
                 </div>
-                <button id="btn-edit-habit-trigger" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-600 rounded-lg text-[10px] font-black uppercase tracking-wider flex items-center gap-1" aria-label="Edit the parameters of this habit">
+                <button id="btn-edit-habit-trigger" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-750 rounded-lg text-[10px] font-black uppercase tracking-wider flex items-center gap-1" aria-label="Edit the parameters of this habit">
                     <i class="fa-solid fa-pen" aria-hidden="true"></i> Edit
                 </button>
             </div>
@@ -632,58 +654,66 @@
             <!-- Dashboard Stats Grid -->
             <div class="grid grid-cols-4 gap-2 text-center mb-3">
                 <div class="bg-stone-50 border border-stone-200/40 rounded-xl p-2">
-                    <span class="block text-[7px] font-black text-stone-500 uppercase tracking-widest leading-none mb-0.5">Active</span>
+                    <span class="block text-[7px] font-black text-stone-700 uppercase tracking-widest leading-none mb-0.5">Active</span>
                     <span id="detail-stat-active-streak" class="text-xs font-black text-stone-900">0d</span>
                 </div>
                 <div class="bg-stone-50 border border-stone-200/40 rounded-xl p-2">
-                    <span class="block text-[7px] font-black text-stone-500 uppercase tracking-widest leading-none mb-0.5">Max Streak</span>
-                    <span id="detail-stat-max-streak" class="text-xs font-black text-rose-700">0d</span>
+                    <span class="block text-[7px] font-black text-stone-700 uppercase tracking-widest leading-none mb-0.5">Max Streak</span>
+                    <span id="detail-stat-max-streak" class="text-xs font-black text-rose-800">0d</span>
                 </div>
                 <div class="bg-stone-50 border border-stone-200/40 rounded-xl p-2">
-                    <span class="block text-[7px] font-black text-stone-500 uppercase tracking-widest leading-none mb-0.5">Total Clears</span>
+                    <span class="block text-[7px] font-black text-stone-700 uppercase tracking-widest leading-none mb-0.5">Total Clears</span>
                     <span id="detail-stat-total" class="text-xs font-black text-stone-900">0</span>
                 </div>
                 <div class="bg-stone-50 border border-stone-200/40 rounded-xl p-2">
-                    <span class="block text-[7px] font-black text-stone-500 uppercase tracking-widest leading-none mb-0.5">Consistency</span>
-                    <span id="detail-stat-rate" class="text-xs font-black text-indigo-700">0%</span>
+                    <span class="block text-[7px] font-black text-stone-700 uppercase tracking-widest leading-none mb-0.5">Consistency</span>
+                    <span id="detail-stat-rate" class="text-xs font-black text-indigo-800">0%</span>
                 </div>
             </div>
 
             <!-- GitHub-Style Contribution Map (Advanced Highlight) -->
             <div class="mb-3 text-left bg-stone-50/50 border border-stone-200/40 p-3 rounded-2xl relative">
-                <span class="block text-[8px] font-black text-stone-500 uppercase tracking-widest mb-2" id="grid-header">26-Week Contribution Chain</span>
+                <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-2" id="grid-header">26-Week Contribution Chain</span>
                 
-                <div class="overflow-x-auto hide-scrollbar">
-                    <div class="flex gap-2 min-w-[280px]">
-                        <!-- Day labels column -->
-                        <div class="grid grid-rows-7 text-[7px] font-black text-stone-400 gap-1 select-none pr-1" aria-hidden="true">
-                            <span>Mon</span>
-                            <span></span>
-                            <span>Wed</span>
-                            <span></span>
-                            <span>Fri</span>
-                            <span></span>
-                            <span>Sun</span>
-                        </div>
-                        <!-- Grid map containing weekly dots columns -->
-                        <div id="detail-contribution-grid" class="grid grid-flow-col grid-rows-7 gap-1 flex-grow" role="group" aria-labelledby="grid-header">
-                            <!-- Injected dynamically by JS -->
+                <div class="relative">
+                    <div id="heatmap-scroll-container" class="overflow-x-auto hide-scrollbar">
+                        <div class="flex gap-2 min-w-[280px]">
+                            <!-- Day labels column -->
+                            <div class="grid grid-rows-7 text-[7px] font-black text-stone-700 gap-1 select-none pr-1" aria-hidden="true">
+                                <span>Mon</span>
+                                <span></span>
+                                <span>Wed</span>
+                                <span></span>
+                                <span>Fri</span>
+                                <span></span>
+                                <span>Sun</span>
+                            </div>
+                            <!-- Grid map containing weekly dots columns -->
+                            <div id="detail-contribution-grid" class="grid grid-flow-col grid-rows-7 gap-1 flex-grow" role="group" aria-labelledby="grid-header">
+                                <!-- Injected dynamically by JS -->
+                            </div>
                         </div>
                     </div>
+                    <!-- Smart Scroll Discovery Mask Indicator -->
+                    <div id="scroll-fade-indicator" class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-stone-100 to-transparent pointer-events-none z-10 transition-opacity duration-300"></div>
+                </div>
+                <!-- Heatmap Inspector Label -->
+                <div id="heatmap-inspector" class="text-[10px] text-stone-700 font-black mt-2 bg-stone-100/50 p-1.5 rounded-lg border border-stone-200/40 text-center min-h-[28px] flex items-center justify-center gap-1.5">
+                    Tap or hover a square to inspect details.
                 </div>
             </div>
 
             <!-- Reflection Notes Log Timeline -->
             <div class="mb-4 text-left bg-stone-50/50 border border-stone-200/40 p-3 rounded-2xl">
-                <span class="block text-[8px] font-black text-stone-500 uppercase tracking-widest mb-1.5" id="timeline-title">Recent Reflection Notes</span>
+                <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-1.5" id="timeline-title">Recent Reflection Notes</span>
                 <div id="detail-reflection-logs" class="max-h-20 overflow-y-auto space-y-1.5 text-xs hide-scrollbar" role="log" aria-labelledby="timeline-title">
                     <!-- Dynamic reflection list -->
                 </div>
             </div>
 
             <div class="flex gap-3 pt-3.5 border-t border-stone-150 justify-between items-center">
-                <!-- Competitor Beating 2-Step Custom Confirmation button (complies with NO-CONFIRMATION prompt) -->
-                <button id="btn-delete-habit" class="text-[9px] font-black text-red-600 hover:text-red-800 uppercase tracking-widest flex items-center gap-1 transition-all duration-300">
+                <!-- Competitor Beating 2-Step Custom Confirmation button -->
+                <button id="btn-delete-habit" class="text-[9px] font-black text-red-850 hover:text-red-955 uppercase tracking-widest flex items-center gap-1 transition-all duration-300">
                     <i class="fa-solid fa-trash-can text-[10px]" aria-hidden="true"></i> Delete Habit
                 </button>
                 <button id="btn-close-detail-modal" class="px-5 py-2 bg-stone-900 hover:bg-stone-850 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-md active:scale-95">Done</button>
@@ -694,10 +724,10 @@
     <!-- 4. Achievements / Zen Milestones Modal -->
     <div id="achievements-modal" class="modal-backdrop z-[210]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ach_title" aria-describedby="ach_desc">
         <div class="bg-white/95 backdrop-blur-2xl p-5 sm:p-6 rounded-[2.5rem] max-w-md w-full shadow-2xl border border-white/50 relative overflow-hidden" onclick="event.stopPropagation()">
-            <button id="btn-close-achievements" class="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors" aria-label="Close milestone dashboard"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+            <button id="btn-close-achievements" class="absolute top-4 right-4 text-stone-600 hover:text-stone-900 transition-colors" aria-label="Close milestone dashboard"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
             
-            <h3 class="text-base font-black text-stone-900 mb-1.5 uppercase tracking-tight text-center" id="ach_title">Zen Achievements</h3>
-            <p class="text-stone-500 text-xs mb-4 text-center font-medium leading-relaxed" id="ach_desc">Behavioral milestones to reinforce your atomic consistency loops.</p>
+            <h2 class="text-base font-black text-stone-900 mb-1.5 uppercase tracking-tight text-center" id="ach_title">Zen Achievements</h2>
+            <p class="text-stone-700 text-xs mb-4 text-center font-medium leading-relaxed" id="ach_desc">Behavioral milestones to reinforce your atomic consistency loops.</p>
             
             <!-- Grid of Badges -->
             <div class="grid grid-cols-2 gap-2.5 max-h-[45vh] overflow-y-auto hide-scrollbar p-0.5" id="achievements-grid">
@@ -709,28 +739,53 @@
     <!-- 5. Backup / Import / Export Modal -->
     <div id="backup-modal" class="modal-backdrop z-[210]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="backup-title" aria-describedby="backup-desc">
         <div class="bg-white/95 backdrop-blur-2xl p-5 sm:p-6 rounded-[2.5rem] max-w-sm w-full shadow-2xl border border-white/50 relative" onclick="event.stopPropagation()">
-            <button id="btn-close-backup" class="absolute top-4 right-4 text-stone-400 hover:text-stone-900 transition-colors" aria-label="Close backup config"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+            <button id="btn-close-backup" class="absolute top-4 right-4 text-stone-600 hover:text-stone-900 transition-colors" aria-label="Close backup config"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
             
-            <h3 class="text-base font-black text-stone-900 mb-1.5 uppercase tracking-tight text-center" id="backup-title">Ecosystem Backup</h3>
-            <p class="text-stone-500 text-xs mb-4 text-center font-medium leading-relaxed" id="backup-desc">Save your consistency checkpoints locally to protect your data.</p>
+            <h2 class="text-base font-black text-stone-900 mb-1.5 uppercase tracking-tight text-center" id="backup-title">Ecosystem Backup</h2>
+            <p class="text-stone-700 text-xs mb-4 text-center font-medium leading-relaxed" id="backup-desc">Save your consistency checkpoints locally to protect your data.</p>
             
             <div class="space-y-2.5">
                 <button id="btn-export-csv" class="w-full py-3 px-4 border border-stone-200 bg-white hover:bg-stone-50 shadow-sm rounded-xl text-left font-black text-stone-900 transition-all flex justify-between items-center group text-[11px] uppercase tracking-wide" aria-label="Download progress report as spreadsheet CSV file">
                     <span>Export Spreadsheet (.csv)</span>
-                    <i class="fa-solid fa-file-csv text-stone-400 group-hover:text-stone-900 transition-colors text-sm" aria-hidden="true"></i>
+                    <i class="fa-solid fa-file-csv text-stone-600 group-hover:text-stone-900 transition-colors text-sm" aria-hidden="true"></i>
                 </button>
                 <button id="btn-backup-json" class="w-full py-3 px-4 border border-stone-200 bg-white hover:bg-stone-50 shadow-sm rounded-xl text-left font-black text-stone-900 transition-all flex justify-between items-center group text-[11px] uppercase tracking-wide" aria-label="Download direct JSON system state backup file">
                     <span>Download JSON Backup</span>
-                    <i class="fa-solid fa-download text-stone-400 group-hover:text-stone-900 transition-colors text-sm" aria-hidden="true"></i>
+                    <i class="fa-solid fa-download text-stone-600 group-hover:text-stone-900 transition-colors text-sm" aria-hidden="true"></i>
                 </button>
                 
                 <div class="pt-3.5 mt-3.5 border-t border-stone-200/50">
                     <label class="w-full py-2.5 px-4 border border-stone-200/50 bg-stone-50/50 hover:bg-stone-100 rounded-xl transition-colors flex justify-between items-center cursor-pointer">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-stone-600">Restore JSON State</span>
-                        <i class="fa-solid fa-upload text-[11px] text-stone-500" aria-hidden="true"></i>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-stone-700">Restore JSON State</span>
+                        <i class="fa-solid fa-upload text-[11px] text-stone-600" aria-hidden="true"></i>
                         <input type="file" id="import-state-json" accept=".json" class="hidden" aria-label="Upload system JSON backup file">
                     </label>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Analytics & Reports Modal (New Premium Feature) -->
+    <div id="analytics-modal" class="modal-backdrop z-[210]" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="analytics-title" aria-describedby="analytics-desc">
+        <div class="bg-white/95 backdrop-blur-2xl p-5 sm:p-6 rounded-[2.5rem] max-w-md w-full shadow-2xl border border-white/50 relative overflow-hidden" onclick="event.stopPropagation()">
+            <button id="btn-close-analytics" class="absolute top-4 right-4 text-stone-600 hover:text-stone-900 transition-colors" aria-label="Close analytics hub"><i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i></button>
+            
+            <h2 class="text-base font-black text-stone-900 mb-1" id="analytics-title">Ecosystem Analytics</h2>
+            <p class="text-stone-700 text-xs mb-4 font-semibold text-center leading-relaxed" id="analytics-desc">Real-time performance reports to optimize and master your daily focus patterns.</p>
+            
+            <!-- Tab switches -->
+            <div class="flex p-0.5 bg-stone-100 rounded-xl mb-4 text-[10px] font-black uppercase tracking-wider" role="tablist" aria-label="Analytics view options">
+                <button id="btn-anal-weekly" class="flex-1 py-1.5 rounded-lg bg-white text-stone-900 shadow transition-all" role="tab" aria-selected="true" aria-controls="analytics-content-box">Overview & Success</button>
+                <button id="btn-anal-monthly" class="flex-1 py-1.5 rounded-lg text-stone-700 transition-all" role="tab" aria-selected="false" aria-controls="analytics-content-box">Trends & Heatmap</button>
+            </div>
+            
+            <!-- Analytics Dynamic Content Box -->
+            <div class="max-h-[45vh] overflow-y-auto hide-scrollbar space-y-4 text-left p-0.5" id="analytics-content-box" role="tabpanel">
+                <!-- Content injected dynamically by JS -->
+            </div>
+            
+            <div class="pt-3 mt-4 border-t border-stone-200/50 flex justify-end">
+                <button id="btn-close-analytics-modal" class="px-5 py-2 bg-stone-900 hover:bg-stone-850 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all shadow-md active:scale-95">Done</button>
             </div>
         </div>
     </div>
@@ -1346,8 +1401,7 @@
                 this.checkinNoteModal = document.getElementById('checkin-note-modal');
                 this.checkinHabitIdInput = document.getElementById('checkin-habit-id');
                 this.checkinNoteInput = document.getElementById('checkin-note-input');
-                this.btnSkipNote = document.getElementById('btn-skip-note');
-                this.btnSkipDayAction = document.getElementById('btn-skip-day-action');
+                this.btnCancelNote = document.getElementById('btn-cancel-note');
                 this.btnSaveNote = document.getElementById('btn-save-note');
 
                 this.detailModal = document.getElementById('detail-habit-modal');
@@ -1364,6 +1418,16 @@
                 this.btnCloseAchievements = document.getElementById('btn-close-achievements');
                 this.badgeCountUnlocked = document.getElementById('badge-count-unlocked');
                 this.achievementsGrid = document.getElementById('achievements-grid');
+
+                // Analytics Elements
+                this.analyticsModal = document.getElementById('analytics-modal');
+                this.btnViewAnalytics = document.getElementById('btn-view-analytics');
+                this.btnCloseAnalytics = document.getElementById('btn-close-analytics');
+                this.btnCloseAnalyticsModalBtn = document.getElementById('btn-close-analytics-modal');
+                this.btnAnalWeekly = document.getElementById('btn-anal-weekly');
+                this.btnAnalMonthly = document.getElementById('btn-anal-monthly');
+                this.analyticsContentBox = document.getElementById('analytics-content-box');
+                this.activeAnalyticsTab = 'weekly';
 
                 this.detailActiveStreak = document.getElementById('detail-stat-active-streak');
                 this.detailMaxStreak = document.getElementById('detail-stat-max-streak');
@@ -1432,13 +1496,13 @@
                             if (this.customDaysSelection.length > 1) {
                                 this.customDaysSelection = this.customDaysSelection.filter(d => d !== day);
                                 btn.classList.remove('bg-stone-900', 'text-white', 'border-stone-900');
-                                btn.classList.add('text-stone-500', 'border-stone-200');
+                                btn.classList.add('text-stone-700', 'border-stone-200');
                                 this.announce(`Removed ${btn.getAttribute('aria-label')} from schedule`);
                             }
                         } else {
                             this.customDaysSelection.push(day);
                             btn.classList.add('bg-stone-900', 'text-white', 'border-stone-900');
-                            btn.classList.remove('text-stone-500', 'border-stone-200');
+                            btn.classList.remove('text-stone-700', 'border-stone-200');
                             this.announce(`Added ${btn.getAttribute('aria-label')} to schedule`);
                         }
                     });
@@ -1487,24 +1551,8 @@
                     }
                 });
 
-                this.btnSkipNote.addEventListener('click', () => {
-                    const habitId = this.checkinHabitIdInput.value;
-                    const todayStr = this.state.getLocalDateString(new Date());
-                    const habit = this.state.habits.find(h => h.id === habitId);
-                    this.state.toggleCheck(habitId, todayStr, "");
-                    ChimeEngine.playZenChime(this.state.audioTheme);
+                this.btnCancelNote.addEventListener('click', () => {
                     this.closeAccessibleModal('checkin-note-modal');
-                    this.announce(`Check-in logged for ${habit ? habit.name : ''}`);
-                });
-
-                this.btnSkipDayAction.addEventListener('click', () => {
-                    const habitId = this.checkinHabitIdInput.value;
-                    const todayStr = this.state.getLocalDateString(new Date());
-                    const habit = this.state.habits.find(h => h.id === habitId);
-                    this.state.toggleCheck(habitId, todayStr, "Skipped Day override", true);
-                    this.showToast('Day Skipped without streak penalty.');
-                    this.closeAccessibleModal('checkin-note-modal');
-                    this.announce(`Day paused for ${habit ? habit.name : ''} without streak penalty.`);
                 });
 
                 this.btnSaveNote.addEventListener('click', () => {
@@ -1512,10 +1560,13 @@
                     const todayStr = this.state.getLocalDateString(new Date());
                     const note = this.checkinNoteInput.value;
                     const habit = this.state.habits.find(h => h.id === habitId);
-                    this.state.toggleCheck(habitId, todayStr, note);
+                    
+                    // Direct completion update with reflection note
+                    this.state.toggleCheck(habitId, todayStr, note, false);
                     ChimeEngine.playZenChime(this.state.audioTheme);
                     this.closeAccessibleModal('checkin-note-modal');
-                    this.announce(`Check-in logged with reflection for ${habit ? habit.name : ''}`);
+                    this.announce(`Reflection note logged for ${habit ? habit.name : ''}`);
+                    this.showToast('Reflection note saved.');
                 });
 
                 const closeDetail = () => {
@@ -1540,8 +1591,8 @@
                         if (this.deleteStep === 0) {
                             this.deleteStep = 1;
                             this.btnDeleteHabit.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-[10px]" aria-hidden="true"></i> Confirm Delete?';
-                            this.btnDeleteHabit.classList.add('text-amber-600', 'hover:text-amber-800');
-                            this.btnDeleteHabit.classList.remove('text-red-600', 'hover:text-red-800');
+                            this.btnDeleteHabit.classList.add('text-amber-800', 'hover:text-amber-955');
+                            this.btnDeleteHabit.classList.remove('text-red-850', 'hover:text-red-955');
                             this.announce(`Confirm delete for ${habit ? habit.name : ''}. Click again to verify.`);
                             
                             this.deleteTimeout = setTimeout(() => {
@@ -1562,6 +1613,23 @@
                 });
                 this.btnCloseAchievements.addEventListener('click', () => {
                     this.closeAccessibleModal('achievements-modal');
+                });
+
+                // Analytics Events
+                this.btnViewAnalytics.addEventListener('click', () => {
+                    this.openAnalyticsModal();
+                });
+                this.btnCloseAnalytics.addEventListener('click', () => {
+                    this.closeAccessibleModal('analytics-modal');
+                });
+                this.btnCloseAnalyticsModalBtn.addEventListener('click', () => {
+                    this.closeAccessibleModal('analytics-modal');
+                });
+                this.btnAnalWeekly.addEventListener('click', () => {
+                    this.setAnalyticsTab('weekly');
+                });
+                this.btnAnalMonthly.addEventListener('click', () => {
+                    this.setAnalyticsTab('monthly');
                 });
 
                 this.btnBackupMenu.addEventListener('click', () => {
@@ -1636,20 +1704,20 @@
                 clearTimeout(this.deleteTimeout);
                 this.deleteStep = 0;
                 this.btnDeleteHabit.innerHTML = '<i class="fa-solid fa-trash-can text-[10px]" aria-hidden="true"></i> Delete Habit';
-                this.btnDeleteHabit.classList.add('text-red-600', 'hover:text-red-800');
-                this.btnDeleteHabit.classList.remove('text-amber-600', 'hover:text-amber-800');
+                this.btnDeleteHabit.classList.add('text-red-850', 'hover:text-red-955');
+                this.btnDeleteHabit.classList.remove('text-amber-800', 'hover:text-amber-955');
             }
 
             setFrequencyMode(mode) {
                 this.activeFrequencyMode = mode;
                 if (mode === 'daily') {
                     this.freqDaily.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all";
-                    this.freqCustom.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all";
+                    this.freqCustom.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-700 bg-transparent transition-all";
                     this.weekdaySelectorWrapper.classList.add('hidden');
                     this.announce('Frequency mode set to daily.');
                 } else {
                     this.freqCustom.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all";
-                    this.freqDaily.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all";
+                    this.freqDaily.className = "py-1.5 text-[10px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-700 bg-transparent transition-all";
                     this.weekdaySelectorWrapper.classList.remove('hidden');
                     this.announce('Frequency mode set to specific custom weekdays.');
                 }
@@ -1658,12 +1726,12 @@
             setStrategyMode(mode) {
                 this.activeStrategy = mode;
                 if (mode === 'build') {
-                    this.stratBuild.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all flex items-center justify-center gap-1";
-                    this.stratBreak.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all flex items-center justify-center gap-1";
+                    this.stratBuild.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-955 bg-stone-900 text-white transition-all flex items-center justify-center gap-1";
+                    this.stratBreak.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-700 bg-transparent transition-all flex items-center justify-center gap-1";
                     this.announce('Strategy set to build habit.');
                 } else {
-                    this.stratBreak.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-950 bg-stone-900 text-white transition-all flex items-center justify-center gap-1";
-                    this.stratBuild.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-600 bg-transparent transition-all flex items-center justify-center gap-1";
+                    this.stratBreak.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-955 bg-stone-900 text-white transition-all flex items-center justify-center gap-1";
+                    this.stratBuild.className = "py-1.5 text-[9px] font-black uppercase tracking-wider rounded-lg border-2 border-stone-200 text-stone-700 bg-transparent transition-all flex items-center justify-center gap-1";
                     this.announce('Strategy set to break habit.');
                 }
             }
@@ -1697,7 +1765,7 @@
                     if (this.customDaysSelection.includes(day)) {
                         btn.className = "day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-900 bg-stone-900 text-white";
                     } else {
-                        btn.className = "day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-500 hover:border-stone-400";
+                        btn.className = "day-select-btn py-1 text-[9px] font-black rounded-md border border-stone-200 text-stone-700 hover:border-stone-400";
                     }
                 });
 
@@ -1719,29 +1787,313 @@
                     }`;
 
                     const textColors = {
-                        indigo: 'text-indigo-600 bg-indigo-50 border-indigo-100',
-                        rose: 'text-rose-600 bg-rose-50 border-rose-100',
-                        emerald: 'text-emerald-600 bg-emerald-50 border-emerald-100',
-                        amber: 'text-amber-600 bg-amber-50 border-amber-100',
-                        purple: 'text-purple-600 bg-purple-50 border-purple-100',
-                        teal: 'text-teal-600 bg-teal-50 border-teal-100'
-                    }[b.color] || 'text-stone-600 bg-stone-50';
+                        indigo: 'text-indigo-850 bg-indigo-50 border-indigo-100',
+                        rose: 'text-rose-850 bg-rose-50 border-rose-100',
+                        emerald: 'text-emerald-850 bg-emerald-50 border-emerald-100',
+                        amber: 'text-amber-850 bg-amber-50 border-amber-100',
+                        purple: 'text-purple-850 bg-purple-50 border-purple-100',
+                        teal: 'text-teal-850 bg-teal-50 border-teal-100'
+                    }[b.color] || 'text-stone-700 bg-stone-50';
 
                     card.innerHTML = `
                         <div class="w-8 h-8 rounded-full flex items-center justify-center border text-xs mb-2 ${textColors}">
                             <i class="fa-solid ${b.icon}" aria-hidden="true"></i>
                         </div>
-                        <h4 class="text-[10px] font-black text-stone-900 uppercase tracking-tight leading-tight mb-0.5">${b.title}</h4>
-                        <p class="text-[8px] text-stone-500 font-semibold leading-relaxed max-w-[120px]">${b.desc}</p>
+                        <h3 class="text-[10px] font-black text-stone-900 uppercase tracking-tight leading-tight mb-0.5">${b.title}</h3>
+                        <p class="text-[8px] text-stone-700 font-semibold leading-relaxed max-w-[120px]">${b.desc}</p>
                         ${b.unlocked 
                             ? `<span class="mt-1.5 text-[6px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full">Unlocked</span>`
-                            : `<span class="mt-1.5 text-[6px] font-black uppercase tracking-widest bg-stone-100 text-stone-400 px-1.5 py-0.5 rounded-full">Locked</span>`
+                            : `<span class="mt-1.5 text-[6px] font-black uppercase tracking-widest bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded-full">Locked</span>`
                         }
                     `;
                     this.achievementsGrid.appendChild(card);
                 });
 
                 this.openAccessibleModal('achievements-modal');
+            }
+
+            openAnalyticsModal() {
+                this.setAnalyticsTab('weekly');
+                this.openAccessibleModal('analytics-modal');
+            }
+
+            setAnalyticsTab(tab) {
+                this.activeAnalyticsTab = tab;
+                if (tab === 'weekly') {
+                    this.btnAnalWeekly.className = "flex-1 py-1.5 rounded-lg bg-white text-stone-900 shadow transition-all";
+                    this.btnAnalMonthly.className = "flex-1 py-1.5 rounded-lg text-stone-700 transition-all";
+                    this.renderWeeklyAnalytics();
+                } else {
+                    this.btnAnalMonthly.className = "flex-1 py-1.5 rounded-lg bg-white text-stone-900 shadow transition-all";
+                    this.btnAnalWeekly.className = "flex-1 py-1.5 rounded-lg text-stone-700 transition-all";
+                    this.renderMonthlyAnalytics();
+                }
+            }
+
+            renderWeeklyAnalytics() {
+                this.analyticsContentBox.innerHTML = '';
+                if (this.state.habits.length === 0) {
+                    this.analyticsContentBox.innerHTML = `<p class="text-xs text-stone-700 italic text-center py-6">Create habits first to analyze consistency loops.</p>`;
+                    return;
+                }
+
+                const today = new Date();
+                
+                // 1. Calculate Live Weekly Consistency (Last 7 Days)
+                let totalScheduledLast7 = 0;
+                let totalCompletedLast7 = 0;
+                for (let i = 6; i >= 0; i--) {
+                    const checkDate = new Date();
+                    checkDate.setDate(today.getDate() - i);
+                    const dateStr = this.state.getLocalDateString(checkDate);
+                    this.state.habits.forEach(h => {
+                        if (isScheduledDay(h, checkDate)) {
+                            totalScheduledLast7++;
+                            if (isCompletedDay(h, dateStr)) {
+                                totalCompletedLast7++;
+                            }
+                        }
+                    });
+                }
+                const weeklyConsistency = totalScheduledLast7 > 0 ? Math.round((totalCompletedLast7 / totalScheduledLast7) * 100) : 0;
+
+                // 2. Calculate Success Rates per Habit & find Best Performer
+                let bestHabitName = "None";
+                let bestHabitRate = -1;
+                let bestHabitEmoji = "🧘";
+                
+                const habitRates = this.state.habits.map(h => {
+                    let schedCount = 0;
+                    let compCount = 0;
+                    for (let i = 29; i >= 0; i--) {
+                        const checkDate = new Date();
+                        checkDate.setDate(today.getDate() - i);
+                        const dateStr = this.state.getLocalDateString(checkDate);
+                        if (isScheduledDay(h, checkDate)) {
+                            schedCount++;
+                            if (isCompletedDay(h, dateStr)) {
+                                compCount++;
+                            }
+                        }
+                    }
+                    const successRate = schedCount > 0 ? Math.round((compCount / schedCount) * 100) : 0;
+                    
+                    if (successRate > bestHabitRate && compCount > 0) {
+                        bestHabitRate = successRate;
+                        bestHabitName = h.name;
+                        bestHabitEmoji = h.emoji || "🧘";
+                    }
+
+                    return {
+                        habit: h,
+                        rate: successRate,
+                        completed: compCount,
+                        scheduled: schedCount
+                    };
+                });
+
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = "space-y-4 fade-in";
+
+                // Overview Stats Deck Layout
+                contentWrapper.innerHTML = `
+                    <div class="grid grid-cols-2 gap-3 mb-2">
+                        <div class="bg-stone-50 border border-stone-200/50 p-3 rounded-2xl text-center">
+                            <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">Weekly Consistency</span>
+                            <span class="text-xl font-black text-indigo-800">${weeklyConsistency}%</span>
+                            <span class="block text-[8px] text-stone-600 font-semibold mt-0.5">${totalCompletedLast7} of ${totalScheduledLast7} targets met</span>
+                        </div>
+                        <div class="bg-stone-50 border border-stone-200/50 p-3 rounded-2xl flex flex-col justify-center text-center">
+                            <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">Best Performing Anchor</span>
+                            ${bestHabitRate >= 0 && bestHabitName !== "None" ? `
+                                <span class="text-xs font-black text-stone-900 truncate flex items-center justify-center gap-1">
+                                    <span>${bestHabitEmoji}</span> <span class="truncate">${bestHabitName}</span>
+                                </span>
+                                <span class="block text-[8px] text-stone-700 font-bold mt-0.5 uppercase tracking-wider">${bestHabitRate}% Success Rate</span>
+                            ` : `
+                                <span class="text-xs font-bold text-stone-600 italic">No clear data yet</span>
+                            `}
+                        </div>
+                    </div>
+
+                    <!-- Habit success rates breakdown -->
+                    <div class="space-y-2.5">
+                        <span class="block text-[9px] font-black text-stone-700 uppercase tracking-widest border-b border-stone-100 pb-1">Success Rates per Habit (Last 30 Days)</span>
+                        <div class="space-y-2.5">
+                            ${habitRates.map(item => {
+                                const activeColorClass = {
+                                indigo: 'bg-indigo-700',
+                                emerald: 'bg-emerald-700',
+                                rose: 'bg-rose-700',
+                                amber: 'bg-amber-500',
+                                purple: 'bg-purple-700'
+                            }[item.habit.color] || 'bg-stone-900';
+
+                            return `
+                                    <div class="text-xs space-y-1">
+                                        <div class="flex justify-between font-bold text-stone-850">
+                                            <span class="truncate flex items-center gap-1">
+                                                <span>${item.habit.emoji || '🧘'}</span> <span class="truncate">${item.habit.name}</span>
+                                            </span>
+                                            <span class="font-black text-stone-900">${item.rate}% <span class="text-[9px] text-stone-700 font-semibold">(${item.completed}/${item.scheduled})</span></span>
+                                        </div>
+                                        <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden relative border border-stone-200/40">
+                                            <div class="h-full rounded-full ${activeColorClass} transition-all duration-500" style="width: ${item.rate}%"></div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+
+                this.analyticsContentBox.appendChild(contentWrapper);
+            }
+
+            renderMonthlyAnalytics() {
+                this.analyticsContentBox.innerHTML = '';
+                if (this.state.habits.length === 0) {
+                    this.analyticsContentBox.innerHTML = `<p class="text-xs text-stone-700 italic text-center py-6">Create habits first to analyze trend records.</p>`;
+                    return;
+                }
+
+                const today = new Date();
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = "space-y-5 fade-in";
+
+                // 1. Build a stunning 30-Day Missed-Day Heatmap Month-Matrix
+                const heatmapWrapper = document.createElement('div');
+                heatmapWrapper.className = "bg-stone-50/50 border border-stone-200/40 p-3 rounded-2xl text-left";
+                
+                let heatmapHTML = `
+                    <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-2.5">30-Day Missed & Sickness Heatmap</span>
+                    <div class="grid grid-cols-7 gap-1.5 max-w-[280px] mx-auto mb-2">
+                `;
+
+                // Calculate daily checks over past 30 days
+                const last30Days = [];
+                for (let i = 29; i >= 0; i--) {
+                    const checkDate = new Date();
+                    checkDate.setDate(today.getDate() - i);
+                    const dateStr = this.state.getLocalDateString(checkDate);
+                    
+                    let schedCount = 0;
+                    let compCount = 0;
+                    let skipCount = 0;
+
+                    this.state.habits.forEach(h => {
+                        if (isScheduledDay(h, checkDate)) {
+                            schedCount++;
+                            if (isCompletedDay(h, dateStr)) {
+                                compCount++;
+                            } else if (isSkippedDay(h, dateStr)) {
+                                skipCount++;
+                            }
+                        }
+                    });
+
+                    last30Days.push({
+                        date: dateStr,
+                        scheduled: schedCount,
+                        completed: compCount,
+                        skipped: skipCount
+                    });
+                }
+
+                // Render Heatmap Dots
+                last30Days.forEach(day => {
+                    let colorClass = "bg-stone-100 border border-stone-200/50"; // default unscheduled
+                    let iconHTML = "";
+                    let tooltip = `${day.date} : Rest Day`;
+
+                    if (day.scheduled > 0) {
+                        if (day.skipped === day.scheduled) {
+                            colorClass = "bg-amber-100 border border-amber-300 text-amber-700";
+                            tooltip = `${day.date} : Skipped/Paused Moratorium`;
+                            iconHTML = `<i class="fa-solid fa-forward text-[5px]"></i>`;
+                        } else if (day.completed === day.scheduled) {
+                            colorClass = "bg-indigo-850 border border-indigo-700 text-white shadow-sm";
+                            tooltip = `${day.date} : Perfect Completion (${day.completed}/${day.scheduled})`;
+                        } else if (day.completed > 0) {
+                            colorClass = "bg-indigo-200 border border-indigo-300 text-indigo-800 font-bold";
+                            tooltip = `${day.date} : Partial Success (${day.completed}/${day.scheduled})`;
+                        } else {
+                            colorClass = "bg-rose-50 border border-rose-200 text-rose-800 font-bold";
+                            tooltip = `${day.date} : Missed all targets (0/${day.scheduled})`;
+                            iconHTML = `<i class="fa-solid fa-xmark text-[6px]"></i>`;
+                        }
+                    }
+
+                    heatmapHTML += `
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] cursor-help relative group transition-all hover:scale-110 ${colorClass}" title="${tooltip}">
+                            ${iconHTML}
+                        </div>
+                    `;
+                });
+
+                heatmapHTML += `
+                    </div>
+                    <!-- Minimalist Heatmap Legend -->
+                    <div class="flex flex-wrap gap-2.5 justify-center items-center text-[7px] font-black uppercase tracking-wider text-stone-600 mt-2 border-t border-stone-100 pt-2">
+                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-indigo-850 block"></span> Perfect</span>
+                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-indigo-200 block"></span> Partial</span>
+                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-rose-50 border border-rose-200 block"></span> Missed</span>
+                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-amber-100 border border-amber-300 block"></span> Skipped</span>
+                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-stone-100 border border-stone-200/50 block"></span> Rest</span>
+                    </div>
+                `;
+
+                heatmapWrapper.innerHTML = heatmapHTML;
+                contentWrapper.appendChild(heatmapWrapper);
+
+                // 2. Build the Monthly Trend Chart (Weekly blocks consistency over last 4 weeks)
+                const trendWrapper = document.createElement('div');
+                trendWrapper.className = "bg-stone-50/50 border border-stone-200/40 p-3 rounded-2xl";
+                
+                let trendHTML = `
+                    <span class="block text-[8px] font-black text-stone-700 uppercase tracking-widest mb-3">4-Week Completion Trend Chart</span>
+                    <div class="flex items-end justify-around h-24 pt-2 border-b border-stone-200/80">
+                `;
+
+                // Calculate rates for Week 1 (Days 0-6 ago), Week 2 (Days 7-13 ago), etc.
+                for (let w = 3; w >= 0; w--) {
+                    let weekScheduled = 0;
+                    let weekCompleted = 0;
+
+                    for (let d = 6; d >= 0; d--) {
+                        const checkDate = new Date();
+                        checkDate.setDate(today.getDate() - (w * 7 + d));
+                        const dateStr = this.state.getLocalDateString(checkDate);
+
+                        this.state.habits.forEach(h => {
+                            if (isScheduledDay(h, checkDate)) {
+                                weekScheduled++;
+                                if (isCompletedDay(h, dateStr)) {
+                                    weekCompleted++;
+                                }
+                            }
+                        });
+                    }
+
+                    const weekRate = weekScheduled > 0 ? Math.round((weekCompleted / weekScheduled) * 100) : 0;
+                    const weekLabel = w === 0 ? 'This Week' : `Week -${w}`;
+
+                    trendHTML += `
+                        <div class="flex flex-col items-center gap-1.5 flex-1 max-w-[50px] group">
+                            <span class="text-[8px] font-black text-stone-850 opacity-0 group-hover:opacity-100 transition-opacity leading-none">${weekRate}%</span>
+                            <div class="w-4 bg-stone-200 group-hover:bg-indigo-850 rounded-t-sm transition-all duration-500 h-16 flex items-end relative overflow-hidden">
+                                <div class="bg-indigo-850 rounded-t-sm w-full transition-all duration-700" style="height: ${weekRate}%"></div>
+                            </div>
+                            <span class="text-[7px] font-bold text-stone-700 uppercase tracking-wider leading-none truncate w-full text-center">${weekLabel}</span>
+                        </div>
+                    `;
+                }
+
+                trendHTML += `</div>`;
+                trendWrapper.innerHTML = trendHTML;
+                contentWrapper.appendChild(trendWrapper);
+
+                this.analyticsContentBox.appendChild(contentWrapper);
             }
 
             render() {
@@ -1760,42 +2112,54 @@
 
                 if (this.state.habits.length === 0) {
                     this.habitsContainer.innerHTML = `
-                        <div class="py-6 px-4 sm:px-6 border-2 border-dashed border-stone-200 rounded-3xl bg-stone-50/20 text-left fade-in">
-                            <div class="text-center mb-4">
-                                <div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone-900 text-white mb-2 shadow-sm">
-                                    <i class="fa-solid fa-seedling text-xs" aria-hidden="true"></i>
+                        <div class="py-8 px-6 sm:px-8 border-2 border-dashed border-stone-300 rounded-[2rem] bg-stone-50/40 text-left fade-in shadow-inner relative overflow-hidden">
+                            <div class="text-center mb-6">
+                                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-stone-900 text-white mb-3 shadow-md">
+                                    <i class="fa-solid fa-seedling text-lg" aria-hidden="true"></i>
                                 </div>
-                                <h3 class="text-xs font-black text-stone-900 uppercase tracking-wider">Your Consistency Journey Starts Here</h3>
-                                <p class="text-[10px] sm:text-[11px] text-stone-500 mt-0.5 font-semibold">Follow this atomic blueprint to secure your first consistency chain:</p>
+                                <h2 class="text-base sm:text-lg font-black text-stone-900 uppercase tracking-tight mb-1">Begin Your Consistency Chain</h2>
+                                <p class="text-xs text-stone-700 font-semibold max-w-sm mx-auto leading-relaxed">Let's build long-term compound momentum. Here is how to start effectively:</p>
                             </div>
                             
-                            <div class="space-y-2.5 max-w-sm mx-auto">
-                                <div class="flex items-start gap-3 bg-white p-3 rounded-xl border border-stone-200/50 shadow-sm transition-all hover:border-stone-300">
-                                    <span class="w-5 h-5 rounded-full bg-indigo-50 text-indigo-700 text-[10px] font-black flex items-center justify-center flex-shrink-0" aria-hidden="true">1</span>
-                                    <div>
-                                        <h4 class="text-[11px] font-black text-stone-900 leading-tight">Start with just one habit</h4>
-                                        <p class="text-[10px] text-stone-500 font-medium mt-0.5">Don't overwhelm yourself. Anchor one micro-behavior (e.g., read 1 page, take 5 deep breaths, drink water) to form an easy daily loop.</p>
+                            <div class="space-y-4 max-w-md mx-auto mb-6">
+                                <div class="bg-white/80 p-4 rounded-2xl border border-stone-200/60 shadow-sm transition-all hover:border-stone-300">
+                                    <h3 class="text-xs font-black text-stone-955 uppercase tracking-wide flex items-center gap-2 mb-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-stone-900 text-white text-[9px] font-black flex items-center justify-center" aria-hidden="true">1</span>
+                                        Start with one habit.
+                                    </h3>
+                                    <p class="text-xs text-stone-750 font-medium leading-relaxed mb-2.5">
+                                        Planning fatigue is the biggest killer of consistency. Pick exactly one micro-routine today that takes under 5 minutes to complete.
+                                    </p>
+                                    
+                                    <!-- Good Examples Sub-Panel -->
+                                    <div class="bg-stone-50 border border-stone-200/50 p-3 rounded-xl space-y-1.5">
+                                        <span class="block text-[9px] font-black text-stone-600 uppercase tracking-widest mb-1">Good examples:</span>
+                                        <div class="flex items-center gap-2 text-xs font-bold text-stone-850">
+                                            <span class="text-indigo-800" aria-hidden="true">•</span> <span>Read 10 pages</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-xs font-bold text-stone-850">
+                                            <span class="text-emerald-800" aria-hidden="true">•</span> <span>Walk 10 minutes</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-xs font-bold text-stone-850">
+                                            <span class="text-rose-800" aria-hidden="true">•</span> <span>Drink water after waking</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex items-start gap-3 bg-white p-3 rounded-xl border border-stone-200/50 shadow-sm transition-all hover:border-stone-300">
-                                    <span class="w-5 h-5 rounded-full bg-rose-50 text-rose-700 text-[10px] font-black flex items-center justify-center flex-shrink-0" aria-hidden="true">2</span>
-                                    <div>
-                                        <h4 class="text-[11px] font-black text-stone-900 leading-tight">Track it for 7 days straight</h4>
-                                        <p class="text-[10px] text-stone-500 font-medium mt-0.5">Lock in a 7-day streak to trigger initial cognitive rewiring and unlock your very first Zen Achievement Milestone.</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start gap-3 bg-white p-3 rounded-xl border border-stone-200/50 shadow-sm transition-all hover:border-stone-300">
-                                    <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black flex items-center justify-center flex-shrink-0" aria-hidden="true">3</span>
-                                    <div>
-                                        <h4 class="text-[11px] font-black text-stone-900 leading-tight">Focus on consistency, not perfection</h4>
-                                        <p class="text-[10px] text-stone-500 font-medium mt-0.5">Missing one day is an accident. Missing two days is the start of a new bad habit. Tap the checkmark even on hard days.</p>
-                                    </div>
+
+                                <div class="bg-white/80 p-4 rounded-2xl border border-stone-200/60 shadow-sm transition-all hover:border-stone-300">
+                                    <h3 class="text-xs font-black text-stone-955 uppercase tracking-wide flex items-center gap-2 mb-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-stone-900 text-white text-[9px] font-black flex items-center justify-center" aria-hidden="true">2</span>
+                                        Showing up is the goal
+                                    </h3>
+                                    <p class="text-xs text-stone-750 font-medium leading-relaxed mb-0">
+                                        <strong class="text-stone-950 font-black">The goal isn't perfection. The goal is showing up tomorrow.</strong> Missing once is an accident; missing twice is the start of a bad habit. Tap the checkmark to lock in your daily win.
+                                    </p>
                                 </div>
                             </div>
                             
-                            <div class="text-center mt-4">
-                                <button onclick="document.getElementById('btn-add-habit').click()" class="text-[10px] font-black text-stone-900 hover:text-stone-700 uppercase tracking-widest inline-flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-1 focus:ring-stone-950 rounded p-1">
-                                    Create Your First Habit <i class="fa-solid fa-arrow-right text-[8px]" aria-hidden="true"></i>
+                            <div class="text-center">
+                                <button onclick="document.getElementById('btn-add-habit').click()" class="bg-stone-900 text-white font-black uppercase text-[10px] tracking-widest px-6 py-3 rounded-xl hover:bg-stone-850 transition-all inline-flex items-center gap-2 active:scale-95 shadow-md" aria-label="Add your first habit card">
+                                    <i class="fa-solid fa-plus text-[9px]" aria-hidden="true"></i> Create Your First Habit
                                 </button>
                             </div>
                         </div>
@@ -1826,68 +2190,93 @@
                     totalCompletions += completionsCount;
 
                     const habitCard = document.createElement('div');
-                    habitCard.className = `bg-white/80 backdrop-blur-md border border-stone-200/50 rounded-2xl p-3.5 shadow-sm flex items-center justify-between gap-4 transition-all duration-300 hover:shadow-md ${!isScheduledToday ? 'opacity-55' : ''}`;
+                    // Fully responsive grid wrapping row: Column on mobile, Row on larger screens
+                    habitCard.className = `bg-white/80 backdrop-blur-md border border-stone-200/50 rounded-2xl p-3.5 shadow-sm flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between transition-all duration-300 hover:shadow-md ${!isScheduledToday ? 'opacity-55' : ''}`;
                     
                     const checkColorClasses = {
-                        indigo: 'bg-indigo-600',
-                        emerald: 'bg-emerald-600',
-                        rose: 'bg-rose-600',
-                        amber: 'bg-amber-600',
-                        purple: 'bg-purple-600'
+                        indigo: 'bg-indigo-700',
+                        emerald: 'bg-emerald-700',
+                        rose: 'bg-rose-700',
+                        amber: 'bg-amber-500',
+                        purple: 'bg-purple-700'
                     };
                     const activeColor = checkColorClasses[h.color] || 'bg-stone-900';
 
                     habitCard.innerHTML = `
-                        <div class="flex items-center gap-3 min-w-0 flex-grow">
-                            <!-- Drag & Order Sorting control buttons -->
-                            <div class="flex flex-col gap-0.5 items-center flex-shrink-0 text-stone-300 hover:text-stone-600 transition-colors">
-                                <button type="button" class="btn-move-up hover:text-stone-900" title="Move Up" aria-label="Move ${h.name} up in priority"><i class="fa-solid fa-chevron-up text-[8px]" aria-hidden="true"></i></button>
-                                <button type="button" class="btn-move-down hover:text-stone-900" title="Move Down" aria-label="Move ${h.name} down in priority"><i class="fa-solid fa-chevron-down text-[8px]" aria-hidden="true"></i></button>
+                        <!-- Row 1: Core Action & Title, utilizing maximum width on mobile -->
+                        <div class="flex items-center gap-3 min-w-0">
+                            <!-- Drag & Order Sorting control buttons with touch target (13px) -->
+                            <div class="flex flex-col gap-0.5 items-center flex-shrink-0 text-stone-500 hover:text-stone-700 transition-colors">
+                                <button type="button" class="btn-move-up hover:text-stone-900 p-0.5 text-[13px] leading-none" title="Move Up" aria-label="Move ${h.name} up in priority">
+                                    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn-move-down hover:text-stone-900 p-0.5 text-[13px] leading-none" title="Move Down" aria-label="Move ${h.name} down in priority">
+                                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                </button>
                             </div>
 
-                            <!-- Custom Checklist Button -->
-                            <button class="cb-ripple w-5 h-5 rounded-lg border-2 border-stone-300 flex items-center justify-center flex-shrink-0 transition-all duration-300 focus:outline-none ${checkedToday ? activeColor + ' border-transparent' : (skippedToday ? 'bg-amber-500 border-transparent' : 'bg-transparent')} ${!isScheduledToday ? 'cursor-not-allowed opacity-40' : ''}" 
+                            <!-- Custom Checklist Button - Instantly checks off -->
+                            <button class="cb-ripple w-6 h-6 rounded-lg border-2 border-stone-300 flex items-center justify-center flex-shrink-0 transition-all duration-300 focus:outline-none ${checkedToday ? activeColor + ' border-transparent' : (skippedToday ? 'bg-amber-500 border-transparent' : 'bg-transparent')} ${!isScheduledToday ? 'cursor-not-allowed opacity-40' : ''}" 
                                 data-toggle-id="${h.id}" ${!isScheduledToday ? 'disabled' : ''} role="checkbox" aria-checked="${checkedToday ? 'true' : 'false'}" aria-label="Mark checkin for ${h.name} as complete">
                                 ${skippedToday 
                                     ? `<i class="fa-solid fa-forward text-[8px] text-white" aria-hidden="true"></i>` 
-                                    : `<i class="fa-solid fa-check text-[8px] text-white transition-opacity duration-300 ${checkedToday ? 'opacity-100' : 'opacity-0'}" aria-hidden="true"></i>`
+                                    : `<i class="fa-solid fa-check text-[10px] text-white transition-opacity duration-300 ${checkedToday ? 'opacity-100' : 'opacity-0'}" aria-hidden="true"></i>`
                                 }
                             </button>
                             
                             <!-- Information Details triggers -->
-                            <div class="text-left min-w-0 cursor-pointer flex-grow" data-detail-id="${h.id}" role="button" aria-haspopup="dialog" aria-label="View history analysis metrics for ${h.name}">
-                                <div class="flex items-center gap-1.5">
+                            <div class="text-left min-w-0 flex-grow cursor-pointer" data-detail-id="${h.id}" role="button" aria-haspopup="dialog" aria-label="View history analysis metrics for ${h.name}">
+                                <div class="flex items-center gap-1.5 flex-wrap">
                                     <span class="text-xs select-none" aria-hidden="true">${h.emoji || '🧘'}</span>
-                                    <h3 class="text-xs font-black text-stone-900 leading-tight truncate ${checkedToday ? 'line-through text-stone-400' : ''}">${h.name}</h3>
+                                    <h2 class="text-xs sm:text-sm font-black text-stone-900 leading-tight truncate ${checkedToday ? 'line-through text-stone-500' : ''}">${h.name}</h2>
                                     ${h.strategy === 'break' 
-                                        ? `<span class="text-[6px] font-black uppercase tracking-widest bg-rose-50 text-rose-700 border border-rose-100 px-1 py-0.5 rounded flex-shrink-0">Break</span>`
-                                        : `<span class="text-[6px] font-black uppercase tracking-widest bg-indigo-50 text-indigo-700 border border-indigo-100 px-1 py-0.5 rounded flex-shrink-0">Build</span>`
-                                    }
-                                </div>
-                                <div class="flex items-center flex-wrap gap-1.5 mt-0.5">
-                                    <span class="text-[8px] font-black uppercase tracking-wider text-rose-600 flex items-center gap-1">
-                                        <i class="fa-solid fa-fire text-[7px]" aria-hidden="true"></i> ${streaks.active}d streak
-                                    </span>
-                                    <span class="text-stone-300 text-[7px]" aria-hidden="true">•</span>
-                                    <span class="text-[8px] font-bold text-stone-500 font-semibold">History: ${completionsCount} clears</span>
-                                    ${skippedToday 
-                                        ? `<span class="text-[7px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Skipped Today</span>`
-                                        : ''
-                                    }
-                                    ${!isScheduledToday 
-                                        ? `<span class="text-[7px] font-black uppercase tracking-wider bg-stone-100 text-stone-500 px-1.5 py-0.5 rounded">Rest Day</span>`
-                                        : ''
+                                        ? `<span class="text-[6px] font-black uppercase tracking-widest bg-rose-50 text-rose-800 border border-rose-100 px-1 py-0.5 rounded flex-shrink-0">Break</span>`
+                                        : `<span class="text-[6px] font-black uppercase tracking-widest bg-indigo-50 text-indigo-800 border border-indigo-100 px-1 py-0.5 rounded flex-shrink-0">Build</span>`
                                     }
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Sparkline mini history visual -->
-                        <div class="flex items-center gap-1 bg-stone-50 border border-stone-100 px-1.5 py-1 rounded-lg flex-shrink-0 cursor-pointer" data-detail-id="${h.id}" role="button" aria-haspopup="dialog" aria-label="View history sparklines for ${h.name}">
-                            ${this.getMiniSparklineHTML(h)}
+                        <!-- Row 2: Secondary Metadata, Action Triggers & Sparkline (Indented to align perfectly under the text block on mobile) -->
+                        <div class="pl-12 sm:pl-0 flex flex-wrap items-center justify-between sm:justify-end gap-3 flex-shrink-0">
+                            <!-- Stats & Badges -->
+                            <div class="flex items-center flex-wrap gap-1.5 text-left cursor-pointer" data-detail-id="${h.id}">
+                                <span class="text-[8px] font-black uppercase tracking-wider text-rose-800 flex items-center gap-1">
+                                    <i class="fa-solid fa-fire text-[7px]" aria-hidden="true"></i> ${streaks.active}d streak
+                                </span>
+                                <span class="text-stone-500 text-[7px]" aria-hidden="true">•</span>
+                                <span class="text-[8px] font-bold text-stone-700">${completionsCount} clears</span>
+                                ${skippedToday 
+                                    ? `<span class="text-[7px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Skipped</span>`
+                                    : ''
+                                }
+                                ${!isScheduledToday 
+                                    ? `<span class="text-[7px] font-black uppercase tracking-wider bg-stone-100 text-stone-700 px-1.5 py-0.5 rounded">Rest Day</span>`
+                                    : ''
+                                }
+                            </div>
+
+                            <!-- Quick Action Buttons & Sparkline -->
+                            <div class="flex items-center gap-2.5 ml-auto sm:ml-0">
+                                <!-- Quick Reflection Note -->
+                                <button type="button" class="btn-quick-note text-stone-500 hover:text-stone-900 p-1 text-xs focus:outline-none" title="Log Reflection Note" aria-label="Log Reflection Note for ${h.name}">
+                                    <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+                                </button>
+                                
+                                <!-- Quick Skip Day -->
+                                <button type="button" class="btn-quick-skip text-amber-700 hover:text-amber-900 p-1 text-xs focus:outline-none" title="Skip/Pause Day" aria-label="Skip/Pause day for ${h.name}">
+                                    <i class="fa-solid fa-forward" aria-hidden="true"></i>
+                                </button>
+
+                                <!-- Mini sparkline -->
+                                <div class="flex items-center gap-0.5 bg-stone-50 border border-stone-100 px-1 py-1 rounded cursor-pointer" data-detail-id="${h.id}" role="button" aria-haspopup="dialog" aria-label="View history sparklines for ${h.name}">
+                                    ${this.getMiniSparklineHTML(h)}
+                                </div>
+                            </div>
                         </div>
                     `;
 
+                    // Move Up/Down actions
                     habitCard.querySelector('.btn-move-up').addEventListener('click', (e) => {
                         e.stopPropagation();
                         this.state.moveHabit(idx, 'up');
@@ -1899,19 +2288,38 @@
                         this.announce(`Moved ${h.name} down in list.`);
                     });
 
+                    // Checklist Toggle - Instant action
                     habitCard.querySelector('[data-toggle-id]').addEventListener('click', (e) => {
                         e.stopPropagation();
-                        if (checkedToday || skippedToday) {
-                            this.state.toggleCheck(h.id, todayStr);
-                            this.showToast('Check-in cleared.');
-                            this.announce(`Check-in cleared for ${h.name}.`);
+                        const nextState = this.state.toggleCheck(h.id, todayStr);
+                        if (nextState === 'checked') {
+                            ChimeEngine.playZenChime(this.state.audioTheme);
+                            this.showToast('Checked off!');
+                            this.announce(`Checked checkin log state for ${h.name}`);
                         } else {
-                            this.checkinHabitIdInput.value = h.id;
-                            this.checkinNoteInput.value = "";
-                            this.openAccessibleModal('checkin-note-modal', '#checkin-note-input');
+                            this.showToast('Cleared.');
+                            this.announce(`Cleared checkin log state for ${h.name}`);
                         }
                     });
 
+                    // Quick Note trigger
+                    habitCard.querySelector('.btn-quick-note').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.checkinHabitIdInput.value = h.id;
+                        this.checkinNoteInput.value = h.history[todayStr]?.note || "";
+                        this.openAccessibleModal('checkin-note-modal', '#checkin-note-input');
+                    });
+
+                    // Quick Skip trigger
+                    habitCard.querySelector('.btn-quick-skip').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const wasSkipped = skippedToday;
+                        this.state.toggleCheck(h.id, todayStr, wasSkipped ? "" : "Skipped Day override", !wasSkipped);
+                        this.showToast(wasSkipped ? 'Skip cleared.' : 'Day Paused.');
+                        this.announce(wasSkipped ? `Cleared skip day for ${h.name}` : `Paused day for ${h.name}`);
+                    });
+
+                    // Details trigger
                     habitCard.querySelectorAll('[data-detail-id]').forEach(elem => {
                         elem.addEventListener('click', () => {
                             this.openDetailModal(h.id);
@@ -1941,11 +2349,11 @@
                     const skipped = isSkippedDay(habit, dateStr);
                     
                     const activeColorClass = {
-                        indigo: 'bg-indigo-600',
-                        emerald: 'bg-emerald-600',
-                        rose: 'bg-rose-600',
-                        amber: 'bg-amber-600',
-                        purple: 'bg-purple-600'
+                        indigo: 'bg-indigo-700',
+                        emerald: 'bg-emerald-700',
+                        rose: 'bg-rose-700',
+                        amber: 'bg-amber-500',
+                        purple: 'bg-purple-700'
                     }[habit.color] || 'bg-stone-900';
 
                     let dotClass = 'bg-stone-200';
@@ -1978,14 +2386,14 @@
                 this.detailHabitTitle.innerText = (habit.emoji || '🧘') + ' ' + habit.name;
                 
                 const colors = {
-                    indigo: 'bg-indigo-50 text-indigo-700 border-indigo-100',
-                    emerald: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-                    rose: 'bg-rose-50 text-rose-700 border-rose-100',
-                    amber: 'bg-amber-50 text-amber-700 border-amber-100',
-                    purple: 'bg-purple-50 text-purple-700 border-purple-100'
+                    indigo: 'bg-indigo-50 text-indigo-800 border-indigo-100',
+                    emerald: 'bg-emerald-50 text-emerald-800 border-emerald-100',
+                    rose: 'bg-rose-50 text-rose-800 border-rose-100',
+                    amber: 'bg-amber-50 text-amber-800 border-amber-100',
+                    purple: 'bg-purple-50 text-purple-800 border-purple-100'
                 };
                 this.detailCategory.innerText = habit.color.toUpperCase();
-                this.detailCategory.className = `inline-block text-[8px] font-black uppercase tracking-widest px-2.5 py-0.5 border rounded ${colors[habit.color] || 'bg-stone-100 text-stone-600 border-stone-200'}`;
+                this.detailCategory.className = `inline-block text-[8px] font-black uppercase tracking-widest px-2.5 py-0.5 border rounded ${colors[habit.color] || 'bg-stone-100 text-stone-750 border-stone-200'}`;
 
                 if (habit.frequency === 'daily') {
                     this.detailScheduleText.innerText = "Scheduled: Every Single Day";
@@ -2013,6 +2421,21 @@
 
                 this.openAccessibleModal('detail-habit-modal');
                 this.announce(`Opened details and metrics analysis for ${habit.name}`);
+                
+                // Track horizontal scroll state discovery
+                const scrollContainer = document.getElementById('heatmap-scroll-container');
+                const fadeIndicator = document.getElementById('scroll-fade-indicator');
+                if (scrollContainer && fadeIndicator) {
+                    scrollContainer.scrollLeft = scrollContainer.scrollWidth; // Start scroll from right (recent dates)
+                    scrollContainer.addEventListener('scroll', () => {
+                        const totalScrollable = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                        if (scrollContainer.scrollLeft >= totalScrollable - 5) {
+                            fadeIndicator.style.opacity = '0';
+                        } else {
+                            fadeIndicator.style.opacity = '1';
+                        }
+                    });
+                }
             }
 
             renderReflectionLogs(habit) {
@@ -2022,7 +2445,7 @@
                     .sort((a,b) => new Date(b) - new Date(a));
 
                 if (entries.length === 0) {
-                    this.detailReflectionLogs.innerHTML = `<p class="text-[10px] text-stone-400 italic font-semibold leading-relaxed">No custom log notes added yet. Notes help reinforce mental motivation loops.</p>`;
+                    this.detailReflectionLogs.innerHTML = `<p class="text-[10px] text-stone-600 italic font-semibold leading-relaxed">No custom log notes added yet. Notes help reinforce mental motivation loops.</p>`;
                     return;
                 }
 
@@ -2030,10 +2453,10 @@
                     const log = document.createElement('div');
                     log.className = "border-b border-stone-100 pb-1.5 mb-1.5 last:border-b-0 last:mb-0";
                     log.innerHTML = `
-                        <div class="flex justify-between text-[8px] font-black text-stone-400 uppercase tracking-tight mb-0.5">
+                        <div class="flex justify-between text-[8px] font-black text-stone-600 uppercase tracking-tight mb-0.5">
                             <span>${date}</span>
                         </div>
-                        <p class="text-[10px] text-stone-700 font-medium italic m-0">"${habit.history[date].note}"</p>
+                        <p class="text-[10px] text-stone-755 font-medium italic m-0">"${habit.history[date].note}"</p>
                     `;
                     this.detailReflectionLogs.appendChild(log);
                 });
@@ -2064,11 +2487,11 @@
                 }
 
                 const cellColors = {
-                    indigo: 'bg-indigo-600',
-                    emerald: 'bg-emerald-600',
-                    rose: 'bg-rose-600',
-                    amber: 'bg-amber-600',
-                    purple: 'bg-purple-600'
+                    indigo: 'bg-indigo-700',
+                    emerald: 'bg-emerald-700',
+                    rose: 'bg-rose-700',
+                    amber: 'bg-amber-500',
+                    purple: 'bg-purple-700'
                 };
                 const activeColor = cellColors[habit.color] || 'bg-stone-900';
 
@@ -2087,11 +2510,33 @@
                         cellBg = activeColor;
                     }
 
-                    dot.className = `w-2 h-2 rounded-[2px] transition-all hover:scale-125 cursor-pointer ${cellBg}`;
+                    // Tapping target scale verified
+                    dot.className = `w-3.5 h-3.5 sm:w-2.5 sm:h-2.5 rounded-[3px] sm:rounded-[2px] transition-all hover:scale-125 cursor-pointer ${cellBg}`;
                     const statusText = cell.completed ? 'Checked' : (cell.skipped ? 'Skipped' : (cell.isScheduled ? 'Missed' : 'Rest Day'));
                     dot.setAttribute('aria-label', `${cell.date}: ${statusText}`);
                     dot.setAttribute('title', `${cell.date} : ${statusText}`);
                     
+                    // Live Inspector Interaction Block
+                    const inspectHandler = () => {
+                        const inspector = document.getElementById('heatmap-inspector');
+                        if (inspector) {
+                            const formattedDate = new Date(cell.date).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                            });
+                            
+                            const badgeColors = cell.completed 
+                                ? 'bg-indigo-100 text-indigo-800' 
+                                : (cell.skipped ? 'bg-amber-100 text-amber-800' : (cell.isScheduled ? 'bg-red-100 text-red-800' : 'bg-stone-200 text-stone-700'));
+                            
+                            inspector.innerHTML = `<span class="text-stone-900 font-black">${formattedDate}</span>: <span class="uppercase tracking-wider text-[8px] font-black px-1.5 py-0.5 rounded ${badgeColors}">${statusText}</span>`;
+                        }
+                    };
+
+                    dot.addEventListener('mouseenter', inspectHandler);
+                    dot.addEventListener('focus', inspectHandler);
+
                     dot.addEventListener('click', () => {
                         this.state.toggleCheck(habit.id, cell.date);
                         this.announce(`Toggled checkin log state for date ${cell.date}`);
