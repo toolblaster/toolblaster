@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Safe-to-Spend (STS) Budget Calculator - Avoid Impulse Buying</title>
+    <meta name="description" content="Calculate your dynamic daily safe-to-spend allowance. Secure monthly savings goals against impulse buying with interactive amortization schedulers.">
+    <meta name="keywords" content="safe to spend calculator, daily budget calculator, impulse spend planner, emergency savings tracker, budget amortizer, financial tool">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/safe-to-spend-calculator" />
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Advanced Daily Safe-to-Spend (STS) Budget Calculator with Local Storage">
+    <meta property="og:description" content="Plan daily expenditure allowances, simulate retail impulse buys, allocate emergency buffers, and secure your monthly savings targets seamlessly.">
+    <meta property="og:url" content="https://toolblaster.com/finance/safe-to-spend-calculator">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:width" content="192">
+    <meta property="og:image:height" content="192">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Advanced Daily Safe-to-Spend (STS) Budget Calculator with Local Storage">
+    <meta name="twitter:description" content="Plan daily expenditure limits and test dynamic retail budget shocks before hitting Buy Now. Features local storage and CSV export.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2canvas safely imported for dynamic client-side visual cards generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Schema.org JSON-LD structured metadata -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Advanced Daily Safe-to-Spend (STS) Budget Calculator",
+          "description": "Calculate your dynamic spending limit based on monthly commitments, savings goals, and current active expenditures with LocalStorage integration.",
+          "url": "https://toolblaster.com/finance/safe-to-spend-calculator",
+          "inLanguage": "en-IN",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "mainEntity": {
+            "@id": "#sts-calculator"
+          }
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "#sts-calculator",
+          "name": "Daily Safe-to-Spend Budget Planner",
+          "description": "An interactive online utility leveraging classical linear amortization to secure savings goals against daily impulse buying vectors.",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "toolblaster.com"
+          },
+          "url": "https://toolblaster.com/finance/safe-to-spend-calculator",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "toolblaster.com"
+          },
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "Web"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; 
+            --accent-color-dark: #B91C1C;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Safeguards mobile viewports against rendering shifts */
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fef2f2 10%, #f9fafb 70%);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main.container {
+            width: 95%;
+            max-width: 1080px;
+            margin-left: auto;
+            margin-right: auto;
+            flex-grow: 1;
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #cbd5e1; /* Darkened track for robust WCAG contrast */
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark, #B91C1C), var(--accent-color-dark, #B91C1C));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: var(--accent-color-dark, #B91C1C);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -4.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .stepper-button {
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 85px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .ledger-scroll-container {
+            max-height: 380px;
+            overflow-y: auto;
+            overflow-x: auto; /* isolates wide table scrolling to prevent layout breaking on mobile */
+            -webkit-overflow-scrolling: touch;
+        }
+        .ledger-table {
+            min-width: 480px; /* guarantees headers do not collapse on tight viewports */
+        }
+        .ledger-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e5e7eb;
+            z-index: 20;
+            box-shadow: inset 0 -1px 0 #94a3b8, inset 0 1px 0 #94a3b8;
+        }
+
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827;
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            max-width: 200px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%); /* perfect centering, prevents absolute horizontal shifts */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .share-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 1rem;
+        }
+        .share-modal.active { opacity: 1; pointer-events: auto; }
+        .share-modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 520px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-modal.active .share-modal-content {
+            transform: scale(1);
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .close-modal-btn:hover {
+            color: #000000;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .modal-report-content h3 {
+            font-size: 0.85rem;
+            font-weight: 850;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .modal-report-content ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+        .modal-report-content pb li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #111827;
+        }
+        .share-url-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #111827;
+            background: #f8fafc;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+
+        #notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #notification-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        html body .text-xxs {
+            font-size: 0.72rem;
+            line-height: 1rem;
+        }
+
+        .adv-card {
+            padding: 0.75rem;
+            border-radius: 1rem; /* rounded-2xl equivalent */
+            border-width: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.375rem; /* space-y-1.5 equivalent */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm equivalent */
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .card-indigo {
+            background-color: rgba(238, 242, 255, 0.7); /* bg-indigo-50/70 */
+            border-color: #c7d2fe; /* border-indigo-200 */
+            color: #312e81; /* text-indigo-950 */
+        }
+        .card-amber {
+            background-color: rgba(254, 243, 199, 0.7); /* bg-amber-50/70 */
+            border-color: #fde68a; /* border-amber-200 */
+            color: #78350f; /* text-amber-950 */
+        }
+        .card-rose {
+            background-color: rgba(254, 242, 242, 0.7); /* bg-rose-50/70 */
+            border-color: #fecdd3; /* border-rose-200 */
+            color: #4c0519; /* text-rose-950 */
+        }
+        .card-purple {
+            background-color: rgba(243, 232, 255, 0.7); /* bg-purple-50/70 */
+            border-color: #e9d5ff; /* border-purple-200 */
+            color: #3b0764; /* text-purple-950 */
+        }
+        .card-sky {
+            background-color: rgba(224, 242, 254, 0.7); /* bg-sky-50/70 */
+            border-color: #bae6fd; /* border-sky-200 */
+            color: #0369a1; /* text-sky-950 */
+        }
+
+        .pill-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-width: 1px;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .pill-indigo { border-color: #c7d2fe; }
+        .pill-indigo:focus-within {
+            --tw-ring-color: #818cf8; /* indigo-400 */
+            border-color: #818cf8;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-amber { border-color: #fde68a; }
+        .pill-amber:focus-within {
+            --tw-ring-color: #fbbf24; /* amber-400 */
+            border-color: #fbbf24;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-purple { border-color: #e9d5ff; }
+        .pill-purple:focus-within {
+            --tw-ring-color: #c084fc; /* purple-400 */
+            border-color: #c084fc;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-sky { border-color: #bae6fd; }
+        .pill-sky:focus-within {
+            --tw-ring-color: #38bdf8; /* sky-400 */
+            border-color: #38bdf8;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <main class="container">
+        <!-- SCREEN ONLY CALCULATOR WORKSPACE -->
+        <div id="loan-calculator" class="w-full">
+            <div class="bg-white shadow-xl rounded-3xl p-4 sm:p-6 w-full border border-gray-200/80 mx-auto">
+                
+                <!-- Unified Header -->
+                <h1 class="text-base sm:text-lg font-extrabold text-gray-900 text-center mb-1">🛡️ Daily Safe-to-Spend (STS) Calculator</h1>
+                <p class="text-center text-gray-900 mb-4 text-xxs font-medium">Protect your monthly savings target. Know exactly how much cash you can spend today safely.</p>
+
+                <!-- GLOBAL CURRENCY SELECTOR -->
+                <div class="flex justify-center mb-4">
+                    <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-200 shadow-sm">
+                        <label for="globalCurrencySelect" class="text-[10px] font-extrabold text-gray-700 uppercase tracking-wide">Currency:</label>
+                        <select id="globalCurrencySelect" class="bg-transparent text-xs font-bold text-gray-900 focus:outline-none cursor-pointer">
+                            <option value="USD">USD ($) US Dollar</option>
+                            <option value="EUR">EUR (€) Euro</option>
+                            <option value="GBP">GBP (£) British Pound</option>
+                            <option value="INR" selected>INR (₹) Indian Rupee</option>
+                            <option value="CAD">CAD (CA$) Canadian Dollar</option>
+                            <option value="AUD">AUD (A$) Australian Dollar</option>
+                            <option value="ILS">ILS (₪) Israeli Shekel</option>
+                            <option value="RUB">RUB (₽) Russian Ruble</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- MAIN WORKSPACE CORE GRID -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5 items-start">
+                    
+                    <!-- Left Section: Adjustable Financial Profiles -->
+                    <div class="space-y-3">
+                        
+                        <!-- Core Monthly Allocation Setup -->
+                        <div class="bg-blue-50 p-3 rounded-2xl space-y-2">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Monthly Income & Savings Target</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Configure your monthly cash pool. Your daily safe budget is calculated dynamically from this net surplus.</span>
+                                </span>
+                            </h2>
+
+                            <!-- Monthly Income Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="incomeLabel" for="incomeInput" class="block text-xxs font-bold text-gray-900">Net Monthly Income (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Your net monthly salary or total revenue credited to your account this month.</span>
+                                        </span>
+                                    </span>
+                                    <span id="incomeWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="incomeSlider" min="10000" max="1000000" value="75000" step="5000" class="w-full flex-grow" aria-labelledby="incomeLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="incomeDecrement" class="stepper-button" aria-label="Decrease Income">-</button>
+                                        <input type="number" id="incomeInput" class="manual-input text-center" value="75000" min="1000" max="50000000" step="5000">
+                                        <button type="button" id="incomeIncrement" class="stepper-button" aria-label="Increase Income">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fixed Expenses Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="billsLabel" for="billsInput" class="block text-xxs font-bold text-gray-900">Fixed Commitments (Rent & Bills) (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Committed monthly outlays that must be paid. These are isolated from your everyday spending cash pool.</span>
+                                        </span>
+                                    </span>
+                                    <span id="billsWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="billsSlider" min="0" max="500000" value="25000" step="2000" class="w-full flex-grow" aria-labelledby="billsLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="billsDecrement" class="stepper-button" aria-label="Decrease Bills">-</button>
+                                        <input type="number" id="billsInput" class="manual-input text-center" value="25000" min="0" max="5000000" step="2000">
+                                        <button type="button" id="billsIncrement" class="stepper-button" aria-label="Increase Bills">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Savings Target Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="savingsLabel" for="savingsInput" class="block text-xxs font-bold text-gray-900">Savings Target (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Your target monthly savings goal. This amount is isolated and protected from daily shopping outlays.</span>
+                                        </span>
+                                    </span>
+                                    <span id="savingsWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="savingsSlider" min="0" max="500000" value="15000" step="1000" class="w-full flex-grow" aria-labelledby="savingsLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="savingsDecrement" class="stepper-button" aria-label="Decrease Savings">-</button>
+                                        <input type="number" id="savingsInput" class="manual-input text-center" value="15000" min="0" max="5000000" step="1000">
+                                        <button type="button" id="savingsIncrement" class="stepper-button" aria-label="Increase Savings">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Simplified, Organically Calibrated Days Left Planner -->
+                            <div class="relative pb-1 bg-white border border-blue-100 rounded-xl p-2.5 shadow-inner">
+                                <div class="flex items-center gap-1.5 mb-1.5">
+                                    <span class="block text-xxs font-extrabold text-blue-950 uppercase tracking-wide">Days Left in Budget Cycle</span>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Select how your monthly budget cycle resets. The system organically calculates the exact days remaining until the reset date.</span>
+                                    </span>
+                                </div>
+                                
+                                <!-- Symmetrical Reset Controls -->
+                                <div class="grid grid-cols-2 gap-2 mb-2">
+                                    <div>
+                                        <label for="cycleEndModeSelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Cycle Resets On</label>
+                                        <select id="cycleEndModeSelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                            <option value="endOfMonth" selected>End of Calendar Month</option>
+                                            <option value="customDay">My Payday / Custom Date</option>
+                                        </select>
+                                    </div>
+                                    <div id="cycleCustomDayContainer" class="hidden">
+                                        <label for="cycleCustomDaySelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Select Payday Date</label>
+                                        <select id="cycleCustomDaySelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                            <!-- Dynamically injected values 1 to 31 -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="flex-grow">
+                                        <label for="daysRemainingSlider" class="sr-only">Days Remaining Slider</label>
+                                        <input type="range" id="daysRemainingSlider" min="1" max="31" value="24" class="w-full">
+                                    </div>
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="daysRemainingDecrement" class="stepper-button" aria-label="Decrease Days">-</button>
+                                        <input type="number" id="daysRemainingInput" class="manual-input text-center font-bold" value="24" min="1" max="365" step="1">
+                                        <button type="button" id="daysRemainingIncrement" class="stepper-button" aria-label="Increase Days">+</button>
+                                    </div>
+                                </div>
+                                <p id="organicDaysLeftAlert" class="text-[9px] text-blue-900 italic mt-1.5 font-semibold"></p>
+                            </div>
+                        </div>
+
+                        <!-- MASTER TOGGLE FOR SAFETY BUFFERS -->
+                        <div id="toggleBuffersDiv" class="bg-gray-100 p-2.5 rounded-2xl border border-gray-300 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="text-xxs font-bold text-gray-900 whitespace-nowrap">🛡️ Extra Safety Buffers</span>
+                                <span class="tooltip-icon flex-shrink-0" onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Toggle to isolate extra safety cushions, emergency cash margins, windfalls, or upcoming pre-planned expenses.</span>
+                                </span>
+                            </div>
+                            <label for="buffersToggle" class="relative inline-flex items-center flex-shrink-0 select-none cursor-pointer" aria-label="Toggle Extra Safety Buffers">
+                                <input type="checkbox" id="buffersToggle" class="sr-only peer" aria-label="Toggle Extra Safety Buffers">
+                                <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                            </label>
+                        </div>
+
+                        <!-- EXTRA SAFETY BUFFERS -->
+                        <div id="buffersContainer" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
+                            <h3 class="text-xs font-bold text-gray-900 text-center border-b border-gray-200 pb-1.5 flex items-center justify-center gap-1">
+                                <span>Active Safety Buffers</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Configure optional settings to dynamically buffer or increase your everyday spend pool.</span>
+                                </span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Buffer 1: Price Increase Cushion (Indigo Card) -->
+                                <div class="adv-card card-indigo" id="inflationCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="inflationInput" class="text-[10px] font-extrabold tracking-wider uppercase">Price Increase Cushion</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-indigo-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Adds an extra safety percentage cushion to fixed bills to cover potential price hikes.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-indigo" id="inflationPillBox">
+                                        <input type="number" id="inflationInput" class="w-full bg-transparent text-xs font-black outline-none" value="0" min="0" max="30" step="1">
+                                        <span class="text-[10px] font-black text-indigo-600 ml-1 select-none whitespace-nowrap">% Cushion</span>
+                                    </div>
+                                </div>
+
+                                <!-- Buffer 2: Emergency Reserves (Amber Card) -->
+                                <div class="adv-card card-amber" id="emergencyCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="emergencyInput" class="text-[10px] font-extrabold tracking-wider uppercase">Emergency Reserves (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-amber-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">A specific safe margin kept isolated to handle emergency medical or mechanical bills this cycle.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-amber" id="emergencyPillBox">
+                                        <input type="number" id="emergencyInput" class="w-full bg-transparent text-xs font-black outline-none" value="0" min="0" max="1000000" step="50">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Buffer 3: Unexpected Inflows (Purple Card) -->
+                                <div class="adv-card card-purple" id="windfallCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="windfallInput" class="text-[10px] font-extrabold tracking-wider uppercase">Unexpected Inflows (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-purple-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Any extra money, gifts, bonuses, or side cash received this month that boosts your everyday spending pool.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-purple" id="windfallPillBox">
+                                        <input type="number" id="windfallInput" class="w-full bg-transparent text-xs font-black outline-none" value="0" min="0" max="5000000" step="50">
+                                    </div>
+                                </div>
+
+                                <!-- Buffer 4: Upcoming Planned Spend (Sky Blue Card) -->
+                                <div class="adv-card card-sky" id="plannedSpendCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="plannedSpendInput" class="text-[10px] font-extrabold tracking-wider uppercase">Upcoming Planned Spend (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-sky-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Set aside a lumpsum for a pre-planned event this month (like a trip, flight booking, or insurance premium) so it won't inflate today's limit.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-sky" id="plannedSpendPillBox">
+                                        <input type="number" id="plannedSpendInput" class="w-full bg-transparent text-xs font-black outline-none" value="0" min="0" max="5000000" step="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SPENDS REAL-TIME LOGGER CARD -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-300 shadow-sm space-y-2">
+                            <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider block">
+                                ⚡ Log Your Expenses (Instant Budget Adjuster)
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Log daily expenses. Every spent transaction instantly adjusts and balances the daily Safe-to-Spend quota on-the-fly.</span>
+                                </span>
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <div class="pill-container pill-indigo">
+                                    <input type="text" id="expenseDescInput" class="w-full bg-transparent text-xs font-semibold outline-none" placeholder="Expense description (e.g. Groceries)">
+                                </div>
+                                <div class="flex gap-1.5">
+                                    <div class="flex-1 pill-container pill-indigo">
+                                        <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                        <input type="number" id="expenseAmtInput" class="w-full bg-transparent text-xs font-black outline-none" min="1" max="1000000" step="10" placeholder="Amount">
+                                    </div>
+                                    <button type="button" id="addExpenseBtn" class="px-4 bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap">Add Expense</button>
+                                </div>
+                            </div>
+
+                            <!-- DYNAMIC RECENT SPENDS CONFIRMATION LOG LIST (UX Solution to eliminate user confusion) -->
+                            <div id="recentSpendsContainer" class="hidden border-t border-gray-200 pt-2.5 mt-2 space-y-2">
+                                <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block">Instant confirmation log</span>
+                                <div id="recentSpendsList" class="space-y-1.5">
+                                    <!-- Populated on-the-fly by javascript updates -->
+                                </div>
+                                <button type="button" id="goToFullLedgerBtn" class="text-blue-900 hover:text-blue-950 font-extrabold text-[10px] flex items-center gap-1.5 mt-1 transition-all">
+                                    <span>View all logged items in detailed schedule ↓</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Core Metric Cards + Visual Displays -->
+                    <div class="flex flex-col space-y-3">
+                        <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
+                                <h2 class="text-xs font-bold text-blue-950 font-extrabold flex items-center gap-1">
+                                    <span>Today's Spending Status</span>
+                                    <span class="tooltip-icon">
+                                        <svg class="text-blue-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Your dynamically updated spending limit for today. Keeping to this guarantees your monthly savings target.</span>
+                                    </span>
+                                </h2>
+                                <button id="shareReportBtn" class="p-1 text-gray-700 hover:text-red-800 transition-colors flex-shrink-0" aria-label="Share calculations link">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true">
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Total Monthly Commitments</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Sum total of fixed expenses + target savings + emergency protection buffers + planned outlays.</span>
+                                        </span>
+                                    </span>
+                                    <p id="totalCommitmentsDisp" class="text-xs sm:text-sm font-extrabold text-blue-950">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-gray-800">Remaining Spending Pool</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Remaining monthly cash left for spending after monthly bills, savings, and logged expenses.</span>
+                                        </span>
+                                    </span>
+                                    <p id="availableSurplusDisp" class="text-xs sm:text-sm font-extrabold text-green-950">₹0</p>
+                                </div>
+                            </div>
+
+                            <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p id="targetValueCardTitle" class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Today's Safe-to-Spend Limit</p>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">The absolute maximum you can spend today without eating into fixed bills or your savings goal.</span>
+                                    </span>
+                                </span>
+                                <p id="maturityValue" class="text-base sm:text-lg font-extrabold text-purple-950">₹0</p>
+                            </div>
+
+                            <!-- INTERACTIVE IMPULSE BUY SIMULATOR -->
+                            <div id="simulationBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-4 space-y-1">
+                                <div class="flex flex-col space-y-1">
+                                    <span class="flex items-center justify-center gap-1">
+                                        <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">💭 Impulse Buy Simulator</p>
+                                        <span class="tooltip-icon">
+                                            <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Simulate a purchase before buying! See exactly how much your daily spending limit will drop for the rest of the month.</span>
+                                        </span>
+                                    </span>
+                                    <div class="grid grid-cols-3 gap-1.5 py-1">
+                                        <div class="col-span-2 pill-container pill-rose">
+                                            <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                            <input type="number" id="simulationInput" class="w-full bg-transparent text-xs font-black outline-none" min="1" max="1000000" placeholder="Product price">
+                                        </div>
+                                        <button type="button" id="triggerSimulateBtn" class="bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap px-1">Simulate</button>
+                                    </div>
+                                    <p id="simulationBenefitDisplay" class="text-[10.5px] text-emerald-950 font-bold leading-normal text-center mt-1">
+                                        Enter an amount above to preview instant budget shock.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- STATUS BADGE PANEL -->
+                            <div class="mt-3 p-3 bg-white border border-blue-100 rounded-2xl shadow-sm space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="flex items-center gap-1.5">
+                                        <p class="text-xxs font-bold text-gray-900">Total Logged Expenditures This Month</p>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Sum total of spent transactions logged.</span>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div id="loggedOutlaysTotal" class="text-base sm:text-lg font-black text-gray-900">₹0</div>
+                                <div id="affordabilityBadge" class="p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200"></div>
+                            </div>
+                        </div>
+
+                        <!-- Graph Card with premium switcher toggle -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-250 shadow-sm print:hidden">
+                            <div class="flex justify-between items-center mb-2 border-b pb-1">
+                                <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Visual Budget Allocation</span>
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
+                                    <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
+                                    <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Spends Curve</button>
+                                </div>
+                            </div>
+                            <!-- Compact chart containers -->
+                            <div id="chartDoughnutContainer" class="h-24 sm:h-28 flex items-center justify-center">
+                                <canvas id="emiDoughnutChart"></canvas>
+                            </div>
+                            <div id="chartBarContainer" class="h-24 sm:h-28 hidden">
+                                <canvas id="emiBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMORTIZATION BREAKDOWN SCHEDULE LEDGER Section -->
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                    <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px]">
+                        <span class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                            View Active Expenditures Ledger Schedule
+                        </span>
+                        <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-800">▼</span>
+                    </button>
+                    
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b border-gray-200 pb-3">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-[11px] text-gray-700 font-medium">Detailed break-up of your active spent items logged.</p>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span id="totalRowsBadge" class="inline-flex items-center px-2 py-0.5 rounded text-xxs font-extrabold bg-blue-100 text-blue-800"></span>
+                                    <span id="scrollNoticeBadge" class="inline-flex items-center text-[10px] text-gray-500 italic animate-pulse"></span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-xxs font-bold" role="group" aria-label="Amortization Table Mode">
+                                    <button type="button" id="toggleViewMonthBtn" class="px-3 py-1 rounded-md bg-blue-900 text-white shadow transition-all duration-150">Itemized Log</button>
+                                    <button type="button" id="toggleViewYearBtn" class="px-3 py-1 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-150">Daily Cash-Flow</button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Export CSV</button>
+                                    <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all">Print PDF</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
+                            <table class="w-full text-left border-collapse text-xs ledger-table">
+                                <thead>
+                                    <tr class="border-b border-gray-300 text-gray-900 bg-gray-100">
+                                        <th scope="col" id="ledgerPeriodHeader" class="p-3 font-extrabold">Item Description</th>
+                                        <th scope="col" id="ledgerColPrincipal" class="p-3 font-extrabold">Category</th>
+                                        <th scope="col" id="ledgerColInterest" class="p-3 font-extrabold">Amount</th>
+                                        <th scope="col" id="ledgerTotalHeader" class="p-3 font-extrabold">Logged Date</th>
+                                        <th scope="col" id="ledgerBalanceHeader" class="p-3 font-extrabold">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-gray-900">
+                                    <!-- Populated programmatically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Disclaimers -->
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-center text-gray-900 text-[10px] leading-relaxed">
+                    <p class="font-bold text-gray-950 mb-0.5">Calculations Cautionary Note:</p>
+                    <p class="mb-2">Calculations, buffers, extra income, and simulated spending levels are strictly projected based on linear calculation logic. Actual saving trajectories depend heavily on personal tracking discipline.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRINT ONLY HIGH-CONTRAST STATEMENT TEMPLATE -->
+        <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
+             <div class="text-center border-b-2 border-red-700 pb-4 mb-6">
+                 <h1 class="text-2xl font-extrabold uppercase tracking-wide">Daily Safe-to-Spend (STS) Report</h1>
+                 <p class="text-xs text-gray-600 mt-1">Generated electronically on toolblaster.com</p>
+             </div>
+             
+             <div class="grid grid-cols-2 gap-6 mb-6">
+                 <!-- Left: Inputs -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Monthly Parameters</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Monthly Net Income:</td><td id="printIncome" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Fixed Expenses:</td><td id="printBills" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Target Savings Goal:</td><td id="printSavings" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowInflation" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Price Increase Cushion:</td><td id="printInflation" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowEmergency" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Emergency Reserves:</td><td id="printEmergency" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowWindfall" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Unexpected Inflows:</td><td id="printWindfall" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr id="printRowPlanned" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Upcoming Planned Spend:</td><td id="printPlanned" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     </table>
+                 </div>
+                 
+                 <!-- Right: Repayment Metrics -->
+                 <div class="border p-4 rounded-xl">
+                     <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Calculation Summary</h2>
+                     <table class="w-full text-xs">
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Today's Safe-to-Spend Limit:</td><td id="printDailySTS" class="text-right py-1.5 font-extrabold text-blue-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Commitments:</td><td id="printTotalCommitments" class="text-right py-1.5 text-gray-900">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Remaining Spending Pool:</td><td id="printSurplus" class="text-right py-1.5 font-semibold text-green-950">-</td></tr>
+                         <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Spends Recorded:</td><td id="printTotalLogged" class="text-right py-1.5 font-bold text-gray-900">-</td></tr>
+                     </table>
+                 </div>
+              </div>
+
+              <!-- Ledger Schedule -->
+              <div>
+                  <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Expenditures Log</h2>
+                  <table class="w-full text-left border-collapse text-xs border">
+                      <thead>
+                          <tr class="border-b bg-gray-100 text-gray-900">
+                              <th class="p-2 border">Item/Date</th>
+                              <th class="p-2 border">Category</th>
+                              <th class="p-2 border">Amount</th>
+                              <th class="p-2 border">Date Logged</th>
+                          </tr>
+                      </thead>
+                      <tbody id="printLedgerBody" class="divide-y text-gray-900">
+                          <!-- Injected inside JavaScript loops -->
+                      </tbody>
+                  </table>
+              </div>
+        </div>
+
+        <!-- Share Modal dialog Container -->
+        <div id="shareModal" class="share-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="share-modal-content">
+                <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
+                <h2 id="modalTitle" class="modal-title font-extrabold text-center text-sm border-b pb-2 mb-3">Your Daily Safe-to-Spend Overview</h2>
+                
+                <!-- STYLISH EXPORT CARD CONTAINER -->
+                <div id="shareReportCard" class="p-5 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl shadow-xl relative overflow-hidden border border-slate-700">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2.5 mb-3">
+                        <span class="text-[10px] font-black tracking-widest text-indigo-400 uppercase">Daily Budget Audit</span>
+                        <span class="text-[9px] font-medium text-slate-400">toolblaster.com</span>
+                    </div>
+
+                    <div id="modalReportContent" class="modal-report-content space-y-3"></div>
+                </div>
+
+                <div class="modal-share-section mt-4">
+                    <label for="shareUrlInput" class="block text-xxs font-bold text-gray-900 mb-1">Shareable Link Reference</label>
+                    <input type="text" id="shareUrlInput" class="share-url-input" readonly>
+                    
+                    <!-- ACTIONS FOOTER -->
+                    <div class="modal-actions flex flex-wrap justify-end gap-1.5 mt-3">
+                        <button id="copyUrlBtn" class="px-3 py-1.5 bg-gray-700 hover:bg-gray-800 text-white rounded-lg text-xs font-bold border-none cursor-pointer transition-all">Copy Link</button>
+                        
+                        <!-- WhatsApp Markdown Copy Button -->
+                        <button id="copyWhatsAppBtn" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold border-none cursor-pointer flex items-center gap-1 transition-all">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.011 2c-5.502 0-9.989 4.487-9.989 9.989 0 1.761.424 3.424 1.173 4.902l-1.196 4.368 4.474-1.174c1.424.773 3.036 1.201 4.743 1.201 5.502 0 9.989-4.487 9.989-9.989 0-5.502-4.487-9.989-9.989-9.989zm6.186 14.193c-.273.761-1.371 1.393-1.902 1.442-.531.049-1.049.255-3.391-.676-2.996-1.191-4.918-4.238-5.068-4.438-.15-.199-1.201-1.597-1.201-3.045 0-1.448.751-2.158 1.02-2.457.273-.298.599-.373.799-.373.199 0 .398.002.573.01.183.008.431-.072.676.512.249.593.851 2.072.925 2.223.076.15.125.325.026.524-.099.199-.149.324-.299.499-.15.174-.316.388-.451.524-.15.15-.308.315-.133.585.175.27 1.096 1.802 2.348 2.624.975.642 1.799.845 2.074.95.274.105.431.074.593-.11.163-.184.698-.813.886-1.092.189-.279.376-.233.636-.135.259.097 1.644.772 1.925.912.279.139.467.209.537.324.07.116.07.674-.203 1.435z"/></svg>
+                            Copy for WhatsApp
+                        </button>
+                        
+                        <!-- High-Res PNG Image Generator Button -->
+                        <button id="downloadImageBtn" class="px-3 py-1.5 bg-indigo-700 hover:bg-indigo-800 text-white rounded-lg text-xs font-bold border-none cursor-pointer flex items-center gap-1 transition-all">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                            Download Card Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification-toast"></div>
+    </main>
+
+    <script>
+        const currencies = {
+            USD: { symbol: '$', locale: 'en-US', code: 'USD' },
+            EUR: { symbol: '€', locale: 'de-DE', code: 'EUR' },
+            GBP: { symbol: '£', locale: 'en-GB', code: 'GBP' },
+            INR: { symbol: '₹', locale: 'en-IN', code: 'INR' },
+            CAD: { symbol: 'CA$', locale: 'en-CA', code: 'CAD' },
+            AUD: { symbol: 'A$', locale: 'en-AU', code: 'AUD' },
+            ILS: { symbol: '₪', locale: 'he-IL', code: 'ILS' },
+            RUB: { symbol: '₽', locale: 'ru-RU', code: 'RUB' }
+        };
+
+        const currencyRates = {
+            USD: 1,
+            EUR: 0.92,
+            GBP: 0.78,
+            INR: 83,
+            CAD: 1.37,
+            AUD: 1.51,
+            ILS: 3.72,
+            RUB: 90
+        };
+
+        const currencyPresets = {
+            INR: { minI: 10000, maxI: 1000000, stepI: 5000, valI: 75000, minB: 0, maxB: 500000, stepB: 2000, valB: 25000, minS: 0, maxS: 500000, stepS: 1000, valS: 15000 },
+            USD: { minI: 1000,  maxI: 50000,   stepI: 100,  valI: 5000,  minB: 0, maxB: 30000,  stepB: 100,  valB: 2000,  minS: 0, maxS: 25000,  stepS: 50,   valS: 1000 },
+            EUR: { minI: 1000,  maxI: 50000,   stepI: 100,  valI: 4500,  minB: 0, maxB: 30000,  stepB: 100,  valB: 1800,  minS: 0, maxS: 25000,  stepS: 50,   valS: 800 },
+            GBP: { minI: 1000,  maxI: 50000,   stepI: 100,  valI: 4000,  minB: 0, maxB: 30000,  stepB: 100,  valB: 1600,  minS: 0, maxS: 25000,  stepS: 50,   valS: 700 },
+            CAD: { minI: 1000,  maxI: 50000,   stepI: 100,  valI: 5500,  minB: 0, maxB: 30000,  stepB: 100,  valB: 2200,  minS: 0, maxS: 25000,  stepS: 50,   valS: 1000 },
+            AUD: { minI: 1000,  maxI: 50000,   stepI: 100,  valI: 5500,  minB: 0, maxB: 30000,  stepB: 100,  valB: 2200,  minS: 0, maxS: 25000,  stepS: 50,   valS: 1000 },
+            ILS: { minI: 2000,  maxI: 100000,  stepI: 500,  valI: 15000, minB: 0, maxB: 60000,  stepB: 200,  valB: 6000,  minS: 0, maxS: 50000,  stepS: 100,  valS: 3000 },
+            RUB: { minI: 20000, maxI: 2000000, stepI: 10000,valI: 150000,minB: 0, maxB: 1000000, stepB: 5000, valB: 60000, minS: 0, maxS: 1000000, stepS: 2000, valS: 30000 }
+        };
+
+        let selectedCurrency = 'INR'; 
+        let emiDoughnutChart;
+        let emiBarChart;
+        let cachedSchedule = [];
+        let ledgerViewMode = 'month'; 
+        let loggedExpenses = [];
+
+        function formatCurrency(num) {
+            const cur = currencies[selectedCurrency];
+            return new Intl.NumberFormat(cur.locale, { style: 'currency', currency: cur.code, maximumFractionDigits: 0 }).format(Math.round(num));
+        }
+
+        function convertToCompactWords(value) {
+            if (isNaN(value) || value <= 0) return "";
+            if (selectedCurrency === 'INR') {
+                if (value >= 10000000) return `(₹${(value / 10000000).toFixed(2)} Crore)`;
+                if (value >= 100000) return `(₹${(value / 100000).toFixed(2)} Lakh)`;
+                if (value >= 1000) return `(₹${(value / 1000).toFixed(1)} K)`;
+                return `(₹${value})`;
+            }
+            const cur = currencies[selectedCurrency];
+            const formatted = new Intl.NumberFormat(cur.locale, { notation: 'compact', compactDisplay: 'short' }).format(value);
+            return `(${formatted})`;
+        }
+
+        function updateSliderFill(slider) {
+            if (!slider) return;
+            const percentage = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            slider.style.setProperty('--fill-percentage', `${percentage}%`);
+        }
+
+        function updateAllCurrencyPlaceholders() {
+            const cur = currencies[selectedCurrency];
+            document.querySelectorAll('.currency-symbol').forEach(elem => {
+                elem.textContent = cur.symbol;
+            });
+        }
+
+        function triggerCalculation() {
+            const income = Math.max(0, parseFloat(document.getElementById('incomeInput').value) || 0);
+            const bills = Math.max(0, parseFloat(document.getElementById('billsInput').value) || 0);
+            const savings = Math.max(0, parseFloat(document.getElementById('savingsInput').value) || 0);
+
+            const extraBuffersActive = document.getElementById('buffersToggle').checked;
+            let inflationCushion = 0;
+            let emergencyReserve = 0;
+            let windfalls = 0;
+            let plannedSpend = 0;
+
+            if (extraBuffersActive) {
+                const infPercent = Math.max(0, parseFloat(document.getElementById('inflationInput').value) || 0);
+                inflationCushion = bills * (infPercent / 100);
+                emergencyReserve = Math.max(0, parseFloat(document.getElementById('emergencyInput').value) || 0);
+                windfalls = Math.max(0, parseFloat(document.getElementById('windfallInput').value) || 0);
+                plannedSpend = Math.max(0, parseFloat(document.getElementById('plannedSpendInput').value) || 0);
+            }
+
+            const totalCommitments = bills + savings + inflationCushion + emergencyReserve + plannedSpend;
+            const daysRemaining = Math.max(1, parseInt(document.getElementById('daysRemainingInput').value) || 1);
+
+            const outlaysSum = loggedExpenses.reduce((acc, curr) => acc + curr.amt, 0);
+
+            const initialSurplus = Math.max(0, (income + windfalls) - totalCommitments);
+            const remainingSpendPool = Math.max(0, initialSurplus - outlaysSum);
+            const dailySTS = remainingSpendPool / daysRemaining;
+
+            document.getElementById('totalCommitmentsDisp').textContent = formatCurrency(totalCommitments);
+            document.getElementById('availableSurplusDisp').textContent = formatCurrency(remainingSpendPool);
+            document.getElementById('loggedOutlaysTotal').textContent = formatCurrency(outlaysSum);
+            document.getElementById('maturityValue').textContent = `${formatCurrency(dailySTS)} / Day`;
+
+            const affBadge = document.getElementById('affordabilityBadge');
+            if (dailySTS <= 0) {
+                affBadge.innerHTML = `🔴 CRITICAL — BUDGET OVERSPENT! (${daysRemaining} days left with spending pool empty)`;
+                affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-red-100 text-red-950 border border-red-300";
+            } else if (dailySTS < (selectedCurrency === 'INR' ? 500 : 10)) {
+                affBadge.innerHTML = `🟡 CAUTION — SPENDING LIMIT IS VERY LOW (${formatCurrency(dailySTS)}/day remaining)`;
+                affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-amber-100 text-amber-950 border border-amber-300";
+            } else {
+                affBadge.innerHTML = `🟢 SAFE — GOALS SECURED! (${formatCurrency(dailySTS)}/day remaining)`;
+                affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-green-100 text-green-900 border border-green-300";
+            }
+
+            updateSliderFill(document.getElementById('incomeSlider'));
+            updateSliderFill(document.getElementById('billsSlider'));
+            updateSliderFill(document.getElementById('savingsSlider'));
+            updateSliderFill(document.getElementById('daysRemainingSlider'));
+
+            let schedule = [];
+            let simulatedBalance = initialSurplus;
+
+            for (let day = 1; day <= daysRemaining; day++) {
+                const daySpends = (day === 1) ? outlaysSum : 0; 
+                simulatedBalance -= daySpends;
+                
+                const daysLeftFromThisDay = Math.max(1, daysRemaining - day + 1);
+                const projectedLimit = Math.max(0, (simulatedBalance + daySpends) / daysLeftFromThisDay);
+
+                schedule.push({
+                    day: day,
+                    spends: daySpends,
+                    balance: Math.max(0, simulatedBalance),
+                    limit: projectedLimit
+                });
+            }
+
+            cachedSchedule = schedule;
+
+            document.getElementById('printIncome').textContent = formatCurrency(income);
+            document.getElementById('printBills').textContent = formatCurrency(bills);
+            document.getElementById('printSavings').textContent = formatCurrency(savings);
+            document.getElementById('printDailySTS').textContent = `${formatCurrency(dailySTS)} / Day`;
+            document.getElementById('printTotalCommitments').textContent = formatCurrency(totalCommitments);
+            document.getElementById('printSurplus').textContent = formatCurrency(remainingSpendPool);
+            document.getElementById('printTotalLogged').textContent = formatCurrency(outlaysSum);
+
+            if (inflationCushion > 0) {
+                document.getElementById('printRowInflation').classList.remove('hidden');
+                document.getElementById('printInflation').textContent = formatCurrency(inflationCushion);
+            } else {
+                document.getElementById('printRowInflation').classList.add('hidden');
+            }
+            if (emergencyReserve > 0) {
+                document.getElementById('printRowEmergency').classList.remove('hidden');
+                document.getElementById('printEmergency').textContent = formatCurrency(emergencyReserve);
+            } else {
+                document.getElementById('printRowEmergency').classList.add('hidden');
+            }
+            if (windfalls > 0) {
+                document.getElementById('printRowWindfall').classList.remove('hidden');
+                document.getElementById('printWindfall').textContent = formatCurrency(windfalls);
+            } else {
+                document.getElementById('printRowWindfall').classList.add('hidden');
+            }
+            if (plannedSpend > 0) {
+                document.getElementById('printRowPlanned').classList.remove('hidden');
+                document.getElementById('printPlanned').textContent = formatCurrency(plannedSpend);
+            } else {
+                document.getElementById('printRowPlanned').classList.add('hidden');
+            }
+
+            updateVisualizationCharts(initialSurplus, outlaysSum, schedule);
+            renderAmortizationLedger(schedule, daysRemaining);
+            updateRecentSpendsMiniList();
+        }
+
+        function updateVisualizationCharts(surplus, outlays, schedule) {
+            const remaining = Math.max(0, surplus - outlays);
+            const graphContainer = document.getElementById('emiDoughnutChart');
+            const chartData = [outlays, remaining];
+            
+            if (emiDoughnutChart) {
+                emiDoughnutChart.data.datasets[0].data = chartData;
+                emiDoughnutChart.update();
+            } else {
+                emiDoughnutChart = new Chart(graphContainer.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Spent Balance', 'Remaining Spend Pool'],
+                        datasets: [{ data: chartData, backgroundColor: ['#B91C1C', '#10B981'], hoverOffset: 4 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return label + ': ' + formatCurrency(value);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (emiBarChart) {
+                emiBarChart.destroy();
+            }
+
+            const barLabels = [];
+            const barBalances = [];
+            const barSpends = [];
+
+            schedule.forEach(row => {
+                barLabels.push(`Day ${row.day}`);
+                barBalances.push(row.balance);
+                barSpends.push(row.spends);
+            });
+
+            const barCtx = document.getElementById('emiBarChart').getContext('2d');
+            emiBarChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: barLabels,
+                    datasets: [
+                        {
+                            label: 'Spent on this Day',
+                            data: barSpends,
+                            backgroundColor: '#B91C1C',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Remaining Spending Pool',
+                            data: barBalances,
+                            backgroundColor: '#2563EB',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { 
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return new Intl.NumberFormat(currencies[selectedCurrency].locale, { notation: 'compact', compactDisplay: 'short' }).format(value);
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    let value = context.raw || 0;
+                                    return label + ': ' + formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderAmortizationLedger(schedule, totalDays) {
+            const tableBody = document.getElementById('ledgerTableBody');
+            const printTableBody = document.getElementById('printLedgerBody');
+            const totalRowsBadge = document.getElementById('totalRowsBadge');
+            const scrollNoticeBadge = document.getElementById('scrollNoticeBadge');
+
+            tableBody.innerHTML = '';
+            printTableBody.innerHTML = '';
+
+            if (ledgerViewMode === 'month') {
+                document.getElementById('ledgerPeriodHeader').textContent = "Item Description";
+                document.getElementById('ledgerColPrincipal').textContent = "Category";
+                document.getElementById('ledgerColInterest').textContent = "Amount";
+                document.getElementById('ledgerTotalHeader').textContent = "Logged Date";
+                document.getElementById('ledgerBalanceHeader').textContent = "Action";
+
+                totalRowsBadge.textContent = `Showing ${loggedExpenses.length} Spends Logged`;
+                if (loggedExpenses.length > 8) {
+                    scrollNoticeBadge.textContent = "Scroll inside table to view all spends 👇";
+                } else {
+                    scrollNoticeBadge.textContent = "";
+                }
+
+                if (loggedExpenses.length === 0) {
+                    const rowHtml = `
+                        <td colspan="5" class="p-8 text-center text-gray-500 font-semibold italic">No spent items logged yet. Use the logger card above!</td>
+                    `;
+                    tableBody.innerHTML = rowHtml;
+                    printTableBody.innerHTML = rowHtml;
+                    return;
+                }
+
+                loggedExpenses.forEach((item) => {
+                    const rowHtml = `
+                        <td class="p-3 font-semibold text-gray-900">${item.desc}</td>
+                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold rounded bg-gray-150 border border-gray-300 uppercase">${item.cat}</span></td>
+                        <td class="p-3 text-red-950 font-bold">${formatCurrency(item.amt)}</td>
+                        <td class="p-3 text-gray-600">${item.date}</td>
+                        <td class="p-3">
+                            <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-red-700 hover:text-red-900 font-black flex items-center gap-0.5" aria-label="Delete spent outlay">
+                                Delete &times;
+                            </button>
+                        </td>
+                    `;
+                    const screenTr = document.createElement('tr');
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.innerHTML = rowHtml;
+                    tableBody.appendChild(screenTr);
+
+                    const printTr = document.createElement('tr');
+                    printTr.className = "border-b border-gray-200";
+                    printTr.innerHTML = `
+                        <td class="p-2 border">${item.desc}</td>
+                        <td class="p-2 border">${item.cat}</td>
+                        <td class="p-2 border font-bold text-red-750">${formatCurrency(item.amt)}</td>
+                        <td class="p-2 border">${item.date}</td>
+                    `;
+                    printTableBody.appendChild(printTr);
+                });
+            } else {
+                document.getElementById('ledgerPeriodHeader').textContent = "Day";
+                document.getElementById('ledgerColPrincipal').textContent = "Spent on this Day";
+                document.getElementById('ledgerColInterest').textContent = "Cumulative Spends";
+                document.getElementById('ledgerTotalHeader').textContent = "Remaining Spending Pool";
+                document.getElementById('ledgerBalanceHeader').textContent = "Revised Daily Limit";
+
+                totalRowsBadge.textContent = `Showing all ${totalDays} Calendar Days`;
+                if (totalDays > 8) {
+                    scrollNoticeBadge.textContent = "Scroll inside table to view entire cycle 👇";
+                } else {
+                    scrollNoticeBadge.textContent = "";
+                }
+
+                let sumAcc = 0;
+                schedule.forEach(row => {
+                    sumAcc += row.spends;
+
+                    const rowHtml = `
+                        <td class="p-3 font-semibold text-gray-900">Day ${row.day}</td>
+                        <td class="p-3 text-red-900 font-medium">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
+                        <td class="p-3 text-gray-500">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
+                        <td class="p-3 font-medium">${formatCurrency(row.balance)}</td>
+                        <td class="p-3 text-indigo-900 font-bold">${formatCurrency(row.limit)} / Day</td>
+                    `;
+
+                    const screenTr = document.createElement('tr');
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.innerHTML = rowHtml;
+                    tableBody.appendChild(screenTr);
+
+                    const printTr = document.createElement('tr');
+                    printTr.className = "border-b border-gray-200";
+                    printTr.innerHTML = `
+                        <td class="p-2 border">Day ${row.day}</td>
+                        <td class="p-2 border font-semibold">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
+                        <td class="p-2 border">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
+                        <td class="p-2 border font-bold text-indigo-900">${formatCurrency(row.limit)} / Day</td>
+                    `;
+                    printTableBody.appendChild(printTr);
+                });
+            }
+        }
+
+        // --- NEW INSTANT CONFIRMATION LOG LIST (UX Solution to eliminate user confusion) ---
+        function updateRecentSpendsMiniList() {
+            const container = document.getElementById('recentSpendsContainer');
+            const list = document.getElementById('recentSpendsList');
+            if (!container || !list) return;
+
+            if (loggedExpenses.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            list.innerHTML = '';
+
+            // Extract last 3 spent outlays to output upfront
+            const recentItems = [...loggedExpenses].reverse().slice(0, 3);
+
+            recentItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "flex items-center justify-between bg-gray-50 px-2.5 py-1.5 rounded-lg border border-gray-150 text-xxs font-semibold";
+                itemDiv.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-gray-900">${item.desc}</span>
+                        <span class="px-1.5 py-0.2 text-[9px] font-bold rounded bg-gray-200 text-gray-700 uppercase">${item.cat}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-black text-red-700">${formatCurrency(item.amt)}</span>
+                        <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-gray-400 hover:text-red-700 font-bold text-sm leading-none transition-colors" aria-label="Delete item">&times;</button>
+                    </div>
+                `;
+                list.appendChild(itemDiv);
+            });
+        }
+
+        function deleteExpenseItem(id) {
+            loggedExpenses = loggedExpenses.filter(item => item.id !== id);
+            localStorage.setItem('logged_spends_sts', JSON.stringify(loggedExpenses));
+            showNotification("Expense removed from history.");
+            triggerCalculation();
+        }
+
+        function setupSyncFramework(sliderId, inputId, decId, incId, wordId) {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            const dec = document.getElementById(decId);
+            const inc = document.getElementById(incId);
+            const parentGroup = input.closest('.input-stepper-group');
+
+            const getDecimalPlaces = () => {
+                const stepStr = input.step || slider.step || "1";
+                return (stepStr.split('.')[1] || '').length;
+            };
+
+            const syncFromInput = () => {
+                const val = parseFloat(input.value);
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || Infinity;
+                
+                if (!isNaN(val) && (val < min || val > max)) {
+                    input.style.color = '#b91c1c';
+                    if (parentGroup) {
+                        parentGroup.style.borderColor = '#ef4444';
+                        parentGroup.style.backgroundColor = '#fef2f2';
+                    }
+                } else {
+                    input.style.color = '#111827';
+                    if (parentGroup) {
+                        parentGroup.style.borderColor = '#94a3b8';
+                        parentGroup.style.backgroundColor = '#ffffff';
+                    }
+                }
+
+                if (!isNaN(val) && val >= min && val <= max) {
+                    slider.value = val;
+                    updateSliderFill(slider);
+                    if (wordId) {
+                        document.getElementById(wordId).textContent = convertToCompactWords(val);
+                    }
+                    triggerCalculation();
+                } else if (!isNaN(val)) {
+                    if (wordId) {
+                        document.getElementById(wordId).textContent = convertToCompactWords(val);
+                    }
+                }
+            };
+
+            const enforceLimits = () => {
+                let val = parseFloat(input.value);
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || Infinity;
+                const decimalPlaces = getDecimalPlaces();
+
+                if (isNaN(val) || input.value.trim() === '') {
+                    val = min;
+                } else {
+                    val = Math.max(min, Math.min(max, val));
+                }
+
+                const sanitizedVal = parseFloat(val.toFixed(decimalPlaces));
+                input.value = sanitizedVal;
+                slider.value = sanitizedVal;
+                updateSliderFill(slider);
+                if (wordId) {
+                    document.getElementById(wordId).textContent = convertToCompactWords(sanitizedVal);
+                }
+
+                input.style.color = '#111827';
+                if (parentGroup) {
+                    parentGroup.style.borderColor = '#94a3b8';
+                    parentGroup.style.backgroundColor = '#ffffff';
+                }
+
+                triggerCalculation();
+            };
+
+            slider.addEventListener('input', () => {
+                input.value = slider.value;
+                syncFromInput();
+            });
+
+            input.addEventListener('input', () => {
+                let cleaned = input.value.replace(/[^0-9.]/g, '');
+                if (input.value !== cleaned) {
+                    input.value = cleaned;
+                }
+                syncFromInput();
+            });
+
+            input.addEventListener('blur', enforceLimits);
+
+            dec.addEventListener('click', () => {
+                const min = parseFloat(input.min) || 0;
+                const step = parseFloat(input.step) || 1;
+                let val = parseFloat(input.value) || min;
+                val = Math.max(min, val - step);
+                const decimalPlaces = getDecimalPlaces();
+                input.value = parseFloat(val.toFixed(decimalPlaces));
+                slider.value = input.value;
+                updateSliderFill(slider);
+                if (wordId) {
+                    document.getElementById(wordId).textContent = convertToCompactWords(parseFloat(input.value));
+                }
+                triggerCalculation();
+            });
+
+            inc.addEventListener('click', () => {
+                const min = parseFloat(input.min) || 0;
+                const max = parseFloat(input.max) || Infinity;
+                const step = parseFloat(input.step) || 1;
+                let val = parseFloat(input.value) || min;
+                val = Math.min(max, val + step);
+                const decimalPlaces = getDecimalPlaces();
+                input.value = parseFloat(val.toFixed(decimalPlaces));
+                slider.value = input.value;
+                updateSliderFill(slider);
+                if (wordId) {
+                    document.getElementById(wordId).textContent = convertToCompactWords(parseFloat(input.value));
+                }
+                triggerCalculation();
+            });
+
+            updateSliderFill(slider);
+        }
+
+        function calculateOrganicDaysLeft() {
+            const now = new Date();
+            const today = now.getDate();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            const endMode = document.getElementById('cycleEndModeSelect').value;
+            const textAlert = document.getElementById('organicDaysLeftAlert');
+            const slider = document.getElementById('daysRemainingSlider');
+            const input = document.getElementById('daysRemainingInput');
+
+            let daysLeft = 1;
+
+            if (endMode === 'endOfMonth') {
+                document.getElementById('cycleCustomDayContainer').classList.add('hidden');
+                const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                daysLeft = totalDaysInMonth - today + 1;
+                textAlert.textContent = `Today is ${monthNames[currentMonth]} ${today}. There are exactly ${daysLeft} days remaining in this calendar month.`;
+            } else {
+                document.getElementById('cycleCustomDayContainer').classList.remove('hidden');
+                const customDay = parseInt(document.getElementById('cycleCustomDaySelect').value) || 1;
+                
+                if (customDay >= today) {
+                    daysLeft = customDay - today + 1;
+                    textAlert.textContent = `Today is ${monthNames[currentMonth]} ${today}. Mapped until payday on the ${customDay}th of this month (${daysLeft} days left).`;
+                } else {
+                    const totalDaysInCurrentMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                    const daysRemainingInCurrent = totalDaysInCurrentMonth - today + 1;
+                    daysLeft = daysRemainingInCurrent + customDay - 1;
+                    
+                    const nextMonthName = monthNames[(currentMonth + 1) % 12];
+                    textAlert.textContent = `Today is ${monthNames[currentMonth]} ${today}. Mapped until next paycheck on ${nextMonthName} ${customDay} (${daysLeft} days left).`;
+                }
+            }
+
+            slider.max = Math.max(31, daysLeft);
+            input.max = Math.max(31, daysLeft);
+            slider.value = daysLeft;
+            input.value = daysLeft;
+
+            updateSliderFill(slider);
+            triggerCalculation();
+        }
+
+        function populateCustomDayDropdown() {
+            const select = document.getElementById('cycleCustomDaySelect');
+            select.innerHTML = '';
+            for (let i = 1; i <= 31; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `${i}${getOrdinalSuffix(i)}`;
+                if (i === 1) opt.selected = true; 
+                select.appendChild(opt);
+            }
+        }
+
+        function getOrdinalSuffix(i) {
+            const j = i % 10, k = i % 100;
+            if (j === 1 && k !== 11) return "st";
+            if (j === 2 && k !== 12) return "nd";
+            if (j === 3 && k !== 13) return "rd";
+            return "th";
+        }
+
+        function changeCurrencyScaleAndValues(prevCurrency, newCurrency) {
+            selectedCurrency = newCurrency;
+            updateAllCurrencyPlaceholders();
+
+            const conversionFactor = currencyRates[newCurrency] / currencyRates[prevCurrency];
+
+            const syncInput = (inputId, sliderId, keyPrefix) => {
+                const input = document.getElementById(inputId);
+                const slider = document.getElementById(sliderId);
+                const oldVal = parseFloat(input.value) || 0;
+
+                const newVal = Math.round(oldVal * conversionFactor);
+                const preset = currencyPresets[newCurrency] || currencyPresets['INR'];
+
+                slider.min = preset['min' + keyPrefix];
+                slider.max = preset['max' + keyPrefix];
+                slider.step = preset['step' + keyPrefix];
+                slider.value = newVal;
+
+                input.min = preset['min' + keyPrefix];
+                input.max = preset['max' + keyPrefix];
+                input.step = preset['step' + keyPrefix];
+                input.value = newVal;
+
+                updateSliderFill(slider);
+            };
+
+            syncInput('incomeInput', 'incomeSlider', 'I');
+            syncInput('billsInput', 'billsSlider', 'B');
+            syncInput('savingsInput', 'savingsSlider', 'S');
+
+            const emergencyInput = document.getElementById('emergencyInput');
+            emergencyInput.value = Math.round((parseFloat(emergencyInput.value) || 0) * conversionFactor);
+
+            const windfallInput = document.getElementById('windfallInput');
+            windfallInput.value = Math.round((parseFloat(windfallInput.value) || 0) * conversionFactor);
+
+            const plannedInput = document.getElementById('plannedSpendInput');
+            plannedInput.value = Math.round((parseFloat(plannedInput.value) || 0) * conversionFactor);
+
+            loggedExpenses = loggedExpenses.map(item => {
+                return {
+                    ...item,
+                    amt: Math.round(item.amt * conversionFactor)
+                };
+            });
+            localStorage.setItem('logged_spends_sts', JSON.stringify(loggedExpenses));
+
+            const simulationInput = document.getElementById('simulationInput');
+            if (simulationInput.value) {
+                simulationInput.value = Math.round((parseFloat(simulationInput.value) || 0) * conversionFactor);
+            }
+
+            document.getElementById('incomeWord').textContent = convertToCompactWords(parseFloat(document.getElementById('incomeInput').value));
+            document.getElementById('billsWord').textContent = convertToCompactWords(parseFloat(document.getElementById('billsInput').value));
+            document.getElementById('savingsWord').textContent = convertToCompactWords(parseFloat(document.getElementById('savingsInput').value));
+
+            triggerCalculation();
+        }
+
+        function exportToCSV() {
+            if (cachedSchedule.length === 0) return;
+            let csvRows = [];
+
+            if (ledgerViewMode === 'year') {
+                csvRows.push(["Day", "Spent on this Day", "Remaining Spending Pool", "Revised Daily Limit"]);
+                cachedSchedule.forEach(row => {
+                    csvRows.push([`Day ${row.day}`, Math.round(row.spends), Math.round(row.balance), Math.round(row.limit)]);
+                });
+            } else {
+                csvRows.push(["Expense Description", "Category", "Amount", "Date Logged"]);
+                loggedExpenses.forEach(item => {
+                    csvRows.push([item.desc, item.cat, Math.round(item.amt), item.date]);
+                });
+            }
+
+            const csvContent = "data:text/csv;charset=utf-8," + csvRows.map(e => e.map(val => typeof val === 'string' ? `"${val}"` : val).join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Safe_To_Spend_Schedule_${ledgerViewMode}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function showNotification(message) {
+            const toast = document.getElementById('notification-toast');
+            if (toast) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function loadFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const now = new Date();
+            
+            const savedSpends = localStorage.getItem('logged_spends_sts');
+            if (savedSpends) {
+                try {
+                    loggedExpenses = JSON.parse(savedSpends);
+                } catch (e) {
+                    loggedExpenses = [];
+                }
+            } else {
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const mockDate = `02 ${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+                loggedExpenses = [
+                    { id: '1', desc: 'Grocery Bill', cat: 'Groceries', amt: 2500, date: mockDate }
+                ];
+                localStorage.setItem('logged_spends_sts', JSON.stringify(loggedExpenses));
+            }
+
+            if (params.has('curr')) {
+                selectedCurrency = params.get('curr');
+                document.getElementById('globalCurrencySelect').value = selectedCurrency;
+            } else {
+                selectedCurrency = 'INR';
+                document.getElementById('globalCurrencySelect').value = 'INR';
+            }
+
+            updateAllCurrencyPlaceholders();
+
+            const preset = currencyPresets[selectedCurrency];
+            const incomeSlider = document.getElementById('incomeSlider');
+            incomeSlider.min = preset.minI; incomeSlider.max = preset.maxI; incomeSlider.step = preset.stepI; incomeSlider.value = preset.valI;
+            const incomeInput = document.getElementById('incomeInput');
+            incomeInput.min = preset.minI; incomeInput.max = preset.maxI; incomeInput.step = preset.stepI; incomeInput.value = preset.valI;
+
+            const billsSlider = document.getElementById('billsSlider');
+            billsSlider.min = preset.minB; billsSlider.max = preset.maxB; billsSlider.step = preset.stepB; billsSlider.value = preset.valB;
+            const billsInput = document.getElementById('billsInput');
+            billsInput.min = preset.minB; billsInput.max = preset.maxB; billsInput.step = preset.stepB; billsInput.value = preset.valB;
+
+            const savingsSlider = document.getElementById('savingsSlider');
+            savingsSlider.min = preset.minS; savingsSlider.max = preset.maxS; savingsSlider.step = preset.stepS; savingsSlider.value = preset.valS;
+            const savingsInput = document.getElementById('savingsInput');
+            savingsInput.min = preset.minS; savingsInput.max = preset.maxS; savingsInput.step = preset.stepS; savingsInput.value = preset.valS;
+
+            if (params.has('income')) {
+                document.getElementById('incomeInput').value = params.get('income');
+                document.getElementById('incomeSlider').value = params.get('income');
+            }
+            if (params.has('bills')) {
+                document.getElementById('billsInput').value = params.get('bills');
+                document.getElementById('billsSlider').value = params.get('bills');
+            }
+            if (params.has('savings')) {
+                document.getElementById('savingsInput').value = params.get('savings');
+                document.getElementById('savingsSlider').value = params.get('savings');
+            }
+
+            if (params.get('eb') === 'true') {
+                document.getElementById('buffersToggle').checked = true;
+                document.getElementById('buffersContainer').classList.remove('hidden');
+            } else {
+                document.getElementById('buffersToggle').checked = false;
+                document.getElementById('buffersContainer').classList.add('hidden');
+            }
+
+            if (params.has('inf')) document.getElementById('inflationInput').value = params.get('inf');
+            if (params.has('emg')) document.getElementById('emergencyInput').value = params.get('emg');
+            if (params.has('wnd')) document.getElementById('windfallInput').value = params.get('wnd');
+            if (params.has('pln')) document.getElementById('plannedSpendInput').value = params.get('pln');
+
+            updateSliderFill(incomeSlider);
+            updateSliderFill(billsSlider);
+            updateSliderFill(savingsSlider);
+            
+            document.getElementById('incomeWord').textContent = convertToCompactWords(parseFloat(document.getElementById('incomeInput').value));
+            document.getElementById('billsWord').textContent = convertToCompactWords(parseFloat(document.getElementById('billsInput').value));
+            document.getElementById('savingsWord').textContent = convertToCompactWords(parseFloat(document.getElementById('savingsInput').value));
+
+            calculateOrganicDaysLeft();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCustomDayDropdown();
+
+            setupSyncFramework('incomeSlider', 'incomeInput', 'incomeDecrement', 'incomeIncrement', 'incomeWord');
+            setupSyncFramework('billsSlider', 'billsInput', 'billsDecrement', 'billsIncrement', 'billsWord');
+            setupSyncFramework('savingsSlider', 'savingsInput', 'savingsDecrement', 'savingsIncrement', 'savingsWord');
+            setupSyncFramework('daysRemainingSlider', 'daysRemainingInput', 'daysRemainingDecrement', 'daysRemainingIncrement', null);
+
+            document.getElementById('cycleEndModeSelect').addEventListener('change', calculateOrganicDaysLeft);
+            document.getElementById('cycleCustomDaySelect').addEventListener('change', calculateOrganicDaysLeft);
+
+            const buffersToggle = document.getElementById('buffersToggle');
+            const buffersContainer = document.getElementById('buffersContainer');
+            buffersToggle.addEventListener('change', () => {
+                const isActive = buffersToggle.checked;
+                buffersContainer.classList.toggle('hidden', !isActive);
+                triggerCalculation();
+            });
+
+            const globalCurrencySelect = document.getElementById('globalCurrencySelect');
+            globalCurrencySelect.addEventListener('change', (e) => {
+                const prev = selectedCurrency;
+                const next = e.target.value;
+                changeCurrencyScaleAndValues(prev, next);
+            });
+
+            const toggleViewMonthBtn = document.getElementById('toggleViewMonthBtn');
+            const toggleViewYearBtn = document.getElementById('toggleViewYearBtn');
+
+            toggleViewMonthBtn.addEventListener('click', () => {
+                if (ledgerViewMode !== 'month') {
+                    ledgerViewMode = 'month';
+                    toggleViewMonthBtn.className = "px-3 py-1 rounded-md bg-blue-900 text-white shadow";
+                    toggleViewYearBtn.className = "px-3 py-1 rounded-md text-gray-700 hover:text-gray-900";
+                    triggerCalculation();
+                }
+            });
+
+            toggleViewYearBtn.addEventListener('click', () => {
+                if (ledgerViewMode !== 'year') {
+                    ledgerViewMode = 'year';
+                    toggleViewYearBtn.className = "px-3 py-1 rounded-md bg-blue-900 text-white shadow";
+                    toggleViewMonthBtn.className = "px-3 py-1 rounded-md text-gray-700 hover:text-gray-900";
+                    triggerCalculation();
+                }
+            });
+
+            const chartToggleShare = document.getElementById('chartToggleShare');
+            const chartToggleSchedule = document.getElementById('chartToggleSchedule');
+            const doughnutContainer = document.getElementById('chartDoughnutContainer');
+            const barContainer = document.getElementById('chartBarContainer');
+
+            chartToggleShare.addEventListener('click', () => {
+                doughnutContainer.classList.remove('hidden');
+                barContainer.classList.add('hidden');
+                chartToggleShare.className = "px-2 py-0.5 rounded-md bg-blue-900 text-white shadow";
+                chartToggleSchedule.className = "px-2 py-0.5 text-gray-700 hover:text-gray-900 ml-0.5";
+                if (emiDoughnutChart) emiDoughnutChart.resize();
+            });
+
+            chartToggleSchedule.addEventListener('click', () => {
+                barContainer.classList.remove('hidden');
+                doughnutContainer.classList.add('hidden');
+                chartToggleSchedule.className = "px-2 py-0.5 rounded-md bg-blue-900 text-white shadow";
+                chartToggleShare.className = "px-2 py-0.5 text-gray-700 hover:text-gray-900 ml-0.5";
+                if (emiBarChart) emiBarChart.resize();
+            });
+
+            document.getElementById('addExpenseBtn').addEventListener('click', () => {
+                const desc = document.getElementById('expenseDescInput').value.trim() || "Spent Outlay";
+                const amt = Math.max(0, parseFloat(document.getElementById('expenseAmtInput').value) || 0);
+
+                if (amt <= 0) {
+                    showNotification("Please enter a valid spent amount.");
+                    return;
+                }
+
+                const now = new Date();
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const dayDisplay = String(now.getDate()).padStart(2, '0');
+                const formattedDate = `${dayDisplay} ${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+
+                const newSpend = {
+                    id: Math.random().toString(36).substr(2, 9),
+                    desc: desc,
+                    cat: "Outlay",
+                    amt: amt,
+                    date: formattedDate
+                };
+
+                loggedExpenses.push(newSpend);
+                localStorage.setItem('logged_spends_sts', JSON.stringify(loggedExpenses));
+
+                document.getElementById('expenseDescInput').value = '';
+                document.getElementById('expenseAmtInput').value = '';
+
+                showNotification(`Logged spend of ${formatCurrency(amt)} successfully!`);
+                triggerCalculation();
+            });
+
+            // Mini-list smooth navigation button (Scrolls down and auto-expands the main ledger)
+            document.getElementById('goToFullLedgerBtn').addEventListener('click', () => {
+                const content = document.getElementById('ledgerContent');
+                const toggleBtn = document.getElementById('toggleLedgerBtn');
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    document.getElementById('ledgerChevron').style.transform = 'rotate(180deg)';
+                    if (emiBarChart) emiBarChart.resize();
+                }
+                toggleBtn.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            document.getElementById('triggerSimulateBtn').addEventListener('click', () => {
+                const simAmt = Math.max(0, parseFloat(document.getElementById('simulationInput').value) || 0);
+                const display = document.getElementById('simulationBenefitDisplay');
+
+                if (simAmt <= 0) {
+                    showNotification("Please enter a valid price to simulate.");
+                    return;
+                }
+
+                const income = Math.max(0, parseFloat(document.getElementById('incomeInput').value) || 0);
+                const bills = Math.max(0, parseFloat(document.getElementById('billsInput').value) || 0);
+                const savings = Math.max(0, parseFloat(document.getElementById('savingsInput').value) || 0);
+
+                const infPercent = Math.max(0, parseFloat(document.getElementById('inflationInput').value) || 0);
+                const inflationCushion = bills * (infPercent / 100);
+                const emergencyReserve = Math.max(0, parseFloat(document.getElementById('emergencyInput').value) || 0);
+                const windfalls = Math.max(0, parseFloat(document.getElementById('windfallInput').value) || 0);
+                const plannedSpend = Math.max(0, parseFloat(document.getElementById('plannedSpendInput').value) || 0);
+
+                const totalCommitments = bills + savings + inflationCushion + emergencyReserve + plannedSpend;
+                const daysRemaining = Math.max(1, parseInt(document.getElementById('daysRemainingInput').value) || 1);
+
+                const outlaysSum = loggedExpenses.reduce((acc, curr) => acc + curr.amt, 0);
+
+                const initialSurplus = Math.max(0, (income + windfalls) - totalCommitments);
+                const remainingSpendPool = Math.max(0, initialSurplus - outlaysSum);
+                const currentDaily = remainingSpendPool / daysRemaining;
+
+                const simulatedCash = Math.max(0, remainingSpendPool - simAmt);
+                const simulatedDaily = simulatedCash / daysRemaining;
+                const percentageDrop = currentDaily > 0 ? ((currentDaily - simulatedDaily) / currentDaily) * 100 : 0;
+
+                if (simAmt > remainingSpendPool) {
+                    display.innerHTML = `⚠️ <span class="text-red-700 font-extrabold">BUDGET CRASH!</span> Buying this item for ${formatCurrency(simAmt)} immediately wipes out your available spending pool and eats into savings target or bills!`;
+                } else {
+                    display.innerHTML = `📉 <span class="text-blue-900 font-extrabold">Daily Limit Drops by -${Math.round(percentageDrop)}%!</span> Buying this today shrinks your Safe-to-Spend allowance from ${formatCurrency(currentDaily)} to ${formatCurrency(simulatedDaily)} / Day for the next ${daysRemaining} days.`;
+                }
+            });
+
+            document.getElementById('toggleLedgerBtn').addEventListener('click', () => {
+                const content = document.getElementById('ledgerContent');
+                const isHidden = content.classList.toggle('hidden');
+                document.getElementById('ledgerChevron').style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                if (!isHidden && emiBarChart) {
+                    emiBarChart.resize();
+                }
+            });
+
+            document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+            document.getElementById('printPdfBtn').addEventListener('click', () => window.print());
+
+            const modal = document.getElementById('shareModal');
+            document.getElementById('shareReportBtn').addEventListener('click', () => {
+                const params = new URLSearchParams();
+                params.set('income', document.getElementById('incomeInput').value);
+                params.set('bills', document.getElementById('billsInput').value);
+                params.set('savings', document.getElementById('savingsInput').value);
+                params.set('curr', selectedCurrency);
+                
+                const extraBuffersActive = document.getElementById('buffersToggle').checked;
+                if (extraBuffersActive) {
+                    params.set('eb', 'true');
+                    params.set('inf', document.getElementById('inflationInput').value);
+                    params.set('emg', document.getElementById('emergencyInput').value);
+                    params.set('wnd', document.getElementById('windfallInput').value);
+                    params.set('pln', document.getElementById('plannedSpendInput').value);
+                }
+                
+                const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+                document.getElementById('shareUrlInput').value = shareUrl;
+
+                const incomeVal = formatCurrency(parseFloat(document.getElementById('incomeInput').value));
+                const billsVal = formatCurrency(parseFloat(document.getElementById('billsInput').value));
+                const savingsVal = formatCurrency(parseFloat(document.getElementById('savingsInput').value));
+                const mainTargetVal = document.getElementById('maturityValue').textContent.split(" / ")[0];
+                const totalC = document.getElementById('totalCommitmentsDisp').textContent;
+                const totalR = document.getElementById('availableSurplusDisp').textContent;
+
+                let extraReportHtml = '';
+                if (extraBuffersActive) {
+                    const stepUpVal = document.getElementById('inflationInput').value;
+                    const morMonths = document.getElementById('emergencyInput').value;
+                    const windfallVal = document.getElementById('windfallInput').value;
+                    const plannedSpendVal = document.getElementById('plannedSpendInput').value;
+
+                    if (parseFloat(stepUpVal) > 0) extraReportHtml += `<li class="flex justify-between border-b border-slate-700 pb-1"><span class="text-xxs text-indigo-200">Price Increase Cushion:</span><span class="text-xxs font-extrabold text-white">${stepUpVal}%</span></li>`;
+                    if (parseInt(morMonths) > 0) extraReportHtml += `<li class="flex justify-between border-b border-slate-700 pb-1"><span class="text-xxs text-indigo-200">Emergency Reserves:</span><span class="text-xxs font-extrabold text-white">${formatCurrency(morMonths)}</span></li>`;
+                    if (parseFloat(windfallVal) > 0) extraReportHtml += `<li class="flex justify-between border-b border-slate-700 pb-1"><span class="text-xxs text-indigo-200">Unexpected Inflows:</span><span class="text-xxs font-extrabold text-white">${formatCurrency(windfallVal)}</span></li>`;
+                    if (parseFloat(plannedSpendVal) > 0) extraReportHtml += `<li class="flex justify-between border-b border-slate-700 pb-1"><span class="text-xxs text-indigo-200">Upcoming Planned Spend:</span><span class="text-xxs font-extrabold text-white">${formatCurrency(plannedSpendVal)}</span></li>`;
+                }
+
+                const reportHtml = `
+                    <div class="space-y-4">
+                        <div class="text-center bg-slate-800/50 p-3.5 rounded-xl border border-slate-700 shadow-inner">
+                            <span class="text-[9px] text-indigo-400 font-extrabold uppercase tracking-widest block mb-0.5">Recommended Allowance</span>
+                            <span class="text-2xl font-black text-emerald-400">${mainTargetVal}</span>
+                            <span class="text-[10px] text-slate-400 block mt-0.5">Securely calculated for the rest of your cycle</span>
+                        </div>
+                        <ul class="flex flex-col gap-2 mt-1">
+                            <li class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-xxs text-slate-300">Net Monthly Income:</span> 
+                                <span class="text-xxs font-extrabold text-white">${incomeVal}</span>
+                            </li>
+                            <li class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-xxs text-slate-300">Fixed Commitments:</span> 
+                                <span class="text-xxs font-extrabold text-white">${billsVal}</span>
+                            </li>
+                            <li class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-xxs text-slate-300">Savings Target:</span> 
+                                <span class="text-xxs font-extrabold text-white">${savingsVal}</span>
+                            </li>
+                            ${extraReportHtml}
+                            <li class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-xxs text-slate-300">Total Commitments:</span> 
+                                <span class="text-xxs font-extrabold text-white">${totalC}</span>
+                            </li>
+                            <li class="flex justify-between border-b border-slate-800 pb-1">
+                                <span class="text-xxs text-slate-300">Remaining Spending Pool:</span> 
+                                <span class="text-xxs font-extrabold text-emerald-400">${totalR}</span>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+
+                document.getElementById('modalReportContent').innerHTML = reportHtml;
+                modal.classList.add('active');
+            });
+            document.getElementById('closeModalBtn').addEventListener('click', () => modal.classList.remove('active'));
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            document.getElementById('copyUrlBtn').addEventListener('click', () => {
+                try {
+                    const shareUrlInput = document.getElementById('shareUrlInput');
+                    shareUrlInput.select();
+                    document.execCommand('copy');
+                    showNotification('Link copied to clipboard!');
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                    showNotification('Could not copy link.');
+                }
+            });
+
+            document.getElementById('copyWhatsAppBtn').addEventListener('click', () => {
+                const incomeVal = parseFloat(document.getElementById('incomeInput').value) || 0;
+                const billsVal = parseFloat(document.getElementById('billsInput').value) || 0;
+                const savingsVal = parseFloat(document.getElementById('savingsInput').value) || 0;
+                const daysLeft = parseInt(document.getElementById('daysRemainingInput').value) || 1;
+                const limitStr = document.getElementById('maturityValue').textContent.split(" / ")[0];
+                
+                let text = `🛡️ *Daily Safe-to-Spend (STS) Budget Audit*\n`;
+                text += `===============================\n\n`;
+                text += `💰 *Monthly Setup:*\n`;
+                text += `• Net Income: ${formatCurrency(incomeVal)}\n`;
+                text += `• Bills & Rent: ${formatCurrency(billsVal)}\n`;
+                text += `• Savings Goal: ${formatCurrency(savingsVal)}\n\n`;
+                
+                const extraBuffersActive = document.getElementById('buffersToggle').checked;
+                if (extraBuffersActive) {
+                    text += `🛡️ *Active Safety Buffers:*\n`;
+                    const inflationPct = parseFloat(document.getElementById('inflationInput').value) || 0;
+                    const emergency = parseFloat(document.getElementById('emergencyInput').value) || 0;
+                    const windfall = parseFloat(document.getElementById('windfallInput').value) || 0;
+                    const planned = parseFloat(document.getElementById('plannedSpendInput').value) || 0;
+                    
+                    if (inflationPct > 0) text += `• Inflation Cushion: ${inflationPct}% (${formatCurrency(billsVal * (inflationPct / 100))})\n`;
+                    if (emergency > 0) text += `• Emergency Reserves: ${formatCurrency(emergency)}\n`;
+                    if (windfall > 0) text += `• Unexpected Inflows: ${formatCurrency(windfall)}\n`;
+                    if (planned > 0) text += `• Upcoming Planned Spends: ${formatCurrency(planned)}\n`;
+                    text += `\n`;
+                }
+                
+                const commitmentsText = document.getElementById('totalCommitmentsDisp').textContent;
+                const remainingText = document.getElementById('availableSurplusDisp').textContent;
+                
+                text += `📊 *Active Totals:*\n`;
+                text += `• Total Commitments: ${commitmentsText}\n`;
+                text += `• Remaining Spend Pool: ${remainingText}\n\n`;
+                text += `🔥 *Today's Safe Quota:*\n`;
+                text += `👉 *${limitStr} / Day* (safely for next ${daysLeft} days)\n\n`;
+                text += `_Secure your monthly financial goals with toolblaster.com_`;
+
+                const el = document.createElement('textarea');
+                el.value = text;
+                el.setAttribute('readonly', '');
+                el.style.position = 'absolute';
+                el.style.left = '-9999px';
+                document.body.appendChild(el);
+                el.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(el);
+
+                if (copied) {
+                    showNotification('WhatsApp text copied to clipboard successfully!');
+                } else {
+                    showNotification('Failed to copy text. Try selecting manually.');
+                }
+            });
+
+            document.getElementById('downloadImageBtn').addEventListener('click', () => {
+                const card = document.getElementById('shareReportCard');
+                if (!card) return;
+                
+                showNotification('Generating high-res image...');
+
+                html2canvas(card, {
+                    scale: 3, 
+                    backgroundColor: null, 
+                    logging: false,
+                    useCORS: true
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = imgData;
+                    link.download = `Safe-to-Spend-Report-${new Date().toISOString().split('T')[0]}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showNotification('Image downloaded successfully!');
+                }).catch(err => {
+                    console.error('Error generating image:', err);
+                    showNotification('Error rendering image card. Try copying text!');
+                });
+            });
+
+            const inputElements = ['inflationInput', 'emergencyInput', 'windfallInput', 'plannedSpendInput'];
+            inputElements.forEach(id => {
+                const elem = document.getElementById(id);
+                elem.addEventListener('input', () => {
+                    let val = parseFloat(elem.value);
+                    if (val < 0) {
+                        elem.value = 0;
+                    }
+                    triggerCalculation();
+                });
+                elem.addEventListener('blur', () => {
+                    let val = parseFloat(elem.value);
+                    if (isNaN(val) || val < 0) {
+                        elem.value = 0;
+                    }
+                    triggerCalculation();
+                });
+            });
+
+            loadFromUrl();
+        });
+    </script>
+</body>
+</html>
