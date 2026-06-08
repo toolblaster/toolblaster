@@ -16,7 +16,8 @@ const TOOLBLASTER_APPS = [
             { name: "Daily Focus", url: "/productivity/decide/", icon: "fa-bullseye", classes: "bg-indigo-50 border-indigo-100 text-indigo-600 group-hover:text-indigo-600", matchPath: "/decide/" },
             { name: "Word Counter", url: "/productivity/word-counter/", icon: "fa-file-word", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/word-counter/" },
             { name: "Study Timer", url: "/productivity/pomodoro-study-timer/", icon: "fa-stopwatch", classes: "bg-orange-50 border-orange-100 text-orange-600 group-hover:text-orange-600", matchPath: "/pomodoro-study-timer/" },
-            { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", classes: "bg-cyan-50 border-cyan-100 text-cyan-600 group-hover:text-cyan-600", matchPath: "/breathing-pacer/" }
+            { name: "Breathing Pacer", url: "/productivity/breathing-pacer/", icon: "fa-wind", classes: "bg-cyan-50 border-cyan-100 text-cyan-600 group-hover:text-cyan-600", matchPath: "/breathing-pacer/" },
+            { name: "Habit Tracker", url: "/productivity/habit-tracker/", icon: "fa-calendar-check", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/habit-tracker/" }
         ]
     },
     {
@@ -85,6 +86,7 @@ function injectHeader() {
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
+        else if (currentPath.includes('/productivity/habit-tracker')) centerTitle = "HABIT TRACKER";
         else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
         else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "COMPARE INVESTMENT";
         else if (currentPath.includes('/finance/ppf-calculator')) centerTitle = "PPF CALCULATOR";
