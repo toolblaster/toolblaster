@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
-    <title>Daily Safe-to-Spend Calculator | Safe Spending Planner India</title>
+    <!-- SEO and Canonical Metadata (Title Exactly 57 chars, Desc < 160 chars) -->
+    <title>Daily Safe-to-Spend Calculator | Safe Spend Planner India</title>
     <meta name="description" content="Calculate your dynamic daily safe-to-spend allowance. Secure monthly savings goals against impulse buying with our interactive budget planner.">
     <meta name="keywords" content="safe to spend calculator, daily budget calculator, impulse spend planner, emergency savings tracker, budget amortizer, financial tool">
     <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/safe-to-spend-calculator" />
@@ -45,7 +45,7 @@
       "@graph": [
         {
           "@type": "WebPage",
-          "name": "Daily Safe-to-Spend Calculator | Safe Spending Planner India",
+          "name": "Daily Safe-to-Spend Calculator | Safe Spend Planner India",
           "description": "Calculate your dynamic daily safe-to-spend allowance. Secure monthly savings goals against impulse buying with our interactive budget planner.",
           "url": "https://toolblaster.com/finance/safe-to-spend-calculator",
           "inLanguage": "en-IN",
@@ -81,9 +81,9 @@
     }
     </script>
 
-    <!-- Tailwind, Chart.js, and FontAwesome Icons -->
+    <!-- Tailwind, Chart.js (UMD stable version), and FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <!-- html2canvas safely imported for dynamic client-side visual cards generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -319,7 +319,7 @@
             gap: 0.45rem;
             margin-bottom: 1rem;
         }
-        .modal-report-content li {
+        .modal-report-content pb li {
             display: flex;
             justify-content: space-between;
             font-size: 0.75rem;
@@ -631,16 +631,16 @@
                                     </span>
                                 </div>
                                 
-                                <!-- Symmetrical Reset Controls -->
-                                <div class="grid grid-cols-2 gap-2 mb-2">
-                                    <div>
+                                <!-- Symmetrical Reset Controls with 70/30 dynamic flex alignment on custom state -->
+                                <div class="flex gap-2 mb-2 w-full">
+                                    <div id="cycleEndModeWrapper" class="w-full transition-all duration-200">
                                         <label for="cycleEndModeSelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Cycle Resets On</label>
                                         <select id="cycleEndModeSelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
                                             <option value="endOfMonth" selected>End of Calendar Month</option>
                                             <option value="customDay">My Payday / Custom Date</option>
                                         </select>
                                     </div>
-                                    <div id="cycleCustomDayContainer" class="hidden">
+                                    <div id="cycleCustomDayContainer" class="hidden transition-all duration-200">
                                         <label for="cycleCustomDaySelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Select Payday Date</label>
                                         <select id="cycleCustomDaySelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
                                             <!-- Dynamically injected values 1 to 31 -->
@@ -655,6 +655,7 @@
                                     </div>
                                     <div class="input-stepper-group flex-shrink-0 rounded-lg">
                                         <button type="button" id="daysRemainingDecrement" class="stepper-button" aria-label="Decrease Days">-</button>
+                                        <label for="daysRemainingInput" class="sr-only">Days Remaining Input</label> <!-- ACCESSIBILITY FIX: Added associated label with daysRemainingInput -->
                                         <input type="number" id="daysRemainingInput" class="manual-input text-center font-bold" value="24" min="1" max="365" step="1">
                                         <button type="button" id="daysRemainingIncrement" class="stepper-button" aria-label="Increase Days">+</button>
                                     </div>
@@ -783,11 +784,13 @@
                         <div id="loggerContainer" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div class="pill-container pill-indigo">
+                                    <label for="expenseDescInput" class="sr-only">Expense Description</label> <!-- ACCESSIBILITY FIX: Added associated label -->
                                     <input type="text" id="expenseDescInput" class="w-full bg-transparent text-xs font-semibold outline-none" placeholder="Expense description (e.g. Groceries)">
                                 </div>
                                 <div class="flex gap-1.5">
                                     <div class="flex-1 pill-container pill-indigo">
                                         <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                        <label for="expenseAmtInput" class="sr-only">Expense Amount</label> <!-- ACCESSIBILITY FIX: Added associated label -->
                                         <input type="number" id="expenseAmtInput" class="w-full bg-transparent text-xs font-black outline-none" min="1" max="1000000" step="10" placeholder="Amount">
                                     </div>
                                     <button type="button" id="addExpenseBtn" class="px-4 bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap">Add Expense</button>
@@ -809,6 +812,7 @@
 
                     <!-- Right Section: Core Metric Cards + Visual Displays -->
                     <div class="flex flex-col space-y-3">
+                        <!-- Spending Status Main Card (Blue background) -->
                         <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
                             <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
                                 <h2 class="text-xs font-bold text-blue-950 font-extrabold flex items-center gap-1">
@@ -873,63 +877,78 @@
                             </div>
 
                             <!-- INTERACTIVE IMPULSE BUY SIMULATOR -->
-                            <div id="simulationBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-4 space-y-1">
-                                <div class="flex flex-col space-y-1">
-                                    <span class="flex items-center justify-center gap-1">
-                                        <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">💭 Impulse Buy Simulator</p>
-                                        <span class="tooltip-icon">
-                                            <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-                                            </svg>
-                                            <span class="tooltip-text">Simulate a purchase before buying! See exactly how much your daily spending limit will drop for the rest of the month.</span>
-                                        </span>
+                            <div id="simulationBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-3 space-y-1">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">💭 Impulse Buy Simulator</p>
+                                    <span class="tooltip-icon">
+                                        <svg class="text-emerald-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Simulate a purchase before buying! See exactly how much your daily spending limit will drop for the rest of the month.</span>
                                     </span>
-                                    <div class="grid grid-cols-3 gap-1.5 py-1">
-                                        <div class="col-span-2 pill-container pill-rose">
-                                            <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
-                                            <input type="number" id="simulationInput" class="w-full bg-transparent text-xs font-black outline-none font-bold" min="1" max="1000000" placeholder="Product price">
-                                        </div>
-                                        <button type="button" id="triggerSimulateBtn" class="bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap px-1">Simulate</button>
+                                </span>
+                                <div class="flex gap-1.5 py-1.5">
+                                    <div class="flex-grow pill-container pill-rose">
+                                        <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                        <label for="simulationInput" class="sr-only">Simulation Product Price</label> <!-- ACCESSIBILITY FIX: Added associated label -->
+                                        <input type="number" id="simulationInput" class="w-full bg-transparent text-xs font-black outline-none font-bold" min="1" max="1000000" placeholder="Product price">
                                     </div>
-                                    <p id="simulationBenefitDisplay" class="text-[10.5px] text-emerald-950 font-bold leading-normal text-center mt-1">
-                                        Enter an amount above to preview instant budget shock.
-                                    </p>
+                                    <button type="button" id="triggerSimulateBtn" class="bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap px-3 py-1.5">Simulate</button>
                                 </div>
+                                <p id="simulationBenefitDisplay" class="text-[10.5px] text-emerald-950 font-semibold leading-normal text-center mt-1">
+                                    Enter an amount above to preview instant budget shock.
+                                </p>
                             </div>
+                        </div>
 
-                            <!-- STATUS BADGE PANEL -->
-                            <div class="mt-3 p-3 bg-white border border-blue-100 rounded-2xl shadow-sm space-y-2">
-                                <div class="flex justify-between items-center">
-                                    <span class="flex items-center gap-1.5">
-                                        <p class="text-xxs font-bold text-gray-900">Total Logged Expenditures This Month</p>
-                                        <span class="tooltip-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <!-- Expenditures & Visual Allocation Stack (Total spent block + Graph Section stacked vertically on all screens) -->
+                        <div class="flex flex-col gap-3">
+                            <!-- Status Card - Inline layout on desktop (flex sm:flex-row) -->
+                            <div class="p-3 bg-white border border-blue-100 rounded-2xl shadow-sm flex flex-col justify-between">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2 pb-2 border-b border-gray-100">
+                                    <span class="flex items-center gap-1.5 min-w-0">
+                                        <p class="text-xxs font-bold text-gray-900 truncate">Total Logged Expenditures This Month</p>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                                 <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
                                             </svg>
                                             <span class="tooltip-text">Sum total of spent transactions logged.</span>
                                         </span>
                                     </span>
+                                    <div id="loggedOutlaysTotal" class="text-base sm:text-lg font-black text-gray-900 whitespace-nowrap">₹0</div>
                                 </div>
-                                <div id="loggedOutlaysTotal" class="text-base sm:text-lg font-black text-gray-900">₹0</div>
-                                <div id="affordabilityBadge" class="p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200"></div>
+                                <div id="affordabilityBadge" class="p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 mt-1 bg-green-100 text-green-900 border border-green-300"></div>
                             </div>
-                        </div>
 
-                        <!-- Graph Section -->
-                        <div class="bg-white p-3 rounded-2xl border border-gray-250 shadow-sm print-hide">
-                            <div class="flex justify-between items-center mb-2 border-b pb-1">
-                                <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider font-semibold text-stone-850">Visual Budget Allocation</span>
-                                <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
-                                    <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
-                                    <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Spends Curve</button>
+                            <!-- Graph Section (Doughnut block) -->
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm print-hide flex flex-col justify-between">
+                                <div class="flex justify-between items-center mb-1 border-b pb-1">
+                                    <span class="text-xxs font-bold text-gray-900 tracking-wide text-stone-850">Visual Budget Allocation</span>
+                                    <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
+                                        <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
+                                        <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Spends Curve</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Optimized: Compact Doughnut Chart Size to prevent massive page scaling -->
-                            <div id="chartDoughnutContainer" class="h-24 sm:h-28 max-w-[160px] mx-auto flex items-center justify-center">
-                                <canvas id="emiDoughnutChart"></canvas>
-                            </div>
-                            <div id="chartBarContainer" class="h-24 sm:h-28 hidden">
-                                <canvas id="emiBarChart"></canvas>
+                                <!-- Aspect Ratio responsive size dynamic bounds -->
+                                <div id="chartDoughnutContainer" class="relative h-24 sm:h-28 w-[160px] mx-auto">
+                                    <canvas id="emiDoughnutChart"></canvas>
+                                </div>
+                                <div id="chartBarContainer" class="relative h-24 sm:h-28 w-full hidden">
+                                    <canvas id="emiBarChart"></canvas>
+                                </div>
+                                <!-- Custom HTML Legend to display clear numeric values directly -->
+                                <div class="flex justify-between gap-4 mt-1.5 w-full text-[9px] font-bold">
+                                    <div class="flex items-center gap-1 min-w-0">
+                                        <span class="w-2 h-2 rounded-full bg-red-700 flex-shrink-0"></span>
+                                        <span class="truncate text-stone-600">Spent:</span>
+                                        <span id="legendSpentVal" class="text-red-700">₹0</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 min-w-0">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                                        <span class="truncate text-stone-600">Pool:</span>
+                                        <span id="legendPoolVal" class="text-emerald-800 font-extrabold">₹0</span> <!-- ACCESSIBILITY FIX: Changed text-emerald-600 to high-contrast text-emerald-800 -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -962,13 +981,13 @@
                             </div>
                             <div class="flex flex-wrap items-center gap-3 print-hide">
                                 <!-- Month-wise / Year-wise Toggle -->
-                                <div class="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-xxs font-bold" role="group" aria-label="Amortization Table Mode">
-                                    <button type="button" id="toggleViewMonthBtn" class="px-3 py-1 rounded-md bg-blue-900 text-white shadow transition-all duration-150">Itemized Log</button>
-                                    <button type="button" id="toggleViewYearBtn" class="px-3 py-1 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-150 ml-0.5">Daily Cash-Flow</button>
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-[10px] font-bold" role="group" aria-label="Amortization Table Mode">
+                                    <button type="button" id="toggleViewMonthBtn" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow transition-all duration-150">Itemized Log</button>
+                                    <button type="button" id="toggleViewYearBtn" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-150 ml-0.5">Daily Cash-Flow</button>
                                 </div>
-                                <div class="flex gap-2">
-                                    <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-emerald-500">Export CSV</button>
-                                    <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-xxs rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-red-500">Print PDF</button>
+                                <div class="flex gap-1.5">
+                                    <button type="button" id="exportCsvBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-[10px] rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-emerald-500">Export CSV</button>
+                                    <button type="button" id="printPdfBtn" class="flex items-center gap-1.5 px-3 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-[10px] rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-red-500">Print PDF</button>
                                 </div>
                             </div>
                         </div>
@@ -1065,7 +1084,7 @@
         <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
             <div class="space-y-6 text-stone-800">
                 
-                <!-- Section 1: Demystifying Debt Amortization -->
+                <!-- Section 1: Demystifying Spending -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-chart-line"></i></span> The Psychology of Spending: Safe-to-Spend Budgeting
@@ -1078,7 +1097,7 @@
                     </p>
                 </section>
 
-                <!-- Section 2: Mathematical Formulas (Symmetric LaTeX Enclosures Replaced with Premium CSS Flexbox Equations) -->
+                <!-- Section 2: Mathematical Formulas -->
                 <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Amortization Mathematics of Safe-to-Spend (STS)
@@ -1091,9 +1110,9 @@
                         <div class="border-b border-stone-200 pb-5">
                             <h3 class="text-xs font-bold text-stone-900 mb-2">1. The Core Safe-to-Spend (STS) Formula</h3>
                             
-                            <!-- Premium CSS-Flexbox Mathematical Equation Box (Optimized with responsive text size) -->
+                            <!-- Premium CSS-Flexbox Mathematical Equation Box -->
                             <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner">
-                                <div class="font-serif text-stone-900 text-[10px] sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
                                     <span class="font-black text-red-700">STS<sub>daily</sub></span> 
                                     <span class="mx-2 font-bold">=</span> 
                                     <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
@@ -1299,9 +1318,6 @@
     <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
     <div id="notification-toast" role="status" aria-live="polite"></div>
 
-    <!-- Global Layout Injectors & Logic Modules -->
-    <script src="../../js/header-footer.js"></script>
-    
     <script>
         function safeGetLocalStorage(key) {
             try {
@@ -1314,7 +1330,7 @@
 
         function safeSetLocalStorage(key, value) {
             try {
-                localStorage.setItem(key, value);
+                return localStorage.setItem(key, value);
             } catch (e) {
                 console.warn("localStorage write blocked in this environment (likely an iframe sandbox):", e);
             }
@@ -1401,39 +1417,54 @@
 
         function updateVisualizationCharts(surplus, outlays, schedule) {
             const remaining = Math.max(0, surplus - outlays);
-            const graphContainer = document.getElementById('emiDoughnutChart');
             const chartData = [outlays, remaining];
             
-            if (graphContainer) {
+            // Dynamically update custom HTML Legend values
+            const spentLegend = document.getElementById('legendSpentVal');
+            const poolLegend = document.getElementById('legendPoolVal');
+            if (spentLegend) spentLegend.textContent = formatCurrency(outlays);
+            if (poolLegend) poolLegend.textContent = formatCurrency(remaining);
+
+            // 1. Handle Doughnut Chart
+            const doughnutCanvas = document.getElementById('emiDoughnutChart');
+            if (doughnutCanvas) {
                 if (emiDoughnutChart) {
                     emiDoughnutChart.data.datasets[0].data = chartData;
                     emiDoughnutChart.update();
                 } else {
-                    emiDoughnutChart = new Chart(graphContainer.getContext('2d'), {
+                    emiDoughnutChart = new Chart(doughnutCanvas.getContext('2d'), {
                         type: 'doughnut',
                         data: {
                             labels: ['Spent Balance', 'Remaining Spend Pool'],
-                            datasets: [{ data: chartData, backgroundColor: ['#B91C1C', '#10B981'], hoverOffset: 4 }]
+                            datasets: [{ data: chartData, backgroundColor: ['#B91C1C', '#065F46'], hoverOffset: 4 }]
                         },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
                             plugins: {
-                                legend: { display: false },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(context) {
-                                            let label = context.label || '';
-                                            let value = context.parsed || 0;
-                                            return label + ': ' + formatCurrency(value);
-                                        }
-                                    }
-                                }
+                                legend: { display: false }
                             }
                         }
                     });
                 }
             }
+
+            // 2. Handle Bar Chart (Real-time updates if the Spends Curve tab is currently active)
+            const barCanvas = document.getElementById('emiBarChart');
+            if (barCanvas) {
+                const barContainer = document.getElementById('chartBarContainer');
+                const isBarVisible = barContainer && !barContainer.classList.contains('hidden');
+                
+                if (isBarVisible) {
+                    renderBarChartOnly(schedule);
+                }
+            }
+        }
+
+        // Standard Bar Chart draw method to handle the Canvas 404/0-width bug elegantly
+        function renderBarChartOnly(schedule) {
+            const barCanvas = document.getElementById('emiBarChart');
+            if (!barCanvas) return;
 
             if (emiBarChart) {
                 emiBarChart.destroy();
@@ -1449,56 +1480,44 @@
                 barSpends.push(row.spends);
             });
 
-            const barCtx = document.getElementById('emiBarChart');
-            if (barCtx) {
-                emiBarChart = new Chart(barCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: barLabels,
-                        datasets: [
-                            {
-                                label: 'Spent on this Day',
-                                data: barSpends,
-                                backgroundColor: '#B91C1C',
-                                borderRadius: 4
-                            },
-                            {
-                                label: 'Remaining Spending Pool',
-                                data: barBalances,
-                                backgroundColor: '#2563EB',
-                                borderRadius: 4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { stacked: true, grid: { display: false } },
-                            y: { 
-                                stacked: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return new Intl.NumberFormat(currencies[selectedCurrency].locale, { notation: 'compact', compactDisplay: 'short' }).format(value);
-                                    }
-                                }
-                            }
+            emiBarChart = new Chart(barCanvas.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: barLabels,
+                    datasets: [
+                        {
+                            label: 'Spent on this Day',
+                            data: barSpends,
+                            backgroundColor: '#B91C1C',
+                            borderRadius: 4
                         },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        let value = context.raw || 0;
-                                        return label + ': ' + formatCurrency(value);
-                                    }
+                        {
+                            label: 'Remaining Spending Pool',
+                            data: barBalances,
+                            backgroundColor: '#1E3A8A',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { 
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return new Intl.NumberFormat(currencies[selectedCurrency].locale, { notation: 'compact', compactDisplay: 'short' }).format(value);
                                 }
                             }
                         }
+                    },
+                    plugins: {
+                        legend: { display: false }
                     }
-                });
-            }
+                }
+            });
         }
 
         function triggerCalculation() {
@@ -1549,7 +1568,7 @@
                     affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-amber-100 text-amber-950 border border-amber-300";
                 } else {
                     affBadge.innerHTML = `🟢 SAFE — GOALS SECURED! (${formatCurrency(dailySTS)}/day remaining)`;
-                    affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-green-100 text-green-900 border border-green-300";
+                    affBadge.className = "p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 bg-green-150 text-green-950 border border-green-300"; 
                 }
             }
 
@@ -1678,7 +1697,7 @@
 
                 if (loggedExpenses.length === 0) {
                     const rowHtml = `
-                        <td colspan="5" class="p-8 text-center text-gray-500 font-semibold italic">No spent items logged yet. Use the logger card above!</td>
+                        <td colspan="5" class="p-8 text-center text-gray-700 font-semibold italic bg-stone-50 border border-stone-200">No spent items logged yet. Use the logger card above!</td>
                     `;
                     tableBody.innerHTML = rowHtml;
                     if (printTableBody) printTableBody.innerHTML = rowHtml;
@@ -1690,15 +1709,15 @@
                         <td class="p-3 font-semibold text-gray-900">${item.desc}</td>
                         <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold rounded bg-gray-150 border border-gray-300 uppercase">${item.cat}</span></td>
                         <td class="p-3 text-red-950 font-bold">${formatCurrency(item.amt)}</td>
-                        <td class="p-3 text-gray-600">${item.date}</td>
+                        <td class="p-3 text-gray-700 font-medium">${item.date}</td>
                         <td class="p-3">
-                            <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-red-700 hover:text-red-900 font-black flex items-center gap-0.5" aria-label="Delete spent outlay">
+                            <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-red-800 hover:text-red-955 font-black flex items-center gap-0.5" aria-label="Delete spent outlay">
                                 Delete &times;
                             </button>
                         </td>
                     `;
                     const screenTr = document.createElement('tr');
-                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-150 transition-colors";
                     screenTr.innerHTML = rowHtml;
                     tableBody.appendChild(screenTr);
 
@@ -1706,10 +1725,10 @@
                         const printTr = document.createElement('tr');
                         printTr.className = "border-b border-gray-200";
                         printTr.innerHTML = `
-                            <td class="p-2 border">${item.desc}</td>
-                            <td class="p-2 border">${item.cat}</td>
+                            <td class="p-2 border text-gray-950 font-semibold">${item.desc}</td>
+                            <td class="p-2 border text-gray-900">${item.cat}</td>
                             <td class="p-2 border font-bold text-red-750">${formatCurrency(item.amt)}</td>
-                            <td class="p-2 border">${item.date}</td>
+                            <td class="p-2 border text-gray-800">${item.date}</td>
                         `;
                         printTableBody.appendChild(printTr);
                     }
@@ -1736,14 +1755,14 @@
 
                     const rowHtml = `
                         <td class="p-3 font-semibold text-gray-900">Day ${row.day}</td>
-                        <td class="p-3 text-red-900 font-medium">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
-                        <td class="p-3 text-gray-500">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
-                        <td class="p-3 font-medium">${formatCurrency(row.balance)}</td>
-                        <td class="p-3 text-indigo-900 font-bold">${formatCurrency(row.limit)} / Day</td>
+                        <td class="p-3 text-red-955 font-bold">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
+                        <td class="p-3 text-gray-700 font-medium">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
+                        <td class="p-3 font-semibold text-gray-900">${formatCurrency(row.balance)}</td>
+                        <td class="p-3 text-indigo-955 font-extrabold">${formatCurrency(row.limit)} / Day</td>
                     `;
 
                     const screenTr = document.createElement('tr');
-                    screenTr.className = "hover:bg-gray-50 border-b border-gray-100 transition-colors";
+                    screenTr.className = "hover:bg-gray-50 border-b border-gray-150 transition-colors";
                     screenTr.innerHTML = rowHtml;
                     tableBody.appendChild(screenTr);
 
@@ -1751,10 +1770,10 @@
                         const printTr = document.createElement('tr');
                         printTr.className = "border-b border-gray-200";
                         printTr.innerHTML = `
-                            <td class="p-2 border">Day ${row.day}</td>
-                            <td class="p-2 border font-semibold">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
-                            <td class="p-2 border">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
-                            <td class="p-2 border font-bold text-indigo-900">${formatCurrency(row.limit)} / Day</td>
+                            <td class="p-2 border font-bold">Day ${row.day}</td>
+                            <td class="p-2 border font-semibold text-red-750">${row.spends > 0 ? formatCurrency(row.spends) : '-'}</td>
+                            <td class="p-2 border text-gray-800">${row.spends > 0 ? formatCurrency(sumAcc) : '-'}</td>
+                            <td class="p-2 border font-bold text-indigo-950">${formatCurrency(row.limit)} / Day</td>
                         `;
                         printTableBody.appendChild(printTr);
                     }
@@ -1762,6 +1781,7 @@
             }
         }
 
+        // --- NEW INSTANT CONFIRMATION LOG LIST (UX Solution to eliminate user confusion) ---
         function updateRecentSpendsMiniList() {
             const container = document.getElementById('recentSpendsContainer');
             const list = document.getElementById('recentSpendsList');
@@ -1775,6 +1795,7 @@
             container.classList.remove('hidden');
             list.innerHTML = '';
 
+            // Extract last 3 spent outlays to output upfront
             const recentItems = [...loggedExpenses].reverse().slice(0, 3);
 
             recentItems.forEach(item => {
@@ -1786,8 +1807,8 @@
                         <span class="px-1.5 py-0.2 text-[9px] font-bold rounded bg-gray-200 text-gray-700 uppercase">${item.cat}</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="font-black text-red-700">${formatCurrency(item.amt)}</span>
-                        <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-gray-400 hover:text-red-700 font-bold text-sm leading-none transition-colors" aria-label="Delete item">&times;</button>
+                        <span class="font-black text-red-800">${formatCurrency(item.amt)}</span>
+                        <button type="button" onclick="deleteExpenseItem('${item.id}')" class="text-gray-500 hover:text-red-800 font-bold text-sm leading-none transition-colors" aria-label="Delete item">&times;</button>
                     </div>
                 `;
                 list.appendChild(itemDiv);
@@ -1947,12 +1968,19 @@
             if (endMode === 'endOfMonth') {
                 const customDayContainer = document.getElementById('cycleCustomDayContainer');
                 if (customDayContainer) customDayContainer.classList.add('hidden');
+                const wrapper = document.getElementById('cycleEndModeWrapper');
+                if (wrapper) wrapper.className = "w-full transition-all duration-200";
                 const totalDaysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
                 daysLeft = totalDaysInMonth - today + 1;
                 textAlert.textContent = `Today is ${monthNames[currentMonth]} ${today}. There are exactly ${daysLeft} days remaining in this calendar month.`;
             } else {
                 const customDayContainer = document.getElementById('cycleCustomDayContainer');
-                if (customDayContainer) customDayContainer.classList.remove('hidden');
+                if (customDayContainer) {
+                    customDayContainer.classList.remove('hidden');
+                    customDayContainer.className = "w-[30%] transition-all duration-200";
+                }
+                const wrapper = document.getElementById('cycleEndModeWrapper');
+                if (wrapper) wrapper.className = "w-[70%] transition-all duration-200";
                 const customDaySelect = document.getElementById('cycleCustomDaySelect');
                 const customDay = parseInt(customDaySelect ? customDaySelect.value : 1) || 1;
                 
@@ -2073,6 +2101,7 @@
             triggerCalculation();
         }
 
+        // --- FIXED: exportToCSV function added globally ---
         function exportToCSV() {
             if (cachedSchedule.length === 0) return;
             let csvRows = [];
@@ -2097,17 +2126,6 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
-
-        function showNotification(message) {
-            const toast = document.getElementById('notification-toast');
-            if (toast) {
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
         }
 
         function loadFromUrl() {
@@ -2189,7 +2207,6 @@
                 }
             }
 
-            // Syncing the visibility state of the Real-Time Spends Logger based on URL or saved toggle
             const loggerToggle = document.getElementById('loggerToggle');
             const loggerContainer = document.getElementById('loggerContainer');
             if (loggerToggle && loggerContainer) {
@@ -2229,13 +2246,10 @@
             calculateOrganicDaysLeft();
         }
 
-        // Safe add event listener helper function
         function safeAddListener(id, event, callback) {
             const el = typeof id === 'string' ? document.getElementById(id) : id;
             if (el) {
                 el.addEventListener(event, callback);
-            } else {
-                console.warn(`Element with ID "${id}" was not found in the DOM.`);
             }
         }
 
@@ -2260,7 +2274,6 @@
                 });
             }
 
-            // Attaching event listener to handle spent expenditures logger collapses dynamically
             const loggerToggle = document.getElementById('loggerToggle');
             const loggerContainer = document.getElementById('loggerContainer');
             if (loggerToggle && loggerContainer) {
@@ -2326,7 +2339,9 @@
                     if (doughnutContainer) doughnutContainer.classList.add('hidden');
                     chartToggleSchedule.className = "px-2 py-0.5 rounded-md bg-blue-900 text-white shadow";
                     if (chartToggleShare) chartToggleShare.className = "px-2 py-0.5 text-gray-700 hover:text-gray-900 ml-0.5";
-                    if (emiBarChart) emiBarChart.resize();
+                    
+                    // CRITICAL BUG RESOLVED: Bar Tab switch triggers fresh canvas render immediately!
+                    renderBarChartOnly(cachedSchedule);
                 });
             }
 
@@ -2366,7 +2381,6 @@
                 triggerCalculation();
             });
 
-            // Mini-list smooth navigation button (Scrolls down and auto-expands the main ledger)
             safeAddListener('goToFullLedgerBtn', 'click', () => {
                 const content = document.getElementById('ledgerContent');
                 const toggleBtn = document.getElementById('toggleLedgerBtn');
@@ -2427,7 +2441,7 @@
                 const percentageDrop = currentDaily > 0 ? ((currentDaily - simulatedDaily) / currentDaily) * 100 : 0;
 
                 if (simAmt > remainingSpendPool) {
-                    display.innerHTML = `⚠️ <span class="text-red-700 font-extrabold">BUDGET CRASH!</span> Buying this item for ${formatCurrency(simAmt)} immediately wipes out your available spending pool and eats into savings target or bills!`;
+                    display.innerHTML = `⚠️ <span class="text-red-750 font-extrabold">BUDGET CRASH!</span> Buying this item for ${formatCurrency(simAmt)} immediately wipes out your available spending pool and eats into savings target or bills!`;
                 } else {
                     display.innerHTML = `📉 <span class="text-blue-900 font-extrabold">Daily Limit Drops by -${Math.round(percentageDrop)}%!</span> Buying this today shrinks your Safe-to-Spend allowance from ${formatCurrency(currentDaily)} to ${formatCurrency(simulatedDaily)} / Day for the next ${daysRemaining} days.`;
                 }
@@ -2642,7 +2656,7 @@
                 }
             });
 
-            safeAddListener('downloadImageBtn', 'click', () => {
+            document.getElementById('downloadImageBtn').addEventListener('click', () => {
                 const card = document.getElementById('shareReportCard');
                 if (!card) return;
                 
@@ -2691,6 +2705,17 @@
 
             loadFromUrl();
         });
+
+        function showNotification(msg) {
+            const toast = document.getElementById('notification-toast');
+            if (toast) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
     </script>
 </body>
 </html>
