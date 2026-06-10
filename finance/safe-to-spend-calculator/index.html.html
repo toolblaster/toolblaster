@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>Safe-to-Spend Calculator - Dynamic Daily Budget Planner Tool</title>
+    <meta name="description" content="Calculate your dynamic daily safe-to-spend allowance. Secure monthly savings goals against impulse buying with our interactive budget planner.">
+    <meta name="keywords" content="safe to spend calculator, daily budget calculator, impulse spend planner, emergency savings tracker, budget amortizer, financial tool">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/safe-to-spend-calculator" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Advanced Daily Safe-to-Spend (STS) Budget Calculator with Local Storage">
+    <meta property="og:description" content="Plan daily expenditure allowances, simulate retail impulse buys, allocate emergency buffers, and secure your monthly savings targets seamlessly.">
+    <meta property="og:url" content="https://toolblaster.com/finance/safe-to-spend-calculator">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:width" content="192">
+    <meta property="og:image:height" content="192">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Advanced Daily Safe-to-Spend (STS) Budget Calculator with Local Storage">
+    <meta name="twitter:description" content="Plan daily expenditure limits and test dynamic retail budget shocks before hitting Buy Now. Features local storage and CSV export.">
+    <meta name="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata for Header Title -->
+    <meta name="application-name" content="Safe-to-Spend Calculator">
+    <meta name="apple-mobile-web-app-title" content="STS Budget Calculator">
+
+    <!-- Schema.org JSON-LD structured metadata -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Daily Safe-to-Spend Calculator | Safe Spend Planner India",
+          "description": "Calculate your dynamic daily safe-to-spend allowance. Secure monthly savings goals against impulse buying with our interactive budget planner.",
+          "url": "https://toolblaster.com/finance/safe-to-spend-calculator",
+          "inLanguage": "en-IN",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "mainEntity": {
+            "@id": "#sts-calculator"
+          }
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "#sts-calculator",
+          "name": "Daily Safe-to-Spend Budget Planner",
+          "description": "An interactive online utility leveraging classical linear amortization to secure savings goals against daily impulse buying vectors.",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "toolblaster.com"
+          },
+          "url": "https://toolblaster.com/finance/safe-to-spend-calculator",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "toolblaster.com"
+          },
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "Web"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the difference between a Safe-to-Spend limit and a standard budget?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Standard budgets are static monthly blocks. A Safe-to-Spend (STS) budget is a dynamic daily limit. It automatically recalculates whenever you spend money or get extra income, telling you exactly how much cash is safe to spend today without hurting your long-term goals."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens if I overspend my daily limit?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you spend more than your daily limit today, the calculator will automatically re-amortize the remaining spending pool over the rest of the cycle. This will slightly lower your daily spending limit for the remaining days, keeping your monthly savings target safe."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my logged expense data saved privately?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. All your logged transactions, currency preferences, and income configurations are saved locally on your device using browser LocalStorage. None of your sensitive financial data is ever sent to external servers, ensuring 100% privacy."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to Calculate Your Daily Safe-to-Spend Budget",
+          "description": "Calculate and protect your daily spending limit while securing your monthly financial milestones in four simple steps.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Enter Net Income",
+              "text": "Input your net monthly income, which represents your total paycheck or monthly revenue.",
+              "url": "https://toolblaster.com/finance/safe-to-spend-calculator#incomeInput"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Specify Fixed Commitments",
+              "text": "Input your committed fixed monthly outlays such as rent, utilities, bills, and monthly dues.",
+              "url": "https://toolblaster.com/finance/safe-to-spend-calculator#billsInput"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Set Savings Target",
+              "text": "Declare your target savings goal to be isolated and shielded from everyday casual spending.",
+              "url": "https://toolblaster.com/finance/safe-to-spend-calculator#savingsInput"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Track and Log Daily Spends",
+              "text": "Log spent outlays using the quick expense logger to dynamically recalculate your safe daily limit.",
+              "url": "https://toolblaster.com/finance/safe-to-spend-calculator#loggerToggle"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js (UMD stable version), and FontAwesome Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <!-- html2canvas safely imported for dynamic client-side visual cards generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; 
+            --accent-color-dark: #B91C1C;
+        }
+
+        html, body {
+            overflow-x: hidden; /* Safeguards mobile viewports against rendering shifts */
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fef2f2 10%, #f9fafb 70%);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main.container {
+            width: 95%;
+            max-width: 1080px;
+            margin-left: auto;
+            margin-right: auto;
+            flex-grow: 1;
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #cbd5e1; /* Darkened track for robust WCAG contrast */
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark, #B91C1C), var(--accent-color-dark, #B91C1C));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: var(--accent-color-dark, #B91C1C);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -4.5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .stepper-button {
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 85px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .ledger-scroll-container {
+            max-height: 380px;
+            overflow-y: auto;
+            overflow-x: auto; /* isolates wide table scrolling to prevent layout breaking on mobile */
+            -webkit-overflow-scrolling: touch;
+        }
+        .ledger-table {
+            min-width: 480px; /* guarantees headers do not collapse on tight viewports */
+        }
+        .ledger-table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #e5e7eb;
+            z-index: 20;
+            box-shadow: inset 0 -1px 0 #94a3b8, inset 0 1px 0 #94a3b8;
+        }
+
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-icon svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            color: #111827;
+            vertical-align: middle;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            max-width: 200px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%); /* perfect centering, prevents absolute horizontal shifts */
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .share-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 1rem;
+        }
+        .share-modal.active { opacity: 1; pointer-events: auto; }
+        .share-modal-content {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 520px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-modal.active .share-modal-content {
+            transform: scale(1);
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .close-modal-btn:hover {
+            color: #000000;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        .modal-report-content h3 {
+            font-size: 0.85rem;
+            font-weight: 850;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+        .modal-report-content ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+        .modal-report-content pb li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #111827;
+        }
+        .share-url-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            color: #111827;
+            background: #f8fafc;
+            margin-bottom: 0.75rem;
+            outline: none;
+        }
+
+        #notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #notification-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        html body .text-xxs {
+            font-size: 0.72rem;
+            line-height: 1rem;
+        }
+
+        .adv-card {
+            padding: 0.75rem;
+            border-radius: 1rem; /* rounded-2xl equivalent */
+            border-width: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.375rem; /* space-y-1.5 equivalent */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm equivalent */
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .card-indigo {
+            background-color: rgba(238, 242, 255, 0.7); /* bg-indigo-50/70 */
+            border-color: #c7d2fe; /* border-indigo-200 */
+            color: #312e81; /* text-indigo-950 */
+        }
+        .card-amber {
+            background-color: rgba(254, 243, 199, 0.7); /* bg-amber-50/70 */
+            border-color: #fde68a; /* border-amber-200 */
+            color: #78350f; /* text-amber-950 */
+        }
+        .card-rose {
+            background-color: rgba(254, 242, 242, 0.7); /* bg-rose-50/70 */
+            border-color: #fecdd3; /* border-rose-200 */
+            color: #4c0519; /* text-rose-950 */
+        }
+        .card-purple {
+            background-color: rgba(243, 232, 255, 0.7); /* bg-purple-50/70 */
+            border-color: #e9d5ff; /* border-purple-200 */
+            color: #3b0764; /* text-purple-950 */
+        }
+        .card-sky {
+            background-color: rgba(224, 242, 254, 0.7); /* bg-sky-50/70 */
+            border-color: #bae6fd; /* border-sky-200 */
+            color: #0369a1; /* text-sky-950 */
+        }
+
+        .pill-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-width: 1px;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* shadow-inner */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .pill-indigo { border-color: #c7d2fe; }
+        .pill-indigo:focus-within {
+            --tw-ring-color: #818cf8; /* indigo-400 */
+            border-color: #818cf8;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-amber { border-color: #fde68a; }
+        .pill-amber:focus-within {
+            --tw-ring-color: #fbbf24; /* amber-400 */
+            border-color: #fbbf24;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-purple { border-color: #e9d5ff; }
+        .pill-purple:focus-within {
+            --tw-ring-color: #c084fc; /* purple-400 */
+            border-color: #c084fc;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .pill-sky { border-color: #bae6fd; }
+        .pill-sky:focus-within {
+            --tw-ring-color: #38bdf8; /* sky-400 */
+            border-color: #38bdf8;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--tw-ring-color), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            #loan-calculator, #shareModal, #notification-toast, .print-hide, #global-bg-orbs {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+            }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            thead { display: table-header-group; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Global Background Ambient Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
+    </div>
+
+    <!-- Layout Navigation Headers placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Breadcrumbs Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="https://toolblaster.com/finance/" class="hover:text-red-600 transition-colors">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">Safe-to-Spend Calculator</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-shield-halved"></i> Savings Guard
+            </div>
+        </nav>
+
+        <!-- SCREEN CALCULATOR PANEL -->
+        <div id="loan-calculator" class="w-full text-left">
+            <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
+                
+                <!-- Header Block -->
+                <div class="text-center mb-1">
+                    <h1 class="text-base sm:text-lg font-extrabold text-gray-900">🛡️ Daily Safe-to-Spend (STS) Calculator</h1>
+                </div>
+                <p class="text-center text-gray-600 mb-2.5 text-xxs font-medium">Protect your monthly savings target. Know exactly how much cash you can spend today safely.</p>
+
+                <!-- GLOBAL CURRENCY SELECTOR -->
+                <div class="flex justify-center mb-4">
+                    <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-200 shadow-sm">
+                        <label for="globalCurrencySelect" class="text-[10px] font-extrabold text-gray-700 uppercase tracking-wide">Currency:</label>
+                        <select id="globalCurrencySelect" class="bg-transparent text-xs font-bold text-gray-900 focus:outline-none cursor-pointer">
+                            <option value="USD">USD ($) US Dollar</option>
+                            <option value="EUR">EUR (€) Euro</option>
+                            <option value="GBP">GBP (£) British Pound</option>
+                            <option value="INR" selected>INR (₹) Indian Rupee</option>
+                            <option value="CAD">CAD (CA$) Canadian Dollar</option>
+                            <option value="AUD">AUD (A$) Australian Dollar</option>
+                            <option value="ILS">ILS (₪) Israeli Shekel</option>
+                            <option value="RUB">RUB (₽) Russian Ruble</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- MAIN WORKSPACE CORE GRID -->
+                <div id="calculator-main-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5 items-start">
+                    
+                    <!-- Left Section: Adjustable Financial Profiles -->
+                    <div class="space-y-3">
+                        
+                        <!-- Core Monthly Allocation Setup -->
+                        <div class="bg-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl space-y-2 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] uniform-section-labels">
+                            <h2 class="text-xs font-bold text-blue-950 text-center mb-0.5 flex items-center justify-center gap-1">
+                                <span>Monthly Income & Savings Target</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Configure your monthly cash pool. Your daily safe budget is calculated dynamically from this net surplus.</span>
+                                </span>
+                            </h2>
+
+                            <!-- Monthly Income Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="incomeLabel" for="incomeInput" class="block text-xxs font-bold text-gray-900">Net Monthly Income (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Your net monthly salary or total revenue credited to your account this month.</span>
+                                        </span>
+                                    </span>
+                                    <span id="incomeWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="incomeSlider" min="10000" max="1000000" value="75000" step="5000" class="w-full flex-grow" aria-labelledby="incomeLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="incomeDecrement" class="stepper-button" aria-label="Decrease Income">-</button>
+                                        <input type="number" id="incomeInput" class="manual-input text-center font-bold" value="75000" min="1000" max="50000000" step="5000">
+                                        <button type="button" id="incomeIncrement" class="stepper-button" aria-label="Increase Income">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fixed Expenses Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="billsLabel" for="billsInput" class="block text-xxs font-bold text-gray-900">Fixed Commitments (Rent & Bills) (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Committed monthly outlays that must be paid. These are isolated from your everyday spending cash pool.</span>
+                                        </span>
+                                    </span>
+                                    <span id="billsWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="billsSlider" min="0" max="500000" value="25000" step="2000" class="w-full flex-grow" aria-labelledby="billsLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="billsDecrement" class="stepper-button" aria-label="Decrease Bills">-</button>
+                                        <input type="number" id="billsInput" class="manual-input text-center font-bold" value="25000" min="0" max="5000000" step="2000">
+                                        <button type="button" id="billsIncrement" class="stepper-button" aria-label="Increase Bills">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Savings Target Input -->
+                            <div class="relative pb-1.5">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="savingsLabel" for="savingsInput" class="block text-xxs font-bold text-gray-900">Savings Target (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Your target monthly savings goal. This amount is isolated and protected from daily shopping outlays.</span>
+                                        </span>
+                                    </span>
+                                    <span id="savingsWord" class="text-xxs font-bold text-red-900 block h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="savingsSlider" min="0" max="500000" value="15000" step="1000" class="w-full flex-grow" aria-labelledby="savingsLabel">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="savingsDecrement" class="stepper-button" aria-label="Decrease Savings">-</button>
+                                        <input type="number" id="savingsInput" class="manual-input text-center font-bold" value="15000" min="0" max="5000000" step="1000">
+                                        <button type="button" id="savingsIncrement" class="stepper-button" aria-label="Increase Savings">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Simplified, Organically Calibrated Days Left Planner -->
+                            <div class="relative pb-1 bg-white border border-blue-100 rounded-xl p-2.5 shadow-inner">
+                                <div class="flex items-center gap-1.5 mb-1.5">
+                                    <span class="block text-xxs font-extrabold text-blue-950 uppercase tracking-wide">Days Left in Budget Cycle</span>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Select how your monthly budget cycle resets. The system organically calculates the exact days remaining until the reset date.</span>
+                                    </span>
+                                </div>
+                                
+                                <!-- Symmetrical Reset Controls with 70/30 dynamic flex alignment on custom state -->
+                                <div class="flex gap-2 mb-2 w-full">
+                                    <div id="cycleEndModeWrapper" class="w-full transition-all duration-200">
+                                        <label for="cycleEndModeSelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Cycle Resets On</label>
+                                        <select id="cycleEndModeSelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                            <option value="endOfMonth" selected>End of Calendar Month</option>
+                                            <option value="customDay">My Payday / Custom Date</option>
+                                        </select>
+                                    </div>
+                                    <div id="cycleCustomDayContainer" class="hidden transition-all duration-200">
+                                        <label for="cycleCustomDaySelect" class="text-[9px] font-bold text-gray-700 block mb-0.5">Select Payday Date</label>
+                                        <select id="cycleCustomDaySelect" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-2 py-1 text-xxs font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                            <!-- Dynamically injected values 1 to 31 -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="flex-grow">
+                                        <label for="daysRemainingSlider" class="sr-only">Days Remaining Slider</label>
+                                        <input type="range" id="daysRemainingSlider" min="1" max="31" value="24" class="w-full">
+                                    </div>
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="daysRemainingDecrement" class="stepper-button" aria-label="Decrease Days">-</button>
+                                        <label for="daysRemainingInput" class="sr-only">Days Remaining Input</label>
+                                        <input type="number" id="daysRemainingInput" class="manual-input text-center font-bold" value="24" min="1" max="365" step="1">
+                                        <button type="button" id="daysRemainingIncrement" class="stepper-button" aria-label="Increase Days">+</button>
+                                    </div>
+                                </div>
+                                <p id="organicDaysLeftAlert" class="text-[9px] text-blue-900 italic mt-1.5 font-semibold"></p>
+                            </div>
+                        </div>
+
+                        <!-- MASTER TOGGLE FOR SAFETY BUFFERS -->
+                        <div id="toggleBuffersDiv" class="bg-gray-100 p-2.5 rounded-2xl border border-gray-300 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="text-xxs font-bold text-gray-900 whitespace-nowrap">🛡️ Extra Safety Buffers</span>
+                                <span class="tooltip-icon flex-shrink-0" onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Toggle to isolate extra safety cushions, emergency cash margins, windfalls, or upcoming pre-planned expenses.</span>
+                                </span>
+                            </div>
+                            <label for="buffersToggle" class="relative inline-flex items-center flex-shrink-0 select-none cursor-pointer" aria-label="Toggle Extra Safety Buffers">
+                                <input type="checkbox" id="buffersToggle" class="sr-only peer" aria-label="Toggle Extra Safety Buffers">
+                                <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                            </label>
+                        </div>
+
+                        <!-- EXTRA SAFETY BUFFERS -->
+                        <div id="buffersContainer" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
+                            <h3 class="text-xs font-bold text-gray-900 text-center border-b border-gray-200 pb-1.5 flex items-center justify-center gap-1">
+                                <span>Active Safety Buffers</span>
+                                <span class="tooltip-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Configure optional settings to dynamically buffer or increase your everyday spend pool.</span>
+                                </span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Buffer 1: Price Increase Cushion (Indigo Card) -->
+                                <div class="adv-card card-indigo" id="inflationCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="inflationInput" class="text-[10px] font-extrabold tracking-wider uppercase text-indigo-950">Price Increase Cushion</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-indigo-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Adds an extra safety percentage cushion to fixed bills to cover potential price hikes.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-indigo" id="inflationPillBox">
+                                        <input type="number" id="inflationInput" class="w-full bg-transparent text-xs font-black outline-none text-indigo-950" value="0" min="0" max="30" step="1">
+                                        <span class="text-[10px] font-black text-indigo-600 ml-1 select-none whitespace-nowrap">% Cushion</span>
+                                    </div>
+                                </div>
+
+                                <!-- Buffer 2: Emergency Reserves (Amber Card) -->
+                                <div class="adv-card card-amber" id="emergencyCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="emergencyInput" class="text-[10px] font-extrabold tracking-wider uppercase text-amber-950">Emergency Reserves (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-amber-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">A specific safe margin kept isolated to handle emergency medical or mechanical bills this cycle.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-amber" id="emergencyPillBox">
+                                        <input type="number" id="emergencyInput" class="w-full bg-transparent text-xs font-black outline-none font-bold text-amber-950" value="0" min="0" max="1000000" step="50">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Buffer 3: Unexpected Inflows (Purple Card) -->
+                                <div class="adv-card card-purple" id="windfallCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="windfallInput" class="text-[10px] font-extrabold tracking-wider uppercase text-purple-950">Unexpected Inflows (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-purple-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Any extra money, gifts, bonuses, or side cash received this month that boosts your everyday spending pool.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-purple" id="windfallPillBox">
+                                        <input type="number" id="windfallInput" class="w-full bg-transparent text-xs font-black outline-none font-bold text-purple-950" value="0" min="0" max="5000000" step="50">
+                                    </div>
+                                </div>
+
+                                <!-- Buffer 4: Upcoming Planned Spend (Sky Blue Card) -->
+                                <div class="adv-card card-sky" id="plannedSpendCardWrapper">
+                                    <span class="flex items-center gap-1.5">
+                                        <label for="plannedSpendInput" class="text-[10px] font-extrabold tracking-wider uppercase text-sky-950">Upcoming Planned Spend (<span class="currency-symbol">₹</span>)</label>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="text-sky-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Set aside a lumpsum for a pre-planned event this month (like a trip, flight booking, or insurance premium) so it won't inflate today's limit.</span>
+                                        </span>
+                                    </span>
+                                    <div class="pill-container pill-sky" id="plannedSpendPillBox">
+                                        <input type="number" id="plannedSpendInput" class="w-full bg-transparent text-xs font-black outline-none font-bold text-sky-950" value="0" min="0" max="5000000" step="50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MASTER TOGGLE FOR REAL-TIME LOGGER (NEW COLLAPSIBLE INTERACTIVE WRAPPER) -->
+                        <div id="toggleLoggerDiv" class="bg-gray-100 p-2.5 rounded-2xl border border-gray-300 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="text-xxs font-bold text-gray-900 whitespace-nowrap">⚡ Log your expenses (Instant budget adjuster)</span>
+                                <span class="tooltip-icon flex-shrink-0" onclick="event.stopPropagation();">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                    </svg>
+                                    <span class="tooltip-text">Toggle to record transactions. Logged spends dynamically recalculate and reduce your safe-to-spend limit.</span>
+                                </span>
+                            </div>
+                            <label for="loggerToggle" class="relative inline-flex items-center flex-shrink-0 select-none cursor-pointer" aria-label="Toggle Expense Logger">
+                                <input type="checkbox" id="loggerToggle" class="sr-only peer" aria-label="Toggle Expense Logger">
+                                <span class="w-11 h-6 bg-gray-300 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:bg-red-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></span>
+                            </label>
+                        </div>
+
+                        <!-- COLLAPSIBLE SPENDS REAL-TIME LOGGER CARD -->
+                        <div id="loggerContainer" class="hidden bg-white border border-gray-300 p-3 rounded-2xl space-y-3 shadow-md">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <div class="pill-container pill-indigo">
+                                    <label for="expenseDescInput" class="sr-only">Expense Description</label>
+                                    <input type="text" id="expenseDescInput" class="w-full bg-transparent text-xs font-semibold outline-none text-stone-900" placeholder="Expense description (e.g. Groceries)">
+                                </div>
+                                <div class="flex gap-1.5">
+                                    <div class="flex-1 pill-container pill-indigo">
+                                        <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                        <label for="expenseAmtInput" class="sr-only">Expense Amount</label>
+                                        <input type="number" id="expenseAmtInput" class="w-full bg-transparent text-xs font-black outline-none text-stone-900" min="1" max="1000000" step="10" placeholder="Amount">
+                                    </div>
+                                    <button type="button" id="addExpenseBtn" class="px-4 bg-red-800 hover:bg-red-950 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap">Add Expense</button>
+                                </div>
+                            </div>
+
+                            <!-- DYNAMIC RECENT SPENDS CONFIRMATION LOG LIST (UX Solution to eliminate user confusion) -->
+                            <div id="recentSpendsContainer" class="hidden border-t border-gray-200 pt-2.5 mt-2 space-y-2">
+                                <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest block font-inter">Instant confirmation log</span>
+                                <div id="recentSpendsList" class="space-y-1.5">
+                                    <!-- Populated on-the-fly by javascript updates -->
+                                </div>
+                                <button type="button" id="goToFullLedgerBtn" class="text-blue-900 hover:text-blue-955 font-extrabold text-[10px] flex items-center gap-1.5 mt-1 transition-all">
+                                    <span>View all logged items in detailed schedule ↓</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Core Metric Cards + Visual Displays -->
+                    <div class="flex flex-col space-y-3">
+                        <!-- Spending Status Main Card (Blue background) -->
+                        <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <div class="flex justify-between items-center mb-2 border-b border-blue-200 pb-1">
+                                <h2 class="text-xs font-bold text-blue-950 font-extrabold flex items-center gap-1">
+                                    <span>Today's Spending Status</span>
+                                    <span class="tooltip-icon">
+                                        <svg class="text-blue-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Your dynamically updated spending limit for today. Keeping to this guarantees your monthly savings target.</span>
+                                    </span>
+                                </h2>
+                                
+                                <!-- Trigger Share Modal button -->
+                                <button id="shareReportBtn" class="p-1 text-gray-700 hover:text-red-800 transition-colors flex-shrink-0 print-hide" aria-label="Share calculation results">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 8.81C7.5 8.31 6.79 8 6 8c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Accelerator indicator bar -->
+                            <div id="powerSavingsBadge" class="p-2.5 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-950 font-bold text-xxs text-center mb-2 transition-all hidden"></div>
+
+                            <!-- ADAPTIVE METRICS PANEL: SNUG, NO-WRAP LAYOUT ON MOBILE -->
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl flex flex-col items-center justify-center">
+                                    <div class="inline-flex items-center justify-center gap-1 w-full">
+                                        <span class="text-[9px] xs:text-[10px] font-bold text-gray-800 leading-tight">Total Commitments</span>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="w-3 h-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Sum total of fixed expenses + target savings + emergency protection buffers + planned outlays.</span>
+                                        </span>
+                                    </div>
+                                    <p id="totalCommitmentsDisp" class="text-xs sm:text-sm font-extrabold text-blue-950 mt-1">₹0</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl flex flex-col items-center justify-center">
+                                    <div class="inline-flex items-center justify-center gap-1 w-full">
+                                        <span class="text-[9px] xs:text-[10px] font-bold text-gray-800 leading-tight">Remaining Pool</span>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="w-3 h-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Remaining monthly cash left for spending after monthly bills, savings, and logged expenses.</span>
+                                        </span>
+                                    </div>
+                                    <p id="availableSurplusDisp" class="text-xs sm:text-sm font-extrabold text-green-950 mt-1">₹0</p>
+                                </div>
+                            </div>
+
+                            <div id="maturityValueCard" class="p-2.5 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p id="targetValueCardTitle" class="text-xxs font-bold text-gray-900 uppercase tracking-wider">Today's Safe-to-Spend Limit</p>
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">The absolute maximum you can spend today without eating into fixed bills or your savings goal.</span>
+                                    </span>
+                                </span>
+                                <p id="maturityValue" class="text-base sm:text-lg font-extrabold text-purple-950">₹0</p>
+                            </div>
+
+                            <!-- INTERACTIVE IMPULSE BUY SIMULATOR -->
+                            <div id="simulationBenefitCard" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-center mt-2 flex flex-col justify-between px-3 space-y-1">
+                                <span class="flex items-center justify-center gap-1">
+                                    <p class="text-[10px] font-bold text-emerald-950 uppercase tracking-wide">💭 Impulse Buy Simulator</p>
+                                    <span class="tooltip-icon">
+                                        <svg class="text-emerald-955" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Simulate a purchase before buying! See exactly how much your daily spending limit will drop for the rest of the month.</span>
+                                    </span>
+                                </span>
+                                <div class="flex gap-1.5 py-1.5">
+                                    <div class="flex-grow pill-container pill-rose">
+                                        <span class="text-xxs font-bold text-gray-400 select-none mr-1 currency-symbol">₹</span>
+                                        <label for="simulationInput" class="sr-only">Simulation Product Price</label>
+                                        <input type="number" id="simulationInput" class="w-full bg-transparent text-xs font-black outline-none font-bold text-stone-900" min="1" max="1000000" placeholder="Product price">
+                                    </div>
+                                    <button type="button" id="triggerSimulateBtn" class="bg-red-800 hover:bg-red-955 text-white font-extrabold text-xxs rounded-lg shadow-sm transition-all whitespace-nowrap px-3 py-1.5">Simulate</button>
+                                </div>
+                                <p id="simulationBenefitDisplay" class="text-[10.5px] text-emerald-955 font-semibold leading-normal text-center mt-1">
+                                    Enter an amount above to preview instant budget shock.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Expenditures & Visual Allocation Stack (Total spent block + Graph Section stacked vertically on all screens) -->
+                        <div class="flex flex-col gap-3">
+                            <!-- Status Card - Inline layout on desktop (flex sm:flex-row) -->
+                            <div class="p-3 bg-white border border-blue-100 rounded-2xl shadow-sm flex flex-col justify-between">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2 pb-2 border-b border-gray-100">
+                                    <span class="flex items-center gap-1.5 min-w-0">
+                                        <p class="text-xxs font-bold text-gray-900 truncate">Total Logged Expenditures This Month</p>
+                                        <span class="tooltip-icon flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Sum total of spent transactions logged.</span>
+                                        </span>
+                                    </span>
+                                    <div id="loggedOutlaysTotal" class="text-base sm:text-lg font-black text-gray-900 whitespace-nowrap">₹0</div>
+                                </div>
+                                <div id="affordabilityBadge" class="p-2 rounded-xl text-center font-bold text-xxs transition-all duration-200 mt-1 bg-green-150 text-green-955 border border-green-305"></div>
+                            </div>
+
+                            <!-- Graph Section (Doughnut block) -->
+                            <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm print-hide flex flex-col justify-between">
+                                <div class="flex justify-between items-center mb-1 border-b pb-1">
+                                    <span class="text-xxs font-bold text-gray-900 tracking-wide text-stone-850">Visual Budget Allocation</span>
+                                    <div class="flex bg-gray-100 p-0.5 rounded-lg text-[9px] font-bold" role="group" aria-label="Chart Toggle">
+                                        <button type="button" id="chartToggleShare" class="px-2 py-0.5 rounded-md bg-blue-900 text-white shadow">Share Split</button>
+                                        <button type="button" id="chartToggleSchedule" class="px-2 py-0.5 rounded-md text-gray-700 hover:text-gray-900 ml-0.5">Spends Curve</button>
+                                    </div>
+                                </div>
+                                <!-- Aspect Ratio responsive size dynamic bounds -->
+                                <div id="chartDoughnutContainer" class="relative h-24 sm:h-28 w-[160px] mx-auto">
+                                    <canvas id="emiDoughnutChart"></canvas>
+                                </div>
+                                <div id="chartBarContainer" class="relative h-24 sm:h-28 w-full hidden">
+                                    <canvas id="emiBarChart"></canvas>
+                                </div>
+                                <!-- Custom HTML Legend to display clear numeric values directly -->
+                                <div class="flex justify-between gap-4 mt-1.5 w-full text-[9px] font-bold">
+                                    <div class="flex items-center gap-1 min-w-0">
+                                        <span class="w-2 h-2 rounded-full bg-red-700 flex-shrink-0"></span>
+                                        <span class="truncate text-stone-600 font-inter">Spent:</span>
+                                        <span id="legendSpentVal" class="text-red-700">₹0</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 min-w-0">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                                        <span class="truncate text-stone-600 font-inter">Pool:</span>
+                                        <span id="legendPoolVal" class="text-emerald-800 font-extrabold">₹0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured Repayment Accordion Schedule -->
+                <div class="mt-4 border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+                    <button type="button" id="toggleLedgerBtn" class="w-full flex justify-between items-center p-3.5 bg-gray-50 hover:bg-gray-100 transition-all font-bold text-gray-900 text-[12.5px] print-hide">
+                        <span class="flex items-center gap-1.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
+                            </svg>
+                            View Active Expenditures Ledger Schedule
+                        </span>
+                        <span id="ledgerChevron" class="transition-transform duration-300 transform inline-block text-gray-800">▼</span>
+                    </button>
+                    
+                    <div id="ledgerContent" class="hidden p-4 border-t border-gray-200">
+                        <!-- Optimized: Leftover compounding placeholder notice pulled OUT of the flex row, context-corrected & scaled nicely -->
+                        <p class="text-[11px] text-gray-700 font-medium font-semibold text-blue-950 bg-blue-100/60 p-2.5 border border-blue-200 rounded-xl leading-relaxed mb-4">
+                            💡 <strong>Dynamic Budget Tracking:</strong> Add your daily spent items using the quick logger above. The calculator will instantly re-amortize your remaining cash pool across the remaining days of your cycle!
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b border-gray-200 pb-3">
+                            <div class="flex flex-col gap-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span id="totalRowsBadge" class="inline-flex items-center px-2 py-0.5 rounded text-xxs font-extrabold bg-blue-100 text-blue-800"></span>
+                                    <span id="scrollNoticeBadge" class="inline-flex items-center text-[10px] text-gray-500 italic animate-pulse"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- ADAPTIVE INLINE TOOLBAR: EXPORTS AND TOGGLES CLEANLY MERGED IN 2 BALANCED COLS ON MOBILE -->
+                            <div class="grid grid-cols-2 gap-2 w-full sm:flex sm:items-center sm:gap-3 print-hide sm:w-auto">
+                                <!-- Mode Toggle -->
+                                <div class="flex bg-gray-100 p-0.5 rounded-lg border border-gray-200 text-[9px] xs:text-[10px] font-bold w-full" role="group" aria-label="Amortization Table Mode">
+                                    <button type="button" id="toggleViewMonthBtn" class="flex-1 py-1 rounded-md bg-blue-900 text-white shadow transition-all duration-150 text-center">Itemized Log</button>
+                                    <button type="button" id="toggleViewYearBtn" class="flex-1 py-1 text-gray-700 hover:text-gray-900 transition-all duration-150 text-center ml-0.5">Daily Cash-Flow</button>
+                                </div>
+                                <!-- Actions -->
+                                <div class="flex gap-1 w-full sm:w-auto">
+                                    <button type="button" id="exportCsvBtn" class="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-2.5 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-[9px] xs:text-[10px] rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-emerald-500 text-center">Export CSV</button>
+                                    <button type="button" id="printPdfBtn" class="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-2.5 py-1.5 bg-red-800 hover:bg-red-900 text-white font-bold text-[9px] xs:text-[10px] rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-red-500 text-center">Print PDF</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ledger-scroll-container rounded-xl border border-gray-100 shadow-inner">
+                            <table class="w-full text-left border-collapse text-xs ledger-table">
+                                <thead>
+                                    <tr class="border-b border-gray-300 text-gray-900 bg-gray-100">
+                                        <th scope="col" id="ledgerPeriodHeader" class="p-3 font-extrabold">Item Description</th>
+                                        <th scope="col" id="ledgerColPrincipal" class="p-3 font-extrabold">Category</th>
+                                        <th scope="col" id="ledgerColInterest" class="p-3 font-extrabold">Amount</th>
+                                        <th scope="col" id="ledgerTotalHeader" class="p-3 font-extrabold">Logged Date</th>
+                                        <th scope="col" id="ledgerBalanceHeader" class="p-3 font-extrabold">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ledgerTableBody" class="divide-y divide-gray-100 text-gray-900">
+                                    <!-- Populated programmatically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surplus Integration Banner -->
+                <div id="sponsorship-banner" class="border-t border-gray-200 mt-4 pt-4 w-full flex flex-wrap justify-center items-center gap-4 text-xxs font-bold text-gray-700 print-hide mb-1">
+                    <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors">
+                        Invest surplus savings with 5paisa to liquidate debt faster
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- Compliance disclaimer bar -->
+                <div id="sebi-compliance-disclaimer" class="border-t border-gray-200 mt-3 pt-3 text-center text-gray-900 text-[10px] leading-relaxed print-hide">
+                    <p class="font-bold text-gray-950 mb-0.5 font-inter">AMFI & SEBI Regulatory Cautionary Note:</p>
+                    <p class="mb-2">Calculations, buffers, extra income, and simulated spending levels are strictly projected based on linear calculation logic. Actual saving trajectories depend heavily on personal tracking discipline.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section (Isolates during printing) -->
+        <div class="max-w-[1080px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: PPF Calculator -->
+                <a href="https://toolblaster.com/finance/ppf-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-purple-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">PPF Calculator</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Calculate maturity and tax benefits.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: SIP vs FD vs RD -->
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-100">
+                            <i class="fa-solid fa-chart-simple text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">SIP vs FD vs RD</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Compare compound yields side-by-side.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-chart-line text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight">Investment Planner</h3>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Plan custom wealth and retirement goals.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sleek & Minimal Ecosystem SEO Article -->
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
+            <div class="space-y-6 text-stone-850 font-inter">
+                
+                <!-- Section 1: Demystifying Spending -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-chart-line"></i></span> The Psychology of Spending: Safe-to-Spend Budgeting
+                    </h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
+                        The biggest blocker to consistent monthly savings isn't low income—it is <strong>impulse buying</strong>. Classical monthly budgeting systems fail because they present finance as a static block. When you see a massive bank balance on payday, your brain is tricked into thinking you have surplus money, triggering retail gratification loops that eat into your savings targets.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
+                        Our advanced <strong>Daily Safe-to-Spend (STS) Calculator</strong> breaks this cycle by introducing dynamic, linear amortization. By isolating your fixed bills and monthly savings goals upfront, it translates your complex monthly cash pool into a single, straightforward daily budget allowance. Spending within this daily target guarantees that your financial milestones are met on time.
+                    </p>
+                </section>
+
+                <!-- Section 2: Mathematical Formulas -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Amortization Mathematics of Safe-to-Spend (STS)
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        The algorithm operates on a high-precision linear allocation equation. This continuously recalibrates your safe daily spending boundaries:
+                    </p>
+
+                    <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. The Core Safe-to-Spend (STS) Formula</h3>
+                            
+                            <!-- Premium CSS-Flexbox Mathematical Equation Box -->
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-4">
+                                    <span class="font-black text-red-700">STS<sub>daily</sub></span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-800 px-3 pb-1.5 font-bold text-stone-800">
+                                            (I + W) - (F + S + C<sub>inf</sub> + E<sub>res</sub> + P<sub>spend</sub>) - ∑ Exp
+                                        </span>
+                                        <span class="pt-1.5 font-bold text-stone-800">
+                                            D<sub>rem</sub>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Responsive High-Contrast Legend Grid -->
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-md mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">I</strong><span>= Net Income</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">W</strong><span>= Windfalls</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">F</strong><span>= Fixed commitments</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">S</strong><span>= Savings Goal</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">C<sub>inf</sub></strong><span>= Price Cushion</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">E<sub>res</sub></strong><span>= Emergency Reserve</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">P<sub>spend</sub></strong><span>= Planned spend</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">∑ Exp</strong><span>= Total spent logged</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">D<sub>rem</sub></strong><span>= Days Left</span></div>
+                                </div>
+                            </div>
+
+                            <p class="mt-2 text-[11px] text-stone-600 leading-relaxed">
+                                Where <strong class="text-stone-800">STS<sub>daily</sub></strong> represents your dynamic daily spend budget. If you save extra money or log fewer expenses, the system automatically redistributes the surplus back into your spending pool, adjusting your daily allowance upward.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Real-World Examples and Case Studies (Mobile Optimized Layout) -->
+                <section class="bg-white/70 backdrop-blur-xl p-5 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Examples & Case Studies
+                    </h2>
+                    <p class="text-xs sm:text-sm leading-relaxed mb-5 text-stone-800 font-medium">
+                        Explore these realistic scenarios to see how linear budget amortization works in practice:
+                    </p>
+
+                    <div class="space-y-5">
+                        <!-- Case Study 1 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-[10px]">1</span>
+                                    Securing a ₹25,000 Savings Goal on a ₹80,000 Income
+                                </h3>
+                                <span class="bg-emerald-50 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Goal Shielding</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
+                                An IT consultant earns a net salary of <strong>₹80,000 per month</strong>. They have committed rental and utility bills of <strong>₹30,000</strong> and want to save <strong>₹25,000</strong>.
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Without Step-up:</strong> They see ₹80,000 in their account and spend freely. By mid-month, they are left with only ₹15,000, failing their savings target.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">STS Approach:</strong> The calculator deducts bills (₹30,000) and savings (₹25,000) immediately. The remaining spending pool is ₹25,000. With 30 days left in the cycle, their Safe-to-Spend limit is set to <strong>₹833 / Day</strong>. They spend within this limit, guaranteeing their ₹25,000 savings goal.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Case Study 2 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-100 text-blue-800 font-bold text-[10px]">2</span>
+                                    Managing a Sudden ₹5,000 Shopping Impulse
+                                </h3>
+                                <span class="bg-blue-50 text-blue-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Impulse Prevention</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
+                                A marketing executive has a spending pool of ₹15,000 left with 15 days remaining (<strong>₹1,000 / Day limit</strong>). They are tempted to buy a luxury watch worth <strong>₹5,000</strong>.
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">STS Simulation:</strong> Before tapping "Buy Now", they enter ₹5,000 into the Impulse Buy Simulator.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">Budget Shock Feedback:</strong> The simulator warns them that making this purchase will immediately slash their daily allowance by <strong>-33%</strong>, dropping it from ₹1,000/day to <strong>₹666/day</strong> for the next two weeks. Seeing this visual impact, they skip the watch and protect their budget.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: FAQs Section -->
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. What is the difference between a Safe-to-Spend limit different from a standard budget?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Standard budgets are static monthly blocks. A Safe-to-Spend (STS) budget is a dynamic daily limit. It automatically recalculates whenever you spend money or get extra income, telling you exactly how much cash is safe to spend today without hurting your long-term goals.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. What happens if I overspend my daily limit?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">If you spend more than your daily limit today, the calculator will automatically re-amortize the remaining spending pool over the rest of the cycle. This will slightly lower your daily spending limit for the remaining days, keeping your monthly savings target safe.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Is my logged expense data saved privately?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Yes. All your logged transactions, currency preferences, and income configurations are saved locally on your device using browser LocalStorage. None of your sensitive financial data is ever sent to external servers, ensuring 100% privacy.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- PRINT ONLY HIGH-CONTRAST STATEMENT REPORT TEMPLATE -->
+    <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
+         <div class="text-center border-b-2 border-red-700 pb-4 mb-6">
+             <h1 class="text-2xl font-extrabold uppercase tracking-wide">Daily Safe-to-Spend (STS) Report</h1>
+             <p class="text-xs text-gray-600 mt-1">Generated electronically on toolblaster.com</p>
+         </div>
+         
+         <div class="grid grid-cols-2 gap-6 mb-6">
+             <!-- Left: Inputs -->
+             <div class="border p-4 rounded-xl">
+                 <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Monthly Parameters</h2>
+                 <table class="w-full text-xs">
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Monthly Net Income:</td><td id="printIncome" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Fixed Expenses:</td><td id="printBills" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Target Savings Goal:</td><td id="printSavings" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr id="printRowInflation" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Price Increase Cushion:</td><td id="printInflation" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr id="printRowEmergency" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Emergency Reserves:</td><td id="printEmergency" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr id="printRowWindfall" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Unexpected Inflows:</td><td id="printWindfall" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr id="printRowPlanned" class="border-b hidden"><td class="py-1.5 font-semibold text-gray-900">Upcoming Planned Spend:</td><td id="printPlanned" class="text-right py-1.5 text-gray-900">-</td></tr>
+                 </table>
+             </div>
+             
+             <!-- Right: Repayment Metrics -->
+             <div class="border p-4 rounded-xl">
+                 <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Calculation Summary</h2>
+                 <table class="w-full text-xs">
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Today's Safe-to-Spend Limit:</td><td id="printDailySTS" class="text-right py-1.5 font-extrabold text-blue-900">-</td></tr>
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Commitments:</td><td id="printTotalCommitments" class="text-right py-1.5 text-gray-900">-</td></tr>
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Remaining Spending Pool:</td><td id="printSurplus" class="text-right py-1.5 font-semibold text-green-950">-</td></tr>
+                     <tr class="border-b"><td class="py-1.5 font-semibold text-gray-900">Total Spends Recorded:</td><td id="printTotalLogged" class="text-right py-1.5 font-bold text-gray-900">-</td></tr>
+                 </table>
+             </div>
+          </div>
+
+          <!-- Print Ledger Table -->
+          <div>
+              <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Expenditures Log</h2>
+              <table class="w-full text-left border-collapse text-xs border">
+                  <thead>
+                      <tr class="border-b bg-gray-100 text-gray-900">
+                          <th class="p-2 border">Item/Date</th>
+                          <th class="p-2 border">Category</th>
+                          <th class="p-2 border">Amount</th>
+                          <th class="p-2 border">Date Logged</th>
+                      </tr>
+                  </thead>
+                  <tbody id="printLedgerBody" class="divide-y text-gray-900">
+                      <!-- Injected inside JavaScript loops -->
+                  </tbody>
+              </table>
+          </div>
+    </div>
+
+    <!-- Share Report dialog Modal -->
+    <div id="shareModal" class="share-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="share-modal-content">
+            <button id="closeModalBtn" class="close-modal-btn" aria-label="Close dialog">&times;</button>
+            <h2 id="modalTitle" class="modal-title font-extrabold text-center text-sm border-b pb-2 mb-3">Your Daily Safe-to-Spend Overview</h2>
+            
+            <!-- STYLISH EXPORT CARD CONTAINER -->
+            <div id="shareReportCard" class="p-5 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl shadow-xl relative overflow-hidden border border-slate-700">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="flex justify-between items-center border-b border-slate-700 pb-2.5 mb-3">
+                    <span class="text-[10px] font-black tracking-widest text-indigo-400 uppercase">Daily Budget Audit</span>
+                    <span class="text-[9px] font-medium text-slate-400 font-inter">toolblaster.com</span>
+                </div>
+
+                <div id="modalReportContent" class="modal-report-content space-y-3"></div>
+            </div>
+
+            <div class="modal-share-section mt-4">
+                <label for="shareUrlInput" class="block text-xxs font-bold text-gray-900 mb-1">Shareable Link Reference</label>
+                <input type="text" id="shareUrlInput" class="share-url-input" readonly>
+                
+                <!-- ACTIONS FOOTER: GRACEFULLY DISPLAYED INLINE ON MOBILE IN 3 BALANCED COLS -->
+                <div class="modal-actions grid grid-cols-3 gap-1 mt-3 w-full sm:flex sm:justify-end sm:gap-2">
+                    <button id="copyUrlBtn" class="px-1 py-2 sm:px-3 sm:py-1.5 bg-gray-700 hover:bg-gray-800 text-white rounded-lg text-[9px] xs:text-[10px] sm:text-xs font-bold border-none cursor-pointer transition-all text-center flex items-center justify-center">Copy Link</button>
+                    
+                    <!-- WhatsApp Markdown Copy Button -->
+                    <button id="copyWhatsAppBtn" class="px-1 py-2 sm:px-3 sm:py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-[9px] xs:text-[10px] sm:text-xs font-bold border-none cursor-pointer flex items-center justify-center gap-0.5 transition-all text-center">
+                        <svg class="w-2.5 h-3.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.011 2c-5.502 0-9.989 4.487-9.989 9.989 0 1.761.424 3.424 1.173 4.902l-1.196 4.368 4.474-1.174c1.424.773 3.036 1.201 4.743 1.201 5.502 0 9.989-4.487 9.989-9.989 0-5.502-4.487-9.989-9.989-9.989zm6.186 14.193c-.273.761-1.371 1.393-1.902 1.442-.531.049-1.049.255-3.391-.676-2.996-1.191-4.918-4.238-5.068-4.438-.15-.199-1.201-1.597-1.201-3.045 0-1.448.751-2.158 1.02-2.457.273-.298.599-.373.799-.373.199 0 .398.002.573.01.183.008.431-.072.676.512.249.593.851 2.072.925 2.223.076.15.125.325.026.524-.099.199-.149.324-.299.499-.15.174-.316.388-.451.524-.15.15-.308.315-.133.585.175.27 1.096 1.802 2.348 2.624.975.642 1.799.845 2.074.95.274.105.431.074.593-.11.163-.184.698-.813.886-1.092.189-.279.376-.233.636-.135.259.097 1.644.772 1.925.912.279.139.467.209.537.324.07.116.07.674-.203 1.435z"/></svg>
+                        <span class="hidden xxs:inline">WhatsApp</span><span class="inline xxs:hidden">WA</span>
+                    </button>
+                    
+                    <!-- High-Res PNG Image Generator Button -->
+                    <button id="downloadImageBtn" class="px-1 py-2 sm:px-3 sm:py-1.5 bg-indigo-700 hover:bg-indigo-800 text-white rounded-lg text-[9px] xs:text-[10px] sm:text-xs font-bold border-none cursor-pointer flex items-center justify-center gap-0.5 transition-all text-center">
+                        <svg class="w-2.5 h-3.5 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span class="hidden xxs:inline">Card Image</span><span class="inline xxs:hidden">Img</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+    <div id="notification-toast" role="status" aria-live="polite"></div>
+
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
