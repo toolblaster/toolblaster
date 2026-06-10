@@ -10,7 +10,7 @@ Toolblaster was born from a simple frustration: essential digital utilities and 
 
 Our Core Pillars:
 
-🔒 Privacy-First (Local Storage): What happens on your device stays on your device. All our productivity and calculation tools run completely client-side. We do not track, upload, or process your private financial inputs on central servers.
+🔒 Privacy-First (Local Storage): What happens on your device stays on your device. All our productivity and calculation tools run completely client-side. We do not track, upload, or process your private inputs on central servers.
 
 ⚡ Built for Speed: Zero bloat, instant load times, and vanilla JavaScript compiled logic for a seamless user experience.
 
@@ -56,6 +56,14 @@ Feature: Visual pacing for the 4-7-8 method, classic Box Breathing, and custom c
 
 Tech: CSS custom keyframes, Navigator Vibration API.
 
+Habit Tracker (/productivity/habit-tracker/)
+
+Atomic Daily Routine Builder
+
+Feature: Helps users build and maintain life-changing daily routines with visual check-ins and streaks.
+
+Tech: Local state sync, weekly completion metrics tracking.
+
 📈 Finance Suite
 
 PPF Calculator (/finance/ppf-calculator/)
@@ -77,6 +85,21 @@ Feature: Unified calculator supporting Home, Car, Bike, Personal, and Mobile loa
 Power-User Controls: Simulate step-up annual repayment increments, skipped moratorium months (payment holidays), ancillary fee bundling, and floating rate interest shocks. Features a foreclosure part-payment/lumpsum scheduler.
 
 Tech: Dual-chart visualizers (Doughnut split and stacked YoY Bar charts), Old vs. New Income Tax regime calculators (Section 24b/80C tax saved mapping), and automated PDF statements generator.
+
+Safe-to-Spend Calculator (/finance/safe-to-spend-calculator/)
+
+Dynamic Daily Budget Planner & Impulse Buy Shield
+
+Feature: Instantly isolates rent, bills, and monthly savings goals to turn your remaining net monthly pool into a single, stress-free daily spending limit. Features an Interactive Impulse Buy Simulator to test the immediate drop in your daily spending limits for the rest of the cycle before tapping "Buy Now."
+
+Safety Buffers: Allows fine-tuning of price cushions (inflation buffers), unexpected windfalls, medical emergency reserves, and upcoming pre-planned one-off spends.
+
+Advanced Logic: Implements client-side linear amortization. If you overspend your limit today, the engine dynamically recalibrates and re-amortizes the remaining balance over the rest of the calendar month or payday reset cycle.
+
+
+$$\text{STS}_{\text{daily}} = \frac{(I + W) - (F + S + C_{\text{inf}} + E_{\text{res}} + P_{\text{spend}}) - \sum \text{Exp}}{D_{\text{rem}}}$$
+
+Tech: Chart.js dynamic visualizers (Doughnut split and daily spends curve bar chart switcher), html2canvas high-resolution card generator for clean sharing, LocalStorage-persisted itemized ledger schedule, real-time mini spends logger, and raw CSV/PDF report exporter.
 
 Compare Investment (/finance/sip-vs-fd-vs-rd-calculator/)
 
@@ -146,9 +169,9 @@ Use an extension like Live Server to serve the index.html file from the root dir
 
 WCAG AA Compliance: Color pairings are reviewed meticulously. Headings, labels, and text colors have been upgraded (e.g., from stone-400 to high-contrast stone-600 or stone-900 against light backgrounds) to meet the strict 4.5:1 contrast ratio benchmark. Input boxes feature precise aria labels and step validations.
 
-Print Optimization: Custom @media print style sheets swap out interactive controls and sliders with high-contrast, clean-cut statement templates (#print-report and #yearlyGrowthContainer) specifically designed for neat A4 PDF saving.
+Print Optimization: Custom @media print style sheets swap out interactive controls and sliders with high-contrast, clean-cut statement templates (#print-report and table structures) specifically designed for neat A4 PDF saving.
 
-SEO & Structure: Implemented standardized meta titles (strictly capped at 60 characters for SERP) and meta descriptions under 160 characters. Backed by extensive Schema.org JSON-LD structured data graphs (FinancialProduct and WebApplication) for rich snippet results.
+SEO & Structure: Implemented standardized meta titles (strictly capped at 60 characters for SERP) and meta descriptions under 160 characters. Backed by extensive Schema.org JSON-LD structured data graphs (FinancialProduct and HowTo/FAQPage configurations) for rich snippet results.
 
 ✉️ Contact & Creator
 
