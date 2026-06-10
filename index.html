@@ -63,8 +63,8 @@
     <!-- Header & Nav -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-16">
+    <!-- Main Content Area: CONSTRAINED TO OFFICIAL WIDTH (w-[95%] max-w-[1080px]) -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-2 pb-16 px-1">
         
         <!-- Hero Section (Highly Compact for Mobile, Margin/Padding Reduced) -->
         <div class="relative z-10 max-w-4xl mx-auto text-center pt-2 pb-2 md:pb-3 px-2 fade-in">
@@ -103,9 +103,9 @@
                     <div class="flex-grow h-px bg-stone-200"></div>
                 </div>
                 
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-3">
                     <!-- Word Counter Tool -->
-                    <a href="/productivity/word-counter/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/productivity/word-counter/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-red-100 transition-colors">
                             <i class="fa-solid fa-file-word text-sm lg:text-lg"></i>
                         </div>
@@ -116,7 +116,7 @@
                     </a>
 
                     <!-- Daily Focus (DECIDE) -->
-                    <a href="/productivity/decide/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/productivity/decide/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-indigo-100 transition-colors">
                             <i class="fa-solid fa-bullseye text-sm lg:text-lg"></i>
                         </div>
@@ -127,7 +127,7 @@
                     </a>
 
                     <!-- Pomodoro Study Timer -->
-                    <a href="/productivity/pomodoro-study-timer/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/productivity/pomodoro-study-timer/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-orange-100 transition-colors">
                             <i class="fa-solid fa-stopwatch text-sm lg:text-lg"></i>
                         </div>
@@ -138,7 +138,7 @@
                     </a>
 
                     <!-- Breathing Pacer -->
-                    <a href="/productivity/breathing-pacer/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/productivity/breathing-pacer/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-wind text-sm lg:text-lg"></i>
                         </div>
@@ -149,7 +149,7 @@
                     </a>
 
                     <!-- Habit Tracker Tool -->
-                    <a href="/productivity/habit-tracker/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/productivity/habit-tracker/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-emerald-100 transition-colors">
                             <i class="fa-solid fa-calendar-check text-sm lg:text-lg"></i>
                         </div>
@@ -169,9 +169,9 @@
                     <div class="flex-grow h-px bg-stone-200"></div>
                 </div>
                 
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-3">
                     <!-- Investment Planner Tool -->
-                    <a href="/finance/investment-planner/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/finance/investment-planner/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-emerald-100 transition-colors">
                             <i class="fa-solid fa-chart-line text-sm lg:text-lg"></i>
                         </div>
@@ -182,7 +182,7 @@
                     </a>
 
                     <!-- Compare Investment Tool -->
-                    <a href="/finance/sip-vs-fd-vs-rd-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/finance/sip-vs-fd-vs-rd-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-red-100 transition-colors">
                             <i class="fa-solid fa-chart-simple text-sm lg:text-lg"></i>
                         </div>
@@ -193,7 +193,7 @@
                     </a>
 
                     <!-- PPF Calculator Tool -->
-                    <a href="/finance/ppf-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/finance/ppf-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-blue-100 transition-colors">
                             <i class="fa-solid fa-piggy-bank text-sm lg:text-lg"></i>
                         </div>
@@ -204,13 +204,24 @@
                     </a>
 
                     <!-- EMI Calculator Tool -->
-                    <a href="/finance/emi-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/finance/emi-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-purple-100 transition-colors">
                             <i class="fa-solid fa-calculator text-sm lg:text-lg"></i>
                         </div>
                         <div class="flex flex-col min-w-0">
                             <h4 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">EMI Calculator</h4>
                             <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Calculate Home, Car & Personal Loan EMIs.</p>
+                        </div>
+                    </a>
+
+                    <!-- Safe-to-Spend Calculator Tool -->
+                    <a href="/finance/safe-to-spend-calculator/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
+                        <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-amber-100 transition-colors">
+                            <i class="fa-solid fa-shield-halved text-sm lg:text-lg"></i>
+                        </div>
+                        <div class="flex flex-col min-w-0">
+                            <h4 class="text-[13px] lg:text-[14px] font-black font-inter text-stone-900 leading-tight truncate">Safe-to-Spend</h4>
+                            <p class="text-[9px] lg:text-[10px] font-inter text-stone-500 mt-0.5 leading-tight line-clamp-1 lg:line-clamp-2">Dynamic daily budget planner.</p>
                         </div>
                     </a>
                 </div>
@@ -224,9 +235,9 @@
                     <div class="flex-grow h-px bg-stone-200"></div>
                 </div>
                 
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-3">
                     <!-- Kids Rhymes -->
-                    <a href="/educational/nursery-rhymes-for-kids/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group">
+                    <a href="/educational/nursery-rhymes-for-kids/" class="premium-card flex flex-row items-center pl-2 pr-1 lg:pl-3 lg:pr-1.5 py-1.5 lg:py-2.5 rounded-xl bg-white text-left w-full group min-w-0 overflow-hidden">
                         <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 mr-2 lg:mr-3 shadow-inner group-hover:bg-pink-100 transition-colors">
                             <i class="fa-solid fa-music text-sm lg:text-lg"></i>
                         </div>
@@ -242,23 +253,22 @@
 
         <!-- Trust Section: WHY CHOOSE US -->
         <section class="max-w-4xl mx-auto mb-10 fade-in">
-            <!-- ACCESSIBILITY FIX: Upgraded section heading text color from text-stone-400 to text-stone-600 for safe contrast on light bg -->
             <h2 class="text-center text-[10px] font-black font-inter tracking-[0.3em] text-stone-600 uppercase mb-4 mt-12">Why Choose Toolblaster</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 px-2">
-                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm min-w-0">
                     <i class="fa-solid fa-circle-check text-green-500 text-base mb-1"></i>
                     <span class="text-[10px] font-black font-inter text-stone-800 uppercase tracking-tight">100% Free Tools</span>
                 </div>
-                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm min-w-0">
                     <i class="fa-solid fa-user-slash text-stone-800 text-base mb-1"></i>
                     <span class="text-[10px] font-black font-inter text-stone-800 uppercase tracking-tight">No Login Required</span>
                 </div>
-                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm min-w-0">
                     <i class="fa-solid fa-bolt-lightning text-yellow-500 text-base mb-1"></i>
                     <span class="text-[10px] font-black font-inter text-stone-800 uppercase tracking-tight">Fast & Accurate</span>
                 </div>
-                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm">
+                <div class="bg-white border border-stone-200 px-3 py-2.5 rounded-xl flex flex-col items-center text-center shadow-sm min-w-0">
                     <i class="fa-solid fa-shield-halved text-blue-500 text-base mb-1"></i>
                     <span class="text-[10px] font-black font-inter text-stone-800 uppercase tracking-tight">Privacy Focused</span>
                 </div>
