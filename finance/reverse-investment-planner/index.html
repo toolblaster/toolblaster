@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO and Canonical Metadata (Title Exactly 60 chars, Desc < 160 chars) -->
+    <title>Reverse Investment Calculator - Goal, CAGR & XIRR Plan Tools</title>
+    <meta name="description" content="Calculate required monthly SIP, lumpsum, actual CAGR, and irregular XIRR returns side-by-side with our advanced target-based financial planner.">
+    <meta name="keywords" content="reverse sip calculator, reverse lumpsum planner, cagr finder, xirr calculator online, internal rate of return, financial goals, investment planner">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/finance/reverse-investment-planner" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Advanced 4-in-1 Reverse Wealth & IRR Compounding Engine">
+    <meta property="og:description" content="Calculate monthly investments needed, evaluate policy CAGR, and audit irregular transaction XIRR using our high-precision reverse finance engine.">
+    <meta property="og:url" content="https://toolblaster.com/finance/reverse-investment-planner">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+
+    <!-- Application Brand Metadata -->
+    <meta name="application-name" content="Reverse Investment Calculator">
+    <meta name="apple-mobile-web-app-title" content="Reverse Wealth Engine">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Reverse Investment Calculator - Plan Goals, CAGR & XIRR Online",
+          "description": "Calculate required monthly SIP, lumpsum, actual CAGR, and irregular XIRR returns side-by-side with our advanced target-based financial planner.",
+          "url": "https://toolblaster.com/finance/reverse-investment-planner",
+          "inLanguage": "en-IN",
+          "image": "https://toolblaster.com/js/favicon/android-chrome-192x192.png"
+        },
+        {
+          "@type": "FinancialProduct",
+          "name": "Reverse Wealth & CAGR/XIRR Finder Engine",
+          "description": "An advanced financial back-calculation utility supporting Reverse SIP, Reverse Lumpsum, CAGR identification, and complex multi-date XIRR audits.",
+          "brand": {
+            "@type": "Brand",
+            "name": "toolblaster.com"
+          },
+          "url": "https://toolblaster.com/finance/reverse-investment-planner",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How is a reverse calculator different from a standard SIP calculator?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Standard calculators show what your current investment will become in the future. A reverse calculator works backward; you specify your target goal (e.g. 1 Crore) and it tells you exactly how much you need to invest today or monthly to achieve it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the Newton-Raphson method used for in XIRR?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Net Present Value (NPV) equation for irregular cash flows cannot be solved directly. The Newton-Raphson method is a high-speed mathematical iterative algorithm that converges rapidly to find the exact rate of return where the NPV becomes zero."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to Calculate Required Monthly SIP for a Financial Goal",
+          "description": "Calculate the exact monthly investment quota required to reach a specific financial target in three simple steps.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Define Target Corpus",
+              "text": "Enter the total wealth corpus you want to accumulate at the end of your holding period."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Enter Expected Returns & Tenure",
+              "text": "Specify the annual rate of interest compounding and the duration of your investment."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Evaluate the Required Monthly Investment",
+              "text": "Review the dynamic result displaying the required monthly SIP contribution."
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and FontAwesome Icons CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827; 
+            --accent-color-dark: #B91C1C; /* Premium Crimson Red Theme */
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fef2f2 15%, #f9fafb 75%);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.4;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main.container {
+            width: 95%;
+            max-width: 1080px;
+            margin-left: auto;
+            margin-right: auto;
+            flex-grow: 1;
+            padding-top: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Customize Slider Fill Progress */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 3px;
+            background-image: linear-gradient(var(--accent-color-dark), var(--accent-color-dark));
+            background-size: var(--fill-percentage, 0%) 100%;
+            background-repeat: no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--accent-color-dark);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Number Steppers Styling */
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #94a3b8;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+        }
+        .stepper-button {
+            background-color: #e5e7eb;
+            color: #111827; 
+            border: none;
+            width: 1.5rem;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html body .manual-input {
+            border: none;
+            text-align: center;
+            font-weight: 700;
+            color: #111827;
+            background: transparent;
+            height: 100%;
+            outline: none;
+            font-size: 0.75rem;
+            width: 85px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* Dynamic category switcher tabs matching core system */
+        .mode-tab-btn {
+            color: #1f2937;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .mode-tab-btn.active {
+            background-color: var(--accent-color-dark);
+            color: #ffffff;
+            border-color: var(--accent-color-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        /* Tooltips Design */
+        .tooltip-icon {
+            cursor: help;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 50;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            font-size: 0.65rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px; border-style: solid;
+            border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .scrollable-ledger {
+            max-height: 280px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #111827;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #notification-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        html body .text-xxs {
+            font-size: 0.72rem;
+            line-height: 1rem;
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            #master-calculator-card, #notification-toast, .print-hide, #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, nav[aria-label="Breadcrumb"] {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+                padding: 1cm !important;
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin-top: 10px !important;
+            }
+            th, td {
+                border: 1px solid #cbd5e1 !important;
+                padding: 6px 10px !important;
+                font-size: 9pt !important;
+                text-align: left !important;
+            }
+            th {
+                background-color: #f1f5f9 !important;
+                font-weight: bold !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Global Background Ambient Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-teal-50/25 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-emerald-50/20 blur-[100px]"></div>
+    </div>
+
+    <!-- Layout Navigation Headers placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Content Workspace -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="https://toolblaster.com/finance/" class="hover:text-red-600 transition-colors">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">Reverse Wealth Planner</span>
+            </div>
+            <!-- TWEAK 1: Added hidden sm:flex to hide this badge on mobile screen displays -->
+            <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-rotate-left"></i> Goal Reverse Engineering
+            </div>
+        </nav>
+
+        <!-- PRINT ONLY HIGH-CONTRAST STATEMENT REPORT TEMPLATE -->
+        <div id="print-report" class="print-only hidden p-6 text-black bg-white max-w-full">
+            <div class="text-center border-b-2 border-red-700 pb-4 mb-6">
+                <h1 class="text-2xl font-extrabold uppercase tracking-wide">🛡️ Reverse Compounding Audit Statement</h1>
+                <p class="text-xs text-gray-600 mt-1">Generated electronically on toolblaster.com</p>
+                <div id="printActiveMode" class="text-xs font-black text-red-700 uppercase tracking-widest mt-2">Mode: Reverse SIP</div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6 mb-6">
+                <div class="border p-4 rounded-xl">
+                    <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Calculation Inputs</h2>
+                    <table class="w-full text-xs">
+                        <tr class="border-b"><td class="py-2 font-semibold text-gray-900" id="printInput1Label">Parameter 1:</td><td id="printInput1Value" class="text-right py-2 text-gray-900 font-bold">-</td></tr>
+                        <tr class="border-b" id="printInput2Row"><td class="py-2 font-semibold text-gray-900" id="printInput2Label">Parameter 2:</td><td id="printInput2Value" class="text-right py-2 text-gray-900 font-bold">-</td></tr>
+                        <tr class="border-b" id="printInput3Row"><td class="py-2 font-semibold text-gray-900" id="printInput3Label">Parameter 3:</td><td id="printInput3Value" class="text-right py-2 text-gray-900 font-bold">-</td></tr>
+                        <tr class="border-b" id="printInflationRow"><td class="py-2 font-semibold text-gray-900">Inflation Adjustment:</td><td id="printInflationValue" class="text-right py-2 text-gray-900 font-bold">-</td></tr>
+                    </table>
+                </div>
+                
+                <div class="border p-4 rounded-xl">
+                    <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">Engine Output</h2>
+                    <table class="w-full text-xs">
+                        <tr class="border-b"><td class="py-2 font-semibold text-gray-900" id="printMetric1Label">Metric 1:</td><td id="printMetric1Value" class="text-right py-2 text-gray-900 font-semibold">-</td></tr>
+                        <tr class="border-b"><td class="py-2 font-semibold text-gray-900" id="printMetric2Label">Metric 2:</td><td id="printMetric2Value" class="text-right py-2 text-gray-900 font-semibold">-</td></tr>
+                        <tr class="border-b" id="printMetric3Row"><td class="py-2 font-semibold text-gray-900" id="printMetric3Label">Absolute Cash Surplus:</td><td id="printMetric3Value" class="text-right py-2 text-gray-900 font-semibold">-</td></tr>
+                        <tr class="border-b bg-red-50/50"><td class="py-2 font-black text-red-950 text-xs" id="printOutputLabel">Final Output:</td><td id="printOutputValue" class="text-right py-2 font-black text-red-700 text-sm">-</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Print Ledger Table (Hidden unless XIRR mode is active) -->
+            <div id="printLedgerContainer" class="hidden">
+                <h2 class="font-bold text-sm uppercase tracking-wider text-red-700 mb-3 border-b pb-1">XIRR Transaction Audit Trail</h2>
+                <table class="w-full text-left border-collapse text-xs border">
+                    <thead>
+                        <tr class="border-b bg-gray-100 text-gray-900">
+                            <th class="p-2 border font-bold">Transaction Date</th>
+                            <th class="p-2 border font-bold">Type</th>
+                            <th class="p-2 border text-right font-bold">Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="printLedgerBody" class="divide-y text-gray-900">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200 text-center text-[10px] text-gray-500">
+                This document is generated on toolblaster.com for educational and strategic asset forecasting. Standard market volatility applies.
+            </div>
+        </div>
+
+        <!-- MASTER CONTAINER -->
+        <div id="master-calculator-card" class="w-full text-left">
+            <div class="bg-white/95 backdrop-blur-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 ring-4 sm:ring-8 ring-stone-100/40 mx-auto my-0 calculator-container relative">
+                
+                <!-- Title Header -->
+                <div class="text-center mb-1">
+                    <h1 class="text-base sm:text-lg font-extrabold text-gray-900">🛡️ Reverse Wealth & IRR Compounding Engine</h1>
+                </div>
+                <p class="text-center text-gray-600 mb-4 text-xxs font-medium">Ulte tareeke se apne target goals set karein, policy CAGR dhoondhein ya irregular XIRR calculate karein.</p>
+
+                <!-- 4-IN-1 MODE TOGGLE SELECTOR -->
+                <div class="flex justify-center mb-5">
+                    <!-- Mobile view compatible categories grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-1.5 p-1 bg-gray-100 rounded-2xl w-full max-w-2xl mx-auto" role="tablist">
+                        <button type="button" id="tab-rev-sip" class="mode-tab-btn active text-center py-2 text-[10px] sm:text-xxs font-bold rounded-xl transition-all" aria-selected="true">Reverse SIP</button>
+                        <button type="button" id="tab-rev-lump" class="mode-tab-btn text-center py-2 text-[10px] sm:text-xxs font-bold rounded-xl transition-all" aria-selected="false">Reverse Lumpsum</button>
+                        <button type="button" id="tab-cagr" class="mode-tab-btn text-center py-2 text-[10px] sm:text-xxs font-bold rounded-xl transition-all" aria-selected="false">CAGR Finder</button>
+                        <button type="button" id="tab-xirr" class="mode-tab-btn text-center py-2 text-[10px] sm:text-xxs font-bold rounded-xl transition-all" aria-selected="false">XIRR Audit</button>
+                    </div>
+                </div>
+
+                <!-- CORE CALCULATOR LAYOUT GRID -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5 items-start">
+                    
+                    <!-- LEFT COLUMN: DYNAMIC INPUT CONTROLS -->
+                    <div class="space-y-4">
+                        
+                        <!-- Main Variable Parameters Box -->
+                        <div class="bg-gradient-to-br from-indigo-50/70 to-blue-50/50 border border-blue-100 p-3 sm:p-4 rounded-2xl space-y-3.5 shadow-sm">
+                            <h2 id="inputs-section-title" class="text-xs font-bold text-blue-950 text-center mb-1">Target Wealth Variables</h2>
+                            
+                            <!-- Slider 1 (Dynamic based on selected mode) -->
+                            <div id="dynamic-slider-1-container" class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="slider1Label" for="slider1Input" class="block text-xxs font-bold text-gray-900">Target Corpus (₹)</label>
+                                        <span class="tooltip-icon">
+                                            <!-- PROPERLY CONFIGURED SVG WITH COMPLETE STROKE ATTRIBUTES FOR HIGH-CONTRAST "i" GLYPH RENDERING -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block align-middle text-stone-600 hover:text-red-700 transition-colors">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                            </svg>
+                                            <span id="slider1Tooltip" class="tooltip-text">Aapki target saving value jo aapko future me achhi life/retirement ke liye chahiye.</span>
+                                        </span>
+                                    </span>
+                                    <!-- INDIAN COMPACT WORD BINDING: Positioned right-aligned directly above number stepper inputs -->
+                                    <span id="slider1Word" class="text-xxs font-extrabold text-red-700 block text-right pr-2 h-4"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="slider1" min="100000" max="100000000" value="5000000" step="50000" class="w-full flex-grow">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="slider1Dec" class="stepper-button">-</button>
+                                        <input type="number" id="slider1Input" class="manual-input text-center" value="5000000" min="1000" max="500000000" step="50000">
+                                        <button type="button" id="slider1Inc" class="stepper-button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slider 2 (Expected CAGR / Yield Rate) -->
+                            <div id="dynamic-slider-2-container" class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="slider2Label" for="slider2Input" class="block text-xxs font-bold text-gray-900">Expected Annual Returns (%)</label>
+                                        <span class="tooltip-icon">
+                                            <!-- PROPERLY CONFIGURED SVG WITH COMPLETE STROKE ATTRIBUTES FOR HIGH-CONTRAST "i" GLYPH RENDERING -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block align-middle text-stone-600 hover:text-red-700 transition-colors">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                            </svg>
+                                            <span id="slider2Tooltip" class="tooltip-text">Aapki investment scheme se milne wala estimated interest ya compound annual rate (CAGR).</span>
+                                        </span>
+                                    </span>
+                                    <!-- INDIAN COMPACT WORD BINDING: Positioned right-aligned directly above number stepper inputs -->
+                                    <span id="slider2Word" class="text-xxs font-extrabold text-red-700 block text-right pr-2 h-4 hidden"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="slider2" min="1" max="30" value="12" step="0.1" class="w-full flex-grow">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="slider2Dec" class="stepper-button">-</button>
+                                        <input type="number" id="slider2Input" class="manual-input text-center" value="12" min="1" max="50" step="0.1">
+                                        <button type="button" id="slider2Inc" class="stepper-button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slider 3 (Investment Tenure) -->
+                            <div id="dynamic-slider-3-container" class="relative pb-1">
+                                <div class="flex justify-between items-center mb-0.5 h-4">
+                                    <span class="flex items-center gap-1.5">
+                                        <label id="slider3Label" for="slider3Input" class="block text-xxs font-bold text-gray-900">Holding Period Tenure (Years)</label>
+                                        <span class="tooltip-icon">
+                                            <!-- PROPER PROPERLY CONFIGURED SVG WITH COMPLETE STROKE ATTRIBUTES FOR HIGH-CONTRAST "i" GLYPH RENDERING -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block align-middle text-stone-600 hover:text-red-700 transition-colors">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                            </svg>
+                                            <span id="slider3Tooltip" class="tooltip-text">Kitne samay/saal tak aap is investment me bache rahenge.</span>
+                                        </span>
+                                    </span>
+                                    <!-- INDIAN COMPACT WORD BINDING: Positioned right-aligned directly above number stepper inputs -->
+                                    <span id="slider3Word" class="text-xxs font-extrabold text-red-700 block text-right pr-2 h-4 hidden"></span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="slider3" min="1" max="40" value="10" step="1" class="w-full flex-grow">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="slider3Dec" class="stepper-button">-</button>
+                                        <input type="number" id="slider3Input" class="manual-input text-center" value="10" min="1" max="50" step="1">
+                                        <button type="button" id="slider3Inc" class="stepper-button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADVANCED EXTRA CONTROLS: INFLATION SLAB -->
+                        <div id="extra-inflation-panel" class="bg-white border border-stone-200 p-3 rounded-2xl space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xxs font-extrabold text-stone-700 uppercase tracking-wide flex items-center gap-1">
+                                    <span>Adjust Goals for Inflation</span>
+                                    <span class="tooltip-icon">
+                                        <!-- PROPERLY CONFIGURED SVG WITH COMPLETE STROKE ATTRIBUTES FOR HIGH-CONTRAST "i" GLYPH RENDERING -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block align-middle text-stone-600 hover:text-red-700 transition-colors">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                        </svg>
+                                        <span class="tooltip-text">Inflation active karne se target corpus aane wale samay ki purchasing power ke mutabik scale up ho jata hai.</span>
+                                    </span>
+                                </span>
+                                <label class="relative inline-flex items-center cursor-pointer" for="inflationToggle">
+                                    <input type="checkbox" id="inflationToggle" class="sr-only peer" aria-label="Toggle Inflation Adjustment">
+                                    <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-700"></div>
+                                </label>
+                            </div>
+                            <div id="inflationGroup" class="hidden relative pb-1">
+                                <label for="inflationRateInput" class="block text-xxs font-bold text-gray-700 mb-1">Expected Inflation Rate (% p.a.)</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="inflationRateSlider" min="0" max="15" value="6" step="0.1" class="w-full flex-grow">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-lg">
+                                        <button type="button" id="inflationRateDec" class="stepper-button">-</button>
+                                        <input type="number" id="inflationRateInput" class="manual-input text-center" value="6" min="0" max="15" step="0.1">
+                                        <button type="button" id="inflationRateInc" class="stepper-button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DYNAMIC XIRR DOCK PANEL (ONLY VISIBLE IN XIRR MODE) -->
+                        <div id="xirr-audit-panel" class="hidden bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
+                            <h3 class="text-xs font-bold text-gray-900 text-center border-b pb-1.5 flex items-center justify-center gap-1">
+                                <span>XIRR Transaction Ledger</span>
+                            </h3>
+                            <!-- Responsive Ledger Table Wrapper -->
+                            <div class="scrollable-ledger rounded-lg border border-stone-200/60 bg-white">
+                                <table class="min-w-full text-xs">
+                                    <thead class="bg-stone-100 text-stone-700 font-extrabold sticky top-0 z-10 border-b">
+                                        <tr>
+                                            <th class="p-2 text-left">Date</th>
+                                            <th class="p-2 text-left">Type</th>
+                                            <th class="p-2 text-right">Amount (₹)</th>
+                                            <th class="p-2 text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="xirrLedgerBody" class="divide-y divide-stone-100">
+                                        <!-- Dynamic entries added via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Add row controls -->
+                            <div class="grid grid-cols-3 gap-2 items-center">
+                                <input type="date" id="newFlowDate" class="p-1.5 border rounded-lg text-xxs text-stone-900 bg-white outline-none focus:ring-1 focus:ring-red-600">
+                                <select id="newFlowType" class="p-1.5 border rounded-lg text-xxs text-stone-900 bg-white outline-none focus:ring-1 focus:ring-red-600">
+                                    <option value="debit">Invested (-)</option>
+                                    <option value="credit">Received (+)</option>
+                                </select>
+                                <div class="flex gap-1">
+                                    <input type="number" id="newFlowAmount" class="w-full p-1.5 border rounded-lg text-xxs font-bold text-stone-900 outline-none focus:ring-1 focus:ring-red-600" placeholder="Amt" min="1">
+                                    <button type="button" id="addNewFlowBtn" class="bg-red-800 hover:bg-red-950 text-white font-extrabold text-[10px] px-2.5 py-1.5 rounded-lg transition-all">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: DETAILED SUMMARY & CHARTS -->
+                    <div class="flex flex-col space-y-3.5">
+                        
+                        <!-- Spending Summary Output Panel -->
+                        <div class="bg-blue-50 p-3 rounded-2xl border border-blue-100 flex-grow" aria-live="polite">
+                            <div class="flex justify-between items-center mb-2.5 border-b border-blue-200 pb-1.5">
+                                <h3 id="output-section-title" class="text-xs font-bold text-blue-950 font-extrabold">Required Allocation Summary</h3>
+                                <!-- Print Trigger -->
+                                <button type="button" onclick="window.print()" class="text-xxs font-extrabold text-blue-900 hover:text-red-700 flex items-center gap-1 transition-colors print-hide">
+                                    <i class="fa-solid fa-print"></i> Print
+                                </button>
+                            </div>
+
+                            <!-- Live Warning Validation Alerts -->
+                            <div id="errorAlertBox" class="p-2.5 rounded-xl bg-red-100 border border-red-300 text-red-950 font-extrabold text-xxs text-center mb-2.5 hidden"></div>
+
+                            <!-- Real-time Metrics display -->
+                            <div class="grid grid-cols-2 gap-2 text-center my-1.5">
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl flex flex-col items-center justify-center">
+                                    <span class="text-[10px] font-bold text-gray-800" id="cardMetric1Label">Target Corpus Value</span>
+                                    <p id="cardMetric1Value" class="text-xs sm:text-sm font-extrabold text-blue-950 mt-1">₹50,00,000</p>
+                                </div>
+                                <div class="p-2 bg-white border border-blue-100 rounded-xl flex flex-col items-center justify-center">
+                                    <span class="text-[10px] font-bold text-gray-800" id="cardMetric2Label">Expected Growth</span>
+                                    <p id="cardMetric2Value" class="text-xs sm:text-sm font-extrabold text-green-950 mt-1">₹36,11,875</p>
+                                </div>
+                            </div>
+
+                            <!-- Large Callout result panel -->
+                            <div class="p-3 rounded-xl text-center mt-2.5 bg-gray-100 border border-gray-200">
+                                <span class="text-xxs font-bold text-gray-900 uppercase tracking-wider block" id="largeCalloutLabel">Monthly SIP Required</span>
+                                <p id="largeCalloutValue" class="text-base sm:text-[20px] font-black text-purple-950 mt-1">₹11,568 / Month</p>
+                            </div>
+
+                            <!-- Extra Information Info block -->
+                            <div id="secondaryInfoBox" class="mt-2.5 p-2 bg-white rounded-xl border border-blue-100 flex flex-wrap justify-between items-center text-xxs font-semibold">
+                                <span id="secInfoLabel" class="text-stone-700">Total Principal Capital Invested:</span>
+                                <span id="secInfoValue" class="text-indigo-950 font-extrabold">₹13,88,125</span>
+                            </div>
+                        </div>
+
+                        <!-- Graph Chart Container (Hidden during PDF prints) -->
+                        <div class="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm print-hide flex flex-col justify-between">
+                            <span class="text-xxs font-bold text-gray-900 tracking-wide block mb-1">Visual Allocation Breakdown</span>
+                            <div id="chartContainer" class="relative h-28 sm:h-32 w-[160px] mx-auto">
+                                <canvas id="breakdownDoughnutChart"></canvas>
+                            </div>
+                            <!-- UNIFORM COLOR LEGEND ALIGNED TO THE MODULAR MULTI-PRODUCT SPECIFICATION -->
+                            <div class="flex justify-between gap-4 mt-2 w-full text-[9px] font-bold">
+                                <div class="flex items-center gap-1 min-w-0">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-900 flex-shrink-0"></span>
+                                    <span class="truncate text-stone-600 font-inter" id="legendLabel1">Principal:</span>
+                                    <span id="legendVal1" class="text-blue-900">₹13,88,125</span>
+                                </div>
+                                <div class="flex items-center gap-1 min-w-0">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 flex-shrink-0"></span>
+                                    <span class="truncate text-stone-600 font-inter" id="legendLabel2">Returns:</span>
+                                    <span id="legendVal2" class="text-emerald-700 font-extrabold">₹36,11,875</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Structured Regulatory compliance notes -->
+                <div id="compliancedisclaimer" class="border-t border-gray-200 mt-4 pt-3.5 text-center text-gray-900 text-[10px] leading-relaxed">
+                    <p class="font-bold text-gray-950 mb-0.5">Sovereign Compliance & SEBI Advisory Notes:</p>
+                    <p class="mb-2">Gains and required allocations calculated here assume continuous compound growth. All XIRR audits calculate annualised rates based on exact standard calendar dates. Mutual funds carrying equity allocations represent significant volatility risks. Real proceeds are subject to market conditions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleek and Minimal Ecosystem Internal Link Section -->
+        <div class="max-w-[1080px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
+                <!-- Card 1: SIP vs FD vs RD -->
+                <a href="https://toolblaster.com/finance/sip-vs-fd-vs-rd-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-red-600 uppercase tracking-widest block leading-none mb-0.5">Yield Comparison</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">SIP vs FD vs RD</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Compare FD, RD, and SIP mutual funds side-by-side.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Investment Planner -->
+                <a href="https://toolblaster.com/finance/investment-planner/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-emerald-600 uppercase tracking-widest block leading-none mb-0.5">Comprehensive Planner</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">Investment Planner</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Plan long-term goals, SWPs, and retirement funds.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Safe-to-Spend -->
+                <a href="https://toolblaster.com/finance/safe-to-spend-calculator/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <span class="text-[8px] font-black text-amber-600 uppercase tracking-widest block leading-none mb-0.5">Daily Budget Planner</span>
+                            <h3 class="text-sm font-black text-stone-900 m-0 leading-tight truncate">Safe-to-Spend</h3>
+                            <p class="text-[10px] font-medium text-stone-600 truncate leading-tight mt-0.5">Track daily allowances after bills & savings goal.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center gap-0.5 group-hover:translate-x-1 transition-transform flex-shrink-0">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PREMIUM SEO & TECHNICAL DOCUMENTATION SECTION -->
+        <article class="w-full max-w-3xl mx-auto mt-12 mb-16 prose prose-stone relative z-10 print-hide">
+            <div class="space-y-6 text-stone-850 font-inter">
+                
+                <!-- Section 1: Philosophy & Psychology -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-calculator"></i></span> Reverse Engineering Wealth: Why Back-Calculation Matters
+                    </h2>
+                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
+                        Socio-economic cycles dictate that traditional forward calculators (where you declare monthly inputs to guess future maturity) are not enough for modern milestone planning. True financial planning begins with the <strong>endpoint</strong>. Whether planning for retirement, an estate purchase, or your child's higher education, you must start with a target goal.
+                    </p>
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
+                        Our advanced <strong>Reverse Investment Calculator</strong> acts as an inverse compounding engine. It helps you back-calculate the exact monthly SIP quota or bulk one-time lumpsum needed to hit your targets, find the real CAGR of traditional policies, or solve complex multi-date XIRR portfolios with local browser privacy.
+                    </p>
+                </section>
+
+                <!-- Section 2: Mathematical Formulations -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-superscript"></i></span> Compounding Mathematics & Algorithmic Slabs
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 font-medium">
+                        The mathematics behind back-calculating target plans, finding yields, and solving irregular XIRR cash flows:
+                    </p>
+
+                    <div class="space-y-6 text-xs text-stone-800 font-medium leading-relaxed">
+                        
+                        <!-- Lumpsum reverse formula -->
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">1. Reverse Lumpsum Compounding Formula</h3>
+                            <p class="mb-3 text-stone-700">Calculates the one-time principal capital needed today to achieve a future target value:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner w-full">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-2 justify-center">
+                                    <span class="font-black text-red-700">P</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-800 px-3 pb-1.5 font-bold text-stone-800">
+                                            FV × (1 + inf)<sup>t</sup>
+                                        </span>
+                                        <span class="pt-1.5 font-bold text-stone-800">
+                                            (1 + r)<sup>t</sup>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-md mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">P</strong><span>= Lumpsum Principal Needed</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">FV</strong><span>= Target Future Value Goal</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">inf</strong><span>= Inflation Rate (p.a. %)</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">r</strong><span>= Expected Return Rate (%)</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">t</strong><span>= Investment Period (Years)</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reverse SIP Formula -->
+                        <div class="border-b border-stone-200 pb-5">
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">2. Reverse SIP (Future Value of Annuity) Formula</h3>
+                            <p class="mb-3 text-stone-700">Calculates the monthly investment required to reach a specific financial target:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner w-full overflow-x-auto custom-scrollbar">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-2 justify-center">
+                                    <span class="font-black text-red-700">M</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-800 px-3 pb-1.5 font-bold text-stone-800">
+                                            FV<sub>adj</sub>
+                                        </span>
+                                        <span class="pt-1.5 font-bold text-stone-800">
+                                            [((1 + i)<sup>n</sup> - 1) / i] × (1 + i)
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-md mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">M</strong><span>= Monthly SIP Required</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">FV<sub>adj</sub></strong><span>= Inflation-adjusted Target</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">i</strong><span>= Monthly Rate (r / 12)</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">n</strong><span>= Total Months (t × 12)</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- XIRR Equation block -->
+                        <div>
+                            <h3 class="text-xs font-bold text-stone-900 mb-2">3. Newton-Raphson XIRR Solver Formula</h3>
+                            <p class="mb-3 text-stone-700">XIRR calculates the annualised rate of return for irregular cash flows by solving the Net Present Value equation where NPV = 0:</p>
+                            
+                            <div class="bg-gradient-to-r from-stone-50 to-stone-100/50 border border-stone-200/80 p-4 rounded-xl flex flex-col items-center justify-center my-3 shadow-inner w-full">
+                                <div class="font-serif text-stone-900 text-xs sm:text-sm md:text-base lg:text-lg select-none inline-flex items-center whitespace-nowrap mb-2 justify-center">
+                                    <span class="font-black text-red-700">NPV(r)</span> 
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <span class="font-bold">∑</span> 
+                                    <div class="inline-flex flex-col items-center mx-1.5 align-middle text-center leading-none">
+                                        <span class="border-b border-stone-800 px-3 pb-1.5 font-bold text-stone-800">
+                                            C<sub>i</sub>
+                                        </span>
+                                        <span class="pt-1.5 font-bold text-stone-800">
+                                            (1 + r)<sup>(d<sub>i</sub> - d<sub>1</sub>)/365</sup>
+                                        </span>
+                                    </div>
+                                    <span class="mx-2 font-bold">=</span> 
+                                    <span class="font-extrabold text-emerald-800">0</span>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-stone-600 border-t border-stone-200/60 pt-3 w-full max-w-md mx-auto">
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">C<sub>i</sub></strong><span>= i-th cash flow value</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">d<sub>i</sub></strong><span>= i-th transaction date</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">d<sub>1</sub></strong><span>= First transaction date</span></div>
+                                    <div class="flex items-center gap-1.5"><strong class="text-stone-800 font-bold">r</strong><span>= Extended XIRR Return Rate</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Section 3: Case Studies -->
+                <section class="bg-white/70 backdrop-blur-xl p-5 sm:p-8 rounded-[2rem] border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Real-World Case Studies
+                    </h2>
+                    <p class="text-xs sm:text-sm leading-relaxed mb-5 text-stone-800 font-medium">
+                        Explore how back-compounding calculations work in practical Indian market scenarios:
+                    </p>
+
+                    <div class="space-y-5">
+                        <!-- Case 1 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-[10px]">1</span>
+                                    Targeting a ₹1 Crore Corpus in 15 Years
+                                </h3>
+                                <span class="bg-emerald-50 text-emerald-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">Goal Target</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
+                                A young couple wants to accumulate <strong>₹1 Crore</strong> for their child's education in 15 years, assuming an expected return of <strong>12% p.a.</strong>
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">Without Inflation:</strong> They must start a monthly SIP of <strong>₹19,819</strong>.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">With 6% Inflation:</strong> Due to rising costs, they will need <strong>₹2.4 Crore</strong> in 15 years to match today's buying power. To achieve this, their required monthly SIP scales to <strong>₹47,497</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Case 2 -->
+                        <div class="bg-stone-50/50 p-4 sm:p-5 rounded-2xl border border-stone-200/60">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 mb-3">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-stone-950 flex items-center gap-2 m-0">
+                                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blue-100 text-blue-800 font-bold text-[10px]">2</span>
+                                    Decoding traditional insurance policy return rate (CAGR)
+                                </h3>
+                                <span class="bg-blue-50 text-blue-800 text-[9px] font-bold px-2 py-0.5 rounded-full self-start sm:self-auto uppercase tracking-wide">CAGR Finder</span>
+                            </div>
+                            <p class="text-stone-700 leading-relaxed mb-3 font-medium text-xs">
+                                An investor paid a one-time single premium of <strong>₹5,000,000</strong> for an insurance-cum-wealth policy. After 10 years, they received a maturity payout of <strong>₹9,000,000</strong>.
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2 text-stone-600 mb-0 font-medium text-xs">
+                                <li class="leading-relaxed"><strong class="text-stone-800">The Pitch:</strong> The agent highlighted a seemingly high growth of ₹4,000,000 in returns.</li>
+                                <li class="leading-relaxed"><strong class="text-stone-800">The Reality check:</strong> Inputting these values into our CAGR Finder reveals a compound annual growth rate of just <strong>6.05%</strong>. This is below major long-term equity benchmarks, showing the need for a retro-check.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: FAQs Section -->
+                <section id="faqs" class="bg-transparent">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. How is a reverse calculator different from a standard SIP calculator?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Standard calculators show what your current investment will become in the future. A reverse calculator works backward; you specify your target goal (e.g. 1 Crore) and it tells you exactly how much you need to invest today or monthly to achieve it.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. What is the Newton-Raphson method used for in XIRR?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">The Net Present Value (NPV) equation for irregular cash flows cannot be solved directly. The Newton-Raphson method is a high-speed mathematical iterative algorithm that converges rapidly to find the exact rate of return where the NPV becomes zero.</p>
+                        </div>
+                        <div class="p-4 sm:p-5 bg-white/60 backdrop-blur-lg rounded-2xl border border-white/80 shadow-sm">
+                            <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Why should I adjust my goals for inflation?</h3>
+                            <p class="text-xs leading-relaxed mb-0 text-stone-800 font-medium">Inflation reduces the purchasing power of your money over time. If you target ₹50 Lacs in 15 years, it will have much less value than it does today. Activating the inflation adjustment automatically inflates your target corpus to preserve today's purchasing power.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+
+    <!-- Scripts -->
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
