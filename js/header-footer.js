@@ -4,7 +4,7 @@
  */
 
 // ==========================================
-// ðŸš€ CENTRAL TOOLBLASTER APP DIRECTORY ðŸš€
+// 🚀 CENTRAL TOOLBLASTER APP DIRECTORY 🚀
 // This array is 100% dynamic. Add any new tool here, and it will
 // automatically render in both the App Drawer and Top Navigation!
 // ==========================================
@@ -28,14 +28,15 @@ const TOOLBLASTER_APPS = [
             { name: "Compare Investment", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" },
             { name: "PPF Calculator", url: "/finance/ppf-calculator/", icon: "fa-piggy-bank", classes: "bg-blue-50 border-blue-100 text-blue-600 group-hover:text-blue-600", matchPath: "/ppf-calculator/" },
             { name: "EMI Calculator", url: "/finance/emi-calculator/", icon: "fa-calculator", classes: "bg-purple-50 border-purple-100 text-purple-600 group-hover:text-purple-600", matchPath: "/emi-calculator/" },
-            { name: "Safe-to-Spend", url: "/finance/safe-to-spend-calculator/", icon: "fa-shield-halved", classes: "bg-amber-50 border-amber-100 text-amber-600 group-hover:text-amber-600", matchPath: "/safe-to-spend-calculator/" }
+            { name: "Safe-to-Spend", url: "/finance/safe-to-spend-calculator/", icon: "fa-shield-halved", classes: "bg-amber-50 border-amber-100 text-amber-600 group-hover:text-amber-600", matchPath: "/safe-to-spend-calculator/" },
+            { name: "Reverse Planner", url: "/finance/reverse-investment-planner/", icon: "fa-rotate-left", classes: "bg-rose-50 border-rose-100 text-rose-600 group-hover:text-rose-600", matchPath: "/reverse-investment-planner/" }
         ]
     },
     {
         category: "Educational",
         icon: "fa-graduation-cap",
         apps: [
-            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes" }
+            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes-for-kids/" }
         ]
     }
 ];
@@ -81,7 +82,7 @@ function injectHeader() {
     } else if (iosAppNameMeta && iosAppNameMeta.content) {
         centerTitle = iosAppNameMeta.content.toUpperCase();
     } else {
-        // Fallback for older legacy pages
+        // Fallback for active pages (Legacy unused parameters removed smoothly)
         if (currentPath.includes('/decide/')) centerTitle = "DECIDE.";
         else if (currentPath.includes('/pomodoro-study-timer/')) centerTitle = "STUDY TIMER";
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
@@ -93,12 +94,7 @@ function injectHeader() {
         else if (currentPath.includes('/finance/ppf-calculator')) centerTitle = "PPF CALCULATOR";
         else if (currentPath.includes('/finance/emi-calculator')) centerTitle = "EMI CALCULATOR";
         else if (currentPath.includes('/finance/safe-to-spend-calculator')) centerTitle = "SAFE-TO-SPEND";
-        else if (currentPath.includes('/reviews/')) centerTitle = "REVIEWS";
-        else if (currentHost.includes('gstbilling')) centerTitle = "GST BILLING";
-        else if (currentHost.includes('agriquiz')) centerTitle = "AGRI QUIZ";
-        else if (currentHost.includes('onlinenotepad')) centerTitle = "NOTEPAD";
-        else if (currentHost.includes('sipcalculator')) centerTitle = "SIP PLANNER";
-        else if (currentHost.includes('percentagecalculator')) centerTitle = "PERCENTAGE";
+        else if (currentPath.includes('/finance/reverse-investment-planner')) centerTitle = "REVERSE PLANNER";
         else if (currentPath === '/' || currentPath === '/index.html') centerTitle = "HOME";
         else if (document.title) {
             centerTitle = document.title.split(/\||-/)[0].trim().toUpperCase();
@@ -108,7 +104,7 @@ function injectHeader() {
     // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
     let descTitle = "";
     if (document.title) {
-        const titleParts = document.title.split(/\||-|:/);
+        const titleParts = document.title.split(/\||-/);
         if (titleParts.length > 1) {
             let bestPart = "";
             let bestCleanedLength = 0;
@@ -173,7 +169,6 @@ function injectHeader() {
             drawerCategoriesHtml += `<div class="px-6 my-1 border-t border-stone-100"></div>`;
         }
         
-        // ACCESSIBILITY FIX: Changed category heading from text-stone-400 to text-stone-600 to satisfy WCAG AA contrast limits
         drawerCategoriesHtml += `
             <div class="px-4 py-2">
                 <h3 class="text-[9px] font-black text-stone-600 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
@@ -196,8 +191,6 @@ function injectHeader() {
         drawerCategoriesHtml += `</div></div>`;
     });
 
-    // CRITICAL BUG FIX (COMPLETELY ACCESSIBILITY AND OVERLAP PROOF):
-    // Uses semantic custom queries to prevent third-party visual CSS breaks or component blocks.
     headerContainer.innerHTML = `
         <style>
             @media (max-width: 639px) {
@@ -208,7 +201,6 @@ function injectHeader() {
                 .tb-mobile-only { display: none !important; }
                 .tb-desktop-only { display: block !important; }
             }
-            /* PREMIUM VISIBILITY CLIP TRAP: Completely silences the off-screen sidebar from mobile browser canvas */
             #global-sidebar {
                 visibility: hidden;
                 transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -219,9 +211,7 @@ function injectHeader() {
             }
         </style>
         
-        <!-- RELATIVE POSITIONING ensures the header scrolls away naturally -->
         <nav class="relative w-full bg-white border-b border-stone-300 shadow-sm z-[100]">
-            <!-- CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment -->
             <div class="mx-auto w-[95%] max-w-[1080px] h-12 flex items-center justify-between relative">
                 
                 <!-- Left: Brand Logo -->
@@ -285,7 +275,6 @@ function injectHeader() {
                 </div>
                 
                 <div class="flex justify-center">
-                    <!-- ACCESSIBILITY FIX: Upgraded contrast on the Home link from text-stone-500 to text-stone-600 -->
                     <a href="/" class="text-[10px] font-bold text-stone-600 hover:text-red-600 uppercase tracking-widest transition-colors flex items-center whitespace-nowrap">
                         Home
                     </a>
@@ -313,18 +302,39 @@ function injectHeader() {
     const overlay = document.getElementById('global-sidebar-overlay');
 
     if(menuBtn && sidebar && overlay) {
+        // Watertight mobile scroll-lock handling to prevent background scrolling
+        const preventDefaultScroll = (e) => {
+            // Let the user scroll normally inside the sidebar drawer list
+            if (sidebar.contains(e.target)) {
+                return;
+            }
+            e.preventDefault();
+        };
+
         const openMenu = () => {
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             overlay.classList.add('opacity-100');
             sidebar.classList.add('active');
+            
+            // Standard scroll disable for both HTML and Body elements
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+            
+            // Securely trap mobile Safari touchmove actions
+            document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
         };
 
         const closeMenu = () => {
             overlay.classList.remove('opacity-100');
             overlay.classList.add('opacity-0', 'pointer-events-none');
             sidebar.classList.remove('active');
+            
+            // Restore scroll settings
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            
+            // Remove mobile touch listener safely
+            document.removeEventListener('touchmove', preventDefaultScroll);
         };
 
         menuBtn.addEventListener('click', openMenu);
@@ -332,7 +342,7 @@ function injectHeader() {
         overlay.addEventListener('click', closeMenu);
     }
 
-    // Dynamic style for custom scrollbar inside sidebar
+    // Dynamic style inside sidebar
     const style = document.createElement('style');
     style.innerHTML = `
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
@@ -365,7 +375,10 @@ function injectToolNav() {
             if (tool.matchPath) {
                 const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
                 const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
-                if (cleanCurrentPath.includes(cleanMatchPath)) {
+                
+                // Segment boundary RegExp check to prevent substring overlap bugs like "reverse-investment-planner" matching "investment-planner"
+                const boundaryRegex = new RegExp(`(^|\\/)${cleanMatchPath}($|\\/)`);
+                if (boundaryRegex.test(cleanCurrentPath)) {
                     activeCategory = cat;
                     break;
                 }
@@ -393,13 +406,16 @@ function injectToolNav() {
 
     let linksHtml = '';
     
-    // 3. Generate HTML for the selected tools
+    // 3. Generate HTML for the selected tools with strict boundary checks
     toolsToShow.forEach(tool => {
         let isActive = false;
         if (tool.matchPath) {
             const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
             const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
-            if (cleanCurrentPath.includes(cleanMatchPath)) {
+            
+            // Strictly match path boundaries
+            const boundaryRegex = new RegExp(`(^|\\/)${cleanMatchPath}($|\\/)`);
+            if (boundaryRegex.test(cleanCurrentPath)) {
                 isActive = true;
             }
         }
@@ -422,10 +438,6 @@ function injectToolNav() {
         </style>
     `;
 
-    // CRITICAL BUG FIX & ACCESSIBILITY FIX: Category Label is now inline-block (sticky left pinned with nice shadow) 
-    // and styled with text-stone-600 (to achieve 6.6:1 contrast ratio against bg-stone-100)
-    // to ensure mobile-first layout always displays active category clearly without wrapping.
-    // CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment
     navContainer.innerHTML = style + `
         <div id="sec-nav-inner" class="w-full bg-stone-100/95 backdrop-blur-md border-b border-stone-200 shadow-sm z-[90] transition-none">
             <div class="mx-auto w-[95%] max-w-[1080px]">
@@ -441,12 +453,10 @@ function injectToolNav() {
         const activeItem = document.querySelector('#secondary-scroll-nav .active-tool');
         const navScrollContainer = document.getElementById('secondary-scroll-nav');
         
-        // BUG FIX: Removed standard .scrollIntoView() which shifts viewport window on mobiles.
         if (activeItem && navScrollContainer) {
             const containerRect = navScrollContainer.getBoundingClientRect();
             const itemRect = activeItem.getBoundingClientRect();
             
-            // Determine the precise scroll offset required to center the active tool element inside sub-nav
             const targetScrollLeft = navScrollContainer.scrollLeft + (itemRect.left - containerRect.left) - (containerRect.width / 2) + (itemRect.width / 2);
             navScrollContainer.scrollLeft = targetScrollLeft;
         }
@@ -455,7 +465,6 @@ function injectToolNav() {
         if (innerNav) {
             const handleScroll = () => {
                 if (window.scrollY >= 48) {
-                    // Added top-0, left-0, right-0, w-full explicitly to enforce absolute viewport locking
                     innerNav.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'w-full');
                 } else {
                     innerNav.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'w-full');
@@ -469,7 +478,7 @@ function injectToolNav() {
 
 /**
  * Global Footer
- * Ultra-Minimalist Redesign: Integrated dynamic Social Sharing, perfectly centered.
+ * Dynamic Social Sharing, perfectly centered.
  */
 function injectFooterAndModals() {
     const footerContainer = document.getElementById('app-footer');
@@ -477,11 +486,9 @@ function injectFooterAndModals() {
 
     footerContainer.className = "w-full mt-auto mb-0";
 
-    // Auto-capture current page URL for sharing
     const currentUrl = encodeURIComponent(window.location.href);
     const shareMsg = encodeURIComponent("Check out this useful tool on Toolblaster: ");
 
-    // CHANGED: Replaced responsive padding classes with fluid w-[95%] max-w-[1080px] for identical alignment
     footerContainer.innerHTML = `
         <footer class="bg-white border-t border-stone-200 w-full relative z-50">
             <div class="mx-auto w-[95%] max-w-[1080px] py-5">
@@ -490,7 +497,7 @@ function injectFooterAndModals() {
                     <!-- Left Group: Copyright -->
                     <div class="w-full md:w-1/3 text-center md:text-left order-3 md:order-1 mt-1 md:mt-0">
                         <p class="text-[10px] text-stone-600 font-bold tracking-widest uppercase">
-                            Â© ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
+                            © ${new Date().getFullYear()} TOOLBLASTER.COM | ALL RIGHTS RESERVED.
                         </p>
                     </div>
                     
