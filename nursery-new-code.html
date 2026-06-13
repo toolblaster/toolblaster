@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags - Optimized for "Tool" Branding & Character Limits -->
+    <title>Interactive Nursery Rhymes Tool for Kids | Toolblaster</title>
+    <meta name="description" content="Free interactive nursery rhymes tool for kids in English & Hindi. Features read-aloud text-to-speech, custom playlists, and local favorites.">
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    <meta property="og:title" content="Interactive Nursery Rhymes Tool for Kids | Toolblaster">
+    <meta property="og:description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta property="og:image:alt" content="Interactive Rhymes Tool by Toolblaster">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://toolblaster.com/educational/nursery-rhymes-for-kids/">
+    <meta property="twitter:title" content="Interactive Nursery Rhymes Tool for Kids | Toolblaster">
+    <meta property="twitter:description" content="Free interactive nursery rhymes tool for kids in English and Hindi. Features read-aloud text-to-speech, custom playlists, and safe local storage.">
+    <meta property="twitter:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+
+    <!-- Absolute Paths to prevent 404s -->
+    <link rel="icon" type="image/x-icon" href="/js/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/js/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/js/favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" rel="apple-touch-icon" href="/js/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="/js/favicon/site.webmanifest">
+    
+    <!-- Tailwind Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global Fonts & Icons: Optimized with Inter & Noto Sans Devanagari only -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Nursery Rhymes Learning Tool",
+      "url": "https://toolblaster.com/educational/nursery-rhymes-for-kids/",
+      "description": "Interactive nursery rhymes tool for kids in English and Hindi.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #FAFAF9; 
+            --text-main: #292524;
+            --accent: #EF4444;
+        }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+        
+        /* Font rules to guarantee only Inter and Noto Sans Devanagari load */
+        .font-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif !important;
+        }
+        
+        /* Category Buttons - Clean CSS State Governances */
+        .category-btn { 
+            background-color: #FFFFFF;
+            color: #44403C; /* stone-700 */
+            border-color: #E7E5E4; /* stone-200 */
+            transition: all 0.2s ease-in-out; 
+        }
+        /* Inactive Buttons - Hover Behavior */
+        .category-btn:not(.active):hover {
+            background-color: #FEF2F2 !important; /* red-50 */
+            color: #DC2626 !important;            /* red-600 */
+            border-color: #FCA5A5 !important;      /* red-300 */
+            transform: translateY(-1px);
+        }
+        /* Active Buttons - Default State */
+        .category-btn.active { 
+            background-color: #DC2626 !important; 
+            color: #FFFFFF !important; 
+            border-color: #DC2626 !important; 
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3) !important; 
+        }
+        /* Active Buttons - Hover Behavior */
+        .category-btn.active:hover {
+            background-color: #B91C1C !important; /* red-700 */
+            color: #FFFFFF !important;
+            border-color: #B91C1C !important;
+            transform: translateY(-1px);
+        }
+
+        .action-btn { transition: all 0.2s ease-in-out; }
+        .action-btn:hover { background-color: #f5f5f4; color: #DC2626; transform: scale(1.05); }
+        
+        #toast-notification {
+            visibility: hidden; min-width: 200px; background-color: rgba(41, 37, 36, 0.95); backdrop-filter: blur(8px); color: #fff; text-align: center; border-radius: 12px;
+            padding: 12px 16px; font-weight: 600; font-size: 14px; position: fixed; z-index: 100; left: 50%; transform: translateX(-50%); bottom: 30px;
+            opacity: 0; transition: opacity 0.3s, bottom 0.3s; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
+        }
+        #toast-notification.show { visibility: visible; opacity: 1; bottom: 50px; }
+        
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        .animate-pop { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .button-pop:active { animation: pop 0.2s ease-in-out; }
+        
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::before { content: 'тЦ╢'; margin-right: 0.5rem; display: inline-block; transition: transform 0.2s; font-size: 12px; }
+        details[open] > summary::before { transform: rotate(90deg); }
+
+        /* Emoji Particle Sparkles */
+        .emoji-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 110;
+            font-size: 24px;
+            animation: floatUpAndFade 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes floatUpAndFade {
+            0% { transform: translate(0, 0) scale(0.4) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot)); opacity: 0; }
+        }
+
+        /* Ambient Orbs Transitions */
+        #global-bg-orbs div {
+            transition: background-color 0.6s ease;
+        }
+
+        /* Bedtime Mode (Dark Theme) Clean CSS Override Governances */
+        body.theme-bedtime {
+            background-color: #0F172A !important;
+            color: #E2E8F0 !important;
+        }
+        body.theme-bedtime #tool-action-bar {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3) !important;
+        }
+        body.theme-bedtime #tool-action-bar h1 { color: #F8FAFC !important; }
+        body.theme-bedtime #tool-action-bar h2 { color: #94A3B8 !important; }
+        body.theme-bedtime #playlist-toggle-btn {
+            background-color: #1E293B !important;
+            color: #E2E8F0 !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #playlist-toggle-btn:hover { background-color: #334155 !important; }
+
+        body.theme-bedtime #playroom-card {
+            background-image: linear-gradient(to right, rgb(76 29 149 / 0.4), rgb(49 46 129 / 0.4)) !important;
+            border-color: rgb(99 102 241 / 0.3) !important;
+        }
+        body.theme-bedtime #playroom-desc { color: #A5B4FC !important; }
+        
+        body.theme-bedtime #speed-toggle-btn {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+            color: #CBD5E1 !important;
+        }
+        body.theme-bedtime #speed-toggle-btn:hover {
+            background-color: #334155 !important;
+        }
+        body.theme-bedtime #speed-dropdown-menu {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5) !important;
+        }
+        body.theme-bedtime .speed-option-item {
+            color: #CBD5E1 !important;
+        }
+        body.theme-bedtime .speed-option-item:hover {
+            background-color: #334155 !important;
+            color: #F8FAFC !important;
+        }
+        body.theme-bedtime .speed-option-item.selected-active {
+            background-color: #DC2626 !important;
+            color: #FFFFFF !important;
+        }
+
+        body.theme-bedtime #bedtime-mode-btn,
+        body.theme-bedtime #audio-fx-btn {
+            background-color: #1E293B !important;
+            color: #E2E8F0 !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #bedtime-mode-btn:hover,
+        body.theme-bedtime #audio-fx-btn:hover {
+            background-color: #334155 !important;
+        }
+
+        body.theme-bedtime #rotd-card {
+            background-color: #1E293B !important;
+            border-color: rgb(99 102 241 / 0.3) !important;
+        }
+        body.theme-bedtime #rotd-title { color: #F8FAFC !important; }
+        body.theme-bedtime #rotd-icon {
+            background-color: #0F172A !important;
+            border-color: #1E293B !important;
+        }
+        body.theme-bedtime #rotd-card div.bg-red-50 {
+            background-color: rgb(127 29 29 / 0.4) !important;
+            color: #FECACA !important;
+            border-color: rgb(185 28 28 / 0.3) !important;
+        }
+
+        body.theme-bedtime #controls-box {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #search-bar {
+            background-color: #0F172A !important;
+            border-color: #334155 !important;
+            color: #F8FAFC !important;
+        }
+        body.theme-bedtime #search-bar::placeholder { color: #64748B !important; }
+        
+        /* Category button fixes in Bedtime mode */
+        body.theme-bedtime .category-btn {
+            background-color: #1E293B !important;
+            color: #94A3B8 !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime .category-btn:not(.active):hover {
+            background-color: rgb(76 29 149 / 0.3) !important;
+            color: #A5B4FC !important;
+            border-color: #4F46E5 !important;
+        }
+        body.theme-bedtime .category-btn.active {
+            background-color: #DC2626 !important;
+            color: #FFFFFF !important;
+            border-color: #DC2626 !important;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4) !important;
+        }
+        
+        body.theme-bedtime #gallery-title { color: #F8FAFC !important; }
+        
+        /* Rhyme Grid Cards bedtime */
+        body.theme-bedtime .rhyme-card {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime .rhyme-card:hover {
+            border-color: #EF4444 !important;
+        }
+        body.theme-bedtime .rhyme-card h3 { color: #F1F5F9 !important; }
+        body.theme-bedtime .rhyme-card a { color: #F1F5F9 !important; }
+        body.theme-bedtime .rhyme-card div.bg-stone-50 {
+            background-color: #0F172A !important;
+            border-color: #1E293B !important;
+        }
+        body.theme-bedtime .fav-icon-grid {
+            background-color: rgb(15 23 42 / 0.8) !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime .fav-icon-grid:not(.text-red-500) { color: #475569 !important; }
+
+        /* Detail section bedtime overrides */
+        body.theme-bedtime #back-button,
+        body.theme-bedtime #previous-detail-rhyme-btn,
+        body.theme-bedtime #next-detail-rhyme-btn {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+            color: #CBD5E1 !important;
+        }
+        body.theme-bedtime #back-button:hover,
+        body.theme-bedtime #previous-detail-rhyme-btn:hover,
+        body.theme-bedtime #next-detail-rhyme-btn:hover {
+            background-color: #334155 !important;
+            color: #F8FAFC !important;
+        }
+
+        body.theme-bedtime #detail-card-panel {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #detail-card-panel h2 { color: #F8FAFC !important; }
+        body.theme-bedtime #detail-card-panel h3 { color: #94A3B8 !important; }
+        body.theme-bedtime #detail-card-panel div.border-stone-200 { border-color: #334155 !important; }
+        
+        body.theme-bedtime #playlist-nav-buttons {
+            background-color: rgb(127 29 29 / 0.2) !important;
+            border-color: rgb(185 28 28 / 0.3) !important;
+        }
+        body.theme-bedtime #playlist-position { color: #FCA5A5 !important; }
+        body.theme-bedtime #prev-rhyme-btn,
+        body.theme-bedtime #next-rhyme-btn { color: #F87171 !important; }
+
+        body.theme-bedtime #learning-focus-badge {
+            background-color: rgb(30 58 138 / 0.4) !important;
+            border-color: rgb(59 130 246 / 0.3) !important;
+            color: #93C5FD !important;
+        }
+
+        body.theme-bedtime #english-lyrics-box,
+        body.theme-bedtime #hindi-column {
+            background-color: #0F172A !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #english-lyrics-box h3,
+        body.theme-bedtime #hindi-column h3 {
+            color: #64748B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #rhyme-lyrics-en,
+        body.theme-bedtime #rhyme-lyrics-hi {
+            color: #E2E8F0 !important;
+        }
+
+        body.theme-bedtime #fun-fact-details {
+            background-color: rgb(120 53 4 / 0.15) !important;
+            border-color: rgb(234 179 8 / 0.2) !important;
+        }
+        body.theme-bedtime #fun-fact-details summary { color: #FCD34D !important; }
+        body.theme-bedtime #fun-fact-text-en { color: #F1F5F9 !important; }
+        body.theme-bedtime #fun-fact-text-hi {
+            color: #94A3B8 !important;
+            border-color: rgb(234 179 8 / 0.1) !important;
+        }
+
+        body.theme-bedtime #playlist-sidebar {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #playlist-header-panel {
+            background-color: #0F172A !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #playlist-header-panel h2 { color: #F8FAFC !important; }
+        body.theme-bedtime #playlist-footer-panel {
+            background-color: #0F172A !important;
+            border-color: #334155 !important;
+        }
+        body.theme-bedtime #clear-playlist-btn {
+            background-color: #334155 !important;
+            color: #CBD5E1 !important;
+        }
+        body.theme-bedtime #clear-playlist-btn:hover {
+            background-color: #DC2626 !important;
+            color: #FFFFFF !important;
+        }
+
+        body.theme-bedtime .action-btn {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+            color: #E2E8F0 !important;
+        }
+        body.theme-bedtime .action-btn:hover {
+            background-color: #334155 !important;
+            color: #DC2626 !important;
+        }
+        body.theme-bedtime #favorite-btn:not(.text-red-500) { color: #64748B !important; }
+
+        /* Breadcrumb overrides for Bedtime */
+        body.theme-bedtime nav[aria-label="Breadcrumb"] { color: #64748B !important; }
+        body.theme-bedtime nav[aria-label="Breadcrumb"] a { color: #94A3B8 !important; }
+        body.theme-bedtime nav[aria-label="Breadcrumb"] a:hover { color: #EF4444 !important; }
+        body.theme-bedtime nav[aria-label="Breadcrumb"] span.text-stone-300 { color: #334155 !important; }
+        body.theme-bedtime #breadcrumb-current { color: #F1F5F9 !important; }
+
+        @media print {
+            body { background-color: white !important; color: #1c1917 !important; font-size: 11pt; }
+            #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, #tool-action-bar, #controls-section, #rhyme-of-the-day, #playlist-view, #toast-notification { display: none !important; }
+            #rhyme-gallery { display: none !important; }
+            #rhyme-detail { display: block !important; box-shadow: none !important; border: none !important; background: white !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+            .print-hide { display: none !important; }
+            .print-card { border: 1px solid #e7e5e4 !important; border-radius: 16px !important; padding: 24px !important; background: #ffffff !important; box-shadow: none !important; }
+            pre { white-space: pre-wrap; border: 1px solid #e5e5e4; padding: 12px; background: #fafaf9; font-size: 10pt; line-height: 1.5; border-radius: 8px; }
+            .print-header { display: block !important; margin-bottom: 16px; border-bottom: 2px solid #dc2626; padding-bottom: 8px; }
+            .print-footer { display: block !important; margin-top: 24px; border-top: 1px solid #e7e5e4; padding-top: 8px; font-size: 8pt; color: #78716c; text-align: center; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative">
+
+    <!-- Global Ambient Glassmorphism Background Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="orb-1" class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-100/10 blur-[120px]"></div>
+        <div id="orb-2" class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-50/20 blur-[100px]"></div>
+        <div id="orb-3" class="absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-yellow-50/10 blur-[80px]"></div>
+        <div id="orb-4" class="absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-pink-100/10 blur-[90px]"></div>
+    </div>
+
+    <!-- Global Toolblaster Headers -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Tool Workspace -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[10px] sm:text-[11px] text-stone-600 mb-4 sm:mb-5 font-semibold fade-in px-1 flex items-center flex-wrap relative z-10">
+            <a href="/" class="hover:text-red-600 transition-colors inline-flex items-center gap-1 sm:gap-1.5">
+                <i class="fa-solid fa-house text-[9px] sm:text-[10px] pb-0.5"></i> Home
+            </a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <a href="/educational/" class="hover:text-red-600 transition-colors">Educational</a>
+            <span class="mx-1.5 sm:mx-2 text-stone-300">/</span>
+            <span id="breadcrumb-current" class="text-stone-800 font-bold transition-colors duration-450">Kids Rhymes</span>
+        </nav>
+
+        <!-- Local Tool Action Bar - High Contrast Opaque Solid Container -->
+        <div id="tool-action-bar" class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white border border-stone-250 shadow-md ring-1 ring-stone-900/5 p-4 md:p-5 rounded-2xl mb-6 fade-in gap-4 relative overflow-hidden transition-all duration-400">
+            <div class="flex items-center gap-3 md:gap-4 relative z-10">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white border border-stone-100 text-red-600 flex items-center justify-center font-bold text-2xl md:text-3xl flex-shrink-0 shadow-sm transition-all duration-400">
+                    ЁЯО╡
+                </div>
+                <div class="flex flex-col justify-center">
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 leading-tight tracking-tight transition-colors duration-450">Interactive Nursery Rhymes for Kids</h1>
+                    <h2 id="subtitle-element" class="text-xs sm:text-sm text-stone-700 font-semibold mt-0.5 leading-tight transition-colors duration-450">Complete Rhymes collection in English & Hindi</h2>
+                </div>
+            </div>
+            
+            <div class="w-full sm:w-auto flex-shrink-0 relative z-10">
+                <button id="playlist-toggle-btn" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-50 text-stone-800 px-4 py-2.5 sm:py-2 rounded-xl transition-all duration-200 font-bold text-sm relative button-pop border border-stone-200 shadow-sm transition-all duration-400" aria-label="View Playlist">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span>Playlist</span>
+                    <span id="playlist-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black rounded-full h-5 w-5 flex items-center justify-center shadow-md hidden animate-pop border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Kids Playroom Interactive Controls - Optimized to be incredibly compact and horizontal on mobile -->
+        <section id="playroom-controls" class="mb-3 sm:mb-6 fade-in relative z-10">
+            <div class="bg-white border border-red-200 rounded-2xl p-2.5 sm:p-4 flex flex-row items-center justify-between gap-2 transition-all duration-400" id="playroom-card">
+                <div class="flex items-center gap-1.5 sm:gap-3">
+                    <span class="text-lg sm:text-2xl animate-bounce" aria-hidden="true">ЁЯОи</span>
+                    <div>
+                        <!-- Heading Fix: Changed h4 to h2 to maintain strict sequential heading descent (H1 -> H2) -->
+                        <h2 class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-red-700 leading-none" id="playroom-header">Playroom Controls</h2>
+                        <p class="hidden md:block text-[11px] text-stone-600 mt-0.5" id="playroom-desc">Tweak themes, sounds, and speech speeds for interactive learning!</p>
+                    </div>
+                </div>
+                <!-- Flex container specifically configured to stay inline and not wrap excessively on mobile -->
+                <div class="flex flex-row items-center gap-1.5 sm:gap-3 w-auto justify-end">
+                    <!-- Modern Custom Dropdown Selector -->
+                    <div class="relative" id="speed-wrapper">
+                        <!-- Associated hidden label for screen reader compliance -->
+                        <label id="speed-selector-label" class="sr-only">Select speech speed</label>
+                        <button id="speed-toggle-btn" class="flex items-center gap-1.5 sm:gap-2 bg-white border border-stone-200 rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 shadow-sm transition-all duration-300 hover:border-red-300 hover:bg-red-50/10 text-[10px] sm:text-xs font-bold text-stone-850" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="speed-selector-label">
+                            <span id="speed-display">тЪб Normal</span>
+                            <i class="fa-solid fa-chevron-down text-[8px] sm:text-[10px] text-stone-500 transition-transform duration-300" id="speed-chevron"></i>
+                        </button>
+                        <!-- Sleek Floating Popover Speed Dropdown Menu -->
+                        <ul id="speed-dropdown-menu" class="hidden absolute right-0 mt-1.5 w-32 sm:w-36 bg-white border border-stone-200 rounded-xl shadow-lg py-1 z-50 transition-all duration-300 transform scale-95 origin-top-right text-[10px] sm:text-xs overflow-hidden">
+                            <li class="speed-option-item px-3 py-2 hover:bg-red-50 hover:text-red-700 cursor-pointer flex items-center gap-2 font-semibold text-stone-700 transition-colors duration-150" data-value="0.7" role="option">
+                                <span>ЁЯРв</span> Slow (0.7x)
+                            </li>
+                            <li class="speed-option-item px-3 py-2 cursor-pointer flex items-center gap-2 font-semibold text-stone-700 transition-colors duration-150 selected-active bg-red-500 text-white" data-value="1.0" role="option">
+                                <span>тЪб</span> Normal (1.0x)
+                            </li>
+                            <li class="speed-option-item px-3 py-2 hover:bg-red-50 hover:text-red-700 cursor-pointer flex items-center gap-2 font-semibold text-stone-700 transition-colors duration-150" data-value="1.3" role="option">
+                                <span>ЁЯЪА</span> Fast (1.3x)
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Bedtime/Sleep Mode Toggle -->
+                    <button id="bedtime-mode-btn" class="flex items-center justify-center gap-1 sm:gap-2 bg-white hover:bg-stone-50 text-stone-700 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl transition-all duration-200 font-bold text-[10px] sm:text-xs border border-stone-200 shadow-sm button-pop" aria-label="Toggle Bedtime Theme">
+                        <span id="theme-btn-icon">ЁЯМЩ</span> <span id="theme-btn-text" class="hidden xs:inline">Bedtime Mode</span>
+                    </button>
+                    <!-- Audio Effects Toggle -->
+                    <button id="audio-fx-btn" class="flex items-center justify-center gap-1 sm:gap-2 bg-white hover:bg-stone-50 text-stone-750 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl transition-all duration-200 font-bold text-[10px] sm:text-xs border border-stone-200 shadow-sm button-pop" aria-label="Toggle sound effects">
+                        <span id="audio-fx-icon">ЁЯФК</span> <span id="audio-fx-text" class="hidden xs:inline">Magical Sounds</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rhyme of the Day - High Contrast -->
+        <section id="rhyme-of-the-day" class="mb-6 fade-in relative z-10">
+            <div id="rotd-card" class="w-full md:w-2/3 lg:w-1/2 mx-auto bg-white border border-red-200 p-4 rounded-2xl cursor-pointer hover:border-red-300 hover:shadow-lg transition-all duration-300 flex items-center justify-between gap-3 shadow-md">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <div class="text-2xl bg-red-50 border border-red-100 w-12 h-12 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" id="rotd-icon"><span class="animate-pulse opacity-80">ЁЯО╡</span></div>
+                    <div class="text-left overflow-hidden">
+                        <!-- Heading Fix: Converted to h2 for logical hierarchy descending structure -->
+                        <h2 class="text-[10px] font-black uppercase tracking-widest text-red-700 mb-0.5 block truncate">Featured Today</h2>
+                        <h3 class="text-base sm:text-lg font-bold text-stone-900 truncate" id="rotd-title">Loading...</h3>
+                    </div>
+                </div>
+                <!-- Contrast Fix: Text updated from text-red-600 to text-red-800 to ensure solid > 4.5:1 ratio on bg-red-50 wrapper -->
+                <div class="bg-red-50 text-red-800 hover:bg-red-100 font-bold text-[10px] sm:text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-red-200 shadow-sm whitespace-nowrap flex-shrink-0 hover:scale-105 transition-transform">
+                    Read & Listen &rarr;
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls Section - High Contrast -->
+        <section id="controls-section" class="mb-8 fade-in relative z-10">
+            <div class="bg-white border border-stone-200 rounded-[2rem] shadow-md p-5 md:p-6 transition-all duration-400" id="controls-box">
+                <div class="flex flex-col md:flex-row items-center gap-4 mb-6">
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass text-stone-400"></i>
+                        </div>
+                        <input type="search" id="search-bar" placeholder="Search rhymes by title or lyrics..." class="w-full pl-11 pr-4 py-3 text-sm font-medium text-stone-900 bg-white border border-stone-200 shadow-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-400">
+                    </div>
+                    <button id="surprise-button" class="w-full md:w-auto flex-shrink-0 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 text-sm rounded-xl shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shuffle"></i> Random Rhyme
+                    </button>
+                </div>
+
+                <div id="category-filters">
+                    <div class="flex flex-wrap items-center justify-start md:justify-center gap-2">
+                        <button class="category-btn active px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Rhymes">All</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Favorites">Favorites тЭдя╕П</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Learning">Learning ЁЯза</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Animal">Animals ЁЯР╛</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Classic">Classics ЁЯУЬ</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Lullaby">Lullabies ЁЯМЩ</button>
+                        <button class="category-btn px-4 py-2 text-xs md:text-sm font-bold rounded-full border shadow-sm transition-all" data-category="Indian">Indian ЁЯЗоЁЯЗ│</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rhyme Gallery View -->
+        <section id="rhyme-gallery" class="mb-12 relative z-10">
+            <!-- Heading Fix: Strict H2 wrapper preserved cleanly -->
+            <h2 id="gallery-title" class="text-lg md:text-xl font-black text-stone-900 text-center md:text-left mb-6 transition-opacity duration-300 px-2 drop-shadow-sm transition-colors duration-450">All Rhymes</h2>
+            
+            <div id="rhyme-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[50vh]">
+                <!-- Glassmorphic Skeleton Loaders -->
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+                <div class="bg-white/80 backdrop-blur-sm animate-pulse border border-stone-200 rounded-2xl h-32 md:h-36 shadow-sm"></div>
+            </div>
+        </section>
+
+        <!-- Single Rhyme Detail View - High Contrast -->
+        <section id="rhyme-detail" class="hidden min-h-[60vh] fade-in relative z-10">
+            <!-- Printable Header (Hidden in Browser, visible on Print) -->
+            <div class="hidden print-header">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-black text-red-650 uppercase tracking-widest">Toolblaster learning station</span>
+                    <span class="text-[9px] text-stone-400">toolblaster.com/educational/nursery-rhymes-for-kids/</span>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-6 print-hide">
+                    <button id="back-button" class="flex items-center gap-2 bg-white/90 backdrop-blur-md border border-stone-200 shadow-sm rounded-lg text-stone-700 hover:text-red-600 hover:bg-white font-bold py-2 px-3 transition-all active:scale-95 text-sm transition-all duration-400">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Gallery
+                    </button>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button id="previous-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/90 backdrop-blur-md border border-stone-200 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider transition-all duration-400">Prev</button>
+                        <button id="next-detail-rhyme-btn" class="flex-1 sm:flex-none bg-white/90 backdrop-blur-md border border-stone-200 text-stone-700 hover:bg-white font-bold py-2 px-4 rounded-xl shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-xs uppercase tracking-wider transition-all duration-400">Next</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-10 rounded-[2rem] shadow-xl border border-stone-200 relative overflow-hidden print-card transition-all duration-400" id="detail-card-panel">
+                    <div class="text-center border-b border-stone-205 pb-5 mb-5 relative z-10">
+                        <!-- Heading Fix: Standard H2 title inside detail panel matches A11y crawler sequences -->
+                        <h2 id="rhyme-title-en" class="text-2xl sm:text-[30px] font-black text-stone-900 mb-1.5 leading-tight transition-colors duration-450"></h2>
+                        <!-- Strictly binding Devanagari font system to Hindi elements -->
+                        <h3 id="rhyme-title-hi" class="text-lg sm:text-xl font-bold text-stone-700 font-hindi transition-colors duration-450"></h3>
+                        
+                        <div id="learning-focus-badge-container" class="hidden mt-3">
+                            <span id="learning-focus-badge" class="inline-block bg-blue-50 border border-blue-200 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm"></span>
+                        </div>
+
+                        <div class="flex justify-center items-center gap-3 mt-5 print-hide">
+                            <button id="read-aloud-btn-rhyme" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop transition-all duration-400" title="Read Aloud" aria-label="Read Aloud">ЁЯУв</button>
+                            <button id="add-to-playlist-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full button-pop transition-all duration-400" title="Add to Playlist" aria-label="Add to Playlist"><i class="fa-solid fa-plus text-stone-700 text-base transition-colors duration-450" id="playlist-plus-icon"></i></button>
+                            <button id="favorite-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop transition-all duration-400" title="Add to Favorites" aria-label="Add to Favorites">ЁЯдН</button>
+                            <button id="share-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop transition-all duration-400" title="Share" aria-label="Share">ЁЯФЧ</button>
+                            <button id="print-rhyme-btn" class="action-btn w-12 h-12 flex items-center justify-center bg-white border border-stone-200 shadow-sm rounded-full text-lg button-pop transition-all duration-400" title="Print" aria-label="Print">ЁЯЦия╕П</button>
+                        </div>
+                    </div>
+                    
+                    <div id="playlist-nav-buttons" class="hidden flex justify-center items-center gap-3 mb-6 bg-red-50 py-2 px-4 rounded-xl border border-red-200 shadow-sm print-hide max-w-xs mx-auto relative z-10 transition-all duration-400">
+                        <button id="prev-rhyme-btn" class="text-red-700 hover:text-red-950 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-backward-step text-sm"></i></button>
+                        <span id="playlist-position" class="text-red-900 font-bold text-xs uppercase tracking-wider"></span>
+                        <button id="next-rhyme-btn" class="text-red-600 hover:text-red-800 font-bold px-3 py-1 disabled:opacity-50"><i class="fa-solid fa-forward-step text-sm"></i></button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                        <div class="bg-stone-50 border border-stone-200 p-5 rounded-2xl shadow-sm transition-all duration-400" id="english-lyrics-box">
+                            <h3 class="text-xs font-black text-stone-600 uppercase tracking-[0.2em] mb-4 border-b border-stone-200 pb-2">English</h3>
+                            <pre id="rhyme-lyrics-en" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap font-sans bg-transparent border-0 p-0 transition-colors duration-450"></pre>
+                        </div>
+                        <div id="hindi-column" class="bg-stone-50 border border-stone-200 p-5 rounded-2xl shadow-sm transition-all duration-400">
+                            <!-- Strictly binding Devanagari font system to Hindi elements -->
+                            <h3 class="text-xs font-black text-stone-600 uppercase tracking-[0.2em] mb-4 border-b border-stone-200 pb-2 font-hindi">Hindi</h3>
+                            <pre id="rhyme-lyrics-hi" class="text-[13px] sm:text-sm leading-relaxed text-stone-800 whitespace-pre-wrap bg-transparent border-0 p-0 font-hindi transition-colors duration-450"></pre>
+                        </div>
+                    </div>
+                    
+                    <div id="fun-fact-container" class="mt-8 pt-8 border-t border-stone-200 hidden relative z-10">
+                        <details id="fun-fact-details" class="bg-yellow-50/95 p-5 rounded-2xl cursor-pointer border border-yellow-200 shadow-md group transition-all duration-400" open>
+                            <!-- Strictly binding Devanagari font system to Hindi elements -->
+                            <summary class="text-xs font-black text-stone-700 uppercase tracking-[0.2em] group-hover:text-red-700 transition-colors outline-none flex items-center">
+                                <span class="mr-2 text-base animate-pulse" aria-hidden="true">ЁЯТб</span> Educational Fact <span class="font-hindi ml-1">/ рд╢реИрдХреНрд╖рдгрд┐рдХ рддрдереНрдп</span>
+                            </summary>
+                            <div class="mt-4 space-y-3 font-sans">
+                                <p id="fun-fact-text-en" class="text-[13px] sm:text-sm leading-relaxed text-stone-900 font-bold transition-colors duration-450"></p>
+                                <!-- Strictly binding Devanagari font system to Hindi elements -->
+                                <p id="fun-fact-text-hi" class="text-[13px] sm:text-sm leading-relaxed text-stone-700 font-semibold border-t border-yellow-250 pt-3 italic font-hindi transition-colors duration-450"></p>
+                            </div>
+                        </details>
+                    </div>
+
+                     <div id="copyright-notice-container" class="mt-6 hidden print-hide relative z-10">
+                        <div class="text-center">
+                            <p id="copyright-text" class="text-[10px] text-stone-550 uppercase tracking-wider font-bold"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Printable Footer (Hidden in Browser, visible on Print) -->
+            <div class="hidden print-footer">
+                <p class="text-[9px]">┬й Toolblaster Nursery Rhymes. Shared with kids under standard public learning credentials. Printed document safe copy.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer Placeholder -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60]"></div>
+
+    <!-- Modals & Overlays -->
+    <!-- Playlist Sidebar -->
+    <div id="playlist-view" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[100] hidden flex justify-end transition-opacity duration-300">
+        <div class="bg-white shadow-2xl w-full sm:w-96 h-full flex flex-col transform translate-x-full transition-transform duration-300 border-l border-stone-200 transition-all duration-400" id="playlist-sidebar">
+            <div class="flex justify-between items-center p-5 border-b border-stone-200 bg-white" id="playlist-header-panel">
+                <h2 class="text-lg font-black text-stone-900">Your Queue</h2>
+                <button id="close-playlist-btn" class="text-stone-400 hover:text-red-600 transition-colors p-2 text-xl" aria-label="Close Playlist"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="playlist-items" class="flex-grow p-4 space-y-3 overflow-y-auto"></div>
+            <div class="p-5 border-t border-stone-200 bg-stone-50" id="playlist-footer-panel">
+                <button id="clear-playlist-btn" class="w-full bg-stone-200 hover:bg-red-600 hover:text-white text-stone-750 font-bold py-3 px-4 rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">Clear Queue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification"></div>
+
+    <!-- Header-Footer script (optional external resource, kept self-contained safe fallback) -->
+    <script src="/js/header-footer.js" onerror="console.warn('Global navigation layout scripts bypassed.')"></script>
+
+    <!-- Consolidated Interactive Nursery Rhymes Logic -->
+    <script>
+        // HARDCODED RHYME DATA - Embedded and saved in strict UTF-8
+        const hardcodedRhymesData = [
+            // PUBLIC RHYMES
+            { id: 1, title: "Twinkle, Twinkle, Little Star", category: "Classic", icon: "тЬи", tags: ["lullaby", "classic"], lyrics: "Twinkle, twinkle, little star,\nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.\n\nWhen the blazing sun is gone,\nWhen he nothing shines upon,\nThen you show your little light,\nTwinkle, twinkle, all the night.", funFact: "The lyrics are from an early-19th-century English poem by Jane Taylor, 'The Star'. The tune is from an old French melody.", funFact_hi: "рдЧрд╛рдиреЗ рдХреЗ рдмреЛрд▓ 19рд╡реАрдВ рд╕рджреА рдХреА рд╢реБрд░реБрдЖрдд рдХреА рдПрдХ рдЕрдВрдЧреНрд░реЗрдЬреА рдХрд╡рд┐рддрд╛ 'рдж рд╕реНрдЯрд╛рд░' рд╕реЗ рд▓рд┐рдП рдЧрдП рд╣реИрдВ, рдЬрд┐рд╕реЗ рдЬреЗрди рдЯреЗрд▓рд░ рдиреЗ рд▓рд┐рдЦрд╛ рдерд╛ред рдЗрд╕рдХреА рдзреБрди рдПрдХ рдкреБрд░рд╛рдиреА рдлреНрд░рд╛рдВрд╕реАрд╕реА рдзреБрди рд╕реЗ рд▓реА рдЧрдИ рд╣реИред" },
+            { id: 2, title: "Baa, Baa, Black Sheep", category: "Animal", icon: "ЁЯРС", tags: ["animal", "classic", "learning"], lyrics: "Baa, baa, black sheep,\nHave you any wool?\nYes, sir, yes, sir,\nThree bags full.\n\nOne for the master,\nOne for the dame,\nAnd one for the little boy\nWho lives down the lane.", funFact: "This rhyme is over 250 years old! It is one of the most popular nursery rhymes in the English language.", funFact_hi: "рдпрд╣ рдмрд╛рд▓рдЧреАрдд 250 рд╡рд░реНрд╖ рд╕реЗ рднреА рдЕрдзрд┐рдХ рдкреБрд░рд╛рдирд╛ рд╣реИ! рдпрд╣ рдЕрдВрдЧреНрд░реЗрдЬреА рднрд╛рд╖рд╛ рдХреЗ рд╕рдмрд╕реЗ рд▓реЛрдХрдкреНрд░рд┐рдп рдмрд╛рд▓рдЧреАрддреЛрдВ рдореЗрдВ рд╕реЗ рдПрдХ рд╣реИред" },
+            { id: 3, title: "Machli Jal Ki Rani Hai", title_hi: "рдордЫрд▓реА рдЬрд▓ рдХреА рд░рд╛рдиреА рд╣реИ", category: "Indian", icon: "ЁЯРа", tags: ["animal", "indian"], lyrics: "Fish, the queen of water,\nHer life is made of water.\nTouch it, and she will be scared,\nTake her out, and she will die.", lyrics_hi: "рдордЫрд▓реА рдЬрд▓ рдХреА рд░рд╛рдиреА рд╣реИ,\nрдЬреАрд╡рди рдЙрд╕рдХрд╛ рдкрд╛рдиреА рд╣реИред\nрд╣рд╛рде рд▓рдЧрд╛рдУ рдбрд░ рдЬрд╛рдПрдЧреА,\nрдмрд╛рд╣рд░ рдирд┐рдХрд╛рд▓реЛ рдорд░ рдЬрд╛рдПрдЧреАред", funFact: "This is one of the first and most popular Hindi rhymes taught to children in India to help them learn about nature.", funFact_hi: "рдпрд╣ рднрд╛рд░рдд рдореЗрдВ рдмрдЪреНрдЪреЛрдВ рдХреЛ рдкреНрд░рдХреГрддрд┐ рдХреЗ рдмрд╛рд░реЗ рдореЗрдВ рд╕рд┐рдЦрд╛рдиреЗ рдХреЗ рд▓рд┐рдП рдкрдврд╝рд╛рдП рдЬрд╛рдиреЗ рд╡рд╛рд▓реЗ рд╕рдмрд╕реЗ рдкрд╣рд▓реЗ рдФрд░ рд╕рдмрд╕реЗ рд▓реЛрдХрдкреНрд░рд┐рдп рд╣рд┐рдВрджреА рдмрд╛рд▓рдЧреАрддреЛрдВ рдореЗрдВ рд╕реЗ рдПрдХ рд╣реИред" },
+            { id: 4, title: "Mary Had a Little Lamb", category: "Animal", icon: "ЁЯРС", tags: ["animal", "classic"], lyrics: "Mary had a little lamb,\nIts fleece was white as snow;\nAnd everywhere that Mary went,\nThe lamb was sure to go.\n\nIt followed her to school one day,\nWhich was against the rule;\nIt made the children laugh and play\nTo see a lamb at school.\n\nAnd so the teacher turned him out,\nBut still he lingered near,\nAnd waited patiently about\nTill Mary did appear.", funFact: "This rhyme is based on a real-life incident! A young girl named Mary Sawyer took her pet lamb to school in the 1830s.", funFact_hi: "рдпрд╣ рдХрд╡рд┐рддрд╛ рдПрдХ рд╡рд╛рд╕реНрддрд╡рд┐рдХ рдЬреАрд╡рди рдХреА рдШрдЯрдирд╛ рдкрд░ рдЖрдзрд╛рд░рд┐рдд рд╣реИ! рдореИрд░реА рд╕реЙрдпрд░ рдирд╛рдо рдХреА рдПрдХ рдпреБрд╡рд╛ рд▓рдбрд╝рдХреА 1830 рдХреЗ рджрд╢рдХ рдореЗрдВ рдЕрдкрдиреЗ рдкрд╛рд▓рддреВ рдореЗрдордиреЗ рдХреЛ рд╕реНрдХреВрд▓ рд▓реЗ рдЧрдИ рдереАред" },
+            { id: 5, title: "Jack and Jill", category: "Classic", icon: "ЁЯСзЁЯСж", tags: ["classic"], lyrics: "Jack and Jill went up the hill\nTo fetch a pail of water;\nJack fell down and broke his crown,\nAnd Jill came tumbling after.\n\nUp Jack got and home did trot,\nAs fast as he could caper,\nTo old Dame Dob, who patched his nob\nWith vinegar and brown paper.", funFact: "Some historians think 'Jack and Jill' might be a story about King Louis XVI of France (who lost his 'crown') and his wife Marie Antoinette.", funFact_hi: "рдХреБрдЫ рдЗрддрд┐рд╣рд╛рд╕рдХрд╛рд░реЛрдВ рдХрд╛ рдорд╛рдирдирд╛ рд╣реИ рдХрд┐ 'рдЬреИрдХ рдПрдВрдб рдЬрд┐рд▓' рдлреНрд░рд╛рдВрд╕ рдХреЗ рд░рд╛рдЬрд╛ рд▓реБрдИ рд▓реБрдИ XVI (рдЬрд┐рдиреНрд╣реЛрдВрдиреЗ рдЕрдкрдирд╛ 'рдореБрдХреБрдЯ' рдЦреЛ рджрд┐рдпрд╛ рдерд╛) рдФрд░ рдЙрдирдХреА рдкрддреНрдиреА рдореИрд░реА рдПрдВрдЯреЛрдиреЗрдЯ рдХреЗ рдмрд╛рд░реЗ рдореЗрдВ рдПрдХ рдХрд╣рд╛рдиреА рд╣реЛ рд╕рдХрддреА рд╣реИред" },
+            { id: 6, title: "Hey Diddle Diddle", category: "Classic", icon: "ЁЯРИЁЯО╗", tags: ["silly", "animal", "classic"], lyrics: "Hey diddle diddle,\nThe cat and the fiddle,\nThe cow jumped over the moon;\nThe little dog laughed\nTo see such sport,\nAnd the dish ran away with the spoon.", funFact: "This rhyme is pure fun and nonsense! It is designed to be silly and make children laugh with its impossible images.", funFact_hi: "рдпрд╣ рдХрд╡рд┐рддрд╛ рдкреВрд░реА рддрд░рд╣ рд╕реЗ рдордиреЛрд░рдВрдЬрди рдФрд░ рдмрдХрд╡рд╛рд╕ рд╣реИ! рдЗрд╕реЗ рдирд╛рд╕рдордЭ рдмрдирд╛рдиреЗ рдФрд░ рдмрдЪреНрдЪреЛрдВ рдХреЛ рдЗрд╕рдХреА рдЕрд╕рдВрднрд╡ рдЫрд╡рд┐рдпреЛрдВ рд╕реЗ рд╣рдВрд╕рд╛рдиреЗ рдХреЗ рд▓рд┐рдП рдбрд┐рдЬрд╝рд╛рдЗрди рдХрд┐рдпрд╛ рдЧрдпрд╛ рд╣реИред" },
+            { id: 7, title: "Itsy Bitsy Spider", category: "Animal", icon: "ЁЯХ╖я╕П", tags: ["animal"], lyrics: "The itsy bitsy spider\nClimbed up the waterspout.\nDown came the rain\nAnd washed the spider out.\nOut came the sun\nAnd dried up all the rain,\nAnd the itsy bitsy spider\nClimbed up the spout again.", funFact: "This rhyme teaches a simple lesson about perseverance. Even when things go wrong, you can always try again!", funFact_hi: "рдпрд╣ рдХрд╡рд┐рддрд╛ рджреГрдврд╝рддрд╛ рдХреЗ рдмрд╛рд░реЗ рдореЗрдВ рдПрдХ рд╕рд░рд▓ рд╕рдмрдХ рд╕рд┐рдЦрд╛рддреА рд╣реИред рднрд▓реЗ рд╣реА рдЪреАрдЬреЗрдВ рдЧрд▓рдд рд╣реЛ рдЬрд╛рдПрдВ, рдЖрдк рд╣рдореЗрд╢рд╛ рджреЛрдмрд╛рд░рд╛ рдХреЛрд╢рд┐рд╢ рдХрд░ рд╕рдХрддреЗ рд╣реИрдВ!" },
+            { id: 8, title: "Row, Row, Row Your Boat", category: "Classic", icon: "ЁЯЪг", tags: ["classic"], lyrics: "Row, row, row your boat,\nGently down the stream.\nMerrily, merrily, merrily, merrily,\nLife is but a dream.", funFact: "This rhyme is often sung in a 'round,' where different groups start singing at different times, creating beautiful harmony.", funFact_hi: "рдпрд╣ рдХрд╡рд┐рддрд╛ рдЕрдХреНрд╕рд░ 'рд░рд╛рдЙрдВрдб' рдореЗрдВ рдЧрд╛рдИ рдЬрд╛рддреА, рдЬрд╣рд╛рдБ рд╡рд┐рднрд┐рдиреНрди рд╕рдореВрд╣ рдЕрд▓рдЧ-рдЕрд▓рдЧ рд╕рдордп рдкрд░ рдЧрд╛рдирд╛ рд╢реБрд░реВ рдХрд░рддреЗ рд╣реИрдВ, рдЬрд┐рд╕рд╕реЗ рдПрдХ рд╕реБрдВрджрд░ рд╕рд╛рдордВрдЬрд╕реНрдп рдмрдирддрд╛ рд╣реИред" },
+            { id: 9, title: "London Bridge Is Falling Down", category: "Classic", icon: "ЁЯМЙ", tags: ["classic"], lyrics: "London Bridge is falling down,\nFalling down, falling down.\nLondon Bridge is falling down,\nMy fair lady.\n\nBuild it up with wood and clay,\nWood and clay, wood and clay,\nBuild it up with wood and clay,\nMy fair lady.", funFact: "The famous London Bridge has been rebuilt many times over the centuries. One of the old bridges was even sold and moved to Arizona, USA!", funFact_hi: "рдкреНрд░рд╕рд┐рджреНрдз рд▓рдВрджрди рдмреНрд░рд┐рдЬ рдХреЛ рд╕рджрд┐рдпреЛрдВ рд╕реЗ рдХрдИ рдмрд╛рд░ рдкреБрдирд░реНрдирд┐рд░реНрдорд┐рдд рдХрд┐рдпрд╛ рдЧрдпрд╛ рд╣реИред рдкреБрд░рд╛рдиреЗ рдкреБрд▓реЛрдВ рдореЗрдВ рд╕реЗ рдПрдХ рдХреЛ рддреЛ рдмреЗрдЪрдХрд░ рдПрд░рд┐рдЬрд╝реЛрдирд╛, рдпреВрдПрд╕рдП рд▓реЗ рдЬрд╛рдирд╛ рдЧрдпрд╛ рдерд╛!" },
+            { id: 13, title: "Hickory Dickory Dock", category: "Learning", icon: "ЁЯХ░я╕П", tags: ["learning", "animal", "classic"], learningFocus: "Telling Time", lyrics: "Hickory dickory dock,\nThe mouse ran up the clock.\nThe clock struck one,\nThe mouse ran down.\nHickory dickory dock.", funFact: "This rhyme is a fun way to help children learn how to tell time and practice counting.", funFact_hi: "рдпрд╣ рдХрд╡рд┐рддрд╛ рдмрдЪреНрдЪреЛрдВ рдХреЛ рд╕рдордп рджреЗрдЦрдирд╛ рд╕реАрдЦрдиреЗ рдФрд░ рдЧрд┐рдирддреА рдХрд╛ рдЕрднреНрдпрд╛рд╕ рдХрд░рд╛рдиреЗ рдХрд╛ рдПрдХ рдордЬреЗрджрд╛рд░ рддрд░реАрдХрд╛ рд╣реИред" },
+            { id: 14, title: "Pat-a-cake, Pat-a-cake", category: "Classic", icon: "ЁЯОВ", tags: ["classic", "food"], lyrics: "Pat-a-cake, pat-a-cake, baker's man,\nBake me a cake as fast as you can;\nPat it and prick it, and mark it with B,\nAnd put it in the oven for Baby and me.", funFact: "This is one of the oldest English nursery rhymes, often played as a clapping game between a parent and a baby.", funFact_hi: "рдпрд╣ рд╕рдмрд╕реЗ рдкреБрд░рд╛рдиреЗ рдЕрдВрдЧреНрд░реЗрдЬреА рдмрд╛рд▓рдЧреАрддреЛрдВ рдореЗрдВ рд╕реЗ рдПрдХ рд╣реИ, рдЬрд┐рд╕реЗ рдЕрдХреНрд╕рд░ рдорд╛рддрд╛-рдкрд┐рддрд╛ рдФрд░ рдмрдЪреНрдЪреЗ рдХреЗ рдмреАрдЪ рддрд╛рд▓реА рдмрдЬрд╛рдиреЗ рдХреЗ рдЦреЗрд▓ рдХреЗ рд░реВрдк рдореЗрдВ рдЦреЗрд▓рд╛ рдЬрд╛рддрд╛ рд╣реИред" },
+            { id: 15, title: "This Little Piggy", category: "Animal", icon: "ЁЯР╖", tags: ["animal", "classic"], lyrics: "This little piggy went to market,\nThis little piggy stayed home,\nThis little piggy had roast beef,\nThis little piggy had none.\nThis little piggy cried, 'Wee, wee, wee!' all the way home.", funFact: "This is a popular 'toe play' rhyme, where each line corresponds to wiggling one of a baby's five toes.", funFact_hi: "рдпрд╣ рдПрдХ рд▓реЛрдХрдкреНрд░рд┐рдп 'рдкреИрд░ рдХреА рдЙрдВрдЧрд▓реА рдХрд╛ рдЦреЗрд▓' рд╣реИ, рдЬрд╣рд╛рдБ рдкреНрд░рддреНрдпреЗрдХ рдкрдВрдХреНрддрд┐ рдмрдЪреНрдЪреЗ рдХреЗ рдкреИрд░ рдХреА рдкрд╛рдБрдЪ рдЙрдВрдЧрд▓рд┐рдпреЛрдВ рдореЗрдВ рд╕реЗ рдПрдХ рдХреЛ рд╣рд┐рд▓рд╛рдиреЗ рд╕реЗ рдореЗрд▓ рдЦрд╛рддреА рд╣реИред" },
+            { id: 17, title: "Ring Around the Rosie", category: "Classic", icon: "ЁЯМ╣", tags: ["classic"], lyrics: "Ring-a-round the rosie,\nA pocket full of posies,\nAshes! Ashes!\nWe all fall down.", funFact: "Many people believe this rhyme is about the Great Plague of London, but historians say there is no real evidence for this. It is most likely just a fun game!", funFact_hi: "рдХрдИ рд▓реЛрдЧреЛрдВ рдХрд╛ рдорд╛рдирдирд╛ рд╣реИ рдХрд┐ рдпрд╣ рдХрд╡рд┐рддрд╛ рд▓рдВрджрди рдХреЗ рдорд╣рд╛рди рдкреНрд▓реЗрдЧ рдХреЗ рдмрд╛рд░реЗ рдореЗрдВ рд╣реИ, рд▓реЗрдХрд┐рди рдЗрддрд┐рд╣рд╛рд╕рдХрд╛рд░реЛрдВ рдХрд╛ рдХрд╣рдирд╛ рд╣реИ рдХрд┐ рдЗрд╕рдХрд╛ рдХреЛрдИ рд╡рд╛рд╕реНрддрд╡рд┐рдХ рдкреНрд░рдорд╛рдг рдирд╣реАрдВ рд╣реИред рдпрд╣ рдХреЗрд╡рд▓ рдПрдХ рдордЬреЗрджрд╛рд░ рдЦреЗрд▓ рд╣реИ!" },
+            { id: 18, title: "One, Two, Buckle My Shoe", category: "Learning", icon: "ЁЯСЮ", tags: ["learning", "classic"], learningFocus: "Counting to 20", lyrics: "One, two, Buckle my shoe;\nThree, four, Knock at the door;\nFive, six, Pick up sticks;\nSeven, eight, Lay them straight.\nNine, ten, A big fat hen;\nEleven, twelve, Dig and delve;\nThirteen, fourteen, Maids a-courting;\nFifteen, sixteen, Maids in the kitchen.\nSeventeen, eighteen, Maids a-waiting;\nNineteen, twenty, My plate's empty.", funFact: "This is a classic counting rhyme that helps children learn their numbers in a fun, memorable way.", funFact_hi: "рдпрд╣ рдПрдХ рдХреНрд▓рд╛рд╕рд┐рдХ рдЧрд┐рдирддреА рдХрд╡рд┐рддрд╛ рд╣реИ рдЬреЛ рдмрдЪреНрдЪреЛрдВ рдХреЛ рдордЬреЗрджрд╛рд░ рдФрд░ рдпрд╛рджрдЧрд╛рд░ рддрд░реАрдХреЗ рд╕реЗ рдЙрдирдХреЗ рдирдВрдмрд░ рд╕реАрдЦрдиреЗ рдореЗрдВ рдорджрдж рдХрд░рддреА рд╣реИред" },
+            { id: 23, title: "Chanda Mama", title_hi: "рдЪрдВрджрд╛ рдорд╛рдорд╛ рджреВрд░ рдХреЗ", category: "Indian", icon: "ЁЯМЬ", tags: ["indian", "lullaby"], lyrics: "Moon uncle, so far away,\nCooking puddings day by day.\nYou eat from your plate so grand,\nGive me a bowl here in my hand.", lyrics_hi: "рдЪрдВрджрд╛ рдорд╛рдорд╛ рджреВрд░ рдХреЗ,\nрдкреБрдП рдкрдХрд╛рдП рдмреВрд░ рдХреЗред\nрдЖрдк рдЦрд╛рдПрдВ рдерд╛рд▓реА рдореЗрдВ,\nрдореБрдиреНрдиреЗ рдХреЛ рджреЗрдВ рдкреНрдпрд╛рд▓реА рдореЗрдВред", funFact: "In Indian culture, the moon is often affectionately called 'Chanda Mama' (Moon Uncle), and is a central character in many lullabies and stories.", funFact_hi: "рднрд╛рд░рддреАрдп рд╕рдВрд╕реНрдХреГрддрд┐ рдореЗрдВ, рдЪрдВрджреНрд░рдорд╛ рдХреЛ рдЕрдХреНрд╕рд░ рдкреНрдпрд╛рд░ рд╕реЗ 'рдЪрдВрджрд╛ рдорд╛рдорд╛' (рдЪрдВрджреНрд░рдорд╛ рдорд╛рдорд╛) рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИ, рдФрд░ рдпрд╣ рдХрдИ рд▓реЛрд░рд┐рдпреЛрдВ рдФрд░ рдХрд╣рд╛рдирд┐рдпреЛрдВ рдХрд╛ рдПрдХ рдореБрдЦреНрдп рдкрд╛рддреНрд░ рд╣реИред" },
+            { id: 26, title: "Humpty Dumpty", category: "Classic", icon: "ЁЯеЪ", tags: ["classic", "silly"], lyrics: "Humpty Dumpty sat on a wall,\nHumpty Dumpty had a great fall.\nAll the king's horses and all the king's men,\nCould not put Humpty together again.", funFact: "Humpty Dumpty was originally a riddle! The answer is an egg. If an egg falls and breaks, you cannot put it back together.", funFact_hi: "рд╣рдореНрдкреНрдЯреА рдбрдореНрдкреНрдЯреА рдореВрд▓ рд░реВрдк рд╕реЗ рдПрдХ рдкрд╣реЗрд▓реА рдереА! рдЗрд╕рдХрд╛ рдЙрддреНрддрд░ рдПрдХ рдЕрдВрдбрд╛ рд╣реИред рдпрджрд┐ рдХреЛрдИ рдЕрдВрдбрд╛ рдЧрд┐рд░рддрд╛ рд╣реИ рдФрд░ рдЯреВрдЯ рдЬрд╛рддрд╛, рддреЛ рдЖрдк рдЙрд╕реЗ рд╡рд╛рдкрд╕ рдЬреЛрдбрд╝ рдирд╣реАрдВ рд╕рдХрддреЗред" },
+            { id: 31, title: "Rain, Rain, Go Away", category: "Classic", icon: "тШФ", tags: ["classic"], lyrics: "Rain, rain, go away,\nCome again another day.\nLittle Johnny wants to play,\nRain, rain, go away.", funFact: "This rhyme was historically recorded during the Anglo-Spanish war when English sailors wanted rain to disappear.", funFact_hi: "рдпрд╣ рдмрд╛рд▓рдЧреАрдд рдРрддрд┐рд╣рд╛рд╕рд┐рдХ рд░реВрдк рд╕реЗ рдПрдВрдЧреНрд▓реЛ-рд╕реНрдкреИрдирд┐рд╢ рдпреБрджреНрдз рдХреЗ рджреМрд░рд╛рди рд░рд┐рдХреЙрд░реНрдб рдХрд┐рдпрд╛ рдЧрдпрд╛ рдерд╛ рдЬрдм рдЕрдВрдЧреНрд░реЗрдЬреА рдирд╛рд╡рд┐рдХ рдЪрд╛рд╣рддреЗ рдереЗ рдХрд┐ рдмрд╛рд░рд┐рд╢ рдЧрд╛рдпрдм рд╣реЛ рдЬрд╛рдПред" },
+            { id: 47, title: "Rock-a-bye Baby", category: "Classic", icon: "ЁЯС╢", tags: ["classic", "lullaby"], lyrics: "Rock-a-bye baby, on the treetop,\nWhen the wind blows, the cradle will rock,\nWhen the bough breaks, the cradle will fall,\nAnd down will come baby, cradle and all.", funFact: "Some believe the rhyme was written by a pilgrim who noticed Native Americans tying cradles to tree branches.", funFact_hi: "рдХреБрдЫ рд▓реЛрдЧреЛрдВ рдХрд╛ рдорд╛рдирдирд╛ рд╣реИ рдХрд┐ рдпрд╣ рдХрд╡рд┐рддрд╛ рдПрдХ рддреАрд░реНрдердпрд╛рддреНрд░реА рджреНрд╡рд╛рд░рд╛ рд▓рд┐рдЦреА рдереА рдЬрд┐рд╕рдиреЗ рджреЗрдЦрд╛ рдХрд┐ рдореВрд▓ рдЕрдореЗрд░рд┐рдХреА рдкрд╛рд▓рдиреЗ рдХреЛ рдкреЗрдбрд╝ рдХреА рд╢рд╛рдЦрд╛рдУрдВ рд╕реЗ рдмрд╛рдВрдз рд░рд╣реЗ рдереЗред" },
+            { id: 84, title: "Little Bo-Peep", category: "Classic", icon: "ЁЯРС", tags: ["classic", "animal"], lyrics: "Little Bo-Peep has lost her sheep,\nAnd does not know where to find them;\nLeave them alone, and they will come home,\nWagging their tails behind them.", funFact: "Bo-Peep was actually a children's game of hide-and-seek played in the 16th century.", funFact_hi: "рдмреЛ-рдкреАрдк рд╡рд╛рд╕реНрддрд╡ рдореЗрдВ 16рд╡реАрдВ рд╢рддрд╛рдмреНрджреА рдореЗрдВ рдЦреЗрд▓рд╛ рдЬрд╛рдиреЗ рд╡рд╛рд▓рд╛ рдмрдЪреНрдЪреЛрдВ рдХрд╛ рд▓реБрдХрд╛-рдЫрд┐рдкреА рдХрд╛ рдЦреЗрд▓ рдерд╛ред" },
+            
+            // EXCLUSIVE RHYMES
+            { id: 101, title: "The Friendly Robot", category: "Learning", icon: "ЁЯдЦ", tags: ["learning", "silly"], isExclusive: true, lyrics: "I have a robot, big and grand,\nThe best robot in the land.\nHe helps me clean my room each day,\nThen we both go out to play.", funFact: "The word 'robot' comes from the Czech word 'robota', which means 'forced labor' or 'work'.", funFact_hi: "рд╢рдмреНрдж 'рд░реЛрдмреЛрдЯ' рдЪреЗрдХ рд╢рдмреНрдж 'рд░реЛрдмреЛрдЯрд╛' рд╕реЗ рдЖрдпрд╛ рд╣реИ, рдЬрд┐рд╕рдХрд╛ рдЕрд░реНрде рд╣реИ 'рдЬрдмрд░рди рд╢реНрд░рдо' рдпрд╛ 'рдХрд╛рдо'ред" },
+            { id: 103, title: "The Sleepy Bear", title_hi: "рд╕реЛрддрд╛ рднрд╛рд▓реВ", category: "Animal", icon: "ЁЯР╗", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "The sleepy bear goes to his bed,\nLays down his big and fuzzy head.\nHe dreams of honey, sweet and deep,\nWhile all the little bunnies sleep.", lyrics_hi: "рд╕реЛрддрд╛ рднрд╛рд▓реВ рдмрд┐рд╕реНрддрд░ рдЬрд╛рдП,\nрдЕрдкрдирд╛ рдкреНрдпрд╛рд░рд╛ рд╕рд┐рд░ рдЯрд┐рдХрд╛рдПред\nрд╢рд╣рджрдордпреА рдореАрдареЗ рд╕рдкрдиреЗ рджреЗрдЦреЗ,\nрдЬрдм рдЦрд░рдЧреЛрд╢ рд╕рдм рд╕реЛ рдЬрд╛рдПрдВред", funFact: "Bears can sleep for several months during the winter in a process called hibernation.", funFact_hi: "рднрд╛рд▓реВ рд╕рд░реНрджрд┐рдпреЛрдВ рдХреЗ рджреМрд░рд╛рди рдХрдИ рдорд╣реАрдиреЛрдВ рддрдХ рд╕реЛ рд╕рдХрддреЗ рд╣реИрдВ рдЬрд┐рд╕реЗ рд╣рд╛рдЗрдмрд░рдиреЗрд╢рди (рд╢реАрддрдирд┐рджреНрд░рд╛) рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИред" },
+            { id: 105, title: "My Rocket Ship Adventure", category: "Learning", icon: "ЁЯЪА", tags: ["silly", "action"], isExclusive: true, lyrics: "Five, four, three, two, one, we go,\nMy rocket ship is putting on a show!\nPast the clouds and up so high,\nWe'll draw a circle in the sky.\n\nWe zoom around the yellow moon,\nAnd dance among the stars in tune.\nThen we come back home to bed,\nWith sleepy thoughts inside my head.", funFact: "It takes about three days for a rocket to travel from the Earth to the Moon.", funFact_hi: "рдПрдХ рд░реЙрдХреЗрдЯ рдХреЛ рдкреГрдереНрд╡реА рд╕реЗ рдЪрдВрджреНрд░рдорд╛ рддрдХ рдЬрд╛рдиреЗ рдореЗрдВ рд▓рдЧрднрдЧ рддреАрди рджрд┐рди рдХрд╛ рд╕рдордп рд▓рдЧрд╛рддрд╛ рд╣реИред" },
+            { id: 106, title: "The Wiggle Worm", category: "Animal", icon: "ЁЯРЫ", tags: ["animal", "action"], isExclusive: true, lyrics: "I'm a little wiggle worm,\nWatch me squirm and squirm.\nI wiggle in the dirt all day,\nThen I wiggle, far away!", funFact: "Earthworms are very helpful because they create tunnels in the soil, which helps air and water reach the roots of plants.", funFact_hi: "рдХреЗрдВрдЪреБрдП рдмрд╣реБрдд рдорджрджрдЧрд╛рд░ рд╣реЛрддреЗ рд╣реИрдВ рдХреНрдпреЛрдВрдХрд┐ рд╡реЗ рдорд┐рдЯреНрдЯреА рдореЗрдВ рд╕реБрд░рдВрдЧ рдмрдирд╛рддреЗ рд╣реИрдВ, рдЬрд┐рд╕рд╕реЗ рд╣рд╡рд╛ рдФрд░ рдкрд╛рдиреА рдкреМрдзреЛрдВ рдХреА рдЬрдбрд╝реЛрдВ рддрдХ рдкрд╣реБрдБрдЪ рдкрд╛рддреЗ рд╣реИрдВред" },
+            { id: 107, title: "The Popcorn Song", category: "Learning", icon: "ЁЯН┐", tags: ["food", "silly"], isExclusive: true, lyrics: "Pop, pop, popcorn,\nPopping in the pot.\nPop, pop, popcorn,\nEat it while it's hot!\n\nPop, pop, popcorn,\nWhite and fluffy, too.\nPop, pop, popcorn,\nI'll share a piece with you!", funFact: "A single kernel of popcorn can pop up to 3 feet in the air!", funFact_hi: "рдкреЙрдкрдХреЙрд░реНрди рдХрд╛ рдПрдХ рджрд╛рдирд╛ рд╣рд╡рд╛ рдореЗрдВ 3 рдлреАрдЯ рдКрдкрд░ рддрдХ рдЙрдЫрд▓ рд╕рдХрддрд╛ рд╣реИ!" },
+            { id: 108, title: "My Happy Kite", title_hi: "рдореЗрд░реА рдкреНрдпрд╛рд░реА рдкрддрдВрдЧ", category: "Learning", icon: "ЁЯкБ", tags: ["action"], isExclusive: true, lyrics: "My kite, my kite, flies in the sky,\nSoaring, soaring, way up high.\nDancing with the wind so free,\nLook, my kite is waving at me!", lyrics_hi: "рдореЗрд░реА рдкрддрдВрдЧ, рдореЗрд░реА рдкрддрдВрдЧ, рдЖрд╕рдорд╛рди рдореЗрдВ рдЙрдбрд╝реЗ,\nрдКрдБрдЪреЗ, рдКрдБрдЪреЗ, рдмрд╣реБрдд рдКрдБрдЪреЗ рдЙрдбрд╝реЗред\nрд╣рд╡рд╛ рдХреЗ рд╕рдВрдЧ рдирд╛рдЪреЗ рдЖрдЬрд╝рд╛рдж,\nрджреЗрдЦреЛ, рдореЗрд░реА рдкрддрдВрдЧ рдореБрдЭреЗ рд╣рд┐рд▓рд╛рдП рд╣рд╛рде!", funFact: "Kites were invented in China over 2,000 years ago.", funFact_hi: "рдкрддрдВрдЧ рдХрд╛ рдЖрд╡рд┐рд╖реНрдХрд╛рд░ 2,000 рд╕реЗ рдЕрдзрд┐рдХ рд╡рд░реНрд╖ рдкрд╣рд▓реЗ рдЪреАрди рдореЗрдВ рд╣реБрдЖ рдерд╛ред" },
+            { id: 109, title: "The Little Owl", category: "Animal", icon: "ЁЯжЙ", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "The sun is gone, the moon is bright,\nA little owl says, 'Hoo!' at night.\nHe spreads his wings and starts to fly,\nBeneath the starry, sleepy sky.", funFact: "Owls can turn their heads almost all the way around, but they can't move their eyes.", funFact_hi: "рдЙрд▓реНрд▓реВ рдЕрдкрдиреЗ рд╕рд┐рд░ рдХреЛ рд▓рдЧрднрдЧ рдЪрд╛рд░реЛрдВ рдУрд░ рдШреБрдорд╛ рд╕рдХрддреЗ рд╣реИрдВ, рд▓реЗрдХрд┐рди рд╡реЗ рдЕрдкрдиреА рдЖрдБрдЦреЗрдВ рдирд╣реАрдВ рд╣рд┐рд▓рд╛ рд╕рдХрддреЗред" },
+            { id: 111, title: "Silly Starfish", category: "Animal", icon: "тнР", tags: ["animal", "silly", "ocean"], isExclusive: true, lyrics: "Silly little starfish,\nSpinning in the blue,\nDoing cartwheels in the sea,\nJust for me and you.", funFact: "Starfish can regrow their arms if they lose one!", funFact_hi: "рдпрджрд┐ рд╕реНрдЯрд╛рд░рдлрд┐рд╢ рдХреА рдХреЛрдИ рднреБрдЬрд╛ рдХрдЯ рдЬрд╛рдП, рддреЛ рд╡рд╣ рдЙрд╕реЗ рд╡рд╛рдкрд╕ рдЙрдЧрд╛ рд╕рдХрддреА рд╣реИ!" },
+            { id: 112, title: "The Mighty Rex", category: "Animal", icon: "ЁЯжЦ", tags: ["animal", "action"], isExclusive: true, lyrics: "The mighty Rex with a toothy grin,\nMakes the whole jungle shake and spin.\nHe gives a roar, a mighty sound,\nThen takes a nap upon the ground.", funFact: "Despite its ferocious reputation, some scientists think the T-Rex might have had feathers!", funFact_hi: "рдЕрдкрдиреА рдХреНрд░реВрд░ рдЫрд╡рд┐ рдХреЗ рдмрд╛рд╡рдЬреВрдж, рдХреБрдЫ рд╡реИрдЬреНрдЮрд╛рдирд┐рдХреЛрдВ рдХрд╛ рдорд╛рдирдирд╛ рд╣реИ рдХрд┐ рдЯреА-рд░реЗрдХреНрд╕ рдХреЗ рд╢рд░реАрд░ рдкрд░ рдкрдВрдЦ рд╣реЛ рд╕рдХрддреЗ рдереЗ!" },
+            { id: 116, title: "Mr. Snail", category: "Animal", icon: "ЁЯРМ", tags: ["animal"], isExclusive: true, lyrics: "Slowly, slowly, Mr. Snail,\nCrawling down the garden trail.\nHe carries his house upon his back,\nThen hides inside, it's black, black, black.\n\nBut when the sun begins to peek,\nHe slowly lifts his head to speak.\nHe says, 'Hello, my friend, so grand!'\nAnd crawls out on his house-in-hand.", funFact: "Some snails can sleep for up to three years!", funFact_hi: "рдХреБрдЫ рдШреЛрдВрдШреЗ (Snails) рддреАрди рд╕рд╛рд▓ рддрдХ рд╕реЛ рд╕рдХрддреЗ рд╣реИрдВ!" },
+            { id: 121, title: "Penguin Parade", category: "Animal", icon: "ЁЯРз", tags: ["animal", "action"], isExclusive: true, lyrics: "Down the snowy hill they slide,\nWhat a fun and slippery ride!\nThen they waddle, side-by-side,\nIt's the penguin parade!", funFact: "The way penguins waddle actually helps them save energy as they walk.", funFact_hi: "рдкреЗрдВрдЧреБрдЗрди рдХрд╛ рдордЯрдХ-рдордЯрдХ рдХрд░ рдЪрд▓рдирд╛ рд╡рд╛рд╕реНрддрд╡ рдореЗрдВ рдЪрд▓рддреЗ рд╕рдордп рдЙрдирдХреА рдКрд░реНрдЬрд╛ рдмрдЪрд╛рдиреЗ рдореЗрдВ рдорджрдж рдХрд░рддрд╛ рд╣реИред" },
+            { id: 122, title: "The Baking Song", category: "Learning", icon: "ЁЯНк", tags: ["food", "learning"], learningFocus: "Following Steps", isExclusive: true, lyrics: "Mix the flour, crack the egg,\nStir the batter with your leg!\nJust kidding, use a spoon instead,\nTime to make some gingerbread!", funFact: "The tradition of making decorated gingerbread houses started in Germany in the 1800s.", funFact_hi: "рд╕рдЬреЗ рд╣реБрдП рдЬрд┐рдВрдЬрд░рдмреНрд░реЗрдб рдШрд░ рдмрдирд╛рдиреЗ рдХреА рдкрд░рдВрдкрд░рд╛ 1800 рдХреЗ рджрд╢рдХ рдореЗрдВ рдЬрд░реНрдордиреА рдореЗрдВ рд╢реБрд░реВ рд╣реБрдИ рдереАред" },
+            { id: 123, title: "The Bouncing Ball", category: "Learning", icon: "тЪ╜", tags: ["action", "silly"], isExclusive: true, lyrics: "A bouncing ball, a bouncing ball,\nBouncing up against the wall.\nIt bounces high, it bounces low,\nWhere will the bouncing ball go?", funFact: "The first basketballs were not bouncy at all! They were made of leather panels stitched together with a rubber bladder inside, much like a soccer ball.", funFact_hi: "рдкрд╣рд▓реЗ рдмрд╛рд╕реНрдХреЗрдЯрдмреЙрд▓ рдмрд┐рд▓реНрдХреБрд▓ рднреА рдЙрдЫрд▓рдиреЗ рд╡рд╛рд▓реЗ рдирд╣реАрдВ рдереЗ! рд╡реЗ рдЪрдордбрд╝реЗ рдХреЗ рдкреИрдирд▓реЛрдВ рд╕реЗ рдмрдиреЗ рдереЗ рдЬрд┐рдиреНрд╣реЗрдВ рдЖрдкрд╕ рдореЗрдВ рд╕рд┐рд▓рдХрд░ рдЕрдВрджрд░ рд░рдмрд░ рдмреНрд▓реИрдбрд░ рдбрд╛рд▓рд╛ рдЧрдпрд╛ рдерд╛, рдмрд┐рд▓реНрдХреБрд▓ рд╕реЙрдХрд░ рдмреЙрд▓ рдХреА рддрд░рд╣ред" },
+            { id: 125, title: "The Little Frog", category: "Animal", icon: "ЁЯР╕", tags: ["animal"], isExclusive: true, lyrics: "A little frog on a lily pad,\nWas feeling just a little sad.\nThen he jumped up with a CROAK!\nAnd that was the best froggy joke.", funFact: "Frogs don't need to drink water; they absorb it through their skin.", funFact_hi: "рдореЗрдВрдврдХреЛрдВ рдХреЛ рдкрд╛рдиреА рдкреАрдиреЗ рдХреА рдЖрд╡рд╢реНрдпрдХрддрд╛ рдирд╣реАрдВ рд╣реЛрддреА; рд╡реЗ рдЗрд╕реЗ рдЕрдкрдиреА рддреНрд╡рдЪрд╛ рдХреЗ рдорд╛рдзреНрдпрдо рд╕реЗ рдЕрд╡рд╢реЛрд╖рд┐рдд рдХрд░рддреЗ рд╣реИрдВред" },
+            { id: 127, title: "The Squirrel's Nut", category: "Animal", icon: "ЁЯР┐я╕П", tags: ["animal"], isExclusive: true, lyrics: "A little squirrel with a tail so grand,\nFound the biggest nut in all the land.\nHe buried it deep beside a tree,\nTo eat in winter, just for he.", funFact: "Squirrels pretend to bury nuts to fool other animals who might be watching them, then they hide the real nut somewhere else!", funFact_hi: "рдЧрд┐рд▓рд╣рд░реА рдЕрдиреНрдп рдЬрд╛рдирд╡рд░реЛрдВ рдХреЛ рдмреЗрд╡рдХреВрдл рдмрдирд╛рдиреЗ рдХреЗ рд▓рд┐рдП рдирдЯ рджрдлрдирд╛рдиреЗ рдХрд╛ рдирд╛рдЯрдХ рдХрд░рддреА рд╣реИ рдЬреЛ рдЙрдиреНрд╣реЗрдВ рджреЗрдЦ рд░рд╣реЗ рд╣реЛрддреЗ рд╣реИрдВ, рдлрд┐рд░ рд╡реЗ рдЕрд╕рд▓реА рдирдЯ рдХреЛ рдХрд╣реАрдВ рдФрд░ рдЫрд┐рдкрд╛ рджреЗрддреА рд╣реИрдВ!" },
+            { id: 129, title: "The Friendly Ghost", category: "Classic", icon: "ЁЯС╗", tags: ["silly", "lullaby"], isExclusive: true, lyrics: "There's a friendly ghost who floats and flies,\nHe has two big and happy eyes.\nHe doesn't want to make you scared,\nHe just wants his teddy bear.\n\nHe finds his bear right on the floor,\nAnd hugs it tight and starts to snore.\nHe's happy now, his day is blessed,\nThe friendly ghost can go to rest.", funFact: "The idea of ghosts being white and floaty comes from old traditions where burial cloths, called shrouds, were usually white.", funFact_hi: "рднреВрддреЛрдВ рдХреЗ рд╕рдлреЗрдж рдФрд░ рддреИрд░рддреЗ рд╣реБрдП рд╣реЛрдиреЗ рдХрд╛ рд╡рд┐рдЪрд╛рд░ рдкреБрд░рд╛рдиреА рдкрд░рдВрдкрд░рд╛рдУрдВ рд╕реЗ рдЖрддрд╛ рд╣реИ рдЬрд╣рд╛рдБ рдХрдлрд╝рди рдХреЗ рдХрдкрдбрд╝реЗ рдЖрдорддреМрд░ рдкрд░ рд╕рдлреЗрдж рд╣реЛрддреЗ рдереЗред" },
+            { id: 131, title: "The Happy Dolphin", category: "Animal", icon: "ЁЯРм", tags: ["animal", "action"], isExclusive: true, lyrics: "Splash and flip, so fast and free,\nA happy dolphin in the sea.\nHe jumps and clicks and says hello,\nTo all the little fish below.", funFact: "Dolphins sleep with only half of their brain at a time, and they keep one eye open to watch for predators.", funFact_hi: "рдбреЙрд▓реНрдлрд╝рд┐рди рдПрдХ рд╕рдордп рдореЗрдВ рдЕрдкрдиреЗ рдорд╕реНрддрд┐рд╖реНрдХ рдХреЗ рдХреЗрд╡рд▓ рдЖрдзреЗ рд╣рд┐рд╕реНрд╕реЗ рдХреЗ рд╕рд╛рде рд╕реЛрддреА рд╣реИрдВ, рдФрд░ рд╢рд┐рдХрд╛рд░рд┐рдпреЛрдВ рдкрд░ рдирдЬрд╝рд░ рд░рдЦрдиреЗ рдХреЗ рд▓рд┐рдП рдПрдХ рдЖрдБрдЦ рдЦреБрд▓реА рд░рдЦрддреА рд╣реИрдВред" },
+            { id: 132, title: "The Moon's Goodnight", title_hi: "рдЪрд╛рдБрдж рдХреА рд╢реБрднрд░рд╛рддреНрд░рд┐", category: "Classic", icon: "ЁЯМЬ", tags: ["lullaby"], isExclusive: true, lyrics: "The moon peeks out from cloudy skies,\nAnd winks its sleepy, silver eyes.\nIt's time for bed, you sleepy head,\n'Goodnight, goodnight,' the moonlight said.", lyrics_hi: "рдЪрд╛рдБрдж рдмрд╛рджрд▓реЛрдВ рд╕реЗ рдЭрд╛рдБрдХреЗ,\nрдЕрдкрдиреА рдиреАрдВрдж рднрд░реА, рдЪрд╛рдБрджреА рд╕реА рдЖрдБрдЦреЗрдВ рдЭрдкрдХрд╛рдПред\nрд╕реЛрдиреЗ рдХрд╛ рд╕рдордп рд╣реЛ рдЧрдпрд╛, рдореЗрд░реЗ рдкреНрдпрд╛рд░реЗ,\n'рд╢реБрднрд░рд╛рддреНрд░рд┐, рд╢реБрднрд░рд╛рддреНрд░рд┐,' рдЪрд╛рдБрджрдиреА рдиреЗ рдХрд╣рд╛ред", funFact: "The moon doesn't make its own light! It reflects the light from the sun, just like a giant mirror in the sky.", funFact_hi: "рдЪрдВрджреНрд░рдорд╛ рдЕрдкрдиреА рд░реЛрд╢рдиреА рдЦреБрдж рдирд╣реАрдВ рдмрдирд╛рддрд╛! рдЗрдЯ reflects the light from the sun, just like a giant mirror in the sky." },
+            { id: 133, title: "The Little Boat", category: "Learning", icon: "тЫ╡", tags: ["transport"], isExclusive: true, lyrics: "My little boat upon the sea,\nSails along so happily.\nThe wind it pushes, soft and low,\nThis way and that way we will go.", funFact: "Sailboats don't have engines; they use the power of the wind in their sails to move across the water.", funFact_hi: "рдкрд╛рд▓ рдиреМрдХрд╛рдУрдВ (Sailboats) рдореЗрдВ рдЗрдВрдЬрди рдирд╣реАрдВ рд╣реЛрддреЗ; рд╡реЗ рдкрд╛рдиреА рдореЗрдВ рдЪрд▓рдиреЗ рдХреЗ рд▓рд┐рдП рдЕрдкрдиреА рдкрд╛рд▓ рдореЗрдВ рд╣рд╡рд╛ рдХреА рд╢рдХреНрддрд┐ рдХрд╛ рдЙрдкрдпреЛрдЧ рдХрд░рддреА рд╣реИрдВред" },
+            { id: 137, title: "The Sleepy Volcano", category: "Classic", icon: "ЁЯМЛ", tags: ["silly", "lullaby"], isExclusive: true, lyrics: "There's a sleepy volcano, taking a nap,\nWith a fluffy white cloud for a thinking cap.\nHe rumbles and grumbles, a sleepy sound,\nShaking the flowers all over the ground.", funFact: "When a volcano erupts, the hot liquid rock that comes out is called lava.", funFact_hi: "рдЬрдм рдЬреНрд╡рд╛рд▓рд╛рдореБрдЦреА рдлрдЯрддрд╛ рд╣реИ, рддреЛ рдЬреЛ рдЧрд░реНрдо рддрд░рд▓ рдЪрдЯреНрдЯрд╛рди рдирд┐рдХрд▓рддреА рд╣реИ рдЙрд╕реЗ рд▓рд╛рд╡рд╛ рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИред" },
+            { id: 138, title: "The Butterfly", category: "Animal", icon: "ЁЯжЛ", tags: ["animal"], isExclusive: true, lyrics: "A little caterpillar, slow and green,\nBecame the prettiest bug you've seen.\nShe grew some wings and fluttered high,\nA lovely, painted butterfly.", funFact: "Butterflies taste with their feet! It helps them find the right leaf to lay their eggs on.", funFact_hi: "рддрд┐рддрд▓рд┐рдпрд╛рдБ рдЕрдкрдиреЗ рдкреИрд░реЛрдВ рд╕реЗ рд╕реНрд╡рд╛рдж рд▓реЗрддреА рд╣реИрдВ! рдпрд╣ рдЙрдиреНрд╣реЗрдВ рдЕрдкрдиреЗ рдЕрдВрдбреЗ рджреЗрдиреЗ рдХреЗ рд▓рд┐рдП рд╕рд╣реА рдкрддреНрддреА рдЦреЛрдЬрдиреЗ рдореЗрдВ рдорджрдж рдХрд░рддрд╛ рд╣реИред" },
+            { id: 141, title: "My Little Wooden Horse", category: "Indian", icon: "ЁЯР┤", tags: ["indian", "animal"], isExclusive: true, lyrics: "Saddle up my horse of wood,\nOn his back, I've always stood.\nWith a tail of rope and a happy sound,\nWe gallop all over the town!", funFact: "Wooden pull-toys have been a childhood classic for hundreds of years, encouraging imagination and play.", funFact_hi: "рд▓рдХрдбрд╝реА рдХреЗ рдЦреАрдВрдЪрдиреЗ рд╡рд╛рд▓реЗ рдЦрд┐рд▓реМрдиреЗ рд╕реИрдХрдбрд╝реЛрдВ рд╡рд░реНрд╖реЛрдВ рд╕реЗ рдмрдЪреНрдЪреЛрдВ рдХреЗ рдкрд╕рдВрджреАрджрд╛ рд░рд╣реЗ рд╣реИрдВ, рдЬреЛ рдХрд▓реНрдкрдирд╛ рдФрд░ рдЦреЗрд▓ рдХреЛ рдмрдврд╝рд╛рд╡рд╛ рджреЗрддреЗ рд╣реИрдВред" },
+            { id: 142, title: "The City Bus", category: "Classic", icon: "ЁЯЪМ", tags: ["classic", "silly"], isExclusive: true, lyrics: "The big red bus goes beep, beep, beep,\nWhile all the people are asleep.\nThe doors swing open, wide and grand,\nTo take us all across the land.", funFact: "The first city buses were pulled by horses!", funFact_hi: "рдкрд╣рд▓реЗ рд╢рд╣рд░ рдХреЗ рдмрд╕ рдШреЛрдбрд╝реЛрдВ рджреНрд╡рд╛рд░рд╛ рдЦреАрдВрдЪреЗ рдЬрд╛рддреЗ рдереЗ!" },
+            { id: 143, title: "My Little Teacup", category: "Classic", icon: "ЁЯлЦ", tags: ["classic"], isExclusive: true, lyrics: "I have a little teacup,\nIt's shiny, small, and round.\nWhen I pour the tea in,\nIt makes a happy sound.", funFact: "Having a tea party with toys and friends is a fun way to practice being a good host.", funFact_hi: "рдЦрд┐рд▓реМрдиреЛрдВ рдФрд░ рджреЛрд╕реНрддреЛрдВ рдХреЗ рд╕рд╛рде рдЪрд╛рдп рдкрд╛рд░реНрдЯреА рдХрд░рдирд╛ рдПрдХ рдЕрдЪреНрдЫреЗ рдореЗрдЬрдмрд╛рди рдмрдирдиреЗ рдХрд╛ рдЕрднреНрдпрд╛рд╕ рдХрд░рдиреЗ рдХрд╛ рдПрдХ рдордЬреЗрджрд╛рд░ рддрд░реАрдХрд╛ рд╣реИред" },
+            { id: 144, title: "The Happy Peacock", title_hi: "рдЦреБрд╢ рдореЛрд░", category: "Indian", icon: "ЁЯжЪ", tags: ["indian", "animal"], isExclusive: true, lyrics: "Grandma saw a peacock bright,\nWith feathers of blue and green.\nHe danced around in the morning light,\nThe prettiest bird she's seen.", lyrics_hi: "рдирд╛рдиреА рдиреЗ рджреЗрдЦрд╛ рдПрдХ рдореЛрд░ рдЪрдордХреАрд▓рд╛,\nрдкрдВрдЦ рдереЗ рдЙрд╕рдХреЗ рдиреАрд▓реЗ рдФрд░ рд╣рд░реЗред\nрд╕реБрдмрд╣ рдХреА рд░реЛрд╢рдиреА рдореЗрдВ рд╡реЛ рдирд╛рдЪрд╛,\nрд╕рдмрд╕реЗ рд╕реБрдВрджрд░ рдкрдХреНрд╖реА рдЬреЛ рдЙрдиреНрд╣реЛрдВрдиреЗ рджреЗрдЦрд╛ред", funFact: "A peacock's long, beautiful feathers are called a 'train'.", funFact_hi: "рдореЛрд░ рдХреЗ рд▓рдВрдмреЗ, рд╕реБрдВрджрд░ рдкрдВрдЦреЛрдВ рдХреЛ 'рдЯреНрд░реЗрди' рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИред" },
+            { id: 146, title: "When I'm Feeling Glad", category: "Learning", icon: "ЁЯШК", tags: ["learning", "silly", "action"], isExclusive: true, lyrics: "When I'm feeling glad, a happy song I hum,\nI tap my feet just like a little drum.\nI give a wiggle, then a little leap,\nWhile all the grumpy feelings fall asleep.", funFact: "Doing something active, like dancing or jumping, can make you feel even happier!", funFact_hi: "рдиреГрддреНрдп рдпрд╛ рдХреВрджрдиреЗ рдЬреИрд╕реА рд╕рдХреНрд░рд┐рдп рдЧрддрд┐рд╡рд┐рдзрд┐рдпрд╛рдБ рдХрд░рдиреЗ рд╕реЗ рдЖрдк рдФрд░ рднреА рдЕрдзрд┐рдХ рдЦреБрд╢ рдорд╣рд╕реВрд╕ рдХрд░ рд╕рдХрддреЗ рд╣реИрдВред" },
+            { id: 147, title: "Panda's Peaceful Snack", category: "Animal", icon: "ЁЯР╝", tags: ["classic", "animal"], isExclusive: true, lyrics: "A happy panda, soft and grand,\nChews on bamboo in his land.\nMunch, munch, munch, the whole day long,\nHumming a quiet, happy song.", funFact: "Pandas have a special bone in their wrist that acts like a thumb to help them grip bamboo stalks.", funFact_hi: "рдкрдВрдбреЛрдВ рдХреА рдХрд▓рд╛рдИ рдореЗрдВ рдПрдХ рд╡рд┐рд╢реЗрд╖ рдХрд▓рд╛рдИ рд╣рдбреНрдбреА рд╣реЛрддреА рд╣реИ рдЬреЛ рдмрд╛рдВрд╕ рдХреЗ рдбрдВрдард▓ рдХреЛ рдкрдХрдбрд╝рдиреЗ рдореЗрдВ рдорджрдж рдХрд░рдиреЗ рдХреЗ рд▓рд┐рдП рдЕрдВрдЧреВрдареЗ рдХреА рддрд░рд╣ рдХрд╛рдо рдХрд░рддреА рд╣реИред" },
+            { id: 148, title: "Clever Monkey", title_hi: "рдЪрд╛рд▓рд╛рдХ рдмрдВрджрд░", category: "Indian", icon: "ЁЯР╡", tags: ["indian", "animal", "silly"], isExclusive: true, lyrics: "Monkey wears a silly hat,\nAnd has a friendly chatter-chat.\nHe swings from branches in the sun,\nAnd has a lot of monkey fun.\n\nHe climbs the trees up to the top,\nAnd gives a little playful hop.\nHe pulls a funny face for you,\nAnd waves his tail and says, 'Achoo!'", lyrics_hi: "рдмрдВрджрд░ рдкрд╣рдиреЗ рдПрдХ рдордЬрд╝реЗрджрд╛рд░ рдЯреЛрдкреА,\nрдФрд░ рдХрд░рддрд╛ рд╣реИ рдкреНрдпрд╛рд░реА рдмрд╛рддреЗрдВред\nрдзреВрдк рдореЗрдВ рдбрд╛рд▓рд┐рдпреЛрдВ рдкрд░ рдЭреВрд▓рддрд╛,\nрдФрд░ рдХрд░рддрд╛ рд╣реИ рдмрдВрджрд░ рд╡рд╛рд▓реА рдорд╕реНрддреАред\n\nрдкреЗрдбрд╝реЛрдВ рдкрд░ рдЪрдврд╝рддрд╛ рдКрдкрд░ рддрдХ,\nрдФрд░ рдПрдХ рдЫреЛрдЯреА рд╕реА рдЫрд▓рд╛рдВрдЧ рд▓рдЧрд╛рддрд╛ред\nрддреБрдореНрд╣рд╛рд░реЗ рд▓рд┐рдП рдПрдХ рдордЬрд╝реЗрджрд╛рд░ рдЪреЗрд╣рд░рд╛ рдмрдирд╛рддрд╛,\nрдФрд░ рдЕрдкрдиреА рдкреВрдБрдЫ рд╣рд┐рд▓рд╛рдХрд░ рдХрд╣рддрд╛, 'рдЖрдЪреНрдЫреВ!'", funFact: "Monkeys use their long tails to help them balance as they swing through the trees.", funFact_hi: "рдмрдВрджрд░ рдкреЗрдбрд╝реЛрдВ рдХреЗ рдмреАрдЪ рдЭреВрд▓рддреЗ рд╕рдордп рдЕрдкрдирд╛ рд╕рдВрддреБрд▓рди рдмрдирд╛рдП рд░рдЦрдиреЗ рдХреЗ рд▓рд┐рдП рдЕрдкрдиреА рд▓рдВрдмреА рдкреВрдВрдЫ рдХрд╛ рдЙрдкрдпреЛрдЧ рдХрд░рддреЗ рд╣реИрдВред" },
+            { id: 149, title: "The Mighty Elephant", title_hi: "рд╢рдХреНрддрд┐рд╢рд╛рд▓реА рд╣рд╛рдереА", category: "Indian", icon: "ЁЯРШ", tags: ["indian", "animal"], isExclusive: true, lyrics: "Elephant king, so big and gray,\nSwings his trunk along the way.\nHe says hello with a happy toot,\nAnd stomps his great big elephant foot.", lyrics_hi: "рд╣рд╛рдереА рд░рд╛рдЬрд╛, рдмрдбрд╝рд╛ рдФрд░ рднреВрд░рд╛,\nрд░рд╛рд╕реНрддреЗ рдореЗрдВ рдЕрдкрдиреА рд╕реВрдВрдб рд╣рд┐рд▓рд╛рддрд╛ред\nрдЦреБрд╢реА рд╕реЗ рдПрдХ рддреВрд░реНрдп рдмрдЬрд╛рдХрд░ рдирдорд╕реНрддреЗ рдХрд╣рддрд╛,\nрдФрд░ рдЕрдкрдирд╛ рдмрдбрд╝рд╛ рд╣рд╛рдереА рдкреИрд░ рдкрдЯрдХрддрд╛ред", funFact: "An elephant's trunk is so strong and skillful it can pick up something as heavy as a log or as small as a single grain of rice.", funFact_hi: "рд╣рд╛рдереА рдХреА рд╕реВрдВрдб рдЗрддрдиреА рдордЬрдмреВрдд рдФрд░ рдХреБрд╢рд▓ рд╣реЛрддреА рд╣реИ рдХрд┐ рд╡рд╣ рд▓рдХрдбрд╝реА рдХреЗ рд▓рдЯреНрдареЗ рдЬреИрд╕реА рднрд╛рд░реА рдЪреАрдЬ рдпрд╛ рдЪрд╛рд╡рд▓ рдХреЗ рдПрдХ рджрд╛рдиреЗ рдЬреИрд╕реА рдЫреЛрдЯреА рдЪреАрдЬ рдХреЛ рднреА рдЙрдард╛ рд╕рдХрддреА рд╣реИред" },
+            { id: 150, title: "Timothy's Tuba", category: "Classic", icon: "ЁЯО║", tags: ["classic", "silly"], isExclusive: true, lyrics: "Timothy found a tuba bright,\nHe puffed his cheeks with all his might.\nInstead of music, out came a pop,\nAnd a shower of lemon drops!", funFact: "Tubas are the largest brass instruments in an orchestra and make the lowest sounds.", funFact_hi: "рдЯреНрдпреВрдмрд╛ рдСрд░реНрдХреЗрд╕реНрдЯреНрд░рд╛ рдореЗрдВ рд╕рдмрд╕реЗ рдмрдбрд╝реЗ рдкреАрддрд▓ рдХреЗ рд╡рд╛рджреНрдп рдпрдВрддреНрд░ рд╣реЛрддреЗ рд╣реИрдВ рдФрд░ рд╕рдмрд╕реЗ рдзреАрдореА рд╡ рдЧрд╣рд░реА рдЖрд╡рд╛рдЬ рдирд┐рдХрд╛рд▓рддреЗ рд╣реИрдВред" },
+            { id: 152, title: "Silly Billy Goat", category: "Animal", icon: "ЁЯРР", tags: ["classic", "silly"], isExclusive: true, lyrics: "Silly Billy Goat went to the fair,\nWith a bright blue ribbon in his hair.\nHe tipped his hat and tapped his toe,\nAnd put on a funny show.\n\nHe balanced books upon his nose,\nAnd jumped and twirled upon his toes.\nHe sang a song and took a bow,\nHe's the silliest goat, you'll agree right now!", funFact: "Goats are incredibly agile animals and have fantastic balance, sometimes even climbing trees!", funFact_hi: "рдмрдХрд░рд┐рдпрд╛рдВ рдЕрд╡рд┐рд╢реНрд╡рд╕рдиреАрдп рд░реВрдк рд╕реЗ рдЪреБрд╕реНрдд рдЬрд╛рдирд╡рд░ рд╣реИрдВ рдФрд░ рдЙрдирдХрд╛ рд╕рдВрддреБрд▓рди рдмрд╣реБрдд рд╢рд╛рдирджрд╛рд░ рд╣реЛрддрд╛ рд╣реИ, рдХрднреА-рдХрднреА рддреЛ рд╡реЗ рдкреЗрдбрд╝реЛрдВ рдкрд░ рднреА рдЪрдврд╝ рдЬрд╛рддреА рд╣реИрдВ!" },
+            { id: 154, title: "My Counting Game", category: "Learning", icon: "ЁЯФв", tags: ["learning", "classic"], learningFocus: "Counting", isExclusive: true, lyrics: "Let's play a game and count to one,\nTap your head, the game's begun.\nLet's play a game and count to two,\nTouch your nose and then your shoe.\n\nLet's play a game and count to three,\nTouch your tummy, one, two, three.\nLet's play a game and count to four,\nClap your hands and ask for more!", funFact: "Ancient civilizations used their fingers, toes, and even shells or stones to count before numbers were written.", funFact_hi: "рдкреНрд░рд╛рдЪреАрди рд╕рднреНрдпрддрд╛рдУрдВ рдореЗрдВ рд╕рдВрдЦреНрдпрд╛рдПрдБ рд▓рд┐рдЦреЗ рдЬрд╛рдиреЗ рд╕реЗ рдкрд╣рд▓реЗ рдЧрд┐рдирдиреЗ рдХреЗ рд▓рд┐рдП рдЕрдкрдиреА рдЙрдВрдЧрд▓рд┐рдпреЛрдВ, рдкреИрд░ рдХреА рдЙрдВрдЧрд▓рд┐рдпреЛрдВ рдФрд░ рдпрд╣рд╛рдБ рддрдХ рдХрд┐ рдЧреЛрд▓реЗ рдпрд╛ рдкрддреНрдерд░реЛрдВ рдХрд╛ рдЙрдкрдпреЛрдЧ рдХрд┐рдпрд╛ рдЬрд╛рддрд╛ рдерд╛ред" },
+            { id: 159, title: "Down by the Gate", category: "Classic", icon: "ЁЯЪк", tags: ["classic", "silly"], isExclusive: true, lyrics: "Down by the gate, gate, gate,\nStood a little cat, cat, cat,\nWith a fuzzy hat, hat, hat,\nImagine that, that, that!", funFact: "Cats have exceptional night vision, which is six times better than a human's night vision.", funFact_hi: "рдмрд┐рд▓реНрд▓рд┐рдпреЛрдВ рдХреА рд░рд╛рдд рдХреА рджреГрд╖реНрдЯрд┐ рдЕрд╕рд╛рдзрд╛рд░рдг рд╣реЛрддреА рд╣реИ, рдЬреЛ рдордиреБрд╖реНрдп рдХреА рд░рд╛рдд рдХреА рджреГрд╖реНрдЯрд┐ рд╕реЗ рдЫрд╣ рдЧреБрдирд╛ рдмреЗрд╣рддрд░ рд╣реЛрддреА рд╣реИред" },
+            { id: 160, title: "The Alphabet's Echo", category: "Learning", icon: "ЁЯФд", tags: ["learning"], learningFocus: "Alphabet", isExclusive: true, lyrics: "A is for Achoo! when you sneeze,\nB is for Buzzing like the bees.\nC is for Clapping, one, two, three,\nD is for Dancing, wild and free!", funFact: "The English alphabet has 26 letters, but some languages have many more or many fewer!", funFact_hi: "рдЕрдВрдЧреНрд░реЗрдЬреА рд╡рд░реНрдгрдорд╛рд▓рд╛ рдореЗрдВ 26 рдЕрдХреНрд╖рд░ рд╣реЛрддреЗ рд╣реИрдВ, рд▓реЗрдХрд┐рди рдХреБрдЫ рднрд╛рд╖рд╛рдУрдВ рдореЗрдВ рдЗрд╕рд╕реЗ рдмрд╣реБрдд рдЕрдзрд┐рдХ рдпрд╛ рдмрд╣реБрдд рдХрдо рд╣реЛрддреЗ рд╣реИрдВред" },
+            { id: 163, title: "Time for a Snack", category: "Classic", icon: "ЁЯНО", tags: ["classic", "food"], isExclusive: true, lyrics: "The clock strikes four, it's time to eat,\nTime to eat, time to eat.\nThe clock strikes four, it's time to eat,\nLet's have a tasty treat.", funFact: "Eating fresh fruits like apples for snacks provides kids with healthy natural energy and essential vitamins.", funFact_hi: "рд╕реНрдиреИрдХреНрд╕ рдХреЗ рд▓рд┐рдП рд╕реЗрдм рдЬреИрд╕реЗ рддрд╛рдЬреЗ рдлрд▓ рдЦрд╛рдиреЗ рд╕реЗ рдмрдЪреНрдЪреЛрдВ рдХреЛ рд╕реНрд╡рд╕реНрде рдкреНрд░рд╛рдХреГрддрд┐рдХ рдКрд░реНрдЬрд╛ рдФрд░ рдЖрд╡рд╢реНрдпрдХ рд╡рд┐рдЯрд╛рдорд┐рди рдорд┐рд▓рддреЗ рд╣реИрдВред" },
+            { id: 165, title: "A Fuzzy Caterpillar", category: "Animal", icon: "ЁЯРЫ", tags: ["animal"], isExclusive: true, lyrics: "I found a fuzzy caterpillar,\nWon't my mommy be so thrilled with her?\nI found a fuzzy caterpillar,\nWhoops! She's tickling my chin!", funFact: "Fuzzy woolly bear caterpillars are said to predict the severity of the coming winter based on their band colors.", funFact_hi: "рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИ рдХрд┐ рд░реЛрдПрдБрджрд╛рд░ рдКрдиреА рднрд╛рд▓реВ рдХреИрдЯрд░рдкрд┐рд▓рд░ рдЕрдкрдиреЗ рдмреИрдВрдб рдХреЗ рд░рдВрдЧреЛрдВ рдХреЗ рдЖрдзрд╛рд░ рдкрд░ рдЖрдиреЗ рд╡рд╛рд▓реА рд╕рд░реНрджрд┐рдпреЛрдВ рдХреА рдЧрдВрднреАрд░рддрд╛ рдХреА рднрд╡рд┐рд╖реНрдпрд╡рд╛рдгреА рдХрд░рддреЗ рд╣реИрдВред" },
+            { id: 166, title: "The Magical Garden", category: "Learning", icon: "ЁЯМ╖", tags: ["learning"], learningFocus: "Imagination", isExclusive: true, lyrics: "In a magical garden, the flowers can sing,\nAnd butterflies whisper on shimmering wing.\nThe clouds are all fluffy like cotton candy sweet,\nA wonderful place for my two little feet.", funFact: "Using imagination and pretending is a crucial way for kids to develop problem-solving skills.", funFact_hi: "рдХрд▓реНрдкрдирд╛ рдХрд╛ рдЙрдкрдпреЛрдЧ рдХрд░рдирд╛ рдФрд░ рдирд╛рдЯрдХ рдХрд░рдирд╛ рдмрдЪреНрдЪреЛрдВ рдХреЗ рд▓рд┐рдП рд╕рдорд╕реНрдпрд╛-рд╕рдорд╛рдзрд╛рди рдХреМрд╢рд▓ рд╡рд┐рдХрд╕рд┐рдд рдХрд░рдиреЗ рдХрд╛ рдПрдХ рдорд╣рддреНрд╡рдкреВрд░реНрдг рддрд░реАрдХрд╛ рд╣реИред" },
+            { id: 167, title: "The Little Glimmer Bug", category: "Animal", icon: "ЁЯРЮ", tags: ["animal", "lullaby"], isExclusive: true, lyrics: "A little glimmer bug at night,\nFlashes his tiny, happy light.\nHe dances in the moonlit air,\nWithout a worry, without a care.", funFact: "Fireflies create their light through a chemical reaction in their bodies called bioluminescence.", funFact_hi: "рдЬреБрдЧрдиреВ рдЕрдкрдиреЗ рд╢рд░реАрд░ рдореЗрдВ рдПрдХ рд░рд╛рд╕рд╛рдпрдирд┐рдХ reaction рдХреЗ рдорд╛рдзреНрдпрдо рд╕реЗ рдЕрдкрдирд╛ рдкреНрд░рдХрд╛рд╢ рдмрдирд╛рддреЗ рд╣реИрдВ рдЬрд┐рд╕реЗ рдмрд╛рдпреЛрд▓реБрдорд┐рдиреЗрд╕реЗрдВрд╕ (рдЬреИрд╡-рджреАрдкреНрддрд┐) рдХрд╣рд╛ рдЬрд╛рддрд╛ рд╣реИред" },
+            { id: 168, title: "The Dreamland Train", category: "Learning", icon: "ЁЯЪВ", tags: ["lullaby", "transport"], isExclusive: true, lyrics: "The Dreamland Train goes choo-choo-choo,\nCarrying sleepy dreams for you.\nIt chugs along a starry track,\nDon't worry, it will bring them back.", funFact: "Many old steam trains had a 'cowcatcher' on the front, not to catch cows, but to clear obstacles off the tracks.", funFact_hi: "рдХрдИ рдкреБрд░рд╛рдиреА рднрд╛рдк рдЯреНрд░реЗрдиреЛрдВ рдХреЗ рдЖрдЧреЗ рдПрдХ 'рдХрд╛рдЙрдХреИрдЪрд░' рд▓рдЧрд╛ рд╣реЛрддрд╛ рдерд╛, рдЧрд╛рдпреЛрдВ рдХреЛ рдкрдХрдбрд╝рдиреЗ рдХреЗ рд▓рд┐рдП рдирд╣реАрдВ, рдмрд▓реНрдХрд┐ рдкрдЯрд░рд┐рдпреЛрдВ рд╕реЗ рдмрд╛рдзрд╛рдУрдВ рдХреЛ рд╕рд╛рдл рдХрд░рдиреЗ рдХреЗ рд▓рд┐рдПред" },
+            { id: 169, title: "The Cloud Sheep", category: "Classic", icon: "тШБя╕ПЁЯРС", tags: ["silly", "animal"], isExclusive: true, lyrics: "A fluffy cloud, a sheep so white,\nFloated by in broad daylight.\nHe did a baa-baa in the sky,\nAnd winked his little cloudy eye.", funFact: "Clouds are made of tiny water droplets or ice crystals that are so light they can float in the air.", funFact_hi: "рдмрд╛рджрд▓ рдкрд╛рдиреА рдХреА рдЫреЛрдЯреА рдмреВрдВрджреЛрдВ рдпрд╛ рдмрд░реНрдл рдХреЗ рдХреНрд░рд┐рд╕реНрдЯрд▓ рд╕реЗ рдмрдиреЗ рд╣реЛрддреЗ рд╣реИрдВ рдЬреЛ рдЗрддрдиреЗ рд╣рд▓реНрдХреЗ рд╣реЛрддреЗ рд╣реИрдВ рдХрд┐ рд╡реЗ рд╣рд╡рд╛ рдореЗрдВ рддреИрд░ рд╕рдХрддреЗ рд╣реИрдВред" },
+            { id: 170, title: "The Toothbrush March", category: "Learning", icon: "ЁЯж╖", tags: ["learning", "action"], learningFocus: "Personal Hygiene", isExclusive: true, lyrics: "My toothbrush marches left and right,\nTo make my teeth so clean and bright.\nIt marches up and marches down,\nThe cleanest teeth in all the town!", funFact: "It's important to brush your teeth for two minutes, which is about the length of singing 'Twinkle, Twinkle, Little Star' three times!", funFact_hi: "рдЕрдкрдиреЗ рджрд╛рдБрддреЛрдВ рдХреЛ рджреЛ рдорд┐рдирдЯ рддрдХ рдмреНрд░рд╢ рдХрд░рдирд╛ рдорд╣рддреНрд╡рдкреВрд░реНрдг рд╣реИ, рдЬреЛ рд▓рдЧрднрдЧ рддреАрди рдмрд╛рд░ 'рдЯреНрд╡рд┐рдВрдХрд▓, рдЯреНрд╡рд┐рдВрдХрд▓, рд▓рд┐рдЯрд┐рд▓ рд╕реНрдЯрд╛рд░' рдЧрд╛рдиреЗ рдХреЗ рдмрд░рд╛рдмрд░ рд╣реИ!" },
+            { id: 171, title: "The Tickle Monster", title_hi: "рдЧреБрджрдЧреБрджреА рд╡рд╛рд▓рд╛ рд░рд╛рдХреНрд╖рд╕", category: "Learning", icon: "ЁЯС╗", tags: ["silly", "action"], isExclusive: true, lyrics: "The tickle monster's on the loose,\nHe's not a monster you can shoo!\nWith fuzzy arms and happy feet,\nHe thinks a giggle is a treat.\n\nHe'll tickle toes and sleepy heads,\nAnd chase the grumpies from their beds.\nHe isn't scary, mean, or tall,\nHe just wants to make you laugh, that's all!", lyrics_hi: "рдЧреБрджрдЧреБрджреА рд╡рд╛рд▓рд╛ рд░рд╛рдХреНрд╖рд╕ рд╣реИ рднрд╛рдЧрд╛,\nрдпрд╣ рдРрд╕рд╛ рд░рд╛рдХреНрд╖рд╕ рдирд╣реАрдВ рдЬрд┐рд╕реЗ рддреБрдо рднрдЧрд╛ рд╕рдХреЛ!\nрд░реЛрдПрдБрджрд╛рд░ рдмрд╛рд╣реЛрдВ рдФрд░ рдЦреБрд╢ рдкреИрд░реЛрдВ рдХреЗ рд╕рд╛рде,\nрдЙрд╕реЗ рдЦрд┐рд▓рдЦрд┐рд▓рд╛рд╣рдЯ рдПрдХ рджрд╛рд╡рдд рд▓рдЧрддреА рд╣реИред\n\nрд╡рд╣ рдкреИрд░ рдХреА рдЙрдВрдЧрд▓рд┐рдпреЛрдВ рдФрд░ рдиреАрдВрдж рд╡рд╛рд▓реЗ рд╕рд┐рд░реЛрдВ рдХреЛ рдЧреБрджрдЧреБрджрд╛рдПрдЧрд╛,\nрдФрд░ рдЙрджрд╛рд╕реА рдХреЛ рдЙрдирдХреЗ рдмрд┐рд╕реНрддрд░реЛрдВ рд╕реЗ рднрдЧрд╛ рджреЗрдЧрд╛ред\nрд╡рд╣ рдбрд░рд╛рд╡рдирд╛, рдорддрд▓рдмреА рдпрд╛ рд▓рдВрдмрд╛ рдирд╣реАрдВ рд╣реИ,\nрд╡рд╣ рддреЛ рдмрд╕ рддреБрдореНрд╣реЗрдВ рд╣рдБрд╕рд╛рдирд╛ рдЪрд╛рд╣рддрд╛ рд╣реИ, рдмрд╕ рдЗрддрдирд╛ рд╣реА!", funFact: "Laughing is good for you! It can make you feel happy and relaxed.", funFact_hi: "рд╣рдБрд╕рд╛рдирд╛ рдЖрдкрдХреЗ рд▓рд┐рдП рдмрд╣реБрдд рдЕрдЪреНрдЫрд╛ рд╣реИ! рдЗрдЯ can make you feel happy and relaxed." },
+            { id: 172, title: "The Dream Weaver", title_hi: "рд╕рдкрдиреЛрдВ рдХрд╛ рдмреБрдирдХрд░", category: "Classic", icon: "ЁЯХ╕я╕П", tags: ["lullaby", "animal"], isExclusive: true, lyrics: "A little spider, kind and bright,\nWeaves happy dreams throughout the night.\nShe takes a thread of moonlight beams,\nAnd spins a web of happy dreams.\n\nShe adds a star, a candy cane,\nA ride upon a choo-choo train.\nSo close your eyes and sleep so deep,\nGood dreams the weaver helps you keep.", lyrics_hi: "рдПрдХ рдЫреЛрдЯреА рдордХрдбрд╝реА, рджрдпрд╛рд▓реБ рдФрд░ рдЙрдЬреНрдЬреНрд╡рд▓,\nрд░рд╛рдд рднрд░ рдЦреБрд╢рд┐рдпреЛрдВ рдХреЗ рд╕рдкрдиреЗ рдмреБрдирддреА рд╣реИред\nрд╡рд╣ рдЪрд╛рдВрджрдиреА рдХреА рдХрд┐рд░рдгреЛрдВ рдХрд╛ рдПрдХ рдзрд╛рдЧрд╛ рд▓реЗрддреА рд╣реИ,\nрдФрд░ рдЦреБрд╢рд┐рдпреЛрдВ рдХреЗ рд╕рдкрдиреЛрдВ рдХрд╛ рдЬрд╛рд▓ рдмреБрдирддреА рд╣реИред\n\nрд╡рд╣ рдПрдХ рддрд╛рд░рд╛, рдПрдХ рдХреИрдВрдбреА рдХреЗрди рдЬреЛрдбрд╝рддреА рд╣реИ,\nрдПрдХ рдЫреБрдХ-рдЫреБрдХ рдЧрд╛рдбрд╝реА рдХреА рд╕рд╡рд╛рд░реАред\nрддреЛ рдЕрдкрдиреА рдЖрдБрдЦреЗрдВ рдмрдВрдж рдХрд░реЛ рдФрд░ рдЧрд╣рд░реА рдиреАрдВрдж рд╕реЛ рдЬрд╛рдУ,\nрдЕрдЪреНрдЫреЗ рд╕рдкрдиреЗ рдмреБрдирдХрд░ рддреБрдореНрд╣рд╛рд░реА рдорджрдж рдХрд░рддреА рд╣реИред", funFact: "Not all spiders spin webs to catch food. Some use their silk for building homes or protecting their eggs.", funFact_hi: "рд╕рднреА рдордХрдбрд╝рд┐рдпрд╛рдБ рднреЛрдЬрди рдкрдХрдбрд╝рдиреЗ рдХреЗ рд▓рд┐рдП рдЬрд╛рд▓реЗ рдирд╣реАрдВ рдмреБрдирддреАрдВред рдХреБрдЫ рдЕрдкрдиреЗ рд░реЗрд╢рдо рдХрд╛ рдЙрдкрдпреЛрдЧ рдШрд░ рдмрдирд╛рдиреЗ рдпрд╛ рдЕрдкрдиреЗ рдЕрдВрдбреЛрдВ рдХреА рд░рдХреНрд╖рд╛ рдХреЗ рд▓рд┐рдП рдХрд░рддреА рд╣реИрдВред" },
+            { id: 173, title: "The Dancing Dinosaur", title_hi: "рдирд╛рдЪрдиреЗ рд╡рд╛рд▓рд╛ рдбрд╛рдпрдирд╛рд╕реЛрд░", category: "Animal", icon: "ЁЯТГЁЯжЦ", tags: ["animal", "silly", "action"], isExclusive: true, lyrics: "A dinosaur with happy feet,\nDanced all day right down the street.\nHe did the wiggle, did the stomp,\nAnd in the puddles, he would chomp!\n\nHe'd twirl around and give a roar,\nThen ask the people, \"Want some more?\"\nThe friendliest dino you could meet,\nWas the one with happy, dancing feet.", lyrics_hi: "рдПрдХ рдбрд╛рдпрдирд╛рд╕реЛрд░ рдЦреБрд╢ рдкреИрд░реЛрдВ рд╡рд╛рд▓рд╛,\nрд╕рдбрд╝рдХ рдкрд░ рджрд┐рди рднрд░ рдирд╛рдЪрддрд╛ рдерд╛ред\nрд╡рд╣ рдордЯрдХрддрд╛, рд╡рд╣ рдкрдЯрдХрддрд╛,\nрдФрд░ рдкреЛрдЦрд░реЛрдВ рдореЗрдВ рдЪрдмрд╛рддрд╛ рдерд╛!\n\nрд╡рд╣ рдШреВрдорддрд╛ рдФрд░ рдПрдХ рджрд╣рд╛рдбрд╝ рд▓рдЧрд╛рддрд╛,\nрдлрд┐рд░ рд▓реЛрдЧреЛрдВ рд╕реЗ рдкреВрдЫрддрд╛, \"рдФрд░ рдЪрд╛рд╣рд┐рдП рдХреНрдпрд╛?\"\nрд╕рдмрд╕реЗ рдорд┐рд▓рдирд╕рд╛рд░ рдбрд╛рдпрдирд╛рд╕реЛрд░ рдЬрд┐рд╕рд╕реЗ рдЖрдк рдорд┐рд▓ рд╕рдХрддреЗ рд╣реИрдВ,\nрд╡рд╣реА рдерд╛ рдЬрд┐рд╕рдХреЗ рдкреИрд░ рдЦреБрд╢ рдФрд░ рдирд╛рдЪрдиреЗ рд╡рд╛рд▓реЗ рдереЗред", funFact: "The name Dinosaur means 'terrible lizard' in Greek.", funFact_hi: "рдЧреНрд░реАрдХ рднрд╛рд╖рд╛ рдореЗрдВ рдбрд╛рдпрдирд╛рд╕реЛрд░ рдирд╛рдо рдХрд╛ рдЕрд░реНрде 'рднрдпрд╛рдирдХ рдЫрд┐рдкрдХрд▓реА' рд╣реЛрддрд╛ рд╣реИред" },
+            { id: 174, title: "The Magic Teapot", title_hi: "рдЬрд╛рджреБрдИ рдЪрд╛рдпрджрд╛рдиреА", category: "Indian", icon: "ЁЯлЦ", tags: ["silly", "indian", "learning"], isExclusive: true, lyrics: "I have a magic teapot, small and round,\nIt makes a very happy whistling sound.\nWhen I pour the tea, what do I see?\nA tiny little rainbow, just for me!", lyrics_hi: "рдореЗрд░реЗ рдкрд╛рд╕ рд╣реИ рдЬрд╛рджреБрдИ рдЪрд╛рдпрджрд╛рдиреА, рдЧреЛрд▓ рдФрд░ рдЫреЛрдЯреА,\nрдЬрд┐рд╕рдХреА рд╕реАрдЯреА рдмрдЬрддреА рд╣реИ рдмрд╣реБрдд рд╣реА рдореАрдареАред\nрдЬрдм рдореИрдВ рдЪрд╛рдп рдбрд╛рд▓рддрд╛ рд╣реВрдБ, рддреЛ рдХреНрдпрд╛ рджреЗрдЦрддрд╛ рд╣реВрдБ?\nрдПрдХ рдирдиреНрд╣рд╛ рд╕рд╛ рдЗрдВрджреНрд░рдзрдиреБрд╖, рд╕рд┐рд░реНрдл рдЕрдкрдиреЗ рд▓рд┐рдП рдкрд╛рддрд╛ рд╣реВрдБ!", funFact: "Rainbows are formed when sunlight shines through tiny water droplets in the air, acting like a natural prism!", funFact_hi: "рдЗрдВрджреНрд░рдзрдиреБрд╖ рддрдм рдмрдирддрд╛ рд╣реИ рдЬрдм рд╕реВрд░реНрдп рдХрд╛ рдкреНрд░рдХрд╛рд╢ рд╣рд╡рд╛ рдореЗрдВ рдкрд╛рдиреА рдХреА рдЫреЛрдЯреА рдмреВрдВрджреЛрдВ рд╕реЗ рд╣реЛрдХрд░ рдЧреБрдЬрд░рддрд╛ рд╣реИ, рдЬреЛ рдПрдХ рдкреНрд░рд╛рдХреГрддрд┐рдХ prism рдХреА рддрд░рд╣ рдХрд╛рдо рдХрд░рддрд╛ рд╣реИ!" },
+            { id: 175, title: "The Jumping Mango", title_hi: "рдЙрдЫрд▓рддрд╛ рдЖрдо", category: "Indian", icon: "ЁЯен", tags: ["indian", "food", "action"], isExclusive: true, lyrics: "Yellow, yellow mango, sweet and bright,\nJumping in the basket with all its might.\nHop to the left, hop to the right,\nThe yummiest treat for a summer night!", lyrics_hi: "рдкреАрд▓рд╛, рдкреАрд▓рд╛ рдЖрдо, рдореАрдард╛ рдФрд░ рдЪрдордХреАрд▓рд╛,\nрдЯреЛрдХрд░реА рдореЗрдВ рдЙрдЫрд▓реЗ, рдЬреИрд╕реЗ рд╣реЛ рдирд╢реАрд▓рд╛ред\nрдмрд╛рдИрдВ рдУрд░ рдХреВрджреЗ, рджрд╛рдИрдВ рдУрд░ рдЬрд╛рдП,\nрдЧрд░реНрдорд┐рдпреЛрдВ рдХреА рд░рд╛рдд рдореЗрдВ, рд╕рдм рдореЫреЗ рд╕реЗ рдЦрд╛рдПрдВ!", funFact: "The mango is the national fruit of India, and there are hundreds of different delicious varieties grown all over the country!", funFact_hi: "рдЖрдо рднрд╛рд░рдд рдХрд╛ рд░рд╛рд╖реНрдЯреНрд░реАрдп рдлрд▓ рд╣реИ, рдФрд░ рджреЗрд╢ рднрд░ рдореЗрдВ рдЗрд╕рдХреА рд╕реИрдХрдбрд╝реЛрдВ рд╕реНрд╡рд╛рджрд┐рд╖реНрдЯ рдХрд┐рд╕реНрдореЗрдВ рдЙрдЧрд╛рдИ рдЬрд╛рддреА рд╣реИрдВ!" },
+            { id: 176, title: "Little Monsoon Cloud", title_hi: "рдирдиреНрд╣рд╛ рдорд╛рдирд╕реВрдиреА рдмрд╛рджрд▓", category: "Learning", icon: "ЁЯМзя╕П", tags: ["learning", "nature", "indian"], isExclusive: true, lyrics: "Little monsoon cloud, fluffy and gray,\nWandering in the sky, ready to play.\nSprinkle some water on the thirsty tree,\nPitter-patter raindrops for you and me!", lyrics_hi: "рдирдиреНрд╣рд╛ рдорд╛рдирд╕реВрдиреА рдмрд╛рджрд▓, рд░реБрдИ рд╕рд╛ рдФрд░ рднреВрд░рд╛,\nрдЖрд╕рдорд╛рди рдореЗрдВ рдШреВрдореЗ, рдЦреЗрд▓ рдХреЗ рд▓рд┐рдП рдкреВрд░рд╛ред\nрдкреНрдпрд╛рд╕реЗ рдкреЗрдбрд╝ рдкрд░ рдереЛрдбрд╝рд╛ рдкрд╛рдиреА рдЫрд┐рдбрд╝рдХреЗ,\nрдЯрд┐рдк-рдЯрд┐рдк рдмрд╛рд░рд┐рд╢ рдХреА рдмреВрдБрджреЗрдВ, рдореЗрд░реЗ рдФрд░ рддреБрдореНрд╣рд╛рд░реЗ рд▓рд┐рдП!", funFact: "Monsoons bring the heavy rains that help farmers grow crops and fill up the rivers during the rainy season!", funFact_hi: "рдорд╛рдирд╕реВрди рднрд╛рд░реА рдмрд╛рд░рд┐рд╢ рд▓рд╛рддрд╛ рд╣реИ рдЬреЛ рдХрд┐рд╕рд╛рдиреЛрдВ рдХреЛ рдлрд╕рд▓реЗрдВ рдЙрдЧрд╛рдиреЗ рдФрд░ рдмрд░рд╕рд╛рдд рдХреЗ рдореМрд╕рдо рдореЗрдВ рдирджрд┐рдпреЛрдВ рдХреЛ рднрд░рдиреЗ рдореЗрдВ рдорджрдж рдХрд░рддреА рд╣реИ!" }
+        ];
+
+        // UTILITY: Generate SEO-friendly slug from title
+        function generateSlug(text) {
+            if (!text) return '';
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
+        }
+
+        window.TB = {
+            allRhymes: [],
+            currentRhymeList: [],
+            favorites: JSON.parse(localStorage.getItem('favoriteRhymes')) || [],
+            playlist: (JSON.parse(localStorage.getItem('playlist')) || []).filter(i => i.type === 'rhyme'),
+            currentRhyme: null,
+            isPlaylistMode: false,
+            currentPlaylistIndex: -1,
+            isBedtimeMode: false,
+            soundEffectsEnabled: true
+        };
+
+        // Web Audio Synthesizer for 100% self-contained micro sound feedback
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playPopSound() {
+            if (!window.TB.soundEffectsEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+                
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(150, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.1);
+                
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 0.12);
+            } catch(e) { console.warn("Audio Synthesizer block bypassed:", e); }
+        }
+
+        function playChimeSound() {
+            if (!window.TB.soundEffectsEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+                
+                const playNote = (freq, delay, dur) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime + delay);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + delay);
+                    osc.stop(ctx.currentTime + delay + dur);
+                };
+                
+                playNote(523.25, 0, 0.3);      // C5
+                playNote(659.25, 0.08, 0.3);   // E5
+                playNote(783.99, 0.16, 0.4);   // G5
+            } catch(e) { console.warn("Audio Synthesizer block bypassed:", e); }
+        }
+
+        // Floating emoji sparkles particle burst generator
+        function triggerSparkles(x, y, emojiSymbol) {
+            const count = 12;
+            const container = document.body;
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'emoji-particle';
+                particle.textContent = emojiSymbol;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 50 + Math.random() * 120;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance - 80; 
+                const rot = -180 + Math.random() * 360;
+                
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+                particle.style.setProperty('--rot', `${rot}deg`);
+                
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                
+                container.appendChild(particle);
+                setTimeout(() => particle.remove(), 1200);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const rhymeGalleryView = document.getElementById('rhyme-gallery');
+            const rhymeDetailView = document.getElementById('rhyme-detail');
+            const rhymeOfTheDaySection = document.getElementById('rhyme-of-the-day');
+            const rhymeGrid = document.getElementById('rhyme-grid');
+            const controlsSection = document.getElementById('controls-section');
+            const searchBar = document.getElementById('search-bar');
+            
+            const speedSelectButton = document.getElementById('speed-toggle-btn');
+            const speedMenu = document.getElementById('speed-dropdown-menu');
+            const speedChevron = document.getElementById('speed-chevron');
+            const speedDisplay = document.getElementById('speed-display');
+            const bedtimeBtn = document.getElementById('bedtime-mode-btn');
+            const audioFxBtn = document.getElementById('audio-fx-btn');
+
+            let isReading = false;
+            let readingQueue = [];
+            let englishVoice = null;
+            let hindiVoice = null;
+
+            function initVoices() {
+                if (!window.speechSynthesis) return;
+                const voices = window.speechSynthesis.getVoices();
+                englishVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Zira'))) || voices.find(v => v.lang === 'en-US');
+                hindiVoice = voices.find(v => v.lang === 'hi-IN' && v.name.includes('Google')) || voices.find(v => v.lang === 'hi-IN');
+            }
+            if (window.speechSynthesis) {
+                window.speechSynthesis.onvoiceschanged = initVoices;
+                initVoices();
+            }
+
+            function init() {
+                window.TB.allRhymes = [...hardcodedRhymesData].sort((a, b) => a.id - b.id);
+                
+                // NO CLS: Instantly parse static HTML cards and bind dynamic click handlers
+                window.TB.displayRhymeGallery(); 
+                
+                handleUrlParams();
+                renderPlaylist();
+                addBasicEventListeners();
+                
+                window.TB.speechRate = 1.0;
+            }
+
+            window.TB.hideAllViews = function() {
+                rhymeGalleryView.classList.add('hidden');
+                rhymeDetailView.classList.add('hidden');
+                rhymeOfTheDaySection.classList.add('hidden');
+                controlsSection.classList.add('hidden');
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                isReading = false;
+            }
+
+            window.TB.showMainView = function(viewName) {
+                window.TB.hideAllViews();
+                controlsSection.classList.remove('hidden');
+                resetMetaTags();
+
+                rhymeGalleryView.classList.remove('hidden');
+                rhymeOfTheDaySection.classList.remove('hidden');
+                
+                let rhymesToDisplay;
+                let galleryTitleText = "All Tools & Rhymes";
+                
+                if (viewName === 'Favorites') {
+                    rhymesToDisplay = window.TB.allRhymes.filter(r => window.TB.favorites.includes(r.id));
+                    galleryTitleText = "Your Favorites тЭдя╕П";
+                } else if (viewName === 'Lullaby') {
+                    rhymesToDisplay = window.TB.allRhymes.filter(r => r.tags && r.tags.includes('lullaby'));
+                    galleryTitleText = "Lullabies ЁЯМЩ";
+                } else if (['Animal', 'Learning', 'Classic', 'Indian'].includes(viewName)) {
+                    rhymesToDisplay = window.TB.allRhymes.filter(r => r.category === viewName);
+                    const icons = { 'Animal': 'ЁЯР╛', 'Learning': 'ЁЯза', 'Classic': 'ЁЯУЬ', 'Indian': 'ЁЯЗоЁЯЗ│' };
+                    galleryTitleText = `${viewName} Collection ${icons[viewName] || ''}`;
+                } else {
+                    rhymesToDisplay = window.TB.allRhymes;
+                    galleryTitleText = "Complete Collection";
+                }
+                
+                const galleryTitleEl = document.getElementById('gallery-title');
+                if (galleryTitleEl) galleryTitleEl.textContent = galleryTitleText;
+                
+                window.TB.filterRhymeGallery(rhymesToDisplay);
+                displayRhymeOfTheDay();
+            }
+
+            function goHome() {
+                playPopSound();
+                searchBar.value = '';
+                window.TB.isPlaylistMode = false;
+                window.TB.currentPlaylistIndex = -1;
+                updateActiveCategoryButton('Rhymes');
+                resetMetaTags();
+                window.TB.showMainView('Rhymes');
+                updateUrl({ category: 'Rhymes' });
+            }
+
+            function goBackToGallery() {
+                playPopSound();
+                window.TB.isPlaylistMode = false;
+                const activeCategory = document.querySelector('.category-btn.active')?.dataset.category || 'Rhymes';
+                resetMetaTags();
+                window.TB.showMainView(activeCategory);
+                updateUrl({ category: activeCategory });
+                
+                setTimeout(() => {
+                    const topPos = controlsSection.getBoundingClientRect().top + window.scrollY - 30;
+                    window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+                }, 50);
+            }
+
+            window.TB.toggleGridFavorite = function(id, event) {
+                if (event) event.stopPropagation();
+                
+                playChimeSound();
+                if (event && event.clientX && event.clientY) {
+                    triggerSparkles(event.clientX, event.clientY, 'тЬи');
+                }
+                
+                const idx = window.TB.favorites.indexOf(id);
+                if (idx > -1) {
+                    window.TB.favorites.splice(idx, 1);
+                } else {
+                    window.TB.favorites.push(id);
+                }
+                localStorage.setItem('favoriteRhymes', JSON.stringify(window.TB.favorites));
+                
+                // Update specific card fav button states
+                const cardFav = document.querySelector(`.rhyme-card[data-rhyme-id="${id}"] .fav-icon-grid`);
+                if (cardFav) {
+                    cardFav.innerHTML = idx > -1 ? 'ЁЯдН' : 'тЭдя╕П';
+                    cardFav.classList.toggle('text-red-500', idx === -1);
+                }
+                
+                const indicators = document.querySelectorAll(`.rhyme-card[data-rhyme-id="${id}"] .favorite-indicator`);
+                indicators.forEach(el => el.textContent = idx > -1 ? '' : 'тЭдя╕П');
+                
+                window.TB.showToast(idx > -1 ? "Removed from Favorites" : "Added to Favorites! тЭдя╕П");
+            };
+
+            // ZERO CLS ENGINE: Simply binds events to static elements instead of recreating them
+            window.TB.displayRhymeGallery = function() {
+                const cards = document.querySelectorAll('.rhyme-card');
+                cards.forEach(card => {
+                    const rhymeId = parseInt(card.dataset.rhymeId);
+                    const isFav = window.TB.favorites.includes(rhymeId);
+                    
+                    // Synchronize initial local storage states
+                    const indicator = card.querySelector('.favorite-indicator');
+                    if (indicator) indicator.textContent = isFav ? 'тЭдя╕П' : '';
+                    
+                    const btn = card.querySelector('.fav-icon-grid');
+                    if (btn) {
+                        btn.innerHTML = isFav ? 'тЭдя╕П' : 'ЁЯдН';
+                        btn.className = `fav-icon-grid absolute top-2 right-2 text-sm w-7 h-7 rounded-full bg-white/80 backdrop-blur-sm border border-stone-200 flex items-center justify-center shadow-sm hover:scale-115 transition-transform ${isFav ? 'text-red-500' : 'text-stone-300'}`;
+                    }
+                    
+                    // Custom non-CLS anchor clicks
+                    const anchor = card.querySelector('a');
+                    if (anchor) {
+                        anchor.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            playPopSound();
+                            window.TB.showRhymeDetail(rhymeId);
+                        });
+                    }
+                });
+                applyThemeClasses();
+            }
+
+            // ZERO CLS ENGINE: Toggles native CSS .hidden classes instantly
+            window.TB.filterRhymeGallery = function(rhymesToShow) {
+                const showIds = rhymesToShow.map(r => r.id);
+                const cards = document.querySelectorAll('.rhyme-card');
+                cards.forEach(card => {
+                    const id = parseInt(card.dataset.rhymeId);
+                    if (showIds.includes(id)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            window.TB.showRhymeDetail = function(rhymeId, fromPlaylist = false, playlistIndex = -1) {
+                const wasAlreadyInDetailView = !rhymeDetailView.classList.contains('hidden');
+
+                window.TB.currentRhyme = window.TB.allRhymes.find(r => r.id === rhymeId);
+                if (!window.TB.currentRhyme) return;
+                window.TB.hideAllViews();
+                rhymeDetailView.classList.remove('hidden');
+
+                const slug = generateSlug(window.TB.currentRhyme.title);
+                const seoUrlParam = `${rhymeId}-${slug}`;
+                const rhymeUrl = `https://toolblaster.com/educational/nursery-rhymes-for-kids/?rhyme=${seoUrlParam}`;
+                
+                updateMetaTags(`${window.TB.currentRhyme.title} | Toolblaster Learning`, `Listen and read ${window.TB.currentRhyme.title}. Toolblaster's interactive learning station.`, rhymeUrl);
+                updateUrl({ rhyme: seoUrlParam });
+                
+                window.TB.isPlaylistMode = fromPlaylist;
+                window.TB.currentPlaylistIndex = fromPlaylist ? playlistIndex : -1;
+                
+                document.getElementById('rhyme-title-en').textContent = window.TB.currentRhyme.title;
+                document.getElementById('rhyme-lyrics-en').textContent = window.TB.currentRhyme.lyrics;
+                const titleHi = document.getElementById('rhyme-title-hi');
+                const hindiCol = document.getElementById('hindi-column');
+                if (window.TB.currentRhyme.title_hi) {
+                    titleHi.textContent = window.TB.currentRhyme.title_hi;
+                    document.getElementById('rhyme-lyrics-hi').textContent = window.TB.currentRhyme.lyrics_hi;
+                    hindiCol.classList.remove('hidden');
+                } else {
+                    titleHi.textContent = '';
+                    hindiCol.classList.add('hidden');
+                }
+
+                const learning = document.getElementById('learning-focus-badge-container');
+                if (window.TB.currentRhyme.learningFocus) {
+                    document.getElementById('learning-focus-badge').textContent = `Educational Focus: ${window.TB.currentRhyme.learningFocus}`;
+                    learning.classList.remove('hidden');
+                } else { learning.classList.add('hidden'); }
+
+                const funFact = document.getElementById('fun-fact-container');
+                if (window.TB.currentRhyme.funFact) {
+                    document.getElementById('fun-fact-text-en').textContent = window.TB.currentRhyme.funFact;
+                    const hiText = document.getElementById('fun-fact-text-hi');
+                    if (window.TB.currentRhyme.funFact_hi) {
+                        hiText.textContent = window.TB.currentRhyme.funFact_hi;
+                        hiText.classList.remove('hidden');
+                    } else {
+                        hiText.classList.add('hidden');
+                    }
+                    funFact.classList.remove('hidden');
+                } else { funFact.classList.add('hidden'); }
+
+                const copyText = document.getElementById('copyright-text');
+                copyText.textContent = window.TB.currentRhyme.isExclusive ? `Copyright ┬й Toolblaster. Original Content.` : `Public Domain Learning Content.`;
+                document.getElementById('copyright-notice-container').classList.remove('hidden');
+
+                const favBtn = document.getElementById('favorite-btn');
+                favBtn.innerHTML = window.TB.favorites.includes(rhymeId) ? 'тЭдя╕П' : 'ЁЯдН';
+                
+                const listToUse = window.TB.favorites.includes(rhymeId) ? window.TB.allRhymes : window.TB.allRhymes;
+                const idx = listToUse.findIndex(r => r.id === rhymeId);
+                document.getElementById('previous-detail-rhyme-btn').disabled = idx <= 0;
+                document.getElementById('next-detail-rhyme-btn').disabled = idx >= listToUse.length - 1;
+
+                updateReadAloudBtn(document.getElementById('read-aloud-btn-rhyme'), false);
+                updatePlaylistBtns();
+                updatePlaylistNav();
+                applyThemeClasses();
+
+                const topPos = rhymeDetailView.getBoundingClientRect().top + window.scrollY - 30;
+                window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+            }
+
+            function displayRhymeOfTheDay() {
+                const day = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+                const rhyme = window.TB.allRhymes[day % window.TB.allRhymes.length];
+                if (!rhyme) return;
+                document.getElementById('rotd-icon').textContent = rhyme.icon || 'ЁЯО╡';
+                document.getElementById('rotd-title').textContent = rhyme.title;
+                document.getElementById('rotd-card').onclick = () => {
+                    playPopSound();
+                    window.TB.showRhymeDetail(rhyme.id);
+                };
+            }
+
+            function toggleReadAloud(event) {
+                if (!('speechSynthesis' in window)) { window.TB.showToast("TTS not supported in this browser."); return; }
+                
+                const btn = document.getElementById('read-aloud-btn-rhyme');
+
+                if (isReading) { 
+                    window.speechSynthesis.cancel(); 
+                    isReading = false; 
+                    readingQueue = [];
+                    updateReadAloudBtn(btn, false);
+                    return; 
+                }
+
+                if (!window.TB.currentRhyme) return;
+
+                playPopSound();
+                if (event && event.clientX && event.clientY) {
+                    triggerSparkles(event.clientX, event.clientY, window.TB.currentRhyme.icon || 'ЁЯО╡');
+                }
+
+                let enParts = [window.TB.currentRhyme.lyrics]; 
+                let hiParts = window.TB.currentRhyme.lyrics_hi ? [window.TB.currentRhyme.lyrics_hi] : [];
+
+                readingQueue = [];
+
+                const addToQueue = (textArray, lang, voice) => {
+                    if (!textArray) return;
+                    textArray.forEach(text => {
+                        if (!text || !text.trim()) return;
+                        const u = new SpeechSynthesisUtterance(text);
+                        u.lang = lang;
+                        if (voice) u.voice = voice;
+                        u.rate = window.TB.speechRate || 1.0;
+                        readingQueue.push(u);
+                    });
+                };
+
+                addToQueue(enParts, 'en-US', englishVoice);
+                addToQueue(hiParts, 'hi-IN', hindiVoice);
+
+                if (readingQueue.length === 0) return;
+
+                isReading = true;
+                updateReadAloudBtn(btn, true);
+                
+                let currentIdx = 0;
+
+                const playNext = () => {
+                    if (!isReading) return; 
+                    if (currentIdx >= readingQueue.length) {
+                        isReading = false;
+                        updateReadAloudBtn(btn, false);
+                        return;
+                    }
+                    const utterance = readingQueue[currentIdx];
+                    utterance.onend = () => { currentIdx++; playNext(); };
+                    utterance.onerror = (e) => { console.error("TTS Error", e); currentIdx++; playNext(); };
+                    window.speechSynthesis.speak(utterance);
+                };
+
+                playNext();
+            }
+
+            function updateReadAloudBtn(btn, active) {
+                if(btn) {
+                    btn.innerHTML = active ? 'тП╕я╕П' : 'ЁЯУв';
+                    btn.classList.toggle('text-red-500', active);
+                    btn.classList.toggle('border-red-500', active);
+                    btn.title = active ? 'Stop' : 'Read Aloud';
+                }
+            }
+
+            function toggleFavorite(id, btn, event) {
+                playChimeSound();
+                animateBtn(btn);
+                
+                if (event && event.clientX && event.clientY) {
+                    triggerSparkles(event.clientX, event.clientY, 'тЭдя╕П');
+                }
+
+                const idx = window.TB.favorites.indexOf(id);
+                if (idx > -1) window.TB.favorites.splice(idx, 1);
+                else window.TB.favorites.push(id);
+                
+                localStorage.setItem('favoriteRhymes', JSON.stringify(window.TB.favorites));
+                btn.innerHTML = idx > -1 ? 'ЁЯдН' : 'тЭдя╕П';
+                
+                const card = document.querySelector(`#rhyme-grid .rhyme-card[data-rhyme-id="${id}"] .fav-icon-grid`);
+                if(card) {
+                    card.innerHTML = idx > -1 ? 'ЁЯдН' : 'тЭдя╕П';
+                    card.classList.toggle('text-red-500', idx === -1);
+                }
+
+                const indicator = document.querySelector(`#rhyme-grid .rhyme-card[data-rhyme-id="${id}"] .favorite-indicator`);
+                if(indicator) indicator.textContent = idx > -1 ? '' : 'тЭдя╕П';
+            }
+
+            function togglePlaylistView() {
+                playPopSound();
+                const overlay = document.getElementById('playlist-view');
+                const sidebar = document.getElementById('playlist-sidebar');
+                
+                if (overlay.classList.contains('hidden')) {
+                    renderPlaylist();
+                    overlay.classList.remove('hidden');
+                    
+                    document.body.classList.add('overflow-hidden');
+                    document.documentElement.classList.add('overflow-hidden');
+                    
+                    setTimeout(() => {
+                        sidebar.classList.remove('translate-x-full');
+                    }, 10);
+                } else {
+                    sidebar.classList.add('translate-x-full');
+                    
+                    document.body.classList.remove('overflow-hidden');
+                    document.documentElement.classList.remove('overflow-hidden');
+                    
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            function renderPlaylist() {
+                const countEl = document.getElementById('playlist-count');
+                if (countEl) {
+                    countEl.textContent = window.TB.playlist.length;
+                    countEl.classList.toggle('hidden', window.TB.playlist.length === 0);
+                }
+
+                const container = document.getElementById('playlist-items');
+                container.innerHTML = '';
+                
+                document.getElementById('clear-playlist-btn').disabled = window.TB.playlist.length === 0;
+
+                if (window.TB.playlist.length === 0) {
+                    container.innerHTML = '<div class="text-center text-stone-400 py-10"><i class="fa-solid fa-list-ul text-3xl mb-3"></i><p class="font-medium text-sm">Your queue is empty.</p></div>';
+                    return;
+                }
+
+                window.TB.playlist.forEach((item, idx) => {
+                    let details = window.TB.allRhymes.find(r => r.id === item.id);
+                    if (!details) return;
+                    
+                    const div = document.createElement('div');
+                    const themeTextClass = window.TB.isPlaylistMode ? 'text-slate-355' : 'text-stone-850';
+                    const activeRowClass = window.TB.isPlaylistMode && idx === window.TB.currentPlaylistIndex 
+                        ? 'bg-red-500/10 border-red-400' 
+                        : (window.TB.isBedtimeMode ? 'bg-slate-800 border-slate-700 hover:border-slate-600' : 'bg-white border-stone-200 hover:border-stone-300');
+                    
+                    div.className = `flex justify-between items-center p-3 rounded-xl border transition-all duration-400 ${activeRowClass}`;
+                    div.innerHTML = `
+                        <div class="cursor-pointer flex-grow flex items-center gap-3" onclick="window.TB.playFromPlaylist(${idx})">
+                            <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-sm shadow-inner text-stone-900">
+                                ${window.TB.isPlaylistMode && idx === window.TB.currentPlaylistIndex ? 'ЁЯФК' : (details.icon || 'ЁЯО╡')}
+                            </div>
+                            <span class="font-bold text-sm ${themeTextClass}">${details.title}</span>
+                        </div>
+                        <button class="text-stone-400 hover:text-red-500 w-8 h-8 flex items-center justify-center transition-colors" onclick="window.TB.removeFromPlaylist(${item.id})"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            window.TB.playFromPlaylist = function(idx) {
+                togglePlaylistView();
+                const item = window.TB.playlist[idx];
+                window.TB.showRhymeDetail(item.id, true, idx);
+            };
+
+            window.TB.removeFromPlaylist = function(id) {
+                playPopSound();
+                window.TB.playlist = window.TB.playlist.filter(i => i.id !== id);
+                localStorage.setItem('playlist', JSON.stringify(window.TB.playlist));
+                renderPlaylist();
+                if (window.TB.currentRhyme && window.TB.currentRhyme.id === id) updatePlaylistBtns();
+            };
+
+            function addToPlaylist(id, btn, event) {
+                playChimeSound();
+                animateBtn(btn);
+                
+                if (event && event.clientX && event.clientY) {
+                    triggerSparkles(event.clientX, event.clientY, 'ЁЯО╡');
+                }
+
+                const exists = window.TB.playlist.some(i => i.id === id);
+                if (exists) {
+                    window.TB.playlist = window.TB.playlist.filter(i => i.id !== id);
+                    window.TB.showToast("Removed from queue.");
+                } else {
+                    window.TB.playlist.push({ id, type: 'rhyme' });
+                    window.TB.showToast("Added to queue!");
+                }
+                localStorage.setItem('playlist', JSON.stringify(window.TB.playlist));
+                renderPlaylist(); 
+                updatePlaylistBtns();
+            }
+
+            function updatePlaylistBtns() {
+                if(window.TB.currentRhyme) {
+                    const inList = window.TB.playlist.some(i => i.id === window.TB.currentRhyme.id);
+                    const btn = document.getElementById('add-to-playlist-btn');
+                    btn.innerHTML = inList ? '<i class="fa-solid fa-check text-green-500"></i>' : '<i class="fa-solid fa-plus text-stone-600"></i>';
+                }
+            }
+
+            function updatePlaylistNav() {
+                const rNav = document.getElementById('playlist-nav-buttons');
+                rNav.classList.add('hidden'); 
+                
+                if (window.TB.isPlaylistMode && window.TB.playlist.length > 0) {
+                    const pos = document.getElementById('playlist-position');
+                    const prev = document.getElementById('prev-rhyme-btn');
+                    const next = document.getElementById('next-rhyme-btn');
+                    
+                    rNav.classList.remove('hidden');
+                    pos.textContent = `Queue: ${window.TB.currentPlaylistIndex + 1} of ${window.TB.playlist.length}`;
+                    
+                    const newPrev = prev.cloneNode(true); prev.parentNode.replaceChild(newPrev, prev);
+                    const newNext = next.cloneNode(true); next.parentNode.replaceChild(newNext, next);
+                    
+                    newPrev.onclick = () => { if(window.TB.currentPlaylistIndex > 0) window.TB.playFromPlaylist(window.TB.currentPlaylistIndex - 1); };
+                    newNext.onclick = () => { if(window.TB.currentPlaylistIndex < window.TB.playlist.length - 1) window.TB.playFromPlaylist(window.TB.currentPlaylistIndex + 1); };
+                    
+                    newPrev.disabled = window.TB.currentPlaylistIndex <= 0;
+                    newNext.disabled = window.TB.currentPlaylistIndex >= window.TB.playlist.length - 1;
+                }
+            }
+
+            // Sleepy Bedtime Mode styling classes manipulator using robust stylesheet overrides
+            function applyThemeClasses() {
+                const isBedtime = window.TB.isBedtimeMode;
+                document.body.classList.toggle('theme-bedtime', isBedtime);
+                
+                const orb1 = document.getElementById('orb-1');
+                const orb2 = document.getElementById('orb-2');
+                const orb3 = document.getElementById('orb-3');
+                const orb4 = document.getElementById('orb-4');
+                if (orb1) {
+                    orb1.className = isBedtime
+                        ? "absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-violet-900/20 blur-[120px]"
+                        : "absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-100/10 blur-[120px]";
+                }
+                if (orb2) {
+                    orb2.className = isBedtime
+                        ? "absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-900/30 blur-[100px]"
+                        : "absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-blue-50/20 blur-[100px]";
+                }
+                if (orb3) {
+                    orb3.className = isBedtime
+                        ? "absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-slate-900/20 blur-[80px]"
+                        : "absolute top-[30%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-yellow-50/10 blur-[80px]";
+                }
+                if (orb4) {
+                    orb4.className = isBedtime
+                        ? "absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-fuchsia-900/20 blur-[90px]"
+                        : "absolute bottom-[20%] left-[20%] w-[25vw] h-[25vw] rounded-full bg-pink-100/10 blur-[90px]";
+                }
+            }
+
+            function toggleBedtimeMode() {
+                playChimeSound();
+                window.TB.isBedtimeMode = !window.TB.isBedtimeMode;
+                
+                const icon = document.getElementById('theme-btn-icon');
+                const text = document.getElementById('theme-btn-text');
+                if (icon) icon.textContent = window.TB.isBedtimeMode ? 'тШАя╕П' : 'ЁЯМЩ';
+                if (text) text.textContent = window.TB.isBedtimeMode ? 'Day Mode' : 'Bedtime Mode';
+                
+                applyThemeClasses();
+                window.TB.showToast(window.TB.isBedtimeMode ? "Sleepy Bedtime Mode Activated! ЁЯМЩ" : "Daylight Mode Restored! тШАя╕П");
+            }
+
+            function toggleAudioFx() {
+                window.TB.soundEffectsEnabled = !window.TB.soundEffectsEnabled;
+                playPopSound();
+                
+                const icon = document.getElementById('audio-fx-icon');
+                const text = document.getElementById('audio-fx-text');
+                if (icon) icon.textContent = window.TB.soundEffectsEnabled ? 'ЁЯФК' : 'ЁЯФЗ';
+                if (text) text.textContent = window.TB.soundEffectsEnabled ? 'Magical Sounds' : 'Muted Sounds';
+                
+                window.TB.showToast(window.TB.soundEffectsEnabled ? "Sensory Audio Enabled! ЁЯФК" : "Magical Sounds Muted! ЁЯФЗ");
+            }
+
+            function shareContent() {
+                let shareUrl = 'https://toolblaster.com/educational/nursery-rhymes-for-kids/';
+                if (window.TB.currentRhyme && !document.getElementById('rhyme-detail').classList.contains('hidden')) {
+                    const slug = generateSlug(window.TB.currentRhyme.title);
+                    shareUrl += `?rhyme=${window.TB.currentRhyme.id}-${slug}`;
+                }
+
+                if (navigator.share) {
+                    navigator.share({ title: document.title, url: shareUrl }).catch(console.error);
+                } else {
+                    navigator.clipboard.writeText(shareUrl);
+                    window.TB.showToast('Link copied to clipboard!');
+                }
+            }
+
+            function surpriseMe() {
+                const list = window.TB.allRhymes;
+                const item = list[Math.floor(Math.random() * list.length)];
+                window.TB.showRhymeDetail(item.id);
+            }
+
+            function addBasicEventListeners() {
+                document.getElementById('back-button').addEventListener('click', goBackToGallery);
+                
+                searchBar.addEventListener('input', () => {
+                     const val = searchBar.value.toLowerCase();
+                     const galleryTitleEl = document.getElementById('gallery-title');
+                     if (galleryTitleEl && val.length > 0) {
+                         galleryTitleEl.textContent = `Results for "${val}"`;
+                     } else if (galleryTitleEl) {
+                         const activeCategory = document.querySelector('.category-btn.active')?.dataset.category || 'Rhymes';
+                         const icons = { 'Animal': 'ЁЯР╛', 'Learning': 'ЁЯза', 'Classic': 'ЁЯУЬ', 'Indian': 'ЁЯЗоЁЯЗ│', 'Lullaby': 'ЁЯМЩ', 'Favorites': 'тЭдя╕П' };
+                         galleryTitleEl.textContent = val.length === 0 && activeCategory !== 'Rhymes' ? `${activeCategory} Collection ${icons[activeCategory] || ''}` : `All Rhymes`;
+                     }
+                     // Map to static filter
+                     const matched = window.TB.allRhymes.filter(r => r.title.toLowerCase().includes(val) || r.lyrics.toLowerCase().includes(val));
+                     window.TB.filterRhymeGallery(matched);
+                });
+
+                document.getElementById('category-filters').addEventListener('click', (e) => {
+                    const btn = e.target.closest('.category-btn');
+                    if (btn) {
+                        playPopSound();
+                        const cat = btn.dataset.category;
+                        updateActiveCategoryButton(cat);
+                        window.TB.showMainView(cat);
+                        updateUrl({ category: cat });
+                    }
+                });
+
+                document.getElementById('previous-detail-rhyme-btn').addEventListener('click', () => {
+                    playPopSound();
+                    const list = window.TB.allRhymes;
+                    const idx = list.findIndex(r => r.id === window.TB.currentRhyme.id) - 1;
+                    if(idx >= 0 && idx < list.length) window.TB.showRhymeDetail(list[idx].id);
+                });
+
+                document.getElementById('next-detail-rhyme-btn').addEventListener('click', () => {
+                    playPopSound();
+                    const list = window.TB.allRhymes;
+                    const idx = list.findIndex(r => r.id === window.TB.currentRhyme.id) + 1;
+                    if(idx >= 0 && idx < list.length) window.TB.showRhymeDetail(list[idx].id);
+                });
+
+                document.getElementById('read-aloud-btn-rhyme').addEventListener('click', toggleReadAloud);
+                
+                document.getElementById('favorite-btn').addEventListener('click', (e) => {
+                    toggleFavorite(window.TB.currentRhyme.id, e.currentTarget, e);
+                });
+                
+                document.getElementById('add-to-playlist-btn').addEventListener('click', (e) => {
+                    addToPlaylist(window.TB.currentRhyme.id, e.currentTarget, e);
+                });
+                
+                document.getElementById('playlist-toggle-btn').addEventListener('click', togglePlaylistView);
+                document.getElementById('close-playlist-btn').addEventListener('click', togglePlaylistView);
+                
+                // Playroom settings interactive listeners - Custom speed select triggers
+                speedSelectButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    playPopSound();
+                    const isHidden = speedMenu.classList.contains('hidden');
+                    if (isHidden) {
+                        speedMenu.classList.remove('hidden');
+                        setTimeout(() => {
+                            speedMenu.classList.remove('scale-95', 'opacity-0');
+                            speedMenu.classList.add('scale-100', 'opacity-100');
+                        }, 10);
+                        speedChevron.classList.add('rotate-180');
+                        speedSelectButton.setAttribute('aria-expanded', 'true');
+                    } else {
+                        closeSpeedDropdown();
+                    }
+                });
+
+                // Dropdown speed option items selection
+                document.querySelectorAll('.speed-option-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const targetVal = parseFloat(item.dataset.value);
+                        window.TB.speechRate = targetVal;
+                        playPopSound();
+                        
+                        document.querySelectorAll('.speed-option-item').forEach(opt => {
+                            opt.classList.remove('selected-active', 'bg-red-500', 'text-white');
+                            opt.classList.add('hover:bg-red-50', 'hover:text-red-700', 'text-stone-700');
+                        });
+                        item.classList.remove('hover:bg-red-50', 'hover:text-red-700', 'text-stone-700');
+                        item.classList.add('selected-active', 'bg-red-500', 'text-white');
+
+                        const speedEmojis = { 0.7: 'ЁЯРв Slow', 1.0: 'тЪб Normal', 1.3: 'ЁЯЪА Fast' };
+                        speedDisplay.textContent = speedEmojis[targetVal] || `тЪб ${targetVal}x`;
+                        
+                        window.TB.showToast(`Reading Speed Set to: ${item.textContent.trim()}`);
+                        closeSpeedDropdown();
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!document.getElementById('speed-wrapper').contains(e.target)) {
+                        closeSpeedDropdown();
+                    }
+                });
+
+                function closeSpeedDropdown() {
+                    if (!speedMenu.classList.contains('hidden')) {
+                        speedMenu.classList.remove('scale-100', 'opacity-100');
+                        speedMenu.classList.add('scale-95', 'opacity-0');
+                        speedChevron.classList.remove('rotate-180');
+                        speedSelectButton.setAttribute('aria-expanded', 'false');
+                        setTimeout(() => {
+                            speedMenu.classList.add('hidden');
+                        }, 250);
+                    }
+                }
+                
+                bedtimeBtn.addEventListener('click', toggleBedtimeMode);
+                audioFxBtn.addEventListener('click', toggleAudioFx);
+                
+                document.getElementById('playlist-view').addEventListener('click', (e) => {
+                    if (e.target.id === 'playlist-view') {
+                        togglePlaylistView();
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        const playlistView = document.getElementById('playlist-view');
+                        if (playlistView && !playlistView.classList.contains('hidden')) {
+                            togglePlaylistView();
+                        }
+                    }
+                });
+
+                document.getElementById('clear-playlist-btn').addEventListener('click', () => { window.TB.playlist = []; localStorage.setItem('playlist', '[]'); renderPlaylist(); });
+                document.getElementById('share-rhyme-btn').addEventListener('click', shareContent);
+                document.getElementById('print-rhyme-btn').addEventListener('click', () => { document.body.classList.add('printing-rhyme'); window.print(); document.body.classList.remove('printing-rhyme'); });
+                document.getElementById('surprise-button').addEventListener('click', surpriseMe);
+            }
+
+            function updateActiveCategoryButton(cat) {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                const activeBtn = document.querySelector(`.category-btn[data-category="${cat}"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                }
+            }
+
+            const origTitle = document.title;
+            const origDesc = document.querySelector('meta[name="description"]').getAttribute('content');
+            
+            function updateMetaTags(t, d, url) {
+                document.title = t;
+                const descMeta = document.querySelector('meta[name="description"]');
+                if (descMeta) descMeta.setAttribute('content', d);
+                
+                const ogUrl = document.querySelector('meta[property="og:url"]');
+                if (ogUrl) ogUrl.setAttribute('content', url);
+                
+                let link = document.querySelector('link[rel="canonical"]');
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'canonical';
+                    document.head.appendChild(link);
+                }
+                link.setAttribute('href', url);
+            }
+            
+            function resetMetaTags() { updateMetaTags(origTitle, origDesc, 'https://toolblaster.com/educational/nursery-rhymes-for-kids/'); }
+            
+            function updateUrl(params) {
+                let isDetail = false;
+                try {
+                    const url = new URL(window.location);
+                    url.search = '';
+                    for (const k in params) { 
+                        if(params[k]) { 
+                            url.searchParams.set(k, params[k]); 
+                            if(['rhyme'].includes(k)) isDetail = true; 
+                        } 
+                    }
+                    if (window.location.protocol !== 'blob:' && window.location.protocol !== 'about:') {
+                        window.history.pushState({}, '', url.pathname + url.search);
+                    }
+                } catch (e) {
+                    console.warn("URL history updates skipped in sandbox environment:", e.message);
+                }
+                const currentParams = new URLSearchParams(params);
+                const searchStr = currentParams.toString() ? '?' + currentParams.toString() : '';
+                const canonicalUrl = isDetail ? `https://toolblaster.com/educational/nursery-rhymes-for-kids/${searchStr}` : 'https://toolblaster.com/educational/nursery-rhymes-for-kids/';
+                updateMetaTags(isDetail ? document.title : origTitle, isDetail ? document.querySelector('meta[name="description"]').getAttribute('content') : origDesc, canonicalUrl);
+            }
+
+            function handleUrlParams() {
+                const p = new URLSearchParams(window.location.search);
+                if (p.get('rhyme')) window.TB.showRhymeDetail(parseInt(p.get('rhyme')));
+                else if (p.get('category')) { updateActiveCategoryButton(p.get('category')); window.TB.showMainView(p.get('category')); }
+                else { resetMetaTags(); window.TB.showMainView('Rhymes'); }
+            }
+            
+            function animateBtn(btn) {
+                btn.classList.add('animate-pop');
+                setTimeout(() => btn.classList.remove('animate-pop'), 300);
+            }
+
+            window.TB.showToast = function(msg) {
+                const t = document.getElementById('toast-notification');
+                t.textContent = msg;
+                t.classList.add('show');
+                setTimeout(() => t.classList.remove('show'), 2500);
+            };
+
+            init();
+        });
+    </script>
+</body>
+</html>
