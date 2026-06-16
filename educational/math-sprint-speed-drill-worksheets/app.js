@@ -17,6 +17,7 @@ let currentCurriculum = 'CBSE';
 let selectedAvatar = '🏃‍♂️'; 
 let missedQuestionsThisRun = []; 
 let printingCorrectionWorksheetOnly = false; 
+let lastWorksheetConfig = ""; // Track worksheet math parameter changes to clear cache
 
 // MULTI-STUDENT PROFILE SYSTEM
 let studentsList = [];
@@ -973,6 +974,13 @@ function updateWorksheetPreview() {
     // Adjust operators dynamically if specialized topic chosen
     if (topic === 'fractions_basic') activeOps = ['frac'];
     else if (topic === 'decimals_basic') activeOps = ['dec'];
+
+    // Clear cache if key mathematical parameters have changed
+    const currentConfigKey = `${grade}_${count}_${topic}_${activeOps.join(',')}`;
+    if (lastWorksheetConfig !== currentConfigKey) {
+        cachedWorksheetQuestionsList = [];
+        lastWorksheetConfig = currentConfigKey;
+    }
 
     if (activeOps.length === 0) {
         document.getElementById('screen-worksheet-preview').innerHTML = `<p class="text-center text-red-700 font-bold p-10">Choose at least one math operation from options panel.</p>`;
