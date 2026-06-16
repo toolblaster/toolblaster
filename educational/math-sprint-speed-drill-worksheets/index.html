@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- JSON-LD Structured Data: Combined SoftwareApplication, EducationalAudience, HowTo, & FAQPage schemas -->
+    <!-- JSON-LD Structured Data: Combined SoftwareApplication, EducationalAudience & FAQPage schemas -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -59,37 +59,6 @@
           }
         },
         {
-          "@type": "HowTo",
-          "name": "How to Use MathSprint Speed Drills & Worksheets",
-          "description": "A parent and student guide to configuring math timed sprints, generating customized printable PDF worksheets, and tracking progress scores.",
-          "step": [
-            {
-              "@type": "HowToStep",
-              "name": "Select Your Learning Mode",
-              "text": "Choose 'Timed Drill' for an online mental arithmetic speed run, 'Worksheet' to design printable papers, or 'Dashboard' to add student roster profiles.",
-              "url": "https://toolblaster.com/educational/math-sprint-speed-drill-worksheets#tab-drill"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Configure Math Settings",
-              "text": "Choose your academic class level (Class 1-5 preset), select mathematical operators (Addition, Subtraction, Multiplication, Division, Fractions, or Decimals), and select your runner avatar.",
-              "url": "https://toolblaster.com/educational/math-sprint-speed-drill-worksheets#drill-setup-screen"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Engage and Practice",
-              "text": "Press Start Active Sprint to play. Type answers on the custom numpad to build combo streaks, or click Print PDF inside the worksheet panel to generate custom worksheets.",
-              "url": "https://toolblaster.com/educational/math-sprint-speed-drill-worksheets#drill-active-screen"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Analyze Performance Progress",
-              "text": "Review mistakes in the Parent's Weakness Analysis Room. Download a targeted correction worksheet to re-test, or export student scores to a spreadsheet.",
-              "url": "https://toolblaster.com/educational/math-sprint-speed-drill-worksheets#redemption-analysis-card"
-            }
-          ]
-        },
-        {
           "@type": "FAQPage",
           "mainEntity": [
             {
@@ -114,22 +83,6 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes! The integrated Classroom Dashboard lets teachers and parents register multiple student profiles, track individual progress runs, view high scores, streaks, and easily export all class metrics to a standard CSV file."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How do children unlock locked avatars like Speedy Turtle or Robo-Pi?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Locked avatars are reward-based. Completing your first run unlocks Einstein Owl. Scoring over 50 points unlocks Speedy Turtle, while scoring 120 points unlocks Rocket. Reaching a 90% accuracy score unlocks Robo-Pi."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is my child's performance data and student roster saved privately?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. MathSprint runs 100% client-side. All student names, completed sprint history records, streak metrics, and unlocked badges are saved locally inside your browser's private sandbox local storage (no account registrations required)."
               }
             }
           ]
@@ -207,6 +160,16 @@
             height: 100%;
             pointer-events: none;
             z-index: 40;
+        }
+
+        /* --- ACCESSIBLE FOCUS OUTLINE RESET --- */
+        button:focus, a:focus, input:focus, select:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 2px solid var(--accent-primary) !important;
+            outline-offset: 2px !important;
         }
 
         /* Seamless Toggle Transition */
@@ -363,16 +326,16 @@
             </div>
         </nav>
 
-        <!-- Dynamic Screen Area (Hides cleanly during physical prints) -->
+        <!-- Dynamic Screen Area (Constraint set to max-w-3xl (768px) on load for drill mode) -->
         <div id="screen-container" class="w-full text-left print-hide">
-            <div id="main-tool-card" class="bg-white border border-stone-200 shadow-md rounded-3xl p-5 sm:p-8 mx-auto my-0 relative max-w-2xl transition-all duration-300">
+            <div id="main-tool-card" class="bg-white border border-stone-200 shadow-md rounded-3xl p-5 sm:p-8 mx-auto my-0 relative max-w-3xl transition-all duration-300">
 
                 <!-- Header Block - Balanced Premium Font Sizes with Settings Cog -->
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex-grow text-center pl-6">
                         <h1 class="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">🧮 MathSprint: Drill & Worksheets</h1>
                     </div>
-                    <button type="button" id="settings-cog-btn" class="text-stone-600 hover:text-red-800 transition-all text-base p-1 focus:outline-none" title="Parental Settings & Workspace Customization" onclick="toggleConsolidatedSettings()">
+                    <button type="button" id="settings-cog-btn" class="text-stone-600 hover:text-red-800 transition-all text-base p-1 focus:outline-none focus:ring-0 active:outline-none" title="Parental Settings & Workspace Customization" onclick="toggleConsolidatedSettings()">
                         <i class="fa-solid fa-gear text-lg sm:text-xl"></i>
                     </button>
                 </div>
@@ -536,7 +499,7 @@
                                     <input type="checkbox" value="perc" class="sr-only peer" aria-label="Percentages">
                                     <div class="absolute inset-0 rounded-xl border-2 border-transparent peer-checked:border-red-800 peer-checked:bg-red-50/50 pointer-events-none transition-all z-0"></div>
                                     <span class="text-sm font-black text-stone-900 relative z-10 peer-checked:text-red-955">%</span>
-                                    <span class="text-[8px] font-black text-stone-700 uppercase relative z-10">Perc</span>
+                                    <span class="text-[8px] font-black text-stone-700 uppercase relative z-10">Percent</span>
                                 </label>
                             </div>
                         </div>
@@ -931,7 +894,7 @@
                     </div>
                 </div>
 
-                <!-- PANEL C: TEACHER & MULTI-STUDENT PROFILE DASHBOARD -->
+                <!-- PANEL C: TEACHER & MULTI-STUDENT PROFILE DASHBOARD (Explicit ARIA Role tabpanel) -->
                 <div id="dashboard-mode-panel" role="tabpanel" aria-labelledby="tab-dashboard" class="hidden space-y-5">
                     <div class="bg-stone-50 border border-stone-200 p-5 rounded-2xl space-y-4">
                         <h2 class="text-xs font-black text-stone-900 uppercase tracking-widest text-center border-b border-stone-200 pb-2">Classroom Profiles Manager</h2>
@@ -984,8 +947,8 @@
             </div>
         </div>
 
-        <!-- Related Educational Tools Links - OPTIMIZED ALIGNED TO OFFICIAL 1080PX WIDTH -->
-        <div class="max-w-[1080px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
+        <!-- Related Educational Tools Links - STRICTLY OPTIMIZED TO 768PX FOR ALIGNMENT SYMMETRY -->
+        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <!-- Card 1: Nursery Rhymes -->
                 <a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
@@ -1017,27 +980,35 @@
             </div>
         </div>
 
-        <!-- SEO Article & Scientific Evaluation Guides Section - STRICTLY OPTIMIZED TO 768PX SEO SUITE WIDTH -->
-        <section class="max-w-[768px] mx-auto mt-8 print-hide px-4 sm:px-1 space-y-8 text-stone-850 font-inter">
+        <!-- SEO Article & Scientific Evaluation Guides Section - STRICTLY OPTIMIZED TO 768px (3xl) FOR PERFECT READABILITY -->
+        <section class="max-w-[768px] mx-auto mt-10 print-hide px-4 sm:px-1 space-y-8 text-stone-850 font-inter">
             
-            <!-- SECTION 1: BRAIN MUSCLES COGNITIVE SCIENCE (RE-ALIGNED & SIMPLIFIED FOR KIDS, PARENTS & TEACHERS) -->
-            <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-                <h2 class="text-lg sm:text-xl font-black text-stone-900 tracking-tight border-b pb-3 flex items-center gap-2">
+            <!-- SECTION 1: SIMPLIFIED, NON-BORING GAMIFIED EXPLANATION FOR PARENTS & KIDS -->
+            <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-5">
+                <h2 class="text-base sm:text-lg font-black text-stone-900 tracking-tight border-b pb-3 flex items-center gap-2">
                     <i class="fa-solid fa-brain text-red-700 animate-pulse"></i> Why Speed Math Drills Help Build Strong Brain Muscles!
                 </h2>
+                
                 <p class="text-xs sm:text-sm leading-relaxed text-stone-700">
-                    Think of your brain like a muscle - the more you exercise it, the stronger and faster it gets! MathSprint is designed to make mental arithmetic feel as natural as breathing. Instead of spending your precious energy counting on your fingers or getting stuck on basic steps, our quick sprints help you build <strong>strong, automatic math habits</strong>. This means you can recall addition, subtraction, or multiplication facts instantly, leaving your brain completely free to tackle big, exciting science and math problem-solving in school and life!
+                    Think of your brain like a muscle—the more you exercise it, the stronger and faster it gets! MathSprint is designed to make mental arithmetic feel as natural as breathing. Instead of spending your precious energy counting on your fingers or getting stuck on basic steps, our quick sprints help you build <strong>strong, automatic math habits</strong>. This means you can recall addition, subtraction, or multiplication facts instantly, leaving your brain completely free to tackle big, exciting science and math problem-solving in school and life!
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-stone-50 border border-stone-200 rounded-2xl p-5 space-y-3">
-                        <h3 class="text-xs font-black uppercase tracking-wider text-stone-900">🚀 1. Freeing Up Your Brain Power</h3>
-                        <p class="text-xs text-stone-700 leading-relaxed">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                    <div class="bg-stone-50 border border-stone-100 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl leading-none">🚀</span>
+                            <h3 class="text-xs font-black uppercase text-stone-900 tracking-wide leading-none">Freeing Up Brain Power</h3>
+                        </div>
+                        <p class="text-[11px] text-stone-600 leading-normal font-semibold">
                             When basic calculations (like $8 \times 7$ or $12 + 15$) become instant mental habits, children do not get overwhelmed by complex classroom math. This is what teachers call "cognitive load reduction"—or simply making plenty of room in your head for bigger and more creative ideas!
                         </p>
                     </div>
-                    <div class="bg-stone-50 border border-stone-200 rounded-2xl p-5 space-y-3">
-                        <h3 class="text-xs font-black uppercase tracking-wider text-stone-900">🎉 2. Turning Math Practice into a Fun Game</h3>
-                        <p class="text-xs text-stone-700 leading-relaxed">
+                    <div class="bg-stone-50 border border-stone-100 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl leading-none">🎉</span>
+                            <h3 class="text-xs font-black uppercase text-stone-900 tracking-wide leading-none">Playful Speed Challenges</h3>
+                        </div>
+                        <p class="text-[11px] text-stone-600 leading-normal font-semibold">
                             By using custom companion racer avatars, daily streaks, score points, and rewarding badges, we turn boring math practice into a low-stress, highly motivating game. It keeps kids excited to beat their own personal high scores every single day!
                         </p>
                     </div>
@@ -1097,7 +1068,7 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: RE-ENGINEERED HIGH-CONTRAST PARENT-FRIENDLY ADAPTIVE EXPLANATION -->
+            <!-- SECTION 3: RE-ENGINEERED HIGH-CONTRAST PARENT-FRIENDLY ADAPTIVE EXPLANATION (COMPACT NO RAW LATEX) -->
             <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
                 <h2 class="text-lg sm:text-xl font-black text-stone-900 tracking-tight border-b pb-3 flex items-center gap-2">
                     <i class="fa-solid fa-square-root-variable text-red-700"></i> Mathematical Modeling of Adaptive Learning
@@ -1107,7 +1078,7 @@
                 </p>
                 
                 <div class="bg-stone-50 border border-stone-200 rounded-2xl p-5 sm:p-6 space-y-4">
-                    <h3 class="text-xs font-black text-stone-950 uppercase tracking-widest flex items-center gap-1.5 border-b border-stone-200 pb-2">
+                    <h3 class="text-xs font-black text-stone-955 uppercase tracking-widest flex items-center gap-1.5 border-b border-stone-200 pb-2">
                         <i class="fa-solid fa-circle-info text-blue-700"></i> Parent's Guide to Adaptive Learning
                     </h3>
                     <p class="text-xs text-stone-700 leading-relaxed">
@@ -1144,6 +1115,7 @@
                 </div>
             </div>
 
+            <!-- SECTION 4: CURRICULUM TABLE -->
             <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
                 <h2 class="text-lg sm:text-xl font-black text-stone-900 tracking-tight border-b pb-3 flex items-center gap-2">
                     <i class="fa-solid fa-list-check text-red-700"></i> Classroom Curriculum Standards (Class 1 to 5)
@@ -1183,7 +1155,7 @@
                 </div>
             </div>
 
-            <!-- Frequently Asked Questions Accordions -->
+            <!-- SECTION 5: FAQS (5 COMPACT ACCESSIBLE BLOCKS) -->
             <div class="bg-white border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-5">
                 <h2 class="text-lg sm:text-xl font-black text-stone-900 tracking-tight border-b pb-3">
                     ❓ Frequently Asked Questions (Parents Guide)
