@@ -36,7 +36,8 @@ const TOOLBLASTER_APPS = [
         category: "Educational",
         icon: "fa-graduation-cap",
         apps: [
-            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes-for-kids/" }
+            { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes-for-kids/" },
+            { name: "Math Sprint", url: "/educational/math-sprint-speed-drill-worksheets/", icon: "fa-calculator", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/math-sprint-speed-drill-worksheets/" }
         ]
     }
 ];
@@ -86,6 +87,7 @@ function injectHeader() {
         if (currentPath.includes('/decide/')) centerTitle = "DECIDE.";
         else if (currentPath.includes('/pomodoro-study-timer/')) centerTitle = "STUDY TIMER";
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
+        else if (currentPath.includes('/educational/math-sprint-speed-drill-worksheets')) centerTitle = "MATH SPRINT";
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/productivity/habit-tracker')) centerTitle = "HABIT TRACKER";
@@ -509,8 +511,8 @@ function injectFooterAndModals() {
                             <a href="https://api.whatsapp.com/send?text=${shareMsg}${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#25D366] hover:scale-110 transition-all duration-300" aria-label="Share on WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-sm"></i>
                             </a>
-                            <!-- X (Twitter) -->
-                            <a href="https://twitter.com/intent/tweet?url=${currentUrl}&text=${shareMsg}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
+                            <!-- Twitter -->
+                            <a href="https://twitter.com/intent/tweet?text=${shareMsg}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
                                 <svg class="w-3.5 h-3.5 fill-current inline-block pb-[1px]" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
                                 </svg>
