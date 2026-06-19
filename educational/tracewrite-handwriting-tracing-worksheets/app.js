@@ -1,10 +1,10 @@
 // STREAMING_CHUNK: Initializing state and historical tracing log systems...
-        let currentMode = 'drill'; 
-        let activeTracerLetter = 'A'; 
+        let currentMode = 'drill'; 
+        let activeTracerLetter = 'A'; 
         let audioCtx = null;
         let isTracingDrawing = false;
-        let activeTheme = 'chalk'; 
-         
+        let activeTheme = 'chalk'; 
+         
         let canvas = null;
         let ctx = null;
 
@@ -173,12 +173,12 @@
         // STREAMING_CHUNK: Populating Parent Dashboard Analytics view...
         function populateAnalyticsDashboard() {
             const logs = pruneOldActivityLogs();
-            
+             
             // Calculate Stats
             const traces = logs.filter(l => l.type === 'trace');
             const totalTraced = traces.length;
-            const avgAccuracy = totalTraced > 0 
-                ? Math.round(traces.reduce((sum, current) => sum + current.accuracy, 0) / totalTraced) 
+            const avgAccuracy = totalTraced > 0 
+                ? Math.round(traces.reduce((sum, current) => sum + current.accuracy, 0) / totalTraced) 
                 : 0;
             const totalSheets = logs.filter(l => l.type === 'print').length;
 
@@ -292,7 +292,7 @@
         function startChalkSound() {
             initAudio();
             if (!audioCtx) return;
-             
+             
             try {
                 chalkOscNode = audioCtx.createOscillator();
                 chalkOscNode.type = 'triangle';
@@ -304,11 +304,11 @@
                 for (let i = 0; i < bufferSize; i++) {
                     output[i] = Math.random() * 2 - 1;
                 }
-                 
+                 
                 chalkNoiseNode = audioCtx.createBufferSource();
                 chalkNoiseNode.buffer = noiseBuffer;
                 chalkNoiseNode.loop = true;
-                 
+                 
                 chalkFilterNode = audioCtx.createBiquadFilter();
                 chalkFilterNode.type = 'bandpass';
                 if (activeTheme === 'chalk') {
@@ -318,15 +318,15 @@
                     chalkFilterNode.frequency.setValueAtTime(3000, audioCtx.currentTime);
                     chalkFilterNode.Q.setValueAtTime(1.5, audioCtx.currentTime);
                 }
-                 
+                 
                 chalkGainNode = audioCtx.createGain();
                 chalkGainNode.gain.setValueAtTime(activeTheme === 'chalk' ? 0.03 : 0.015, audioCtx.currentTime);
-                 
+                 
                 chalkOscNode.connect(chalkFilterNode);
                 chalkNoiseNode.connect(chalkFilterNode);
                 chalkFilterNode.connect(chalkGainNode);
                 chalkGainNode.connect(audioCtx.destination);
-                 
+                 
                 chalkOscNode.start();
                 chalkNoiseNode.start();
             } catch(e) {
@@ -351,8 +351,8 @@
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
-            osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.12); 
+            osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); 
+            osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.12); 
             gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
             osc.connect(gain);
@@ -363,14 +363,14 @@
 
         function speakPhonicsText(txt) {
             if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel(); 
-             
+            window.speechSynthesis.cancel(); 
+             
             const accent = document.getElementById('drill-voice-select')?.value || 'US';
             const rate = parseFloat(document.getElementById('drill-speed-select')?.value || '0.9');
-             
+             
             const utterance = new SpeechSynthesisUtterance(txt);
             utterance.rate = rate;
-            utterance.pitch = 1.15; 
+            utterance.pitch = 1.15; 
 
             const voices = window.speechSynthesis.getVoices();
             if (accent === 'UK') {
@@ -454,7 +454,16 @@
 
         function stopConfettiCelebration() {
             isConfettiActive = false;
-            if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+            if (confettiAnimationId) {
+                cancelAnimationFrame(confettiAnimationId);
+            }
+            
+            // FIX: Ensure the canvas is completely wiped clean so no frozen particles remain
+            const canvasEl = document.getElementById('confetti-canvas');
+            if (canvasEl) {
+                const ctxEl = canvasEl.getContext('2d');
+                ctxEl.clearRect(0, 0, canvasEl.width, canvasEl.height);
+            }
         }
 
         function switchMode(mode) {
@@ -481,7 +490,7 @@
             } else {
                 if (card) {
                     card.classList.remove('max-w-[1080px]');
-                    card.classList.add('max-w-3xl'); 
+                    card.classList.add('max-w-3xl'); 
                 }
                 resetTracerMode();
             }
@@ -538,11 +547,11 @@
             pathEl.setAttribute("d", pathData);
             const pathLength = pathEl.getTotalLength();
             
-            const segmentsCount = 30; 
+            const segmentsCount = 30; 
             for (let i = 0; i <= segmentsCount; i++) {
                 const pt = pathEl.getPointAtLength((i / segmentsCount) * pathLength);
                 tracingCheckpoints.push({
-                    x: pt.x, 
+                    x: pt.x, 
                     y: pt.y,
                     visited: false
                 });
@@ -584,13 +593,13 @@
             if (cue) {
                 if (pct > 80) {
                     cue.textContent = "Almost complete! Perfect alignment.";
-                    cue.className = "text-emerald-700 font-extrabold";
+                    cue.className = "text-emerald-700 font-extrabold block leading-tight";
                 } else if (pct > 40) {
                     cue.textContent = "Writing nicely! Follow standard paths.";
-                    cue.className = "text-amber-700 font-extrabold";
+                    cue.className = "text-amber-700 font-extrabold block leading-tight";
                 } else {
                     cue.textContent = "Follow the numbered star guide!";
-                    cue.className = "text-red-700 font-extrabold";
+                    cue.className = "text-red-700 font-extrabold block leading-tight";
                 }
             }
         }
@@ -606,7 +615,7 @@
 
             hand.classList.remove('hidden');
             let progress = 0;
-             
+             
             function animateStep() {
                 if (progress > pathLength) {
                     hand.classList.add('hidden');
@@ -623,7 +632,10 @@
 
         function selectLetterForOnScreenTracer(char) {
             activeTracerLetter = char;
-             
+            
+            // FIX: Ensure confetti is fully cleared immediately when selecting a new letter
+            stopConfettiCelebration();
+
             document.getElementById('drill-setup-screen').classList.add('hidden');
             document.getElementById('drill-active-screen').classList.remove('hidden');
 
@@ -640,7 +652,7 @@
         }
 
         function resetTracerMode() {
-            stopConfettiCelebration();
+            stopConfettiCelebration(); // Ensure confetti is cleared when returning to main screen
             document.getElementById('drill-active-screen').classList.add('hidden');
             document.getElementById('drill-setup-screen').classList.remove('hidden');
         }
@@ -729,6 +741,7 @@
         }
 
         function clearTracerCanvas() {
+            stopConfettiCelebration(); // Ensure confetti is cleared on clicking "Clear Board"
             if (ctx && canvas) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
@@ -738,7 +751,7 @@
         // STREAMING_CHUNK: Validating strokes and committing results to historical log entries...
         function validateTracedLetter() {
             const pct = Math.min(100, Math.round((visitedCheckpointsCount / tracingCheckpoints.length) * 100));
-             
+             
             if (pct < 50) {
                 speakPhonicsText("Try drawing inside the guide dots!");
                 showToast("Keep going! Trace closer to the guidelines.");
@@ -766,7 +779,7 @@
             speakPhonicsText(`${ph}. Wonderful tracing practice!`);
 
             showToast(`Accuracy: ${pct}%! Awarded +10 Points! Check your Rewards Shelf!`);
-             
+             
             let streak = parseInt(localStorage.getItem('tracewrite_streak_val')) || 0;
             streak++;
             localStorage.setItem('tracewrite_streak_val', streak);
@@ -784,17 +797,16 @@
 
             if (theme === 'chalk') {
                 wrap.className = "relative w-full max-w-lg aspect-square rounded-2xl p-1 bg-stone-900 border-4 border-stone-700 overflow-hidden flex items-center justify-center shadow-inner theme-chalkboard";
-                guide.className = "font-bold text-[220px] sm:text-[280px] font-mono tracking-tighter leading-none select-none text-white/10";
                 btnChalk.className = "px-2 py-1 rounded bg-stone-900 text-white shadow";
                 btnPencil.className = "px-2 py-1 rounded text-stone-700 ml-0.5";
             } else {
                 wrap.className = "relative w-full max-w-lg aspect-square rounded-2xl p-1 bg-white border-4 border-stone-300 overflow-hidden flex items-center justify-center shadow-inner theme-paper-desk";
-                guide.className = "font-bold text-[220px] sm:text-[280px] font-mono tracking-tighter leading-none select-none text-blue-900/10";
                 btnPencil.className = "px-2 py-1 rounded bg-stone-900 text-white shadow";
                 btnChalk.className = "px-2 py-1 rounded text-stone-700 ml-0.5";
             }
 
             initTracerCanvasBoard();
+            drawGuidesOverlay(); // Ensure the guided SVG track updates its colors based on the theme
         }
 
         function drawGuidesOverlay() {
@@ -805,19 +817,52 @@
             const pathData = svgLetterCoordinates[activeTracerLetter];
             if (!pathData) return;
 
+            // Hide the old normal big text, we will replace it with precise SVG dots/tracks
+            const bgText = document.getElementById('tracer-bg-guide');
+            if (bgText) bgText.style.display = 'none';
+
             const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
             pathEl.setAttribute("d", pathData);
             const pathLength = pathEl.getTotalLength();
 
+            // --- 1. Generate Dotted Highway SVG specifically for tracing ---
+            const svgVisual = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgVisual.setAttribute("viewBox", "0 0 200 200");
+            svgVisual.setAttribute("class", "absolute inset-0 w-full h-full pointer-events-none z-10");
+            
+            // Faint thick shadow line (Creates a track boundary)
+            const solidPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            solidPath.setAttribute("d", pathData);
+            solidPath.setAttribute("fill", "none");
+            solidPath.setAttribute("stroke", activeTheme === 'chalk' ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.08)");
+            solidPath.setAttribute("stroke-width", "28");
+            solidPath.setAttribute("stroke-linecap", "round");
+            solidPath.setAttribute("stroke-linejoin", "round");
+            svgVisual.appendChild(solidPath);
+
+            // Inner precise dashed path to trace
+            const dashedPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            dashedPath.setAttribute("d", pathData);
+            dashedPath.setAttribute("fill", "none");
+            dashedPath.setAttribute("stroke", activeTheme === 'chalk' ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.4)");
+            dashedPath.setAttribute("stroke-width", "4");
+            dashedPath.setAttribute("stroke-linecap", "round");
+            dashedPath.setAttribute("stroke-linejoin", "round");
+            dashedPath.setAttribute("stroke-dasharray", "8, 12");
+            svgVisual.appendChild(dashedPath);
+
+            overlay.appendChild(svgVisual);
+
+            // --- 2. Create the animated sequence checkpoints (1, 2, 3) ---
             const checkpoints = [0.05, 0.5, 0.95];
             checkpoints.forEach((fraction, index) => {
                 const pt = pathEl.getPointAtLength(fraction * pathLength);
                 const indicator = document.createElement('div');
                 indicator.className = "absolute w-6 h-6 rounded-full text-white font-black text-xs flex items-center justify-center shadow-lg guide-dot-pulse transform -translate-x-1/2 -translate-y-1/2 z-20 bg-emerald-400";
-                 
+                 
                 if (index === 1) indicator.className = indicator.className.replace('bg-emerald-400', 'bg-amber-400');
                 if (index === 2) indicator.className = indicator.className.replace('bg-emerald-400', 'bg-red-400');
-                 
+                 
                 indicator.style.left = `${(pt.x / 200) * 100}%`;
                 indicator.style.top = `${(pt.y / 200) * 100}%`;
                 indicator.textContent = index + 1;
@@ -853,7 +898,7 @@
             if (modal) {
                 const isHidden = modal.classList.toggle('hidden');
                 if (!isHidden) {
-                    clearRewardNotification(); 
+                    clearRewardNotification(); 
                     refreshStickerShelfDisplay();
                     document.body.style.overflow = 'hidden';
                     document.documentElement.style.overflow = 'hidden';
@@ -931,7 +976,7 @@
                     chk.checked = checked;
                 }
             }
-            toggleMilestoneCheck(); 
+            toggleMilestoneCheck(); 
         }
 
         function refreshStickerShelfDisplay() {
@@ -951,7 +996,7 @@
                     unlocked ? 'bg-amber-100 border-amber-300 scale-100' : 'bg-stone-100 border-stone-200 opacity-40 grayscale scale-95'
                 }`;
                 block.style.minWidth = "80px";
-                 
+                 
                 block.innerHTML = `
                     <span class="text-3xl">${badge.icon}</span>
                     <span class="text-[10px] font-black leading-tight text-stone-700 mt-1 truncate block w-full">${badge.label}</span>
@@ -990,7 +1035,7 @@
             const style = document.getElementById('ws-style-select').value;
             const textRaw = document.getElementById('ws-text-input').value.toUpperCase() || "TRACE";
             const fontStyle = document.getElementById('ws-cursive-select').value;
-            const rowsCount = parseInt(document.getElementById('ws-rows-select').value) || 8; 
+            const rowsCount = parseInt(document.getElementById('ws-rows-select').value) || 8; 
             const previewBox = document.getElementById('screen-worksheet-preview');
             const printBox = document.getElementById('print-sheet');
 
@@ -1000,11 +1045,11 @@
             let printRowsHtml = '';
 
             const rowHeight = 120;
-            const textY = 75; 
+            const textY = 75; 
 
             if (style === 'custom_name') {
                 for (let i = 0; i < rowsCount; i++) {
-                    const traceStyle = (i === 0) ? 'bold' : (i < 4 ? 'dotted' : 'empty'); 
+                    const traceStyle = (i === 0) ? 'bold' : (i < 4 ? 'dotted' : 'empty'); 
                     rowsHtml += generateWorksheetSVGRow(textRaw, fontStyle, traceStyle, i + 1, rowHeight, textY);
                     printRowsHtml += generateWorksheetSVGRow(textRaw, fontStyle, traceStyle, i + 1, rowHeight, textY, true);
                 }
@@ -1126,7 +1171,7 @@
                 const topBlue = 30;
                 const midDashedRed = 62;
                 const bottomBlue = 95;
-                computedY = fontStyle === 'cursive' ? 88 : 91; 
+                computedY = fontStyle === 'cursive' ? 88 : 91; 
 
                 linesHtml = `
                     <line x1="10" y1="${topBlue}" x2="790" y2="${topBlue}" stroke="#2563eb" stroke-width="1.2" />
@@ -1138,7 +1183,7 @@
                 const greyMid1 = 48;
                 const greyMid2 = 71;
                 const redBottom = 94;
-                computedY = 71; 
+                computedY = 71; 
 
                 linesHtml = `
                     <line x1="10" y1="${redTop}" x2="790" y2="${redTop}" stroke="#dc2626" stroke-width="1.2" />
@@ -1164,7 +1209,7 @@
                 const blueMid1 = 45;
                 const blueMid2 = 75;
                 const redBottom = 95;
-                computedY = 75; 
+                computedY = 75; 
 
                 linesHtml = `
                     <line x1="10" y1="${redTop}" x2="790" y2="${redTop}" stroke="#dc2626" stroke-width="1.2" />
@@ -1194,9 +1239,9 @@
             document.getElementById('ws-school-input').value = "TRACEWRITE HANDWRITING DRILL";
             document.getElementById('ws-style-select').value = "custom_name";
             document.getElementById('ws-cursive-select').value = "print";
-            document.getElementById('ws-rows-select').value = "8"; 
+            document.getElementById('ws-rows-select').value = "8"; 
             document.getElementById('ws-country-select').value = "IN";
-             
+             
             handleWorksheetStyleSelect();
             showToast("Options reset to default parameters.");
         }
@@ -1222,9 +1267,9 @@
         // STREAMING_CHUNK: Bootstrapping application on window ready...
         document.addEventListener('DOMContentLoaded', () => {
             populateAlphabetGrids();
-            switchMode('drill'); 
+            switchMode('drill'); 
             loadMilestoneStates();
-            refreshStickerShelfDisplay(); 
+            refreshStickerShelfDisplay(); 
             pruneOldActivityLogs(); // automatically prune legacy data older than 15 days on mount
 
             document.getElementById('tracer-interactive-canvas')?.addEventListener('touchmove', (e) => {
