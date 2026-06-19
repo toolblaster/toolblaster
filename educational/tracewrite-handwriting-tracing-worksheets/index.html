@@ -77,7 +77,7 @@
                 "text": "Yes! TraceWrite uses standard school 4-line guides (red top/bottom and blue middle lines) mathematically scaled with a 1:1.5:1 ratio for ascenders, middle bodies, and descenders, promoting correct writing habits."
               }
             }
-          }
+          ]
         }
       ]
     }
@@ -314,15 +314,17 @@
                     </div>
                 </div>
 
-                <!-- SIDE-BY-SIDE COMPACT BUTTON TRIGGERS -->
-                <div class="flex justify-center gap-2 mb-5">
+                <!-- SIDE-BY-SIDE COMPACT BUTTON TRIGGERS (Optimized for Mobile) -->
+                <div class="flex flex-row justify-between sm:justify-center w-full gap-1.5 sm:gap-2 mb-4 sm:mb-5">
                     <!-- Presets & Guidelines Button -->
-                    <button type="button" onclick="toggleMilestonesModal()" class="bg-red-50 hover:bg-red-100 text-red-800 border border-red-200 px-2.5 py-1 rounded-full text-[8px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm active:scale-95">
-                        <i class="fa-solid fa-graduation-cap"></i> Presets & Study Guidelines
+                    <button type="button" onclick="toggleMilestonesModal()" class="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-800 border border-red-200 px-1 py-1.5 sm:px-2.5 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 leading-tight text-center">
+                        <i class="fa-solid fa-graduation-cap text-[10px] sm:text-[9.5px]"></i>
+                        <span>Presets <span class="hidden sm:inline">& Study</span></span>
                     </button>
-                    <!-- Stickers & Rewards Popup Button with pulsing Notification Badge -->
-                    <button type="button" onclick="toggleRewardsModal()" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-2.5 py-1 rounded-full text-[8px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm active:scale-95 relative">
-                        <i class="fa-solid fa-star"></i> Stickers & Rewards
+                    <!-- Stickers & Rewards Popup Button -->
+                    <button type="button" onclick="toggleRewardsModal()" class="flex-1 sm:flex-initial bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-1 py-1.5 sm:px-2.5 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 relative leading-tight text-center">
+                        <i class="fa-solid fa-star text-[10px] sm:text-[9.5px]"></i>
+                        <span>Rewards <span class="hidden sm:inline">& Stickers</span></span>
                         <!-- Dynamic notification dot indicator -->
                         <span id="reward-notif-dot" class="absolute -top-1 -right-1 flex h-2 w-2 hidden">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -330,8 +332,9 @@
                         </span>
                     </button>
                     <!-- Parent Dashboard & Analytics Button -->
-                    <button type="button" id="btn-parent-analytics" onclick="toggleAnalyticsModal()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-full text-[8px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm active:scale-95 relative">
-                        <i class="fa-solid fa-chart-line"></i> Dashboard & History
+                    <button type="button" id="btn-parent-analytics" onclick="toggleAnalyticsModal()" class="flex-1 sm:flex-initial bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 py-1.5 sm:px-2.5 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 relative leading-tight text-center">
+                        <i class="fa-solid fa-chart-line text-[10px] sm:text-[9.5px]"></i>
+                        <span>History <span class="hidden sm:inline">& Dashboard</span></span>
                         <!-- Dynamic analytics alert dot -->
                         <span id="analytics-notif-dot" class="absolute -top-1 -right-1 flex h-2 w-2 hidden">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -454,14 +457,14 @@
                         </div>
 
                         <!-- Guided Accuracy Feedback Bar -->
-                        <div class="w-full bg-stone-50 border border-stone-200 rounded-xl p-3 flex justify-between items-center text-xs font-bold text-stone-700">
-                            <div>
+                        <div class="w-full bg-stone-50 border border-stone-200 rounded-xl p-3 flex flex-row justify-between items-start gap-3 text-xs font-bold text-stone-700">
+                            <div class="shrink-0">
                                 <span class="text-[10px] uppercase text-stone-400 block font-black">Accuracy Level</span>
                                 <span id="realtime-accuracy-counter" class="text-stone-900 font-extrabold">0% Checked</span>
                             </div>
-                            <div>
+                            <div class="text-right flex-1 min-w-0">
                                 <span class="text-[10px] uppercase text-stone-400 block font-black">Task Cue</span>
-                                <span id="realtime-status-message-cue" class="text-red-700 font-extrabold">Follow the numerical path!</span>
+                                <span id="realtime-status-message-cue" class="text-red-700 font-extrabold block leading-tight">Follow the numerical path!</span>
                             </div>
                         </div>
 
@@ -660,11 +663,31 @@
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-600"><i class="fa-solid fa-brain"></i></span> The Cognitive Power of Handwriting & Letter Tracing
                     </h2>
-                    <p class="leading-relaxed mb-3 text-stone-800 text-[13px] font-medium">
-                        Teaching young learners to write is one of the most vital developmental milestones. While digital interfaces are expanding, physical handwriting practice remains an irreplaceable tool for <strong>cognitive map building</strong>. Research in developmental psychology proves that physically tracing letter strokes stimulates complex neural pathways in the brain's reading network, helping preschool and kindergarten students recognize characters and develop spelling memory significantly faster than typing.
+                    <p class="leading-relaxed mb-4 text-stone-800 text-[13px] font-medium">
+                        Teaching young learners to write is one of the most vital developmental milestones. While digital interfaces are everywhere, the tactile experience of physical handwriting remains an irreplaceable tool for early brain development. Here is why structured handwriting practice is crucial:
                     </p>
-                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium">
-                        Our advanced <strong>TraceWrite Worksheet Generator</strong> is designed to support parents and early-grade teachers. By providing beautifully aligned, standard school 4-line grids with custom name-repetition modes, it bridges the gap between interactive digital screen practice and focused offline physical writing drills.
+                    
+                    <ul class="space-y-3 mb-5 pl-1">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 font-medium leading-relaxed">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
+                            <span><strong>Cognitive Map Building:</strong> Physically tracing letter strokes stimulates complex neural pathways in the brain's reading network, significantly accelerating character recognition.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 font-medium leading-relaxed">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
+                            <span><strong>Fine Motor Skills:</strong> Gripping a pencil and navigating standard 4-line boundaries develops crucial hand-eye coordination and finger dexterity.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 font-medium leading-relaxed">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
+                            <span><strong>Enhanced Memory Retention:</strong> Studies prove that children who write words by hand develop much stronger spelling memory compared to typing on a keyboard.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 font-medium leading-relaxed">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
+                            <span><strong>Improved Focus:</strong> The deliberate pacing required to draw sequential shapes naturally calms the mind and promotes longer attention spans in toddlers.</span>
+                        </li>
+                    </ul>
+
+                    <p class="leading-relaxed mb-0 text-stone-800 text-[13px] font-medium border-t border-stone-200/60 pt-4">
+                        Our advanced <strong>TraceWrite Worksheet Generator</strong> is designed to support this educational journey. By providing beautifully aligned, standard school grids with custom name-repetition modes, it perfectly bridges the gap between interactive digital screen practice and focused offline writing drills.
                     </p>
                 </section>
 
