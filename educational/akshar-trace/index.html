@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <title>AksharTrace - Hindi Alphabet Handwriting and Tracing Sheets Generator</title>
+    <meta name="description" content="Create customized Devanagari handwriting worksheets and trace Hindi letters. Includes an on-screen tracing slate with stroke direction guides.">
+    <meta name="keywords" content="Hindi tracing worksheet, Hindi handwriting generator, Devanagari trace online, Hindi letter tracing pdf, preschool Hindi practice sheets">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/educational/akshar-trace" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook Meta Data -->
+    <meta property="og:title" content="AksharTrace: Custom Devanagari Handwriting & Letter Tracing Sheets">
+    <meta property="og:description" content="Generate custom Devanagari tracing sheets & Hindi handwriting worksheets with standard school 5-line guides.">
+    <meta property="og:url" content="https://toolblaster.com/educational/akshar-trace">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicons & Manifest Links -->
+    <link class="icon animate-pulse" rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="32x32" href="../../js/favicon/favicon-32x32.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="512x512" href="../../js/favicon/android-chrome-512x512.png">
+    <link class="apple-touch-icon" href="../../js/favicon/apple-touch-icon.png">
+    <link class="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Optimized Font Loading (Inter & Noto Sans Devanagari Only for Performance) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS Overrides -->
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #1c1917; 
+            --accent-primary: #b91c1c; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fff5f5 10%, #f9fafb 80%);
+            color: var(--text-color);
+            transition: background 0.3s ease;
+        }
+
+        /* Chalkboard blackboard style theme overrides for tracer slate */
+        .theme-chalkboard {
+            background-color: #142a22 !important;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) !important;
+            background-size: 20px 20px !important;
+            border: 8px solid #5c3a21 !important; /* Wooden border frame */
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 10px 25px rgba(0,0,0,0.3) !important;
+        }
+
+        /* Paper sheet visual style inside tracer area */
+        .theme-paper-desk {
+            background-color: #ffffff !important;
+            background-image: 
+                linear-gradient(rgba(186, 230, 253, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(186, 230, 253, 0.4) 1px, transparent 1px) !important;
+            background-size: 20px 20px !important;
+            border: 8px solid #cbd5e1 !important;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05), 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Tactile Duolingo-style 3D Push Buttons */
+        .action-btn-3d {
+            box-shadow: 0 4px 0 #991b1b;
+            transform: translateY(0);
+            transition: all 0.1s ease;
+        }
+        .action-btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Seamless Toggle Transition */
+        .mode-tab {
+            transition: all 0.2s ease-in-out;
+            outline: none !important;
+        }
+        .mode-tab.active {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:focus:not(:focus-visible),
+        a:focus:not(:focus-visible),
+        select:focus:not(:focus-visible),
+        input:focus:not(:focus-visible) {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Reusable tooltips container styles */
+        .section-tooltip {
+            cursor: help;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .section-tooltip .tooltip-text-bubble {
+            width: 200px;
+            background-color: #1c1917; 
+            color: #ffffff;
+            text-align: center;
+            border-radius: 0.5rem;
+            padding: 8px 10px;
+            position: absolute;
+            z-index: 100;
+            bottom: 130%;
+            left: 50%;
+            transform: translate3d(-50%, 4px, 0) scale(0.95);
+            opacity: 0;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.3;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+        .section-tooltip:hover .tooltip-text-bubble {
+            opacity: 1;
+            transform: translate3d(-50%, 0, 0) scale(1);
+        }
+
+        /* High-contrast printable sheet grid rows based on standard Indian school copy rules */
+        .print-line-shirorekha {
+            stroke: #2563eb; 
+            stroke-width: 1.2;
+        }
+        .print-line-body {
+            stroke: #2563eb; 
+            stroke-width: 1.2;
+        }
+        .print-line-outer {
+            stroke: #dc2626; 
+            stroke-width: 1.2;
+        }
+
+        #confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        /* Guide Point pulses on active chalkboard */
+        .guide-dot-pulse {
+            animation: guidePulse 1.5s infinite ease-in-out;
+        }
+        @keyframes guidePulse {
+            0%, 100% { transform: scale(1) translate(-50%, -50%); opacity: 0.8; }
+            50% { transform: scale(1.2) translate(-50%, -50%); opacity: 1; box-shadow: 0 0 12px #34d399; }
+        }
+
+        /* Floating hand guide styles */
+        #hand-guide-pointer {
+            pointer-events: none;
+            transition: left 0.1s ease, top 0.1s ease;
+            z-index: 30;
+        }
+
+        /* Custom Devanagari script layout class */
+        .hindi-font {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+
+        /* 5-Line ruling layout rules inside Interactive Slate */
+        .ruled-line-y {
+            border-bottom: 2px solid #ef4444;
+        }
+        .ruled-line-b {
+            border-bottom: 1.5px solid #3b82f6;
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            #screen-container, #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, .print-hide, .main-seo-article {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            #print-sheet {
+                max-height: 100%;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Global Background Ambient Orbs -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-15%] w-[55vw] h-[55vw] rounded-full bg-red-100/20 blur-[130px]"></div>
+        <div class="absolute bottom-[-10%] right-[-15%] w-[45vw] h-[45vw] rounded-full bg-amber-100/20 blur-[110px]"></div>
+    </div>
+
+    <!-- Layout Navigation Placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Breadcrumbs Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-700 mb-4 font-semibold flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-700 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="https://toolblaster.com/educational/" class="hover:text-red-700 transition-colors">Educational</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">AksharTrace</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-1.5 bg-red-50 text-red-800 border border-red-200 px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                <i class="fa-solid fa-feather-pointed"></i> Devanagari Tracing
+            </div>
+        </nav>
+
+        <!-- Dynamic Screen Area -->
+        <div id="screen-container" class="w-full text-left print-hide">
+            <div id="main-tool-card" class="bg-white border border-stone-200 shadow-md rounded-3xl p-5 sm:p-8 mx-auto my-0 relative max-w-3xl transition-all duration-300">
+
+                <!-- Header Block -->
+                <div class="text-center mb-1">
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 tracking-tight flex items-center justify-center gap-2">
+                        🕉️ AksharTrace: Hindi Varnamala
+                    </h1>
+                </div>
+                <p class="text-center text-stone-600 mb-4 text-xs font-semibold">
+                    Practice Devanagari handwriting. Trace Hindi characters on-screen or prepare printable 5-line guide sheets.
+                </p>
+
+                <!-- WORKSPACE TAB SWITCHER -->
+                <div class="flex justify-center mb-4">
+                    <div class="grid grid-cols-2 gap-1 p-1 bg-stone-100 rounded-xl w-full max-w-md mx-auto" role="tablist" aria-label="AksharTrace Navigation Modes">
+                        
+                        <button type="button" id="tab-drill" role="tab" aria-selected="true" aria-controls="drill-mode-panel" class="mode-tab active text-center py-2 text-[10px] sm:text-xs font-extrabold rounded-lg transition-all relative group">
+                            🖌️ Slate (Interactive Slate)
+                            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-stone-900 text-white text-[10px] font-bold rounded-lg p-2 shadow-lg leading-snug pointer-events-none z-50 text-center opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150">
+                                Trace letter paths on screen.
+                            </span>
+                        </button>
+                        
+                        <button type="button" id="tab-worksheet" role="tab" aria-selected="false" aria-controls="worksheet-mode-panel" class="mode-tab text-center py-2 text-[10px] sm:text-xs font-extrabold rounded-lg transition-all text-stone-700 hover:text-stone-900 relative group">
+                            📝 Worksheet Maker
+                            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-stone-900 text-white text-[10px] font-bold rounded-lg p-2 shadow-lg leading-snug pointer-events-none z-50 text-center opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150">
+                                Create printable Devanagari PDFs.
+                            </span>
+                        </button>
+                        
+                    </div>
+                </div>
+
+                <!-- SIDE-BY-SIDE COMPACT BUTTON TRIGGERS -->
+                <div class="flex flex-row justify-between sm:justify-center w-full gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                    <button type="button" id="btn-presets" class="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-800 border border-red-200 px-1 py-1.5 sm:px-3 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 leading-tight text-center">
+                        <i class="fa-solid fa-graduation-cap text-[10px]"></i>
+                        <span>Worksheet Presets</span>
+                    </button>
+                    <button type="button" id="btn-rewards" class="flex-1 sm:flex-initial bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 px-1 py-1.5 sm:px-3 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 relative leading-tight text-center">
+                        <i class="fa-solid fa-face-laugh text-[10px]"></i>
+                        <span>Unlockable Toys</span>
+                        <span id="reward-notif-dot" class="absolute -top-1 -right-1 flex h-2 w-2 hidden">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                    </button>
+                    <button type="button" id="btn-analytics" class="flex-1 sm:flex-initial bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-1 py-1.5 sm:px-3 sm:py-1 rounded-xl sm:rounded-full text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 transition-all shadow-sm active:scale-95 relative leading-tight text-center">
+                        <i class="fa-solid fa-chart-line text-[10px]"></i>
+                        <span>Progress History</span>
+                        <span id="analytics-notif-dot" class="absolute -top-1 -right-1 flex h-2 w-2 hidden">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- PANEL A: INTERACTIVE TRACER MODE -->
+                <div id="drill-mode-panel" role="tabpanel" class="space-y-4">
+                    
+                    <!-- Pre-start Configuration Screen -->
+                    <div id="drill-setup-screen" class="w-full bg-stone-50 border border-stone-200 rounded-2xl p-5 sm:p-8 space-y-5">
+                        
+                        <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-3xl select-none">🔥</span>
+                                <div class="text-left">
+                                    <h2 class="text-xs font-black text-amber-955 uppercase tracking-wider leading-none font-sans">Daily Writing Streak</h2>
+                                    <p class="text-[10px] text-stone-600 font-semibold mt-1 font-sans">
+                                        Practice daily on slate to build hand dexterity.
+                                    </p>
+                                </div>
+                            </div>
+                            <span class="bg-amber-100 text-amber-800 border border-amber-300 font-bold px-3 py-1 rounded-full text-xs">
+                                <span id="drill-streak-count">0</span> Days Active
+                            </span>
+                        </div>
+
+                        <!-- Select Vowels (स्वर) Grid -->
+                        <div class="space-y-2 text-left">
+                            <h2 class="text-xs font-black text-stone-800 uppercase tracking-widest border-b pb-1 font-sans">
+                                स्वर (Vowels)
+                            </h2>
+                            <div class="grid grid-cols-5 sm:grid-cols-8 gap-2" id="vowels-grid">
+                                <!-- Populated programmatically -->
+                            </div>
+                        </div>
+
+                        <!-- Select Consonants (व्यंजन) Grid -->
+                        <div class="space-y-2 text-left pt-2">
+                            <h2 class="text-xs font-black text-stone-800 uppercase tracking-widest border-b pb-1 font-sans">
+                                व्यंजन (Consonants)
+                            </h2>
+                            <div class="grid grid-cols-5 sm:grid-cols-8 gap-2" id="consonants-grid">
+                                <!-- Populated programmatically -->
+                            </div>
+                        </div>
+
+                        <!-- Select Word Families (बाराखड़ी) Grid -->
+                        <div class="space-y-2 text-left pt-2">
+                            <h2 class="text-xs font-black text-indigo-800 uppercase tracking-widest border-b pb-1 font-sans">
+                                बाराखड़ी (Word Families / Phonics)
+                            </h2>
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2" id="families-grid">
+                                <!-- Populated programmatically with क, का, कि, की, कु, कू -->
+                            </div>
+                        </div>
+
+                        <!-- Launcher -->
+                        <button type="button" id="btn-random-challenge" class="w-full bg-red-800 hover:bg-red-955 text-white font-black uppercase text-xs tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95 action-btn-3d flex items-center justify-center gap-2">
+                            🎯 Random Practice Challenge
+                        </button>
+                    </div>
+
+                    <!-- Interactive chalkboard tracer slate -->
+                    <div id="drill-active-screen" class="hidden w-full border border-stone-200 rounded-2xl p-4 sm:p-5 relative overflow-hidden flex flex-col items-center space-y-4 transition-all duration-300 bg-stone-900">
+                        <canvas id="confetti-canvas"></canvas>
+                        
+                        <!-- Chalkboard Controls header -->
+                        <div class="flex justify-between items-center w-full border-b border-stone-700/60 pb-2 flex-wrap gap-2">
+                            <button type="button" id="btn-back-setup" class="bg-stone-800 hover:bg-stone-700 text-stone-200 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-xl transition-all">
+                                <i class="fa-solid fa-arrow-left"></i> Change Letter
+                            </button>
+                            
+                            <span id="current-tracer-letter-label" class="text-xs font-black text-stone-300">Practice: Letter</span>
+                            
+                            <!-- Dynamic Theme Selector -->
+                            <div class="flex bg-stone-800 p-0.5 rounded-lg text-[9px] font-bold shadow-sm" role="group">
+                                <button type="button" id="btn-theme-chalk" class="px-2.5 py-1 rounded bg-stone-900 text-white shadow">Chalk Slate</button>
+                                <button type="button" id="btn-theme-pencil" class="px-2.5 py-1 rounded text-stone-400 ml-0.5">Pencil Paper</button>
+                            </div>
+
+                            <button type="button" id="btn-clear-canvas" class="bg-stone-800 hover:bg-stone-700 text-stone-200 font-extrabold uppercase text-[10px] tracking-wider px-3 py-1.5 rounded-xl transition-all">
+                                <i class="fa-solid fa-eraser"></i> Clear Slate
+                            </button>
+                        </div>
+
+                        <!-- Substantial Additions: Rainbow Chalk Palette, Audio Control Switch & "Show Me" Demo Buttons -->
+                        <div class="flex justify-between items-center w-full bg-stone-850 px-3 py-2.5 rounded-xl text-stone-200 flex-wrap gap-3 text-[10px] sm:text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-stone-400 uppercase text-[9px] tracking-wider">Chalk Palette:</span>
+                                <div class="flex items-center gap-1.5" id="chalk-palette-container" role="radiogroup" aria-label="Chalk Color Selection">
+                                    <button type="button" class="w-5 h-5 rounded-full bg-white border-2 border-stone-600 focus:ring-1 focus:ring-red-500 scale-110" data-color="rgba(255, 255, 255, 0.95)" aria-label="White Chalk" aria-checked="true"></button>
+                                    <button type="button" class="w-5 h-5 rounded-full bg-yellow-300 border-2 border-transparent focus:ring-1 focus:ring-red-500" data-color="rgba(253, 224, 71, 0.95)" aria-label="Neon Yellow Chalk" aria-checked="false"></button>
+                                    <button type="button" class="w-5 h-5 rounded-full bg-green-300 border-2 border-transparent focus:ring-1 focus:ring-red-500" data-color="rgba(134, 239, 172, 0.95)" aria-label="Mint Green Chalk" aria-checked="false"></button>
+                                    <button type="button" class="w-5 h-5 rounded-full bg-pink-300 border-2 border-transparent focus:ring-1 focus:ring-red-500" data-color="rgba(244, 114, 182, 0.95)" aria-label="Bubblegum Pink Chalk" aria-checked="false"></button>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" id="btn-toggle-sound" class="bg-stone-800 hover:bg-stone-700 text-stone-200 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-xl transition-all">
+                                    🔊 Sound: ON
+                                </button>
+                                <button type="button" id="btn-show-me" class="bg-amber-600 hover:bg-amber-700 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-xl transition-all flex items-center gap-1">
+                                    👁️ Show Me (दिखाएं)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Progressive Difficulty Level Bar -->
+                        <div class="flex justify-between items-center w-full bg-stone-850 px-3 py-2 rounded-xl text-stone-200 flex-wrap gap-2 text-[10px] sm:text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-stairs text-indigo-400"></i>
+                                <span class="font-bold">Difficulty Level:</span>
+                            </div>
+                            <div class="flex bg-stone-800 p-0.5 rounded-lg font-bold" role="group" id="difficulty-selector-group">
+                                <button type="button" id="btn-diff-beginner" class="px-3 py-1 rounded bg-indigo-700 text-white text-[10px] transition-all">Beginner</button>
+                                <button type="button" id="btn-diff-intermediate" class="px-3 py-1 rounded text-stone-400 text-[10px] ml-0.5 transition-all">Intermediate</button>
+                                <button type="button" id="btn-diff-advanced" class="px-3 py-1 rounded text-stone-400 text-[10px] ml-0.5 transition-all">Advanced</button>
+                            </div>
+                        </div>
+
+                        <!-- Accessibility / Assist Options bar -->
+                        <div class="flex justify-between items-center w-full bg-stone-800/80 px-3 py-2 rounded-xl text-stone-200 flex-wrap gap-2 text-[10px] sm:text-xs">
+                            <div class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-universal-access text-red-400"></i>
+                                <span class="font-bold">Assistive Mode (Alternative Controls):</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button type="button" id="btn-toggle-assist" class="bg-stone-700 hover:bg-stone-600 text-stone-100 font-extrabold px-3 py-1 rounded-lg uppercase transition-all">
+                                    ♿ Assist Mode: OFF
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Assist Mode Keys Map Instruction Bar -->
+                        <div id="assist-keys-hud" class="hidden text-center text-[10px] sm:text-xs text-amber-400 font-bold bg-stone-950/80 p-2.5 rounded-xl border border-stone-800 w-full leading-normal font-sans">
+                            💡 Keyboard Tracing: Use <kbd class="bg-stone-800 px-1 rounded text-stone-100">←</kbd> <kbd class="bg-stone-800 px-1 rounded text-stone-100">→</kbd> <kbd class="bg-stone-800 px-1 rounded text-stone-100">↑</kbd> <kbd class="bg-stone-800 px-1 rounded text-stone-100">↓</kbd> Arrow Keys to guide pencil path. Or click sequential checkpoints on slate.
+                        </div>
+
+                        <!-- Main canvas workspace styled with Slate chalkboard frame visual look -->
+                        <div class="relative w-full max-w-sm aspect-square rounded-2xl p-1 bg-stone-950 border-4 border-stone-700 overflow-hidden flex items-center justify-center shadow-inner theme-slate" id="chalkboard-wrap-box">
+                            
+                            <!-- Static 5-Line ruling background inside the slate container -->
+                            <div class="absolute inset-0 flex flex-col justify-between py-6 px-1 select-none pointer-events-none z-0 opacity-20">
+                                <div class="ruled-line-y w-full h-0"></div>
+                                <div class="ruled-line-b w-full h-0"></div>
+                                <div class="ruled-line-b w-full h-0"></div>
+                                <div class="ruled-line-b w-full h-0"></div>
+                                <div class="ruled-line-y w-full h-0"></div>
+                            </div>
+
+                            <!-- Background guide placeholder element -->
+                            <div class="absolute inset-0 flex items-center justify-center select-none pointer-events-none z-0">
+                                <span id="tracer-bg-guide" class="font-extrabold text-[150px] leading-none select-none text-white/5 hindi-font">अ</span>
+                            </div>
+                            
+                            <!-- Active Stroke checkpoints guides overlay -->
+                            <div id="tracer-guides-overlay" class="absolute inset-0 z-20 pointer-events-none select-none">
+                                <!-- Numbered check-markers inject programmatically -->
+                            </div>
+
+                            <!-- Stylus pencil guide hand pointer -->
+                            <div id="hand-guide-pointer" class="absolute w-8 h-8 flex items-center justify-center hidden pointer-events-none">
+                                <span class="text-3xl animate-bounce drop-shadow-md">✍️</span>
+                            </div>
+
+                            <canvas id="tracer-interactive-canvas" class="absolute inset-0 z-10 cursor-crosshair touch-none"></canvas>
+                        </div>
+
+                        <!-- Real-time accuracy metrics and feedback hints -->
+                        <div class="w-full bg-stone-850/80 border border-stone-700/60 rounded-xl p-3 flex flex-row justify-between items-start gap-3 text-xs font-bold text-stone-400">
+                            <div class="shrink-0 text-left">
+                                <span class="text-[9px] uppercase text-stone-500 block font-black">Accuracy Level</span>
+                                <span id="realtime-accuracy-counter" class="text-stone-200 font-extrabold text-sm">0% Checked</span>
+                            </div>
+                            <div class="text-right flex-1 min-w-0">
+                                <span class="text-[9px] uppercase text-stone-500 block font-black">Spoken Phonics & Tips</span>
+                                <span id="realtime-status-message-cue" class="text-amber-500 font-extrabold block leading-tight text-xs">Follow sequential dots in numerical order.</span>
+                            </div>
+                        </div>
+
+                        <!-- Validate Button -->
+                        <button type="button" id="btn-validate-trace" class="w-full bg-red-800 hover:bg-red-955 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95 action-btn-3d">
+                            💯 Complete letter and Play Phonics
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- PANEL B: WORKSHEET PDF MAKER ACTIVE WORKSPACE -->
+                <div id="worksheet-mode-panel" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                    
+                    <!-- Left configuration options panel -->
+                    <div class="lg:col-span-5 bg-stone-50 border border-stone-200 p-5 rounded-2xl space-y-4">
+                        <h2 class="text-xs font-black text-stone-855 uppercase tracking-widest text-center border-b border-stone-200 pb-2 font-sans">Worksheet Controls</h2>
+                        
+                        <!-- Heading Title input -->
+                        <div class="space-y-1 text-left">
+                            <label for="ws-school-input" class="block text-[11px] font-bold text-stone-700 uppercase">Worksheet Title Header</label>
+                            <input type="text" id="ws-school-input" class="w-full bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs font-bold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500" value="अक्षर अभ्यास लेखन माला">
+                        </div>
+
+                        <!-- Syllabus Type Presets Selector -->
+                        <div class="space-y-1 text-left">
+                            <label for="ws-style-select" class="block text-[11px] font-bold text-stone-700 uppercase">Syllabus Template Mode</label>
+                            <select id="ws-style-select" class="w-full bg-white border border-stone-300 rounded-xl p-3 text-xs font-extrabold text-stone-900 focus:outline-none">
+                                <option value="custom_name" selected>Personalized Name Repeating Grid</option>
+                                <option value="preset_vowels">Vowels Group Practice (Svar: अ to औ)</option>
+                                <option value="preset_consonants">Consonants Group Practice (Vyanjan: क to झ)</option>
+                                <option value="custom_sentence">Custom Handwriting Short Sentence</option>
+                                <option value="preset_blank">Blank Ruled Five-Line Practice Sheets</option>
+                            </select>
+                        </div>
+
+                        <!-- Dynamic Input Box based on style -->
+                        <div class="space-y-1.5 text-left" id="ws-custom-input-container">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <label for="ws-text-input" id="ws-input-label-text" class="block text-[11px] font-bold text-stone-700 uppercase">Enter Practice Name</label>
+                                    <span class="section-tooltip" aria-describedby="tooltip-ws-input">
+                                        <i class="fa-solid fa-circle-question text-stone-400 hover:text-red-700 transition-colors text-xs cursor-help"></i>
+                                        <span id="tooltip-ws-input" class="tooltip-text-bubble">
+                                            Type in Hinglish (e.g. \"aarav\") or Hindi to generate customized tracing baselines.
+                                        </span>
+                                    </span>
+                                </div>
+                                <label class="flex items-center gap-1 cursor-pointer select-none text-[9.5px] font-extrabold text-red-800">
+                                    <input type="checkbox" id="chk-hinglish-auto" checked class="rounded text-red-600 focus:ring-red-500 h-3 w-3">
+                                    <span>Hinglish auto ✍️</span>
+                                </label>
+                            </div>
+                            <input type="text" id="ws-text-input" class="w-full bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500" value="आरव">
+                            
+                            <!-- Substantial Addition: Word History Chips -->
+                            <div class="mt-2 text-left space-y-1">
+                                <span class="text-[9px] font-black uppercase text-stone-500">Quick Recalls (हालिया शब्द):</span>
+                                <div id="history-chips-container" class="flex flex-wrap gap-1.5">
+                                    <!-- Populated programmatically -->
+                                </div>
+                            </div>
+
+                            <!-- Virtual Devanagari Keyboard -->
+                            <div class="mt-2 bg-stone-100 p-2 rounded-xl border border-stone-200/80">
+                                <div class="flex justify-between items-center mb-1 border-b pb-1 border-stone-200">
+                                    <span class="text-[9px] font-black uppercase text-stone-500">Tap-key Letter tray</span>
+                                </div>
+                                <div id="devanagari-tap-keypad" class="grid grid-cols-6 xs:grid-cols-8 sm:grid-cols-9 gap-1.5">
+                                    <!-- Dynamically populated devanagari keyboard buttons -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Double-sided Offset Margin Option -->
+                        <div class="space-y-1 text-left">
+                            <label class="flex items-center gap-2 bg-white border border-stone-300 rounded-xl p-2.5 cursor-pointer select-none text-[11px] font-bold text-stone-700">
+                                <input type="checkbox" id="chk-double-sided" class="rounded text-red-600 focus:ring-red-500 h-4 w-4">
+                                <span>📖 Book Margin (Double-Sided Print)</span>
+                            </label>
+                        </div>
+
+                        <!-- Rows count selector -->
+                        <div class="space-y-1 text-left">
+                            <label for="ws-rows-select" class="block text-[11px] font-bold text-stone-700 uppercase">Total Row Grid Density</label>
+                            <select id="ws-rows-select" class="w-full bg-white border border-stone-300 rounded-xl p-3 text-xs font-extrabold text-stone-900 focus:outline-none">
+                                <option value="5">5 Rows (Spacious spacing for young children)</option>
+                                <option value="7" selected>7 Rows (Balanced space with headers)</option>
+                                <option value="9">9 Rows (High density practicing matrix)</option>
+                            </select>
+                        </div>
+
+                        <!-- Actions triggers -->
+                        <div class="flex gap-2">
+                            <button type="button" id="btn-reset-worksheet" class="flex-1 bg-stone-200 hover:bg-stone-300 text-stone-855 font-extrabold uppercase text-[10px] tracking-wider py-3 rounded-xl transition-all">
+                                <i class="fa-solid fa-rotate-left"></i> Reset
+                            </button>
+                            <button type="button" id="btn-print-worksheet" class="flex-1 bg-red-800 hover:bg-red-955 text-white font-extrabold uppercase text-[10px] tracking-wider py-3 rounded-xl transition-all">
+                                <i class="fa-solid fa-print"></i> Print A4 Pages
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right dynamic vector A4 sheet preview block -->
+                    <div class="lg:col-span-7 bg-white border border-stone-200 shadow-inner p-4 sm:p-5 rounded-2xl overflow-x-auto relative text-left">
+                        <div class="flex justify-between items-center mb-3 pb-1 border-b">
+                            <span class="text-[10px] font-black text-stone-600 uppercase tracking-widest">A4 Sheet Print Preview</span>
+                            <span class="text-xs text-blue-900 italic font-bold">Vector calligraphy guidelines style</span>
+                        </div>
+                        
+                        <!-- Visual representation container inside screen layout -->
+                        <div class="border border-stone-300 p-4 bg-white max-w-full text-black rounded-lg" id="screen-worksheet-preview">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Related Tools Navigation -->
+        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: MathSprint -->
+                <a href="https://toolblaster.com/educational/math-sprint-speed-drill-worksheets/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">MathSprint</span>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Class 1 to 5 adaptive mathematical speed drills.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 2: TraceWrite -->
+                <a href="https://toolblaster.com/educational/tracewrite-handwriting-tracing-worksheets/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-100">
+                            <i class="fa-solid fa-pen-nib text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">TraceWrite</span>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">English alphabet & custom name writing maker.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 3: Nursery Rhymes -->
+                <a href="https://toolblaster.com/educational/nursery-rhymes-for-kids/" class="flex items-center justify-between bg-white/80 hover:bg-white backdrop-blur-xl border border-stone-200 hover:border-red-500 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-pink-100">
+                            <i class="fa-solid fa-music text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">Nursery Rhymes</span>
+                            <p class="text-[10px] text-stone-500 mt-0.5 leading-tight truncate">Interactive nursery rhymes & spoken audio guides.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-600 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scientific Educational Documentation & SEO Guides -->
+        <article class="w-full max-w-[768px] mx-auto mt-10 mb-16 prose prose-stone relative z-10 print-hide px-4 sm:px-1 text-left font-sans">
+            <div class="space-y-6 text-stone-800 font-inter">
+                
+                <!-- Section 1: What is AksharTrace? -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight font-sans">
+                        <span class="text-red-600"><i class="fa-solid fa-feather-pointed"></i></span> What is AksharTrace?
+                    </h2>
+                    <p class="leading-relaxed mb-0 text-[13px] font-medium text-stone-600">
+                        <strong>AksharTrace</strong> is a specialized, web-based Devanagari (Hindi) script handwriting generator and interactive sensory learning canvas. It serves as a dual educational ecosystem: providing children with an on-screen tracing slate featuring real-time stroke-direction feedback, and offering parents and teachers a dynamic vector worksheet maker to instantly print standard school-grade five-line handwriting drills.
+                    </p>
+                </section>
+
+                <!-- Section 2: Why AksharTrace Exists -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight font-sans">
+                        <span class="text-red-600"><i class="fa-solid fa-lightbulb"></i></span> Why Does AksharTrace Exist?
+                    </h2>
+                    <p class="leading-relaxed text-[13px] font-medium text-stone-600 mb-4">
+                        Learning Devanagari handwriting requires unique motor control to master the horizontal headline (the Shirorekha), as well as complex looping curves. AksharTrace exists to solve three critical structural problems for families and classrooms:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+                        <div class="bg-stone-50 p-4 rounded-xl space-y-1.5">
+                            <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 text-xs">
+                                <i class="fa-solid fa-earth-americas text-red-600"></i> Diaspora Home Learning
+                            </h3>
+                            <p class="text-stone-600 text-[11px] leading-relaxed">
+                                Families living outside South Asia struggle to find premium or personalized Hindi handwriting sheets. This generator lets parents input their child's name or custom words to create tailored tracing drills.
+                            </p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl space-y-1.5">
+                            <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 text-xs">
+                                <i class="fa-solid fa-print text-red-600"></i> Classroom Prep Speed
+                            </h3>
+                            <p class="text-stone-600 text-[11px] leading-relaxed">
+                                Teachers spend hours manually sketching out five-line templates for homework. AksharTrace generates customizable, high-resolution printable PDF sheets with a single click.
+                            </p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl space-y-1.5">
+                            <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 text-xs">
+                                <i class="fa-solid fa-pen-nib text-red-600"></i> Stroke Order Mastery
+                            </h3>
+                            <p class="text-stone-600 text-[11px] leading-relaxed">
+                                Blindly copying static shapes leads to poor penmanship habits. Our interactive chalkboard slate teaches the traditional, sequential stroke order (1, 2, 3) through guided checkpoints.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Substantial Addition: Section 3 Core Tool Benefits (SEO Evergreen) -->
+                <section class="bg-white/70 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight font-sans">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-check"></i></span> Key Benefits & Features of AksharTrace
+                    </h2>
+                    <p class="leading-relaxed text-[13px] font-medium text-stone-600 mb-4">
+                        Our platform is engineered using modern web technologies to maximize educational engagement and logistical convenience. Here are the core benefits that deliver everlasting educational value:
+                    </p>
+                    <ul class="space-y-3.5 pl-1 text-[13px] text-stone-700 font-medium">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Customizable PDF Sheets:</strong> Easily design tailored sheets repeating your child's name or custom spelling lists, formatted to match authentic school-grade ruling.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Sensory Chalk Board Interface:</strong> Employs synthetic audio frequencies that replicate realistic writing feedback, maximizing micro-level motor-skill retention.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Interactive Phonics Integration:</strong> Every letter trace chimes out precise vocal pronunciations to reinforce orthographic and phonemic mapping simultaneously.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>No Heavy Typography Overhead:</strong> Tracing sheets are calculated client-side via native vector paths, ensuring crisp print results and fast load speeds on mobile networks.</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 4: FAQs (Exactly 5 Targeted Entries) -->
+                <section class="space-y-3">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 uppercase tracking-tight font-sans">
+                        <span class="text-red-600"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions
+                    </h2>
+                    <div class="p-4 bg-white/60 backdrop-blur-lg rounded-2xl border border-stone-200">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. What makes AksharTrace different from standard printable PDFs?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-600 font-medium">Instead of offering pre-made, static PDFs, AksharTrace generates bespoke, vector-aligned worksheets on-demand based on custom names or words typed by parents or teachers, complete with proper ligature shaping.</p>
+                    </div>
+                    <div class="p-4 bg-white/60 backdrop-blur-lg rounded-2xl border border-stone-200">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. What are the spacing and proportions of a standard 5-line Hindi notebook sheet?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-600 font-medium">A 5-line system separates characters into clear components: Line 1 limits top vowel modifiers; Line 2 holds the Shirorekha headline; Lines 3 and 4 contain the main letter bodies; Line 5 restricts lower vowel descenders.</p>
+                    </div>
+                    <div class="p-4 bg-white/60 backdrop-blur-lg rounded-2xl border border-stone-200">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. Can parents living abroad customize printable worksheets for names or words?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-600 font-medium">Yes. Parents can input names or simple sentences using our tap-key keypad or Roman phonetic transliteration to print structured, repeatable tracing rows.</p>
+                    </div>
+                    <div class="p-4 bg-white/60 backdrop-blur-lg rounded-2xl border border-stone-200">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">4. How does the Roman phonetic auto-conversion feature work?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-600 font-medium">When the auto-conversion setting is checked, parents can type standard romanized phonetics (such as 'aarav' or 'bharat'). The transliteration engine parses phonetic patterns and translates them into clean Unicode Devanagari characters.</p>
+                    </div>
+                    <div class="p-4 bg-white/60 backdrop-blur-lg rounded-2xl border border-stone-200">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">5. Is student activity data stored or shared with external servers?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-600 font-medium">No. To support student privacy and standard COPPA guidelines, all student progress, streak data, unlocked milestones, and analytical logs are stored directly inside your browser's private local memory sandbox.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+        <!-- PHYSICAL PRINT STATEMENT SHEETS TEMPLATES -->
+        <div id="print-sheet" class="print-only hidden text-black bg-white w-full">
+            <!-- Dynamic print elements inserted here during window trigger -->
+        </div>
+
+    </main>
+
+    <!-- DYNAMIC MILESTONES & PRESETS POPUP MODAL -->
+    <div id="milestones-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="milestones-modal-content" class="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-stone-200 relative transform transition-all scale-100 duration-200 overflow-y-auto max-h-[90vh]">
+            <button type="button" id="btn-close-milestones" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 font-extrabold text-xl focus:outline-none">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4 text-left">
+                <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h2 class="text-xs sm:text-sm font-black text-stone-900 uppercase tracking-wider">Devanagari Learning Presets and Guidelines</h2>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-[11px] text-blue-950 font-semibold leading-relaxed mb-4 text-left">
+                💡 <strong>Instruction:</strong> Select a learning preset below to configure the Worksheet Maker, or use the checklists to track physical motor progress.
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-left">
+                <!-- Group 1: Vowels Stage -->
+                <div class="border border-stone-150 rounded-2xl p-4 bg-stone-50/50 space-y-2">
+                    <h3 class="text-xs font-black uppercase text-stone-800 tracking-wider">👶 Primary Level (Ages 3-5)</h3>
+                    <div class="flex flex-col gap-1.5">
+                        <button type="button" id="btn-preset-blank" class="preset-action-btn w-full text-left text-[11px] font-bold text-stone-700 bg-white border border-stone-200 rounded-lg p-2 hover:border-red-500 transition-colors">
+                            📝 Blank 5-Line Ruled Practice Sheet
+                        </button>
+                        <button type="button" id="btn-preset-vowels" class="preset-action-btn w-full text-left text-[11px] font-bold text-stone-700 bg-white border border-stone-200 rounded-lg p-2 hover:border-red-500 transition-colors">
+                            🅰️ Primary Vowels (अ to औ)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Group 2: Consonants & Names -->
+                <div class="border border-stone-150 rounded-2xl p-4 bg-stone-50/50 space-y-2">
+                    <h3 class="text-xs font-black uppercase text-stone-800 tracking-wider">🎓 Advanced Level (Ages 5-8)</h3>
+                    <div class="flex flex-col gap-1.5">
+                        <button type="button" id="btn-preset-consonants" class="preset-action-btn w-full text-left text-[11px] font-bold text-stone-700 bg-white border border-stone-200 rounded-lg p-2 hover:border-red-500 transition-colors">
+                            🛡️ Consonants Practice Grid (क to झ)
+                        </button>
+                        <button type="button" id="btn-preset-india" class="preset-action-btn w-full text-left text-[11px] font-bold text-stone-700 bg-white border border-stone-200 rounded-lg p-2 hover:border-red-500 transition-colors">
+                            🇮🇳 'भारत' - Practice Name Repeat
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Homeschooling Checklists -->
+            <div class="border border-stone-150 rounded-2xl p-4 space-y-3 bg-stone-50/20 mt-4 text-left">
+                <h2 class="text-xs font-black uppercase text-stone-800 tracking-wider flex items-center gap-1.5">
+                    🎯 Weekly Milestones Checker
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[9.5px] sm:text-[10.5px] font-bold text-stone-700 leading-tight">
+                    <label class="flex items-center gap-2 bg-white border border-stone-200 p-2 rounded-xl cursor-pointer">
+                        <input type="checkbox" id="chk-milestone-1" class="milestone-chk rounded text-red-600 focus:ring-red-500 h-3.5 w-3.5 flex-shrink-0">
+                        <span class="font-sans text-[9px] sm:text-[10px]">Pencil Tripod Grip</span>
+                    </label>
+                    <label class="flex items-center gap-2 bg-white border border-stone-200 p-2 rounded-xl cursor-pointer">
+                        <input type="checkbox" id="chk-milestone-2" class="milestone-chk rounded text-red-600 focus:ring-red-500 h-3.5 w-3.5 flex-shrink-0">
+                        <span class="font-sans text-[9px] sm:text-[10px]">Shirorekha Horizontal Line</span>
+                    </label>
+                    <label class="flex items-center gap-2 bg-white border border-stone-200 p-2 rounded-xl cursor-pointer">
+                        <input type="checkbox" id="chk-milestone-3" class="milestone-chk rounded text-red-600 focus:ring-red-500 h-3.5 w-3.5 flex-shrink-0">
+                        <span class="font-sans text-[9px] sm:text-[10px]">Hanging Stem Curves</span>
+                    </label>
+                </div>
+                <p id="milestone-status-message" class="text-[10px] text-stone-600 italic font-semibold pt-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKER REWARDS MODAL -->
+    <div id="sticker-book-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="sticker-book-modal-content" class="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-stone-200 relative transform transition-all scale-100 duration-200 overflow-y-auto max-h-[90vh]">
+            <button type="button" id="btn-close-rewards" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 font-extrabold text-xl focus:outline-none">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4 text-left">
+                <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center shadow-inner text-lg">
+                    🌟
+                </div>
+                <h2 class="text-xs sm:text-sm font-black text-stone-900 uppercase tracking-wider">Sticker Collection and Milestones</h2>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-955 font-semibold leading-relaxed mb-4 text-left">
+                🦁 <strong>Earning Points:</strong> Receive +10 points on each successfully completed letter in the interactive slate mode to unlock the animal characters.
+            </div>
+
+            <div id="reward-sticker-shelf" class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                <!-- Stickers populated programmatically -->
+            </div>
+
+            <div class="text-[10px] text-stone-500 font-bold mt-4 text-center bg-stone-50/20 p-3 rounded-xl border border-stone-200">
+                Your Practice Points Balance: <span id="reward-total-points" class="text-red-700 font-black text-xs">0 Pts</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC PARENT ANALYTICS & HISTORY POPUP MODAL -->
+    <div id="analytics-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="analytics-modal-content" class="bg-white rounded-3xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-stone-200 relative transform transition-all scale-100 duration-200 overflow-y-auto max-h-[90vh]">
+            <button type="button" id="btn-close-analytics" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 font-extrabold text-xl focus:outline-none">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4 text-left">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shadow-inner text-lg">
+                    📈
+                </div>
+                <h2 class="text-xs sm:text-sm font-black text-stone-900 uppercase tracking-wider">Activity History Dashboard</h2>
+            </div>
+
+            <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3 text-[11px] text-emerald-955 font-semibold leading-relaxed mb-4 text-left">
+                📊 <strong>15-Day Local History Logs:</strong> Tracks daily completions, worksheet generations, and performance data on your local browser memory space.
+            </div>
+
+            <!-- Stats Row -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 text-center">
+                <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
+                    <span class="text-[9px] font-bold uppercase text-stone-400 block leading-tight">Letters Traced</span>
+                    <span id="stats-total-traced" class="text-sm font-extrabold text-stone-850 mt-0.5 block">0</span>
+                </div>
+                <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
+                    <span class="text-[9px] font-bold uppercase text-stone-400 block leading-tight">Avg Accuracy</span>
+                    <span id="stats-avg-accuracy" class="text-sm font-extrabold text-emerald-700 mt-0.5 block">0%</span>
+                </div>
+                <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
+                    <span class="text-[9px] font-bold uppercase text-stone-400 block leading-tight">Worksheet Batches</span>
+                    <span id="stats-total-sheets" class="text-sm font-extrabold text-stone-850 mt-0.5 block">0</span>
+                </div>
+                <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
+                    <span class="text-[9px] font-bold uppercase text-stone-400 block leading-tight">Active Days</span>
+                    <span id="stats-active-days" class="text-sm font-extrabold text-amber-700 mt-0.5 block">0 Days</span>
+                </div>
+            </div>
+
+            <!-- Weakness Focus & Targeted Corrections -->
+            <div id="analytics-weakness-card" class="bg-red-50 border border-red-200 rounded-2xl p-4 mb-4 text-left space-y-2">
+                <h3 class="text-xs font-black text-red-955 uppercase tracking-wide flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Letters Requiring Practice Focus
+                </h3>
+                <p id="analytics-weakness-text" class="text-[11px] text-stone-700 font-semibold leading-relaxed">
+                    Once trace accuracy drops below 80%, characters are logged here to generate targeted homework sheets.
+                </p>
+                <div id="difficult-letters-badges" class="flex flex-wrap gap-1.5 pt-1">
+                    <!-- Populated dynamically -->
+                </div>
+                <button type="button" id="btn-print-redemption" class="hidden mt-2 bg-red-800 hover:bg-red-955 text-white font-extrabold text-[10px] uppercase tracking-wider px-4 py-2 rounded-xl transition-all shadow-sm">
+                    🖨️ Print Targeted Weakness Worksheet
+                </button>
+            </div>
+
+            <!-- Printable Certificate Section -->
+            <div id="certificate-claim-box" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-4 text-left space-y-2 hidden">
+                <h3 class="text-xs font-black text-amber-955 uppercase tracking-wide flex items-center gap-1.5">
+                    <i class="fa-solid fa-medal text-amber-600"></i> Devanagari Master Writer Certificate!
+                </h3>
+                <p class="text-[11px] text-stone-700 font-semibold">
+                    Congratulations! Your student has achieved over 100 points. Print their commemorative diploma!
+                </p>
+                <button type="button" id="btn-print-certificate" class="bg-amber-700 hover:bg-amber-850 text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-xl transition-all shadow-md">
+                    📜 Print Commemorative Diploma (A4)
+                </button>
+            </div>
+
+            <!-- Log Timeline container -->
+            <div class="space-y-2 text-left">
+                <h3 class="text-xs font-black text-stone-700 tracking-wider">Weekly Activity History</h3>
+                <div id="analytics-timeline-container" class="space-y-3 max-h-[30vh] overflow-y-auto pr-1 border border-stone-150 rounded-xl p-3 bg-stone-50/50">
+                    <!-- Dynamic timeline logs loaded here -->
+                </div>
+            </div>
+
+            <!-- Actions block -->
+            <div class="flex justify-between items-center mt-5 pt-3 border-t text-[10px] text-stone-500 font-semibold">
+                <span>Data remains inside the browser local sandbox memory</span>
+                <button type="button" id="btn-wipe-analytics" class="text-red-700 hover:text-red-900 uppercase font-black tracking-wider text-[9px]">
+                    Wipe History Logs
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Global Footer Placeholders -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60] print-hide"></div>
+    <div id="notification-toast" role="status" aria-live="polite" class="print-hide"></div>
+
+    <!-- Header-Footer System Scripts -->
+    <script src="../../js/header-footer.js"></script>
+
+    <!-- YOUR SEPARATED APPLICATION LOGIC -->
+    <script src="app.js" defer></script>
+</body>
+</html>
