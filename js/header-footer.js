@@ -36,6 +36,7 @@ const TOOLBLASTER_APPS = [
         category: "Educational",
         icon: "fa-graduation-cap",
         apps: [
+            { name: "AksharTrace", url: "/educational/akshar-trace/", icon: "fa-feather-pointed", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/akshar-trace/" },
             { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes-for-kids/" },
             { name: "Math Sprint", url: "/educational/math-sprint-speed-drill-worksheets/", icon: "fa-calculator", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/math-sprint-speed-drill-worksheets/" },
             { name: "TraceWrite", url: "/educational/tracewrite-handwriting-tracing-worksheets/", icon: "fa-pen-nib", classes: "bg-amber-50 border-amber-100 text-amber-600 group-hover:text-amber-600", matchPath: "/educational/tracewrite-handwriting-tracing-worksheets/" }
@@ -67,14 +68,14 @@ function injectHeader() {
     const headerContainer = document.getElementById('app-header');
     if (!headerContainer) return;
 
-    // CRITICAL FIX: Ensure the placeholder keeps its height so the page doesn't jump
+    // Ensure the placeholder keeps its height so the page doesn't jump
     headerContainer.style.minHeight = '48px';
     headerContainer.className = "w-full relative z-[100]";
 
     const currentPath = window.location.pathname;
     const currentHost = window.location.hostname;
 
-    // SCALABLE LOGIC: Read from HTML Meta tags automatically!
+    // Read from HTML Meta tags automatically
     let centerTitle = "TOOLBLASTER"; 
     const appNameMeta = document.querySelector('meta[name="application-name"]');
     const iosAppNameMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
@@ -84,9 +85,10 @@ function injectHeader() {
     } else if (iosAppNameMeta && iosAppNameMeta.content) {
         centerTitle = iosAppNameMeta.content.toUpperCase();
     } else {
-        // Fallback for active pages (Legacy unused parameters removed smoothly)
+        // Fallback for active pages
         if (currentPath.includes('/decide/')) centerTitle = "DECIDE.";
         else if (currentPath.includes('/pomodoro-study-timer/')) centerTitle = "STUDY TIMER";
+        else if (currentPath.includes('/educational/akshar-trace/')) centerTitle = "AKSHARTRACE";
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
         else if (currentPath.includes('/educational/math-sprint-speed-drill-worksheets')) centerTitle = "MATH SPRINT";
         else if (currentPath.includes('/educational/tracewrite-handwriting-tracing-worksheets')) centerTitle = "TRACEWRITE";
@@ -105,7 +107,7 @@ function injectHeader() {
         }
     }
 
-    // Logic 2: DYNAMIC DESCRIPTION DETECTION (From document.title)
+    // Dynamic Description detection
     let descTitle = "";
     if (document.title) {
         const titleParts = document.title.split(/\||-/);
@@ -137,7 +139,6 @@ function injectHeader() {
                 }
             });
             
-            // Fallback
             if (!bestPart) {
                 titleParts.forEach(part => {
                     const cleanPart = part.trim();
@@ -147,7 +148,6 @@ function injectHeader() {
                 });
             }
             
-            // Strip centerTitle words dynamically from bestPart to avoid repetitive visual bloat
             let tempDesc = bestPart;
             const wordsToStrip = [centerTitle, "toolblaster"];
             if (centerTitle.includes(" ")) {
@@ -308,7 +308,6 @@ function injectHeader() {
     if(menuBtn && sidebar && overlay) {
         // Watertight mobile scroll-lock handling to prevent background scrolling
         const preventDefaultScroll = (e) => {
-            // Let the user scroll normally inside the sidebar drawer list
             if (sidebar.contains(e.target)) {
                 return;
             }
@@ -320,11 +319,9 @@ function injectHeader() {
             overlay.classList.add('opacity-100');
             sidebar.classList.add('active');
             
-            // Standard scroll disable for both HTML and Body elements
             document.body.style.overflow = 'hidden';
             document.documentElement.style.overflow = 'hidden';
             
-            // Securely trap mobile Safari touchmove actions
             document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
         };
 
@@ -333,17 +330,22 @@ function injectHeader() {
             overlay.classList.add('opacity-0', 'pointer-events-none');
             sidebar.classList.remove('active');
             
-            // Restore scroll settings
             document.body.style.overflow = '';
             document.documentElement.style.overflow = '';
             
-            // Remove mobile touch listener safely
             document.removeEventListener('touchmove', preventDefaultScroll);
         };
 
         menuBtn.addEventListener('click', openMenu);
         closeBtn?.addEventListener('click', closeMenu);
         overlay.addEventListener('click', closeMenu);
+
+        // Substantial Addition: ESC Key Listener to close overlay/drawer
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeMenu();
+            }
+        });
     }
 
     // Dynamic style inside sidebar
@@ -365,7 +367,6 @@ function injectToolNav() {
     const navContainer = document.getElementById('app-tool-nav');
     if (!navContainer) return;
 
-    // Height reduced to save vertical space
     navContainer.style.minHeight = '36px';
     navContainer.className = "w-full relative z-[90]";
 
@@ -380,7 +381,6 @@ function injectToolNav() {
                 const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
                 const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
                 
-                // Segment boundary RegExp check to prevent substring overlap bugs like "reverse-investment-planner" matching "investment-planner"
                 const boundaryRegex = new RegExp(`(^|\\/)${cleanMatchPath}($|\\/)`);
                 if (boundaryRegex.test(cleanCurrentPath)) {
                     activeCategory = cat;
@@ -403,7 +403,6 @@ function injectToolNav() {
         toolsToShow = activeCategory.apps.slice(0, 7);
         categoryLabel = activeCategory.category;
     } else {
-        // Fallback for homepage or unknown pages
         toolsToShow = TOOLBLASTER_APPS.flatMap(cat => cat.apps).slice(0, 7);
         categoryLabel = "Top Apps";
     }
@@ -417,7 +416,6 @@ function injectToolNav() {
             const cleanMatchPath = tool.matchPath.replace(/^\/|\/$/g, '');
             const cleanCurrentPath = currentPath.replace(/^\/|\/$/g, '');
             
-            // Strictly match path boundaries
             const boundaryRegex = new RegExp(`(^|\\/)${cleanMatchPath}($|\\/)`);
             if (boundaryRegex.test(cleanCurrentPath)) {
                 isActive = true;
@@ -513,7 +511,7 @@ function injectFooterAndModals() {
                             <a href="https://api.whatsapp.com/send?text=${shareMsg}${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-[#25D366] hover:scale-110 transition-all duration-300" aria-label="Share on WhatsApp">
                                 <i class="fa-brands fa-whatsapp text-sm"></i>
                             </a>
-                            <!-- Twitter -->
+                            <!-- Twitter / X -->
                             <a href="https://twitter.com/intent/tweet?text=${shareMsg}&url=${currentUrl}" target="_blank" rel="noopener noreferrer" class="text-stone-500 hover:text-stone-900 hover:scale-110 transition-all duration-300" aria-label="Share on X">
                                 <svg class="w-3.5 h-3.5 fill-current inline-block pb-[1px]" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
