@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Optimized Exactly 60 Character Meta Title for Everlasting SERP Ranking -->
+    <title>Devnagari KeyMaster - Hindi & English Touch Typing Tutor App</title>
+    <!-- Optimized Meta Description for WCAG AA compliance (Under 160 Chars) -->
+    <meta name="description" content="Master Remington Krutidev, Mangal Inscript, and English touch typing. Free online typing simulator with real-time feedback, heatmaps, and certificates.">
+    <meta name="keywords" content="hindi typing test, learn hindi typing online, krutidev typing trainer, mangal inscript keyboard, online typing tutor india, government clerk typing test">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/educational/devnagari-keymaster" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook Meta Data -->
+    <meta property="og:title" content="Devnagari KeyMaster: Premium Hindi & English Typing Tutor">
+    <meta property="og:description" content="Improve your Krutidev, Mangal, and English typing speeds with guided keyboard overlays and dynamic accuracy heatmaps.">
+    <meta property="og:url" content="https://toolblaster.com/educational/devnagari-keymaster">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../js/favicon/android-chrome-192x192.png">
+
+    <!-- Favicons & Manifest Links -->
+    <link class="icon animate-pulse" rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="32x32" href="../../js/favicon/favicon-32x32.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="512x512" href="../../js/favicon/android-chrome-512x512.png">
+    <link class="apple-touch-icon" href="../../js/favicon/apple-touch-icon.png">
+
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts Preconnect Guards -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Isolated Google Fonts Stylesheets to resolve strict MIME checking and 400 Bad Request Errors -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://toolblaster.com/educational/devnagari-keymaster#software",
+          "name": "Devnagari KeyMaster - Typing Tutor",
+          "url": "https://toolblaster.com/educational/devnagari-keymaster",
+          "operatingSystem": "All",
+          "applicationCategory": "EducationalApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #1c1917; 
+            --accent-primary: #b91c1c; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #fff5f5 10%, #f9fafb 80%);
+            color: var(--text-color);
+            transition: background 0.3s ease;
+        }
+        .hindi-font {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+
+        /* Glassmorphism panel variables */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 223, 219, 0.6);
+        }
+
+        /* Color-coded mechanical keyboard keys to guide specific fingers */
+        .key-pinky { background-color: #fee2e2; border-color: #fca5a5; }
+        .key-ring { background-color: #ffedd5; border-color: #fdba74; }
+        .key-middle { background-color: #fef9c3; border-color: #fde047; }
+        .key-index-l { background-color: #dcfce7; border-color: #86efac; }
+        .key-index-r { background-color: #e0f2fe; border-color: #7dd3fc; }
+        .key-thumb { background-color: #f3e8ff; border-color: #c084fc; }
+
+        .key-active {
+            background-color: #b91c1c !important;
+            color: #ffffff !important;
+            border-color: #991b1b !important;
+            transform: translateY(2px);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15) !important;
+        }
+
+        /* Active key interior alignment variables */
+        .key-active .main-label {
+            color: #ffffff !important;
+        }
+
+        .key-active .sub-label {
+            color: #fee2e2 !important;
+        }
+
+        /* Fingertip guide dynamic styles with dark red background for high contrast active text label mapping */
+        .finger-active {
+            background-color: #c53030 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 10px rgba(197,48,48,0.75) !important;
+            transform: scale(1.1);
+        }
+
+        /* Custom Scrollbar for horizontal slider containers */
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(28, 25, 23, 0.05);
+            border-radius: 999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(185, 28, 28, 0.25);
+            border-radius: 999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(185, 28, 28, 0.45);
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            #screen-container, #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, .print-hide, .main-seo-article, main {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #faf8f5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-50/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-amber-50/20 blur-[100px]"></div>
+    </div>
+
+    <!-- Layout Navigation Placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Unified Breadcrumbs Navigation with compliant text contrast colors -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-800 mb-4 font-semibold flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-700 transition-colors inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-400">/</span>
+                <a href="https://toolblaster.com/educational/" class="hover:text-red-700 transition-colors">Educational</a>
+                <span class="mx-1.5 text-stone-400">/</span>
+                <span class="text-stone-900 font-bold">Devnagari KeyMaster</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-2">
+                <div id="streak-pill-desktop" class="flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-900 border border-amber-300 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                    <i class="fa-solid fa-fire text-orange-600"></i> <span id="streak-count-desktop">0 Day Streak</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-red-50 text-red-900 border border-red-300 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                    <i class="fa-regular fa-keyboard"></i> Touch Typing Trainer
+                </div>
+            </div>
+        </nav>
+
+        <div id="screen-container" class="w-full text-left print-hide">
+            <!-- Upgraded Main Card to match glassmorphism standard across tools -->
+            <div id="main-tool-card" class="glass-panel border border-stone-200/80 shadow-xl rounded-3xl p-5 sm:p-8 mx-auto my-0 relative max-w-4xl transition-all duration-300">
+                
+                <!-- Title Header Block with Perfect Inline Baseline Matching AksharTrace -->
+                <div class="text-center mb-1">
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 tracking-tight flex items-center justify-center gap-2">
+                        <!-- Custom high-contrast SVG Keyboard Icon aligned pixel-perfectly with text baseline -->
+                        <span class="inline-flex items-center justify-center text-red-700 flex-shrink-0">
+                            <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                        </span>
+                        <span>Devnagari KeyMaster</span>
+                    </h1>
+                    <!-- Dynamic Streak Badge -->
+                    <div id="streak-badge-container" class="mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-amber-900 tracking-wide shadow-sm cursor-help" title="Practice daily to maintain your speed streak!">
+                        <i class="fa-solid fa-fire text-orange-600 text-[11px] animate-bounce"></i> 
+                        <span id="streak-count-badge">0 Day Streak</span>
+                        <span class="text-stone-400 mx-1">|</span>
+                        <span class="text-[9px] text-stone-700">Best: <span id="streak-best-badge">0</span></span>
+                    </div>
+                </div>
+                <p class="text-center text-stone-800 mb-6 text-xs font-semibold max-w-lg mx-auto leading-relaxed">
+                    Master Remington (Krutidev), Inscript (Mangal), or English Touch Typing. Develop perfect muscle memory with dynamic heatmap tracing.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-stone-100/90 border border-stone-200 rounded-2xl p-4 mb-5 text-xs font-bold text-stone-800 shadow-sm">
+                    <!-- Layout Select -->
+                    <div class="space-y-1 relative">
+                        <label for="keyboard-layout-select" class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Keyboard Layout Standard</label>
+                        <select id="keyboard-layout-select" class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Choose standard Government Unicode Inscript, Legacy Krutidev, or classic English standard layout">
+                            <option value="hindi_inscript" selected>🇮🇳 Hindi Inscript (Mangal Unicode)</option>
+                            <option value="hindi_remington">⌨️ Hindi Remington (Krutidev Legacy)</option>
+                            <option value="english_qwerty">🇬🇧 English (Classic QWERTY Standard)</option>
+                        </select>
+                    </div>
+
+                    <!-- Practice Category Select -->
+                    <div class="space-y-1 relative">
+                        <label for="lesson-category-select" class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Training Category Row</label>
+                        <select id="lesson-category-select" class="w-full bg-white border border-stone-300/80 rounded-xl p-2.5 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Select typing drill level from basic home row up to official exam paragraphs">
+                            <option value="home_row" selected>Home Row Drills (प्राथमिक स्तर)</option>
+                            <option value="top_row">Top Row Drills (द्वितीय स्तर)</option>
+                            <option value="bottom_row">Bottom Row Drills (तृतीय स्तर)</option>
+                            <option value="government_exams">Government Mock Exam Paragraphs (परीक्षा अभ्यास)</option>
+                            <option value="custom_practice">Custom Practice Sandbox (स्वयं का पाठ)</option>
+                        </select>
+                    </div>
+
+                    <!-- Sound, Certificate Control triggers -->
+                    <div class="flex items-end gap-1.5 w-full">
+                        <div class="flex-1 relative">
+                            <button type="button" id="btn-toggle-sound" class="w-full bg-white hover:bg-stone-50 border border-stone-300/80 text-stone-900 p-2.5 rounded-xl transition-all flex items-center justify-center gap-1 font-extrabold shadow-sm text-[10px]" title="Toggle sensory key click sounds">
+                                <i id="sound-icon" class="fa-solid fa-volume-high text-stone-700"></i> <span id="sound-text" class="hidden lg:inline">Mute</span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex-1 relative">
+                            <button type="button" id="btn-toggle-lessons-modal" class="w-full bg-red-50 hover:bg-red-100 border border-red-300 text-red-950 p-2.5 rounded-xl transition-all flex items-center justify-center gap-1 relative font-extrabold shadow-sm text-[10px]" title="View & Print your touch typing commemorative diploma card">
+                                <i class="fa-solid fa-medal text-red-700"></i> <span class="hidden lg:inline">Diploma</span>
+                                <span id="cert-badge-dot" class="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-red-600 hidden animate-ping"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High Contrast Compliant Settings Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-stone-100/50 border border-stone-200 rounded-2xl p-4 mb-5 text-xs font-bold text-stone-850">
+                    <!-- Left Side: On-Screen Shift Toggle -->
+                    <div class="flex items-center justify-between bg-white border border-stone-200 rounded-xl p-2 relative" title="Allows touch typing practice of shifted character sets directly without physically holding keys on mobile devices">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-stone-800 uppercase font-black tracking-wider">On-Screen Shift Toggle:</span>
+                            <span class="text-[10px] text-stone-600 font-extrabold leading-none mt-1">(For Mobile/Tablet practices)</span>
+                        </div>
+                        <button type="button" id="btn-screen-shift" class="bg-stone-200 hover:bg-stone-300 text-stone-900 font-extrabold px-3 py-1.5 rounded-lg text-[10px] uppercase transition-all flex items-center gap-1">
+                            <i class="fa-solid fa-arrow-up"></i> <span id="lbl-screen-shift">Shift: OFF</span>
+                        </button>
+                    </div>
+                    <!-- Right Side: Performance Analytics Popup trigger button -->
+                    <div class="flex items-center justify-between bg-white border border-stone-200 rounded-xl p-2 relative" title="Open interactive charts tracking speed trends, accuracy logs, and layouts weak key analytics instantly">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-stone-800 uppercase font-black tracking-wider">Performance Analytics:</span>
+                            <span class="text-[10px] text-stone-600 font-extrabold leading-none mt-1">(View popup progress charts)</span>
+                        </div>
+                        <button type="button" id="btn-quick-analytics-jump" class="bg-red-800 hover:bg-red-900 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-[10px] uppercase transition-all flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-chart-line"></i> <span>View Charts</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CUSTOM TEXT SANDBOX INPUT -->
+                <div id="custom-practice-sandbox" class="hidden bg-stone-100/80 border border-stone-200 rounded-2xl p-4 mb-5 space-y-3 shadow-inner">
+                    <label for="custom-typed-text" class="block text-[10px] font-black text-stone-800 uppercase tracking-widest">Custom Devanagari / English Sandbox (पसंद का पाठ पेस्ट करें)</label>
+                    <textarea id="custom-typed-text" rows="3" class="w-full bg-white border border-stone-300 rounded-xl p-3 text-xs font-medium focus:ring-2 focus:ring-red-500 focus:outline-none leading-relaxed text-stone-900" placeholder="Type or paste your own paragraph here... Our engine translates standard input instantly into Krutidev or Inscript mapping rules."></textarea>
+                    <button type="button" id="btn-load-custom-text" class="bg-red-800 hover:bg-red-900 text-white font-black text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-xl transition-all active:scale-95 shadow-sm" title="Load your custom text to begin practice">📥 Load Practice Paragraph</button>
+                </div>
+
+                <!-- GOVERNMENT MOCK EXAM CONTROLS PANEL -->
+                <div class="bg-stone-100/90 border border-stone-200 rounded-3xl p-5 sm:p-6 mb-5 text-xs font-bold text-stone-800 space-y-4 shadow-sm">
+                    <div class="flex justify-between items-center border-b border-stone-200 pb-3">
+                        <span class="text-xs font-black uppercase tracking-wider text-red-900 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-red-700"></i> Govt Clerk Exam Simulator</span>
+                        <label class="flex items-center gap-1.5 cursor-pointer text-[10px] font-black uppercase text-stone-800 relative" title="Locks Backspace usage & locks duration to standard 10 minutes">
+                            <input type="checkbox" id="chk-strict-mock" class="rounded text-red-600 focus:ring-red-500 h-4 w-4">
+                            <span>Strict Mock Mode ON 🚨</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Flexible layout with optimized horizontal & vertical breathing spaces -->
+                    <div class="flex flex-wrap items-end gap-4 sm:gap-6 w-full">
+                        <!-- Exam Text Preset (Dynamically displayed during exams) -->
+                        <div id="mock-exam-subselect-wrap" class="hidden flex-1 min-w-[210px] space-y-1.5 relative">
+                            <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Exam Text Preset</span>
+                            <select id="mock-exam-subselect" class="w-full bg-white border border-stone-300 px-4 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-stone-900 shadow-sm transition-all" title="Select standard government verified exam paragraphs">
+                                <option value="test_1">SSC CHSL Clerk standard drill (Easy)</option>
+                                <option value="test_2">ASI Police Clerk test (Medium)</option>
+                                <option value="test_3">High Court Special paragraph (Hard)</option>
+                                <option value="test_4">Preamble of Constitution (Constitution)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                            <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Practice Duration</span>
+                            <select id="mock-timer-select" class="w-full bg-white border border-stone-300 px-4 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-stone-900 shadow-sm transition-all" title="Set countdown time limit interval for your session">
+                                <option value="0">No Limit (असीमित समय)</option>
+                                <option value="120">2 Minute Run</option>
+                                <option value="300">5 Minute Run</option>
+                                <option value="600">10 Minute Run (Standard Exam)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                            <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Backspace Restriction</span>
+                            <select id="backspace-lock-select" class="w-full bg-white border border-stone-300 px-4 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-stone-900 shadow-sm transition-all" title="Toggle backspace block constraints to simulate rigorous government typist standards">
+                                <option value="allow">Allow Backspace (संशोधन की अनुमति)</option>
+                                <option value="disable">Lock Backspace (कठोर प्रतिबंध)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                            <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Friction Map Visual</span>
+                            <button type="button" id="btn-toggle-heatmap" class="w-full bg-white hover:bg-stone-50 border border-stone-300 px-4 py-3 rounded-xl transition-all flex items-center justify-center gap-1.5 font-bold text-stone-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" title="Highlights high friction keys dynamically on the visual overlay with warning colors">
+                                <i class="fa-solid fa-fire text-amber-500"></i> <span id="heatmap-toggle-lbl">Friction Heatmap: OFF</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Weak key practice alert prompt -->
+                    <div id="weak-keys-alert-bar" class="hidden bg-amber-50 border border-amber-300 rounded-xl p-3 flex justify-between items-center text-[10px] text-stone-900 font-bold leading-relaxed transition-all">
+                        <span>⚠️ High friction keystrokes detected. Practice them specifically to construct strong motor neural maps!</span>
+                        <button type="button" id="btn-practice-weak-keys" class="bg-amber-700 hover:bg-amber-800 text-white font-black uppercase text-[9px] tracking-wider px-3 py-1.5 rounded-lg transition-all" title="Compile and load custom exercises isolated specifically to target your weak keys">Practice Weak Keys</button>
+                    </div>
+                </div>
+
+                <div class="relative bg-stone-950 rounded-2xl p-5 md:p-6 mb-5 border-4 border-stone-800 shadow-2xl">
+                    <!-- Invisible input receiver for unified Desktop and OTG accessories (with WCAG AA accessible label associated) -->
+                    <input type="text" id="hidden-typing-input" class="absolute opacity-0 pointer-events-none w-0 h-0" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Hidden keyboard input receiver">
+
+                    <!-- Typing stats banner with upgraded high contrast text labels -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4 border-b border-stone-800 pb-3 text-center text-stone-300 font-bold font-sans">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Gross Speed</span>
+                            <span id="stat-wpm" class="text-white text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true" aria-label="Gross Speed: 0 Words Per Minute">0 WPM</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Net WPM (Govt)</span>
+                            <span id="stat-net-wpm" class="text-red-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true" aria-label="Net Speed: 0 Words Per Minute">0 WPM</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Accuracy Rate</span>
+                            <span id="stat-accuracy" class="text-emerald-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true" aria-label="Accuracy Rate: 100 percent">100%</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Errors Log</span>
+                            <span id="stat-errors" class="text-amber-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true" aria-label="Errors Logged: 0 keys">0 Keys</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Time Clock</span>
+                            <span id="stat-countdown" class="text-white text-base sm:text-lg font-black transition-colors" role="timer" aria-live="polite" aria-atomic="true" aria-label="No time limit running">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Target Words Display Box (High Contrast WCAG Compliant Layout) -->
+                    <div id="typing-words-container" class="min-h-[120px] max-h-[160px] overflow-y-auto mb-4 p-4 bg-stone-900 rounded-xl border border-stone-800 text-lg sm:text-xl leading-relaxed font-semibold text-stone-300 select-none flex flex-wrap gap-x-3 gap-y-2 outline-none focus:ring-2 focus:ring-red-600 cursor-text custom-scroll" tabindex="0">
+                        <!-- Words are injected programmatically -->
+                    </div>
+
+                    <!-- Live Progress Feedback Bar with upgraded high contrast tag elements -->
+                    <div id="live-progress-feedback" class="mb-2 flex items-center justify-between text-xs font-bold px-1 bg-stone-900 border border-stone-800 p-2.5 rounded-xl flex-wrap gap-2 text-stone-200">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-300 block font-black">Live Typed Preview:</span>
+                            <span id="user-live-word-typed" class="text-stone-100 font-extrabold text-sm min-h-[20px] hindi-font bg-stone-900 border border-stone-800 px-2.5 py-0.5 rounded min-w-[50px] text-center"></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-300 block font-black">Typing Flow State:</span>
+                            <div class="w-16 bg-stone-950 h-3 rounded-full overflow-hidden border border-stone-800 flex items-center">
+                                <div id="live-flow-indicator" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-emerald-400 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-300 block font-black">Next Expected Stroke:</span>
+                            <span id="expected-key-indicator" class="text-amber-400 font-black text-sm bg-stone-950 px-3 py-0.5 rounded border border-stone-800 uppercase tracking-widest text-center" role="status" aria-live="assertive" aria-atomic="true" aria-label="Next expected stroke: A">A</span>
+                        </div>
+                    </div>
+
+                    <!-- Input Instructions HUD with stone-300 for superior dark contrast ratio -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] text-stone-300 font-semibold gap-2 border-t border-stone-800/60 pt-2.5">
+                        <span>💡 <strong class="text-white">Tap typing box</strong> to focus. Support both hardware and OTG mobile keyboards!</span>
+                        <div class="flex gap-2">
+                            <button type="button" id="btn-reset-practice" class="bg-stone-800 hover:bg-stone-750 text-stone-100 uppercase font-black tracking-widest text-[9px] px-3.5 py-1.5 rounded-lg transition-all border border-stone-800" title="Reset your practice statistics and restart the active layout drill"><i class="fa-solid fa-rotate-left"></i> Restart Drill</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center px-1 mb-2">
+                    <span class="text-[10px] font-black uppercase text-stone-700 tracking-wider">Keyboard Overlay Configuration</span>
+                    <button type="button" id="btn-toggle-kb-visibility" class="bg-stone-100 hover:bg-stone-250 border border-stone-300 text-stone-900 font-extrabold px-3 py-1 rounded-xl text-[9px] uppercase tracking-wide transition-all shadow-sm" title="Toggle visible states of the interactive on-screen mechanical guides">
+                        <i class="fa-regular fa-eye-slash"></i> Hide Key Overlay
+                    </button>
+                </div>
+
+                <!-- KEYBOARD FINGER GRAPHIC OVERLAY -->
+                <div id="keyboard-overlay-outer" class="w-full bg-stone-100/95 border border-stone-300 rounded-3xl p-3 sm:p-5 select-none print-hide overflow-x-auto custom-scroll shadow-sm transition-all duration-300">
+                    <p class="text-stone-800 text-[10px] font-black uppercase tracking-widest text-center mb-3">Color-Coded Touch Typist Fingertip Alignment</p>
+                    
+                    <div class="min-w-[620px] max-w-full space-y-1 mx-auto text-stone-900 font-bold text-xs p-1" id="virtual-keyboard">
+                        <!-- Key Rows injected dynamically -->
+                    </div>
+
+                    <!-- Fingertips color legends bar -->
+                    <div class="flex justify-center gap-4 flex-wrap mt-4 text-[9px] font-black uppercase text-stone-700 tracking-wider">
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-100 border border-red-300 block shadow-sm"></span> Pinky</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-orange-100 border border-orange-300 block shadow-sm"></span> Ring</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-yellow-100 border border-yellow-300 block shadow-sm"></span> Middle</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-green-100 border border-green-300 block shadow-sm"></span> Left Index</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-100 border border-sky-300 block shadow-sm"></span> Right Index</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-100 border border-purple-300 block shadow-sm"></span> Thumbs</div>
+                    </div>
+                </div>
+
+                <!-- FLOATING ACTIVE HANDS FINGER GUIDE -->
+                <div id="hands-finger-guide-outer" class="mt-5 bg-stone-100/95 border border-stone-300 rounded-3xl p-4 text-center select-none print-hide shadow-sm transition-all duration-300">
+                    <p class="text-stone-800 text-[10px] font-black uppercase tracking-widest mb-3">👐 Active Touch-Typing Fingertips Guide</p>
+                    <div class="flex justify-center gap-10 items-center flex-wrap">
+                        <!-- Left Hand -->
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] font-black text-stone-700 mb-1.5 tracking-widest">LEFT HAND</span>
+                            <div class="flex gap-1.5 text-[10px] font-black text-stone-900">
+                                <div id="finger-L-pink" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">P</div>
+                                <div id="finger-L-ring" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">R</div>
+                                <div id="finger-L-middle" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">M</div>
+                                <div id="finger-L-index" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">I</div>
+                                <div id="finger-L-thumb" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">T</div>
+                            </div>
+                        </div>
+                        <!-- Right Hand -->
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] font-black text-stone-700 mb-1.5 tracking-widest">RIGHT HAND</span>
+                            <div class="flex gap-1.5 text-[10px] font-black text-stone-900">
+                                <div id="finger-R-thumb" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">T</div>
+                                <div id="finger-R-index" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">I</div>
+                                <div id="finger-R-middle" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">M</div>
+                                <div id="finger-R-ring" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">R</div>
+                                <div id="finger-R-pinky" class="w-8 h-8 rounded-full bg-white border border-stone-400 flex items-center justify-center transition-all shadow-sm">P</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Aligned Related Tools Links (Uniform design matching previous pages) -->
+        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: MathSprint -->
+                <a href="https://toolblaster.com/educational/math-sprint-speed-drill-worksheets/" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-200">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">MathSprint</span>
+                            <p class="text-[10px] text-stone-700 mt-0.5 leading-tight truncate">Class 1 to 5 adaptive mathematical speed drills.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 2: TraceWrite -->
+                <a href="https://toolblaster.com/educational/tracewrite-handwriting-tracing-worksheets/" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-200">
+                            <i class="fa-solid fa-pen-nib text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">TraceWrite</span>
+                            <p class="text-[10px] text-stone-700 mt-0.5 leading-tight truncate">English alphabet & custom name writing maker.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 3: AksharTrace -->
+                <a href="https://toolblaster.com/educational/akshar-trace/" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-amber-200">
+                            <i class="fa-solid fa-feather-pointed text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 m-0 leading-tight block">AksharTrace</span>
+                            <p class="text-[10px] text-stone-700 mt-0.5 leading-tight truncate">Hindi alphabet handwriting and tracing sheets.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Premium Informational & SEO Documentation Article Section -->
+        <article class="w-full max-w-[768px] mx-auto mt-10 mb-16 prose prose-stone relative z-10 print-hide px-4 sm:px-1 text-left font-sans">
+            <div class="space-y-6 text-stone-900 font-inter">
+                
+                <!-- Section 1: Philosophy & Cognitive Science with standard emerald highlights -->
+                <section class="bg-white/90 p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700"><i class="fa-solid fa-brain"></i></span> The Cognitive Mechanics of Touch Typing
+                    </h2>
+                    <p class="leading-relaxed mb-4 text-stone-850 text-[13px] font-medium">
+                        Touch typing is not simply a mechanical execution; it is an intimate coordination between spatial memory and haptic feedback loops. By training the fingers to locate specific keyboard zones independently of focal vision, typists convert linguistic concepts directly into finger movements, freeing cognitive space for content formulation. Key benefits of mastering touch typing include:
+                    </p>
+                    
+                    <ul class="space-y-3 mb-5 pl-1">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Motor Spatial Mapping:</strong> Consistent alignment over the standard "Home Row" anchor coordinates creates robust muscle memory maps, allowing the brain's motor cortex to recall key locations without visual prompts.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Devanagari Complexities Resolved:</strong> Script layouts such as Remington Gail or Mangal Inscript require structured sequences to formulate joint letters and vowel diacritics. Direct typing practice minimizes cognitive friction.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Govt Examination Readiness:</strong> Most civil services, banking clerical exams, and legislative department tests mandate specific speed targets (typically 35+ Net WPM). Continuous mock simulation guarantees preparedness under exam conditions.</span>
+                        </li>
+                    </ul>
+                    
+                    <p class="leading-relaxed mb-0 text-stone-850 text-[13px] font-medium border-t border-stone-200 pt-4">
+                        Our advanced <strong>Devnagari KeyMaster App</strong> bridges legacy typewriter architectures with modern web-based training principles, offering an ink-safe design and a secure client-side sandbox environment.
+                    </p>
+                </section>
+
+                <!-- Section 2: Remington vs Inscript Layout Analysis -->
+                <section class="bg-white/90 p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700"><i class="fa-solid fa-code-fork"></i></span> Krutidev (Remington) vs. Mangal (Inscript)
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-850 font-semibold">
+                        India's government departments employ two completely distinct typing methodologies, each catering to different technological generations:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-stone-850 leading-relaxed">
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                            <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-red-100 text-red-900 font-bold flex items-center justify-center text-[10px]">1</span>
+                                Remington Krutidev (ASCII Legacy)
+                            </h3>
+                            <p class="text-[11px] text-stone-700 leading-normal">
+                                Modeled directly after standard mechanical typewriters. It uses classical English ASCII key values to represent Hindi characters. To display Devanagari, users must have specific legacy fonts installed. This layout remains deeply rooted in State Clerk examinations.
+                            </p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                            <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-red-100 text-red-900 font-bold flex items-center justify-center text-[10px]">2</span>
+                                Inscript Mangal (Unicode Standard)
+                            </h3>
+                            <p class="text-[11px] text-stone-700 leading-normal">
+                                The official, native Unicode layout endorsed by the Government of India. This system maps standard Devanagari phonetics systematically across standard keyboards, placing vowel clusters on the left hand and consonants on the right. No external font files are needed.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Premium Advantages matching AksharTrace's bullet style -->
+                <section class="bg-white/90 p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700"><i class="fa-solid fa-circle-check"></i></span> Premium Advantages of KeyMaster Tutor
+                    </h2>
+                    <ul class="space-y-3.5 pl-1 text-[13px] text-stone-850 font-medium leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>No OS Layout Pack Needed:</strong> Type Remington & Inscript directly over standard English QWERTY structures without configurations.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Intelligent Shift Guides:</strong> Always highlights the Shift modifier keys dynamically whenever capital keys or shifts are required.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Universal Device Support:</strong> Seamless typing mapping on Desktop browsers, mobile layout selectors, and OTG accessories.</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 4: Frequently Asked Questions (Exactly 5 Targeted Entries) -->
+                <section id="faqs" class="bg-transparent space-y-3">
+                    <h2 class="text-base font-black text-stone-900 mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-700"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">1. Can I practice Hindi Remington (Krutidev) typing without installing custom fonts?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">Absolutely! Devnagari KeyMaster's virtual parsing engine intercepts classical ASCII keyboard codes and displays beautiful, high-contrast Devanagari Unicode equivalents in real-time, eliminating the need to install external layout files on your local computer.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">2. What metrics are used to calculate Gross and Net typing speed?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold text-left">
+                            We follow the precise guidelines established by Indian government typing tests: 
+                            $$\text{Gross Speed} = \frac{\text{Total Keystrokes} / 5}{\text{Minutes Elapsed}}$$
+                            $$\text{Net Speed (Govt)} = \text{Gross WPM} - \frac{\text{Incorrect Keystrokes}}{\text{Minutes Elapsed}}$$
+                            This standard accounts for word structures by defining 5 keystrokes as 1 standard word.
+                        </p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">3. What is the benefit of the dynamic keystroke friction heatmap?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">The friction heatmap is a diagnostic tool that tracks your exact error rates per key. Buttons with high error ratios glow red, helping you pinpoint keys that disrupt your writing rhythm so you can isolate them for targeted practice.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">4. Is my typed data sent to external servers or logged?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">No. In accordance with strict COPPA guidelines and privacy-by-design standards, Devnagari KeyMaster operates entirely client-side. Your practice texts, typing speeds, and spatial coordinates never leave your device.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">5. How do I print my Devanagari Master Typing Diploma?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">Once your personal records achieve a Net Speed of 35 WPM or higher with at least 95% accuracy, the lock is removed on the Certificate Modal. Type your name and tap the print button to generate a clean, vector-rendered A4 printout.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- PRINTABLE MASTER CERTIFICATE -->
+    <div id="print-certificate-shelf" class="print-only hidden w-full bg-white text-stone-900">
+        <!-- Injected programmatically during print call -->
+    </div>
+
+    <!-- CERTIFICATE CLAIM MODAL -->
+    <div id="cert-claim-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="cert-claim-modal-content" class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 relative transform transition-all duration-200 text-left">
+            <button type="button" id="btn-close-cert-modal" class="absolute top-4 right-4 text-stone-700 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close diploma details">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h2 class="text-sm font-black text-stone-900 uppercase tracking-wider">Devnagari Master Typing Diploma</h2>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 text-[11px] text-stone-900 font-bold leading-relaxed mb-4">
+                🏆 <strong>Requirement:</strong> Maintain a net speed of over <strong>35 WPM</strong> with an accuracy threshold of <strong>95%</strong> to print your commemorative certificate.
+            </div>
+
+            <!-- Gamified Streak Achievements inside Modal Container -->
+            <div class="border border-stone-200 rounded-2xl p-3 mb-4 space-y-2.5">
+                <span class="text-[10px] font-black uppercase text-stone-700 tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-medal text-amber-600"></i> Gamified Streak Achievements
+                </span>
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-bold text-stone-800">
+                    <div id="achieve-7day" class="flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2">
+                        <span id="achieve-7day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <div>
+                            <span class="block font-extrabold text-stone-900">7-Day Fire Medal</span>
+                            <span id="achieve-7day-status" class="text-[8px] text-stone-700 font-medium">Practice 7 days consecutively</span>
+                        </div>
+                    </div>
+                    <div id="achieve-30day" class="flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2">
+                        <span id="achieve-30day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <div>
+                            <span class="block font-extrabold text-stone-900">30-Day Master Ring</span>
+                            <span id="achieve-30day-status" class="text-[8px] text-stone-700 font-medium">Practice 30 days consecutively</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label for="student-name-input" class="block text-[10px] font-black text-stone-800 uppercase">Student / Candidate Name</label>
+                    <input type="text" id="student-name-input" class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500" value="TypeMaster Candidate">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                    <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                        <span class="text-[9px] uppercase text-stone-700 block font-bold">Your Best Speed</span>
+                        <span id="best-speed-lbl" class="text-sm font-black text-stone-900">0 WPM</span>
+                    </div>
+                    <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-200">
+                        <span class="text-[9px] uppercase text-stone-700 block font-bold">Your Best Accuracy</span>
+                        <span id="best-accuracy-lbl" class="text-sm font-black text-emerald-900">0%</span>
+                    </div>
+                </div>
+
+                <p id="cert-status-error-msg" class="text-[11px] text-red-800 font-bold italic text-center"></p>
+
+                <button type="button" id="btn-print-diploma" class="w-full bg-red-800 hover:bg-red-900 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95">
+                    📜 Print Commemorative Diploma
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFORMANCE ANALYTICS POPUP MODAL -->
+    <div id="analytics-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="analytics-modal-content" class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl border border-stone-200 relative transform transition-all duration-200 text-left max-h-[90vh] overflow-y-auto custom-scroll">
+            <button type="button" id="btn-close-analytics-modal" class="absolute top-4 right-4 text-stone-700 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close performance analytics dashboard">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h2 class="text-sm font-black text-stone-900 uppercase tracking-wider">Performance Analytics Dashboard</h2>
+            </div>
+            
+            <div id="analytics-content-wrapper" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Historical Progress Line Chart Card -->
+                    <div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-sm relative min-h-[260px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-stone-700">WPM & Accuracy Trends</span>
+                            <span class="text-[9px] text-stone-500 font-bold">Last 15 Sessions</span>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center relative">
+                            <canvas id="progressTrendChart" class="max-h-[180px] w-full"></canvas>
+                            <div id="no-history-overlay" class="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4">
+                                <i class="fa-solid fa-chart-line text-stone-400 text-3xl mb-1.5"></i>
+                                <p class="text-xs font-bold text-stone-800">No practice history recorded yet.</p>
+                                <p class="text-[10px] text-stone-600 mt-0.5 font-medium">Complete your first touch typing run to plot your progress!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weak Keys Cumulative Friction Bar Chart -->
+                    <div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-sm relative min-h-[260px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-stone-700">Keystroke Friction Analysis</span>
+                            <span class="text-[9px] text-stone-500 font-bold">Error Ratios per Key</span>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center relative">
+                            <canvas id="weakKeysFrictionChart" class="max-h-[180px] w-full"></canvas>
+                            <div id="no-weakkeys-overlay" class="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4">
+                                <i class="fa-solid fa-fingerprint text-stone-400 text-3xl mb-1.5"></i>
+                                <p class="text-xs font-bold text-stone-800">No friction keys tracked yet.</p>
+                                <p class="text-[10px] text-stone-600 mt-0.5 font-medium">Make typos during practice to map key-friction coefficients!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center text-[10px] text-stone-750 font-bold px-1 bg-stone-50 border border-stone-200 p-2.5 rounded-xl flex-wrap gap-2">
+                    <span>💡 <strong class="text-stone-900">Target metrics:</strong> Try to keep accuracy above 95% to allow stable motor nervous pathway building.</span>
+                    <button type="button" id="btn-clear-analytics" class="text-red-700 hover:text-red-900 uppercase font-black tracking-widest text-[9px] transition-all flex items-center gap-1.5" title="Clear all local user progress logs and weak character coefficients"><i class="fa-solid fa-trash-can"></i> Clear History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER PLACEHOLDERS -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60] print-hide"></div>
+    <div id="notification-toast" role="status" aria-live="polite" class="print-hide"></div>
+
+    <script src="../../js/header-footer.js"></script>
+
+    <!-- KEYMASTER APPLICATION SCRIPT -->
+    <script>
+        const STORAGE_VERSION = 1;
+        const StorageProxy = {
+            get(key, defaultValue) {
+                try {
+                    const raw = localStorage.getItem(key);
+                    if (!raw) return defaultValue;
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === 'object' && 'version' in parsed) {
+                        if (parsed.version === STORAGE_VERSION) return parsed.data;
+                    }
+                    return parsed;
+                } catch (e) {
+                    console.error("StorageProxy read error:", e);
+                    return defaultValue;
+                }
+            },
+            set(key, val) {
+                try {
+                    const envelope = { version: STORAGE_VERSION, data: val };
+                    localStorage.setItem(key, JSON.stringify(envelope));
+                    return true;
+                } catch (e) {
+                    console.error("StorageProxy write error:", e);
+                    return false;
+                }
+            }
+        };
+
+        // ENCAPSULATED KEYBOARD REGISTRY
+        const KEYBOARD_REGISTRY = {
+            charToCodeMap: {
+                'q': 'KeyQ', 'w': 'KeyW', 'e': 'KeyE', 'r': 'KeyR', 't': 'KeyT', 'y': 'KeyY', 'u': 'KeyU', 'i': 'KeyI', 'o': 'KeyO', 'p': 'KeyP', '[': 'BracketLeft', ']': 'BracketRight',
+                'a': 'KeyA', 's': 'KeyS', 'd': 'KeyD', 'f': 'KeyF', 'g': 'KeyG', 'h': 'KeyH', 'j': 'KeyJ', 'k': 'KeyK', 'l': 'KeyL', ';': 'Semicolon', "'": 'Quote',
+                'z': 'KeyZ', 'x': 'KeyX', 'c': 'KeyC', 'v': 'KeyV', 'b': 'KeyB', 'n': 'KeyN', 'm': 'KeyM', ',': 'Comma', '.': 'Period', '/': 'Slash',
+                'Q': 'KeyQ', 'W': 'KeyW', 'E': 'KeyE', 'R': 'KeyR', 'T': 'KeyT', 'Y': 'KeyY', 'U': 'KeyU', 'I': 'KeyI', 'O': 'KeyO', 'P': 'KeyP', '{': 'BracketLeft', '}': 'BracketRight',
+                'A': 'KeyA', 'S': 'KeyS', 'D': 'KeyD', 'F': 'KeyF', 'G': 'KeyG', 'H': 'KeyH', 'J': 'KeyJ', 'K': 'KeyK', 'L': 'KeyL', ':': 'Semicolon', '"': 'Quote',
+                'Z': 'KeyZ', 'X': 'KeyX', 'C': 'KeyC', 'V': 'KeyV', 'B': 'KeyB', 'N': 'KeyN', 'M': 'KeyM', '<': 'Comma', '>': 'Period', '?': 'Slash'
+            },
+            layouts: {
+                english_qwerty: {
+                    displayName: "English QWERTY",
+                    forwardMap: {},
+                    backwardMap: {},
+                    forwardMapShifted: {}
+                },
+                hindi_inscript: {
+                    displayName: "Hindi Inscript (Mangal)",
+                    forwardMap: {
+                        'KeyQ': 'ौ', 'KeyW': 'ै', 'KeyE': 'ा', 'KeyR': 'ी', 'KeyT': 'ू', 'KeyY': 'ब', 'KeyU': 'ह', 'KeyI': 'ग', 'KeyO': 'द', 'KeyP': 'ज', 'BracketLeft': 'ड', 'BracketRight': 'ृ',
+                        'KeyA': 'ो', 'KeyS': 'े', 'KeyD': '्', 'KeyF': 'ि', 'KeyG': 'ु', 'KeyH': 'प', 'KeyJ': 'र', 'KeyK': 'क', 'KeyL': 'त', 'Semicolon': 'च', 'Quote': 'ट',
+                        'KeyZ': '़', 'KeyX': 'ं', 'KeyC': 'म', 'KeyV': 'न', 'KeyB': 'व', 'KeyN': 'ल', 'KeyM': 'स', 'Comma': ',', 'Period': '.', 'Slash': 'य',
+                        'Space': ' '
+                    },
+                    forwardMapShifted: {
+                        'KeyQ': 'औ', 'KeyW': 'ऐ', 'KeyE': 'आ', 'KeyR': 'ई', 'KeyT': 'ऊ', 'KeyY': 'भ', 'KeyU': 'ङ', 'KeyI': 'घ', 'KeyO': 'ध', 'KeyP': 'झ', 'BracketLeft': 'ढ', 'BracketRight': 'ञ',
+                        'KeyA': 'ओ', 'KeyS': 'ए', 'KeyD': 'अ', 'KeyF': 'इ', 'KeyG': 'उ', 'KeyH': 'फ', 'KeyJ': 'ऱ', 'KeyK': 'ख', 'KeyL': 'थ', 'Semicolon': 'छ', 'Quote': 'ठ',
+                        'KeyZ': 'ऋ', 'KeyX': 'ँ', 'KeyC': 'ण', 'KeyV': 'ऩ', 'KeyB': 'ष', 'KeyN': 'ळ', 'KeyM': 'श', 'Comma': 'ष्', 'Period': '।', 'Slash': 'य',
+                        'Digit1': '१', 'Digit2': '२', 'Digit3': '३', 'Digit4': '४', 'Digit5': '५', 'Digit6': '६', 'Digit7': '७', 'Digit8': '८', 'Digit9': '९', 'Digit0': '०'
+                    },
+                    backwardMap: {
+                        'क': 'k', 'ख': 'K', 'ग': 'i', 'घ': 'I', 'च': ';', 'छ': ':', 'ज': 'p', 'झ': 'P', 'ट': "'", 'ठ': '"', 'ड': '[', 'ढ': '{', 'ण': 'C',
+                        'त': 'l', 'थ': 'L', 'द': 'o', 'ध': 'O', 'न': 'v', 'प': 'h', 'फ': 'H', 'ब': 'y', 'भ': 'Y', 'म': 'c', 'य': '/', 'र': 'j', 'ल': 'n',
+                        'व': 'b', 'श': 'M', 'ष': 'K', 'स': 'm', 'ह': 'u', 'ा': 'e', 'ि': 'f', 'ी': 'r', 'ु': 'g', 'ू': 't', 'े': 's', 'ै': 'w', 'ो': 'a', 'ौ': 'q', '्': 'd', 'ं': 'x'
+                    }
+                },
+                hindi_remington: {
+                    displayName: "Hindi Remington (Krutidev)",
+                    forwardMap: {
+                        'KeyQ': 'ु', 'KeyW': 'ू', 'KeyE': 'म', 'KeyR': 'त', 'KeyT': 'ज', 'KeyY': 'ल', 'KeyU': 'न', 'KeyI': 'प', 'KeyO': 'व', 'KeyP': 'च', 'BracketLeft': 'ख', 'BracketRight': 'ह',
+                        'KeyA': 'ं', 'KeyS': 'क', 'KeyD': 'ि', 'KeyF': 'थ', 'KeyG': 'ह', 'KeyH': 'ी', 'KeyJ': 'र', 'KeyK': 'ा', 'KeyL': 'स', 'Semicolon': 'य', 'Quote': 'श',
+                        'KeyZ': '्र', 'KeyX': 'ग', 'KeyC': 'ब', 'KeyV': 'अ', 'KeyB': 'इ', 'KeyN': 'द', 'KeyM': 'ध', 'Comma': 'ए', 'Period': 'ण', 'Slash': 'ध',
+                        'Space': ' '
+                    },
+                    forwardMapShifted: {
+                        'KeyQ': 'फ', 'KeyW': 'ॅ', 'KeyE': 'ब्', 'KeyR': 'द्', 'KeyT': 'ज्', 'KeyY': 'ल्', 'KeyU': 'न्', 'KeyI': 'प्', 'KeyO': 'व्', 'KeyP': 'च्', 'BracketLeft': 'ख्', 'BracketRight': 'ः',
+                        'KeyA': 'ा', 'KeyS': 'क्', 'KeyD': 'ध', 'KeyF': 'थ्', 'KeyG': 'घ', 'KeyH': 'भ्', 'KeyJ': 'श्र', 'KeyK': 'ा', 'KeyL': 'स्', 'Semicolon': 'श्', 'Quote': 'ष्',
+                        'KeyZ': 'र्', 'KeyX': 'ग्', 'KeyC': 'ब्', 'KeyV': 'ट्', 'KeyB': 'ठ्', 'KeyN': 'ड्', 'KeyM': 'ढ्', 'Comma': 'श्', 'Period': '।', 'Slash': '?',
+                        'Equal': 'ृ', 'Digit5': 'ज्ञ', 'Digit6': 'त्र', 'Digit7': 'क्ष', 'Digit8': 'श्र'
+                    },
+                    backwardMap: {
+                        'क': 's', 'ख': '[', 'ग': 'x', 'घ': '?', 'च': 'p', 'छ': 'N', 'ज': 't', 'झ': 'I', 'ट': 'v', 'ठ': 'V', 'ड': 'f', 'ढ': 'F', 'ण': 'C',
+                        'त': 'r', 'थ': 'F', 'द': 'n', 'ध': 'm', 'न': 'u', 'प': 'i', 'फ': 'o', 'ब': 'c', 'भ': 'y', 'म': 'e', 'य': ';', 'र': 'j', 'ल': 'y',
+                        'व': 'o', 'श': 'C', 'ष': '"', 'स': 'l', 'ह': 'g', 'ा': 'k', 'ि': 'd', 'ी': 'h', 'ु': 'q', 'ू': 'w', 'े': 's', 'ै': '`', 'ं': 'a', '्': 'd'
+                    }
+                }
+            }
+        };
+
+        // SCALABLE SYLLABUS REGISTRY
+        const SYLLABUS_REGISTRY = {
+            english_qwerty: {
+                home_row: [
+                    { display: "asdf", keys: "asdf" },
+                    { display: "jkl;", keys: "jkl;" },
+                    { display: "asdfg", keys: "asdfg" },
+                    { display: "hjkl;", keys: "hjkl;" },
+                    { display: "flash", keys: "flash" },
+                    { display: "glass", keys: "glass" },
+                    { display: "salad", keys: "salad" },
+                    { display: "galah", keys: "galah" },
+                    { display: "slash", keys: "slash" }
+                ],
+                top_row: [
+                    { display: "qwer", keys: "qwer" },
+                    { display: "uiop", keys: "uiop" },
+                    { display: "qwert", keys: "qwert" },
+                    { display: "yuiop", keys: "yuiop" },
+                    { display: "quiet", keys: "quiet" },
+                    { display: "power", keys: "power" },
+                    { display: "write", keys: "write" },
+                    { display: "route", keys: "route" }
+                ],
+                bottom_row: [
+                    { display: "zxcv", keys: "zxcv" },
+                    { display: "nm,.", keys: "nm,." },
+                    { display: "zxcvb", keys: "zxcvb" },
+                    { display: "voice", keys: "voice" },
+                    { display: "cabin", keys: "cabin" },
+                    { display: "music", keys: "music" },
+                    { display: "zebra", keys: "zebra" }
+                ],
+                government_exams: [] // populated programmatically on selection
+            },
+            hindi_inscript: {
+                home_row: [
+                    { display: "कक", keys: "kk" },
+                    { display: "तत", keys: "ll" },
+                    { display: "चच", keys: ";;" },
+                    { display: "पप", keys: "hh" },
+                    { display: "रर", keys: "jj" },
+                    { display: "मम", keys: "cc" },
+                    { display: "नन", keys: "vv" },
+                    { display: "कतरप", keys: "kljh" },
+                    { display: "मिरन", keys: "cfjv" }
+                ],
+                top_row: [
+                    { display: "जज", keys: "pp" },
+                    { display: "खख", keys: "KK" },
+                    { display: "थथ", keys: "LL" },
+                    { display: "धध", keys: "OO" },
+                    { display: "जखथ", keys: "pKL" },
+                    { display: "धजख", keys: "OpK" }
+                ],
+                bottom_row: [
+                    { display: "इइ", keys: "FF" },
+                    { display: "उउ", keys: "GG" },
+                    { display: "एए", keys: "SS" },
+                    { display: "ऐऐ", keys: "WW" },
+                    { display: "ओओ", keys: "AA" },
+                    { display: "औऔ", keys: "QQ" },
+                    { display: "इउ", keys: "FG" },
+                    { display: "एऐ", keys: "SW" },
+                    { display: "ओऔ", keys: "AQ" }
+                ],
+                government_exams: [] // populated programmatically on selection
+            },
+            hindi_remington: {
+                home_row: [
+                    { display: "कक", keys: "ss" },
+                    { display: "सस", keys: "ll" },
+                    { display: "रर", keys: "jj" },
+                    { display: "यय", keys: ";;" },
+                    { display: "हह", keys: "gg" },
+                    { display: "किथ", keys: "dsf" },
+                    { display: "हर", keys: "gj" },
+                    { display: "ास", keys: "kl" },
+                    { display: "सिहर", keys: "dlgj" }
+                ],
+                top_row: [
+                    { display: "जज", keys: "tt" },
+                    { display: "लल", keys: "yy" },
+                    { display: "नन", keys: "uu" },
+                    { display: "पप", keys: "ii" },
+                    { display: "वव", keys: "oo" },
+                    { display: "चच", keys: "pp" },
+                    { display: "जल", keys: "ty" },
+                    { display: "नप", keys: "ui" },
+                    { display: "वच", keys: "op" }
+                ],
+                bottom_row: [
+                    { display: "अअ", keys: "vv" },
+                    { display: "इइ", keys: "bb" },
+                    { display: "दद", keys: "nn" },
+                    { display: "धध", keys: "mm" },
+                    { display: "गग", keys: "xx" },
+                    { display: "बब", keys: "cc" },
+                    { display: "अद", keys: "vn" },
+                    { display: "इग", keys: "bx" }
+                ],
+                government_exams: [] // populated programmatically on selection
+            }
+        };
+
+        const keyboardKeysDefinitions = {
+            row1: [
+                { key: '`', label: '`', class: 'key-pinky', code: 'Backquote' },
+                { key: '1', label: '1', class: 'key-pinky', code: 'Digit1' },
+                { key: '2', label: '2', class: 'key-ring', code: 'Digit2' },
+                { key: '3', label: '3', class: 'key-middle', code: 'Digit3' },
+                { key: '4', label: '4', class: 'key-index-l', code: 'Digit4' },
+                { key: '5', label: '5', class: 'key-index-l', code: 'Digit5' },
+                { key: '6', label: '6', class: 'key-index-r', code: 'Digit6' },
+                { key: '7', label: '7', class: 'key-index-r', code: 'Digit7' },
+                { key: '8', label: '8', class: 'key-middle', code: 'Digit8' },
+                { key: '9', label: '9', class: 'key-ring', code: 'Digit9' },
+                { key: '0', label: '0', class: 'key-pinky', code: 'Digit0' },
+                { key: '-', label: '-', class: 'key-pinky', code: 'Minus' },
+                { key: '=', label: '=', class: 'key-pinky', code: 'Equal' },
+                { key: 'Backspace', label: 'Backspace', class: 'key-pinky w-20 text-[10px]', code: 'Backspace' }
+            ],
+            row2: [
+                { key: 'Tab', label: 'Tab', class: 'key-pinky w-14 text-[10px]', code: 'Tab' },
+                { key: 'q', label: 'Q', class: 'key-pinky', code: 'KeyQ' },
+                { key: 'w', label: 'W', class: 'key-ring', code: 'KeyW' },
+                { key: 'e', label: 'E', class: 'key-middle', code: 'KeyE' },
+                { key: 'r', label: 'R', class: 'key-index-l', code: 'KeyR' },
+                { key: 't', label: 'T', class: 'key-index-l', code: 'KeyT' },
+                { key: 'y', label: 'Y', class: 'key-index-r', code: 'KeyY' },
+                { key: 'u', label: 'U', class: 'key-index-r', code: 'KeyU' },
+                { key: 'i', label: 'I', class: 'key-middle', code: 'KeyI' },
+                { key: 'o', label: 'O', class: 'key-ring', code: 'KeyO' },
+                { key: 'p', label: 'P', class: 'key-pinky', code: 'KeyP' },
+                { key: '[', label: '[', class: 'key-pinky', code: 'BracketLeft' },
+                { key: ']', label: ']', class: 'key-pinky', code: 'BracketRight' },
+                { key: '\\', label: '\\', class: 'key-pinky w-12', code: 'Backslash' }
+            ],
+            row3: [
+                { key: 'CapsLock', label: 'Caps', class: 'key-pinky w-16 text-[10px]', code: 'CapsLock' },
+                { key: 'a', label: 'A', class: 'key-pinky', code: 'KeyA' },
+                { key: 's', label: 'S', class: 'key-ring', code: 'KeyS' },
+                { key: 'd', label: 'D', class: 'key-middle', code: 'KeyD' },
+                { key: 'f', label: 'F', class: 'key-index-l', code: 'KeyF' },
+                { key: 'g', label: 'G', class: 'key-index-l', code: 'KeyG' },
+                { key: 'h', label: 'H', class: 'key-index-r', code: 'KeyH' },
+                { key: 'j', label: 'J', class: 'key-index-r', code: 'KeyJ' },
+                { key: 'k', label: 'K', class: 'key-middle', code: 'KeyK' },
+                { key: 'l', label: 'L', class: 'key-ring', code: 'KeyL' },
+                { key: ';', label: ';', class: 'key-pinky', code: 'Semicolon' },
+                { key: '\'', label: '\'', class: 'key-pinky', code: 'Quote' },
+                { key: 'Enter', label: 'Enter', class: 'key-pinky w-20 text-[10px]', code: 'Enter' }
+            ],
+            row4: [
+                { key: 'ShiftLeft', label: 'Shift', class: 'key-pinky w-20 text-[10px]', code: 'ShiftLeft' },
+                { key: 'z', label: 'Z', class: 'key-pinky', code: 'KeyZ' },
+                { key: 'x', label: 'X', class: 'key-ring', code: 'KeyX' },
+                { key: 'c', label: 'C', class: 'key-middle', code: 'KeyC' },
+                { key: 'v', label: 'V', class: 'key-index-l', code: 'KeyV' }, 
+                { key: 'b', label: 'B', class: 'key-index-l', code: 'KeyB' }, 
+                { key: 'n', label: 'N', class: 'key-index-r', code: 'KeyN' },
+                { key: 'm', label: 'M', class: 'key-index-r', code: 'KeyM' },
+                { key: ',', label: ',', class: 'key-middle', code: 'Comma' },
+                { key: '.', label: '.', class: 'key-ring', code: 'Period' },
+                { key: '/', label: '/', class: 'key-pinky', code: 'Slash' },
+                { key: 'ShiftRight', label: 'Shift', class: 'key-pinky w-24 text-[10px]', code: 'ShiftRight' }
+            ],
+            row5: [
+                { key: 'ControlLeft', label: 'Ctrl', class: 'key-pinky w-12 text-[10px]', code: 'ControlLeft' },
+                { key: 'AltLeft', label: 'Alt', class: 'key-thumb w-12 text-[10px]', code: 'AltLeft' },
+                { key: ' ', label: 'Space Bar', class: 'key-thumb flex-1 h-10', code: 'Space' },
+                { key: 'AltRight', label: 'Alt', class: 'key-thumb w-12 text-[10px]', code: 'AltRight' },
+                { key: 'ControlRight', label: 'Ctrl', class: 'key-pinky w-12 text-[10px]', code: 'ControlRight' }
+            ]
+        };
+
+        // EXAM TEXT DATA PRESETS
+        const GOVT_EXAMS_PRESETS = {
+            english_qwerty: {
+                test_1: "Touch typing is a skill that uses muscle memory to go super fast on key rows without looking. Speed builds up dynamically over time.",
+                test_2: "Staff Selection Commission standards require typing over 35 Words Per Minute. Focus strictly on maintaining 97% accuracy continuously.",
+                test_3: "Judiciary examinations verify rigorous speed benchmarks. Eliminate friction keys by utilizing local feedback graphs to pass clerk posts.",
+                test_4: "We, the people of India, having solemnly resolved to constitute India into a Sovereign Socialist Secular Democratic Republic."
+            },
+            hindi_inscript: {
+                test_1: "भारत हमारा देश है। हम सब इसके नागरिक हैं। नियमित अभ्यास करने से हमारी गति और सटीकता में सुधार होगा।",
+                test_2: "सरकारी लिपिकीय परीक्षा में उत्तीर्ण होने के लिए न्यूनतम पैंटीस शब्द प्रति मिनट की गति होना अति आवश्यक माना जाता है।",
+                test_3: "हिंदी टंकण में विराम चिन्हों तथा संयुक्त अक्षरों का विशेष ध्यान रखना पड़ता है। निरंतर अभ्यास ही सफलता की मुख्य कुंजी है।",
+                test_4: "हम भारत के लोग भारत को एक संपूर्ण प्रभुत्व संपन्न समाजवादी पंथ निरपेक्ष लोकतंत्रात्मक गणराज्य बनाने के लिए दृढ संकल्पित हैं।"
+            },
+            hindi_remington: {
+                test_1: "भारत देश महान है। इसके उत्तर में हिमालय पर्वत विराजमान है। हिंदी भाषा हमारी राष्ट्रभाषा है।",
+                test_2: "टंकण परीक्षा में सफल होने के लिए अभ्यर्थी को प्रतिदिन कम से कम दो घंटे अभ्यास करने का सुझाव दिया जाता है।",
+                test_3: "कृतिदेव लेआउट पर अभ्यास करते समय उंगलियों को होम रो पर ही स्थापित रखें। इससे कार्य कुशलता में तेजी आएगी।",
+                test_4: "संविधान सभा में आज तारीख छब्बीस नवम्बर उन्नीस सौ उनचास को एतद द्वारा इस संविधान को अंगीकृत अधिनियमित और आत्मार्पित करते हैं।"
+            }
+        };
+
+        // GLOBAL UTILITY FUNCTIONS
+        function formatSecondsToTimeStr(totalSeconds) {
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // HTML escaping helper function to protect against XSS injection
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
+        function mapKeycodeToFingerGuide(code) {
+            const leftPinky = ['KeyA', 'KeyQ', 'KeyZ', 'Digit1', 'Backquote', 'Tab', 'CapsLock', 'ShiftLeft', 'ControlLeft'];
+            const leftRing = ['KeyS', 'KeyW', 'KeyX', 'Digit2'];
+            const leftMiddle = ['KeyD', 'KeyE', 'KeyC', 'Digit3'];
+            const leftIndex = ['KeyF', 'KeyR', 'KeyV', 'Digit4', 'Digit5', 'KeyG', 'KeyT', 'KeyB'];
+            const rightIndex = ['KeyJ', 'KeyU', 'KeyN', 'Digit6', 'Digit7', 'KeyH', 'KeyY', 'KeyM'];
+            const rightMiddle = ['KeyK', 'KeyI', 'Comma', 'Digit8'];
+            const rightRing = ['KeyL', 'KeyO', 'Period', 'Digit9'];
+            const rightPinky = ['Semicolon', 'KeyP', 'Slash', 'Digit0', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Quote', 'Backslash', 'Enter', 'ShiftRight', 'ControlRight'];
+
+            if (leftPinky.includes(code)) return 'finger-L-pink';
+            if (leftRing.includes(code)) return 'finger-L-ring';
+            if (leftMiddle.includes(code)) return 'finger-L-middle';
+            if (leftIndex.includes(code)) return 'finger-L-index';
+            if (rightIndex.includes(code)) return 'finger-R-index';
+            if (rightMiddle.includes(code)) return 'finger-R-middle';
+            if (rightRing.includes(code)) return 'finger-R-ring';
+            if (rightPinky.includes(code)) return 'finger-R-pinky';
+            if (code === 'Space') return 'finger-L-thumb'; 
+            return null;
+        }
+
+        // OBJECT-ORIENTED APP SYSTEM ENCAPSULATION
+        class DevnagariKeyMasterApp {
+            constructor() {
+                // CENTRALIZED APPLICATION STATE
+                this.state = {
+                    currentLayout: 'hindi_inscript',
+                    currentCategory: 'home_row',
+                    currentActiveLessonWords: [],
+                    activeWordIndex: 0,
+                    typedKeystrokesBuffer: "",
+                    incorrectKeystrokesCount: 0,
+                    totalKeystrokesCount: 0,
+                    practiceStartTime: null,
+                    isPracticeActive: false,
+                    isAudioMuted: false,
+                    isHeatmapActive: false,
+                    currentTimerDuration: 0, // 0 = Unlimited
+                    timeRemainingSeconds: 0,
+                    isShiftActive: false, // Tracks Shift state (both physical and virtual toggle)
+                    isKeyboardVisible: true, // Collapsible state
+                    bestWpmRecord: parseInt(StorageProxy.get('keymaster_best_wpm', 0)) || 0,
+                    bestAccuracyRecord: parseInt(StorageProxy.get('keymaster_best_accuracy', 0)) || 0,
+                    
+                    // Gamified Streaks Local State Variables
+                    streakCurrent: parseInt(StorageProxy.get('keymaster_streak_current', 0)) || 0,
+                    streakBest: parseInt(StorageProxy.get('keymaster_streak_best', 0)) || 0,
+                    streakLastDate: StorageProxy.get('keymaster_streak_last_date', null),
+
+                    // Analytics History State Variables
+                    practiceHistory: StorageProxy.get('keymaster_practice_history', []) || [],
+                    cumulativeKeyStats: StorageProxy.get('keymaster_cumulative_key_stats', {}) || {},
+
+                    metrics: {
+                        errorsPerKey: {},
+                        keyPressCounter: {}
+                    }
+                };
+
+                this.timerIntervalId = null;
+                this.audioContext = null;
+
+                // Fast Delta DOM Caching maps to avoid queries
+                this.keyDOMElements = {};
+                this.activeHighlightedKeys = [];
+                this.activeHighlightedFingers = [];
+
+                // ChartJS Instances
+                this.progressChartInstance = null;
+                this.weakKeysChartInstance = null;
+            }
+
+            init() {
+                // Check for broken streak on app loading startup
+                const todayStr = this.getTodaysDateString();
+                const yesterdayStr = this.getYesterdaysDateString();
+                const lastDate = this.state.streakLastDate;
+
+                if (lastDate && lastDate !== todayStr && lastDate !== yesterdayStr) {
+                    this.state.streakCurrent = 0;
+                    StorageProxy.set('keymaster_streak_current', 0);
+                }
+
+                this.renderKeyboardStructure();
+                this.updateKeyboardLabels();
+                this.loadPracticeSyllabusString();
+                this.registerEventListeners();
+                this.updateStreakVisuals();
+
+                this.initAnalyticsCharts();
+            }
+
+            // Locale-independent manual YYYY-MM-DD Date Formatter helpers
+            getTodaysDateString() {
+                const d = new Date();
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+
+            getYesterdaysDateString() {
+                const d = new Date();
+                d.setDate(d.getDate() - 1);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+
+            registerEventListeners() {
+                const typingContainer = document.getElementById('typing-words-container');
+                const hiddenInput = document.getElementById('hidden-typing-input');
+
+                // Shift keydown tracking for real-time label flipping
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Shift') {
+                        this.state.isShiftActive = true;
+                        this.updateShiftBtnState();
+                        this.updateKeyboardLabels();
+                        this.highlightNextVirtualKey();
+                    }
+                    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                        return;
+                    }
+                    if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                    }
+                    this.handlePhysicalTypingInput(e);
+                });
+
+                window.addEventListener('keyup', (e) => {
+                    if (e.key === 'Shift') {
+                        this.state.isShiftActive = false;
+                        this.updateShiftBtnState();
+                        this.updateKeyboardLabels();
+                        this.highlightNextVirtualKey();
+                    }
+                });
+
+                // Soft keyboard capture redirector
+                typingContainer.addEventListener('click', () => {
+                    hiddenInput.focus();
+                    this.showToast("Typing arena active. Start typing!");
+                });
+
+                hiddenInput.addEventListener('input', (e) => {
+                    const typedChar = e.target.value.slice(-1);
+                    const simulatedEvent = {
+                        key: typedChar,
+                        preventDefault: () => {}
+                    };
+                    this.handlePhysicalTypingInput(simulatedEvent);
+                    hiddenInput.value = '';
+                });
+
+                // Controls and Selector listeners with perfect accessible values
+                document.getElementById('keyboard-layout-select').addEventListener('change', (e) => {
+                    this.state.currentLayout = e.target.value;
+                    this.updateKeyboardLabels();
+                    this.loadPracticeSyllabusString();
+                    this.showToast(`Layout changed to: ${KEYBOARD_REGISTRY.layouts[this.state.currentLayout]?.displayName || this.state.currentLayout}`);
+                    // Refresh graphs to map layouts back correctly
+                    this.updateAnalyticsCharts();
+                });
+
+                document.getElementById('lesson-category-select').addEventListener('change', () => this.loadPracticeSyllabusString());
+                document.getElementById('mock-exam-subselect').addEventListener('change', () => this.loadPracticeSyllabusString());
+                document.getElementById('btn-load-custom-text').addEventListener('click', () => this.loadPracticeSyllabusString());
+                document.getElementById('btn-reset-practice').addEventListener('click', () => this.resetActivePracticeStates());
+
+                document.getElementById('btn-toggle-sound').addEventListener('click', () => {
+                    this.state.isAudioMuted = !this.state.isAudioMuted;
+                    const txt = document.getElementById('sound-text');
+                    const icon = document.getElementById('sound-icon');
+                    if (this.state.isAudioMuted) {
+                        txt.textContent = "Sound: OFF";
+                        icon.className = "fa-solid fa-volume-xmark text-stone-700";
+                        this.showToast("Sensory clicks muted.");
+                    } else {
+                        txt.textContent = "Sound: ON";
+                        icon.className = "fa-solid fa-volume-high text-stone-700";
+                        this.showToast("Sensory clicks unmuted.");
+                    }
+                });
+
+                document.getElementById('btn-toggle-heatmap').addEventListener('click', () => {
+                    this.state.isHeatmapActive = !this.state.isHeatmapActive;
+                    const lbl = document.getElementById('heatmap-toggle-lbl');
+                    if (this.state.isHeatmapActive) {
+                        lbl.textContent = "Friction Heatmap: ON";
+                        this.showToast("Keyboard error distribution active.");
+                    } else {
+                        lbl.textContent = "Friction Heatmap: OFF";
+                        this.showToast("Keyboard overlay reset.");
+                    }
+                    this.applyLiveHeatmapOverlays();
+                });
+
+                document.getElementById('btn-practice-weak-keys').addEventListener('click', () => this.compileWeakKeysCustomDrill());
+
+                document.getElementById('chk-strict-mock').addEventListener('change', (e) => {
+                    const isStrict = e.target.checked;
+                    const lockSelect = document.getElementById('backspace-lock-select');
+                    const timerSelect = document.getElementById('mock-timer-select');
+                    
+                    if (isStrict) {
+                        lockSelect.value = 'disable';
+                        timerSelect.value = '600'; 
+                        this.showToast("Exam Simulator: Backspace locked | 10 Min limit");
+                    } else {
+                        lockSelect.value = 'allow';
+                        timerSelect.value = '0';
+                        this.showToast("Standard practice restored.");
+                    }
+                    this.resetActivePracticeStates();
+                });
+
+                document.getElementById('btn-toggle-lessons-modal').addEventListener('click', () => this.toggleCertModal());
+                document.getElementById('btn-close-cert-modal').addEventListener('click', () => this.toggleCertModal());
+                document.getElementById('btn-print-diploma').addEventListener('click', () => this.handleCertificatePrintAction());
+
+                // Collapsible keyboard overlay
+                document.getElementById('btn-toggle-kb-visibility').addEventListener('click', () => {
+                    this.state.isKeyboardVisible = !this.state.isKeyboardVisible;
+                    const wrapper = document.getElementById('keyboard-overlay-outer');
+                    const hands = document.getElementById('hands-finger-guide-outer');
+                    const btn = document.getElementById('btn-toggle-kb-visibility');
+                    if (this.state.isKeyboardVisible) {
+                        wrapper.classList.remove('hidden');
+                        hands.classList.remove('hidden');
+                        btn.innerHTML = `<i class="fa-regular fa-eye-slash"></i> Hide Key Overlay`;
+                    } else {
+                        wrapper.classList.add('hidden');
+                        hands.classList.add('hidden');
+                        btn.innerHTML = `<i class="fa-regular fa-eye"></i> Show Key Overlay`;
+                    }
+                });
+
+                // Right-aligned header Analytics Modal trigger button listener
+                document.getElementById('btn-quick-analytics-jump').addEventListener('click', () => {
+                    this.toggleAnalyticsModal();
+                });
+
+                document.getElementById('btn-close-analytics-modal').addEventListener('click', () => {
+                    this.toggleAnalyticsModal();
+                });
+
+                // Clear history button callback
+                document.getElementById('btn-clear-analytics').addEventListener('click', () => {
+                    this.clearAnalyticsHistory();
+                });
+
+                // On-screen Shift toggle
+                document.getElementById('btn-screen-shift').addEventListener('click', () => {
+                    this.state.isShiftActive = !this.state.isShiftActive;
+                    this.updateShiftBtnState();
+                    this.updateKeyboardLabels();
+                    this.highlightNextVirtualKey();
+                });
+
+                // Unified backdrop popups dismissal tracker
+                window.addEventListener('click', (e) => {
+                    const certModal = document.getElementById('cert-claim-modal');
+                    if (e.target === certModal) {
+                        this.toggleCertModal();
+                    }
+                    const analyticsModal = document.getElementById('analytics-modal');
+                    if (e.target === analyticsModal) {
+                        this.toggleAnalyticsModal();
+                    }
+                });
+
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        const certModal = document.getElementById('cert-claim-modal');
+                        if (certModal && !certModal.classList.contains('hidden')) {
+                            this.toggleCertModal();
+                        }
+                        const analyticsModal = document.getElementById('analytics-modal');
+                        if (analyticsModal && !analyticsModal.classList.contains('hidden')) {
+                            this.toggleAnalyticsModal();
+                        }
+                    }
+                });
+            }
+
+            updateShiftBtnState() {
+                const btn = document.getElementById('btn-screen-shift');
+                const lbl = document.getElementById('lbl-screen-shift');
+                if (this.state.isShiftActive) {
+                    btn.classList.replace('bg-stone-200', 'bg-red-800');
+                    btn.classList.replace('text-stone-900', 'text-white');
+                    lbl.textContent = "Shift: ON";
+                } else {
+                    btn.classList.replace('bg-red-800', 'bg-stone-200');
+                    btn.classList.replace('text-white', 'text-stone-900');
+                    lbl.textContent = "Shift: OFF";
+                }
+            }
+
+            playKeyClickSound() {
+                if (this.state.isAudioMuted) return;
+                if (!this.audioContext) {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.audioContext.state === 'suspended') {
+                    this.audioContext.resume();
+                }
+                try {
+                    const now = this.audioContext.currentTime;
+                    
+                    // High tactile mechanical linear snap
+                    const oscClick = this.audioContext.createOscillator();
+                    const gainClick = this.audioContext.createGain();
+                    oscClick.type = 'triangle';
+                    oscClick.frequency.setValueAtTime(2500, now);
+                    oscClick.frequency.exponentialRampToValueAtTime(1000, now + 0.012);
+                    
+                    gainClick.gain.setValueAtTime(0.06, now);
+                    gainClick.gain.exponentialRampToValueAtTime(0.001, now + 0.012);
+                    
+                    oscClick.connect(gainClick);
+                    gainClick.connect(this.audioContext.destination);
+                    
+                    // Bottom housing mechanical thump resonance
+                    const oscRes = this.audioContext.createOscillator();
+                    const gainRes = this.audioContext.createGain();
+                    oscRes.type = 'sine';
+                    oscRes.frequency.setValueAtTime(160, now);
+                    oscRes.frequency.exponentialRampToValueAtTime(80, now + 0.035);
+                    
+                    gainRes.gain.setValueAtTime(0.12, now);
+                    gainRes.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+                    
+                    oscRes.connect(gainRes);
+                    gainRes.connect(this.audioContext.destination);
+                    
+                    oscClick.start(now);
+                    oscClick.stop(now + 0.015);
+                    oscRes.start(now);
+                    oscRes.stop(now + 0.04);
+                } catch (e) {
+                    console.warn("Mechanical switch sound generation failed:", e);
+                }
+            }
+
+            playMistakeBuzzerSound() {
+                if (this.state.isAudioMuted) return;
+                if (!this.audioContext) {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.audioContext.state === 'suspended') {
+                    this.audioContext.resume();
+                }
+                try {
+                    const osc = this.audioContext.createOscillator();
+                    const gain = this.audioContext.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(140, this.audioContext.currentTime);
+                    gain.gain.setValueAtTime(0.1, this.audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.15);
+                    osc.connect(gain);
+                    gain.connect(this.audioContext.destination);
+                    osc.start();
+                    osc.stop(this.audioContext.currentTime + 0.18);
+                } catch (e) {
+                    console.warn("Audio context buzzer generation failed:", e);
+                }
+            }
+
+            // High-precision lookup helper supporting shift logic properly
+            getUnicodeCharacterForKey(char, layoutName) {
+                const code = KEYBOARD_REGISTRY.charToCodeMap[char];
+                if (!code) return char;
+
+                const layout = KEYBOARD_REGISTRY.layouts[layoutName];
+                if (!layout) return char;
+
+                // Detect shift states dynamically
+                const isShifted = char !== char.toLowerCase() || ['{', '}', ':', '"', '<', '>', '?', '~', '_', '+', '|'].includes(char);
+
+                if (isShifted && layout.forwardMapShifted && layout.forwardMapShifted[code]) {
+                    return layout.forwardMapShifted[code];
+                }
+                return layout.forwardMap[code] || char;
+            }
+
+            krutidevKeystrokesToUnicode(keysStr) {
+                let chars = [];
+                for (let i = 0; i < keysStr.length; i++) {
+                    let char = keysStr[i];
+                    let unicodeChar = this.getUnicodeCharacterForKey(char, 'hindi_remington');
+                    chars.push(unicodeChar);
+                }
+
+                // 1. Combine half-consonants made full with खड़ी पाई 'ा'
+                for (let i = 0; i < chars.length - 1; i++) {
+                    if (chars[i] === '्' && chars[i+1] === 'ा') {
+                        chars.splice(i, 2); // remove both Halant and aa matra
+                        i--; // adjust index after removal
+                    }
+                }
+
+                // 2. Complex context-aware 'ि' (Chhoti ee matra) reordering loop past half-consonant clusters
+                for (let i = 0; i < chars.length; i++) {
+                    if (chars[i] === 'ि') {
+                        let j = i + 1;
+                        // Skip any half consonants (consonant followed by Halant '्')
+                        while (j < chars.length) {
+                            if (j + 1 < chars.length && chars[j+1] === '्') {
+                                j += 2;
+                            } else {
+                                break;
+                            }
+                        }
+                        // Skip main base consonant
+                        if (j < chars.length) {
+                            j++;
+                        }
+                        // Move 'ि' to be after the consonant cluster
+                        if (j - 1 > i) {
+                            const matra = chars[i];
+                            chars.splice(i, 1);
+                            chars.splice(j - 1, 0, matra);
+                        }
+                    }
+                }
+
+                // 3. Robust र-रेफ ('र्') reordering backwards past vowel matras, anusvara, and consonant clusters
+                for (let i = 1; i < chars.length; i++) {
+                    if (chars[i] === 'र' && chars[i+1] === '्') {
+                        let j = i - 1;
+                        const matras = ['ा', 'ि', 'ी', 'ु', 'ू', 'ृ', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः', 'ॅ', 'ॉ'];
+                        while (j >= 0 && matras.includes(chars[j])) {
+                            j--;
+                        }
+                        if (j >= 0) {
+                            j--; // skip main consonant
+                        }
+                        while (j >= 1) {
+                            if (chars[j] === '्') {
+                                j -= 2;
+                            } else {
+                                break;
+                            }
+                        }
+                        const rephR = chars[i];
+                        const rephH = chars[i+1];
+                        chars.splice(i, 2);
+                        chars.splice(j + 1, 0, rephR, rephH);
+                    }
+                }
+
+                return chars.join("");
+            }
+
+            inscriptKeystrokesToUnicode(keysStr) {
+                let chars = [];
+                for (let i = 0; i < keysStr.length; i++) {
+                    let char = keysStr[i];
+                    let unicodeChar = this.getUnicodeCharacterForKey(char, 'hindi_inscript');
+                    chars.push(unicodeChar);
+                }
+                return chars.join("");
+            }
+
+            convertBufferToLivePreview(keysStr) {
+                if (this.state.currentLayout === 'english_qwerty') {
+                    return keysStr;
+                } else if (this.state.currentLayout === 'hindi_remington') {
+                    return this.krutidevKeystrokesToUnicode(keysStr);
+                } else {
+                    return this.inscriptKeystrokesToUnicode(keysStr);
+                }
+            }
+
+            transliterateDevanagariBackward(unicodeText) {
+                let compiledWords = [];
+                const rawWords = unicodeText.split(/\s+/);
+
+                rawWords.forEach(word => {
+                    if (!word.trim()) return;
+
+                    let keystrokeRepresentation = "";
+                    for (let i = 0; i < word.length; i++) {
+                        const char = word[i];
+                        if (this.state.currentLayout === 'english_qwerty') {
+                            keystrokeRepresentation += char;
+                        } else if (this.state.currentLayout === 'hindi_remington') {
+                            keystrokeRepresentation += KEYBOARD_REGISTRY.layouts.hindi_remington.backwardMap[char] || char;
+                        } else {
+                            keystrokeRepresentation += KEYBOARD_REGISTRY.layouts.hindi_inscript.backwardMap[char] || char;
+                        }
+                    }
+                    compiledWords.push({
+                        display: word,
+                        keys: keystrokeRepresentation
+                    });
+                });
+                return compiledWords;
+            }
+
+            // High Performance: Render layout skeleton structural elements EXACTLY once
+            renderKeyboardStructure() {
+                const kb = document.getElementById('virtual-keyboard');
+                if (!kb) return;
+
+                kb.innerHTML = '';
+                this.keyDOMElements = {};
+
+                ['row1', 'row2', 'row3', 'row4', 'row5'].forEach(rowKey => {
+                    const rowEl = document.createElement('div');
+                    rowEl.className = "flex justify-center gap-1 w-full";
+                    
+                    keyboardKeysDefinitions[rowKey].forEach(kDef => {
+                        const keyEl = document.createElement('div');
+                        keyEl.id = `vkey-${kDef.code}`;
+                        keyEl.className = `flex flex-col items-center justify-center border-2 border-stone-300 rounded-lg p-1.5 transition-all text-center select-none shadow-sm cursor-pointer ${kDef.class || ''}`;
+                        keyEl.style.minWidth = kDef.class && kDef.class.includes('w-') ? '' : '38px';
+                        keyEl.style.height = '42px';
+
+                        const mainTextSpan = document.createElement('span');
+                        mainTextSpan.className = "text-[12px] font-black tracking-tight leading-none hindi-font text-stone-900 main-label";
+                        keyEl.appendChild(mainTextSpan);
+
+                        const subTextSpan = document.createElement('span');
+                        subTextSpan.className = "text-[8px] text-stone-750 font-black block mt-0.5 leading-none sub-label hidden";
+                        keyEl.appendChild(subTextSpan);
+
+                        keyEl.addEventListener('click', () => {
+                            const simulatedEvent = { key: kDef.key, preventDefault: () => {} };
+                            this.handlePhysicalTypingInput(simulatedEvent);
+                        });
+
+                        rowEl.appendChild(keyEl);
+
+                        // Cache the newly created DOM nodes to completely avoid queries
+                        this.keyDOMElements[kDef.code] = {
+                            element: keyEl,
+                            mainLabelSpan: mainTextSpan,
+                            subLabelSpan: subTextSpan,
+                            def: kDef
+                        };
+                    });
+                    kb.appendChild(rowEl);
+                });
+                this.applyLiveHeatmapOverlays();
+            }
+
+            // High Performance: Perform quick localized text updates without DOM recreation
+            updateKeyboardLabels() {
+                const layout = KEYBOARD_REGISTRY.layouts[this.state.currentLayout];
+                const currentActiveKeymap = (this.state.isShiftActive && layout?.forwardMapShifted) ? layout.forwardMapShifted : layout?.forwardMap;
+
+                for (const code in this.keyDOMElements) {
+                    const cache = this.keyDOMElements[code];
+                    let primaryLabel = cache.def.label;
+                    let subLabel = "";
+
+                    if (currentActiveKeymap && currentActiveKeymap[code]) {
+                        primaryLabel = currentActiveKeymap[code];
+                        subLabel = cache.def.label;
+                    }
+
+                    cache.mainLabelSpan.textContent = primaryLabel;
+
+                    if (subLabel && subLabel !== primaryLabel) {
+                        cache.subLabelSpan.textContent = subLabel;
+                        cache.subLabelSpan.classList.remove('hidden');
+                    } else {
+                        cache.subLabelSpan.classList.add('hidden');
+                    }
+                }
+            }
+
+            // High Performance: Clear color styles using cached keys instead of global DOM queries
+            applyLiveHeatmapOverlays() {
+                for (const code in this.keyDOMElements) {
+                    const cache = this.keyDOMElements[code];
+                    if (cache && cache.element) {
+                        cache.element.style.backgroundColor = '';
+                        cache.element.style.borderColor = '';
+                    }
+                }
+
+                if (!this.state.isHeatmapActive) return;
+
+                for (const keycode in this.state.metrics.errorsPerKey) {
+                    const errorCount = this.state.metrics.errorsPerKey[keycode] || 0;
+                    const totalClicks = this.state.metrics.keyPressCounter[keycode] || 1;
+                    const ratio = errorCount / totalClicks;
+
+                    if (errorCount > 0) {
+                        const cache = this.keyDOMElements[keycode];
+                        if (cache && cache.element) {
+                            const opacity = Math.min(0.9, 0.2 + (ratio * 0.7));
+                            cache.element.style.backgroundColor = `rgba(185, 28, 28, ${opacity})`;
+                            cache.element.style.borderColor = `rgba(153, 27, 27, ${opacity + 0.1})`;
+                        }
+                    }
+                }
+            }
+
+            loadPracticeSyllabusString() {
+                const selectVal = document.getElementById('lesson-category-select').value;
+                const sandboxBox = document.getElementById('custom-practice-sandbox');
+                const subselectWrap = document.getElementById('mock-exam-subselect-wrap');
+
+                if (selectVal === 'custom_practice') {
+                    sandboxBox.classList.remove('hidden');
+                    subselectWrap.classList.add('hidden');
+                    const rawText = document.getElementById('custom-typed-text').value.trim() || "भारत महान देश है";
+                    this.state.currentActiveLessonWords = this.transliterateDevanagariBackward(rawText);
+                } else if (selectVal === 'government_exams') {
+                    sandboxBox.classList.add('hidden');
+                    subselectWrap.classList.remove('hidden');
+                    const examPreset = document.getElementById('mock-exam-subselect').value;
+                    const text = GOVT_EXAMS_PRESETS[this.state.currentLayout][examPreset] || "भारत हमारा देश है।";
+                    this.state.currentActiveLessonWords = this.transliterateDevanagariBackward(text);
+                } else {
+                    sandboxBox.classList.add('hidden');
+                    subselectWrap.classList.add('hidden');
+                    this.state.currentActiveLessonWords = SYLLABUS_REGISTRY[this.state.currentLayout][selectVal] || [];
+                }
+                this.resetActivePracticeStates();
+            }
+
+            resetActivePracticeStates() {
+                this.stopCountdownTimer();
+                this.state.activeWordIndex = 0;
+                this.state.typedKeystrokesBuffer = "";
+                this.state.incorrectKeystrokesCount = 0;
+                this.state.totalKeystrokesCount = 0;
+                this.state.practiceStartTime = null;
+                this.state.isPracticeActive = false;
+
+                this.state.metrics.errorsPerKey = {};
+                this.state.metrics.keyPressCounter = {};
+                document.getElementById('weak-keys-alert-bar').classList.add('hidden');
+
+                const wpmSpan = document.getElementById('stat-wpm');
+                wpmSpan.textContent = "0 WPM";
+                wpmSpan.setAttribute('aria-label', "Gross Speed: 0 Words Per Minute");
+
+                const netWpmSpan = document.getElementById('stat-net-wpm');
+                netWpmSpan.textContent = "0 WPM";
+                netWpmSpan.setAttribute('aria-label', "Net Speed: 0 Words Per Minute");
+
+                const accuracySpan = document.getElementById('stat-accuracy');
+                accuracySpan.textContent = "100%";
+                accuracySpan.setAttribute('aria-label', "Accuracy Rate: 100 percent");
+
+                const errorsSpan = document.getElementById('stat-errors');
+                errorsSpan.textContent = "0 Keys";
+                errorsSpan.setAttribute('aria-label', "Errors Logged: 0 keys");
+
+                document.getElementById('live-flow-indicator').style.width = "0%";
+
+                const countdownSpan = document.getElementById('stat-countdown');
+                const timerSelectVal = parseInt(document.getElementById('mock-timer-select').value);
+                if (timerSelectVal > 0) {
+                    this.state.currentTimerDuration = timerSelectVal;
+                    this.state.timeRemainingSeconds = timerSelectVal;
+                    const displayTime = formatSecondsToTimeStr(timerSelectVal);
+                    countdownSpan.textContent = displayTime;
+                    countdownSpan.setAttribute('aria-label', `Remaining: ${displayTime}`);
+                } else {
+                    this.state.currentTimerDuration = 0;
+                    countdownSpan.textContent = "-";
+                    countdownSpan.setAttribute('aria-label', "No time limit running");
+                }
+
+                this.renderTypingWordsArea();
+                this.updateLivePreviewHUD();
+                this.highlightNextVirtualKey();
+            }
+
+            startCountdownTimer() {
+                if (this.state.currentTimerDuration <= 0) return;
+                this.stopCountdownTimer();
+
+                const countdownSpan = document.getElementById('stat-countdown');
+                this.state.timeRemainingSeconds = this.state.currentTimerDuration;
+                this.timerIntervalId = setInterval(() => {
+                    this.state.timeRemainingSeconds--;
+                    const displayTime = formatSecondsToTimeStr(this.state.timeRemainingSeconds);
+                    countdownSpan.textContent = displayTime;
+                    countdownSpan.setAttribute('aria-label', `Remaining: ${displayTime}`);
+
+                    if (this.state.timeRemainingSeconds <= 0) {
+                        this.stopCountdownTimer();
+                        this.concludePracticeDrillRun();
+                    } else {
+                        this.calculateRealTimePracticeMetrics();
+                    }
+                }, 1000);
+            }
+
+            stopCountdownTimer() {
+                if (this.timerIntervalId) {
+                    clearInterval(this.timerIntervalId);
+                    this.timerIntervalId = null;
+                }
+            }
+
+            renderTypingWordsArea() {
+                const container = document.getElementById('typing-words-container');
+                if (!container) return;
+
+                container.innerHTML = '';
+                this.state.currentActiveLessonWords.forEach((wordDef, idx) => {
+                    const span = document.createElement('span');
+                    span.id = `word-${idx}`;
+                    span.className = "transition-all duration-150 px-2 py-0.5 rounded-lg hindi-font";
+                    
+                    if (idx === this.state.activeWordIndex) {
+                        span.className += " text-white border-b-2 border-red-500 font-extrabold bg-stone-800 shadow-md scale-105";
+                    } else if (idx < this.state.activeWordIndex) {
+                        span.className += " text-emerald-400 font-bold opacity-90";
+                    } else {
+                        span.className += " text-stone-200 opacity-80";
+                    }
+                    span.textContent = wordDef.display;
+                    container.appendChild(span);
+                });
+            }
+
+            updateLivePreviewHUD() {
+                const currentWordDef = this.state.currentActiveLessonWords[this.state.activeWordIndex];
+                const liveLabel = document.getElementById('user-live-word-typed');
+                const expectedLabel = document.getElementById('expected-key-indicator');
+
+                if (!currentWordDef) {
+                    if (liveLabel) liveLabel.textContent = "";
+                    if (expectedLabel) {
+                        expectedLabel.textContent = "-";
+                        expectedLabel.setAttribute('aria-label', "All words typed successfully");
+                    }
+                    return;
+                }
+
+                if (liveLabel) {
+                    liveLabel.textContent = this.convertBufferToLivePreview(this.state.typedKeystrokesBuffer);
+                }
+
+                if (expectedLabel) {
+                    const nextExpectedChar = currentWordDef.keys[this.state.typedKeystrokesBuffer.length];
+                    const keyStr = nextExpectedChar === " " ? "Space" : nextExpectedChar || "Space";
+                    expectedLabel.textContent = keyStr;
+                    expectedLabel.setAttribute('aria-label', `Next expected stroke: ${keyStr}`);
+                }
+            }
+
+            isExpectedKeyShifted(nextExpectedChar) {
+                if (this.state.currentLayout === 'english_qwerty') {
+                    return nextExpectedChar && nextExpectedChar === nextExpectedChar.toUpperCase() && nextExpectedChar !== nextExpectedChar.toLowerCase();
+                }
+                const layout = KEYBOARD_REGISTRY.layouts[this.state.currentLayout];
+                if (layout && layout.forwardMapShifted) {
+                    return Object.values(layout.forwardMapShifted).includes(nextExpectedChar);
+                }
+                return false;
+            }
+
+            // High Performance: Clear previously highlighted elements directly using delta arrays
+            highlightNextVirtualKey() {
+                if (this.activeHighlightedKeys) {
+                    this.activeHighlightedKeys.forEach(k => k.classList.remove('key-active'));
+                }
+                this.activeHighlightedKeys = [];
+
+                if (this.activeHighlightedFingers) {
+                    this.activeHighlightedFingers.forEach(f => f.classList.remove('finger-active'));
+                }
+                this.activeHighlightedFingers = [];
+
+                const currentWordDef = this.state.currentActiveLessonWords[this.state.activeWordIndex];
+                if (!currentWordDef) return;
+
+                const nextExpectedChar = currentWordDef.keys[this.state.typedKeystrokesBuffer.length];
+                const codeToHighlight = KEYBOARD_REGISTRY.charToCodeMap[nextExpectedChar] || (nextExpectedChar === " " ? "Space" : null);
+
+                if (codeToHighlight) {
+                    const cache = this.keyDOMElements[codeToHighlight];
+                    if (cache && cache.element) {
+                        cache.element.classList.add('key-active');
+                        this.activeHighlightedKeys.push(cache.element);
+                    }
+
+                    if (this.isExpectedKeyShifted(nextExpectedChar)) {
+                        const leftShift = this.keyDOMElements['ShiftLeft'];
+                        const rightShift = this.keyDOMElements['ShiftRight'];
+                        if (leftShift && leftShift.element) {
+                            leftShift.element.classList.add('key-active');
+                            this.activeHighlightedKeys.push(leftShift.element);
+                        }
+                        if (rightShift && rightShift.element) {
+                            rightShift.element.classList.add('key-active');
+                            this.activeHighlightedKeys.push(rightShift.element);
+                        }
+                    }
+
+                    const activeFingerId = mapKeycodeToFingerGuide(codeToHighlight);
+                    if (activeFingerId) {
+                        const fingerBubble = document.getElementById(activeFingerId);
+                        if (fingerBubble) {
+                            fingerBubble.classList.add('finger-active');
+                            this.activeHighlightedFingers.push(fingerBubble);
+                        }
+                    }
+                }
+            }
+
+            handlePhysicalTypingInput(e) {
+                const currentWordDef = this.state.currentActiveLessonWords[this.state.activeWordIndex];
+                if (!currentWordDef) return;
+
+                if (!this.state.isPracticeActive) {
+                    this.state.isPracticeActive = true;
+                    this.state.practiceStartTime = Date.now();
+                    this.startCountdownTimer();
+                }
+
+                const expectedKey = currentWordDef.keys[this.state.typedKeystrokesBuffer.length];
+                const code = KEYBOARD_REGISTRY.charToCodeMap[expectedKey] || (expectedKey === " " ? "Space" : null);
+
+                const backspaceSetting = document.getElementById('backspace-lock-select').value;
+                if (e.key === 'Backspace') {
+                    if (backspaceSetting === 'disable') {
+                        this.playMistakeBuzzerSound();
+                        this.triggerVisualMistakeFlash();
+                        return; 
+                    }
+                    if (this.state.typedKeystrokesBuffer.length > 0) {
+                        this.state.typedKeystrokesBuffer = this.state.typedKeystrokesBuffer.slice(0, -1);
+                        this.playKeyClickSound();
+                        this.updateLivePreviewHUD();
+                        this.highlightNextVirtualKey();
+                    }
+                    return;
+                }
+
+                this.state.totalKeystrokesCount++;
+                if (code) {
+                    this.state.metrics.keyPressCounter[code] = (this.state.metrics.keyPressCounter[code] || 0) + 1;
+                }
+
+                if (e.key === ' ') {
+                    if (this.state.typedKeystrokesBuffer === currentWordDef.keys) {
+                        this.state.activeWordIndex++;
+                        this.state.typedKeystrokesBuffer = "";
+                        this.playKeyClickSound();
+                        
+                        if (this.state.activeWordIndex >= this.state.currentActiveLessonWords.length) {
+                            this.concludePracticeDrillRun();
+                        } else {
+                            this.renderTypingWordsArea();
+                            this.updateLivePreviewHUD();
+                            this.highlightNextVirtualKey();
+                            this.calculateRealTimePracticeMetrics();
+                        }
+                    } else {
+                        this.state.incorrectKeystrokesCount++;
+                        if (code) {
+                            this.state.metrics.errorsPerKey[code] = (this.state.metrics.errorsPerKey[code] || 0) + 1;
+                        }
+                        this.playMistakeBuzzerSound();
+                        this.triggerVisualMistakeFlash();
+                        this.calculateRealTimePracticeMetrics();
+                    }
+                    this.applyLiveHeatmapOverlays();
+                    return;
+                }
+
+                if (e.key === expectedKey) {
+                    this.state.typedKeystrokesBuffer += e.key;
+                    this.playKeyClickSound();
+                    this.updateLivePreviewHUD();
+                    this.highlightNextVirtualKey();
+                    this.calculateRealTimePracticeMetrics();
+                } else {
+                    this.state.incorrectKeystrokesCount++;
+                    if (code) {
+                        this.state.metrics.errorsPerKey[code] = (this.state.metrics.errorsPerKey[code] || 0) + 1;
+                    }
+                    this.playMistakeBuzzerSound();
+                    this.triggerVisualMistakeFlash();
+                    this.calculateRealTimePracticeMetrics();
+                }
+                this.applyLiveHeatmapOverlays();
+            }
+
+            triggerVisualMistakeFlash() {
+                const container = document.getElementById('typing-words-container');
+                if (container) {
+                    container.classList.add('bg-red-950/40', 'border-red-600');
+                    setTimeout(() => {
+                        container.classList.remove('bg-red-950/40', 'border-red-600');
+                    }, 150);
+                }
+            }
+
+            calculateRealTimePracticeMetrics() {
+                if (!this.state.practiceStartTime) return;
+
+                let elapsedMinutes = (Date.now() - this.state.practiceStartTime) / 60000;
+                if (elapsedMinutes <= 0) return;
+
+                if (this.state.currentTimerDuration > 0) {
+                    const elapsedSeconds = this.state.currentTimerDuration - this.state.timeRemainingSeconds;
+                    elapsedMinutes = Math.max(0.01, elapsedSeconds / 60);
+                }
+
+                const correctKeystrokes = Math.max(0, this.state.totalKeystrokesCount - this.state.incorrectKeystrokesCount);
+                const grossWordsCount = this.state.totalKeystrokesCount / 5;
+                const grossWpm = Math.round(grossWordsCount / elapsedMinutes) || 0;
+
+                const accuracyVal = Math.max(0, Math.round((correctKeystrokes / this.state.totalKeystrokesCount) * 100)) || 100;
+
+                const errorsCount = this.state.incorrectKeystrokesCount;
+                const netWpm = Math.max(0, Math.round(((this.state.totalKeystrokesCount - (errorsCount * 5)) / 5) / elapsedMinutes)) || 0;
+
+                const wpmSpan = document.getElementById('stat-wpm');
+                wpmSpan.textContent = `${grossWpm} WPM`;
+                wpmSpan.setAttribute('aria-label', `Gross Speed: ${grossWpm} Words Per Minute`);
+
+                const netWpmSpan = document.getElementById('stat-net-wpm');
+                netWpmSpan.textContent = `${netWpm} WPM`;
+                netWpmSpan.setAttribute('aria-label', `Net Speed: ${netWpm} Words Per Minute`);
+
+                const accuracySpan = document.getElementById('stat-accuracy');
+                accuracySpan.textContent = `${accuracyVal}%`;
+                accuracySpan.setAttribute('aria-label', `Accuracy Rate: ${accuracyVal} percent`);
+
+                const errorsSpan = document.getElementById('stat-errors');
+                errorsSpan.textContent = `${errorsCount} Keys`;
+                errorsSpan.setAttribute('aria-label', `Errors Logged: ${errorsCount} keys`);
+
+                // Update flow state speedometer bar (up to 80 WPM threshold)
+                const flowWidth = Math.min(100, Math.round((netWpm / 80) * 100));
+                document.getElementById('live-flow-indicator').style.width = `${flowWidth}%`;
+
+                const accLbl = document.getElementById('stat-accuracy');
+                if (accuracyVal < 90) {
+                    accLbl.className = "text-red-500 text-base sm:text-lg font-black";
+                } else if (accuracyVal < 95) {
+                    accLbl.className = "text-amber-500 text-base sm:text-lg font-black";
+                } else {
+                    accLbl.className = "text-emerald-400 text-base sm:text-lg font-black";
+                }
+            }
+
+            concludePracticeDrillRun() {
+                this.stopCountdownTimer();
+                this.state.isPracticeActive = false;
+
+                const elapsedMinutes = this.state.currentTimerDuration > 0 
+                    ? (this.state.currentTimerDuration - this.state.timeRemainingSeconds) / 60 
+                    : (Date.now() - this.state.practiceStartTime) / 60000;
+
+                const correctKeystrokes = Math.max(0, this.state.totalKeystrokesCount - this.state.incorrectKeystrokesCount);
+                const grossWpm = Math.round((this.state.totalKeystrokesCount / 5) / elapsedMinutes) || 0;
+                const finalWpm = Math.max(0, Math.round(((this.state.totalKeystrokesCount - (this.state.incorrectKeystrokesCount * 5)) / 5) / elapsedMinutes)) || 0;
+                const finalAccuracy = Math.max(0, Math.round((correctKeystrokes / this.state.totalKeystrokesCount) * 100)) || 100;
+
+                const wpmSpan = document.getElementById('stat-wpm');
+                wpmSpan.textContent = `${grossWpm} WPM`;
+                wpmSpan.setAttribute('aria-label', `Gross Speed: ${grossWpm} Words Per Minute`);
+
+                const netWpmSpan = document.getElementById('stat-net-wpm');
+                netWpmSpan.textContent = `${finalWpm} WPM`;
+                netWpmSpan.setAttribute('aria-label', `Net Speed: ${finalWpm} Words Per Minute`);
+
+                const accuracySpan = document.getElementById('stat-accuracy');
+                accuracySpan.textContent = `${finalAccuracy}%`;
+                accuracySpan.setAttribute('aria-label', `Accuracy Rate: ${finalAccuracy} percent`);
+
+                this.renderTypingWordsArea();
+
+                // gamified Daily Streaks update execution
+                this.updateDailyStreakOnCompletion();
+
+                this.showToast(`Drill complete! Net Speed: ${finalWpm} WPM | Accuracy: ${finalAccuracy}%`);
+
+                if (finalWpm > this.state.bestWpmRecord && finalAccuracy >= 95) {
+                    this.state.bestWpmRecord = finalWpm;
+                    StorageProxy.set('keymaster_best_wpm', this.state.bestWpmRecord);
+                }
+                if (finalAccuracy > this.state.bestAccuracyRecord) {
+                    this.state.bestAccuracyRecord = finalAccuracy;
+                    StorageProxy.set('keymaster_best_accuracy', this.state.bestAccuracyRecord);
+                }
+
+                if (this.state.bestWpmRecord >= 35 && this.state.bestAccuracyRecord >= 95) {
+                    const badge = document.getElementById('cert-badge-dot');
+                    if (badge) badge.classList.remove('hidden');
+                }
+
+                this.evaluateFrictionAlertKeys();
+
+                // Save this session run record into history log
+                const runRecord = {
+                    timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }),
+                    wpm: finalWpm,
+                    accuracy: finalAccuracy,
+                    layout: this.state.currentLayout
+                };
+                this.state.practiceHistory.push(runRecord);
+                if (this.state.practiceHistory.length > 15) {
+                    this.state.practiceHistory.shift(); // keep slim rolling buffer
+                }
+                StorageProxy.set('keymaster_practice_history', this.state.practiceHistory);
+
+                // Commit session keystroke metrics to historical rolling values
+                for (const keycode in this.state.metrics.keyPressCounter) {
+                    if (!this.state.cumulativeKeyStats[keycode]) {
+                        this.state.cumulativeKeyStats[keycode] = { errors: 0, presses: 0 };
+                    }
+                    this.state.cumulativeKeyStats[keycode].presses += this.state.metrics.keyPressCounter[keycode];
+                    this.state.cumulativeKeyStats[keycode].errors += (this.state.metrics.errorsPerKey[keycode] || 0);
+                }
+                StorageProxy.set('keymaster_cumulative_key_stats', this.state.cumulativeKeyStats);
+
+                // Rerender analytics charts immediately
+                this.updateAnalyticsCharts();
+            }
+
+            initAnalyticsCharts() {
+                const ctxTrend = document.getElementById('progressTrendChart');
+                const ctxFriction = document.getElementById('weakKeysFrictionChart');
+
+                if (!ctxTrend || !ctxFriction) return;
+
+                // Initialize empty Dual-Axis Line chart with WCAG AA compliant text color #44403c
+                this.progressChartInstance = new Chart(ctxTrend, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [
+                            {
+                                label: 'Speed (Net WPM)',
+                                data: [],
+                                borderColor: '#b91c1c',
+                                backgroundColor: 'rgba(185, 28, 28, 0.1)',
+                                borderWidth: 2.5,
+                                tension: 0.3,
+                                yAxisID: 'yWpm'
+                            },
+                            {
+                                label: 'Accuracy (%)',
+                                data: [],
+                                borderColor: '#10b981',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2.5,
+                                tension: 0.3,
+                                yAxisID: 'yAcc'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 9, weight: 'bold', family: 'Inter' }, color: '#44403c' }
+                            },
+                            yWpm: {
+                                position: 'left',
+                                grid: { color: 'rgba(28, 25, 23, 0.08)' },
+                                ticks: { font: { size: 9, weight: 'bold' }, color: '#b91c1c' },
+                                title: { display: true, text: 'WPM', font: { size: 9, weight: 'extrabold' }, color: '#b91c1c' }
+                            },
+                            yAcc: {
+                                position: 'right',
+                                min: 0,
+                                max: 100,
+                                grid: { drawOnChartArea: false },
+                                ticks: { font: { size: 9, weight: 'bold' }, color: '#10b981' },
+                                title: { display: true, text: 'Accuracy %', font: { size: 9, weight: 'extrabold' }, color: '#10b981' }
+                            }
+                        }
+                    }
+                });
+
+                // Initialize empty Weak Keys Friction bar chart with WCAG AA compliant text color #44403c
+                this.weakKeysChartInstance = new Chart(ctxFriction, {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: 'rgba(185, 28, 28, 0.85)',
+                            borderRadius: 6,
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            x: {
+                                min: 0,
+                                max: 1.0,
+                                grid: { color: 'rgba(28, 25, 23, 0.08)' },
+                                ticks: { font: { size: 9, weight: 'bold', family: 'Inter' }, color: '#44403c' },
+                                title: { display: true, text: 'Friction Ratio (Errors/Presses)', font: { size: 9, weight: 'extrabold' }, color: '#44403c' }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { font: { size: 10, weight: 'black', family: 'Inter' }, color: '#1c1917' }
+                            }
+                        }
+                    }
+                });
+
+                this.updateAnalyticsCharts();
+            }
+
+            updateAnalyticsCharts() {
+                if (!this.progressChartInstance || !this.weakKeysChartInstance) return;
+
+                // 1. UPDATE HISTORICAL TRENDS CHART
+                const history = this.state.practiceHistory;
+                const overlayTrend = document.getElementById('no-history-overlay');
+
+                if (history && history.length > 0) {
+                    if (overlayTrend) overlayTrend.classList.add('hidden');
+                    
+                    const labels = history.map((run, i) => `#${i + 1}`);
+                    const wpmData = history.map(run => run.wpm);
+                    const accData = history.map(run => run.accuracy);
+
+                    this.progressChartInstance.data.labels = labels;
+                    this.progressChartInstance.data.datasets[0].data = wpmData;
+                    this.progressChartInstance.data.datasets[1].data = accData;
+                    this.progressChartInstance.update();
+                } else {
+                    if (overlayTrend) overlayTrend.classList.remove('hidden');
+                    this.progressChartInstance.data.labels = [];
+                    this.progressChartInstance.data.datasets[0].data = [];
+                    this.progressChartInstance.data.datasets[1].data = [];
+                    this.progressChartInstance.update();
+                }
+
+                // 2. UPDATE WEAK KEYS BAR CHART (Friction: Errors/Presses)
+                const cumulative = this.state.cumulativeKeyStats;
+                const overlayWeak = document.getElementById('no-weakkeys-overlay');
+
+                // Filter keys pressed at least 3 times to get statistically valid friction
+                const sortedWeakKeys = Object.keys(cumulative)
+                    .map(code => {
+                        const stats = cumulative[code];
+                        const ratio = stats.presses >= 3 ? (stats.errors / stats.presses) : 0;
+                        return { code, ratio, errors: stats.errors };
+                    })
+                    .filter(item => item.ratio > 0.05) // ignore keys with very low friction
+                    .sort((a, b) => b.ratio - a.ratio) // sort descending
+                    .slice(0, 7); // pick worst 7
+
+                if (sortedWeakKeys.length > 0) {
+                    if (overlayWeak) overlayWeak.classList.add('hidden');
+
+                    const barLabels = sortedWeakKeys.map(item => {
+                        // Dynamically map hardware code to the character on the current layout
+                        let charRepr = item.code.replace('Key', '').toUpperCase();
+                        const layout = KEYBOARD_REGISTRY.layouts[this.state.currentLayout];
+                        if (layout && layout.forwardMap && layout.forwardMap[item.code]) {
+                            charRepr = layout.forwardMap[item.code];
+                        }
+                        return `${charRepr} (${item.code.replace('Key', '')})`;
+                    });
+                    const barData = sortedWeakKeys.map(item => Math.min(1.0, item.ratio));
+
+                    this.weakKeysChartInstance.data.labels = barLabels;
+                    this.weakKeysChartInstance.data.datasets[0].data = barData;
+                    this.weakKeysChartInstance.update();
+                } else {
+                    if (overlayWeak) overlayWeak.classList.remove('hidden');
+                    this.weakKeysChartInstance.data.labels = [];
+                    this.weakKeysChartInstance.data.datasets[0].data = [];
+                    this.weakKeysChartInstance.update();
+                }
+            }
+
+            clearAnalyticsHistory() {
+                if (confirm("Are you sure you want to clear your local performance trends and cumulative error history? This cannot be undone.")) {
+                    this.state.practiceHistory = [];
+                    this.state.cumulativeKeyStats = {};
+                    StorageProxy.set('keymaster_practice_history', []);
+                    StorageProxy.set('keymaster_cumulative_key_stats', {});
+                    this.updateAnalyticsCharts();
+                    this.showToast("Practice database reset complete.");
+                }
+            }
+
+            toggleAnalyticsModal() {
+                const modal = document.getElementById('analytics-modal');
+                if (!modal) return;
+                const isHidden = modal.classList.toggle('hidden');
+                if (!isHidden) {
+                    document.body.style.overflow = 'hidden';
+                    document.documentElement.style.overflow = 'hidden';
+                    
+                    // Force chart update on layout state restoration to correctly recalculate dimensions
+                    setTimeout(() => {
+                        this.updateAnalyticsCharts();
+                    }, 50);
+                } else {
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                }
+            }
+
+            updateDailyStreakOnCompletion() {
+                const todayStr = this.getTodaysDateString();
+                const yesterdayStr = this.getYesterdaysDateString();
+                const lastDate = this.state.streakLastDate;
+
+                if (!lastDate) {
+                    // First ever complete typing run
+                    this.state.streakCurrent = 1;
+                    this.state.streakLastDate = todayStr;
+                    this.showStreakMilestoneCelebration(1);
+                } else if (lastDate === todayStr) {
+                    // Already practiced today, keep current streak but show reminder
+                    this.showToast("Practice session logged for today! Streak is secure.");
+                } else if (lastDate === yesterdayStr) {
+                    // Consecutive day drill finished!
+                    this.state.streakCurrent += 1;
+                    this.state.streakLastDate = todayStr;
+                    this.showStreakMilestoneCelebration(this.state.streakCurrent);
+                } else {
+                    // Broken streak, reset back to 1
+                    this.state.streakCurrent = 1;
+                    this.state.streakLastDate = todayStr;
+                    this.showToast("New daily streak started today! Let's build consistency.");
+                }
+
+                // Update historic best streak
+                if (this.state.streakCurrent > this.state.streakBest) {
+                    this.state.streakBest = this.state.streakCurrent;
+                    StorageProxy.set('keymaster_streak_best', this.state.streakBest);
+                }
+
+                // Save states securely to local Storage Proxy
+                StorageProxy.set('keymaster_streak_current', this.state.streakCurrent);
+                StorageProxy.set('keymaster_streak_last_date', this.state.streakLastDate);
+
+                // Update UI visually
+                this.updateStreakVisuals();
+            }
+
+            showStreakMilestoneCelebration(days) {
+                if (days === 7) {
+                    this.showToast("🔥 Phenomenal! You achieved a 7-Day Typing Streak! Keep ascending!");
+                } else if (days === 30) {
+                    this.showToast("🏆 Grandmaster Streak! 30 Days of consistent touch typing!");
+                } else {
+                    this.showToast(`🔥 Daily Streak Updated: ${days} ${days === 1 ? 'Day' : 'Days'}!`);
+                }
+            }
+
+            updateStreakVisuals() {
+                const countBadge = document.getElementById('streak-count-badge');
+                const bestBadge = document.getElementById('streak-best-badge');
+                const countDesktop = document.getElementById('streak-count-desktop');
+                const badgeContainer = document.getElementById('streak-badge-container');
+                const pillDesktop = document.getElementById('streak-pill-desktop');
+
+                if (countBadge) countBadge.textContent = `${this.state.streakCurrent} Day Streak`;
+                if (bestBadge) bestBadge.textContent = this.state.streakBest;
+                if (countDesktop) countDesktop.textContent = `${this.state.streakCurrent} Day Streak`;
+
+                // Dynamic style upgrade thresholds based on user streak duration
+                if (badgeContainer) {
+                    if (this.state.streakCurrent >= 30) {
+                        badgeContainer.className = "mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-red-500 to-amber-500 border border-red-400 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-white tracking-wide shadow-md cursor-help";
+                    } else if (this.state.streakCurrent >= 7) {
+                        badgeContainer.className = "mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-yellow-500 border border-orange-400 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-white tracking-wide shadow-sm cursor-help";
+                    } else {
+                        badgeContainer.className = "mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-amber-900 tracking-wide shadow-sm cursor-help";
+                    }
+                }
+
+                if (pillDesktop) {
+                    if (this.state.streakCurrent >= 30) {
+                        pillDesktop.className = "flex items-center gap-1.5 bg-gradient-to-r from-red-500 to-amber-500 text-white border border-red-400 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest";
+                    } else if (this.state.streakCurrent >= 7) {
+                        pillDesktop.className = "flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border border-orange-400 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest";
+                    } else {
+                        pillDesktop.className = "flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-900 border border-amber-300 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest";
+                    }
+                }
+            }
+
+            evaluateFrictionAlertKeys() {
+                let errorKeysExist = false;
+                for (const keycode in this.state.metrics.errorsPerKey) {
+                    if (this.state.metrics.errorsPerKey[keycode] >= 2) {
+                        errorKeysExist = true;
+                        break;
+                    }
+                }
+                const bar = document.getElementById('weak-keys-alert-bar');
+                if (errorKeysExist) {
+                    bar.classList.remove('hidden');
+                } else {
+                    bar.classList.add('hidden');
+                }
+            }
+
+            compileWeakKeysCustomDrill() {
+                let weakCharacters = [];
+                for (const keycode in this.state.metrics.errorsPerKey) {
+                    if (this.state.metrics.errorsPerKey[keycode] >= 2) {
+                        let character = "";
+                        if (this.state.currentLayout === 'hindi_inscript') {
+                            character = KEYBOARD_REGISTRY.layouts.hindi_inscript.forwardMap[keycode];
+                        } else if (this.state.currentLayout === 'hindi_remington') {
+                            character = KEYBOARD_REGISTRY.layouts.hindi_remington.forwardMap[keycode];
+                        } else {
+                            for (const char in KEYBOARD_REGISTRY.charToCodeMap) {
+                                if (KEYBOARD_REGISTRY.charToCodeMap[char] === keycode) {
+                                    character = char;
+                                    break;
+                                }
+                            }
+                        }
+                        if (character && !weakCharacters.includes(character)) {
+                            weakCharacters.push(character);
+                        }
+                    }
+                }
+
+                if (weakCharacters.length === 0) {
+                    this.showToast("Perfect score! No weak keys detected.");
+                    return;
+                }
+
+                let builtDrillWords = [];
+                weakCharacters.forEach(char => {
+                    const triple = (char + char + char);
+                    builtDrillWords.push(triple);
+                    builtDrillWords.push(char);
+                });
+
+                const joinedStr = builtDrillWords.join(" ");
+                document.getElementById('lesson-category-select').value = 'custom_practice';
+                document.getElementById('custom-typed-text').value = joinedStr;
+
+                this.loadPracticeSyllabusString();
+                this.showToast("Weak characters loaded into Practice Sandbox!");
+            }
+
+            showToast(msg) {
+                const toast = document.getElementById('notification-toast');
+                if (toast) {
+                    toast.textContent = msg;
+                    toast.className = "fixed bottom-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-xl z-[2000] show transition-all duration-300";
+                    setTimeout(() => {
+                        toast.className = "hidden";
+                    }, 3000);
+                }
+            }
+
+            toggleCertModal() {
+                const modal = document.getElementById('cert-claim-modal');
+                const errorMsg = document.getElementById('cert-status-error-msg');
+                const speedLbl = document.getElementById('best-speed-lbl');
+                const accLbl = document.getElementById('best-accuracy-lbl');
+
+                if (!modal) return;
+
+                const isHidden = modal.classList.toggle('hidden');
+                if (!isHidden) {
+                    speedLbl.textContent = `${this.state.bestWpmRecord} WPM`;
+                    accLbl.textContent = `${this.state.bestAccuracyRecord}%`;
+
+                    if (this.state.bestWpmRecord >= 35 && this.state.bestAccuracyRecord >= 95) {
+                        errorMsg.textContent = "🏆 Eligible! You are qualified to print your certificate.";
+                        errorMsg.className = "text-[11px] text-emerald-800 font-bold italic text-center";
+                    } else {
+                        errorMsg.textContent = "🔒 Locked. Reach 35+ WPM speed with 95% accuracy to unlock.";
+                        errorMsg.className = "text-[11px] text-red-800 font-bold italic text-center";
+                    }
+
+                    // Dynamic updates for daily streak achievements inside the modal
+                    const ach7Icon = document.getElementById('achieve-7day-icon');
+                    const ach7Status = document.getElementById('achieve-7day-status');
+                    const ach7Box = document.getElementById('achieve-7day');
+                    if (this.state.streakCurrent >= 7) {
+                        if (ach7Icon) ach7Icon.textContent = "🔥";
+                        if (ach7Status) ach7Status.textContent = "Unlocked & Activated!";
+                        if (ach7Box) ach7Box.className = "flex items-center gap-2 bg-orange-50 border border-orange-300 rounded-xl p-2 text-orange-950";
+                    } else {
+                        if (ach7Icon) ach7Icon.textContent = "🔒";
+                        if (ach7Status) ach7Status.textContent = `${7 - this.state.streakCurrent} days remaining`;
+                        if (ach7Box) ach7Box.className = "flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2";
+                    }
+
+                    const ach30Icon = document.getElementById('achieve-30day-icon');
+                    const ach30Status = document.getElementById('achieve-30day-status');
+                    const ach30Box = document.getElementById('achieve-30day');
+                    if (this.state.streakCurrent >= 30) {
+                        if (ach30Icon) ach30Icon.textContent = "👑";
+                        if (ach30Status) ach30Status.textContent = "Grandmaster Active!";
+                        if (ach30Box) ach30Box.className = "flex items-center gap-2 bg-red-50 border border-red-300 rounded-xl p-2 text-red-950";
+                    } else {
+                        if (ach30Icon) ach30Icon.textContent = "🔒";
+                        if (ach30Status) ach30Status.textContent = `${30 - this.state.streakCurrent} days remaining`;
+                        if (ach30Box) ach30Box.className = "flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2";
+                    }
+
+                    document.body.style.overflow = 'hidden';
+                    document.documentElement.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                }
+            }
+
+            handleCertificatePrintAction() {
+                if (this.state.bestWpmRecord < 35 || this.state.bestAccuracyRecord < 95) {
+                    this.showToast("Typing speed milestone of 35 WPM with 95% accuracy not met yet.");
+                    return;
+                }
+
+                // Strictly escape candidate name to protect against XSS injection inside the print shelf layout
+                const rawName = document.getElementById('student-name-input').value || "Candidate Master";
+                const candidateName = escapeHTML(rawName);
+                const dateStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                const layoutName = this.state.currentLayout === 'hindi_inscript' 
+                    ? 'Hindi Inscript (Mangal Unicode)' 
+                    : this.state.currentLayout === 'hindi_remington' 
+                        ? 'Hindi Remington (Krutidev Gail)' 
+                        : 'English Classic QWERTY';
+
+                const printShelf = document.getElementById('print-certificate-shelf');
+                if (!printShelf) return;
+
+                printShelf.innerHTML = `
+                    <div class="relative w-full min-h-screen bg-[#faf8f5] p-12 flex flex-col justify-between items-center overflow-hidden print:p-8" style="font-family: 'Playfair Display', serif; box-sizing: border-box;">
+                        
+                        <!-- Formal Security Guilloché Gold Border Frames -->
+                        <div class="absolute inset-4 border-[3px] border-[#c5a880] pointer-events-none"></div>
+                        <div class="absolute inset-6 border border-[#c5a880]/60 pointer-events-none"></div>
+                        
+                        <!-- Vintage SVG Corner Ornaments -->
+                        <div class="absolute top-8 left-8 text-[#c5a880] w-12 h-12 opacity-80">
+                            <svg viewBox="0 0 100 100" class="fill-current"><path d="M0 0 h100 v10 H20 v90 H0 z"/></svg>
+                        </div>
+                        <div class="absolute top-8 right-8 text-[#c5a880] w-12 h-12 opacity-80 transform rotate-90">
+                            <svg viewBox="0 0 100 100" class="fill-current"><path d="M0 0 h100 v10 H20 v90 H0 z"/></svg>
+                        </div>
+                        <div class="absolute bottom-8 left-8 text-[#c5a880] w-12 h-12 opacity-80 transform -rotate-90">
+                            <svg viewBox="0 0 100 100" class="fill-current"><path d="M0 0 h100 v10 H20 v90 H0 z"/></svg>
+                        </div>
+                        <div class="absolute bottom-8 right-8 text-[#c5a880] w-12 h-12 opacity-80 transform rotate-180">
+                            <svg viewBox="0 0 100 100" class="fill-current"><path d="M0 0 h100 v10 H20 v90 H0 z"/></svg>
+                        </div>
+
+                        <!-- Formal Header Section -->
+                        <div class="text-center z-10 mt-6 space-y-2">
+                            <h1 class="text-4xl font-bold tracking-[0.25em] text-stone-855 uppercase" style="font-family: 'Cinzel', serif;">Diploma of Mastery</h1>
+                            <p class="text-xs tracking-[0.3em] text-[#9c805e] uppercase font-bold">Devnagari KeyMaster Typing Academy</p>
+                        </div>
+
+                        <!-- Certificate Body Prose -->
+                        <div class="text-center z-10 my-4 max-w-2xl space-y-4">
+                            <p class="text-sm italic text-stone-700 font-sans">This official scroll hereby certifies and proclaims that</p>
+                            <h2 class="text-4xl font-extrabold text-stone-900 border-b border-[#c5a880]/50 pb-2.5 my-3 px-8 italic" style="font-family: 'Playfair Display', serif;">${candidateName}</h2>
+                            <p class="text-sm leading-relaxed text-stone-800 font-sans font-medium">
+                                has successfully surpassed all rigorous typing speed targets, accuracy benchmarks, and tactile muscle-coordination milestones on the standard keyboard layout:
+                            </p>
+                            <p class="text-xs text-[#9c805e] font-black uppercase tracking-widest">
+                                Layout Standard: <span class="text-stone-900 font-black">${layoutName}</span>
+                            </p>
+                        </div>
+
+                        <!-- Certificate Footer Section: Stats, Gold Wax Seal, Calligraphy Signatures -->
+                        <div class="w-full max-w-3xl grid grid-cols-3 gap-4 items-center z-10 mb-6 text-center">
+                            
+                            <!-- Left: Verified Scores Grid -->
+                            <div class="space-y-1.5 text-left pl-6 border-l-2 border-[#c5a880]/30 font-sans">
+                                <p class="text-[10px] text-stone-500 uppercase tracking-widest font-black leading-none mb-1">Academic Scores</p>
+                                <p class="text-xs text-stone-850 font-bold leading-normal">Speed: <span class="text-stone-950 font-black">${this.state.bestWpmRecord} Net WPM</span></p>
+                                <p class="text-xs text-stone-850 font-bold leading-normal">Accuracy: <span class="text-stone-950 font-black">${this.state.bestAccuracyRecord}%</span></p>
+                                <p class="text-[10px] text-[#9c805e] font-black tracking-wide mt-1.5">Date: ${dateStr}</p>
+                            </div>
+
+                            <!-- Center: Complex Vintage Gold Wax Seal SVG -->
+                            <div class="flex flex-col items-center justify-center relative">
+                                <svg class="w-20 h-20 text-[#d4af37]" viewBox="0 0 100 100" fill="currentColor">
+                                    <!-- Outer serrated edge -->
+                                    <path d="M50 5 L53 14 L62 9 L61 19 L70 16 L66 25 L75 24 L69 32 L78 33 L71 40 L79 43 L71 49 L77 56 L68 59 L73 67 L63 68 L66 77 L57 76 L58 85 L49 82 L48 91 L40 86 L38 95 L31 88 L27 96 L22 88 L16 94 L13 85 L6 89 L6 79 L0 74 L8 67 L2 60 L10 55 L5 47 L13 44 L10 35 L19 34 L17 25 L26 26 L26 16 L35 19 L36 9 L44 14 Z" opacity="0.9" />
+                                    <!-- Inner wax seal circle -->
+                                    <circle cx="50" cy="50" r="34" fill="#c5a880" stroke="#b3966a" stroke-width="2" />
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#faf8f5" stroke-dasharray="2" stroke-width="1.5" opacity="0.8" />
+                                    <!-- Text inside seal -->
+                                    <text x="50" y="44" font-family="'Cinzel', serif" font-weight="900" font-size="6" fill="#faf8f5" text-anchor="middle" letter-spacing="1">MASTER</text>
+                                    <text x="50" y="53" font-family="'Cinzel', serif" font-weight="900" font-size="10" fill="#faf8f5" text-anchor="middle" letter-spacing="1">KEY</text>
+                                    <text x="50" y="62" font-family="'Cinzel', serif" font-weight="900" font-size="6" fill="#faf8f5" text-anchor="middle" letter-spacing="1">VERIFIED</text>
+                                </svg>
+                            </div>
+
+                            <!-- Right: Calligraphy Signature line -->
+                            <div class="space-y-1 pr-6 flex flex-col items-end">
+                                <span class="text-3xl text-stone-855 italic pr-2" style="font-family: 'Pinyon Script', cursive; transform: rotate(-4deg); transform-origin: bottom right;">Devendra Sharma</span>
+                                <div class="w-36 border-t border-stone-400"></div>
+                                <p class="text-[9px] text-stone-600 uppercase tracking-widest font-black leading-none mt-1">Registrar Authority</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                window.print();
+            }
+        }
+
+        // Initialize the optimized application
+        document.addEventListener('DOMContentLoaded', () => {
+            window.keyMasterApp = new DevnagariKeyMasterApp();
+            window.keyMasterApp.init();
+        });
+    </script>
+</body>
+</html>
