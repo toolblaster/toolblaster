@@ -159,6 +159,8 @@
             border: none; text-align: center; font-weight: 700; color: #111827;
             background: transparent; height: 100%; outline: none; font-size: 0.75rem;
             width: 82px; padding: 0 4px;
+            -moz-appearance: textfield;
+            appearance: textfield;
         }
         .manual-input::-webkit-outer-spin-button, .manual-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         .input-stepper-group:focus-within {
@@ -263,66 +265,84 @@
                             <!-- Section: Core Age Parameters -->
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label id="ageLabelText" for="ageInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1">Current Age</label>
+                                    <label id="ageLabelText" for="ageInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">Current Age</label>
                                     <div class="input-stepper-group flex rounded-xl w-full">
                                         <button type="button" class="stepper-button" onclick="adjustValue('ageInput', -1, 18, 65)">-</button>
-                                        <input type="number" id="ageInput" class="manual-input flex-grow" value="28" min="18" max="65" onchange="validateAgeSettings()">
+                                        <input type="number" id="ageInput" class="manual-input flex-grow animate-none" value="28" min="18" max="65" onchange="validateAgeSettings()">
                                         <button type="button" class="stepper-button" onclick="adjustValue('ageInput', 1, 18, 65)">+</button>
                                     </div>
                                 </div>
                                 <div>
-                                    <label id="retireAgeLabelText" for="retireAgeInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1">Retirement Age</label>
+                                    <label id="retireAgeLabelText" for="retireAgeInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">Retirement Age</label>
                                     <div class="input-stepper-group flex rounded-xl w-full">
                                         <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', -1, 25, 75)">-</button>
-                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow" value="45" min="25" max="75" onchange="validateAgeSettings()">
+                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow animate-none" value="45" min="25" max="75" onchange="validateAgeSettings()">
                                         <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', 1, 25, 75)">+</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Monthly Expenses Slider -->
+                            <!-- Monthly Expenses Slider with Tooltip -->
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800">Monthly Expenses Today (₹)</label>
+                                    <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Monthly Expenses Today (₹)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your average current monthly living expenses including food, bills, rent, lifestyle, and healthcare. Excluding savings.</span>
+                                        </span>
+                                    </label>
                                     <span id="expenseWords" class="text-[10px] text-red-800 font-bold"></span>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input type="range" id="expenseSlider" min="10000" max="500000" value="50000" step="5000" class="w-full range-slider flex-grow" oninput="syncExpenseSlider()">
+                                    <input type="range" id="expenseSlider" min="10000" max="500000" value="50000" step="5000" class="w-full range-slider flex-grow" oninput="syncExpenseSlider()" aria-label="Monthly Expenses Range">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
                                         <button type="button" class="stepper-button" onclick="adjustExpense(-5000)">-</button>
-                                        <input type="number" id="expenseInput" class="manual-input" value="50000" min="10000" max="500000" step="5000" onchange="syncExpenseInput()">
+                                        <input type="number" id="expenseInput" class="manual-input animate-none" value="50000" min="10000" max="500000" step="5000" onchange="syncExpenseInput()">
                                         <button type="button" class="stepper-button" onclick="adjustExpense(5000)">+</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Current Saved Net Worth Slider -->
+                            <!-- Current Saved Net Worth Slider with Tooltip & 9 Crore Cap -->
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label id="networthLabelText" for="networthInput" class="block text-xxs font-bold text-stone-800">Current Portfolio Net Worth (₹)</label>
+                                    <label id="networthLabelText" for="networthInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Current Portfolio Net Worth (₹)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Sum of all liquid and investable assets you own today (mutual funds, stocks, EPF, PPF, gold, etc.) that can support your retirement.</span>
+                                        </span>
+                                    </label>
                                     <span id="networthWords" class="text-[10px] text-red-800 font-bold"></span>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input type="range" id="networthSlider" min="0" max="20000000" value="500000" step="50000" class="w-full range-slider flex-grow" oninput="syncNetworthSlider()">
-                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                    <input type="range" id="networthSlider" min="0" max="90000000" value="500000" step="50000" class="w-full range-slider flex-grow" oninput="syncNetworthSlider()" aria-label="Current Portfolio Net Worth Range">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl flex-grow-0">
                                         <button type="button" class="stepper-button" onclick="adjustNetworth(-50000)">-</button>
-                                        <input type="number" id="networthInput" class="manual-input" value="500000" min="0" max="200000000" step="50000" onchange="syncNetworthInput()">
+                                        <input type="number" id="networthInput" class="manual-input flex-grow animate-none" value="500000" min="0" max="90000000" step="50000" onchange="syncNetworthInput()">
                                         <button type="button" class="stepper-button" onclick="adjustNetworth(50000)">+</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Monthly Savings Slider -->
+                            <!-- Monthly Savings Slider with Tooltip -->
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label id="savingsLabelText" for="savingsInput" class="block text-xxs font-bold text-stone-800">Monthly Savings Contribution (₹)</label>
+                                    <label id="savingsLabelText" for="savingsInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Monthly Savings Contribution (₹)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">The total amount you save and invest into compounding assets every month specifically for your early retirement goal.</span>
+                                        </span>
+                                    </label>
                                     <span id="savingsWords" class="text-[10px] text-red-800 font-bold"></span>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <input type="range" id="savingsSlider" min="1000" max="250000" value="25000" step="1000" class="w-full range-slider flex-grow" oninput="syncSavingsSlider()">
+                                    <input type="range" id="savingsSlider" min="1000" max="250000" value="25000" step="1000" class="w-full range-slider flex-grow" oninput="syncSavingsSlider()" aria-label="Monthly Savings Contribution Range">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
                                         <button type="button" class="stepper-button" onclick="adjustSavings(-1000)">-</button>
-                                        <input type="number" id="savingsInput" class="manual-input" value="25000" min="1000" max="250000" step="1000" onchange="syncSavingsInput()">
+                                        <input type="number" id="savingsInput" class="manual-input animate-none" value="25000" min="1000" max="250000" step="1000" onchange="syncSavingsInput()">
                                         <button type="button" class="stepper-button" onclick="adjustSavings(1000)">+</button>
                                     </div>
                                 </div>
@@ -331,7 +351,7 @@
                             <!-- Yield Rates Parameters (Pre-retirement Return & Post-retirement Return) -->
                             <div class="grid grid-cols-2 gap-3.5">
                                 <div>
-                                    <label id="preReturnLabelText" for="preReturnInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1 flex items-center">
+                                    <label id="preReturnLabelText" for="preReturnInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1 flex items-center">
                                         Pre-Retire Return
                                         <span class="tooltip-icon ml-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -340,8 +360,8 @@
                                     </label>
                                     <div class="input-stepper-group flex rounded-xl w-full">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('preReturnInput', -0.5, 4, 25)">-</button>
-                                        <input type="number" id="preReturnInput" class="manual-input" value="12" min="4" max="25" step="0.1" onchange="runSimulation()">
-                                        <button type="button" class="stepper-button" onclick="adjustReturnRate('preReturnInput', 0.1)">+</button>
+                                        <input type="number" id="preReturnInput" class="manual-input flex-grow animate-none" value="12" min="4" max="25" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('preReturnInput', 0.5, 4, 25)">+</button>
                                     </div>
                                 </div>
                                 <div>
@@ -352,10 +372,10 @@
                                             <span class="tooltip-text">Annualized yield during retirement. Standard is lower (e.g. 7%-8%) to reflect safer conservative assets like debt and deposits.</span>
                                         </span>
                                     </label>
-                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                    <div class="input-stepper-group flex rounded-xl w-full animate-none">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('postReturnInput', -0.5, 3, 18)">-</button>
-                                        <input type="number" id="postReturnInput" class="manual-input" value="8" min="3" max="18" step="0.1" onchange="runSimulation()">
-                                        <button type="button" class="stepper-button" onclick="adjustReturnRate('postReturnInput', 0.1)">+</button>
+                                        <input type="number" id="postReturnInput" class="manual-input flex-grow animate-none" value="8" min="3" max="18" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('postReturnInput', 0.5, 3, 18)">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -373,10 +393,10 @@
                                     </span>
                                 </label>
                                 <div class="flex items-center space-x-2">
-                                    <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()">
+                                    <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()" aria-label="Long-Term Inflation Estimate Range">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', -0.1, 2, 12)">-</button>
-                                        <input type="number" id="inflationInput" class="manual-input" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
+                                        <input type="number" id="inflationInput" class="manual-input animate-none" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', 0.1, 2, 12)">+</button>
                                     </div>
                                 </div>
@@ -394,10 +414,10 @@
                                     </span>
                                 </label>
                                 <div class="flex items-center space-x-2">
-                                    <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()">
+                                    <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()" aria-label="Annual Savings Step-Up Range">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
                                         <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', -1, 0, 25)">-</button>
-                                        <input type="number" id="stepUpInput" class="manual-input" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
+                                        <input type="number" id="stepUpInput" class="manual-input animate-none" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
                                         <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', 1, 0, 25)">+</button>
                                     </div>
                                 </div>
@@ -415,10 +435,10 @@
                                     </span>
                                 </label>
                                 <div class="flex items-center space-x-2">
-                                    <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()">
+                                    <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()" aria-label="Safe Withdrawal Rate Range">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', -0.1, 2, 8)">-</button>
-                                        <input type="number" id="swrInput" class="manual-input" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
+                                        <input type="number" id="swrInput" class="manual-input animate-none" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
                                         <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', 0.1, 2, 8)">+</button>
                                     </div>
                                 </div>
@@ -443,8 +463,8 @@
                                 <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-emerald-800">₹0</span>
                             </div>
                             <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1 flex flex-col justify-center">
-                                <span class="block text-[8.5px] sm:text-[10px] font-black text-red-900 uppercase tracking-wider leading-tight">FIRE Year Status</span>
-                                <span id="fireStatusVal" class="text-xs sm:text-[13px] font-black text-red-955 mt-0.5">Calculating...</span>
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-red-900 uppercase tracking-wider leading-tight">FIRE Year Status</span>
+                                <span id="fireStatusVal" class="text-xs sm:text-[11.5px] font-black text-red-955 mt-0.5">Calculating...</span>
                             </div>
                         </div>
 
@@ -455,10 +475,16 @@
                                 <span class="text-[9px] text-slate-500 font-bold tracking-tight">At Target Age</span>
                             </div>
                             <div class="space-y-2 text-xxs sm:text-xs">
-                                <!-- Lean FIRE -->
+                                <!-- Lean FIRE with Tooltip -->
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="font-extrabold text-stone-800">Lean FIRE Corpus (₹)</span>
+                                        <span class="font-extrabold text-stone-800 flex items-center gap-1">
+                                            <span>Lean FIRE Corpus (₹)</span>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">The minimum bare-bones corpus required to fund a minimalist retirement covering strictly essential survival needs (approx. 75% of your standard budget).</span>
+                                            </span>
+                                        </span>
                                         <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers bare minimum survival expenses (75% budget)</span>
                                     </div>
                                     <div class="text-right">
@@ -466,10 +492,16 @@
                                         <span id="leanFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
                                     </div>
                                 </div>
-                                <!-- Fat FIRE -->
+                                <!-- Fat FIRE with Tooltip -->
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
-                                        <span class="font-extrabold text-stone-800">Fat FIRE Corpus (₹)</span>
+                                        <span class="font-extrabold text-stone-800 flex items-center gap-1">
+                                            <span>Fat FIRE Corpus (₹)</span>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">A luxury early retirement target corpus designed with a premium lifestyle buffer (approx. 125% of your standard budget) to absorb market volatility.</span>
+                                            </span>
+                                        </span>
                                         <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers a luxury lifestyle buffer (125% budget)</span>
                                     </div>
                                     <div class="text-right">
@@ -532,7 +564,7 @@
                 <!-- Structured Growth Schedule Panel -->
                 <div id="growthTableContainer" class="hidden bg-white rounded-2xl shadow-sm mt-4 border border-stone-200 overflow-hidden">
                     <div class="p-3 border-b border-stone-200 bg-stone-50 flex items-center justify-between">
-                         <h2 class="text-xs font-bold text-stone-850 m-0 uppercase tracking-wider">Year-by-Year FIRE Ledger (Drawdown Timeline)</h2>
+                         <h2 class="text-xs font-bold text-stone-855 m-0 uppercase tracking-wider">Year-by-Year FIRE Ledger (Drawdown Timeline)</h2>
                          <span class="text-[10px] text-stone-600 italic font-semibold">Post-retirement withdrawals are adjusted dynamically for inflation.</span>
                     </div>
                     <div class="overflow-x-auto max-h-[300px] custom-scrollbar">
@@ -646,7 +678,7 @@
                         The FIRE movement is a lifestyle and financial framework designed to maximize savings rates and build a robust investment portfolio, enabling individuals to retire decades earlier than traditional retirement ages. The core objective is gaining absolute control over your time.
                     </p>
                     <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
-                        <li><strong class="text-stone-850">Savings Rate is King:</strong> While typical financial planners recommend saving $10\%$ to $15\%$ of income, FIRE practitioners often target savings rates of $40\%$ to $70\%$.</li>
+                        <li><strong class="text-stone-850">Savings Rate is King:</strong> While typical financial planners recommend saving 10% to 15% of income, FIRE practitioners often target savings rates of 40% to 70%.</li>
                         <li><strong class="text-stone-850">The Power of Compounding:</strong> Saving aggressively early in life allows compounding interest to take over, funding your future lifestyle completely.</li>
                     </ul>
                 </section>
@@ -655,15 +687,18 @@
                 <section class="space-y-2">
                     <h3 class="text-[13px] font-black text-stone-900">2. The Mathematics of FIRE: The Rule of 25</h3>
                     <p class="font-medium text-stone-600">
-                        Traditional retirement calculations rely on Bengen’s **Rule of 25** derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a $4\%$ safe withdrawal rate, your accumulated nest egg must be exactly $25$ times your annual living expenses:
+                        Traditional retirement calculations rely on Bengen’s <strong class="text-stone-900">Rule of 25</strong> derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a 4% safe withdrawal rate, your accumulated nest egg must be exactly 25 times your annual living expenses:
                     </p>
-                    <div class="my-3 p-3 bg-stone-50 border border-stone-200 rounded-xl text-center">
-                        $$\text{FIRE Corpus Required} = \text{Current Annual Expenses} \times 25$$
+                    <div class="my-3 p-4 bg-stone-50 border border-stone-250 rounded-2xl text-center">
+                        <span class="block text-xxs font-bold text-stone-500 uppercase tracking-wider mb-1">FIRE Target Equation</span>
+                        <span class="text-sm sm:text-base font-black text-red-800">FIRE Corpus Required = Current Annual Expenses × 25</span>
                     </div>
-                    <p class="font-medium text-stone-600">
+                    <p class="font-medium text-stone-600 leading-relaxed">
                         If your monthly expenses are ₹50,000, your annual expenses are ₹6,00,000. Your target corpus (before adjusting for inflation) is:
-                        $$₹6,00,000 \times 25 = ₹1.5 \text{ Crore}$$
                     </p>
+                    <div class="my-3 p-3.5 bg-stone-50 border border-stone-200 rounded-xl text-center font-extrabold text-stone-855">
+                        ₹6,00,000 × 25 = ₹1.5 Crore
+                    </div>
                 </section>
 
                 <!-- Section 3 -->
@@ -673,9 +708,9 @@
                         Retirement is not a one-size-fits-all plan. The FIRE ecosystem has several customized strategies:
                     </p>
                     <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
-                        <li><strong class="text-stone-855">Lean FIRE:</strong> Designed for minimalist lifestyles. It assumes survival expenses are capped at around $75\%$ of your standard budget.</li>
-                        <li><strong class="text-stone-855">Traditional FIRE:</strong> Replaces your current standard of living exactly ($100\%$ budget replacement using a $4\%$ SWR rule).</li>
-                        <li><strong class="text-stone-855">Fat FIRE:</strong> Tailored for comfortable lifestyles, modeling a $125\%$ budget to build a premium wealth cushion.</li>
+                        <li><strong class="text-stone-855">Lean FIRE:</strong> Designed for minimalist lifestyles. It assumes survival expenses are capped at around 75% of your standard budget.</li>
+                        <li><strong class="text-stone-855">Traditional FIRE:</strong> Replaces your current standard of living exactly (100% budget replacement using a 4% SWR rule).</li>
+                        <li><strong class="text-stone-855">Fat FIRE:</strong> Tailored for comfortable lifestyles, modeling a 125% budget to build a premium wealth cushion.</li>
                         <li><strong class="text-stone-855">Coast FIRE:</strong> Hitting a milestone where your current savings, even if you never add another rupee, will grow to fund your ultimate traditional retirement goal by age 60 entirely through compounding. You only work to cover current day-to-day costs.</li>
                     </ul>
                 </section>
@@ -684,7 +719,7 @@
                 <section class="space-y-2">
                     <h3 class="text-[13px] font-black text-stone-900">4. Solving the Drawdown Sequence: Safe Withdrawal Rate (SWR)</h3>
                     <p class="font-medium text-stone-600">
-                        In retirement, your portfolio continues to compound while you make systematic withdrawals (SWP). If you retire in a prolonged bear market, you face **Sequence of Returns Risk**—withdrawing capital while prices are falling can deplete your portfolio prematurely. To prevent this, using a conservative SWR ($3\%$ to $4.5\%$) and shifting to a balanced portfolio (yielding lower but safer returns) is recommended.
+                        In retirement, your portfolio continues to compound while you make systematic withdrawals (SWP). If you retire in a prolonged bear market, you face <strong class="text-stone-900">Sequence of Returns Risk</strong>—withdrawing capital while prices are falling can deplete your portfolio prematurely. To prevent this, using a conservative SWR (3% to 4.5%) and shifting to a balanced portfolio (yielding lower but safer returns) is recommended.
                     </p>
                 </section>
 
@@ -704,7 +739,7 @@
                         1. Is a 4% Safe Withdrawal Rate (SWR) realistic in India?
                     </h3>
                     <p class="leading-relaxed text-stone-600 font-medium">
-                        While the $4\%$ rule was modeled on US historical equity and bond returns, India experiences higher inflation rates. Many financial advisors in India suggest a slightly more conservative SWR of $3\%$ to $3.5\%$ or maintaining a portion of assets in equity mutual funds post-retirement to stay ahead of inflation.
+                        While the 4% rule was modeled on US historical equity and bond returns, India experiences higher inflation rates. Many financial advisors in India suggest a slightly more conservative SWR of 3% to 3.5% or maintaining a portion of assets in equity mutual funds post-retirement to stay ahead of inflation.
                     </p>
                 </div>
 
@@ -724,7 +759,7 @@
                         3. What is the impact of a high savings rate on early retirement?
                     </h3>
                     <p class="leading-relaxed text-stone-600 font-medium">
-                        Your savings rate is the single most powerful factor under your control. A savings rate of $10\%$ means you must work 9 years to fund 1 year of retirement. A savings rate of $50\%$ means every year you work funds a full year of retirement, accelerating your path to financial freedom.
+                        Your savings rate is the single most powerful factor under your control. A savings rate of 10% means you must work 9 years to fund 1 year of retirement. A savings rate of 50% means every year you work funds a full year of retirement, accelerating your path to financial freedom.
                     </p>
                 </div>
 
@@ -734,7 +769,7 @@
                         4. Can I customize pre-retirement and post-retirement yield expectations?
                     </h3>
                     <p class="leading-relaxed text-stone-600 font-medium">
-                        Yes. This calculator features independent inputs for both phases. During accumulation, you can model aggressive growth ($12\%$ to $15\%$ CAGR). During retirement, you can model a safer, yield-preservation allocation ($6\%$ to $8\%$) to better protect your nest egg.
+                        Yes. This calculator features independent inputs for both phases. During accumulation, you can model aggressive growth (12% to 15% CAGR). During retirement, you can model a safer, yield-preservation allocation (6% to 8%) to better protect your nest egg.
                     </p>
                 </div>
             </div>
@@ -854,6 +889,7 @@
             runSimulation();
         }
 
+        // --- Monthly Expense Adjustment Step ---
         function adjustExpense(step) {
             const input = document.getElementById('expenseInput');
             let val = (parseInt(input.value) || 0) + step;
@@ -870,6 +906,7 @@
             runSimulation();
         }
 
+        // --- Networth Input Support for 9 Crore ---
         function syncNetworthInput() {
             const slider = document.getElementById('networthSlider');
             const input = document.getElementById('networthInput');
@@ -1008,15 +1045,11 @@
             const fatFireTarget = targetCorpusFloor * 1.25;
 
             // Coast FIRE target today calculation
-            // Coast FIRE Target = Target Corpus / (1 + Pre-Retire Real Return)^YearsToRetire
-            // We model standard pre-retirement CAGR yield to prevent safe withdrawal double counts
-            const preRetireRealRate = (preRetireReturn - inflation) / 100;
             const coastFireTargetToday = targetCorpusFloor / Math.pow(1 + (preRetireReturn / 100), yearsToRetire);
 
             // Accumulation Phase Compounding Loop
             let runningPortfolio = startPortfolio;
             let currentMonthlySavings = startSavings;
-            let ageProgress = currentAge;
             let totalInvested = startPortfolio;
 
             yearlyTableData = [];
@@ -1109,7 +1142,7 @@
                 fireStatusEl.className = "text-xs sm:text-[13px] font-black text-emerald-800 mt-0.5";
             } else if (projectedCorpusValueAtRetire >= leanFireTarget) {
                 fireStatusEl.textContent = "🥪 Lean FIRE Ready";
-                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-amber-700 mt-0.5";
+                fireStatusEl.className = "text-xs sm:text-[11.5px] font-black text-amber-700 mt-0.5";
             } else {
                 const deficit = targetCorpusFloor - projectedCorpusValueAtRetire;
                 fireStatusEl.textContent = `₹${formatIndianShort(deficit)} Gap`;
