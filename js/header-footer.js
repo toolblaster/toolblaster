@@ -24,6 +24,7 @@ const TOOLBLASTER_APPS = [
         category: "Finance",
         icon: "fa-wallet",
         apps: [
+            { name: "Advanced MF Calc", url: "/finance/advanced-mutual-fund-calculator/", icon: "fa-chart-pie", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/advanced-mutual-fund-calculator/" },
             { name: "Investment Planner", url: "/finance/investment-planner/", icon: "fa-chart-line", classes: "bg-emerald-50 border-emerald-100 text-emerald-600 group-hover:text-emerald-600", matchPath: "/investment-planner/" },
             { name: "Compare Investment", url: "/finance/sip-vs-fd-vs-rd-calculator/", icon: "fa-chart-simple", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/sip-vs-fd-vs-rd-calculator/" },
             { name: "PPF Calculator", url: "/finance/ppf-calculator/", icon: "fa-piggy-bank", classes: "bg-blue-50 border-blue-100 text-blue-600 group-hover:text-blue-600", matchPath: "/ppf-calculator/" },
@@ -95,6 +96,7 @@ function injectHeader() {
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/productivity/habit-tracker')) centerTitle = "HABIT TRACKER";
+        else if (currentPath.includes('/finance/advanced-mutual-fund-calculator')) centerTitle = "ADVANCED MF CALC";
         else if (currentPath.includes('/finance/investment-planner')) centerTitle = "INVESTMENT PLANNER";
         else if (currentPath.includes('/finance/sip-vs-fd-vs-rd-calculator')) centerTitle = "COMPARE INVESTMENT";
         else if (currentPath.includes('/finance/ppf-calculator')) centerTitle = "PPF CALCULATOR";
@@ -117,7 +119,7 @@ function injectHeader() {
             
             titleParts.forEach(part => {
                 const cleanPart = part.trim();
-                if (cleanPart.toLowerCase() === 'toolblaster') return;
+                if (cleanPart.toLowerCase() === 'toolblaster' || cleanPart.toLowerCase() === 'advanced mutual fund calculator suite') return;
                 
                 // Temp clean contents to test real description value
                 let temp = cleanPart;
