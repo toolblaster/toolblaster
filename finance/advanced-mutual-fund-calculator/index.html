@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Advanced Mutual Fund Calculator Suite | Unified Wealth Planner</title>
+    <meta name="description" content="Calculate compound growth on Index, Large Cap, Mid Cap, Small Cap, Multi Cap, Flexi Cap, Hybrid & Debt funds with Expense Ratio drag and LTCG tax estimations.">
+    <meta name="keywords" content="mutual fund calculator, index fund calculator, small cap calculator, expense ratio calculator, sip planner, lumpsum compound, personal finance india">
+    <link rel="canonical" href="https://toolblaster.com/finance/advanced-mutual-fund-calculator/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph & Twitter Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Advanced Mutual Fund Calculator Suite | Wealth Planner">
+    <meta property="og:description" content="Simulate returns across 9 distinct mutual fund classes with drag effects of expense ratios and 12.5% Section 112A LTCG tax.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata -->
+    <meta name="application-name" content="Advanced Mutual Fund Calculator">
+    <meta name="apple-mobile-web-app-title" content="Mutual Fund Planner">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#webapp",
+          "name": "Advanced Mutual Fund Calculator Suite | Unified Wealth Planner",
+          "url": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/",
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#howto",
+          "name": "How to Calculate Mutual Fund Returns with Expense Ratio Drag & Taxes",
+          "description": "Step-by-step guide to calculating your mutual fund returns across Index, Small Cap, Mid Cap, Large Cap, and Debt funds.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Select Mutual Fund Category",
+              "text": "Choose from 9 distinct categories like Index, Large Cap, Mid Cap, Small Cap, Multi Cap, Flexi Cap, Balanced, Equity Basket, or Debt Fund. This automatically applies standard historical CAGR return and expense ratio presets.",
+              "url": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#step1"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Choose Investment Method",
+              "text": "Select between Systematic Investment Plan (SIP) or One-Time Lumpsum contribution.",
+              "url": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#step2"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Input Financial Amounts",
+              "text": "Set your Monthly SIP or Lumpsum contribution amount, expected annualized returns (CAGR), and holding period in years.",
+              "url": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#step3"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Adjust Advanced Parameters",
+              "text": "Model Expense Ratio friction, apply Annual Step-up percentages, toggle inflation rate adjustments, and estimate Indian LTCG tax rules (12.5% flat rate on gains above ₹1.25L).",
+              "url": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#step4"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://toolblaster.com/finance/advanced-mutual-fund-calculator/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the Expense Ratio in mutual funds and how does it affect returns?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Expense Ratio is the annual fee charged by mutual funds to cover management and administrative expenses. A higher expense ratio acts as a drag on compounding, significantly reducing your net wealth over a long-term horizon compared to low-cost passive index funds."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is LTCG tax on equity mutual funds calculated in India?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under Section 112A, Long-Term Capital Gains (LTCG) on equity mutual funds held for more than 12 months are exempt up to ₹1.25 Lakh per financial year. Gains exceeding this limit are taxed at a flat rate of 12.5%."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why should I adjust my mutual fund returns for inflation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Adjusting for inflation is crucial because price rises systematically erode purchasing power. A nominal target of ₹1 Crore today will buy significantly less in 15 or 20 years. Calculating inflation-adjusted returns helps you plan for actual purchasing power."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and Google Fonts -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { 
+            --bg-color: #f9fafb; 
+            --text-main: #111827; 
+            --accent-color: #dc2626;
+            --accent-color-dark: #b91c1c;
+        }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .hidden { display: none !important; }
+        
+        /* Custom desktop badge responsive control (Ensures visibility in preview panels) */
+        @media (max-width: 480px) {
+            .custom-desktop-badge { display: none !important; }
+        }
+
+        /* Disclaimer responsive display matching same 480px mobile breakpoint */
+        .mobile-disclaimer { display: block; }
+        .desktop-disclaimer { display: none; }
+        @media (min-width: 481px) {
+            .mobile-disclaimer { display: none !important; }
+            .desktop-disclaimer { display: block !important; }
+        }
+        
+        /* Premium custom toast notifications */
+        #notification-toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background-color: #111827; color: white; padding: 12px 24px;
+            border-radius: 12px; z-index: 1000; opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.15);
+            font-size: 0.75rem; font-weight: 600; text-align: center;
+        }
+        #notification-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, -5px); }
+
+        /* Custom Range Slider - Unified Red Accent Theme */
+        .range-slider {
+            -webkit-appearance: none; appearance: none; background: transparent;
+            cursor: pointer; height: 6px; flex-grow: 1;
+        }
+        .range-slider::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%)); 
+        }
+        .range-slider::-moz-range-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%));
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; margin-top: -4.5px;
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark); 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
+        }
+        .range-slider::-moz-range-thumb {
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark);
+            border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .range-slider:focus { outline: none; }
+
+        /* Unified Steppers */
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease;
+        }
+        .manual-input {
+            border: none; text-align: center; font-weight: 700; color: #111827;
+            background: transparent; height: 100%; outline: none; font-size: 0.75rem;
+            width: 82px; padding: 0 4px;
+        }
+        .manual-input::-webkit-outer-spin-button, .manual-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .input-stepper-group:focus-within {
+            border-color: var(--accent-color-dark) !important;
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2) !important;
+        }
+        .stepper-button {
+            background-color: #e5e7eb; color: #111827; border: none; width: 1.5rem;
+            height: 100%; cursor: pointer; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center; transition: all 0.1s;
+        }
+        .stepper-button:hover:not(:disabled) { background-color: #cbd5e1; } 
+        .stepper-button:disabled { opacity: 0.5; cursor: not-allowed; } 
+
+        /* Unified Category Switcher Tab design - Red Theme Matching EMI Tab buttons */
+        .loan-tab-btn {
+            color: #1f2937;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .loan-tab-btn.active {
+            background-color: var(--accent-color-dark);
+            color: #ffffff;
+            border-color: var(--accent-color-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        /* Tooltip styling - Reverted to High Contrast Dark Design */
+        .tooltip-icon { cursor: help; position: relative; display: inline-block; }
+        .tooltip-icon svg { width: 0.8rem; height: 0.8rem; color: currentColor; vertical-align: middle; }
+        .tooltip-text {
+            display: none; width: 220px; background-color: #111827; color: #ffffff;
+            text-align: left; border-radius: 8px; padding: 8px 12px; position: absolute;
+            z-index: 50; bottom: 125%; left: 50%; transform: translateX(-50%);
+            font-size: 0.65rem; font-weight: 500; line-height: 1.4;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15); pointer-events: none;
+            text-transform: none;
+        }
+        .tooltip-text::after {
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border-width: 5px; border-style: solid; border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text { display: block; }
+
+        /* Custom Scrollbars */
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f9fafb; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* General layout additions */
+        html body .text-xxs { font-size: 0.72rem; line-height: 1rem; }
+        .tab-mode-btn { transition: all 0.2s; border: 1px solid #cbd5e1; cursor: pointer; }
+        .tab-mode-btn.active {
+            background-color: var(--accent-color-dark);
+            color: white;
+            border-color: var(--accent-color-dark);
+        }
+
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            #app-header, #app-tool-nav, #app-footer, .print-hide, .range-slider, .stepper-button { display: none !important; }
+            .print-show { display: block !important; }
+            .calculator-container { border: none !important; box-shadow: none !important; }
+            #growthTableContainer { max-height: none; overflow: visible; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Glow Background -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-50/20 blur-[130px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[40vw] rounded-full bg-stone-100/30 blur-[110px]"></div>
+    </div>
+
+    <!-- Layout Navigation placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-4 pb-6">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-700 transition-colors inline-flex items-center gap-1.5" title="Navigate home">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="/finance" class="hover:text-red-700 transition-colors" title="View other financial planning resources">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">Mutual Fund Calculators</span>
+            </div>
+            <!-- Visible on Desktop preview container (>480px), strictly hidden on mobile (<480px) -->
+            <div class="custom-desktop-badge flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider">
+                <i class="fa-solid fa-chart-line text-[10px]"></i> Portfolio Simulator
+            </div>
+        </nav>
+
+        <!-- Main Card (Concentric ring elements and double shadows fully eliminated) -->
+        <div id="calculator" class="w-full text-left mt-1">
+            <div class="bg-white/95 backdrop-blur-xl shadow-xl rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 mx-auto my-0 calculator-container relative">
+
+                <!-- Title Header -->
+                <div class="text-center mb-5">
+                    <h1 id="calculatorTitle" class="text-base sm:text-[18px] font-extrabold text-stone-900 leading-tight">Advanced Mutual Fund Calculator</h1>
+                    <p id="calculatorDescription" class="text-stone-600 text-xxs font-medium mt-1">Compare 9 distinct asset classes with real-time expense ratios, tax parameters, and inflation drag.</p>
+                </div>
+
+                <!-- Unified Horizontal Tabs Switcher for Mutual Funds -->
+                <div class="mb-5 print-hide">
+                    <label class="block text-[10px] font-black text-stone-700 uppercase tracking-wider mb-2.5 text-center">Select Asset Class / Fund Category</label>
+                    <div class="grid grid-cols-3 sm:grid-cols-9 gap-1.5 p-1 bg-gray-100 rounded-xl" role="tablist">
+                        <button type="button" role="tab" aria-selected="true" class="loan-tab-btn active text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-index" onclick="setAssetClass('index')" title="Switch to Index Fund: Passive schemes tracking major market indices like Nifty 50 with ultra-low costs">Index</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-large" onclick="setAssetClass('large')" title="Switch to Large Cap Fund: Invests in India's top 100 stable bluechip companies for steady active growth">Large Cap</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-mid" onclick="setAssetClass('mid')" title="Switch to Mid Cap Fund: Targets medium-sized active business enterprises with moderate-to-high growth potential">Mid Cap</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-small" onclick="setAssetClass('small')" title="Switch to Small Cap Fund: Volatile, high-growth schemes targeting emerging micro-cap enterprises">Small Cap</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-multi" onclick="setAssetClass('multi')" title="Switch to Multi Cap Fund: Maintains diversified allocation across Large, Mid, and Small Cap stocks">Multi Cap</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-flexi" onclick="setAssetClass('flexi')" title="Switch to Flexi Cap Fund: Dynamic active schemes allowing capital to shift freely across sizes based on market cycles">Flexi Cap</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-hybrid" onclick="setAssetClass('hybrid')" title="Switch to Balanced Fund: Dynamic hybrid allocations combining equity growth with debt preservation stability">Balanced</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-equity" onclick="setAssetClass('equity')" title="Switch to General Equity: General diversified equity investments tracking across various commercial sectors">Equity</button>
+                        <button type="button" role="tab" aria-selected="false" class="loan-tab-btn text-center py-1.5 text-[10px] font-bold rounded-lg transition-all" id="btn-debt" onclick="setAssetClass('debt')" title="Switch to Debt Fund: Safer income-yielding options tracking government bonds and high-rated corporate papers">Debt Fund</button>
+                    </div>
+                </div>
+
+                <!-- SIP vs Lumpsum Switcher Tab -->
+                <div class="flex justify-center mb-5 print-hide">
+                    <div class="flex p-1 bg-gray-100 rounded-xl w-full max-w-sm" role="tablist">
+                        <button type="button" role="tab" aria-selected="true" id="sipModeBtn" class="tab-mode-btn active flex-1 text-center py-1.5 text-xxs font-bold rounded-lg transition-all" onclick="setInvestType('sip')" title="Switch to Systematic Investment Plan (SIP) mode for periodic monthly compounding">Systematic Plan (SIP)</button>
+                        <button type="button" role="tab" aria-selected="false" id="lumpsumModeBtn" class="tab-mode-btn flex-1 text-center py-1.5 text-xxs font-bold rounded-lg transition-all" onclick="setInvestType('lumpsum')" title="Switch to One-Time Lumpsum investment mode for compounding a single up-front bulk principal">One-Time Lumpsum</button>
+                    </div>
+                </div>
+
+                <!-- MAIN WORKSPACE GRID -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 items-start">
+                    
+                    <!-- Left Settings Panel -->
+                    <div class="space-y-3.5 print-hide">
+                        <!-- Standard vs Goal Seek Switcher -->
+                        <div class="flex p-0.5 bg-slate-100 rounded-xl mb-3 border border-slate-200 max-w-[320px] mx-auto w-full" role="tablist">
+                            <button type="button" role="tab" aria-selected="true" id="methodStandardBtn" class="flex-1 text-center py-1 text-xxs font-bold rounded-lg transition-all bg-red-700 text-white shadow-sm font-semibold flex items-center justify-center gap-1" onclick="setCalcMethod('standard')" title="Standard Calculator: Determine future growth value based on selected inputs">
+                                <span>Standard Calculator</span>
+                                <span class="tooltip-icon relative inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                    <span class="tooltip-text">Calculate future returns based on fixed monthly or lumpsum investments.</span>
+                                </span>
+                            </button>
+                            <button type="button" role="tab" aria-selected="false" id="methodGoalSeekBtn" class="flex-1 text-center py-1 text-xxs font-bold rounded-lg transition-all text-stone-600 hover:text-stone-850 font-semibold flex items-center justify-center gap-1" onclick="setCalcMethod('goal_seek')" title="Reverse Goal Seek Calculator: Solve the exact contributions required to achieve your target milestone">
+                                <span>Reverse Goal Seek 🎯</span>
+                                <span class="tooltip-icon relative inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                    <span class="tooltip-text">Find out exactly how much you need to invest to reach your target wealth goal.</span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div class="bg-stone-50 border border-stone-200 p-4 rounded-2xl space-y-4">
+                            
+                            <!-- Primary Investment Amount Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="amountLabelText" for="amountInput" class="block text-xxs font-bold text-stone-800">Monthly SIP Contribution (₹)</label>
+                                    <span id="amountInWords" class="text-[10px] text-red-800 font-bold"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="amountSlider" min="500" max="100000" value="10000" step="500" class="w-full range-slider flex-grow" oninput="syncAmountSlider()" aria-labelledby="amountLabelText" title="Drag to adjust primary investment capital or target goal budget">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustAmount(-500)" title="Decrease contribution amount by ₹500" aria-label="Decrease contribution amount">-</button>
+                                        <input type="number" id="amountInput" class="manual-input" value="10000" min="500" max="100000" step="500" onchange="syncAmountInput()" aria-labelledby="amountLabelText" title="Type your exact primary investment amount">
+                                        <button type="button" class="stepper-button" onclick="adjustAmount(500)" title="Increase contribution amount by ₹500" aria-label="Increase contribution amount">+</button>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-1.5 mt-2" id="amountPresetRow">
+                                    <button type="button" class="px-2.5 py-0.5 bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 rounded text-[10px] font-bold" onclick="setAmountPreset(2000)" title="Set amount instantly to ₹2,000">+ ₹2K</button>
+                                    <button type="button" class="px-2.5 py-0.5 bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 rounded text-[10px] font-bold" onclick="setAmountPreset(5000)" title="Set amount instantly to ₹5,000">+ ₹5K</button>
+                                    <button type="button" class="px-2.5 py-0.5 bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 rounded text-[10px] font-bold" onclick="setAmountPreset(10000)" title="Set amount instantly to ₹10,000">+ ₹10K</button>
+                                    <button type="button" class="px-2.5 py-0.5 bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 rounded text-[10px] font-bold" onclick="setAmountPreset(25000)" title="Set amount instantly to ₹25,000">+ ₹25K</button>
+                                </div>
+                            </div>
+
+                            <!-- Risk Profile Presets Selector -->
+                            <div>
+                                <label class="block text-xxs font-bold text-stone-800 mb-1.5 flex items-center">
+                                    <span>Portfolio Risk Profile</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Quickly align compounding rates with standard risk tolerances: Conservative (10%), Moderate (12%), Aggressive (15%), or edit manually below.</span>
+                                    </span>
+                                </label>
+                                <div class="grid grid-cols-4 gap-1 p-0.5 bg-slate-100 rounded-xl border border-slate-200" role="group" aria-label="Risk profile return presets">
+                                    <button type="button" id="riskProfileCons" class="py-1 text-[9px] sm:text-[10px] font-bold rounded-lg transition-all text-center" onclick="setRiskProfile('conservative')" title="Conservative Profile: Stable growth targeting 10% expected CAGR yield">Conservative</button>
+                                    <button type="button" id="riskProfileMod" class="py-1 text-[9px] sm:text-[10px] font-bold rounded-lg transition-all text-center" onclick="setRiskProfile('moderate')" title="Moderate Profile: Balanced growth targeting 12% expected CAGR yield">Moderate</button>
+                                    <button type="button" id="riskProfileAggr" class="py-1 text-[9px] sm:text-[10px] font-bold rounded-lg transition-all text-center" onclick="setRiskProfile('aggressive')" title="Aggressive Profile: Maximum active compounding targeting 15% CAGR yield">Aggressive</button>
+                                    <button type="button" id="riskProfileCustom" class="py-1 text-[9px] sm:text-[10px] font-bold rounded-lg transition-all text-center bg-transparent text-stone-400 cursor-default" disabled title="Custom manual adjustments override">Custom</button>
+                                </div>
+                            </div>
+
+                            <!-- Expected Compound Return Rate Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="returnLabelText" for="returnInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        Expected CAGR Yield (% p.a.)
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Annualized compounding growth assumption. Defaults optimized per asset class.</span>
+                                        </span>
+                                    </label>
+                                    <span id="historicalCapNotice" class="text-[9px] font-bold text-stone-700"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="returnSlider" min="2" max="30" value="12" step="0.1" class="w-full range-slider flex-grow" oninput="syncReturnSlider()" aria-labelledby="returnLabelText" title="Drag to adjust anticipated annualized yield percentage">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustReturn(-0.1)" title="Decrease return rate by 0.1%" aria-label="Decrease return rate">-</button>
+                                        <input type="number" id="returnInput" class="manual-input" value="12" min="2" max="30" step="0.1" onchange="syncReturnInput()" aria-labelledby="returnLabelText" title="Type your exact anticipated annualized CAGR value">
+                                        <button type="button" class="stepper-button" onclick="adjustReturn(0.1)" title="Increase return rate by 0.1%" aria-label="Increase return rate">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mutual Fund Expense Ratio Slider & Direct vs Regular Switcher -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        Fund Expense Ratio (% p.a.)
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Annual charge deducted by the fund house to manage investments. Passive Index funds are cheaper (~0.2%) than active ones (~1.5%).</span>
+                                        </span>
+                                    </label>
+                                    <span class="text-[9px] font-bold text-red-800 uppercase tracking-wider" id="expenseClassText">Standard Active</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="expenseSlider" min="0.05" max="3.0" value="1.2" step="0.05" class="w-full range-slider flex-grow" aria-labelledby="expenseLabelText" title="Drag to adjust annual mutual fund expense ratio friction fees">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="expenseDecrement" class="stepper-button" aria-label="Decrease Expense" title="Decrease expense ratio by 0.05%">-</button>
+                                        <input type="number" id="expenseInput" class="manual-input" value="1.2" min="0.05" max="3.0" step="0.05" aria-labelledby="expenseLabelText" title="Type your exact mutual fund expense ratio percentage">
+                                        <button type="button" id="expenseIncrement" class="stepper-button" aria-label="Increase Expense" title="Increase expense ratio by 0.05%">+</button>
+                                    </div>
+                                </div>
+
+                                <!-- Direct vs Regular Plan Switcher -->
+                                <div class="mt-2.5 flex items-center justify-between bg-white px-2.5 py-1.5 rounded-xl border border-stone-200">
+                                    <span class="text-[10px] font-bold text-stone-800 flex items-center gap-1">
+                                        ⚡ Plan Option (Fees Drag)
+                                        <span class="tooltip-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Direct plans bypass agents, while Regular plans include a broker trailing commission (~1.0% p.a. added drag), severely leaking your wealth compounding potential.</span>
+                                        </span>
+                                    </span>
+                                    <div class="flex bg-slate-100 p-0.5 rounded-lg text-[9px] font-bold border border-slate-200" role="group">
+                                        <button type="button" id="planTypeDirect" class="px-2 py-0.5 rounded-md bg-red-700 text-white shadow-sm transition-all" onclick="setPlanType('direct')" title="Choose Direct Plan: lowest fee structure, zero agent commission overheads">Direct Plan</button>
+                                        <button type="button" id="planTypeRegular" class="px-2 py-0.5 rounded-md text-stone-600 hover:text-stone-850 ml-0.5 transition-all" onclick="setPlanType('regular')" title="Choose Regular Plan: standard brokered schemes carrying broker trailing fees (~1% p.a. drag)">Regular Plan</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Investment Period -->
+                            <div>
+                                <label id="periodLabelText" for="periodInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1">
+                                    <span>Investment Period (Years)</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                        </svg>
+                                        <span class="tooltip-text">Years of investment accumulation.</span>
+                                    </span>
+                                </label>
+                                <div class="input-group flex items-center space-x-2">
+                                    <input type="range" id="periodSlider" min="1" max="40" value="15" step="1" class="w-full range-slider flex-grow" aria-labelledby="periodLabelText" title="Drag to adjust cumulative investment tenure in years">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="periodDecrement" class="stepper-button" title="Decrease investment tenure by 1 year">-</button>
+                                        <input type="number" id="periodInput" class="manual-input" value="15" min="1" max="40" step="1" aria-labelledby="periodLabelText" title="Type your exact targeted portfolio tenure">
+                                        <button type="button" id="periodIncrement" class="stepper-button" title="Increase investment tenure by 1 year">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SIP Step Up Container with explicit disabled / greyed-out visual explanations -->
+                        <div id="sipStepUpContainer" class="space-y-2 bg-stone-50 border border-stone-200 p-3 rounded-2xl transition-all duration-200">
+                            <!-- Standard SIP Step up parameters -->
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xxs font-bold text-stone-855 flex items-center">
+                                        Apply Annual Step-Up
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                                            </svg>
+                                            <span class="tooltip-text">Increase your monthly contributions as your income rises to compound wealth faster.</span>
+                                        </span>
+                                    </span>
+                                    <label class="relative inline-flex items-center cursor-pointer" for="stepUpToggle" title="Toggle systematic annual contribution scaling">
+                                        <input type="checkbox" id="stepUpToggle" class="sr-only peer" role="switch" aria-label="Toggle Annual Step-Up">
+                                        <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-700"></div>
+                                    </label>
+                                </div>
+                                
+                                <!-- Tooltip advisory showing when inactive -->
+                                <p id="stepUpDisabledMessage" class="hidden text-[9px] text-stone-500 font-medium mt-1 italic">
+                                    * Step-Up is only applicable for Systematic Investment Plans (SIP).
+                                </p>
+
+                                <div id="stepUpInputGroup" class="mt-3 hidden">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label id="stepUpLabelText" for="stepUpInput" class="text-xxs font-bold text-stone-700">Annual Increase (%)</label>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="stepUpSlider" min="1" max="25" value="10" step="1" class="w-full range-slider flex-grow" aria-labelledby="stepUpLabelText" title="Drag to adjust annual systematic increase proportion">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" id="stepUpDecrement" class="stepper-button" title="Decrease step-up percentage by 1%">-</button>
+                                            <input type="number" id="stepUpInput" class="manual-input" value="10" min="1" max="25" step="1" aria-labelledby="stepUpLabelText" title="Type your exact annual scaling percentage">
+                                            <button type="button" id="stepUpIncrement" class="stepper-button" title="Increase step-up percentage by 1%">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Inflation & Taxation Options -->
+                        <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
+                            <!-- Inflation Toggle -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-xxs font-bold text-stone-855 flex items-center">
+                                    Adjust Return for Inflation
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Slashes the final output by average price inflation to show current equivalent buying power.</span>
+                                    </span>
+                                </span>
+                                <label class="relative inline-flex items-center cursor-pointer" for="inflationToggle" title="Toggle inflation discounting factor">
+                                    <input type="checkbox" id="inflationToggle" class="sr-only peer" role="switch" aria-label="Toggle Inflation Adjustment">
+                                    <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-700"></div>
+                                </label>
+                            </div>
+                            <div id="inflationInputGroup" class="hidden">
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="inflationSlider" min="2" max="15" value="6" step="0.1" class="w-full range-slider flex-grow" aria-label="Inflation Rate (%)" title="Drag to adjust core inflation discount rate">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" id="inflationDecrement" class="stepper-button" title="Decrease inflation rate by 0.1%">-</button>
+                                        <input type="number" id="inflationInput" class="manual-input" value="6" min="2" max="15" step="0.1" aria-label="Inflation Rate (%)" title="Type your exact anticipated annual inflation percentage">
+                                        <button type="button" id="inflationIncrement" class="stepper-button" title="Increase inflation rate by 0.1%">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-stone-200/50 my-1"></div>
+
+                            <!-- Taxation Toggle -->
+                            <div class="flex items-center justify-between">
+                                <span class="text-xxs font-bold text-stone-855 flex items-center">
+                                    Estimate Post-Tax Yield (Capital Gains)
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Calculates Indian LTCG Tax (Sec 112A) at 12.5% on gains over ₹1.25 Lakh per FY for equity, or individual slab-rate for debt.</span>
+                                    </span>
+                                </span>
+                                <label class="relative inline-flex items-center cursor-pointer" for="taxToggle" title="Toggle systematic capital gains tax calculations">
+                                    <input type="checkbox" id="taxToggle" class="sr-only peer" role="switch" aria-label="Toggle Capital Gains Tax Estimation">
+                                    <div class="w-9 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-700"></div>
+                                </label>
+                            </div>
+                            <!-- Debt slab tax configuration if Debt is selected -->
+                            <div id="debtTaxGroup" class="hidden space-y-2 mt-2">
+                                <label for="taxSlab" class="block text-[10px] font-bold text-stone-500">Tax Slab (For Debt / Interest income)</label>
+                                <select id="taxSlab" class="w-full h-8 px-2 border border-stone-300 rounded-xl text-xxs font-semibold text-slate-700 focus:ring-red-500 focus:border-red-500 bg-white" onchange="runSimulation()" title="Select your active income tax slab bracket">
+                                    <option value="0.05">5% Tax Bracket</option>
+                                    <option value="0.10">10% Tax Bracket</option>
+                                    <option value="0.15">15% Tax Bracket</option>
+                                    <option value="0.20">20% Tax Bracket</option>
+                                    <option value="0.30" selected>30% Tax Bracket</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Warnings & Validation Flags -->
+                        <div id="smartFinancialValidation" class="space-y-1.5 hidden print-hide"></div>
+                    </div>
+
+                    <!-- Right Column: Interactive Results, Real-Time Chart & Insights -->
+                    <div class="flex flex-col relative print:w-full space-y-4">
+                        
+                        <!-- Main Metric Result Blocks - Optimized for Mobile wrapping (2 Columns first, 1 spanned below) -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center">
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Invested Principal</span>
+                                <span id="investedAmount" class="text-sm sm:text-base font-black text-stone-800">₹0</span>
+                            </div>
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Est. Gains</span>
+                                <span id="gainsAmount" class="text-sm sm:text-base font-black text-emerald-800">₹0</span>
+                            </div>
+                            <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1">
+                                <span id="mainMetricCardTitle" class="block text-[8.5px] sm:text-[10px] font-black text-red-900 uppercase tracking-wider">Total Value</span>
+                                <span id="totalValue" class="text-sm sm:text-base font-black text-red-900">₹0</span>
+                            </div>
+                        </div>
+
+                        <!-- Highly Precise Portfolio Return Rates Summary Box (Personal XIRR & Absolute metrics) -->
+                        <div id="sipRatesRow" class="grid grid-cols-2 gap-2 text-center transition-all duration-200">
+                            <div class="p-2.5 bg-slate-55 border border-slate-200 rounded-2xl flex flex-col justify-center items-center shadow-xs">
+                                <span class="text-[9px] font-black text-slate-600 uppercase tracking-wider flex items-center gap-1">
+                                    Personal XIRR (IRR)
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Extended Internal Rate of Return. For staggered periodic investments like SIP, XIRR represents your true annualized rate of return on your actual invested cash flows, accounting for time-staggering.</span>
+                                    </span>
+                                </span>
+                                <span id="personalXirrVal" class="text-xs sm:text-sm font-black text-stone-900">0%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-55 border border-slate-200 rounded-2xl flex flex-col justify-center items-center shadow-xs">
+                                <span class="text-[9px] font-black text-slate-600 uppercase tracking-wider flex items-center gap-1">
+                                    Absolute Return
+                                    <span class="tooltip-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Simple absolute growth percentage of your total accumulated returns over the entire holding period, computed as (Total Gains / Invested Principal) * 100. Does not account for time.</span>
+                                    </span>
+                                </span>
+                                <span id="absoluteReturnVal" class="text-xs sm:text-sm font-black text-stone-900">0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Highly Visible Regulatory Compliance warning box positioned prominently under results -->
+                        <div class="p-3 bg-amber-50/50 border border-amber-150 rounded-2xl text-stone-750 font-medium leading-relaxed text-xxs flex items-start gap-2 select-none shadow-sm">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-700 text-xs mt-0.5 flex-shrink-0"></i>
+                            <div class="space-y-0.5">
+                                <p class="font-extrabold text-stone-900 text-[10px] uppercase tracking-wide">Regulatory Advisory Notice</p>
+                                <p class="text-[9.5px] leading-normal">Returns shown are strictly <strong class="text-stone-955">illustrative estimates</strong> and do not represent guaranteed future yield assurances or direct investment planning advice. <strong class="text-amber-900 font-extrabold">Past performance is not indicative of future returns.</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Smart Actionable Advisors -->
+                        <div id="smartInsight" class="p-3 bg-red-50 border border-red-200 rounded-xl text-xxs font-semibold text-red-955 flex items-start gap-2 hidden print-hide">
+                            <span id="smartInsightText" class="flex-grow leading-relaxed"></span>
+                        </div>
+
+                        <!-- Dynamic Comparison: Loss to Expense Ratio -->
+                        <div class="p-3 bg-rose-50/60 border border-rose-100 rounded-2xl flex flex-col gap-1.5 relative overflow-hidden" id="lossSimulatorCard">
+                            <div class="flex items-center gap-1.5 text-xs text-rose-955 font-black border-b border-rose-200/50 pb-1.5">
+                                <span>⚠️ Expense Ratio Drags Alert</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xxs">
+                                <span class="text-stone-800 font-medium" id="grossWealthLabel">Wealth generated without Fees:</span>
+                                <span id="grossWealthVal" class="font-extrabold text-stone-800">₹0</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xxs">
+                                <span class="text-stone-800 font-medium" id="leakageLabel">Lost to Expense Ratio:</span>
+                                <span id="expenseLossVal" class="font-black text-rose-700">₹0</span>
+                            </div>
+                            <p id="leakageAlertDescription" class="text-[9px] text-rose-800 font-medium leading-relaxed italic border-t border-rose-200/40 pt-1.5 mt-0.5">
+                                Even small decimal changes in Expense Ratios lock away massive compounded chunks of wealth. Opting for Direct Plan Equity Mutual Funds can save lakhs.
+                            </p>
+                        </div>
+
+                        <!-- Dynamic Post-Tax/Inflation Extras Card -->
+                        <div id="taxInflationBreakdownCard" class="p-3 bg-red-50/50 border border-red-100 rounded-2xl flex flex-col gap-1.5 hidden">
+                            <div class="flex items-center gap-1.5 text-xs text-red-955 font-black border-b border-red-200/50 pb-1.5">
+                                <span>📊 Tax & Inflation Deductions</span>
+                            </div>
+                            <div id="taxRow" class="flex justify-between items-center text-xxs hidden">
+                                <span class="text-stone-850 font-semibold" id="taxLabel">Estimated Capital Gains Tax:</span>
+                                <span id="taxDeductionVal" class="font-black text-red-700">₹0</span>
+                            </div>
+                            <div id="inflationRow" class="flex justify-between items-center text-xxs hidden">
+                                <span class="text-stone-855 font-semibold">Inflation Impact (Purchasing Power):</span>
+                                <span id="inflationDeductionVal" class="font-black text-amber-700">₹0</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xxs font-extrabold border-t border-red-200/40 pt-1.5 mt-0.5">
+                                <span class="text-stone-850">Actual Equivalent Post-Expenses/Taxes:</span>
+                                <span id="postTaxInflationVal" class="font-black text-emerald-800 text-xs">₹0</span>
+                            </div>
+                        </div>
+
+                        <!-- Cost of Delay (Procrastination) Simulator -->
+                        <div id="delaySimulatorCard" class="p-3 bg-amber-50/70 border border-amber-200 rounded-2xl flex flex-col gap-1.5 relative overflow-hidden">
+                            <div class="flex items-center gap-1.5 text-xs text-amber-955 font-black border-b border-amber-200 pb-1.5">
+                                <span>⏱️ The Cost of Delay (Procrastination)</span>
+                            </div>
+                            <p class="text-[9px] text-stone-800 font-semibold leading-relaxed">
+                                Starting later severely reduces compounding time. Here is the cost of delaying your investment start:
+                            </p>
+                            <div class="grid grid-cols-3 gap-2 mt-1">
+                                <div class="p-1.5 bg-white border border-amber-200 rounded-xl text-center" title="Compounding leakage values if your planned portfolio start is delayed by 1 year">
+                                    <span class="block text-[8px] font-black text-amber-955 uppercase">1-Yr Delay</span>
+                                    <span id="delay1Loss" class="text-[10px] font-extrabold text-red-700">₹0</span>
+                                </div>
+                                <div class="p-1.5 bg-white border border-amber-200 rounded-xl text-center" title="Compounding leakage values if your planned portfolio start is delayed by 3 years">
+                                    <span class="block text-[8px] font-black text-amber-955 uppercase">3-Yr Delay</span>
+                                    <span id="delay3Loss" class="text-[10px] font-extrabold text-red-700">₹0</span>
+                                </div>
+                                <div class="p-1.5 bg-white border border-amber-200 rounded-xl text-center" title="Compounding leakage values if your planned portfolio start is delayed by 5 years">
+                                    <span class="block text-[8px] font-black text-amber-955 uppercase">5-Yr Delay</span>
+                                    <span id="delay5Loss" class="text-[10px] font-extrabold text-red-700">₹0</span>
+                                </div>
+                            </div>
+                            <p id="delayExplanation" class="text-[8.5px] text-amber-900 font-semibold leading-relaxed italic border-t border-amber-200/50 pt-1 mt-0.5"></p>
+                        </div>
+
+                        <!-- Graphical Representation Canvas - Shrunk height for better workspace visibility -->
+                        <div class="flex justify-center items-center h-24 sm:h-28 w-full relative print-hide">
+                            <canvas id="compoundingDoughnutChart" aria-label="Compounded Growth Representation"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button Control Toolbar -->
+                <div class="flex flex-wrap justify-center gap-2 mt-5 mb-2 print-hide border-t border-stone-100 pt-5">
+                    <button id="toggleGrowthTableBtn" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-slate-800 active:scale-[0.97]" onclick="toggleGrowthTable()" title="Toggle full tabular progression breakdown list below">Show Yearly Growth</button>
+                    <button id="printReportBtn" class="px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-xl text-xxs font-bold transition-all duration-200 active:scale-[0.97] flex items-center gap-1" onclick="window.print()" title="Print full calculation sheet directly to PDF printer files">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Print/PDF Report
+                    </button>
+                    <button id="exportCsvBtn" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-emerald-800 active:scale-[0.97] flex items-center gap-1" onclick="exportSimulationToCSV()" title="Export dynamic ledger schedules as structured spreadsheet CSV spreadsheet documents">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17h18a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Export CSV
+                    </button>
+                </div>
+
+                <!-- Structured Growth Schedule Panel -->
+                <div id="growthTableContainer" class="hidden bg-white rounded-2xl shadow-sm mt-4 border border-stone-200 overflow-hidden">
+                    <div class="p-3 border-b border-stone-200 bg-stone-50 flex items-center justify-between">
+                         <h2 class="text-xs font-bold text-stone-855 m-0 uppercase tracking-wider">Year-by-Year Wealth Progression Ledger</h2>
+                         <span class="text-[10px] text-stone-600 italic font-semibold">Net rate calculated after deducting annual expense ratio</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-[300px] custom-scrollbar">
+                        <table class="min-w-full text-left">
+                            <thead class="bg-stone-100 border-b border-slate-200 sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[10%]">Year</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Invested Principal</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Gains Generated</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[20%]">Friction Loss (Exp.)</th>
+                                    <th class="p-3 text-center text-[10px] font-black text-slate-800 uppercase tracking-wider w-[20%]">Net Wealth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="growthTableBody" class="bg-white text-xs divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SEBI Benchmark Index Grid -->
+                <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-[10px] leading-relaxed text-stone-700 font-semibold mt-4 space-y-3">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                        <div><strong class="text-stone-855 block">Nifty 50 Index:</strong> <span class="text-red-900 font-bold">12% - 14% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Midcap 150 Index:</strong> <span class="text-red-900 font-bold">14% - 16% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Smallcap 250 Index:</strong> <span class="text-red-900 font-bold">16% - 19% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Conservative Debt:</strong> <span class="text-blue-900 font-bold">6% - 7.5% p.a.</span></div>
+                    </div>
+                    
+                    <!-- 5paisa Affiliate Sponsor Link (To-the-point, mobile-optimized, single-line) -->
+                    <div class="text-center print-hide border-t border-stone-200/50 pt-2.5">
+                        <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-[9px] font-black text-red-800 hover:text-red-950 transition-colors uppercase tracking-widest gap-1" title="Open a Free Demat Account with 5paisa to start investing and creating long-term wealth portfolios">
+                            <i class="fa-solid fa-arrow-trend-up text-[9px]"></i> Open Free Demat Account on 5paisa <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Responsive Legal Disclaimer Footnotes -->
+                    <div class="border-t border-stone-200/50 pt-3 text-center space-y-1 bg-white p-2 rounded-xl border">
+                        <p class="font-extrabold text-stone-800 uppercase tracking-wider text-[9px]">SEBI Advisory & Legal Compliance Disclaimer</p>
+                        <p class="text-stone-600 text-[9px] leading-normal font-medium">
+                            <span class="mobile-disclaimer">
+                                Mutual Fund investments are subject to market risks; read all scheme related documents carefully before investing. This platform provides illustrative calculations only and does not offer SEBI-registered financial, investment, tax, or legal advisory.
+                            </span>
+                            <span class="desktop-disclaimer">
+                                Educational compounding illustration models are calculated according to general industry calculators and AMFI guidance. All mutual fund asset class historical CAGR rate assumptions and fee projections are strictly illustrative and do not represent guaranteed future returns or yield assurances. Direct capital investments in securities and mutual funds are subject to high market volatilities; please read all scheme-related documents carefully before investing. This platform does not provide direct financial, investment, legal, tax, or investment planning advisory services. Users are strongly advised to consult certified financial planners or registered SEBI advisors to align investments with their individual risk profiles and financial goals.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sleek Ecosystem Internal Link Panels (Aligned perfectly to 768px width) -->
+        <div class="max-w-[768px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1: SIP vs FD vs RD -->
+                <a href="../sip-vs-fd-vs-rd-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to standard periodic comparison options between Fixed deposits, systematic plans, and recurring deposits">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-chart-simple text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Asset Comparison</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">SIP vs FD vs RD</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 2: PPF Calculator -->
+                <a href="../ppf-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our secure Public Provident Fund tax deduction calculator tool">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Tax Haven</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">PPF Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="../emi-calculator/" class="flex items-center justify-between bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our advanced multi-loan reducing balance EMI calculator platform">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Debt servicing</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">EMI Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Premium SEO Educational Guide Section (Max width set to 768px for balanced editorial focus) -->
+        <article id="seo-education-guide" class="max-w-[768px] mx-auto bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm mt-6 print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-4 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-red-700"></i> Mutual Fund Investment Guide
+            </h2>
+            
+            <div class="space-y-6 text-stone-750 text-xxs sm:text-xs leading-relaxed font-semibold">
+                
+                <!-- Section 1 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">1. What is a Mutual Fund?</h3>
+                    <p class="font-medium text-stone-600">
+                        A Mutual Fund is a professionally managed collective financial investment vehicle that pools capital from thousands of retail investors to buy diversified baskets of equities, corporate debt bonds, government papers, or other liquid securities. 
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-850">Diversification Benefit:</strong> Instantly spreads your single capital contribution across up to 100 stocks to curb individual security crash hazards.</li>
+                        <li><strong class="text-stone-850">Professional Administration:</strong> Managed by certified fund managers monitoring macroeconomic factors to deploy equity weightings systematically.</li>
+                        <li><strong class="text-stone-855">Liquidity:</strong> Open-ended structures allow investors to redeem partial or entire holdings at daily closing Net Asset Values (NAV).</li>
+                    </ul>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">2. How Expense Ratios Affect Returns</h3>
+                    <p class="font-medium text-stone-600">
+                        The Expense Ratio is the annualized trailing percentage fee charged directly by the Asset Management Company (AMC) to recover operational costs, sales marketing, and administrative manager salaries. It is calculated daily and deducted silently from the scheme's absolute NAV asset pool.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">The Compounding Leakage:</strong> Even a tiny 1% decimal variation in fees eats away massive amounts of terminal wealth. Over 20 or 30 years, a high expense ratio can consume 15% to 25% of your total potential portfolio value.</li>
+                        <li><strong class="text-stone-855">Passive vs Active Fee structures:</strong> Passive Index mutual funds track broad benchmarks with ultra-low costs (usually 0.10% to 0.30% p.a.), whereas active funds carry higher overhead costs (1.0% to 2.25% p.a.) attempting to beat benchmarks.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">3. Direct vs Regular Plans</h3>
+                    <p class="font-medium text-stone-600">
+                        When purchasing mutual funds, you can buy identical underlying portfolios through two standard routes:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Direct Plans (High NAV):</strong> You buy directly from the AMC. Zero agent commission charges are deducted, leading to lower expense ratios and significantly faster long-term compounding.</li>
+                        <li><strong class="text-stone-855">Regular Plans (Lower NAV):</strong> Purchased through a broker, distributor, or bank advisor. AMC pays them an ongoing agent fee (~0.75% to 1.25% trailing fee) out of your capital. Over time, this trailing fee results in thousands of rupees in lost returns.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">4. SIP vs Lumpsum</h3>
+                    <p class="font-medium text-stone-600">
+                        Both methods are mathematically sound, but they cater to entirely different market cycles and personal cash flows:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Systematic Investment Plan (SIP):</strong> Automates monthly fixed deposits. It utilizes Rupee Cost Averaging—purchasing more mutual fund units when prices are down and fewer when markets are up. It is ideal for disciplined budgeting out of salary cycles.</li>
+                        <li><strong class="text-stone-855">One-Time Lumpsum:</strong> Deploys a single bulk sum instantly. It works best when markets are undervalued or correcting. This method maximizes terminal value by compounding the entire capital base over the absolute full holding period.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 5 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">5. Taxation of Mutual Funds in India</h3>
+                    <p class="font-medium text-stone-600">
+                        Mutual fund returns are taxed based on the scheme's asset allocation (Equity vs. Debt) and your specific holding period:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Equity Oriented Funds (&gt;65% Equity):</strong> 
+                            <ul class="list-circle pl-5 mt-1 space-y-1">
+                                <li><strong class="text-stone-800">Short-Term Capital Gains (STCG):</strong> Held under 12 months, taxed at a flat rate of <strong class="text-stone-855">20%</strong>.</li>
+                                <li><strong class="text-stone-800">Long-Term Capital Gains (LTCG):</strong> Held above 12 months, gains are exempt up to <strong class="text-stone-855">₹1.25 Lakh</strong> per financial year. Excess gains are taxed at a flat rate of <strong class="text-stone-855">12.5%</strong>.</li>
+                            </ul>
+                        </li>
+                        <li><strong class="text-stone-855">Debt Oriented Funds (&gt;65% Debt):</strong> Long-term indexation benefits are removed. All capital gains, regardless of holding duration, are added directly to your personal income and taxed at your individual <strong class="text-stone-855">Income Tax Slab Rates</strong>.</li>
+                    </ul>
+                </section>
+
+            </div>
+        </article>
+
+        <!-- Always-Open, Non-Accordion, Numbered FAQ Section below SEO content container -->
+        <section id="faq-section" class="max-w-[768px] mx-auto mt-6 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-5 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-question text-red-700"></i> Frequently Asked Questions
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        1. How realistic is a 12% to 15% CAGR return on equity mutual funds?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Historically, Indian diversified equity mutual funds (like Large Cap, Mid Cap, and Flexi Cap schemes) have delivered average annualized returns (CAGR) of 12% to 15% over long-term horizons of 7 to 10+ years. However, these returns are volatile and never guaranteed. Standard calculators model these ranges strictly as historical benchmark references.
+                    </p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        2. Why does the Expense Ratio matter so much for my terminal wealth?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        The Expense Ratio acts as a daily compounding drag. A seemingly small 1% trailing fee in a Regular Plan adds massive overhead. Direct Plans cut agent commissions, ensuring your entire portfolio gains compound without unnecessary leakage.
+                    </p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        3. What is the difference between Direct and Regular plans?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Direct plans are purchased directly from the AMC, meaning you pay lower expense ratios. Regular plans are bought through brokers/distributors, carrying agent trailing commissions that degrade compounding performance by about 1% annually.
+                    </p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        4. How often should I rebalance my portfolio to capture Section 112A annual tax harvesting?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        To utilize the annual ₹1.25 Lakh long-term capital gains tax exemption in India, many retail investors harvest gains up to ₹1.25 Lakh every financial year and reinvest. This calculator models this precise rebalancing strategy to show realistic post-tax yields.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google AdSense / Programmatic Auto Ads Placement Wrapper (Sized to prevent Cumulative Layout Shift) -->
+        <div id="adsense-future-container" class="w-full mt-4 flex justify-center items-center overflow-hidden min-h-[100px] print-hide" aria-live="polite">
+            <!-- Completely empty reserved area for frictionless programmatic ad injection, preventing CLS -->
+        </div>
+
+    </main>
+
+    <!-- App Footer Placeholder -->
+    <div id="app-footer" class="w-full mt-auto relative z-[60]"></div>
+    <div id="notification-toast" role="status" aria-live="polite"></div>
+
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
