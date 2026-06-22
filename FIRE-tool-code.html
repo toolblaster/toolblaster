@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Advanced FIRE Retirement Calculator | Early Retirement Planner</title>
+    <meta name="description" content="Calculate your Lean FIRE, Traditional FIRE, and Coast FIRE status. Real-time compounding, inflation-adjusted drawdown, and safe withdrawal rate (SWR) models.">
+    <meta name="keywords" content="fire calculator, coast fire calculator, early retirement planner, lean fire, fat fire, safe withdrawal rate, swp depletion planner, personal finance">
+    <link rel="canonical" href="https://toolblaster.com/finance/fire-retirement-planner/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph & Twitter Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Advanced FIRE Retirement Calculator | Early Retirement Planner">
+    <meta property="og:description" content="Model your early retirement milestones with inflation drag, progressive dynamic SWP drawdown curves, and Coast FIRE trackers.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata -->
+    <meta name="application-name" content="Advanced FIRE Planner">
+    <meta name="apple-mobile-web-app-title" content="FIRE Planner">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://toolblaster.com/finance/fire-retirement-planner/#webapp",
+          "name": "Advanced FIRE Retirement Calculator | Early Retirement Planner",
+          "url": "https://toolblaster.com/finance/fire-retirement-planner/",
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://toolblaster.com/finance/fire-retirement-planner/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the 4% rule in FIRE planning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The 4% rule is a guideline for safe withdrawal rates in retirement. It suggests that if you withdraw 4% of your initial retirement corpus in the first year and adjust subsequent withdrawals for inflation, your savings have a very high probability of lasting at least 30 years."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is Coast FIRE?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Coast FIRE is when you have already saved enough in your retirement accounts so that even if you never add another rupee, the portfolio will compound and grow to hit your target retirement corpus by your target retirement age."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is inflation adjustment critical in retirement planning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Inflation systematically reduces the purchasing power of your money. What costs ₹50,000 monthly today will cost much more in 15 or 20 years. Your target retirement corpus must be scaled upwards to preserve your standard of living."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and Google Fonts -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { 
+            --bg-color: #f9fafb; 
+            --text-main: #111827; 
+            --accent-color: #dc2626;
+            --accent-color-dark: #b91c1c;
+        }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .hidden { display: none !important; }
+        
+        @media (max-width: 480px) {
+            .custom-desktop-badge { display: none !important; }
+        }
+
+        .mobile-disclaimer { display: block; }
+        .desktop-disclaimer { display: none; }
+        @media (min-width: 481px) {
+            .mobile-disclaimer { display: none !important; }
+            .desktop-disclaimer { display: block !important; }
+        }
+        
+        #notification-toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background-color: #111827; color: white; padding: 12px 24px;
+            border-radius: 12px; z-index: 1000; opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.15);
+            font-size: 0.75rem; font-weight: 600; text-align: center;
+        }
+        #notification-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, -5px); }
+
+        .range-slider {
+            -webkit-appearance: none; appearance: none; background: transparent;
+            cursor: pointer; height: 6px; flex-grow: 1;
+        }
+        .range-slider::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%)); 
+        }
+        .range-slider::-moz-range-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%));
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; margin-top: -4.5px;
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark); 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
+        }
+        .range-slider::-moz-range-thumb {
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark);
+            border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .range-slider:focus { outline: none; }
+
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease;
+        }
+        .manual-input {
+            border: none; text-align: center; font-weight: 700; color: #111827;
+            background: transparent; height: 100%; outline: none; font-size: 0.75rem;
+            width: 82px; padding: 0 4px;
+        }
+        .manual-input::-webkit-outer-spin-button, .manual-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .input-stepper-group:focus-within {
+            border-color: var(--accent-color-dark) !important;
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2) !important;
+        }
+        .stepper-button {
+            background-color: #e5e7eb; color: #111827; border: none; width: 1.5rem;
+            height: 100%; cursor: pointer; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center; transition: all 0.1s;
+        }
+        .stepper-button:hover:not(:disabled) { background-color: #cbd5e1; } 
+        .stepper-button:disabled { opacity: 0.5; cursor: not-allowed; } 
+
+        .tooltip-icon { cursor: help; position: relative; display: inline-block; }
+        .tooltip-icon svg { width: 0.8rem; height: 0.8rem; color: currentColor; vertical-align: middle; }
+        .tooltip-text {
+            display: none; width: 220px; background-color: #111827; color: #ffffff;
+            text-align: left; border-radius: 8px; padding: 8px 12px; position: absolute;
+            z-index: 50; bottom: 125%; left: 50%; transform: translateX(-50%);
+            font-size: 0.65rem; font-weight: 500; line-height: 1.4;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15); pointer-events: none;
+            text-transform: none;
+        }
+        .tooltip-text::after {
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border-width: 5px; border-style: solid; border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text { display: block; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f9fafb; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        html body .text-xxs { font-size: 0.72rem; line-height: 1rem; }
+        .tab-mode-btn { transition: all 0.2s; border: 1px solid #cbd5e1; cursor: pointer; }
+        .tab-mode-btn.active {
+            background-color: var(--accent-color-dark);
+            color: white;
+            border-color: var(--accent-color-dark);
+        }
+
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            #app-header, #app-tool-nav, #app-footer, .print-hide, .range-slider, .stepper-button { display: none !important; }
+            .print-show { display: block !important; }
+            .calculator-container { border: none !important; box-shadow: none !important; }
+            #growthTableContainer { max-height: none; overflow: visible; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Glow Background -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-50/20 blur-[130px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[40vw] rounded-full bg-stone-100/30 blur-[110px]"></div>
+    </div>
+
+    <!-- Layout Navigation placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-4 pb-6">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-700 transition-colors inline-flex items-center gap-1.5" title="Navigate home">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="/finance" class="hover:text-red-700 transition-colors" title="View other financial planning resources">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">FIRE Retirement Planner</span>
+            </div>
+            <div class="custom-desktop-badge flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider">
+                <i class="fa-solid fa-fire text-[10px]"></i> Independence Engine
+            </div>
+        </nav>
+
+        <!-- Main Card -->
+        <div id="calculator" class="w-full text-left mt-1">
+            <div class="bg-white/95 backdrop-blur-xl shadow-xl rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 mx-auto my-0 calculator-container relative">
+
+                <!-- Title Header -->
+                <div class="text-center mb-5">
+                    <h1 class="text-base sm:text-[18px] font-extrabold text-stone-900 leading-tight">Advanced FIRE Retirement Calculator</h1>
+                    <p class="text-stone-600 text-xxs font-medium mt-1">Simulate your Financial Independence milestones with pre/post-retirement returns, inflation drag, and systematic depletion.</p>
+                </div>
+
+                <!-- MAIN WORKSPACE GRID -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 items-start">
+                    
+                    <!-- Left Settings Panel -->
+                    <div class="space-y-3.5 print-hide">
+                        <div class="bg-stone-50 border border-stone-200 p-4 rounded-2xl space-y-4">
+                            
+                            <!-- Section: Core Age Parameters -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label id="ageLabelText" for="ageInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1">Current Age</label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', -1, 18, 65)">-</button>
+                                        <input type="number" id="ageInput" class="manual-input flex-grow" value="28" min="18" max="65" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', 1, 18, 65)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="retireAgeLabelText" for="retireAgeInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1">Retirement Age</label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', -1, 25, 75)">-</button>
+                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow" value="45" min="25" max="75" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', 1, 25, 75)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Expenses Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800">Monthly Expenses Today (₹)</label>
+                                    <span id="expenseWords" class="text-[10px] text-red-800 font-bold"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="expenseSlider" min="10000" max="500000" value="50000" step="5000" class="w-full range-slider flex-grow" oninput="syncExpenseSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustExpense(-5000)">-</button>
+                                        <input type="number" id="expenseInput" class="manual-input" value="50000" min="10000" max="500000" step="5000" onchange="syncExpenseInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustExpense(5000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Current Saved Net Worth Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="networthLabelText" for="networthInput" class="block text-xxs font-bold text-stone-800">Current Portfolio Net Worth (₹)</label>
+                                    <span id="networthWords" class="text-[10px] text-red-800 font-bold"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="networthSlider" min="0" max="20000000" value="500000" step="50000" class="w-full range-slider flex-grow" oninput="syncNetworthSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustNetworth(-50000)">-</button>
+                                        <input type="number" id="networthInput" class="manual-input" value="500000" min="0" max="200000000" step="50000" onchange="syncNetworthInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustNetworth(50000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Savings Slider -->
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label id="savingsLabelText" for="savingsInput" class="block text-xxs font-bold text-stone-800">Monthly Savings Contribution (₹)</label>
+                                    <span id="savingsWords" class="text-[10px] text-red-800 font-bold"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="savingsSlider" min="1000" max="250000" value="25000" step="1000" class="w-full range-slider flex-grow" oninput="syncSavingsSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustSavings(-1000)">-</button>
+                                        <input type="number" id="savingsInput" class="manual-input" value="25000" min="1000" max="250000" step="1000" onchange="syncSavingsInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustSavings(1000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Yield Rates Parameters (Pre-retirement Return & Post-retirement Return) -->
+                            <div class="grid grid-cols-2 gap-3.5">
+                                <div>
+                                    <label id="preReturnLabelText" for="preReturnInput" class="block text-[10px] font-bold text-stone-850 uppercase tracking-wider mb-1 flex items-center">
+                                        Pre-Retire Return
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Annualized yield assumption during wealth-building accumulation phase. Standard is ~12% (Equity/Mutual Funds).</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('preReturnInput', -0.5, 4, 25)">-</button>
+                                        <input type="number" id="preReturnInput" class="manual-input" value="12" min="4" max="25" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustReturnRate('preReturnInput', 0.1)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="postReturnLabelText" for="postReturnInput" class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider flex items-center mb-1">
+                                        Post-Retire Return
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Annualized yield during retirement. Standard is lower (e.g. 7%-8%) to reflect safer conservative assets like debt and deposits.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('postReturnInput', -0.5, 3, 18)">-</button>
+                                        <input type="number" id="postReturnInput" class="manual-input" value="8" min="3" max="18" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustReturnRate('postReturnInput', 0.1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Savings Step Up & Inflation Parameters -->
+                        <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
+                            <!-- Inflation Parameter -->
+                            <div>
+                                <label id="inflationLabelText" for="inflationInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                    <span>Long-Term Inflation Estimate (% p.a.)</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Expected annual inflation rate. Slashes future purchasing power. Standard in India is around 5%-6%.</span>
+                                    </span>
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', -0.1, 2, 12)">-</button>
+                                        <input type="number" id="inflationInput" class="manual-input" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', 0.1, 2, 12)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-stone-200/50 my-1"></div>
+
+                            <!-- Annual Savings Step-Up -->
+                            <div>
+                                <label id="stepUpLabelText" for="stepUpInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                    <span>Annual Savings Step-Up (%)</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Percentage by which you increase your monthly savings each year as your income grows. Standard step-up is 10%.</span>
+                                    </span>
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', -1, 0, 25)">-</button>
+                                        <input type="number" id="stepUpInput" class="manual-input" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', 1, 0, 25)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-stone-200/50 my-1"></div>
+
+                            <!-- Safe Withdrawal Rate -->
+                            <div>
+                                <label id="swrLabelText" for="swrInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                    <span>Safe Withdrawal Rate (SWR %)</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">The SWR (e.g. 4%) dictates the size of your retirement corpus. 4% SWR means you need exactly 25x of your inflation-adjusted annual expenses.</span>
+                                    </span>
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', -0.1, 2, 8)">-</button>
+                                        <input type="number" id="swrInput" class="manual-input" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', 0.1, 2, 8)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warnings & Validation Flags -->
+                        <div id="smartFinancialValidation" class="space-y-1.5 hidden print-hide"></div>
+                    </div>
+
+                    <!-- Right Column: Interactive Results, Real-Time Chart & Insights -->
+                    <div class="flex flex-col relative print:w-full space-y-4">
+                        
+                        <!-- Main Metric Result Blocks -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center">
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Projected Corpus</span>
+                                <span id="projectedCorpus" class="text-xs sm:text-[13px] font-black text-stone-800">₹0</span>
+                            </div>
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Target Corpus Floor</span>
+                                <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-emerald-800">₹0</span>
+                            </div>
+                            <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1 flex flex-col justify-center">
+                                <span class="block text-[8.5px] sm:text-[10px] font-black text-red-900 uppercase tracking-wider leading-tight">FIRE Year Status</span>
+                                <span id="fireStatusVal" class="text-xs sm:text-[13px] font-black text-red-955 mt-0.5">Calculating...</span>
+                            </div>
+                        </div>
+
+                        <!-- Milestone Trackers (Lean FIRE, Fat FIRE, Coast FIRE Today) -->
+                        <div class="p-4 bg-slate-50 border border-stone-200 rounded-2xl space-y-2.5 shadow-sm">
+                            <div class="text-xs font-black text-stone-900 uppercase tracking-wider border-b border-stone-200 pb-1.5 flex items-center justify-between">
+                                <span>🗺️ FIRE Milestone Progress Board</span>
+                                <span class="text-[9px] text-slate-500 font-bold tracking-tight">At Target Age</span>
+                            </div>
+                            <div class="space-y-2 text-xxs sm:text-xs">
+                                <!-- Lean FIRE -->
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-800">Lean FIRE Corpus (₹)</span>
+                                        <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers bare minimum survival expenses (75% budget)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="leanFireCorpus" class="font-black text-stone-900 block">₹0</span>
+                                        <span id="leanFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                                <!-- Fat FIRE -->
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-800">Fat FIRE Corpus (₹)</span>
+                                        <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers a luxury lifestyle buffer (125% budget)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="fatFireCorpus" class="font-black text-stone-900 block">₹0</span>
+                                        <span id="fatFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-stone-200 my-1"></div>
+                                <!-- Coast FIRE Today -->
+                                <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-stone-200">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-900 flex items-center gap-1">
+                                            Coast FIRE Target Today (₹)
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">If you have this much saved today, you can stop saving and still hit your traditional FIRE goal at your target retirement age strictly through compounding.</span>
+                                            </span>
+                                        </span>
+                                        <span id="coastFireAdvice" class="text-[9px] text-emerald-800 font-black mt-0.5 leading-tight">Calculating status...</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="coastFireTarget" class="font-black text-stone-900 block">₹0</span>
+                                        <span id="coastFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Regulatory Compliance notice -->
+                        <div class="p-3 bg-amber-50/50 border border-amber-150 rounded-2xl text-stone-750 font-medium leading-relaxed text-xxs select-none shadow-sm">
+                            <p class="font-extrabold text-stone-900 text-[10px] uppercase tracking-wide mb-0.5">Regulatory Advisory & Risk Notice</p>
+                            <p class="text-[9.5px]">Retirement projections are strictly <strong class="text-stone-955">illustrative estimates</strong>. Under SEBI regulations, historical CAGR parameters are not guarantees of future performance. Past performance is not indicative of future returns.</p>
+                        </div>
+
+                        <!-- Real-time Smart Actionable Advisors -->
+                        <div id="smartInsight" class="p-3 bg-red-50 border border-red-200 rounded-xl text-xxs font-semibold text-red-955 flex items-start gap-2 hidden print-hide">
+                            <span id="smartInsightText" class="flex-grow leading-relaxed"></span>
+                        </div>
+
+                        <!-- Graphical Representation Canvas -->
+                        <div class="flex justify-center items-center h-44 sm:h-48 w-full relative print-hide border border-stone-250 p-2.5 rounded-2xl bg-stone-50">
+                            <canvas id="fireDrawdownChart" aria-label="Compounded Growth & Retirement Drawdown Graph"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button Control Toolbar -->
+                <div class="flex flex-wrap justify-center gap-2 mt-5 mb-2 print-hide border-t border-stone-100 pt-5">
+                    <button id="toggleGrowthTableBtn" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-slate-800 active:scale-[0.97]" onclick="toggleGrowthTable()">Show Year-by-Year Ledger</button>
+                    <button id="printReportBtn" class="px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-xl text-xxs font-bold transition-all duration-200 active:scale-[0.97] flex items-center gap-1" onclick="window.print()">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Print/PDF Report
+                    </button>
+                    <button id="exportCsvBtn" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-emerald-800 active:scale-[0.97] flex items-center gap-1" onclick="exportSimulationToCSV()">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17h18a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Export CSV
+                    </button>
+                </div>
+
+                <!-- Structured Growth Schedule Panel -->
+                <div id="growthTableContainer" class="hidden bg-white rounded-2xl shadow-sm mt-4 border border-stone-200 overflow-hidden">
+                    <div class="p-3 border-b border-stone-200 bg-stone-50 flex items-center justify-between">
+                         <h2 class="text-xs font-bold text-stone-850 m-0 uppercase tracking-wider">Year-by-Year FIRE Ledger (Drawdown Timeline)</h2>
+                         <span class="text-[10px] text-stone-600 italic font-semibold">Post-retirement withdrawals are adjusted dynamically for inflation.</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-[300px] custom-scrollbar">
+                        <table class="min-w-full text-left">
+                            <thead class="bg-stone-100 border-b border-slate-200 sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[10%]">Age</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[15%]">Phase</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Invested / Drawdown (Annual)</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Gains Generated</th>
+                                    <th class="p-3 text-center text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Closing Net Worth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="growthTableBody" class="bg-white text-xs divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SEBI Benchmark Index Grid -->
+                <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-[10px] leading-relaxed text-stone-700 font-semibold mt-4 space-y-3">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                        <div><strong class="text-stone-855 block">Nifty 50 Index:</strong> <span class="text-red-900 font-bold">12% - 14% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Midcap 150 Index:</strong> <span class="text-red-900 font-bold">14% - 16% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Nifty Hybrid 35:65 Index:</strong> <span class="text-red-900 font-bold">10% - 11.5% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Conservative Debt:</strong> <span class="text-blue-900 font-bold">6% - 7.5% p.a.</span></div>
+                    </div>
+                    
+                    <!-- demat partner links -->
+                    <div class="text-center print-hide border-t border-stone-200/50 pt-2.5">
+                        <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-[9px] font-black text-red-800 hover:text-red-950 transition-colors uppercase tracking-widest gap-1" title="Open a Free Demat Account with 5paisa to start investing and creating long-term wealth portfolios">
+                            <i class="fa-solid fa-arrow-trend-up text-[9px]"></i> Open Free Demat Account on 5paisa <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Disclaimer -->
+                    <div class="border-t border-stone-200/50 pt-3 text-center space-y-1 bg-white p-2 rounded-xl border">
+                        <p class="font-extrabold text-stone-800 uppercase tracking-wider text-[9px]">SEBI Advisory & Legal Compliance Disclaimer</p>
+                        <p class="text-stone-600 text-[9px] leading-normal font-medium">
+                            <span class="mobile-disclaimer">
+                                Mutual Fund and equity investments are subject to high market risks; read all scheme related documents carefully. Calculations shown are strictly educational illustrations and do not represent guaranteed yield assurances.
+                            </span>
+                            <span class="desktop-disclaimer">
+                                Educational compounding illustration models are calculated according to general industry retirement standards and safe withdrawal assumptions. All fund asset class historical CAGR return estimates are strictly illustrative. This platform does not provide SEBI-registered investment, tax, legal, or professional financial planning advice. Users are strongly advised to consult registered SEBI advisors to verify suitability according to individual risk capacities before taking action.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sleek Ecosystem Internal Link Panels (Aligned perfectly to 768px width) -->
+        <div class="max-w-[768px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1: Advanced MF Calc -->
+                <a href="../advanced-mutual-fund-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our advanced compound interest and expense ratio drag tracker">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-chart-pie text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Asset Friction</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">Advanced MF Calc</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 2: PPF Calculator -->
+                <a href="../ppf-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our secure Public Provident Fund tax deduction calculator tool">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Tax Haven</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">PPF Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="../emi-calculator/" class="flex items-center justify-between bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our advanced multi-loan reducing balance EMI calculator platform">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Debt servicing</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">EMI Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Premium SEO Educational Guide Section (Max width set to 768px for balanced editorial focus) -->
+        <article id="seo-education-guide" class="max-w-[768px] mx-auto bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm mt-6 print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-4 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-red-700"></i> The FIRE (Financial Independence, Retire Early) Playbook
+            </h2>
+            
+            <div class="space-y-6 text-stone-750 text-xxs sm:text-xs leading-relaxed font-semibold">
+                
+                <!-- Section 1 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">1. Understanding the FIRE Movement</h3>
+                    <p class="font-medium text-stone-600">
+                        The FIRE movement is a lifestyle and financial framework designed to maximize savings rates and build a robust investment portfolio, enabling individuals to retire decades earlier than traditional retirement ages. The core objective is gaining absolute control over your time.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-850">Savings Rate is King:</strong> While typical financial planners recommend saving $10\%$ to $15\%$ of income, FIRE practitioners often target savings rates of $40\%$ to $70\%$.</li>
+                        <li><strong class="text-stone-850">The Power of Compounding:</strong> Saving aggressively early in life allows compounding interest to take over, funding your future lifestyle completely.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">2. The Mathematics of FIRE: The Rule of 25</h3>
+                    <p class="font-medium text-stone-600">
+                        Traditional retirement calculations rely on Bengen’s **Rule of 25** derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a $4\%$ safe withdrawal rate, your accumulated nest egg must be exactly $25$ times your annual living expenses:
+                    </p>
+                    <div class="my-3 p-3 bg-stone-50 border border-stone-200 rounded-xl text-center">
+                        $$\text{FIRE Corpus Required} = \text{Current Annual Expenses} \times 25$$
+                    </div>
+                    <p class="font-medium text-stone-600">
+                        If your monthly expenses are ₹50,000, your annual expenses are ₹6,00,000. Your target corpus (before adjusting for inflation) is:
+                        $$₹6,00,000 \times 25 = ₹1.5 \text{ Crore}$$
+                    </p>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">3. The Different Flavors of FIRE</h3>
+                    <p class="font-medium text-stone-600">
+                        Retirement is not a one-size-fits-all plan. The FIRE ecosystem has several customized strategies:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Lean FIRE:</strong> Designed for minimalist lifestyles. It assumes survival expenses are capped at around $75\%$ of your standard budget.</li>
+                        <li><strong class="text-stone-855">Traditional FIRE:</strong> Replaces your current standard of living exactly ($100\%$ budget replacement using a $4\%$ SWR rule).</li>
+                        <li><strong class="text-stone-855">Fat FIRE:</strong> Tailored for comfortable lifestyles, modeling a $125\%$ budget to build a premium wealth cushion.</li>
+                        <li><strong class="text-stone-855">Coast FIRE:</strong> Hitting a milestone where your current savings, even if you never add another rupee, will grow to fund your ultimate traditional retirement goal by age 60 entirely through compounding. You only work to cover current day-to-day costs.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">4. Solving the Drawdown Sequence: Safe Withdrawal Rate (SWR)</h3>
+                    <p class="font-medium text-stone-600">
+                        In retirement, your portfolio continues to compound while you make systematic withdrawals (SWP). If you retire in a prolonged bear market, you face **Sequence of Returns Risk**—withdrawing capital while prices are falling can deplete your portfolio prematurely. To prevent this, using a conservative SWR ($3\%$ to $4.5\%$) and shifting to a balanced portfolio (yielding lower but safer returns) is recommended.
+                    </p>
+                </section>
+
+            </div>
+        </article>
+
+        <!-- Always-Open, Non-Accordion, Numbered FAQ Section below SEO content container -->
+        <section id="faq-section" class="max-w-[768px] mx-auto mt-6 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-5 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-question text-red-700"></i> Frequently Asked Questions
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        1. Is a 4% Safe Withdrawal Rate (SWR) realistic in India?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        While the $4\%$ rule was modeled on US historical equity and bond returns, India experiences higher inflation rates. Many financial advisors in India suggest a slightly more conservative SWR of $3\%$ to $3.5\%$ or maintaining a portion of assets in equity mutual funds post-retirement to stay ahead of inflation.
+                    </p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        2. How does Coast FIRE work, and what is its main benefit?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Coast FIRE is achieved when your current saved portfolio is large enough that you no longer need to save actively to secure your retirement. The primary benefit is mental freedom—you can shift to lower-stress, passion-driven, or part-time work that simply covers your current living expenses while your retirement nest egg compounds quietly in the background.
+                    </p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        3. What is the impact of a high savings rate on early retirement?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Your savings rate is the single most powerful factor under your control. A savings rate of $10\%$ means you must work 9 years to fund 1 year of retirement. A savings rate of $50\%$ means every year you work funds a full year of retirement, accelerating your path to financial freedom.
+                    </p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        4. Can I customize pre-retirement and post-retirement yield expectations?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Yes. This calculator features independent inputs for both phases. During accumulation, you can model aggressive growth ($12\%$ to $15\%$ CAGR). During retirement, you can model a safer, yield-preservation allocation ($6\%$ to $8\%$) to better protect your nest egg.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google AdSense / Programmatic Auto Ads Placement Wrapper -->
+        <div id="adsense-future-container" class="w-full mt-4 flex justify-center items-center overflow-hidden min-h-[100px] print-hide" aria-live="polite"></div>
+
+    </main>
+
+    <!-- App Footer Placeholder -->
+    <div id="app-footer" class="w-full mt-auto relative z-[60]"></div>
+    <div id="notification-toast" role="status" aria-live="polite"></div>
+
+    <script src="../../js/header-footer.js"></script>
+    
+    <script>
+        let compoundedChart;
+        let yearlyTableData = [];
+
+        function formatVal(val) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency', currency: 'INR', maximumFractionDigits: 0
+            }).format(Math.round(val));
+        }
+
+        function formatIndianShort(value) {
+            if (value >= 10000000) {
+                return (value / 10000000).toFixed(2).replace(/\.00$/, '').replace(/(\.[0-9])0$/, '$1') + ' Crore';
+            } else if (value >= 100000) {
+                return (value / 100000).toFixed(2).replace(/\.00$/, '').replace(/(\.[0-9])0$/, '$1') + ' Lakh';
+            } else if (value >= 1000) {
+                return (value / 1000).toFixed(1).replace(/\.0$/, '') + ' Thousand';
+            }
+            return value.toString();
+        }
+
+        function displayToast(msg) {
+            const toast = document.getElementById('notification-toast');
+            if (toast) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            }
+        }
+
+        // --- Core Value Adjusters ---
+        function adjustValue(id, step, min, max) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let val = (parseInt(el.value) || 0) + step;
+            el.value = Math.max(min, Math.min(max, val));
+            if (id === 'ageInput' || id === 'retireAgeInput') {
+                validateAgeSettings();
+            } else {
+                runSimulation();
+            }
+        }
+
+        function adjustValueFloat(id, step, min, max) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let val = (parseFloat(el.value) || 0) + step;
+            el.value = parseFloat(Math.max(min, Math.min(max, val)).toFixed(1));
+            
+            // Sync with corresponding sliders if applicable
+            if (id === 'inflationInput') {
+                document.getElementById('inflationSlider').value = el.value;
+                updateSliderIndicator('inflationSlider');
+            } else if (id === 'stepUpInput') {
+                document.getElementById('stepUpSlider').value = el.value;
+                updateSliderIndicator('stepUpSlider');
+            } else if (id === 'swrInput') {
+                document.getElementById('swrSlider').value = el.value;
+                updateSliderIndicator('swrSlider');
+            }
+            runSimulation();
+        }
+
+        function adjustReturnRate(id, step) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let val = (parseFloat(el.value) || 0) + step;
+            el.value = parseFloat(val.toFixed(1));
+            runSimulation();
+        }
+
+        function validateAgeSettings() {
+            const currentAgeEl = document.getElementById('ageInput');
+            const retireAgeEl = document.getElementById('retireAgeInput');
+            let cAge = parseInt(currentAgeEl.value) || 28;
+            let rAge = parseInt(retireAgeEl.value) || 45;
+
+            if (rAge <= cAge) {
+                rAge = cAge + 1;
+                retireAgeEl.value = rAge;
+            }
+            runSimulation();
+        }
+
+        // --- Monthly Expense Synchronization ---
+        function syncExpenseSlider() {
+            const slider = document.getElementById('expenseSlider');
+            const input = document.getElementById('expenseInput');
+            input.value = slider.value;
+            updateSliderIndicator('expenseSlider');
+            runSimulation();
+        }
+
+        function syncExpenseInput() {
+            const slider = document.getElementById('expenseSlider');
+            const input = document.getElementById('expenseInput');
+            let val = Math.max(10000, Math.min(500000, parseInt(input.value) || 10000));
+            input.value = val;
+            slider.value = val;
+            updateSliderIndicator('expenseSlider');
+            runSimulation();
+        }
+
+        function adjustExpense(step) {
+            const input = document.getElementById('expenseInput');
+            let val = (parseInt(input.value) || 0) + step;
+            input.value = Math.max(10000, val);
+            syncExpenseInput();
+        }
+
+        // --- Portfolio networth synchronization ---
+        function syncNetworthSlider() {
+            const slider = document.getElementById('networthSlider');
+            const input = document.getElementById('networthInput');
+            input.value = slider.value;
+            updateSliderIndicator('networthSlider');
+            runSimulation();
+        }
+
+        function syncNetworthInput() {
+            const slider = document.getElementById('networthSlider');
+            const input = document.getElementById('networthInput');
+            let val = Math.max(0, parseInt(input.value) || 0);
+            input.value = val;
+            slider.value = Math.min(slider.max, val);
+            updateSliderIndicator('networthSlider');
+            runSimulation();
+        }
+
+        function adjustNetworth(step) {
+            const input = document.getElementById('networthInput');
+            let val = (parseInt(input.value) || 0) + step;
+            input.value = Math.max(0, val);
+            syncNetworthInput();
+        }
+
+        // --- Monthly Savings Slider synchronization ---
+        function syncSavingsSlider() {
+            const slider = document.getElementById('savingsSlider');
+            const input = document.getElementById('savingsInput');
+            input.value = slider.value;
+            updateSliderIndicator('savingsSlider');
+            runSimulation();
+        }
+
+        function syncSavingsInput() {
+            const slider = document.getElementById('savingsSlider');
+            const input = document.getElementById('savingsInput');
+            let val = Math.max(1000, Math.min(250000, parseInt(input.value) || 1000));
+            input.value = val;
+            slider.value = val;
+            updateSliderIndicator('savingsSlider');
+            runSimulation();
+        }
+
+        function adjustSavings(step) {
+            const input = document.getElementById('savingsInput');
+            let val = (parseInt(input.value) || 0) + step;
+            input.value = Math.max(1000, val);
+            syncSavingsInput();
+        }
+
+        // --- Inflation parameter synchronizer ---
+        function syncInflationSlider() {
+            const slider = document.getElementById('inflationSlider');
+            const input = document.getElementById('inflationInput');
+            input.value = slider.value;
+            updateSliderIndicator('inflationSlider');
+            runSimulation();
+        }
+
+        function syncInflationInput() {
+            const slider = document.getElementById('inflationSlider');
+            const input = document.getElementById('inflationInput');
+            let val = Math.max(2, Math.min(12, parseFloat(input.value) || 2));
+            input.value = val;
+            slider.value = val;
+            updateSliderIndicator('inflationSlider');
+            runSimulation();
+        }
+
+        // --- Step up synchronizer ---
+        function syncStepUpSlider() {
+            const slider = document.getElementById('stepUpSlider');
+            const input = document.getElementById('stepUpInput');
+            input.value = slider.value;
+            updateSliderIndicator('stepUpSlider');
+            runSimulation();
+        }
+
+        function syncStepUpInput() {
+            const slider = document.getElementById('stepUpSlider');
+            const input = document.getElementById('stepUpInput');
+            let val = Math.max(0, Math.min(25, parseInt(input.value) || 0));
+            input.value = val;
+            slider.value = val;
+            updateSliderIndicator('stepUpSlider');
+            runSimulation();
+        }
+
+        // --- SWR synchronizer ---
+        function syncSwrSlider() {
+            const slider = document.getElementById('swrSlider');
+            const input = document.getElementById('swrInput');
+            input.value = slider.value;
+            updateSliderIndicator('swrSlider');
+            runSimulation();
+        }
+
+        function syncSwrInput() {
+            const slider = document.getElementById('swrSlider');
+            const input = document.getElementById('swrInput');
+            let val = Math.max(2, Math.min(8, parseFloat(input.value) || 2));
+            input.value = val;
+            slider.value = val;
+            updateSliderIndicator('swrSlider');
+            runSimulation();
+        }
+
+        function updateSliderIndicator(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const pct = ((el.value - el.min) / (el.max - el.min)) * 100;
+            el.style.setProperty('--fill-percentage', `${pct}%`);
+        }
+
+        // --- CORE FIRE ENGINE MATHEMATICS ---
+        function runSimulation() {
+            const currentAge = parseInt(document.getElementById('ageInput').value) || 28;
+            const retireAge = parseInt(document.getElementById('retireAgeInput').value) || 45;
+            const currentExpenses = parseFloat(document.getElementById('expenseInput').value) || 50000;
+            const startPortfolio = parseFloat(document.getElementById('networthInput').value) || 0;
+            const startSavings = parseFloat(document.getElementById('savingsInput').value) || 0;
+
+            const preRetireReturn = parseFloat(document.getElementById('preReturnInput').value) || 12;
+            const postRetireReturn = parseFloat(document.getElementById('postReturnInput').value) || 8;
+            const inflation = parseFloat(document.getElementById('inflationInput').value) || 6;
+            const stepUpRate = parseFloat(document.getElementById('stepUpInput').value) || 10;
+            const swr = parseFloat(document.getElementById('swrInput').value) || 4;
+
+            // Sync Slider Display word annotations
+            document.getElementById('expenseWords').textContent = `(₹${formatIndianShort(currentExpenses)} / month)`;
+            document.getElementById('networthWords').textContent = `(₹${formatIndianShort(startPortfolio)})`;
+            document.getElementById('savingsWords').textContent = `(₹${formatIndianShort(startSavings)} / month)`;
+
+            const yearsToRetire = retireAge - currentAge;
+            const annualExpenses = currentExpenses * 12;
+
+            // Inflation-adjusted annual expenses at target retirement age
+            const adjustedAnnualExpensesAtRetire = annualExpenses * Math.pow(1 + (inflation / 100), yearsToRetire);
+            
+            // Traditional, Lean, and Fat FIRE targets
+            const targetCorpusFloor = adjustedAnnualExpensesAtRetire / (swr / 100);
+            const leanFireTarget = targetCorpusFloor * 0.75;
+            const fatFireTarget = targetCorpusFloor * 1.25;
+
+            // Coast FIRE target today calculation
+            // Coast FIRE Target = Target Corpus / (1 + Pre-Retire Real Return)^YearsToRetire
+            // We model standard pre-retirement CAGR yield to prevent safe withdrawal double counts
+            const preRetireRealRate = (preRetireReturn - inflation) / 100;
+            const coastFireTargetToday = targetCorpusFloor / Math.pow(1 + (preRetireReturn / 100), yearsToRetire);
+
+            // Accumulation Phase Compounding Loop
+            let runningPortfolio = startPortfolio;
+            let currentMonthlySavings = startSavings;
+            let ageProgress = currentAge;
+            let totalInvested = startPortfolio;
+
+            yearlyTableData = [];
+
+            // Add Initial Year Record
+            yearlyTableData.push({
+                age: currentAge,
+                phase: "Accumulation",
+                annualInput: 0,
+                annualGains: 0,
+                closingNetworth: startPortfolio
+            });
+
+            // Pre-retirement compounding loop (yearly)
+            const preMonthlyRate = (preRetireReturn / 12) / 100;
+            for (let y = 1; y <= yearsToRetire; y++) {
+                let annualSavingsInjected = 0;
+                let preYearStarting = runningPortfolio;
+
+                // Model beginning-of-month monthly deposits compounding
+                for (let m = 1; m <= 12; m++) {
+                    runningPortfolio = (runningPortfolio + currentMonthlySavings) * (1 + preMonthlyRate);
+                    annualSavingsInjected += currentMonthlySavings;
+                }
+
+                totalInvested += annualSavingsInjected;
+                const yearGains = runningPortfolio - preYearStarting - annualSavingsInjected;
+
+                yearlyTableData.push({
+                    age: currentAge + y,
+                    phase: "Accumulation",
+                    annualInput: annualSavingsInjected,
+                    annualGains: yearGains,
+                    closingNetworth: runningPortfolio
+                });
+
+                // Apply Annual Savings Step-up
+                currentMonthlySavings = currentMonthlySavings * (1 + (stepUpRate / 100));
+            }
+
+            const projectedCorpusValueAtRetire = runningPortfolio;
+
+            // Drawdown / Distribution Phase Loop (Up to Age 85 or Depletion)
+            let retirementRunningPortfolio = projectedCorpusValueAtRetire;
+            let retirementYearlyExpenses = adjustedAnnualExpensesAtRetire;
+            const maxRetirementAge = 85;
+            const yearsInRetirement = maxRetirementAge - retireAge;
+
+            let ageCompletedDrawdown = retireAge;
+            let ranOutOfMoney = false;
+
+            for (let y = 1; y <= yearsInRetirement; y++) {
+                if (retirementRunningPortfolio <= 0) {
+                    ranOutOfMoney = true;
+                    break;
+                }
+
+                const postYearStarting = retirementRunningPortfolio;
+                
+                // Systematic Withdrawal occurs at beginning of the year
+                const actualWithdrawal = Math.min(retirementRunningPortfolio, retirementYearlyExpenses);
+                retirementRunningPortfolio -= actualWithdrawal;
+
+                // Remaining funds compound at post-retirement rate
+                retirementRunningPortfolio = retirementRunningPortfolio * (1 + (postRetireReturn / 100));
+                
+                const yearGains = retirementRunningPortfolio - postYearStarting + actualWithdrawal;
+
+                yearlyTableData.push({
+                    age: retireAge + y,
+                    phase: "Drawdown",
+                    annualInput: -actualWithdrawal,
+                    annualGains: yearGains,
+                    closingNetworth: retirementRunningPortfolio
+                });
+
+                // Expenses adjust upwards with inflation each year
+                retirementYearlyExpenses = retirementYearlyExpenses * (1 + (inflation / 100));
+                ageCompletedDrawdown = retireAge + y;
+            }
+
+            // Output Primary Metrics
+            document.getElementById('projectedCorpus').textContent = formatVal(projectedCorpusValueAtRetire);
+            document.getElementById('targetCorpus').textContent = formatVal(targetCorpusFloor);
+
+            // Determine FIRE status and display details
+            const fireStatusEl = document.getElementById('fireStatusVal');
+            if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
+                fireStatusEl.textContent = "🎯 Achieved!";
+                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-emerald-800 mt-0.5";
+            } else if (projectedCorpusValueAtRetire >= leanFireTarget) {
+                fireStatusEl.textContent = "🥪 Lean FIRE Ready";
+                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-amber-700 mt-0.5";
+            } else {
+                const deficit = targetCorpusFloor - projectedCorpusValueAtRetire;
+                fireStatusEl.textContent = `₹${formatIndianShort(deficit)} Gap`;
+                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-red-700 mt-0.5";
+            }
+
+            // Display Milestone Values & Progress bars
+            document.getElementById('leanFireCorpus').textContent = formatVal(leanFireTarget);
+            const leanProgress = Math.min(100, (projectedCorpusValueAtRetire / leanFireTarget) * 100);
+            document.getElementById('leanFireProgress').textContent = `${leanProgress.toFixed(0)}% Achieved`;
+
+            document.getElementById('fatFireCorpus').textContent = formatVal(fatFireTarget);
+            const fatProgress = Math.min(100, (projectedCorpusValueAtRetire / fatFireTarget) * 100);
+            document.getElementById('fatFireProgress').textContent = `${fatProgress.toFixed(0)}% Achieved`;
+
+            // Coast FIRE Progression Logic
+            document.getElementById('coastFireTarget').textContent = formatVal(coastFireTargetToday);
+            const coastProgress = Math.min(100, (startPortfolio / coastFireTargetToday) * 100);
+            document.getElementById('coastFireProgress').textContent = `${coastProgress.toFixed(0)}% Achieved`;
+
+            const coastAdvice = document.getElementById('coastFireAdvice');
+            if (startPortfolio >= coastFireTargetToday) {
+                coastAdvice.textContent = "🟢 Coast FIRE Achieved! Compounding is locked in.";
+                coastAdvice.className = "text-[9px] text-emerald-800 font-black mt-0.5 leading-tight";
+            } else {
+                const coastDeficit = coastFireTargetToday - startPortfolio;
+                coastAdvice.textContent = `Need ₹${formatIndianShort(coastDeficit)} more today to coast smoothly.`;
+                coastAdvice.className = "text-[9px] text-rose-800 font-extrabold mt-0.5 leading-tight";
+            }
+
+            // Compute actual drawdown years remaining
+            const durationYears = ageCompletedDrawdown - retireAge;
+
+            // Dynamic Actionable advisor reports
+            const insightBox = document.getElementById('smartInsight');
+            const textEl = document.getElementById('smartInsightText');
+            if (insightBox && textEl) {
+                insightBox.classList.remove('hidden');
+                let advice = "";
+
+                if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
+                    if (ranOutOfMoney) {
+                        advice = `🎉 <strong>Congratulations:</strong> You hit your FIRE target at Age <strong>${retireAge}</strong> with <strong>${formatVal(projectedCorpusValueAtRetire)}</strong>. Your retirement compounds nicely and sustains your lifestyle until Age <strong>${ageCompletedDrawdown}</strong> before depletion occurs.`;
+                    } else {
+                        advice = `🚀 <strong>Outstanding Profile!</strong> You achieve full financial freedom by Age <strong>${retireAge}</strong>. Your investments compound faster than withdrawals, creating an infinite generation wealth stream.`;
+                    }
+                } else {
+                    const extraSavingsNeeded = solveRequiredMonthlySavings(targetCorpusFloor, startPortfolio, preRetireReturn, yearsToRetire, stepUpRate);
+                    advice = `💡 <strong>FIRE Optimization Plan:</strong> Based on current monthly savings (₹${formatIndianShort(startSavings)}), you will face a deficit of <strong>${formatVal(targetCorpusFloor - projectedCorpusValueAtRetire)}</strong> at age ${retireAge}. Increasing your monthly savings to <strong>₹${formatIndianShort(extraSavingsNeeded)}</strong> will help you achieve full financial independence on time.`;
+                }
+                textEl.innerHTML = advice;
+            }
+
+            // Warnings Validation Alerts
+            const warnBox = document.getElementById('smartFinancialValidation');
+            if (warnBox) {
+                warnBox.innerHTML = '';
+                warnBox.classList.add('hidden');
+
+                if (swr > 5) {
+                    warnBox.classList.remove('hidden');
+                    warnBox.innerHTML = `
+                        <div class="p-2.5 bg-amber-50 border border-amber-250 text-amber-900 rounded-xl text-[10px] flex items-start gap-1.5 leading-relaxed">
+                            <span>⚠️</span>
+                            <span><strong>Aggressive Withdrawal Flag (${swr}% SWR):</strong> Withdrawing over 5% annually in a high-inflation environment significantly increases sequence-of-returns risks. Lower SWR to 3.5%-4% to protect capital.</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // Render Dynamic Double Line Charts
+            renderChartTimeline(yearlyTableData, retireAge);
+
+            // Populate table ledger
+            renderTableLedger(yearlyTableData);
+        }
+
+        // --- Dynamic Reverse Solver (Monthly Savings Needed) ---
+        function solveRequiredMonthlySavings(targetM, startNet, expectedCAGR, years, stepUpPct) {
+            const netCAGR = expectedCAGR / 100;
+            const effNetRate = Math.pow(1 + netCAGR, 1/12) - 1;
+            const stepUpFactor = stepUpPct / 100;
+
+            let low = 1;
+            let high = targetM;
+            for (let iter = 0; iter < 30; iter++) {
+                let mid = (low + high) / 2;
+                let runningNet = startNet;
+                let monthlyContrib = mid;
+                for (let y = 1; y <= years; y++) {
+                    for (let m = 1; m <= 12; m++) {
+                        runningNet = (runningNet + monthlyContrib) * (1 + effNetRate);
+                    }
+                    monthlyContrib = monthlyContrib * (1 + stepUpFactor);
+                }
+                if (runningNet < targetM) {
+                    low = mid;
+                } else {
+                    high = mid;
+                }
+            }
+            return (low + high) / 2;
+        }
+
+        // --- Render Visuals & Charts ---
+        function renderChartTimeline(schedule, retireAge) {
+            const canvas = document.getElementById('fireDrawdownChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            if (typeof Chart === 'undefined') {
+                setTimeout(() => renderChartTimeline(schedule, retireAge), 300);
+                return;
+            }
+
+            const labels = schedule.map(row => `Age ${row.age}`);
+            const values = schedule.map(row => Math.round(row.closingNetworth));
+            const pointColors = schedule.map(row => row.age === retireAge ? '#b91c1c' : 'transparent');
+            const pointRadii = schedule.map(row => row.age === retireAge ? 6 : 0);
+
+            if (compoundedChart) {
+                compoundedChart.data.labels = labels;
+                compoundedChart.data.datasets[0].data = values;
+                compoundedChart.data.datasets[0].pointBackgroundColor = pointColors;
+                compoundedChart.data.datasets[0].pointRadius = pointRadii;
+                compoundedChart.update();
+            } else {
+                compoundedChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Accumulated Portfolio Value',
+                            data: values,
+                            borderColor: '#1e293b',
+                            borderWidth: 3,
+                            fill: false,
+                            tension: 0.1,
+                            pointBackgroundColor: pointColors,
+                            pointRadius: pointRadii,
+                            pointHoverRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: { label: (c) => ` Portfolio: ${formatVal(c.parsed.y)}` },
+                                bodyFont: { family: 'Inter', size: 10 },
+                                cornerRadius: 8,
+                                backgroundColor: '#0f172a'
+                            }
+                        },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+                            y: { ticks: { font: { size: 9 }, callback: (v) => formatIndianShort(v) } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function renderTableLedger(schedule) {
+            const body = document.getElementById('growthTableBody');
+            if (!body) return;
+            body.innerHTML = '';
+
+            const maxPortfolio = Math.max(...schedule.map(r => r.closingNetworth));
+
+            schedule.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = row.phase === 'Drawdown' ? "bg-red-50/20 hover:bg-red-50/40 transition-colors" : "hover:bg-stone-50 transition-colors";
+                
+                const formattedInput = row.annualInput === 0 ? '₹0' : formatVal(row.annualInput);
+                const isDrawdown = row.annualInput < 0;
+
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-800">${row.age}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${row.phase === 'Drawdown' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">
+                            ${row.phase}
+                        </span>
+                    </td>
+                    <td class="p-3 font-medium ${isDrawdown ? 'text-rose-700 font-extrabold' : 'text-slate-600'}">
+                        ${formattedInput}
+                    </td>
+                    <td class="p-3 font-medium text-emerald-800">${formatVal(row.annualGains)}</td>
+                    <td class="p-3 font-extrabold text-slate-900 text-center">
+                        ${formatVal(row.closingNetworth)}
+                        <div class="progress-bar-bg h-1 w-full bg-slate-100 rounded-full mt-1 overflow-hidden print-hide">
+                            <div class="bg-red-700 h-full" style="width: ${Math.min(100, (row.closingNetworth / maxPortfolio) * 100)}%"></div>
+                        </div>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        function toggleGrowthTable() {
+            const container = document.getElementById('growthTableContainer');
+            const btn = document.getElementById('toggleGrowthTableBtn');
+            if (!container || !btn) return;
+
+            const isHidden = container.classList.toggle('hidden');
+            btn.textContent = isHidden ? "Show Year-by-Year Ledger" : "Hide Year-by-Year Ledger";
+
+            if (!isHidden) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function exportSimulationToCSV() {
+            if (yearlyTableData.length === 0) {
+                displayToast("No simulation ledger available to export!");
+                return;
+            }
+            
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Age,Phase,Annual Savings or Withdrawal (INR),Gains Generated (INR),Closing Net Worth (INR)\n";
+            
+            yearlyTableData.forEach(row => {
+                csvContent += `${row.age},${row.phase},${Math.round(row.annualInput)},${Math.round(row.annualGains)},${Math.round(row.closingNetworth)}\n`;
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `FIRE_Retirement_Plan_Ledger.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            displayToast("Progression Ledger CSV downloaded successfully!");
+        }
+
+        // --- Onload Initiators ---
+        window.onload = function() {
+            setupComponentSynchronizers();
+            validateAgeSettings();
+            updateSliderIndicator('expenseSlider');
+            updateSliderIndicator('networthSlider');
+            updateSliderIndicator('savingsSlider');
+            updateSliderIndicator('inflationSlider');
+            updateSliderIndicator('stepUpSlider');
+            updateSliderIndicator('swrSlider');
+        };
+
+        function setupComponentSynchronizers() {
+            // Bind sliders with manual entries directly
+            document.getElementById('expenseSlider').value = 50000;
+            document.getElementById('networthSlider').value = 500000;
+            document.getElementById('savingsSlider').value = 25000;
+            document.getElementById('inflationSlider').value = 6;
+            document.getElementById('stepUpSlider').value = 10;
+            document.getElementById('swrSlider').value = 4;
+        }
+    </script>
+</body>
+</html>
