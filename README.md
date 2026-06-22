@@ -6,7 +6,7 @@ A high-performance digital utility station designed for speed, privacy, and prec
 
 🧠 The Philosophy
 
-Toolblaster was born from a simple frustration: essential digital utilities and financial calculators are often over-engineered, riddled with ads, or hidden behind paywalls. We believe that managing daily priorities, executing deep work, or planning your long-term wealth shouldn't require a subscription or compromise your privacy.
+Toolblaster was born from a simple frustration: essential digital utilities and financial calculators are often over-engineered, riddled with invasive ads, or hidden behind monthly paywalls. We believe that managing daily priorities, executing deep focus work, or planning your long-term compound wealth shouldn't require a subscription or compromise your personal privacy.
 
 Our Core Pillars:
 
@@ -28,7 +28,7 @@ DECIDE. (/productivity/decide/)
 
 Daily Priority Tool for Mental Clarity & Focus
 
-Feature: Limits you to strictly 3 daily priorities to eliminate task overload and anxiety.
+Feature: Limits you to strictly 3 daily priorities to eliminate task overload, cognitive fatigue, and anxiety.
 
 Tech: localStorage persistence, custom JSON imports/exports, and high-fidelity PDF/CSV print generations.
 
@@ -48,8 +48,6 @@ Feature: Auto-start intervals, customizable break rules, and native keyboard hot
 
 Tech: Web Audio API for synthetic ambient sounds (Brown/Pink/White noise), native push notifications, and Screen Wake Lock API.
 
-Breathing Pacer (/productivity/breathing-pacer/)
-
 Minimalist Box Breathing & Meditation Guide
 
 Feature: Visual pacing for the 4-7-8 method, classic Box Breathing, and custom cycles. Leverages Zen-inspired sound blocks.
@@ -66,19 +64,38 @@ Tech: Local state sync, weekly completion metrics tracking.
 
 📈 Finance Suite
 
+Unified High-Precision Portfolio & Compound Yield Simulator
+
+Unified Asset Classes: Calculate and compare compound interest curves across 9 distinct Indian mutual fund asset classes—Index, Large Cap, Mid Cap, Small Cap, Multi Cap, Flexi Cap, Balanced/Hybrid, Equity Basket, and Debt Funds.
+
+Precision Mathematical Compounding: Replaces standard naive linear compounding ($R/12$) with the mathematically precise Effective Monthly Compounding Rate formula based on beginning-of-month periodic deposits:
+
+
+$$i = (1 + R)^{1/12} - 1$$
+
+Direct vs. Regular Wealth Leakage: Models real-time compounding erosion triggered by mutual fund expense ratios and regular plan broker commission trailing fees (~1.0% p.a. added drag), visually projecting absolute wealth loss in rupees.
+
+Annualised Tax Harvesting (Sec 112A): Models realistic portfolio tax liability by harvesting long-term capital gains (LTCG) up to the statutory ₹1.25 Lakh exemption threshold every financial year of the tenure, rather than overestimating tax with a flat maturity calculation.
+
+Reverse Goal Seek Mode: Allows users to input a target milestone corpus (e.g., ₹1 Crore) and backwards-solves the exact starting monthly SIP or up-front lumpsum required.
+
+Cost of Delay (Procrastination) Simulator: Calculates the exact financial penalty of delaying an investment start by 1, 3, or 5 years.
+
+Personal Yield Rates: Displays true cash-flow adjusted XIRR (Extended Internal Rate of Return) alongside simple absolute percentage returns.
+
+Tech: Chart.js visual dough-mapping, year-by-year incremental progression schedules with built-in tabular progress gauges, custom CSV spreadsheet exporters, and fully optimized A4 @media print sheets.
+
 PPF Calculator (/finance/ppf-calculator/)
 
 Sovereign Wealth Maturity, Loan & Extension Planner
 
 Feature: Plan extensions in blocks of 5 years (up to 20 years) with or without fresh contributions. Includes a government-rule loan auditor (eligible Years 3-6) and tax-free partial withdrawal thresholds tracker (eligible Year 7+).
 
-Advanced Logic: Built-in "April 5th" interest timing optimization algorithm to compare lump-sum yield losses against late deposits. Includes an editable YoY growth ledger allowing users to input specific custom annual investments.
+Advanced Logic: Built-in "April 5th" interest timing optimisation algorithm to compare lump-sum yield losses against late deposits. Includes an editable YoY growth ledger allowing users to input specific custom annual investments.
 
 Tech: Chart.js dynamic doughnut mapping, custom CSV exports, tax bracket slab selectors (Section 80C integration), and high-contrast print layouts.
 
-EMI Calculator (/finance/emi-calculator/)
-
-Advanced 5-in-1 Multi-Loan Repayment & Amortization Suite
+Advanced 5-in-1 Multi-Loan Repayment & Amortisation Suite
 
 Feature: Unified calculator supporting Home, Car, Bike, Personal, and Mobile loans. Includes a toggle to check "Max Loan Eligibility" based on target budgets.
 
@@ -171,7 +188,7 @@ WCAG AA Compliance: Color pairings are reviewed meticulously. Headings, labels, 
 
 Print Optimization: Custom @media print style sheets swap out interactive controls and sliders with high-contrast, clean-cut statement templates (#print-report and table structures) specifically designed for neat A4 PDF saving.
 
-SEO & Structure: Implemented standardized meta titles (strictly capped at 60 characters for SERP) and meta descriptions under 160 characters. Backed by extensive Schema.org JSON-LD structured data graphs (FinancialProduct and HowTo/FAQPage configurations) for rich snippet results.
+SEO & Structure: Implemented standardized meta titles (strictly capped at 60 characters for SERP) and meta descriptions under 160 characters. Backed by extensive Schema.org JSON-LD structured data graphs (WebApplication, HowTo, and FAQPage configurations) for rich snippet results.
 
 ✉️ Contact & Creator
 
