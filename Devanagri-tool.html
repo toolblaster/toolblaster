@@ -35,12 +35,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Isolated Google Fonts Stylesheets to resolve strict MIME checking and 400 Bad Request Errors -->
+    <!-- Core Google Fonts Stylesheets to ensure super fast and light initial load times -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -240,9 +237,9 @@
                     <div class="space-y-1 relative">
                         <label for="keyboard-layout-select" class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Keyboard Layout Standard</label>
                         <select id="keyboard-layout-select" class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Choose standard Government Unicode Inscript, Legacy Krutidev, or classic English standard layout">
-                            <option value="hindi_inscript" selected>🇮🇳 Hindi Inscript (Mangal Unicode)</option>
-                            <option value="hindi_remington">⌨️ Hindi Remington (Krutidev Legacy)</option>
-                            <option value="english_qwerty">🇬🇧 English (Classic QWERTY Standard)</option>
+                            <option value="hindi_inscript" selected>Inscript (Mangal Unicode)</option>
+                            <option value="hindi_remington">Remington (Krutidev Legacy)</option>
+                            <option value="english_qwerty">English (Classic QWERTY Standard)</option>
                         </select>
                     </div>
 
@@ -250,11 +247,11 @@
                     <div class="space-y-1 relative">
                         <label for="lesson-category-select" class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Training Category Row</label>
                         <select id="lesson-category-select" class="w-full bg-white border border-stone-300/80 rounded-xl p-2.5 text-xs font-extrabold text-stone-900 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Select typing drill level from basic home row up to official exam paragraphs">
-                            <option value="home_row" selected>Home Row Drills (प्राथमिक स्तर)</option>
-                            <option value="top_row">Top Row Drills (द्वितीय स्तर)</option>
-                            <option value="bottom_row">Bottom Row Drills (तृतीय स्तर)</option>
-                            <option value="government_exams">Government Mock Exam Paragraphs (परीक्षा अभ्यास)</option>
-                            <option value="custom_practice">Custom Practice Sandbox (स्वयं का पाठ)</option>
+                            <option value="home_row" selected>Home Row Drills (рдкреНрд░рд╛рдердорд┐рдХ рд╕реНрддрд░)</option>
+                            <option value="top_row">Top Row Drills (рджреНрд╡рд┐рддреАрдп рд╕реНрддрд░)</option>
+                            <option value="bottom_row">Bottom Row Drills (рддреГрддреАрдп рд╕реНрддрд░)</option>
+                            <option value="government_exams">Government Mock Exam Paragraphs (рдкрд░реАрдХреНрд╖рд╛ рдЕрднреНрдпрд╛рд╕)</option>
+                            <option value="custom_practice">Custom Practice Sandbox (рд╕реНрд╡рдпрдВ рдХрд╛ рдкрд╛рда)</option>
                         </select>
                     </div>
 
@@ -267,8 +264,8 @@
                         </div>
                         
                         <div class="flex-1 relative">
-                            <button type="button" id="btn-toggle-lessons-modal" class="w-full bg-red-50 hover:bg-red-100 border border-red-300 text-red-950 p-2.5 rounded-xl transition-all flex items-center justify-center gap-1 relative font-extrabold shadow-sm text-[10px]" title="View & Print your touch typing commemorative diploma card">
-                                <i class="fa-solid fa-medal text-red-700"></i> <span class="hidden lg:inline">Diploma</span>
+                            <button type="button" id="btn-toggle-lessons-modal" class="w-full bg-red-50 hover:bg-red-100 border border-red-300 text-red-950 p-2.5 rounded-xl transition-all flex items-center justify-center gap-1 relative font-extrabold shadow-sm text-[10px]" title="View & Print your touch typing commemorative certificate card">
+                                <i class="fa-solid fa-medal text-red-700"></i> <span class="hidden lg:inline">Certificate</span>
                                 <span id="cert-badge-dot" class="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-red-600 hidden animate-ping"></span>
                             </button>
                         </div>
@@ -301,9 +298,9 @@
 
                 <!-- CUSTOM TEXT SANDBOX INPUT -->
                 <div id="custom-practice-sandbox" class="hidden bg-stone-100/80 border border-stone-200 rounded-2xl p-4 mb-5 space-y-3 shadow-inner">
-                    <label for="custom-typed-text" class="block text-[10px] font-black text-stone-800 uppercase tracking-widest">Custom Devanagari / English Sandbox (पसंद का पाठ पेस्ट करें)</label>
+                    <label for="custom-typed-text" class="block text-[10px] font-black text-stone-800 uppercase tracking-widest">Custom Devanagari / English Sandbox (рдкрд╕рдВрдж рдХрд╛ рдкрд╛рда рдкреЗрд╕реНрдЯ рдХрд░реЗрдВ)</label>
                     <textarea id="custom-typed-text" rows="3" class="w-full bg-white border border-stone-300 rounded-xl p-3 text-xs font-medium focus:ring-2 focus:ring-red-500 focus:outline-none leading-relaxed text-stone-900" placeholder="Type or paste your own paragraph here... Our engine translates standard input instantly into Krutidev or Inscript mapping rules."></textarea>
-                    <button type="button" id="btn-load-custom-text" class="bg-red-800 hover:bg-red-900 text-white font-black text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-xl transition-all active:scale-95 shadow-sm" title="Load your custom text to begin practice">📥 Load Practice Paragraph</button>
+                    <button type="button" id="btn-load-custom-text" class="bg-red-800 hover:bg-red-900 text-white font-black text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-xl transition-all active:scale-95 shadow-sm" title="Load your custom text to begin practice">ЁЯУе Load Practice Paragraph</button>
                 </div>
 
                 <!-- GOVERNMENT MOCK EXAM CONTROLS PANEL -->
@@ -312,7 +309,7 @@
                         <span class="text-xs font-black uppercase tracking-wider text-red-900 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-red-700"></i> Govt Clerk Exam Simulator</span>
                         <label class="flex items-center gap-1.5 cursor-pointer text-[10px] font-black uppercase text-stone-800 relative" title="Locks Backspace usage & locks duration to standard 10 minutes">
                             <input type="checkbox" id="chk-strict-mock" class="rounded text-red-600 focus:ring-red-500 h-4 w-4">
-                            <span>Strict Mock Mode ON 🚨</span>
+                            <span>Strict Mock Mode ON ЁЯЪи</span>
                         </label>
                     </div>
                     
@@ -332,7 +329,7 @@
                         <div class="flex-1 min-w-[210px] space-y-1.5 relative">
                             <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Practice Duration</span>
                             <select id="mock-timer-select" class="w-full bg-white border border-stone-300 px-4 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-stone-900 shadow-sm transition-all" title="Set countdown time limit interval for your session">
-                                <option value="0">No Limit (असीमित समय)</option>
+                                <option value="0">No Limit (рдЕрд╕реАрдорд┐рдд рд╕рдордп)</option>
                                 <option value="120">2 Minute Run</option>
                                 <option value="300">5 Minute Run</option>
                                 <option value="600">10 Minute Run (Standard Exam)</option>
@@ -342,8 +339,8 @@
                         <div class="flex-1 min-w-[210px] space-y-1.5 relative">
                             <span class="block uppercase tracking-wider text-[9px] text-stone-700 font-black">Backspace Restriction</span>
                             <select id="backspace-lock-select" class="w-full bg-white border border-stone-300 px-4 py-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-stone-900 shadow-sm transition-all" title="Toggle backspace block constraints to simulate rigorous government typist standards">
-                                <option value="allow">Allow Backspace (संशोधन की अनुमति)</option>
-                                <option value="disable">Lock Backspace (कठोर प्रतिबंध)</option>
+                                <option value="allow">Allow Backspace (рд╕рдВрд╢реЛрдзрди рдХреА рдЕрдиреБрдорддрд┐)</option>
+                                <option value="disable">Lock Backspace (рдХрдареЛрд░ рдкреНрд░рддрд┐рдмрдВрдз)</option>
                             </select>
                         </div>
                         
@@ -357,7 +354,7 @@
                     
                     <!-- Weak key practice alert prompt -->
                     <div id="weak-keys-alert-bar" class="hidden bg-amber-50 border border-amber-300 rounded-xl p-3 flex justify-between items-center text-[10px] text-stone-900 font-bold leading-relaxed transition-all">
-                        <span>⚠️ High friction keystrokes detected. Practice them specifically to construct strong motor neural maps!</span>
+                        <span>тЪая╕П High friction keystrokes detected. Practice them specifically to construct strong motor neural maps!</span>
                         <button type="button" id="btn-practice-weak-keys" class="bg-amber-700 hover:bg-amber-800 text-white font-black uppercase text-[9px] tracking-wider px-3 py-1.5 rounded-lg transition-all" title="Compile and load custom exercises isolated specifically to target your weak keys">Practice Weak Keys</button>
                     </div>
                 </div>
@@ -390,8 +387,8 @@
                         </div>
                     </div>
 
-                    <!-- Target Words Display Box (High Contrast WCAG Compliant Layout) -->
-                    <div id="typing-words-container" class="min-h-[120px] max-h-[160px] overflow-y-auto mb-4 p-4 bg-stone-900 rounded-xl border border-stone-800 text-lg sm:text-xl leading-relaxed font-semibold text-stone-300 select-none flex flex-wrap gap-x-3 gap-y-2 outline-none focus:ring-2 focus:ring-red-600 cursor-text custom-scroll" tabindex="0">
+                    <!-- Target Words Display Box (Optimized Sleeker Height with 120px cap) -->
+                    <div id="typing-words-container" class="min-h-[90px] max-h-[120px] overflow-y-auto mb-4 p-4 bg-stone-900 rounded-xl border border-stone-800 text-lg sm:text-xl leading-relaxed font-semibold text-stone-300 select-none flex flex-wrap gap-x-3 gap-y-2 outline-none focus:ring-2 focus:ring-red-600 cursor-text custom-scroll" tabindex="0">
                         <!-- Words are injected programmatically -->
                     </div>
 
@@ -415,7 +412,7 @@
 
                     <!-- Input Instructions HUD with stone-300 for superior dark contrast ratio -->
                     <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] text-stone-300 font-semibold gap-2 border-t border-stone-800/60 pt-2.5">
-                        <span>💡 <strong class="text-white">Tap typing box</strong> to focus. Support both hardware and OTG mobile keyboards!</span>
+                        <span>ЁЯТб <strong class="text-white">Tap typing box</strong> to focus. Support both hardware and OTG mobile keyboards!</span>
                         <div class="flex gap-2">
                             <button type="button" id="btn-reset-practice" class="bg-stone-800 hover:bg-stone-750 text-stone-100 uppercase font-black tracking-widest text-[9px] px-3.5 py-1.5 rounded-lg transition-all border border-stone-800" title="Reset your practice statistics and restart the active layout drill"><i class="fa-solid fa-rotate-left"></i> Restart Drill</button>
                         </div>
@@ -450,7 +447,7 @@
 
                 <!-- FLOATING ACTIVE HANDS FINGER GUIDE -->
                 <div id="hands-finger-guide-outer" class="mt-5 bg-stone-100/95 border border-stone-300 rounded-3xl p-4 text-center select-none print-hide shadow-sm transition-all duration-300">
-                    <p class="text-stone-800 text-[10px] font-black uppercase tracking-widest mb-3">👐 Active Touch-Typing Fingertips Guide</p>
+                    <p class="text-stone-800 text-[10px] font-black uppercase tracking-widest mb-3">ЁЯСР Active Touch-Typing Fingertips Guide</p>
                     <div class="flex justify-center gap-10 items-center flex-wrap">
                         <!-- Left Hand -->
                         <div class="flex flex-col items-center">
@@ -540,26 +537,26 @@
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-700"><i class="fa-solid fa-brain"></i></span> The Cognitive Mechanics of Touch Typing
                     </h2>
-                    <p class="leading-relaxed mb-4 text-stone-850 text-[13px] font-medium">
+                    <p class="leading-relaxed mb-4 text-stone-855 text-[13px] font-medium">
                         Touch typing is not simply a mechanical execution; it is an intimate coordination between spatial memory and haptic feedback loops. By training the fingers to locate specific keyboard zones independently of focal vision, typists convert linguistic concepts directly into finger movements, freeing cognitive space for content formulation. Key benefits of mastering touch typing include:
                     </p>
                     
                     <ul class="space-y-3 mb-5 pl-1">
-                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-855 font-medium leading-relaxed">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
                             <span><strong>Motor Spatial Mapping:</strong> Consistent alignment over the standard "Home Row" anchor coordinates creates robust muscle memory maps, allowing the brain's motor cortex to recall key locations without visual prompts.</span>
                         </li>
-                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-855 font-medium leading-relaxed">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
                             <span><strong>Devanagari Complexities Resolved:</strong> Script layouts such as Remington Gail or Mangal Inscript require structured sequences to formulate joint letters and vowel diacritics. Direct typing practice minimizes cognitive friction.</span>
                         </li>
-                        <li class="flex items-start gap-2.5 text-[13px] text-stone-850 font-medium leading-relaxed">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-855 font-medium leading-relaxed">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
                             <span><strong>Govt Examination Readiness:</strong> Most civil services, banking clerical exams, and legislative department tests mandate specific speed targets (typically 35+ Net WPM). Continuous mock simulation guarantees preparedness under exam conditions.</span>
                         </li>
                     </ul>
                     
-                    <p class="leading-relaxed mb-0 text-stone-850 text-[13px] font-medium border-t border-stone-200 pt-4">
+                    <p class="leading-relaxed mb-0 text-stone-855 text-[13px] font-medium border-t border-stone-200 pt-4">
                         Our advanced <strong>Devnagari KeyMaster App</strong> bridges legacy typewriter architectures with modern web-based training principles, offering an ink-safe design and a secure client-side sandbox environment.
                     </p>
                 </section>
@@ -569,11 +566,11 @@
                     <h2 class="text-base font-black text-stone-900 mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-700"><i class="fa-solid fa-code-fork"></i></span> Krutidev (Remington) vs. Mangal (Inscript)
                     </h2>
-                    <p class="text-xs leading-relaxed mb-4 text-stone-850 font-semibold">
+                    <p class="text-xs leading-relaxed mb-4 text-stone-855 font-semibold">
                         India's government departments employ two completely distinct typing methodologies, each catering to different technological generations:
                     </p>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-stone-850 leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-stone-855 leading-relaxed">
                         <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
                             <h3 class="font-extrabold text-stone-900 uppercase tracking-wide flex items-center gap-1.5 mb-2">
                                 <span class="w-5 h-5 rounded-full bg-red-100 text-red-900 font-bold flex items-center justify-center text-[10px]">1</span>
@@ -600,7 +597,7 @@
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-700"><i class="fa-solid fa-circle-check"></i></span> Premium Advantages of KeyMaster Tutor
                     </h2>
-                    <ul class="space-y-3.5 pl-1 text-[13px] text-stone-850 font-medium leading-relaxed">
+                    <ul class="space-y-3.5 pl-1 text-[13px] text-stone-855 font-medium leading-relaxed">
                         <li class="flex items-start gap-2.5">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
                             <span><strong>No OS Layout Pack Needed:</strong> Type Remington & Inscript directly over standard English QWERTY structures without configurations.</span>
@@ -643,7 +640,7 @@
                         <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">No. In accordance with strict COPPA guidelines and privacy-by-design standards, Devnagari KeyMaster operates entirely client-side. Your practice texts, typing speeds, and spatial coordinates never leave your device.</p>
                     </div>
                     <div class="p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-sm">
-                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">5. How do I print my Devanagari Master Typing Diploma?</h3>
+                        <h3 class="font-black text-stone-900 mb-1.5 mt-0 text-sm">5. How do I print my Devanagari Master Typing Certificate?</h3>
                         <p class="text-xs leading-relaxed mb-0 text-stone-800 font-semibold">Once your personal records achieve a Net Speed of 35 WPM or higher with at least 95% accuracy, the lock is removed on the Certificate Modal. Type your name and tap the print button to generate a clean, vector-rendered A4 printout.</p>
                     </div>
                 </section>
@@ -660,17 +657,17 @@
     <!-- CERTIFICATE CLAIM MODAL -->
     <div id="cert-claim-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
         <div id="cert-claim-modal-content" class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 relative transform transition-all duration-200 text-left">
-            <button type="button" id="btn-close-cert-modal" class="absolute top-4 right-4 text-stone-700 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close diploma details">&times;</button>
+            <button type="button" id="btn-close-cert-modal" class="absolute top-4 right-4 text-stone-700 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close certificate details">&times;</button>
             
             <div class="flex items-center gap-2 border-b border-stone-200 pb-3 mb-4">
                 <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center shadow-inner">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <h2 class="text-sm font-black text-stone-900 uppercase tracking-wider">Devnagari Master Typing Diploma</h2>
+                <h2 class="text-sm font-black text-stone-900 uppercase tracking-wider">Devnagari Master Typing Certificate</h2>
             </div>
 
             <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 text-[11px] text-stone-900 font-bold leading-relaxed mb-4">
-                🏆 <strong>Requirement:</strong> Maintain a net speed of over <strong>35 WPM</strong> with an accuracy threshold of <strong>95%</strong> to print your commemorative certificate.
+                ЁЯПЖ <strong>Requirement:</strong> Maintain a net speed of over <strong>35 WPM</strong> with an accuracy threshold of <strong>95%</strong> to print your commemorative certificate.
             </div>
 
             <!-- Gamified Streak Achievements inside Modal Container -->
@@ -680,14 +677,14 @@
                 </span>
                 <div class="grid grid-cols-2 gap-2 text-[10px] font-bold text-stone-800">
                     <div id="achieve-7day" class="flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2">
-                        <span id="achieve-7day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <span id="achieve-7day-icon" class="text-stone-500 text-xs">ЁЯФТ</span>
                         <div>
                             <span class="block font-extrabold text-stone-900">7-Day Fire Medal</span>
                             <span id="achieve-7day-status" class="text-[8px] text-stone-700 font-medium">Practice 7 days consecutively</span>
                         </div>
                     </div>
                     <div id="achieve-30day" class="flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2">
-                        <span id="achieve-30day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <span id="achieve-30day-icon" class="text-stone-500 text-xs">ЁЯФТ</span>
                         <div>
                             <span class="block font-extrabold text-stone-900">30-Day Master Ring</span>
                             <span id="achieve-30day-status" class="text-[8px] text-stone-700 font-medium">Practice 30 days consecutively</span>
@@ -715,8 +712,8 @@
 
                 <p id="cert-status-error-msg" class="text-[11px] text-red-800 font-bold italic text-center"></p>
 
-                <button type="button" id="btn-print-diploma" class="w-full bg-red-800 hover:bg-red-900 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95">
-                    📜 Print Commemorative Diploma
+                <button type="button" id="btn-print-certificate" class="w-full bg-red-800 hover:bg-red-900 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95">
+                    ЁЯУЬ Print Commemorative Certificate
                 </button>
             </div>
         </div>
@@ -770,7 +767,7 @@
                 </div>
                 
                 <div class="flex justify-between items-center text-[10px] text-stone-750 font-bold px-1 bg-stone-50 border border-stone-200 p-2.5 rounded-xl flex-wrap gap-2">
-                    <span>💡 <strong class="text-stone-900">Target metrics:</strong> Try to keep accuracy above 95% to allow stable motor nervous pathway building.</span>
+                    <span>ЁЯТб <strong class="text-stone-900">Target metrics:</strong> Try to keep accuracy above 95% to allow stable motor nervous pathway building.</span>
                     <button type="button" id="btn-clear-analytics" class="text-red-700 hover:text-red-900 uppercase font-black tracking-widest text-[9px] transition-all flex items-center gap-1.5" title="Clear all local user progress logs and weak character coefficients"><i class="fa-solid fa-trash-can"></i> Clear History</button>
                 </div>
             </div>
@@ -833,151 +830,47 @@
                 hindi_inscript: {
                     displayName: "Hindi Inscript (Mangal)",
                     forwardMap: {
-                        'KeyQ': 'ौ', 'KeyW': 'ै', 'KeyE': 'ा', 'KeyR': 'ी', 'KeyT': 'ू', 'KeyY': 'ब', 'KeyU': 'ह', 'KeyI': 'ग', 'KeyO': 'द', 'KeyP': 'ज', 'BracketLeft': 'ड', 'BracketRight': 'ृ',
-                        'KeyA': 'ो', 'KeyS': 'े', 'KeyD': '्', 'KeyF': 'ि', 'KeyG': 'ु', 'KeyH': 'प', 'KeyJ': 'र', 'KeyK': 'क', 'KeyL': 'त', 'Semicolon': 'च', 'Quote': 'ट',
-                        'KeyZ': '़', 'KeyX': 'ं', 'KeyC': 'म', 'KeyV': 'न', 'KeyB': 'व', 'KeyN': 'ल', 'KeyM': 'स', 'Comma': ',', 'Period': '.', 'Slash': 'य',
+                        'KeyQ': 'реМ', 'KeyW': 'реИ', 'KeyE': 'рд╛', 'KeyR': 'реА', 'KeyT': 'реВ', 'KeyY': 'рдм', 'KeyU': 'рд╣', 'KeyI': 'рдЧ', 'KeyO': 'рдж', 'KeyP': 'рдЬ', 'BracketLeft': 'рдб', 'BracketRight': 'реГ',
+                        'KeyA': 'реЛ', 'KeyS': 'реЗ', 'KeyD': 'реН', 'KeyF': 'рд┐', 'KeyG': 'реБ', 'KeyH': 'рдк', 'KeyJ': 'рд░', 'KeyK': 'рдХ', 'KeyL': 'рдд', 'Semicolon': 'рдЪ', 'Quote': 'рдЯ',
+                        'KeyZ': 'рд╝', 'KeyX': 'рдВ', 'KeyC': 'рдо', 'KeyV': 'рди', 'KeyB': 'рд╡', 'KeyN': 'рд▓', 'KeyM': 'рд╕', 'Comma': ',', 'Period': '.', 'Slash': 'рдп',
                         'Space': ' '
                     },
                     forwardMapShifted: {
-                        'KeyQ': 'औ', 'KeyW': 'ऐ', 'KeyE': 'आ', 'KeyR': 'ई', 'KeyT': 'ऊ', 'KeyY': 'भ', 'KeyU': 'ङ', 'KeyI': 'घ', 'KeyO': 'ध', 'KeyP': 'झ', 'BracketLeft': 'ढ', 'BracketRight': 'ञ',
-                        'KeyA': 'ओ', 'KeyS': 'ए', 'KeyD': 'अ', 'KeyF': 'इ', 'KeyG': 'उ', 'KeyH': 'फ', 'KeyJ': 'ऱ', 'KeyK': 'ख', 'KeyL': 'थ', 'Semicolon': 'छ', 'Quote': 'ठ',
-                        'KeyZ': 'ऋ', 'KeyX': 'ँ', 'KeyC': 'ण', 'KeyV': 'ऩ', 'KeyB': 'ष', 'KeyN': 'ळ', 'KeyM': 'श', 'Comma': 'ष्', 'Period': '।', 'Slash': 'य',
-                        'Digit1': '१', 'Digit2': '२', 'Digit3': '३', 'Digit4': '४', 'Digit5': '५', 'Digit6': '६', 'Digit7': '७', 'Digit8': '८', 'Digit9': '९', 'Digit0': '०'
+                        'KeyQ': 'рдФ', 'KeyW': 'рдР', 'KeyE': 'рдЖ', 'KeyR': 'рдИ', 'KeyT': 'рдК', 'KeyY': 'рдн', 'KeyU': 'рдЩ', 'KeyI': 'рдШ', 'KeyO': 'рдз', 'KeyP': 'рдЭ', 'BracketLeft': 'рдв', 'BracketRight': 'рдЮ',
+                        'KeyA': 'рдУ', 'KeyS': 'рдП', 'KeyD': 'рдЕ', 'KeyF': 'рдЗ', 'KeyG': 'рдЙ', 'KeyH': 'рдл', 'KeyJ': 'рд▒', 'KeyK': 'рдЦ', 'KeyL': 'рде', 'Semicolon': 'рдЫ', 'Quote': 'рда',
+                        'KeyZ': 'рдЛ', 'KeyX': 'рдБ', 'KeyC': 'рдг', 'KeyV': 'рдй', 'KeyB': 'рд╖', 'KeyN': 'рд│', 'KeyM': 'рд╢', 'Comma': 'рд╖реН', 'Period': 'ред', 'Slash': 'рдп',
+                        'Digit1': 'рез', 'Digit2': 'реи', 'Digit3': 'рей', 'Digit4': 'рек', 'Digit5': 'рел', 'Digit6': 'рем', 'Digit7': 'рен', 'Digit8': 'рео', 'Digit9': 'реп', 'Digit0': 'реж'
                     },
                     backwardMap: {
-                        'क': 'k', 'ख': 'K', 'ग': 'i', 'घ': 'I', 'च': ';', 'छ': ':', 'ज': 'p', 'झ': 'P', 'ट': "'", 'ठ': '"', 'ड': '[', 'ढ': '{', 'ण': 'C',
-                        'त': 'l', 'थ': 'L', 'द': 'o', 'ध': 'O', 'न': 'v', 'प': 'h', 'फ': 'H', 'ब': 'y', 'भ': 'Y', 'म': 'c', 'य': '/', 'र': 'j', 'ल': 'n',
-                        'व': 'b', 'श': 'M', 'ष': 'K', 'स': 'm', 'ह': 'u', 'ा': 'e', 'ि': 'f', 'ी': 'r', 'ु': 'g', 'ू': 't', 'े': 's', 'ै': 'w', 'ो': 'a', 'ौ': 'q', '्': 'd', 'ं': 'x'
+                        'рдХ': 'k', 'рдЦ': 'K', 'рдЧ': 'i', 'рдШ': 'I', 'рдЪ': ';', 'рдЫ': ':', 'рдЬ': 'p', 'рдЭ': 'P', 'рдЯ': "'", 'рда': '"', 'рдб': '[', 'рдв': '{', 'рдг': 'C',
+                        'рдд': 'l', 'рде': 'L', 'рдж': 'o', 'рдз': 'O', 'рди': 'v', 'рдк': 'h', 'рдл': 'H', 'рдм': 'y', 'рдн': 'Y', 'рдо': 'c', 'рдп': '/', 'рд░': 'j', 'рд▓': 'n',
+                        'рд╡': 'b', 'рд╢': 'M', 'рд╖': 'K', 'рд╕': 'm', 'рд╣': 'u', 'рд╛': 'e', 'рд┐': 'f', 'реА': 'r', 'реБ': 'g', 'реВ': 't', 'реЗ': 's', 'реИ': 'w', 'реЛ': 'a', 'реМ': 'q', 'реН': 'd', 'рдВ': 'x'
                     }
                 },
                 hindi_remington: {
                     displayName: "Hindi Remington (Krutidev)",
                     forwardMap: {
-                        'KeyQ': 'ु', 'KeyW': 'ू', 'KeyE': 'म', 'KeyR': 'त', 'KeyT': 'ज', 'KeyY': 'ल', 'KeyU': 'न', 'KeyI': 'प', 'KeyO': 'व', 'KeyP': 'च', 'BracketLeft': 'ख', 'BracketRight': 'ह',
-                        'KeyA': 'ं', 'KeyS': 'क', 'KeyD': 'ि', 'KeyF': 'थ', 'KeyG': 'ह', 'KeyH': 'ी', 'KeyJ': 'र', 'KeyK': 'ा', 'KeyL': 'स', 'Semicolon': 'य', 'Quote': 'श',
-                        'KeyZ': '्र', 'KeyX': 'ग', 'KeyC': 'ब', 'KeyV': 'अ', 'KeyB': 'इ', 'KeyN': 'द', 'KeyM': 'ध', 'Comma': 'ए', 'Period': 'ण', 'Slash': 'ध',
+                        'KeyQ': 'реБ', 'KeyW': 'реВ', 'KeyE': 'рдо', 'KeyR': 'рдд', 'KeyT': 'рдЬ', 'KeyY': 'рд▓', 'KeyU': 'рди', 'KeyI': 'рдк', 'KeyO': 'рд╡', 'KeyP': 'рдЪ', 'BracketLeft': 'рдЦ', 'BracketRight': 'рд╣',
+                        'KeyA': 'рдВ', 'KeyS': 'рдХ', 'KeyD': 'рд┐', 'KeyF': 'рде', 'KeyG': 'рд╣', 'KeyH': 'реА', 'KeyJ': 'рд░', 'KeyK': 'рд╛', 'KeyL': 'рд╕', 'Semicolon': 'рдп', 'Quote': 'рд╢',
+                        'KeyZ': 'реНрд░', 'KeyX': 'рдЧ', 'KeyC': 'рдм', 'KeyV': 'рдЕ', 'KeyB': 'рдЗ', 'KeyN': 'рдж', 'KeyM': 'рдз', 'Comma': 'рдП', 'Period': 'рдг', 'Slash': 'рдз',
                         'Space': ' '
                     },
                     forwardMapShifted: {
-                        'KeyQ': 'फ', 'KeyW': 'ॅ', 'KeyE': 'ब्', 'KeyR': 'द्', 'KeyT': 'ज्', 'KeyY': 'ल्', 'KeyU': 'न्', 'KeyI': 'प्', 'KeyO': 'व्', 'KeyP': 'च्', 'BracketLeft': 'ख्', 'BracketRight': 'ः',
-                        'KeyA': 'ा', 'KeyS': 'क्', 'KeyD': 'ध', 'KeyF': 'थ्', 'KeyG': 'घ', 'KeyH': 'भ्', 'KeyJ': 'श्र', 'KeyK': 'ा', 'KeyL': 'स्', 'Semicolon': 'श्', 'Quote': 'ष्',
-                        'KeyZ': 'र्', 'KeyX': 'ग्', 'KeyC': 'ब्', 'KeyV': 'ट्', 'KeyB': 'ठ्', 'KeyN': 'ड्', 'KeyM': 'ढ्', 'Comma': 'श्', 'Period': '।', 'Slash': '?',
-                        'Equal': 'ृ', 'Digit5': 'ज्ञ', 'Digit6': 'त्र', 'Digit7': 'क्ष', 'Digit8': 'श्र'
+                        'KeyQ': 'рдл', 'KeyW': 'реЕ', 'KeyE': 'рдмреН', 'KeyR': 'рджреН', 'KeyT': 'рдЬреН', 'KeyY': 'рд▓реН', 'KeyU': 'рдиреН', 'KeyI': 'рдкреН', 'KeyO': 'рд╡реН', 'KeyP': 'рдЪреН', 'BracketLeft': 'рдЦреН', 'BracketRight': 'рдГ',
+                        'KeyA': 'рд╛', 'KeyS': 'рдХреН', 'KeyD': 'рдз', 'KeyF': 'рдереН', 'KeyG': 'рдШ', 'KeyH': 'рднреН', 'KeyJ': 'рд╢реНрд░', 'KeyK': 'рд╛', 'KeyL': 'рд╕реН', 'Semicolon': 'рд╢реН', 'Quote': 'рд╖реН',
+                        'KeyZ': 'рд░реН', 'KeyX': 'рдЧреН', 'KeyC': 'рдмреН', 'KeyV': 'рдЯреН', 'KeyB': 'рдареН', 'KeyN': 'рдбреН', 'KeyM': 'рдвреН', 'Comma': 'рд╢реН', 'Period': 'ред', 'Slash': '?',
+                        'Equal': 'реГ', 'Digit5': 'рдЬреНрдЮ', 'Digit6': 'рддреНрд░', 'Digit7': 'рдХреНрд╖', 'Digit8': 'рд╢реНрд░'
                     },
                     backwardMap: {
-                        'क': 's', 'ख': '[', 'ग': 'x', 'घ': '?', 'च': 'p', 'छ': 'N', 'ज': 't', 'झ': 'I', 'ट': 'v', 'ठ': 'V', 'ड': 'f', 'ढ': 'F', 'ण': 'C',
-                        'त': 'r', 'थ': 'F', 'द': 'n', 'ध': 'm', 'न': 'u', 'प': 'i', 'फ': 'o', 'ब': 'c', 'भ': 'y', 'म': 'e', 'य': ';', 'र': 'j', 'ल': 'y',
-                        'व': 'o', 'श': 'C', 'ष': '"', 'स': 'l', 'ह': 'g', 'ा': 'k', 'ि': 'd', 'ी': 'h', 'ु': 'q', 'ू': 'w', 'े': 's', 'ै': '`', 'ं': 'a', '्': 'd'
+                        'рдХ': 's', 'рдЦ': '[', 'рдЧ': 'x', 'рдШ': '?', 'рдЪ': 'p', 'рдЫ': 'N', 'рдЬ': 't', 'рдЭ': 'I', 'рдЯ': 'v', 'рда': 'V', 'рдб': 'f', 'рдв': 'F', 'рдг': 'C',
+                        'рдд': 'r', 'рде': 'F', 'рдж': 'n', 'рдз': 'm', 'рди': 'u', 'рдк': 'i', 'рдл': 'o', 'рдм': 'c', 'рдн': 'y', 'рдо': 'e', 'рдп': ';', 'рд░': 'j', 'рд▓': 'y',
+                        'рд╡': 'o', 'рд╢': 'C', 'рд╖': '"', 'рд╕': 'l', 'рд╣': 'g', 'рд╛': 'k', 'рд┐': 'd', 'реА': 'h', 'реБ': 'q', 'реВ': 'w', 'реЗ': 's', 'реИ': '`', 'рдВ': 'a', 'реН': 'd'
                     }
                 }
             }
         };
 
-        // SCALABLE SYLLABUS REGISTRY
-        const SYLLABUS_REGISTRY = {
-            english_qwerty: {
-                home_row: [
-                    { display: "asdf", keys: "asdf" },
-                    { display: "jkl;", keys: "jkl;" },
-                    { display: "asdfg", keys: "asdfg" },
-                    { display: "hjkl;", keys: "hjkl;" },
-                    { display: "flash", keys: "flash" },
-                    { display: "glass", keys: "glass" },
-                    { display: "salad", keys: "salad" },
-                    { display: "galah", keys: "galah" },
-                    { display: "slash", keys: "slash" }
-                ],
-                top_row: [
-                    { display: "qwer", keys: "qwer" },
-                    { display: "uiop", keys: "uiop" },
-                    { display: "qwert", keys: "qwert" },
-                    { display: "yuiop", keys: "yuiop" },
-                    { display: "quiet", keys: "quiet" },
-                    { display: "power", keys: "power" },
-                    { display: "write", keys: "write" },
-                    { display: "route", keys: "route" }
-                ],
-                bottom_row: [
-                    { display: "zxcv", keys: "zxcv" },
-                    { display: "nm,.", keys: "nm,." },
-                    { display: "zxcvb", keys: "zxcvb" },
-                    { display: "voice", keys: "voice" },
-                    { display: "cabin", keys: "cabin" },
-                    { display: "music", keys: "music" },
-                    { display: "zebra", keys: "zebra" }
-                ],
-                government_exams: [] // populated programmatically on selection
-            },
-            hindi_inscript: {
-                home_row: [
-                    { display: "कक", keys: "kk" },
-                    { display: "तत", keys: "ll" },
-                    { display: "चच", keys: ";;" },
-                    { display: "पप", keys: "hh" },
-                    { display: "रर", keys: "jj" },
-                    { display: "मम", keys: "cc" },
-                    { display: "नन", keys: "vv" },
-                    { display: "कतरप", keys: "kljh" },
-                    { display: "मिरन", keys: "cfjv" }
-                ],
-                top_row: [
-                    { display: "जज", keys: "pp" },
-                    { display: "खख", keys: "KK" },
-                    { display: "थथ", keys: "LL" },
-                    { display: "धध", keys: "OO" },
-                    { display: "जखथ", keys: "pKL" },
-                    { display: "धजख", keys: "OpK" }
-                ],
-                bottom_row: [
-                    { display: "इइ", keys: "FF" },
-                    { display: "उउ", keys: "GG" },
-                    { display: "एए", keys: "SS" },
-                    { display: "ऐऐ", keys: "WW" },
-                    { display: "ओओ", keys: "AA" },
-                    { display: "औऔ", keys: "QQ" },
-                    { display: "इउ", keys: "FG" },
-                    { display: "एऐ", keys: "SW" },
-                    { display: "ओऔ", keys: "AQ" }
-                ],
-                government_exams: [] // populated programmatically on selection
-            },
-            hindi_remington: {
-                home_row: [
-                    { display: "कक", keys: "ss" },
-                    { display: "सस", keys: "ll" },
-                    { display: "रर", keys: "jj" },
-                    { display: "यय", keys: ";;" },
-                    { display: "हह", keys: "gg" },
-                    { display: "किथ", keys: "dsf" },
-                    { display: "हर", keys: "gj" },
-                    { display: "ास", keys: "kl" },
-                    { display: "सिहर", keys: "dlgj" }
-                ],
-                top_row: [
-                    { display: "जज", keys: "tt" },
-                    { display: "लल", keys: "yy" },
-                    { display: "नन", keys: "uu" },
-                    { display: "पप", keys: "ii" },
-                    { display: "वव", keys: "oo" },
-                    { display: "चच", keys: "pp" },
-                    { display: "जल", keys: "ty" },
-                    { display: "नप", keys: "ui" },
-                    { display: "वच", keys: "op" }
-                ],
-                bottom_row: [
-                    { display: "अअ", keys: "vv" },
-                    { display: "इइ", keys: "bb" },
-                    { display: "दद", keys: "nn" },
-                    { display: "धध", keys: "mm" },
-                    { display: "गग", keys: "xx" },
-                    { display: "बब", keys: "cc" },
-                    { display: "अद", keys: "vn" },
-                    { display: "इग", keys: "bx" }
-                ],
-                government_exams: [] // populated programmatically on selection
-            }
-        };
-
+        // RESTORED KEYBOARD LAYOUT DEFINITION (FIXES REFERENCEERROR)
         const keyboardKeysDefinitions = {
             row1: [
                 { key: '`', label: '`', class: 'key-pinky', code: 'Backquote' },
@@ -1049,7 +942,7 @@
             ]
         };
 
-        // EXAM TEXT DATA PRESETS
+        // RESTORED GOVERNMENT EXAMS TEXT PRESETS
         const GOVT_EXAMS_PRESETS = {
             english_qwerty: {
                 test_1: "Touch typing is a skill that uses muscle memory to go super fast on key rows without looking. Speed builds up dynamically over time.",
@@ -1058,60 +951,37 @@
                 test_4: "We, the people of India, having solemnly resolved to constitute India into a Sovereign Socialist Secular Democratic Republic."
             },
             hindi_inscript: {
-                test_1: "भारत हमारा देश है। हम सब इसके नागरिक हैं। नियमित अभ्यास करने से हमारी गति और सटीकता में सुधार होगा।",
-                test_2: "सरकारी लिपिकीय परीक्षा में उत्तीर्ण होने के लिए न्यूनतम पैंटीस शब्द प्रति मिनट की गति होना अति आवश्यक माना जाता है।",
-                test_3: "हिंदी टंकण में विराम चिन्हों तथा संयुक्त अक्षरों का विशेष ध्यान रखना पड़ता है। निरंतर अभ्यास ही सफलता की मुख्य कुंजी है।",
-                test_4: "हम भारत के लोग भारत को एक संपूर्ण प्रभुत्व संपन्न समाजवादी पंथ निरपेक्ष लोकतंत्रात्मक गणराज्य बनाने के लिए दृढ संकल्पित हैं।"
+                test_1: "рднрд╛рд░рдд рд╣рдорд╛рд░рд╛ рджреЗрд╢ рд╣реИред рд╣рдо рд╕рдм рдЗрд╕рдХреЗ рдирд╛рдЧрд░рд┐рдХ рд╣реИрдВред рдирд┐рдпрдорд┐рдд рдЕрднреНрдпрд╛рд╕ рдХрд░рдиреЗ рд╕реЗ рд╣рдорд╛рд░реА рдЧрддрд┐ рдФрд░ рд╕рдЯреАрдХрддрд╛ рдореЗрдВ рд╕реБрдзрд╛рд░ рд╣реЛрдЧрд╛ред",
+                test_2: "рд╕рд░рдХрд╛рд░реА рд▓рд┐рдкрд┐рдХреАрдп рдкрд░реАрдХреНрд╖рд╛ рдореЗрдВ рдЙрддреНрддреАрд░реНрдг рд╣реЛрдиреЗ рдХреЗ рд▓рд┐рдП рдиреНрдпреВрдирддрдо рдкреИрдВрдЯреАрд╕ рд╢рдмреНрдж рдкреНрд░рддрд┐ рдорд┐рдирдЯ рдХреА рдЧрддрд┐ рд╣реЛрдирд╛ рдЕрддрд┐ рдЖрд╡рд╢реНрдпрдХ рдорд╛рдирд╛ рдЬрд╛рддрд╛ рд╣реИред",
+                test_3: "рд╣рд┐рдВрджреА рдЯрдВрдХрдг рдореЗрдВ рд╡рд┐рд░рд╛рдо рдЪрд┐рдиреНрд╣реЛрдВ рддрдерд╛ рд╕рдВрдпреБрдХреНрдд рдЕрдХреНрд╖рд░реЛрдВ рдХрд╛ рд╡рд┐рд╢реЗрд╖ рдзреНрдпрд╛рди рд░рдЦрдирд╛ рдкрдбрд╝рддрд╛ рд╣реИред рдирд┐рд░рдВрддрд░ рдЕрднреНрдпрд╛рд╕ рд╣реА рд╕рдлрд▓рддрд╛ рдХреА рдореБрдЦреНрдп рдХреБрдВрдЬреА рд╣реИред",
+                test_4: "рд╣рдо рднрд╛рд░рдд рдХреЗ рд▓реЛрдЧ рднрд╛рд░рдд рдХреЛ рдПрдХ рд╕рдВрдкреВрд░реНрдг рдкреНрд░рднреБрддреНрд╡ рд╕рдВрдкрдиреНрди рд╕рдорд╛рдЬрд╡рд╛рджреА рдкрдВрде рдирд┐рд░рдкреЗрдХреНрд╖ рд▓реЛрдХрддрдВрддреНрд░рд╛рддреНрдордХ рдЧрдгрд░рд╛рдЬреНрдп рдмрдирд╛рдиреЗ рдХреЗ рд▓рд┐рдП рджреГрдв рд╕рдВрдХрд▓реНрдкрд┐рдд рд╣реИрдВред"
             },
             hindi_remington: {
-                test_1: "भारत देश महान है। इसके उत्तर में हिमालय पर्वत विराजमान है। हिंदी भाषा हमारी राष्ट्रभाषा है।",
-                test_2: "टंकण परीक्षा में सफल होने के लिए अभ्यर्थी को प्रतिदिन कम से कम दो घंटे अभ्यास करने का सुझाव दिया जाता है।",
-                test_3: "कृतिदेव लेआउट पर अभ्यास करते समय उंगलियों को होम रो पर ही स्थापित रखें। इससे कार्य कुशलता में तेजी आएगी।",
-                test_4: "संविधान सभा में आज तारीख छब्बीस नवम्बर उन्नीस सौ उनचास को एतद द्वारा इस संविधान को अंगीकृत अधिनियमित और आत्मार्पित करते हैं।"
+                test_1: "рднрд╛рд░рдд рджреЗрд╢ рдорд╣рд╛рди рд╣реИред рдЗрд╕рдХреЗ рдЙрддреНрддрд░ рдореЗрдВ рд╣рд┐рдорд╛рд▓рдп рдкрд░реНрд╡рдд рд╡рд┐рд░рд╛рдЬрдорд╛рди рд╣реИред рд╣рд┐рдВрджреА рднрд╛рд╖рд╛ рд╣рдорд╛рд░реА рд░рд╛рд╖реНрдЯреНрд░рднрд╛рд╖рд╛ рд╣реИред",
+                test_2: "рдЯрдВрдХрдг рдкрд░реАрдХреНрд╖рд╛ рдореЗрдВ рд╕рдлрд▓ рд╣реЛрдиреЗ рдХреЗ рд▓рд┐рдП рдЕрднреНрдпрд░реНрдереА рдХреЛ рдкреНрд░рддрд┐рджрд┐рди рдХрдо рд╕реЗ рдХрдо рджреЛ рдШрдВрдЯреЗ рдЕрднреНрдпрд╛рд╕ рдХрд░рдиреЗ рдХрд╛ рд╕реБрдЭрд╛рд╡ рджрд┐рдпрд╛ рдЬрд╛рддрд╛ рд╣реИред",
+                test_3: "рдХреГрддрд┐рджреЗрд╡ рд▓реЗрдЖрдЙрдЯ рдкрд░ рдЕрднреНрдпрд╛рд╕ рдХрд░рддреЗ рд╕рдордп рдЙрдВрдЧрд▓рд┐рдпреЛрдВ рдХреЛ рд╣реЛрдо рд░реЛ рдкрд░ рд╣реА рд╕реНрдерд╛рдкрд┐рдд рд░рдЦреЗрдВред рдЗрд╕рд╕реЗ рдХрд╛рд░реНрдп рдХреБрд╢рд▓рддрд╛ рдореЗрдВ рддреЗрдЬреА рдЖрдПрдЧреАред",
+                test_4: "рд╕рдВрд╡рд┐рдзрд╛рди рд╕рднрд╛ рдореЗрдВ рдЖрдЬ рддрд╛рд░реАрдЦ рдЫрдмреНрдмреАрд╕ рдирд╡рдореНрдмрд░ рдЙрдиреНрдиреАрд╕ рд╕реМ рдЙрдирдЪрд╛рд╕ рдХреЛ рдПрддрдж рджреНрд╡рд╛рд░рд╛ рдЗрд╕ рд╕рдВрд╡рд┐рдзрд╛рди рдХреЛ рдЕрдВрдЧреАрдХреГрдд рдЕрдзрд┐рдирд┐рдпрдорд┐рдд рдФрд░ рдЖрддреНрдорд╛рд░реНрдкрд┐рдд рдХрд░рддреЗ рд╣реИрдВред"
             }
         };
 
-        // GLOBAL UTILITY FUNCTIONS
-        function formatSecondsToTimeStr(totalSeconds) {
-            const mins = Math.floor(totalSeconds / 60);
-            const secs = totalSeconds % 60;
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        // HTML escaping helper function to protect against XSS injection
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    "'": '&#39;',
-                    '"': '&quot;'
-                }[tag] || tag)
-            );
-        }
-
-        function mapKeycodeToFingerGuide(code) {
-            const leftPinky = ['KeyA', 'KeyQ', 'KeyZ', 'Digit1', 'Backquote', 'Tab', 'CapsLock', 'ShiftLeft', 'ControlLeft'];
-            const leftRing = ['KeyS', 'KeyW', 'KeyX', 'Digit2'];
-            const leftMiddle = ['KeyD', 'KeyE', 'KeyC', 'Digit3'];
-            const leftIndex = ['KeyF', 'KeyR', 'KeyV', 'Digit4', 'Digit5', 'KeyG', 'KeyT', 'KeyB'];
-            const rightIndex = ['KeyJ', 'KeyU', 'KeyN', 'Digit6', 'Digit7', 'KeyH', 'KeyY', 'KeyM'];
-            const rightMiddle = ['KeyK', 'KeyI', 'Comma', 'Digit8'];
-            const rightRing = ['KeyL', 'KeyO', 'Period', 'Digit9'];
-            const rightPinky = ['Semicolon', 'KeyP', 'Slash', 'Digit0', 'Minus', 'Equal', 'BracketLeft', 'BracketRight', 'Quote', 'Backslash', 'Enter', 'ShiftRight', 'ControlRight'];
-
-            if (leftPinky.includes(code)) return 'finger-L-pink';
-            if (leftRing.includes(code)) return 'finger-L-ring';
-            if (leftMiddle.includes(code)) return 'finger-L-middle';
-            if (leftIndex.includes(code)) return 'finger-L-index';
-            if (rightIndex.includes(code)) return 'finger-R-index';
-            if (rightMiddle.includes(code)) return 'finger-R-middle';
-            if (rightRing.includes(code)) return 'finger-R-ring';
-            if (rightPinky.includes(code)) return 'finger-R-pinky';
-            if (code === 'Space') return 'finger-L-thumb'; 
-            return null;
-        }
+        // EVERGREEN PSEUDO-RANDOM CHARACTER SOURCE FOR INFINITE LESSONS
+        const GENERATOR_CHARSETS = {
+            english_qwerty: {
+                home_row: "asdfghjkl",
+                top_row: "qwertyuiop",
+                bottom_row: "zxcvbnm"
+            },
+            hindi_inscript: {
+                home_row: "рдХрддрд░рдкрдЬрдЪрдЯрдорд░рдирд╕",
+                top_row: "реМреИрд╛реАреВрдмрд╣рдЧрджрдЬрдбреГ",
+                bottom_row: "рд╝рдВрдордорд╡рд▓реНрд╕рдп"
+            },
+            hindi_remington: {
+                home_row: "рдВрдХрд┐рдерд╣реАрд░рд╢рд╛рдпрд╕рдХ",
+                top_row: "реБреВрдорддрдЬрд▓рдирдкрд╡рдЪрдЦрд╣",
+                bottom_row: "реНрд░рдЧрдмрдЕрдЗрджрдзрдг"
+            }
+        };
 
         // OBJECT-ORIENTED APP SYSTEM ENCAPSULATION
         class DevnagariKeyMasterApp {
@@ -1312,7 +1182,7 @@
 
                 document.getElementById('btn-toggle-lessons-modal').addEventListener('click', () => this.toggleCertModal());
                 document.getElementById('btn-close-cert-modal').addEventListener('click', () => this.toggleCertModal());
-                document.getElementById('btn-print-diploma').addEventListener('click', () => this.handleCertificatePrintAction());
+                document.getElementById('btn-print-certificate').addEventListener('click', () => this.handleCertificatePrintAction());
 
                 // Collapsible keyboard overlay
                 document.getElementById('btn-toggle-kb-visibility').addEventListener('click', () => {
@@ -1488,21 +1358,21 @@
                     chars.push(unicodeChar);
                 }
 
-                // 1. Combine half-consonants made full with खड़ी पाई 'ा'
+                // 1. Combine half-consonants made full with рдЦрдбрд╝реА рдкрд╛рдИ 'рд╛'
                 for (let i = 0; i < chars.length - 1; i++) {
-                    if (chars[i] === '्' && chars[i+1] === 'ा') {
+                    if (chars[i] === 'реН' && chars[i+1] === 'рд╛') {
                         chars.splice(i, 2); // remove both Halant and aa matra
                         i--; // adjust index after removal
                     }
                 }
 
-                // 2. Complex context-aware 'ि' (Chhoti ee matra) reordering loop past half-consonant clusters
+                // 2. Complex context-aware 'рд┐' (Chhoti ee matra) reordering loop past half-consonant clusters
                 for (let i = 0; i < chars.length; i++) {
-                    if (chars[i] === 'ि') {
+                    if (chars[i] === 'рд┐') {
                         let j = i + 1;
-                        // Skip any half consonants (consonant followed by Halant '्')
+                        // Skip any half consonants (consonant followed by Halant 'реН')
                         while (j < chars.length) {
-                            if (j + 1 < chars.length && chars[j+1] === '्') {
+                            if (j + 1 < chars.length && chars[j+1] === 'реН') {
                                 j += 2;
                             } else {
                                 break;
@@ -1512,7 +1382,7 @@
                         if (j < chars.length) {
                             j++;
                         }
-                        // Move 'ि' to be after the consonant cluster
+                        // Move 'рд┐' to be after the consonant cluster
                         if (j - 1 > i) {
                             const matra = chars[i];
                             chars.splice(i, 1);
@@ -1521,11 +1391,11 @@
                     }
                 }
 
-                // 3. Robust र-रेफ ('र्') reordering backwards past vowel matras, anusvara, and consonant clusters
+                // 3. Robust рд░-рд░реЗрдл ('рд░реН') reordering backwards past vowel matras, anusvara, and consonant clusters
                 for (let i = 1; i < chars.length; i++) {
-                    if (chars[i] === 'र' && chars[i+1] === '्') {
+                    if (chars[i] === 'рд░' && chars[i+1] === 'реН') {
                         let j = i - 1;
-                        const matras = ['ा', 'ि', 'ी', 'ु', 'ू', 'ृ', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः', 'ॅ', 'ॉ'];
+                        const matras = ['рд╛', 'рд┐', 'реА', 'реБ', 'реВ', 'реГ', 'реЗ', 'реИ', 'реЛ', 'реМ', 'рдВ', 'рдГ', 'реЕ', 'реЙ'];
                         while (j >= 0 && matras.includes(chars[j])) {
                             j--;
                         }
@@ -1533,7 +1403,7 @@
                             j--; // skip main consonant
                         }
                         while (j >= 1) {
-                            if (chars[j] === '्') {
+                            if (chars[j] === 'реН') {
                                 j -= 2;
                             } else {
                                 break;
@@ -1696,6 +1566,38 @@
                 }
             }
 
+            // DYNAMIC DACTYL SYLLABLES GENERATOR (ENDLESS FRESH DRILLS)
+            generateInfiniteSyllables(layoutName, categoryName) {
+                const charSource = GENERATOR_CHARSETS[layoutName]?.[categoryName] || "asdf";
+                const generatedWordsList = [];
+                
+                // Let's generate exactly 25 evergreen typing sets
+                for (let i = 0; i < 25; i++) {
+                    let wordLen = Math.floor(Math.random() * 3) + 3; // Length of 3 to 5 letters
+                    let syllableBuffer = "";
+                    for (let j = 0; j < wordLen; j++) {
+                        const randCharIndex = Math.floor(Math.random() * charSource.length);
+                        syllableBuffer += charSource[randCharIndex];
+                    }
+                    
+                    // Prevent consecutive double letters on initial positions for better readability
+                    if (layoutName === 'english_qwerty') {
+                        generatedWordsList.push({
+                            display: syllableBuffer,
+                            keys: syllableBuffer
+                        });
+                    } else {
+                        // Devanagari translation maps to original keystroke combinations
+                        const translatedDisplay = this.convertBufferToLivePreview(syllableBuffer);
+                        generatedWordsList.push({
+                            display: translatedDisplay,
+                            keys: syllableBuffer
+                        });
+                    }
+                }
+                return generatedWordsList;
+            }
+
             loadPracticeSyllabusString() {
                 const selectVal = document.getElementById('lesson-category-select').value;
                 const sandboxBox = document.getElementById('custom-practice-sandbox');
@@ -1704,18 +1606,20 @@
                 if (selectVal === 'custom_practice') {
                     sandboxBox.classList.remove('hidden');
                     subselectWrap.classList.add('hidden');
-                    const rawText = document.getElementById('custom-typed-text').value.trim() || "भारत महान देश है";
+                    const rawText = document.getElementById('custom-typed-text').value.trim() || "рднрд╛рд░рдд рдорд╣рд╛рди рджреЗрд╢ рд╣реИ";
                     this.state.currentActiveLessonWords = this.transliterateDevanagariBackward(rawText);
                 } else if (selectVal === 'government_exams') {
                     sandboxBox.classList.add('hidden');
                     subselectWrap.classList.remove('hidden');
                     const examPreset = document.getElementById('mock-exam-subselect').value;
-                    const text = GOVT_EXAMS_PRESETS[this.state.currentLayout][examPreset] || "भारत हमारा देश है।";
+                    const text = GOVT_EXAMS_PRESETS[this.state.currentLayout][examPreset] || "рднрд╛рд░рдд рд╣рдорд╛рд░рд╛ рджреЗрд╢ рд╣реИред";
                     this.state.currentActiveLessonWords = this.transliterateDevanagariBackward(text);
                 } else {
                     sandboxBox.classList.add('hidden');
                     subselectWrap.classList.add('hidden');
-                    this.state.currentActiveLessonWords = SYLLABUS_REGISTRY[this.state.currentLayout][selectVal] || [];
+                    
+                    // DYNAMIC REPLACEMENT: Replaced small static arrays with dynamic procedural typing generation
+                    this.state.currentActiveLessonWords = this.generateInfiniteSyllables(this.state.currentLayout, selectVal);
                 }
                 this.resetActivePracticeStates();
             }
@@ -2245,7 +2149,7 @@
                     this.progressChartInstance.update();
                 }
 
-                // 2. UPDATE WEAK KEYS BAR CHART (Friction: Errors/Presses)
+                // 2. UPDATE WEAG KEYS BAR CHART (Friction: Errors/Presses)
                 const cumulative = this.state.cumulativeKeyStats;
                 const overlayWeak = document.getElementById('no-weakkeys-overlay');
 
@@ -2355,11 +2259,11 @@
 
             showStreakMilestoneCelebration(days) {
                 if (days === 7) {
-                    this.showToast("🔥 Phenomenal! You achieved a 7-Day Typing Streak! Keep ascending!");
+                    this.showToast("ЁЯФе Phenomenal! You achieved a 7-Day Typing Streak! Keep ascending!");
                 } else if (days === 30) {
-                    this.showToast("🏆 Grandmaster Streak! 30 Days of consistent touch typing!");
+                    this.showToast("ЁЯПЖ Grandmaster Streak! 30 Days of consistent touch typing!");
                 } else {
-                    this.showToast(`🔥 Daily Streak Updated: ${days} ${days === 1 ? 'Day' : 'Days'}!`);
+                    this.showToast(`ЁЯФе Daily Streak Updated: ${days} ${days === 1 ? 'Day' : 'Days'}!`);
                 }
             }
 
@@ -2466,7 +2370,18 @@
                 }
             }
 
+            ensureDecorativeFontsLoaded() {
+                if (!document.getElementById('google-fonts-decorative')) {
+                    const link = document.createElement('link');
+                    link.id = 'google-fonts-decorative';
+                    link.rel = 'stylesheet';
+                    link.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&family=Pinyon+Script&display=swap';
+                    document.head.appendChild(link);
+                }
+            }
+
             toggleCertModal() {
+                this.ensureDecorativeFontsLoaded();
                 const modal = document.getElementById('cert-claim-modal');
                 const errorMsg = document.getElementById('cert-status-error-msg');
                 const speedLbl = document.getElementById('best-speed-lbl');
@@ -2480,10 +2395,10 @@
                     accLbl.textContent = `${this.state.bestAccuracyRecord}%`;
 
                     if (this.state.bestWpmRecord >= 35 && this.state.bestAccuracyRecord >= 95) {
-                        errorMsg.textContent = "🏆 Eligible! You are qualified to print your certificate.";
+                        errorMsg.textContent = "ЁЯПЖ Eligible! You are qualified to print your certificate.";
                         errorMsg.className = "text-[11px] text-emerald-800 font-bold italic text-center";
                     } else {
-                        errorMsg.textContent = "🔒 Locked. Reach 35+ WPM speed with 95% accuracy to unlock.";
+                        errorMsg.textContent = "ЁЯФТ Locked. Reach 35+ WPM speed with 95% accuracy to unlock.";
                         errorMsg.className = "text-[11px] text-red-800 font-bold italic text-center";
                     }
 
@@ -2492,11 +2407,11 @@
                     const ach7Status = document.getElementById('achieve-7day-status');
                     const ach7Box = document.getElementById('achieve-7day');
                     if (this.state.streakCurrent >= 7) {
-                        if (ach7Icon) ach7Icon.textContent = "🔥";
+                        if (ach7Icon) ach7Icon.textContent = "ЁЯФе";
                         if (ach7Status) ach7Status.textContent = "Unlocked & Activated!";
                         if (ach7Box) ach7Box.className = "flex items-center gap-2 bg-orange-50 border border-orange-300 rounded-xl p-2 text-orange-950";
                     } else {
-                        if (ach7Icon) ach7Icon.textContent = "🔒";
+                        if (ach7Icon) ach7Icon.textContent = "ЁЯФТ";
                         if (ach7Status) ach7Status.textContent = `${7 - this.state.streakCurrent} days remaining`;
                         if (ach7Box) ach7Box.className = "flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2";
                     }
@@ -2505,11 +2420,11 @@
                     const ach30Status = document.getElementById('achieve-30day-status');
                     const ach30Box = document.getElementById('achieve-30day');
                     if (this.state.streakCurrent >= 30) {
-                        if (ach30Icon) ach30Icon.textContent = "👑";
+                        if (ach30Icon) ach30Icon.textContent = "ЁЯСС";
                         if (ach30Status) ach30Status.textContent = "Grandmaster Active!";
                         if (ach30Box) ach30Box.className = "flex items-center gap-2 bg-red-50 border border-red-300 rounded-xl p-2 text-red-950";
                     } else {
-                        if (ach30Icon) ach30Icon.textContent = "🔒";
+                        if (ach30Icon) ach30Icon.textContent = "ЁЯФТ";
                         if (ach30Status) ach30Status.textContent = `${30 - this.state.streakCurrent} days remaining`;
                         if (ach30Box) ach30Box.className = "flex items-center gap-2 bg-stone-50 border border-stone-200 rounded-xl p-2";
                     }
@@ -2528,6 +2443,8 @@
                     return;
                 }
 
+                this.ensureDecorativeFontsLoaded();
+
                 // Strictly escape candidate name to protect against XSS injection inside the print shelf layout
                 const rawName = document.getElementById('student-name-input').value || "Candidate Master";
                 const candidateName = escapeHTML(rawName);
@@ -2545,7 +2462,7 @@
                 printShelf.innerHTML = `
                     <div class="relative w-full min-h-screen bg-[#faf8f5] p-12 flex flex-col justify-between items-center overflow-hidden print:p-8" style="font-family: 'Playfair Display', serif; box-sizing: border-box;">
                         
-                        <!-- Formal Security Guilloché Gold Border Frames -->
+                        <!-- Formal Security Guilloch├й Gold Border Frames -->
                         <div class="absolute inset-4 border-[3px] border-[#c5a880] pointer-events-none"></div>
                         <div class="absolute inset-6 border border-[#c5a880]/60 pointer-events-none"></div>
                         
@@ -2565,7 +2482,7 @@
 
                         <!-- Formal Header Section -->
                         <div class="text-center z-10 mt-6 space-y-2">
-                            <h1 class="text-4xl font-bold tracking-[0.25em] text-stone-855 uppercase" style="font-family: 'Cinzel', serif;">Diploma of Mastery</h1>
+                            <h1 class="text-4xl font-bold tracking-[0.25em] text-stone-855 uppercase" style="font-family: 'Cinzel', serif;">Certificate of Mastery</h1>
                             <p class="text-xs tracking-[0.3em] text-[#9c805e] uppercase font-bold">Devnagari KeyMaster Typing Academy</p>
                         </div>
 
