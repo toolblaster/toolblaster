@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Advanced FIRE Retirement Calculator | Early Retirement Planner</title>
-    <meta name="description" content="Calculate your Lean FIRE, Traditional FIRE, and Coast FIRE status. Real-time compounding, inflation-adjusted drawdown, and safe withdrawal rate (SWR) models.">
+    <title>Advanced FIRE Calculator | Early Retirement Planner</title>
+    <meta name="description" content="Calculate Lean, Traditional & Coast FIRE status. Real-time compounding, inflation-adjusted drawdown & custom safe withdrawal rates.">
     <meta name="keywords" content="fire calculator, coast fire calculator, early retirement planner, lean fire, fat fire, safe withdrawal rate, swp depletion planner, personal finance">
     <link class="rounded-full" rel="canonical" href="https://toolblaster.com/finance/fire-retirement-planner/">
     <meta name="robots" content="index, follow">
@@ -285,22 +285,48 @@
                                 </select>
                             </div>
 
-                            <!-- Section: Core Age Parameters -->
-                            <div class="grid grid-cols-2 gap-3">
+                            <!-- Section: Core Age & Life Expectancy Parameters (Optimized Dynamic 3-Column Layout with Precise Tooltips) -->
+                            <div class="grid grid-cols-3 gap-2">
                                 <div>
-                                    <label id="ageLabelText" for="ageInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">Current Age</label>
+                                    <label id="ageLabelText" for="ageInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Current Age</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your current age today. This marks the starting point of your compounding wealth-building phase.</span>
+                                        </span>
+                                    </label>
                                     <div class="input-stepper-group flex rounded-xl w-full">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', -1, 18, 65)">-</button>
-                                        <input type="number" id="ageInput" class="manual-input flex-grow animate-none" value="28" min="18" max="65" onchange="validateAgeSettings()">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', 1, 18, 65)">+</button>
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', -1, 18, 75)">-</button>
+                                        <input type="number" id="ageInput" class="manual-input flex-grow animate-none !w-full" value="28" min="18" max="75" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', 1, 18, 75)">+</button>
                                     </div>
                                 </div>
                                 <div>
-                                    <label id="retireAgeLabelText" for="retireAgeInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">Retirement Age</label>
+                                    <label id="retireAgeLabelText" for="retireAgeInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Retire Age</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your target age to stop active work. This marks the transition from building wealth to drawing from it.</span>
+                                        </span>
+                                    </label>
                                     <div class="input-stepper-group flex rounded-xl w-full">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', -1, 18, 65)">-</button>
-                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow animate-none" value="45" min="18" max="65" onchange="validateAgeSettings()">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', 1, 18, 65)">+</button>
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', -1, 18, 75)">-</button>
+                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow animate-none !w-full" value="45" min="18" max="75" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', 1, 18, 75)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="lifeExpectancyLabelText" for="lifeExpectancyInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Life Expect</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your estimated life expectancy. The target age up to which your retirement nest egg must mathematically support you.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('lifeExpectancyInput', -1, 50, 100)">-</button>
+                                        <input type="number" id="lifeExpectancyInput" class="manual-input flex-grow animate-none !w-full" value="85" min="50" max="100" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('lifeExpectancyInput', 1, 50, 100)">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +369,7 @@
                                     <input type="range" id="networthSlider" min="0" max="90000000" value="500000" step="50000" class="w-full range-slider flex-grow" oninput="syncNetworthSlider()" aria-label="Current Portfolio Net Worth">
                                     <div class="input-stepper-group flex-shrink-0 rounded-xl flex-grow-0">
                                         <button type="button" class="stepper-button" onclick="adjustNetworth(-50000)">-</button>
-                                        <input type="number" id="networthInput" class="manual-input flex-grow animate-none" value="500000" min="0" max="90000000" step="50000" onchange="syncNetworthInput()">
+                                        <input type="number" id="networthInput" class="manual-input flex-grow animate-none flex-shrink" value="500000" min="0" max="90000000" step="50000" onchange="syncNetworthInput()">
                                         <button type="button" class="stepper-button" onclick="adjustNetworth(50000)">+</button>
                                     </div>
                                 </div>
@@ -513,8 +539,8 @@
                                 <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Est. Target Goal</span>
                                 <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-stone-800"><span class="currency-symbol">₹</span>0</span>
                             </div>
-                            <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1">
-                                <span class="block text-[8.5px] sm:text-[10px] font-black text-red-900 uppercase tracking-wider">FIRE Status</span>
+                            <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1 flex flex-col justify-center">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-red-900 uppercase tracking-wider">FIRE Status</span>
                                 <span id="fireStatusVal" class="text-xs sm:text-[11.5px] font-black text-red-955 mt-0.5">Calculating...</span>
                             </div>
                         </div>
@@ -894,6 +920,7 @@
             }).format(Math.round(val));
         }
 
+        // --- Core Formatting Helpers ---
         function formatIndianShort(value) {
             if (currentCurrency.formatType === 'indian') {
                 if (value >= 10000000) {
@@ -930,7 +957,7 @@
             if (!el) return;
             let val = (parseInt(el.value) || 0) + step;
             el.value = Math.max(min, Math.min(max, val));
-            if (id === 'ageInput' || id === 'retireAgeInput') {
+            if (id === 'ageInput' || id === 'retireAgeInput' || id === 'lifeExpectancyInput') {
                 validateAgeSettings();
             } else {
                 if (id === 'stepUpInput') {
@@ -972,12 +999,19 @@
         function validateAgeSettings() {
             const currentAgeEl = document.getElementById('ageInput');
             const retireAgeEl = document.getElementById('retireAgeInput');
+            const lifeExpectancyEl = document.getElementById('lifeExpectancyInput');
             let cAge = parseInt(currentAgeEl.value) || 28;
             let rAge = parseInt(retireAgeEl.value) || 45;
+            let lAge = parseInt(lifeExpectancyEl.value) || 85;
 
+            // Enforce sequential boundaries
             if (rAge <= cAge) {
                 rAge = cAge + 1;
-                retireAgeEl.value = rAge;
+                retireAgeEl.value = Math.min(75, rAge);
+            }
+            if (lAge <= rAge) {
+                lAge = rAge + 1;
+                lifeExpectancyEl.value = Math.min(100, lAge);
             }
             runSimulation();
         }
@@ -1053,14 +1087,7 @@
             runSimulation();
         }
 
-        function adjustSavings(step) {
-            const input = document.getElementById('savingsInput');
-            let val = (parseInt(input.value) || 0) + step;
-            input.value = Math.max(1000, val);
-            syncSavingsInput();
-        }
-
-        // Inflation parameter synchronizer
+        // --- Inflation parameter synchronizer ---
         function syncInflationSlider() {
             const slider = document.getElementById('inflationSlider');
             const input = document.getElementById('inflationInput');
@@ -1115,6 +1142,13 @@
             slider.value = val;
             updateSliderIndicator('swrSlider');
             runSimulation();
+        }
+
+        function adjustSavings(step) {
+            const input = document.getElementById('savingsInput');
+            let val = (parseInt(input.value) || 0) + step;
+            input.value = Math.max(1000, val);
+            syncSavingsInput();
         }
 
         function updateSliderIndicator(id) {
@@ -1181,6 +1215,7 @@
         function runSimulation() {
             const currentAge = parseInt(document.getElementById('ageInput').value) || 28;
             const retireAge = parseInt(document.getElementById('retireAgeInput').value) || 45;
+            const lifeExpectancy = parseInt(document.getElementById('lifeExpectancyInput').value) || 85;
             const currentExpenses = parseFloat(document.getElementById('expenseInput').value) || 50000;
             const startPortfolio = parseFloat(document.getElementById('networthInput').value) || 0;
             const startSavings = parseFloat(document.getElementById('savingsInput').value) || 0;
@@ -1232,7 +1267,8 @@
                 phase: "Accumulation",
                 annualInput: 0,
                 annualGains: 0,
-                closingNetworth: startPortfolio
+                closingNetworth: startPortfolio,
+                isDepleted: false
             });
 
             // Tracking Milestone Achieved Ages
@@ -1260,7 +1296,8 @@
                     phase: "Accumulation",
                     annualInput: annualSavingsInjected,
                     annualGains: yearGains,
-                    closingNetworth: runningPortfolio
+                    closingNetworth: runningPortfolio,
+                    isDepleted: false
                 });
 
                 // Check milestone progress dynamically during the timeline using the exact, active SWR
@@ -1284,10 +1321,10 @@
 
             const projectedCorpusValueAtRetire = runningPortfolio;
 
-            // Drawdown / Distribution Phase Loop (Up to Age 85 or Depletion)
+            // Drawdown / Distribution Phase Loop (Up to Dynamic Life Expectancy or Depletion)
             let retirementRunningPortfolio = projectedCorpusValueAtRetire;
             let retirementYearlyExpenses = adjustedAnnualExpensesAtRetire;
-            const maxRetirementAge = 85;
+            const maxRetirementAge = lifeExpectancy; // Dynamically bound to User Input
             const yearsInRetirement = maxRetirementAge - retireAge;
 
             let ageCompletedDrawdown = retireAge;
@@ -1295,9 +1332,20 @@
 
             // Mathematical drawdown simulates prudent Beginning-Of-Year withdrawals (conservative asset-safe convention)
             for (let y = 1; y <= yearsInRetirement; y++) {
+                const age = retireAge + y;
                 if (retirementRunningPortfolio <= 0) {
-                    ranOutOfMoney = true;
-                    break;
+                    if (!ranOutOfMoney) {
+                        ranOutOfMoney = true;
+                        yearlyTableData.push({
+                            age: age,
+                            phase: "Depleted",
+                            annualInput: 0,
+                            annualGains: 0,
+                            closingNetworth: 0,
+                            isDepleted: true
+                        });
+                    }
+                    break; // Stop rendering extra empty/negative timeline periods
                 }
 
                 const postYearStarting = retirementRunningPortfolio;
@@ -1312,16 +1360,17 @@
                 const yearGains = retirementRunningPortfolio - postYearStarting + actualWithdrawal;
 
                 yearlyTableData.push({
-                    age: retireAge + y,
+                    age: age,
                     phase: "Drawdown",
                     annualInput: -actualWithdrawal,
                     annualGains: yearGains,
-                    closingNetworth: retirementRunningPortfolio
+                    closingNetworth: retirementRunningPortfolio,
+                    isDepleted: false
                 });
 
                 // Expenses adjust upwards with inflation each year
                 retirementYearlyExpenses = retirementYearlyExpenses * (1 + (inflation / 100));
-                ageCompletedDrawdown = retireAge + y;
+                ageCompletedDrawdown = age;
             }
 
             // Output Primary Metrics
@@ -1332,14 +1381,14 @@
             const fireStatusEl = document.getElementById('fireStatusVal');
             if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
                 fireStatusEl.textContent = "🎉 Achieved!";
-                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-emerald-800 mt-0.5";
+                fireStatusEl.className = "text-xs sm:text-[11px] font-black text-emerald-800 mt-0.5";
             } else if (projectedCorpusValueAtRetire >= leanFireTarget) {
                 fireStatusEl.textContent = "⛺ Lean FIRE Ready";
-                fireStatusEl.className = "text-xs sm:text-[11.5px] font-black text-amber-700 mt-0.5";
+                fireStatusEl.className = "text-xs sm:text-[11px] font-black text-amber-700 mt-0.5";
             } else {
                 const deficit = targetCorpusFloor - projectedCorpusValueAtRetire;
                 fireStatusEl.textContent = `${formatIndianShort(deficit)} Gap`;
-                fireStatusEl.className = "text-xs sm:text-[13px] font-black text-red-700 mt-0.5";
+                fireStatusEl.className = "text-xs sm:text-[11px] font-black text-red-700 mt-0.5";
             }
 
             // Display Milestone Values, Progress bars, and Dynamic Milestones Ages
@@ -1390,7 +1439,7 @@
 
                 if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
                     if (ranOutOfMoney) {
-                        advice = `🎉 <strong>Congratulations:</strong> You hit your FIRE target at Age <strong>${retireAge}</strong>. Your retirement compounds nicely and sustains your lifestyle until Age <strong>${ageCompletedDrawdown}</strong> before depletion occurs.`;
+                        advice = `🎉 <strong>Congratulations:</strong> You hit your FIRE target at Age <strong>${retireAge}</strong>. Your retirement savings compound nicely and sustain your lifestyle until Age <strong>${ageCompletedDrawdown}</strong> before depletion occurs.`;
                     } else {
                         advice = `🚀 <strong>Outstanding Profile!</strong> You achieve full financial freedom by Age <strong>${retireAge}</strong>. Your investments compound faster than withdrawals, creating infinite wealth.`;
                     }
@@ -1522,29 +1571,45 @@
 
             schedule.forEach(row => {
                 const tr = document.createElement('tr');
-                tr.className = row.phase === 'Drawdown' ? "bg-red-50/20 hover:bg-red-50/40 transition-colors" : "hover:bg-stone-50 transition-colors";
                 
-                const formattedInput = row.annualInput === 0 ? '0' : formatVal(row.annualInput);
-                const isDrawdown = row.annualInput < 0;
+                if (row.isDepleted) {
+                    // Striking Visual indicator marker row for fully depleted retirement savings
+                    tr.className = "bg-amber-50 hover:bg-amber-100 transition-colors font-semibold text-stone-900 border-l-4 border-amber-500";
+                    tr.innerHTML = `
+                        <td class="p-3 font-semibold text-amber-900">${row.age}</td>
+                        <td class="p-3">
+                            <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-200 text-amber-900">
+                                ⚠ Depleted
+                            </span>
+                        </td>
+                        <td class="p-3 text-[10px] sm:text-xs leading-normal italic text-amber-800" colspan="3">
+                            Portfolio completely exhausted. Supportable retirement lifestyle ends.
+                        </td>
+                    `;
+                } else {
+                    tr.className = row.phase === 'Drawdown' ? "bg-red-50/20 hover:bg-red-50/40 transition-colors" : "hover:bg-stone-50 transition-colors";
+                    const formattedInput = row.annualInput === 0 ? '0' : formatVal(row.annualInput);
+                    const isDrawdown = row.annualInput < 0;
 
-                tr.innerHTML = `
-                    <td class="p-3 font-semibold text-slate-800">${row.age}</td>
-                    <td class="p-3">
-                        <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${row.phase === 'Drawdown' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">
-                            ${row.phase}
-                        </span>
-                    </td>
-                    <td class="p-3 font-medium ${isDrawdown ? 'text-rose-700 font-extrabold' : 'text-slate-600'}">
-                        ${formattedInput}
-                    </td>
-                    <td class="p-3 font-medium text-emerald-800">${formatVal(row.annualGains)}</td>
-                    <td class="p-3 font-extrabold text-slate-900 text-center">
-                        ${formatVal(row.closingNetworth)}
-                        <div class="progress-bar-bg h-1 w-full bg-slate-100 rounded-full mt-1 overflow-hidden print-hide">
-                            <div class="bg-red-700 h-full" style="width: ${Math.min(100, (row.closingNetworth / maxPortfolio) * 100)}%"></div>
-                        </div>
-                    </td>
-                `;
+                    tr.innerHTML = `
+                        <td class="p-3 font-semibold text-slate-800">${row.age}</td>
+                        <td class="p-3">
+                            <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${row.phase === 'Drawdown' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">
+                                ${row.phase}
+                            </span>
+                        </td>
+                        <td class="p-3 font-medium ${isDrawdown ? 'text-rose-700 font-extrabold' : 'text-slate-600'}">
+                            ${formattedInput}
+                        </td>
+                        <td class="p-3 font-medium text-emerald-800">${formatVal(row.annualGains)}</td>
+                        <td class="p-3 font-extrabold text-slate-900 text-center">
+                            ${formatVal(row.closingNetworth)}
+                            <div class="progress-bar-bg h-1 w-full bg-slate-100 rounded-full mt-1 overflow-hidden print-hide">
+                                <div class="bg-red-700 h-full" style="width: ${Math.min(100, (row.closingNetworth / maxPortfolio) * 100)}%"></div>
+                            </div>
+                        </td>
+                    `;
+                }
                 body.appendChild(tr);
             });
         }
@@ -1572,7 +1637,11 @@
             csvContent += "Age,Phase,Annual Savings or Withdrawal,Gains Generated,Closing Net Worth\n";
             
             yearlyTableData.forEach(row => {
-                csvContent += `${row.age},${row.phase},${Math.round(row.annualInput)},${Math.round(row.annualGains)},${Math.round(row.closingNetworth)}\n`;
+                if (row.isDepleted) {
+                    csvContent += `${row.age},DEPLETED,0,0,0\n`;
+                } else {
+                    csvContent += `${row.age},${row.phase},${Math.round(row.annualInput)},${Math.round(row.annualGains)},${Math.round(row.closingNetworth)}\n`;
+                }
             });
             
             const encodedUri = encodeURI(csvContent);
