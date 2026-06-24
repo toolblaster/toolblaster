@@ -71,7 +71,7 @@
               "name": "Why is inflation adjustment critical in retirement planning?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Inflation systematically reduces the purchasing power of your money. What costs ₹50,000 monthly today will cost much more in 15 or 20 years. Your target retirement corpus must be scaled upwards to preserve your standard of living."
+                "text": "Inflation systematically reduces the purchasing power of your money. What costs тВ╣50,000 monthly today will cost much more in 15 or 20 years. Your target retirement corpus must be scaled upwards to preserve your standard of living."
               }
             }
           ]
@@ -262,19 +262,26 @@
                     <div class="space-y-3.5 print-hide">
                         <div class="bg-stone-50 border border-stone-200 p-4 rounded-2xl space-y-4">
                             
-                            <!-- Global Currency Selector -->
+                            <!-- Global Currency Selector with Tooltip -->
                             <div class="pb-2 border-b border-stone-200/60">
-                                <label for="currencySelect" class="block text-[10px] font-extrabold text-stone-850 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                                    <i class="fa-solid fa-globe text-red-700"></i> Plan Currency Layout
+                                <label id="currencySelectLabel" for="currencySelect" class="block text-[10px] font-extrabold text-stone-855 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-globe text-red-700"></i> 
+                                    <span>Plan Currency Layout</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Change the financial currency. This automatically updates formatting, symbols, and regional index defaults.</span>
+                                    </span>
                                 </label>
                                 <select id="currencySelect" class="w-full p-2 bg-white border border-stone-300 rounded-xl text-xs font-bold text-stone-900 focus:outline-none focus:border-red-700 transition-colors" onchange="changeActiveCurrency()">
-                                    <option value="INR" selected>Indian Rupee (INR - ₹)</option>
+                                    <option value="INR" selected>Indian Rupee (INR - тВ╣)</option>
                                     <option value="USD">US Dollar (USD - $)</option>
-                                    <option value="EUR">Euro (EUR - €)</option>
-                                    <option value="GBP">British Pound (GBP - £)</option>
+                                    <option value="EUR">Euro (EUR - тВм)</option>
+                                    <option value="GBP">British Pound (GBP - ┬г)</option>
                                     <option value="AUD">Australian Dollar (AUD - A$)</option>
                                     <option value="CAD">Canadian Dollar (CAD - C$)</option>
-                                    <option value="JPY">Japanese Yen (JPY - ¥)</option>
+                                    <option value="JPY">Japanese Yen (JPY - ┬е)</option>
+                                    <option value="RUB">Russian Ruble (RUB - тВ╜)</option>
+                                    <option value="ILS">Israeli New Shekel (ILS - тВк)</option>
                                 </select>
                             </div>
 
@@ -302,7 +309,7 @@
                             <div>
                                 <div class="flex justify-between items-center mb-1">
                                     <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800 flex items-center">
-                                        <span>Monthly Expenses Today (<span class="currency-symbol">₹</span>)</span>
+                                        <span>Monthly Expenses Today (<span class="currency-symbol">тВ╣</span>)</span>
                                         <span class="tooltip-icon ml-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                             <span class="tooltip-text">Your average current monthly living expenses including food, bills, rent, lifestyle, and healthcare. Excluding savings.</span>
@@ -324,7 +331,7 @@
                             <div>
                                 <div class="flex justify-between items-center mb-1">
                                     <label id="networthLabelText" for="networthInput" class="block text-xxs font-bold text-stone-800 flex items-center">
-                                        <span>Current Portfolio Net Worth (<span class="currency-symbol">₹</span>)</span>
+                                        <span>Current Portfolio Net Worth (<span class="currency-symbol">тВ╣</span>)</span>
                                         <span class="tooltip-icon ml-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                             <span class="tooltip-text">Sum of all liquid and investable assets you own today (mutual funds, stocks, EPF, PPF, gold, etc.) that can support your retirement.</span>
@@ -346,7 +353,7 @@
                             <div>
                                 <div class="flex justify-between items-center mb-1">
                                     <label id="savingsLabelText" for="savingsInput" class="block text-xxs font-bold text-stone-800 flex items-center">
-                                        <span>Monthly Savings Contribution (<span class="currency-symbol">₹</span>)</span>
+                                        <span>Monthly Savings Contribution (<span class="currency-symbol">тВ╣</span>)</span>
                                         <span class="tooltip-icon ml-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                             <span class="tooltip-text">The total amount you save and invest into compounding assets every month specifically for your early retirement goal.</span>
@@ -397,65 +404,70 @@
                             </div>
                         </div>
 
-                        <!-- Savings Step Up & Inflation Parameters -->
-                        <div class="bg-stone-50 border border-stone-200 p-3 rounded-2xl space-y-3">
-                            <!-- Inflation Parameter -->
-                            <div>
-                                <label id="inflationLabelText" for="inflationInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
-                                    <span>Long-Term Inflation Estimate (% p.a.)</span>
-                                    <span class="tooltip-icon ml-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                        <span class="tooltip-text">Expected annual inflation rate. Slashes future purchasing power. Standard in India is around 5%-6%.</span>
-                                    </span>
-                                </label>
-                                <div class="flex items-center space-x-2">
-                                    <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()" aria-label="Long-Term Inflation Estimate Range">
-                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', -0.1, 2, 12)">-</button>
-                                        <input type="number" id="inflationInput" class="manual-input animate-none" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
-                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', 0.1, 2, 12)">+</button>
+                        <!-- тЪЩя╕П ADVANCED COLLAPSIBLE ACCORDION PANEL -->
+                        <div class="border border-stone-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+                            <button type="button" onclick="toggleAdvancedAccordion()" class="w-full flex justify-between items-center px-4 py-3 bg-stone-50 hover:bg-stone-100 transition-colors focus:outline-none">
+                                <span class="font-extrabold text-[11px] text-stone-700 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-red-600"></i> Advanced Assumptions
+                                </span>
+                                <i id="accordionArrow" class="fa-solid fa-chevron-down text-stone-500 transition-transform duration-300"></i>
+                            </button>
+                            
+                            <div id="advancedAccordionBody" class="hidden px-4 py-3 space-y-4 border-t border-stone-200 bg-white">
+                                <!-- Inflation Parameter -->
+                                <div>
+                                    <label id="inflationLabelText" for="inflationInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                        <span>Long-Term Inflation Estimate (% p.a.)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Expected annual inflation rate. Slashes future purchasing power. Standard in India is around 5%-6%.</span>
+                                        </span>
+                                    </label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()" aria-label="Long-Term Inflation Estimate Range">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', -0.1, 2, 12)">-</button>
+                                            <input type="number" id="inflationInput" class="manual-input animate-none" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', 0.1, 2, 12)">+</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="border-t border-stone-200/50 my-1"></div>
-
-                            <!-- Annual Savings Step-Up -->
-                            <div>
-                                <label id="stepUpLabelText" for="stepUpInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
-                                    <span>Annual Savings Step-Up (%)</span>
-                                    <span class="tooltip-icon ml-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                        <span class="tooltip-text">Percentage by which you increase your monthly savings each year as your income grows. Standard step-up is 10%.</span>
-                                    </span>
-                                </label>
-                                <div class="flex items-center space-x-2">
-                                    <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()" aria-label="Annual Savings Step-Up Range">
-                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', -1, 0, 25)">-</button>
-                                        <input type="number" id="stepUpInput" class="manual-input animate-none" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
-                                        <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', 1, 0, 25)">+</button>
+                                <!-- Annual Savings Step-Up -->
+                                <div>
+                                    <label id="stepUpLabelText" for="stepUpInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                        <span>Annual Savings Step-Up (%)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Percentage by which you increase your monthly savings each year as your income grows. Standard step-up is 10%.</span>
+                                        </span>
+                                    </label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()" aria-label="Annual Savings Step-Up Range">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', -1, 0, 25)">-</button>
+                                            <input type="number" id="stepUpInput" class="manual-input animate-none" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', 1, 0, 25)">+</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="border-t border-stone-200/50 my-1"></div>
-
-                            <!-- Safe Withdrawal Rate -->
-                            <div>
-                                <label id="swrLabelText" for="swrInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
-                                    <span>Safe Withdrawal Rate (SWR %)</span>
-                                    <span class="tooltip-icon ml-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                        <span class="tooltip-text">The SWR (e.g. 4%) dictates the size of your retirement corpus. 4% SWR means you need exactly 25x of your inflation-adjusted annual expenses.</span>
-                                    </span>
-                                </label>
-                                <div class="flex items-center space-x-2">
-                                    <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()" aria-label="Safe Withdrawal Rate Range">
-                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
-                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', -0.1, 2, 8)">-</button>
-                                        <input type="number" id="swrInput" class="manual-input animate-none" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
-                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', 0.1, 2, 8)">+</button>
+                                <!-- Safe Withdrawal Rate -->
+                                <div>
+                                    <label id="swrLabelText" for="swrInput" class="block text-xxs font-bold text-stone-800 flex items-center mb-1.5">
+                                        <span>Safe Withdrawal Rate (SWR %)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">The SWR (e.g. 4%) dictates the size of your retirement corpus. 4% SWR means you need exactly 25x of your inflation-adjusted annual expenses.</span>
+                                        </span>
+                                    </label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()" aria-label="Safe Withdrawal Rate Range">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', -0.1, 2, 8)">-</button>
+                                            <input type="number" id="swrInput" class="manual-input animate-none" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', 0.1, 2, 8)">+</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -472,11 +484,11 @@
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center">
                             <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
                                 <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Projected Corpus</span>
-                                <span id="projectedCorpus" class="text-xs sm:text-[13px] font-black text-stone-800"><span class="currency-symbol">₹</span>0</span>
+                                <span id="projectedCorpus" class="text-xs sm:text-[13px] font-black text-stone-800"><span class="currency-symbol">тВ╣</span>0</span>
                             </div>
                             <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
                                 <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Target Corpus Floor</span>
-                                <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-emerald-800"><span class="currency-symbol">₹</span>0</span>
+                                <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-emerald-800"><span class="currency-symbol">тВ╣</span>0</span>
                             </div>
                             <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1 flex flex-col justify-center">
                                 <span class="block text-[8.5px] sm:text-[10px] font-bold text-red-900 uppercase tracking-wider leading-tight">FIRE Year Status</span>
@@ -487,7 +499,7 @@
                         <!-- Milestone Trackers (Lean FIRE, Fat FIRE, Coast FIRE Today) -->
                         <div class="p-4 bg-slate-50 border border-stone-200 rounded-2xl space-y-2.5 shadow-sm">
                             <div class="text-xs font-black text-stone-900 uppercase tracking-wider border-b border-stone-200 pb-1.5 flex items-center justify-between">
-                                <span>🗺️ FIRE Milestone Progress Board</span>
+                                <span>ЁЯЧ║я╕П FIRE Milestone Progress Board</span>
                                 <span class="text-[9px] text-slate-500 font-bold tracking-tight">At Target Age</span>
                             </div>
                             <div class="space-y-2 text-xxs sm:text-xs">
@@ -495,7 +507,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
                                         <span class="font-extrabold text-stone-800 flex items-center gap-1">
-                                            <span>Lean FIRE Corpus (<span class="currency-symbol">₹</span>)</span>
+                                            <span>Lean FIRE Corpus (<span class="currency-symbol">тВ╣</span>)</span>
                                             <span class="tooltip-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                                 <span class="tooltip-text">The minimum bare-bones corpus required to fund a minimalist retirement covering strictly essential survival needs (approx. 75% of your standard budget).</span>
@@ -504,7 +516,7 @@
                                         <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers bare minimum survival expenses (75% budget)</span>
                                     </div>
                                     <div class="text-right">
-                                        <span id="leanFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="leanFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">тВ╣</span>0</span>
                                         <span id="leanFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
                                     </div>
                                 </div>
@@ -512,7 +524,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col">
                                         <span class="font-extrabold text-stone-800 flex items-center gap-1">
-                                            <span>Fat FIRE Corpus (<span class="currency-symbol">₹</span>)</span>
+                                            <span>Fat FIRE Corpus (<span class="currency-symbol">тВ╣</span>)</span>
                                             <span class="tooltip-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                                 <span class="tooltip-text">A luxury early retirement target corpus designed with a premium lifestyle buffer (approx. 125% of your standard budget) to absorb market volatility.</span>
@@ -521,7 +533,7 @@
                                         <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers a luxury lifestyle buffer (125% budget)</span>
                                     </div>
                                     <div class="text-right">
-                                        <span id="fatFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="fatFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">тВ╣</span>0</span>
                                         <span id="fatFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
                                     </div>
                                 </div>
@@ -530,7 +542,7 @@
                                 <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-stone-200">
                                     <div class="flex flex-col">
                                         <span class="font-extrabold text-stone-900 flex items-center gap-1">
-                                            Coast FIRE Target Today (<span class="currency-symbol">₹</span>)
+                                            Coast FIRE Target Today (<span class="currency-symbol">тВ╣</span>)
                                             <span class="tooltip-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                                 <span class="tooltip-text">If you have this much saved today, you can stop saving and still hit your traditional FIRE goal at your target retirement age strictly through compounding.</span>
@@ -539,7 +551,7 @@
                                         <span id="coastFireAdvice" class="text-[9px] text-emerald-800 font-black mt-0.5 leading-tight">Calculating status...</span>
                                     </div>
                                     <div class="text-right">
-                                        <span id="coastFireTarget" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="coastFireTarget" class="font-black text-stone-900 block"><span class="currency-symbol">тВ╣</span>0</span>
                                         <span id="coastFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
                                     </div>
                                 </div>
@@ -694,8 +706,8 @@
                         The FIRE movement is a lifestyle and financial framework designed to maximize savings rates and build a robust investment portfolio, enabling individuals to retire decades earlier than traditional retirement ages. The core objective is gaining absolute control over your time.
                     </p>
                     <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
-                        <li><strong class="text-stone-850">Savings Rate:</strong> While typical financial planners recommend saving 10% to 15% of income, FIRE practitioners often target savings rates of 40% to 70%.</li>
-                        <li><strong class="text-stone-850">The Power of Compounding:</strong> Saving aggressively early in life allows compounding interest to take over, funding your future lifestyle completely.</li>
+                        <li><strong class="text-stone-855">Savings Rate:</strong> While typical financial planners recommend saving 10% to 15% of income, FIRE practitioners often target savings rates of 40% to 70%.</li>
+                        <li><strong class="text-stone-855">The Power of Compounding:</strong> Saving aggressively early in life allows compounding interest to take over, funding your future lifestyle completely.</li>
                     </ul>
                 </section>
 
@@ -703,11 +715,11 @@
                 <section class="space-y-2">
                     <h3 class="text-[13px] font-black text-stone-900">2. The Mathematics of FIRE: The Rule of 25</h3>
                     <p class="font-medium text-stone-600">
-                        Traditional retirement calculations rely on Bengen’s Rule of 25 derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a 4% safe withdrawal rate, your accumulated nest egg must be exactly 25 times your annual living expenses:
+                        Traditional retirement calculations rely on BengenтАЩs Rule of 25 derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a 4% safe withdrawal rate, your accumulated nest egg must be exactly 25 times your annual living expenses:
                     </p>
                     <div class="my-3 p-4 bg-stone-50 border border-stone-250 rounded-2xl text-center">
                         <span class="block text-xxs font-bold text-stone-500 uppercase tracking-wider mb-1">FIRE Target Equation</span>
-                        <span class="text-sm sm:text-base font-black text-red-800">FIRE Corpus Required = Current Annual Expenses × 25</span>
+                        <span class="text-sm sm:text-base font-black text-red-800">FIRE Corpus Required = Current Annual Expenses ├Ч 25</span>
                     </div>
                 </section>
 
@@ -738,10 +750,10 @@
                 <!-- FAQ 1 -->
                 <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
                     <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
-                        1. Is a 4% Safe Withdrawal Rate (SWR) realistic in India?
+                        1. What is the 4% rule in FIRE planning?
                     </h3>
                     <p class="leading-relaxed text-stone-600 font-medium">
-                        While the 4% rule was modeled on US historical equity and bond returns, India experiences higher inflation rates. Many financial advisors in India suggest a slightly more conservative SWR of 3% to 3.5% or maintaining a portion of assets in equity mutual funds post-retirement to stay ahead of inflation.
+                        The 4% rule suggests that if you withdraw 4% of your initial retirement nest egg in your first year of retirement, and adjust subsequent withdrawals for inflation, your capital has a highly statistically significant probability of surviving at least 30 years without total depletion.
                     </p>
                 </div>
 
@@ -751,7 +763,7 @@
                         2. How does Coast FIRE work, and what is its main benefit?
                     </h3>
                     <p class="leading-relaxed text-stone-600 font-medium">
-                        Coast FIRE is achieved when your current saved portfolio is large enough that you no longer need to save actively to secure your retirement. The primary benefit is mental freedom—you can shift to lower-stress, passion-driven, or part-time work that simply covers your current living expenses while your retirement nest egg compounds quietly in the background.
+                        Coast FIRE is achieved when your current saved portfolio is large enough that you no longer need to save actively to secure your retirement. The primary benefit is mental freedomтАФyou can shift to lower-stress, passion-driven, or part-time work that simply covers your current living expenses while your retirement nest egg compounds quietly in the background.
                     </p>
                 </div>
             </div>
@@ -774,13 +786,15 @@
 
         // Global Currency configurations
         const CURRENCIES = {
-            INR: { symbol: '₹', locale: 'en-IN', formatType: 'indian' },
-            USD: { symbol: '$', locale: 'en-US', formatType: 'western' },
-            EUR: { symbol: '€', locale: 'de-DE', formatType: 'western' },
-            GBP: { symbol: '£', locale: 'en-GB', formatType: 'western' },
-            AUD: { symbol: 'A$', locale: 'en-AU', formatType: 'western' },
-            CAD: { symbol: 'C$', locale: 'en-CA', formatType: 'western' },
-            JPY: { symbol: '¥', locale: 'ja-JP', formatType: 'western' }
+            INR: { symbol: 'тВ╣', locale: 'en-IN', formatType: 'indian', defaultSwr: 3.5 },
+            USD: { symbol: '$', locale: 'en-US', formatType: 'western', defaultSwr: 4.0 },
+            EUR: { symbol: 'тВм', locale: 'de-DE', formatType: 'western', defaultSwr: 4.0 },
+            GBP: { symbol: '┬г', locale: 'en-GB', formatType: 'western', defaultSwr: 4.0 },
+            AUD: { symbol: 'A$', locale: 'en-AU', formatType: 'western', defaultSwr: 4.0 },
+            CAD: { symbol: 'C$', locale: 'en-CA', formatType: 'western', defaultSwr: 4.0 },
+            JPY: { symbol: '┬е', locale: 'ja-JP', formatType: 'western', defaultSwr: 4.0 },
+            RUB: { symbol: 'тВ╜', locale: 'ru-RU', formatType: 'western', defaultSwr: 4.5 },
+            ILS: { symbol: 'тВк', locale: 'he-IL', formatType: 'western', defaultSwr: 3.5 }
         };
 
         let currentCurrency = CURRENCIES.INR;
@@ -796,6 +810,15 @@
             symbols.forEach(el => {
                 el.textContent = currentCurrency.symbol;
             });
+
+            // Adjust Safe Withdrawal Rate based on currency default safety rules
+            const swrInput = document.getElementById('swrInput');
+            const swrSlider = document.getElementById('swrSlider');
+            if (swrInput && swrSlider) {
+                swrInput.value = currentCurrency.defaultSwr;
+                swrSlider.value = currentCurrency.defaultSwr;
+                updateSliderIndicator('swrSlider');
+            }
 
             // Re-render comparative indexes based on selected layout
             updateBenchmarkIndexes(code);
@@ -817,7 +840,24 @@
                     <div><strong class="text-stone-855 block">Conservative Debt:</strong> <span class="text-blue-900 font-bold">6% - 7.5% p.a.</span></div>
                 `;
                 compliance.innerHTML = `Retirement projections are strictly illustrative estimates. Under SEBI regulations, historical CAGR parameters are not guarantees of future performance. Past performance is not indicative of future returns.`;
+            } else if (code === 'RUB') {
+                container.innerHTML = `
+                    <div><strong class="text-stone-855 block">MOEX Russia Index:</strong> <span class="text-red-900 font-bold">11% - 14% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">Russian Corporate Bonds:</strong> <span class="text-red-900 font-bold">8% - 10% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">OFZ Govt Bonds:</strong> <span class="text-red-900 font-bold">7.5% - 9% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">Sberbank Savings:</strong> <span class="text-blue-900 font-bold">4% - 6% p.a.</span></div>
+                `;
+                compliance.innerHTML = `Retirement projections are strictly illustrative estimates. MOEX and local deposit yield profiles carry specific inflationary and macroeconomic risk profiles. Past performance is not indicative of future returns.`;
+            } else if (code === 'ILS') {
+                container.innerHTML = `
+                    <div><strong class="text-stone-855 block">TA-125 Index (Israel):</strong> <span class="text-red-900 font-bold">7% - 9% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">S&P 500 Hedged (ILS):</strong> <span class="text-red-900 font-bold">8% - 10% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">Tel-Gov State Bonds:</strong> <span class="text-red-900 font-bold">3% - 4.5% p.a.</span></div>
+                    <div><strong class="text-stone-855 block">Local Shekel Deposit:</strong> <span class="text-blue-900 font-bold">2.5% - 3.8% p.a.</span></div>
+                `;
+                compliance.innerHTML = `Retirement projections are strictly illustrative estimates. Local Bank of Israel rate benchmarks and TA-125 indexing profiles carry macroeconomic yield risks.`;
             } else {
+                // General global (USD, EUR, GBP, AUD, CAD etc)
                 container.innerHTML = `
                     <div><strong class="text-stone-855 block">S&P 500 Index (US):</strong> <span class="text-red-900 font-bold">9% - 11% p.a.</span></div>
                     <div><strong class="text-stone-855 block">MSCI World Index:</strong> <span class="text-red-900 font-bold">7.5% - 9.5% p.a.</span></div>
@@ -953,6 +993,7 @@
             runSimulation();
         }
 
+        // --- Networth Input Support for 9 Crore ---
         function syncNetworthInput() {
             const slider = document.getElementById('networthSlider');
             const input = document.getElementById('networthInput');
@@ -1060,6 +1101,24 @@
             el.style.setProperty('--fill-percentage', `${pct}%`);
         }
 
+        // --- ACCORDION TOGGLE MECHANICS ---
+        function toggleAdvancedAccordion() {
+            const accordionBody = document.getElementById('advancedAccordionBody');
+            const arrow = document.getElementById('accordionArrow');
+            if (!accordionBody || !arrow) return;
+
+            const isHidden = accordionBody.classList.toggle('hidden');
+            if (isHidden) {
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                arrow.style.transform = 'rotate(180deg)';
+                // Re-sync visual sliders upon opening to prevent rendering discrepancies
+                updateSliderIndicator('inflationSlider');
+                updateSliderIndicator('stepUpSlider');
+                updateSliderIndicator('swrSlider');
+            }
+        }
+
         // --- CORE FIRE ENGINE MATHEMATICS ---
         function runSimulation() {
             const currentAge = parseInt(document.getElementById('ageInput').value) || 28;
@@ -1111,6 +1170,11 @@
                 closingNetworth: startPortfolio
             });
 
+            // Tracking Milestone Achieved Ages
+            let leanFireAchievedAge = null;
+            let traditionalFireAchievedAge = null;
+            let fatFireAchievedAge = null;
+
             // Pre-retirement compounding loop (yearly)
             const preMonthlyRate = (preRetireReturn / 12) / 100;
             for (let y = 1; y <= yearsToRetire; y++) {
@@ -1133,6 +1197,21 @@
                     annualGains: yearGains,
                     closingNetworth: runningPortfolio
                 });
+
+                // Check milestone progress dynamically during the timeline
+                const currentAgeLoop = currentAge + y;
+                const adjustedExpensesLoop = annualExpenses * Math.pow(1 + (inflation / 100), y);
+                const localTargetFloor = adjustedExpensesLoop / (swr / 100);
+
+                if (runningPortfolio >= (localTargetFloor * 0.75) && !leanFireAchievedAge) {
+                    leanFireAchievedAge = currentAgeLoop;
+                }
+                if (runningPortfolio >= localTargetFloor && !traditionalFireAchievedAge) {
+                    traditionalFireAchievedAge = currentAgeLoop;
+                }
+                if (runningPortfolio >= (localTargetFloor * 1.25) && !fatFireAchievedAge) {
+                    fatFireAchievedAge = currentAgeLoop;
+                }
 
                 // Apply Annual Savings Step-up
                 currentMonthlySavings = currentMonthlySavings * (1 + (stepUpRate / 100));
@@ -1186,10 +1265,10 @@
             // Determine FIRE status and display details
             const fireStatusEl = document.getElementById('fireStatusVal');
             if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
-                fireStatusEl.textContent = "🎯 Achieved!";
+                fireStatusEl.textContent = "ЁЯОп Achieved!";
                 fireStatusEl.className = "text-xs sm:text-[13px] font-black text-emerald-800 mt-0.5";
             } else if (projectedCorpusValueAtRetire >= leanFireTarget) {
-                fireStatusEl.textContent = "🥪 Lean FIRE Ready";
+                fireStatusEl.textContent = "ЁЯек Lean FIRE Ready";
                 fireStatusEl.className = "text-xs sm:text-[11.5px] font-black text-amber-700 mt-0.5";
             } else {
                 const deficit = targetCorpusFloor - projectedCorpusValueAtRetire;
@@ -1197,14 +1276,16 @@
                 fireStatusEl.className = "text-xs sm:text-[13px] font-black text-red-700 mt-0.5";
             }
 
-            // Display Milestone Values & Progress bars
+            // Display Milestone Values, Progress bars, and Dynamic Milestones Ages
             document.getElementById('leanFireCorpus').textContent = formatVal(leanFireTarget);
             const leanProgress = Math.min(100, (projectedCorpusValueAtRetire / leanFireTarget) * 100);
-            document.getElementById('leanFireProgress').textContent = `${leanProgress.toFixed(0)}% Achieved`;
+            const leanAgeInfo = leanFireAchievedAge ? ` (Achieved at Age ${leanFireAchievedAge})` : " (At target)";
+            document.getElementById('leanFireProgress').textContent = `${leanProgress.toFixed(0)}% Achieved${leanAgeInfo}`;
 
             document.getElementById('fatFireCorpus').textContent = formatVal(fatFireTarget);
             const fatProgress = Math.min(100, (projectedCorpusValueAtRetire / fatFireTarget) * 100);
-            document.getElementById('fatFireProgress').textContent = `${fatProgress.toFixed(0)}% Achieved`;
+            const fatAgeInfo = fatFireAchievedAge ? ` (Achieved at Age ${fatFireAchievedAge})` : " (At target)";
+            document.getElementById('fatFireProgress').textContent = `${fatProgress.toFixed(0)}% Achieved${fatAgeInfo}`;
 
             // Coast FIRE Progression Logic
             document.getElementById('coastFireTarget').textContent = formatVal(coastFireTargetToday);
@@ -1213,13 +1294,26 @@
 
             const coastAdvice = document.getElementById('coastFireAdvice');
             if (startPortfolio >= coastFireTargetToday) {
-                coastAdvice.textContent = "🟢 Coast FIRE Achieved! Compounding is locked in.";
+                coastAdvice.textContent = "ЁЯЯв Coast FIRE Achieved! Compounding is locked in.";
                 coastAdvice.className = "text-[9px] text-emerald-800 font-black mt-0.5 leading-tight";
             } else {
                 const coastDeficit = coastFireTargetToday - startPortfolio;
                 coastAdvice.textContent = `Need ${curSymbol}${formatIndianShort(coastDeficit)} more today to coast smoothly.`;
                 coastAdvice.className = "text-[9px] text-rose-800 font-extrabold mt-0.5 leading-tight";
             }
+
+            // Calculate the Procrastination Penalty (3-Year Delay Cost)
+            let delayedPortfolio = startPortfolio;
+            let delayedSavings = startSavings;
+            // Delay by 3 years, so wealth accumulation is modeled only for (yearsToRetire - 3) years
+            const accumulationYearsDelayed = Math.max(0, yearsToRetire - 3);
+            for (let y = 1; y <= accumulationYearsDelayed; y++) {
+                for (let m = 1; m <= 12; m++) {
+                    delayedPortfolio = (delayedPortfolio + delayedSavings) * (1 + preMonthlyRate);
+                }
+                delayedSavings = delayedSavings * (1 + (stepUpRate / 100));
+            }
+            const delayLossPenalty = Math.max(0, projectedCorpusValueAtRetire - delayedPortfolio);
 
             // Compute actual drawdown years remaining
             const durationYears = ageCompletedDrawdown - retireAge;
@@ -1233,14 +1327,20 @@
 
                 if (projectedCorpusValueAtRetire >= targetCorpusFloor) {
                     if (ranOutOfMoney) {
-                        advice = `🎉 <strong>Congratulations:</strong> You hit your FIRE target at Age <strong>${retireAge}</strong> with <strong>${formatVal(projectedCorpusValueAtRetire)}</strong>. Your retirement compounds nicely and sustains your lifestyle until Age <strong>${ageCompletedDrawdown}</strong> before depletion occurs.`;
+                        advice = `ЁЯОЙ <strong>Congratulations:</strong> You hit your FIRE target at Age <strong>${retireAge}</strong>. Your retirement compounds nicely and sustains your lifestyle until Age <strong>${ageCompletedDrawdown}</strong> before depletion occurs.`;
                     } else {
-                        advice = `🚀 <strong>Outstanding Profile!</strong> You achieve full financial freedom by Age <strong>${retireAge}</strong>. Your investments compound faster than withdrawals, creating an infinite generation wealth stream.`;
+                        advice = `ЁЯЪА <strong>Outstanding Profile!</strong> You achieve full financial freedom by Age <strong>${retireAge}</strong>. Your investments compound faster than withdrawals, creating an infinite generation wealth stream.`;
                     }
                 } else {
                     const extraSavingsNeeded = solveRequiredMonthlySavings(targetCorpusFloor, startPortfolio, preRetireReturn, yearsToRetire, stepUpRate);
-                    advice = `💡 <strong>FIRE Optimization Plan:</strong> Based on current monthly savings (${curSymbol}${formatIndianShort(startSavings)}), you will face a deficit of <strong>${formatVal(targetCorpusFloor - projectedCorpusValueAtRetire)}</strong> at age ${retireAge}. Increasing your monthly savings to <strong>${curSymbol}${formatIndianShort(extraSavingsNeeded)}</strong> will help you achieve full financial independence on time.`;
+                    advice = `ЁЯТб <strong>FIRE Optimization Plan:</strong> Based on current monthly savings (${curSymbol}${formatIndianShort(startSavings)}), you will face a deficit of <strong>${formatVal(targetCorpusFloor - projectedCorpusValueAtRetire)}</strong> at age ${retireAge}. Increasing your monthly savings to <strong>${curSymbol}${formatIndianShort(extraSavingsNeeded)}</strong> will help you achieve full financial independence on time.`;
                 }
+
+                // Append the procrastination penalty insights dynamically
+                if (delayLossPenalty > 0) {
+                    advice += `<br><span class="text-stone-600 block mt-2 text-[10px] border-t border-stone-200/50 pt-2"><i class="fa-solid fa-hourglass-half text-amber-600"></i> <strong>Procrastination Penalty:</strong> Delaying your retirement savings plan by just 3 years will cost you <strong>${formatVal(delayLossPenalty)}</strong> in lost compounding gains at retirement. Start today!</span>`;
+                }
+
                 textEl.innerHTML = advice;
             }
 
@@ -1254,8 +1354,8 @@
                     warnBox.classList.remove('hidden');
                     warnBox.innerHTML = `
                         <div class="p-2.5 bg-amber-50 border border-amber-250 text-amber-900 rounded-xl text-[10px] flex items-start gap-1.5 leading-relaxed">
-                            <span>⚠️</span>
-                            <span><strong>Aggressive Withdrawal Flag (${swr}% SWR):</strong> Withdrawing over 5% annually in a high-inflation environment significantly increases sequence-of-returns risks. Lower SWR to 3.5%-4% to protect capital.</span>
+                            <span>тЪая╕П</span>
+                            <span><strong>Aggressive Withdrawal Flag (${swr}% SWR):</strong> Withdrawing over 5% annually in a high-inflation environment significantly increases sequence-of-returns risks. Lower SWR to protect capital.</span>
                         </div>
                     `;
                 }
