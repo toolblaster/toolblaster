@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Advanced FIRE Calculator | Early Retirement Planner</title>
+    <meta name="description" content="Calculate Lean, Traditional & Coast FIRE status. Real-time compounding, inflation-adjusted drawdown & custom safe withdrawal rates.">
+    <meta name="keywords" content="fire calculator, coast fire calculator, early retirement planner, lean fire, fat fire, safe withdrawal rate, swp depletion planner, personal finance">
+    <link class="rounded-full" rel="canonical" href="https://toolblaster.com/finance/advanced-fire-retirement-planner/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph & Twitter Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Advanced FIRE Retirement Calculator | Early Retirement Planner">
+    <meta property="og:description" content="Model your early retirement milestones with inflation drag, progressive dynamic SWP drawdown curves, and Coast FIRE trackers.">
+    <meta property="og:image" content="https://toolblaster.com/js/favicon/android-chrome-192x192.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="apple-touch-icon" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="manifest" rel="manifest" href="../../js/favicon/site.webmanifest">
+
+    <!-- Application Brand Metadata -->
+    <meta name="application-name" content="Advanced FIRE Planner">
+    <meta name="apple-mobile-web-app-title" content="FIRE Planner">
+
+    <!-- Comprehensive Structured Schema Block (WebApplication, Breadcrumb, HowTo, FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#webapp",
+          "name": "Advanced FIRE Retirement Calculator | Early Retirement Planner",
+          "url": "https://toolblaster.com/finance/advanced-fire-retirement-planner/",
+          "applicationCategory": "FinancialApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://toolblaster.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Finance",
+              "item": "https://toolblaster.com/finance/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "FIRE Retirement Planner",
+              "item": "https://toolblaster.com/finance/advanced-fire-retirement-planner/"
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#howto",
+          "name": "How to Calculate Your Early Retirement (FIRE) Target",
+          "description": "Step-by-step guide to calculating your Lean, Traditional, and Coast FIRE targets using pre/post-retirement returns, inflation, and step-ups.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Enter Your Current Financial Profile",
+              "text": "Input your current age, target retirement age, expected life expectancy, monthly expenses, and current invested net worth portfolio.",
+              "url": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#step1"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Set Monthly Savings and Compounding Returns",
+              "text": "Specify your current monthly savings amount, pre-retirement compounding yield (accumulation rate), and post-retirement yield (drawdown rate).",
+              "url": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#step2"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Enable Advanced Inflation and Step-Up Toggles",
+              "text": "Turn on long-term inflation estimates and annual savings step-up increments to model realistic purchasing power and rising career income compounding.",
+              "url": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#step3"
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Verify Milestones and Drawdown Depletion Ledger",
+              "text": "Review your Coast, Lean, and Fat FIRE milestone progress. Inspect the year-by-year ledger to check for portfolio depletion age based on safe withdrawal rate (SWR).",
+              "url": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#step4"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://toolblaster.com/finance/advanced-fire-retirement-planner/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the 4% rule in FIRE planning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The 4% rule suggests that if you withdraw 4% of your initial retirement nest egg in your first year of retirement, and adjust subsequent withdrawals for inflation, your capital has a highly statistically significant probability of surviving at least 30 years without total depletion."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Coast FIRE work, and what is its main benefit?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Coast FIRE is achieved when your current saved portfolio is large enough that you no longer need to save actively to secure your retirement. The primary benefit is mental freedom—you can shift to lower-stress, passion-driven, or part-time work that simply covers your current living expenses while your retirement nest egg compounds quietly in the background."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the 'Procrastination Penalty' calculate lost opportunity cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Procrastination Penalty mathematically calculates the cost of delaying your retirement plan by exactly 3 years. Because compounding thrives on time, starting even a few years late dramatically reduces your final terminal portfolio size, meaning you either have to save much more monthly or push your retirement age back."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does this planner use a 'Beginning-of-Year' withdrawal convention?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In real life, retirees need funds at the start of each year to pay for their monthly expenses, rather than waiting until the last day of the year. By deducting annual expenses at the beginning of each year and compounding only the remaining balance, the planner provides a conservative, highly realistic trajectory."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Coast FIRE differ from Lean FIRE or Fat FIRE?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lean FIRE represents minimalist independence (covering essentials at 75% of your standard budget), while Fat FIRE targets comfortable luxury (125% of budget). Coast FIRE, however, is a milestone where your current savings are already large enough to compound on their own to fund your ultimate traditional retirement goal by age 60 entirely through compounding."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Tailwind, Chart.js, and Google Fonts -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { 
+            --bg-color: #f9fafb; 
+            --text-main: #111827; 
+            --accent-color: #dc2626;
+            --accent-color-dark: #b91c1c;
+        }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .hidden { display: none !important; }
+        
+        @media (max-width: 480px) {
+            .custom-desktop-badge { display: none !important; }
+        }
+
+        .mobile-disclaimer { display: block; }
+        .desktop-disclaimer { display: none; }
+        @media (min-width: 481px) {
+            .mobile-disclaimer { display: none !important; }
+            .desktop-disclaimer { display: block !important; }
+        }
+        
+        #notification-toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background-color: #111827; color: white; padding: 12px 24px;
+            border-radius: 12px; z-index: 1000; opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.15);
+            font-size: 0.75rem; font-weight: 600; text-align: center;
+        }
+        #notification-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, -5px); }
+
+        .range-slider {
+            -webkit-appearance: none; appearance: none; background: transparent;
+            cursor: pointer; height: 6px; flex-grow: 1;
+        }
+        .range-slider::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%)); 
+        }
+        .range-slider::-moz-range-track {
+            width: 100%; height: 6px; border-radius: 3px;
+            background: linear-gradient(to right, var(--accent-color-dark) var(--fill-percentage, 0%), #cbd5e1 var(--fill-percentage, 0%));
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; margin-top: -4.5px;
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark); 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
+        }
+        .range-slider::-moz-range-thumb {
+            width: 15px; height: 15px; border-radius: 50%; background: var(--accent-color-dark);
+            border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .range-slider:focus { outline: none; }
+
+        .input-stepper-group {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            background: white;
+            overflow: hidden;
+            height: 1.85rem;
+            transition: all 0.2s ease;
+        }
+        .manual-input {
+            border: none; text-align: center; font-weight: 700; color: #111827;
+            background: transparent; height: 100%; outline: none; font-size: 0.75rem;
+            width: 82px; padding: 0 4px;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+        .manual-input::-webkit-outer-spin-button, .manual-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .input-stepper-group:focus-within {
+            border-color: var(--accent-color-dark) !important;
+            box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2) !important;
+        }
+        .stepper-button {
+            background-color: #e5e7eb; color: #111827; border: none; width: 1.5rem;
+            height: 100%; cursor: pointer; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center; transition: all 0.1s;
+        }
+        .stepper-button:hover:not(:disabled) { background-color: #cbd5e1; } 
+        .stepper-button:disabled { opacity: 0.5; cursor: not-allowed; } 
+
+        .tooltip-icon { cursor: help; position: relative; display: inline-block; }
+        .tooltip-icon svg { width: 0.8rem; height: 0.8rem; color: currentColor; vertical-align: middle; }
+        .tooltip-text {
+            display: none; width: 220px; background-color: #111827; color: #ffffff;
+            text-align: left; border-radius: 8px; padding: 8px 12px; position: absolute;
+            z-index: 50; bottom: 125%; left: 50%; transform: translateX(-50%);
+            font-size: 0.65rem; font-weight: 500; line-height: 1.4;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15); pointer-events: none;
+            text-transform: none;
+        }
+        .tooltip-text::after {
+            content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border-width: 5px; border-style: solid; border-color: #111827 transparent transparent transparent;
+        }
+        .tooltip-icon:hover .tooltip-text { display: block; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f9fafb; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        html body .text-xxs { font-size: 0.72rem; line-height: 1rem; }
+        .tab-mode-btn { transition: all 0.2s; border: 1px solid #cbd5e1; cursor: pointer; }
+        .tab-mode-btn.active {
+            background-color: var(--accent-color-dark);
+            color: white;
+            border-color: var(--accent-color-dark);
+        }
+
+        @media print {
+            body { background: white; padding: 0; margin: 0; }
+            #app-header, #app-tool-nav, #app-footer, .print-hide, .range-slider, .stepper-button { display: none !important; }
+            .print-show { display: block !important; }
+            .calculator-container { border: none !important; box-shadow: none !important; }
+            #growthTableContainer { max-height: none; overflow: visible; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-red-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Glow Background -->
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-50/20 blur-[130px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[40vw] rounded-full bg-stone-100/30 blur-[110px]"></div>
+    </div>
+
+    <!-- Layout Navigation placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-4 pb-6">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-600 mb-3 font-medium flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-700 transition-colors inline-flex items-center gap-1.5" title="Navigate home">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <a href="/finance" class="hover:text-red-700 transition-colors" title="View other financial planning resources">Finance</a>
+                <span class="mx-1.5 text-stone-300">/</span>
+                <span class="text-stone-900 font-bold">FIRE Retirement Planner</span>
+            </div>
+            <div class="custom-desktop-badge flex items-center gap-1.5 bg-red-50 text-red-700 border border-red-100 px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider">
+                <i class="fa-solid fa-fire text-[10px]"></i> Independence Engine
+            </div>
+        </nav>
+
+        <!-- Main Card -->
+        <div id="calculator" class="w-full text-left mt-1">
+            <div class="bg-white/95 backdrop-blur-xl shadow-xl rounded-3xl p-4 sm:p-5 w-full border border-stone-200/90 mx-auto my-0 calculator-container relative">
+
+                <!-- Title Header -->
+                <div class="text-center mb-5">
+                    <h1 class="text-base sm:text-[18px] font-extrabold text-stone-900 leading-tight">Advanced FIRE Retirement Calculator</h1>
+                    <p class="text-stone-600 text-xxs font-medium mt-1">Simulate your Financial Independence milestones with pre/post-retirement returns, inflation drag, and systematic depletion.</p>
+                </div>
+
+                <!-- MAIN WORKSPACE GRID -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 items-start">
+                    
+                    <!-- Left Settings Panel -->
+                    <div class="space-y-3.5 print-hide">
+                        <div class="bg-stone-50 border border-stone-200 p-4 rounded-2xl space-y-4">
+                            
+                            <!-- Global Currency Selector with Tooltip -->
+                            <div class="pb-2 border-b border-stone-200/60">
+                                <label id="currencySelectLabel" for="currencySelect" class="block text-[10px] font-extrabold text-stone-855 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-globe text-red-700"></i> 
+                                    <span>Plan Currency Layout</span>
+                                    <span class="tooltip-icon ml-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                        <span class="tooltip-text">Change the financial currency. This automatically updates formatting, symbols, and regional index defaults.</span>
+                                    </span>
+                                </label>
+                                <select id="currencySelect" class="w-full p-2 bg-white border border-stone-300 rounded-xl text-xs font-bold text-stone-900 focus:outline-none focus:border-red-700 transition-colors" onchange="changeActiveCurrency()">
+                                    <option value="INR" selected>Indian Rupee (INR - ₹)</option>
+                                    <option value="USD">US Dollar (USD - $)</option>
+                                    <option value="EUR">Euro (EUR - €)</option>
+                                    <option value="GBP">British Pound (GBP - £)</option>
+                                    <option value="AUD">Australian Dollar (AUD - A$)</option>
+                                    <option value="CAD">Canadian Dollar (CAD - C$)</option>
+                                    <option value="JPY">Japanese Yen (JPY - ¥)</option>
+                                    <option value="RUB">Russian Ruble (RUB - ₽)</option>
+                                    <option value="ILS">Israeli New Shekel (ILS - ₪)</option>
+                                </select>
+                            </div>
+
+                            <!-- Section: Core Age & Life Expectancy Parameters (Optimized Dynamic 3-Column Layout with Precise Tooltips) -->
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label id="ageLabelText" for="ageInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Current Age</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your current age today. This marks the starting point of your compounding wealth-building phase.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', -1, 18, 75)">-</button>
+                                        <input type="number" id="ageInput" class="manual-input flex-grow animate-none !w-full" value="28" min="18" max="75" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('ageInput', 1, 18, 75)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="retireAgeLabelText" for="retireAgeInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Retire Age</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your target age to stop active work. This marks the transition from building wealth to drawing from it.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', -1, 18, 75)">-</button>
+                                        <input type="number" id="retireAgeInput" class="manual-input flex-grow animate-none !w-full" value="45" min="18" max="75" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('retireAgeInput', 1, 18, 75)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="lifeExpectancyLabelText" for="lifeExpectancyInput" class="inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1">
+                                        <span>Life Expect</span>
+                                        <span class="tooltip-icon ml-0.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your estimated life expectancy. The target age up to which your retirement nest egg must mathematically support you.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('lifeExpectancyInput', -1, 50, 100)">-</button>
+                                        <input type="number" id="lifeExpectancyInput" class="manual-input flex-grow animate-none !w-full" value="85" min="50" max="100" onchange="validateAgeSettings()">
+                                        <button type="button" class="stepper-button" onclick="adjustValue('lifeExpectancyInput', 1, 50, 100)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Expenses Slider (Optimized with Flex Wrapping to prevent mobile overflows) -->
+                            <div>
+                                <div class="flex flex-wrap justify-between items-center gap-x-2 gap-y-0.5 mb-1">
+                                    <label id="expenseLabelText" for="expenseInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Monthly Expenses Today (<span class="currency-symbol">₹</span>)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Your average current monthly living expenses including food, bills, rent, lifestyle, and healthcare. Excluding savings.</span>
+                                        </span>
+                                    </label>
+                                    <span id="expenseWords" class="text-[10px] text-red-800 font-bold whitespace-nowrap"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="expenseSlider" min="10000" max="500000" value="50000" step="5000" class="w-full range-slider flex-grow" oninput="syncExpenseSlider()" aria-label="Monthly Expenses">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustExpense(-5000)">-</button>
+                                        <input type="number" id="expenseInput" class="manual-input" value="50000" min="10000" max="500000" step="5000" onchange="syncExpenseInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustExpense(5000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio networth Slider (Optimized with Flex Wrapping to prevent mobile overflows) -->
+                            <div>
+                                <div class="flex flex-wrap justify-between items-center gap-x-2 gap-y-0.5 mb-1">
+                                    <label id="networthLabelText" for="networthInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Current Portfolio Net Worth (<span class="currency-symbol">₹</span>)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Sum of all liquid and investable assets you own today (mutual funds, stocks, EPF, PPF, gold, etc.) that can support your retirement.</span>
+                                        </span>
+                                    </label>
+                                    <span id="networthWords" class="text-[10px] text-red-800 font-bold whitespace-nowrap"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="networthSlider" min="0" max="90000000" value="500000" step="50000" class="w-full range-slider flex-grow" oninput="syncNetworthSlider()" aria-label="Current Portfolio Net Worth">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl flex-grow-0">
+                                        <button type="button" class="stepper-button" onclick="adjustNetworth(-50000)">-</button>
+                                        <input type="number" id="networthInput" class="manual-input flex-grow animate-none flex-shrink" value="500000" min="0" max="90000000" step="50000" onchange="syncNetworthInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustNetworth(50000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Savings Slider (Optimized with Flex Wrapping to prevent mobile overflows) -->
+                            <div>
+                                <div class="flex flex-wrap justify-between items-center gap-x-2 gap-y-0.5 mb-1">
+                                    <label id="savingsLabelText" for="savingsInput" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                        <span>Monthly Savings Contribution (<span class="currency-symbol">₹</span>)</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">The total amount you save and invest into compounding assets every month specifically for your early retirement goal.</span>
+                                        </span>
+                                    </label>
+                                    <span id="savingsWords" class="text-[10px] text-red-800 font-bold whitespace-nowrap"></span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <input type="range" id="savingsSlider" min="1000" max="250000" value="25000" step="1000" class="w-full range-slider flex-grow" oninput="syncSavingsSlider()" aria-label="Monthly Savings">
+                                    <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                        <button type="button" class="stepper-button" onclick="adjustSavings(-1000)">-</button>
+                                        <input type="number" id="savingsInput" class="manual-input animate-none" value="25000" min="1000" max="250000" step="1000" onchange="syncSavingsInput()">
+                                        <button type="button" class="stepper-button" onclick="adjustSavings(1000)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pre and Post Retirement Returns -->
+                            <div class="grid grid-cols-2 gap-3.5">
+                                <div>
+                                    <label id="preReturnLabelText" for="preReturnInput" class="block text-[10px] font-bold text-stone-855 uppercase tracking-wider mb-1 flex items-center">
+                                        <span>Pre-Retire Return</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Annualized yield assumption during wealth-building accumulation phase. Standard is ~12% (Equity/Mutual Funds).</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('preReturnInput', -0.5, 4, 25)">-</button>
+                                        <input type="number" id="preReturnInput" class="manual-input flex-grow animate-none" value="12" min="4" max="25" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('preReturnInput', 0.5, 4, 25)">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label id="postReturnLabelText" for="postReturnInput" class="block text-[10px] font-bold text-stone-500 uppercase tracking-wider flex items-center mb-1">
+                                        <span>Post-Retire Return</span>
+                                        <span class="tooltip-icon ml-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3 text-current"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                            <span class="tooltip-text">Annualized yield during retirement. Standard is lower (e.g. 7%-8%) to reflect safer conservative assets like debt and deposits.</span>
+                                        </span>
+                                    </label>
+                                    <div class="input-stepper-group flex rounded-xl w-full animate-none">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('postReturnInput', -0.5, 3, 18)">-</button>
+                                        <input type="number" id="postReturnInput" class="manual-input flex-grow animate-none" value="8" min="3" max="18" step="0.1" onchange="runSimulation()">
+                                        <button type="button" class="stepper-button" onclick="adjustValueFloat('postReturnInput', 0.5, 3, 18)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 🛠️ ADVANCED COLLAPSIBLE ACCORDION PANEL (By Default OPEN) -->
+                        <div class="border border-stone-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+                            <button type="button" onclick="toggleAdvancedAccordion()" class="w-full flex justify-between items-center px-4 py-3 bg-stone-50 hover:bg-stone-100 transition-colors focus:outline-none">
+                                <span class="font-extrabold text-[11px] text-stone-700 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-red-600"></i> Advanced Assumptions
+                                </span>
+                                <i id="accordionArrow" class="fa-solid fa-chevron-down text-stone-500 transition-transform duration-300" style="transform: rotate(180deg);"></i>
+                            </button>
+                            
+                            <!-- Kept initially OPEN by omitting the 'hidden' class -->
+                            <div id="advancedAccordionBody" class="px-4 py-3 space-y-4 border-t border-stone-200 bg-white">
+                                
+                                <!-- Inflation Parameter with iOS Switch Toggle -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <label id="inflationLabelText" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                            <span>Long-Term Inflation Estimate (% p.a.)</span>
+                                            <span class="tooltip-icon ml-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">Expected annual inflation rate. Slashes future purchasing power. Standard in India is around 5%-6%.</span>
+                                            </span>
+                                        </label>
+                                        <!-- Toggle switch for Inflation -->
+                                        <label class="relative inline-flex items-center cursor-pointer" for="inflationToggle" title="Toggle inflation calculations">
+                                            <input type="checkbox" id="inflationToggle" class="sr-only peer" role="switch" onchange="toggleFrictionGroup('inflation')">
+                                            <div class="w-7 h-4 bg-stone-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-red-700"></div>
+                                        </label>
+                                    </div>
+                                    <div id="inflationGroup" class="flex items-center space-x-2 opacity-50 pointer-events-none transition-opacity duration-200">
+                                        <input type="range" id="inflationSlider" min="2" max="12" value="6" step="0.1" class="w-full range-slider flex-grow" oninput="syncInflationSlider()" aria-label="Long-Term Inflation">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', -0.1, 2, 12)">-</button>
+                                            <input type="number" id="inflationInput" class="manual-input animate-none" value="6" min="2" max="12" step="0.1" onchange="syncInflationInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('inflationInput', 0.1, 2, 12)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Annual Savings Step-Up with iOS Switch Toggle -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <label id="stepUpLabelText" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                            <span>Annual Savings Step-Up (%)</span>
+                                            <span class="tooltip-icon ml-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">Percentage by which you increase your monthly savings each year as your income grows. Standard step-up is 10%.</span>
+                                            </span>
+                                        </label>
+                                        <!-- Toggle switch -->
+                                        <label class="relative inline-flex items-center cursor-pointer" for="stepUpToggle" title="Toggle annual savings increment scaling">
+                                            <input type="checkbox" id="stepUpToggle" class="sr-only peer" role="switch" onchange="toggleFrictionGroup('stepUp')">
+                                            <div class="w-7 h-4 bg-stone-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-red-700"></div>
+                                        </label>
+                                    </div>
+                                    <div id="stepUpGroup" class="flex items-center space-x-2 opacity-50 pointer-events-none transition-opacity duration-200">
+                                        <input type="range" id="stepUpSlider" min="0" max="25" value="10" step="1" class="w-full range-slider flex-grow" oninput="syncStepUpSlider()" aria-label="Savings Step-Up">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', -1, 0, 25)">-</button>
+                                            <input type="number" id="stepUpInput" class="manual-input animate-none" value="10" min="0" max="25" step="1" onchange="syncStepUpInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValue('stepUpInput', 1, 0, 25)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Safe Withdrawal Rate with iOS Switch Toggle -->
+                                <div>
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <label id="swrLabelText" class="block text-xxs font-bold text-stone-800 flex items-center">
+                                            <span>Custom Safe Withdrawal Rate (SWR %)</span>
+                                            <span class="tooltip-icon ml-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">The SWR dictates the size of your retirement corpus. 4% SWR means you need exactly 25x of your inflation-adjusted annual expenses. Unchecked will default to currency baseline parameters automatically.</span>
+                                            </span>
+                                        </label>
+                                        <!-- Toggle switch -->
+                                        <label class="relative inline-flex items-center cursor-pointer" for="swrToggle" title="Toggle custom SWR adjustments">
+                                            <input type="checkbox" id="swrToggle" class="sr-only peer" role="switch" onchange="toggleFrictionGroup('swr')">
+                                            <div class="w-7 h-4 bg-stone-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-red-700"></div>
+                                        </label>
+                                    </div>
+                                    <div id="swrGroup" class="flex items-center space-x-2 opacity-50 pointer-events-none transition-opacity duration-200">
+                                        <input type="range" id="swrSlider" min="2" max="8" value="4" step="0.1" class="w-full range-slider flex-grow" oninput="syncSwrSlider()" aria-label="SWR">
+                                        <div class="input-stepper-group flex-shrink-0 rounded-xl">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', -0.1, 2, 8)">-</button>
+                                            <input type="number" id="swrInput" class="manual-input animate-none" value="4" min="2" max="8" step="0.1" onchange="syncSwrInput()">
+                                            <button type="button" class="stepper-button" onclick="adjustValueFloat('swrInput', 0.1, 2, 8)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Warnings & Validation Flags -->
+                        <div id="smartFinancialValidation" class="space-y-1.5 hidden print-hide"></div>
+                    </div>
+
+                    <!-- Right Column: Interactive Results, Real-Time Chart & Insights -->
+                    <div class="flex flex-col relative print:w-full space-y-4">
+                        
+                        <!-- Main Metric Result Blocks -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center">
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Projected Corpus</span>
+                                <span id="projectedCorpus" class="text-xs sm:text-[13px] font-black text-stone-800"><span class="currency-symbol">₹</span>0</span>
+                            </div>
+                            <div class="p-3 bg-stone-50 border border-stone-200 rounded-2xl">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wide">Est. Target Goal</span>
+                                <span id="targetCorpus" class="text-xs sm:text-[13px] font-black text-stone-800"><span class="currency-symbol">₹</span>0</span>
+                            </div>
+                            <div class="p-3 bg-red-50 border border-red-100 rounded-2xl col-span-2 sm:col-span-1 flex flex-col justify-center">
+                                <span class="block text-[8.5px] sm:text-[10px] font-bold text-red-900 uppercase tracking-wider">FIRE Status</span>
+                                <span id="fireStatusVal" class="text-xs sm:text-[11.5px] font-black text-red-955 mt-0.5">Calculating...</span>
+                            </div>
+                        </div>
+
+                        <!-- Milestone Trackers (Lean FIRE, Fat FIRE, Coast FIRE Today) -->
+                        <div class="p-4 bg-slate-50 border border-stone-200 rounded-2xl space-y-2.5 shadow-sm">
+                            <div class="text-xs font-black text-stone-900 uppercase tracking-wider border-b border-stone-200 pb-1.5 flex items-center justify-between">
+                                <span>🗺️ FIRE Milestone Progress Board</span>
+                                <span class="text-[9px] text-slate-500 font-bold tracking-tight">At Target Age</span>
+                            </div>
+                            <div class="space-y-2 text-xxs sm:text-xs">
+                                <!-- Lean FIRE with Tooltip -->
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-800 flex items-center gap-1">
+                                            <span>Lean FIRE Corpus (<span class="currency-symbol">₹</span>)</span>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">The minimum bare-bones corpus required to fund a minimalist retirement covering strictly essential survival needs (approx. 75% of your standard budget).</span>
+                                            </span>
+                                        </span>
+                                        <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers bare minimum survival expenses (75% budget)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="leanFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="leanFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                                <!-- Fat FIRE with Tooltip -->
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-800 flex items-center gap-1">
+                                            <span>Fat FIRE Corpus (<span class="currency-symbol">₹</span>)</span>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-2.5 h-2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">A luxury early retirement target corpus designed with a premium lifestyle buffer (approx. 125% of your standard budget) to absorb market volatility.</span>
+                                            </span>
+                                        </span>
+                                        <span class="text-[9px] text-stone-500 font-semibold italic leading-tight">Covers a luxury lifestyle buffer (125% budget)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="fatFireCorpus" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="fatFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                                <div class="border-t border-stone-200 my-1"></div>
+                                <!-- Coast FIRE Today -->
+                                <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-stone-200">
+                                    <div class="flex flex-col">
+                                        <span class="font-extrabold text-stone-900 flex items-center gap-1">
+                                            <span>Coast FIRE Target Today (<span class="currency-symbol">₹</span>)</span>
+                                            <span class="tooltip-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-3 h-3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                                <span class="tooltip-text">If you have this much saved today, you can stop saving and still hit your traditional retirement target corpus at age 60 entirely through compounding.</span>
+                                            </span>
+                                        </span>
+                                        <span id="coastFireAdvice" class="text-[9px] text-emerald-800 font-black mt-0.5 leading-tight">Calculating status...</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="coastFireTarget" class="font-black text-stone-900 block"><span class="currency-symbol">₹</span>0</span>
+                                        <span id="coastFireProgress" class="text-[9px] font-bold text-slate-500">0% Achieved</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Regulatory Compliance notice -->
+                        <div class="p-3 bg-amber-50/50 border border-amber-150 rounded-2xl text-stone-750 font-medium leading-relaxed text-xxs select-none shadow-sm">
+                            <p class="font-extrabold text-stone-900 text-[10px] uppercase tracking-wide mb-0.5">Regulatory Advisory & Risk Notice</p>
+                            <p id="complianceText" class="text-[9.5px]">Retirement projections are strictly illustrative estimates. Historical asset parameters are not guarantees of future performance. Past performance is not indicative of future returns.</p>
+                        </div>
+
+                        <!-- Real-time Smart Actionable Advisors -->
+                        <div id="smartInsight" class="p-3 bg-red-50 border border-red-200 rounded-xl text-xxs font-semibold text-red-955 flex items-start gap-2 hidden print-hide">
+                            <span id="smartInsightText" class="flex-grow leading-relaxed"></span>
+                        </div>
+
+                        <!-- Graphical Representation Canvas -->
+                        <div class="flex justify-center items-center h-44 sm:h-48 w-full relative print-hide border border-stone-250 p-2.5 rounded-2xl bg-stone-50">
+                            <canvas id="fireDrawdownChart" aria-label="Compounded Growth & Retirement Drawdown Graph"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button Control Toolbar -->
+                <div class="flex flex-wrap justify-center gap-2 mt-5 mb-2 print-hide border-t border-stone-100 pt-5">
+                    <button id="toggleGrowthTableBtn" class="px-4 py-2 bg-stone-900 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-slate-800 active:scale-[0.97]" onclick="toggleGrowthTable()">Show Year-by-Year Ledger</button>
+                    <button id="printReportBtn" class="px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-xl text-xxs font-bold transition-all duration-200 active:scale-[0.97] flex items-center gap-1" onclick="window.print()">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Print/PDF Report
+                    </button>
+                    <button id="exportCsvBtn" class="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xxs font-bold transition-all duration-200 hover:bg-emerald-800 active:scale-[0.97] flex items-center gap-1" onclick="exportSimulationToCSV()">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17h18a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Export CSV
+                    </button>
+                </div>
+
+                <!-- Structured Growth Schedule Panel -->
+                <div id="growthTableContainer" class="hidden bg-white rounded-2xl shadow-sm mt-4 border border-stone-200 overflow-hidden">
+                    <div class="p-3 border-b border-stone-200 bg-stone-50 flex items-center justify-between">
+                         <h2 class="text-xs font-bold text-stone-855 m-0 uppercase tracking-wider">Year-by-Year FIRE Ledger (Drawdown Timeline)</h2>
+                         <span class="text-[10px] text-stone-600 italic font-semibold">Post-retirement withdrawals are adjusted dynamically for inflation.</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-[300px] custom-scrollbar">
+                        <table class="min-w-full text-left">
+                            <thead class="bg-stone-100 border-b border-slate-200 sticky top-0 z-10">
+                                <tr>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[10%]">Age</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[15%]">Phase</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Invested / Drawdown (Annual)</th>
+                                    <th class="p-3 text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Gains Generated</th>
+                                    <th class="p-3 text-center text-[10px] font-black text-slate-800 uppercase tracking-wider w-[25%]">Closing Net Worth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="growthTableBody" class="bg-white text-xs divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Benchmark Index Grid -->
+                <div class="bg-stone-50 border border-stone-200 rounded-2xl p-4 text-[10px] leading-relaxed text-stone-700 font-semibold mt-4 space-y-3">
+                    <div id="benchmarkContainer" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                        <div><strong class="text-stone-855 block">Nifty 50 Index:</strong> <span class="text-red-900 font-bold">12% - 14% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Midcap 150 Index:</strong> <span class="text-red-900 font-bold">14% - 16% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Nifty Hybrid 35:65 Index:</strong> <span class="text-red-900 font-bold">10% - 11.5% p.a.</span></div>
+                        <div><strong class="text-stone-855 block">Conservative Debt:</strong> <span class="text-blue-900 font-bold">6% - 7.5% p.a.</span></div>
+                    </div>
+                    
+                    <!-- demat partner links -->
+                    <div class="text-center print-hide border-t border-stone-200/50 pt-2.5">
+                        <a href="https://www.5paisa.com/demat-account?ReferralCode=54285431&ReturnUrl=invest-open-account" target="_blank" rel="nofollow sponsored noopener noreferrer" class="inline-flex items-center text-[9px] font-black text-red-800 hover:text-red-950 transition-colors uppercase tracking-widest gap-1" title="Open a Free Demat Account with 5paisa to start investing and creating long-term wealth portfolios">
+                            <i class="fa-solid fa-arrow-trend-up text-[9px]"></i> Open Free Demat Account on 5paisa <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Disclaimer -->
+                    <div class="border-t border-stone-200/50 pt-3 text-center space-y-1 bg-white p-2 rounded-xl border">
+                        <p class="font-extrabold text-stone-800 uppercase tracking-wider text-[9px]">Regulatory Compliance & Asset Disclaimer</p>
+                        <p class="text-stone-600 text-[9px] leading-normal font-medium">
+                            <span class="mobile-disclaimer">
+                                Asset allocations and performance statistics are strictly educational compounding models. Drawdown assumes conservative beginning-of-year annual withdrawals. All investments carry market-related risks. Read scheme folders carefully.
+                            </span>
+                            <span class="desktop-disclaimer">
+                                Educational compounding illustration models are calculated according to general industry retirement standards and safe withdrawal assumptions. Drawdown model assumes annual withdrawals occur at the beginning of each year (prudent conservative planning convention), compounding the remaining balance. All fund asset class historical CAGR return estimates are strictly illustrative. This platform does not provide SEBI or international registered investment, tax, legal, or professional financial planning advice. Users are strongly advised to consult registered investment advisors to verify suitability according to individual risk capacities before taking action.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sleek Ecosystem Internal Link Panels -->
+        <div class="max-w-[768px] mx-auto mb-6 print-hide px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1: Advanced MF Calc -->
+                <a href="../advanced-mutual-fund-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our advanced compound interest and expense ratio drag tracker">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-chart-pie text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Asset Friction</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">Advanced MF Calc</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 2: PPF Calculator -->
+                <a href="../ppf-calculator/" class="flex items-center justify-between bg-white hover:bg-stone-50/50 border border-stone-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our secure Public Provident Fund tax deduction calculator tool">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-piggy-bank text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Tax Haven</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">PPF Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <!-- Card 3: EMI Calculator -->
+                <a href="../emi-calculator/" class="flex items-center justify-between bg-white hover:bg-slate-50/50 border border-slate-200 hover:border-red-500 p-3 rounded-2xl shadow-sm transition-all duration-200 group" title="Navigate to our advanced multi-loan reducing balance EMI calculator platform">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-red-800 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform border border-red-100">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-[8px] font-black text-red-800 uppercase tracking-widest block leading-none mb-0.5">Debt servicing</span>
+                            <span class="text-xs font-black text-stone-900 block leading-tight">EMI Calculator</span>
+                        </div>
+                    </div>
+                    <span class="text-red-800 group-hover:translate-x-1 transition-transform" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Premium SEO Educational Guide Section -->
+        <article id="seo-education-guide" class="max-w-[768px] mx-auto bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm mt-6 print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-4 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-red-700"></i> The FIRE (Financial Independence, Retire Early) Playbook
+            </h2>
+            
+            <div class="space-y-6 text-stone-750 text-xxs sm:text-xs leading-relaxed font-semibold">
+                
+                <!-- Section 1 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">1. Understanding the FIRE Movement</h3>
+                    <p class="font-medium text-stone-600">
+                        The FIRE movement is a lifestyle and financial framework designed to maximize savings rates and build a robust investment portfolio, enabling individuals to retire decades earlier than traditional retirement ages. The core objective is gaining absolute control over your time.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Savings Rate:</strong> While typical financial planners recommend saving 10% to 15% of income, FIRE practitioners often target savings rates of 40% to 70%.</li>
+                        <li><strong class="text-stone-855">The Power of Compounding:</strong> Saving aggressively early in life allows compounding interest to take over, funding your future lifestyle completely.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">2. The Mathematics of FIRE: The Rule of 25</h3>
+                    <p class="font-medium text-stone-600">
+                        Traditional retirement calculations rely on Bengen’s Rule of 25 derived from historical safe withdrawal rate simulations. The formula dictates that to retire safely with a 4% safe withdrawal rate, your accumulated nest egg must be exactly 25 times your annual living expenses:
+                    </p>
+                    <div class="my-3 p-4 bg-stone-50 border border-stone-250 rounded-2xl text-center">
+                        <span class="block text-xxs font-bold text-stone-500 uppercase tracking-wider mb-1">FIRE Target Equation</span>
+                        <span class="text-sm sm:text-base font-black text-red-800">FIRE Corpus Required = Current Annual Expenses × 25</span>
+                    </div>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">3. The Different Flavors of FIRE</h3>
+                    <p class="font-medium text-stone-600">
+                        Retirement is not a one-size-fits-all plan. The FIRE ecosystem has several customized strategies:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-stone-600 font-medium mt-1">
+                        <li><strong class="text-stone-855">Lean FIRE:</strong> Designed for minimalist lifestyles. It assumes survival expenses are capped at around 75% of your standard budget.</li>
+                        <li><strong class="text-stone-855">Traditional FIRE:</strong> Replaces your current standard of living exactly (100% budget replacement using a 4% SWR rule).</li>
+                        <li><strong class="text-stone-855">Fat FIRE:</strong> Tailored for comfortable lifestyles, modeling a 125% budget to build a premium wealth cushion.</li>
+                        <li><strong class="text-stone-855">Coast FIRE:</strong> Hitting a milestone where your current savings, even if you never add another rupee, will grow to fund your ultimate traditional retirement goal by age 60 entirely through compounding. You only work to cover current day-to-day costs.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">4. Sequence of Returns Risk (SRR) in Drawdown</h3>
+                    <p class="font-medium text-stone-600">
+                        Sequence of Returns Risk is the hazard that the timing of market declines hurts your portfolio in the early years of your retirement. If the stock market crashes right after you retire, you are forced to sell portfolio units at depressed prices to fund your withdrawals, severely reducing the longevity of your remaining nest egg.
+                    </p>
+                </div>
+
+                <!-- Section 5 -->
+                <section class="space-y-2">
+                    <h3 class="text-[13px] font-black text-stone-900">5. Tactical Asset Allocation and Annual Rebalancing</h3>
+                    <p class="font-medium text-stone-600">
+                        To successfully survive a 30 to 40 year retirement, passive buy-and-hold strategies must be supported with disciplined asset rebalancing. Setting up a dedicated "Bucket Strategy" (splitting cash into short-term liquid debt buckets and long-term equity growth buckets) allows you to weather short-term recessions without selling long-term equity mutual funds at a loss.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Always-Open, Non-Accordion, Numbered FAQ Section below SEO content container -->
+        <section id="faq-section" class="max-w-[768px] mx-auto mt-6 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-sm print-hide">
+            <h2 class="text-sm font-extrabold text-stone-955 uppercase tracking-wider mb-5 border-b border-stone-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-question text-red-700"></i> Frequently Asked Questions
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        1. What is the 4% rule in FIRE planning?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        The 4% rule suggests that if you withdraw 4% of your initial retirement nest egg in your first year of retirement, and adjust subsequent withdrawals for inflation, your capital has a highly statistically significant probability of surviving at least 30 years without total depletion.
+                    </p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        2. How does Coast FIRE work, and what is its main benefit?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Coast FIRE is achieved when your current saved portfolio is large enough that you no longer need to save actively to secure your retirement. The primary benefit is mental freedom—you can shift to lower-stress, passion-driven, or part-time work that simply covers your current living expenses while your retirement nest egg compounds quietly in the background.
+                    </p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        3. How does the "Procrastination Penalty" calculate lost opportunity cost?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        The Procrastination Penalty mathematically calculates the cost of delaying your retirement plan by exactly 3 years. Because compounding thrives on time, starting even a few years late dramatically reduces your final terminal portfolio size, meaning you either have to save much more monthly or push your retirement age back.
+                    </p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        4. Why does this planner use a "Beginning-of-Year" withdrawal convention?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        In real life, retirees need funds at the start of each year to pay for their monthly expenses, rather than waiting until the last day of the year. By deducting annual expenses at the beginning of each year and compounding only the remaining balance, the planner provides a conservative, highly realistic trajectory.
+                    </p>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="border border-stone-150 rounded-2xl bg-stone-50/50 p-4">
+                    <h3 class="font-extrabold text-stone-955 text-xxs md:text-[13px] uppercase tracking-wide mb-2">
+                        5. How does Coast FIRE differ from Lean FIRE or Fat FIRE?
+                    </h3>
+                    <p class="leading-relaxed text-stone-600 font-medium">
+                        Lean FIRE represents minimalist independence (covering essentials at 75% of your standard budget), while Fat FIRE targets comfortable luxury (125% of budget). Coast FIRE, however, is a milestone where your current savings are already large enough to compound on their own to fund your ultimate traditional retirement goal by age 60 entirely through compounding.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google AdSense / Programmatic Auto Ads Placement Wrapper -->
+        <div id="adsense-future-container" class="w-full mt-4 flex justify-center items-center overflow-hidden min-h-[100px] print-hide" aria-live="polite"></div>
+
+    </main>
+
+    <!-- App Footer Placeholder -->
+    <div id="app-footer" class="w-full mt-auto relative z-[60]"></div>
+    <div id="notification-toast" role="status" aria-live="polite"></div>
+
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
