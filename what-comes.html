@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>What Comes Before, After & Between? - Fun Kid Learning Game</title>
+    <style>
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --bg-sky: #e0f4ff;
+            --color-primary: #ff477e;
+            --color-success: #2ec4b6;
+            --color-warning: #ffb703;
+            --color-purple: #8338ec;
+            --font-fun: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+            --shadow-btn: 0 6px 0 #d93868;
+            --shadow-opt: 0 6px 0 #b5cbd6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-fun);
+            background: var(--bg-sky);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.4) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.4) 0%, transparent 25%);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            position: relative;
+        }
+
+        /* --- ACCESSIBILITY: HIGH CONTRAST FOCUS --- */
+        button:focus-visible {
+            outline: 4px dashed #000;
+            outline-offset: 4px;
+        }
+
+        /* --- STREAMING_CHUNK: Defining Screen Container Rules --- */
+        /* --- SCREEN MANAGEMENT --- */
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            max-height: 100vh;
+            padding: min(10px, 1.5vh) min(15px, 3vw);
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            box-sizing: border-box;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* --- STREAMING_CHUNK: Styling Decorative Background Clouds --- */
+        /* --- ANIMATED DECORATIVE BACKGROUND ELEMENTS --- */
+        .cloud {
+            position: absolute;
+            background: #fff;
+            border-radius: 50px;
+            opacity: 0.85;
+            animation: float-cloud 25s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .cloud.c1 { width: 120px; height: 40px; top: 15%; left: -150px; }
+        .cloud.c1::before { width: 50px; height: 50px; top: -20px; left: 15px; }
+        .cloud.c1::after { width: 70px; height: 70px; top: -35px; right: 15px; }
+        
+        .cloud.c2 { width: 160px; height: 50px; top: 40%; left: -200px; animation-delay: 8s; animation-duration: 35s; }
+        .cloud.c2::before { width: 70px; height: 70px; top: -30px; left: 20px; }
+        .cloud.c2::after { width: 90px; height: 90px; top: -45px; right: 25px; }
+
+        @keyframes float-cloud {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 250px)); }
+        }
+
+        /* --- STREAMING_CHUNK: Styling Home Screen Typography and Layout --- */
+        /* --- HOME SCREEN --- */
+        h1 {
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            color: var(--color-primary);
+            text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffccd5;
+            margin-bottom: min(12px, 1.8vh);
+            z-index: 2;
+            animation: bounce 2s infinite alternate;
+        }
+
+        .btn-giant {
+            font-family: var(--font-fun);
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: bold;
+            padding: min(12px, 2vh) min(45px, 6vw);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn);
+            transition: transform 0.1s;
+            z-index: 2;
+        }
+
+        .btn-giant:active, .btn-giant.keyboard-active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+
+        /* --- STREAMING_CHUNK: Optimizing Configuration Dashboard Sizing --- */
+        /* --- LEVEL & MODE PICKERS --- */
+        .config-container {
+            margin-top: min(15px, 2vh);
+            z-index: 2;
+            background: rgba(255,255,255,0.85);
+            padding: min(15px, 2vh) min(20px, 3.5vw);
+            border-radius: 20px;
+            border: 3px dashed var(--color-primary);
+            max-width: 620px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: min(12px, 1.8vh);
+        }
+
+        .selector-label {
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            font-weight: bold;
+            margin-bottom: min(6px, 0.8vh);
+            color: #444;
+        }
+
+        .option-buttons-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .toggle-btn {
+            font-family: var(--font-fun);
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            padding: min(8px, 1.2vh) min(12px, 2vw);
+            border: 3px solid #fff;
+            background: #fff;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 3px 0 #cbd5e1;
+            transition: all 0.1s;
+        }
+
+        .toggle-btn.selected {
+            background: var(--color-warning);
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 3px 0 #cc9200;
+            transform: translateY(2px);
+        }
+
+        /* Custom Colors for Modes */
+        .mode-btn.selected {
+            background: var(--color-success);
+            color: white;
+            box-shadow: 0 3px 0 #1b8a7f;
+        }
+
+        /* --- STREAMING_CHUNK: Adjusting Prompt Text & Number Cards --- */
+        /* --- GAMEPLAY CONTAINERS --- */
+        .prompt-text {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: bold;
+            margin-bottom: min(6px, 1vh);
+            color: #2b2d42;
+            z-index: 2;
+        }
+
+        /* --- DYNAMIC CARD DISPLAYS --- */
+        .sequence-display-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: min(15px, 2.5vw);
+            margin-bottom: min(12px, 1.5vh);
+            z-index: 2;
+            width: 100%;
+        }
+
+        .number-card {
+            font-size: clamp(3.8rem, 11vw, 6.5rem);
+            font-weight: bold;
+            color: #1d3557;
+            background: white;
+            min-width: clamp(100px, 20vw, 180px);
+            padding: min(10px, 1.8vh) min(20px, 3.5vw);
+            border-radius: 24px;
+            box-shadow: 0 10px 0 rgba(0,0,0,0.05);
+            border: 5px solid #457b9d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .number-card.blank {
+            background: #f1f5f9;
+            color: var(--color-primary);
+            border: 5px dashed var(--color-primary);
+            animation: pulse-border 1.5s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: var(--color-primary); transform: scale(1); }
+            100% { border-color: var(--color-warning); transform: scale(1.03); }
+        }
+
+        /* --- STREAMING_CHUNK: Refining Interactive Option Grids --- */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: min(15px, 2.2vh) min(20px, 3vw);
+            width: 100%;
+            max-width: 580px;
+            z-index: 2;
+            margin-bottom: min(8px, 1vh);
+        }
+
+        .btn-option {
+            font-family: var(--font-fun);
+            font-size: clamp(2.8rem, 8vw, 4.8rem);
+            font-weight: bold;
+            padding: min(8px, 1.2vh);
+            background: #f8fafc;
+            border: 5px solid #cbd5e1;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: clamp(85px, 14vh, 125px);
+            box-sizing: border-box;
+        }
+
+        .btn-option:active, .btn-option.keyboard-active {
+            transform: translateY(6px);
+            box-shadow: none !important;
+        }
+
+        /* Keyboard Support Tooltip Hint */
+        .keyboard-hint {
+            font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+            color: #555;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 3px 10px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            pointer-events: none;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Dynamic Color Options Classes */
+        .opt-0 { background: #ffadad; border-color: #ff8585; box-shadow: 0 6px 0 #e66060; color: #600; }
+        .opt-1 { background: #ffd6a5; border-color: #ffbe76; box-shadow: 0 6px 0 #e69d45; color: #630; }
+        .opt-2 { background: #caffbf; border-color: #a3e895; box-shadow: 0 6px 0 #7ec76f; color: #050; }
+        .opt-3 { background: #9bf6ff; border-color: #62e1ed; box-shadow: 0 6px 0 #3cbac7; color: #056; }
+
+        /* --- STREAMING_CHUNK: Styling Feedback Overlays & Popups --- */
+        /* --- FEEDBACK OVERLAYS & ANIMATIONS --- */
+        .feedback-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(8rem, 20vw, 13rem);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .feedback-overlay.active {
+            opacity: 1;
+        }
+
+        /* --- POPUPS --- */
+        .streak-popup, .congrats-popup {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.98);
+            border: 6px solid var(--color-warning);
+            padding: min(25px, 4vh) min(20px, 3vw);
+            border-radius: 30px;
+            box-shadow: 0 15px 0 rgba(0,0,0,0.1);
+            text-align: center;
+            z-index: 20;
+            display: none;
+            animation: pop-out 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        .streak-popup.active, .congrats-popup.active {
+            display: block;
+        }
+
+        .star-container {
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            color: var(--color-warning);
+            margin: min(10px, 1.5vh) 0;
+            letter-spacing: 6px;
+        }
+
+        /* --- STREAMING_CHUNK: Structuring Canvas and Animation elements --- */
+        /* --- OFFLINE RENDERING ASSETS --- */
+        canvas#confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 12;
+        }
+
+        .floating-balloon {
+            position: fixed;
+            width: 70px;
+            height: 88px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            bottom: -100px;
+            animation: floatUp 6s linear forwards;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .floating-balloon::after {
+            content: "▲";
+            font-size: 8px;
+            color: inherit;
+            position: absolute;
+            bottom: -6px;
+            left: 31px;
+        }
+
+        .balloon-string {
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background: rgba(0,0,0,0.2);
+            bottom: -46px;
+            left: 34px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            50% { transform: translateY(-60vh) translateX(25px) rotate(10deg); }
+            100% { transform: translateY(-130vh) translateX(-25px) rotate(-10deg); }
+        }
+
+        /* --- STREAMING_CHUNK: Designing Parental Dashboard Overlays --- */
+        /* --- PARENT CONTROLS & PANEL --- */
+        .parent-gear {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 1.6rem;
+            background: white;
+            border: 3px solid #cbd5e1;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 30;
+            box-shadow: 0 3px 0 #cbd5e1;
+            transition: transform 0.2s;
+        }
+
+        .parent-gear:hover {
+            transform: rotate(45deg);
+        }
+
+        .parent-panel {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            background: white;
+            border: 3px solid #475569;
+            border-radius: 16px;
+            padding: 15px;
+            width: 260px;
+            z-index: 30;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        .parent-panel.active { display: block; }
+        .parent-panel h2 { font-size: 1.15rem; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; text-align: left;}
+        .stat-line { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem; font-family: sans-serif; }
+        
+        .btn-reset {
+            width: 100%;
+            padding: 6px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: var(--font-fun);
+            font-size: 0.9rem;
+        }
+
+        /* --- TOAST MESSAGING --- */
+        .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            z-index: 40;
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid white;
+        }
+
+        .toast-notification.active {
+            top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for particle confetti -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Decorative Cloud elements -->
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+
+    <!-- Parent Control Gear Overlay -->
+    <button class="parent-gear" id="gearBtn" aria-label="Parent Dashboard">⚙️</button>
+    <div class="parent-panel" id="parentPanel">
+        <h2>Parent Dashboard</h2>
+        <div class="stat-line"><span>Total Answered:</span> <strong id="statTotal">0</strong></div>
+        <div class="stat-line"><span>Correct:</span> <strong id="statCorrect">0</strong></div>
+        <div class="stat-line"><span>Wrong Attempts:</span> <strong id="statWrong">0</strong></div>
+        <div class="stat-line"><span>Accuracy:</span> <strong id="statAccuracy">0%</strong></div>
+        <button class="btn-reset" id="resetBtn">Reset Game Data</button>
+    </div>
+
+    <!-- HOME SCREEN -->
+    <main class="screen active" id="screenHome">
+        <h1>🎈 Numbers Playground</h1>
+        <button class="btn-giant" id="startBtn">START! ▶</button>
+        
+        <div class="config-container">
+            <!-- Level selection -->
+            <div>
+                <div class="selector-label">1. Choose Level:</div>
+                <div class="option-buttons-row">
+                    <button class="toggle-btn toggle-level selected" data-level="1">Beginner (1 to 10)</button>
+                    <button class="toggle-btn toggle-level" data-level="2">Easy (11 to 20)</button>
+                    <button class="toggle-btn toggle-level" data-level="3">Intermediate (21 to 50)</button>
+                    <button class="toggle-btn toggle-level" data-level="4">Mixed (1 to 50)</button>
+                </div>
+            </div>
+
+            <!-- Play styles -->
+            <div>
+                <div class="selector-label">2. Choose Game Style:</div>
+                <div class="option-buttons-row">
+                    <button class="toggle-btn mode-btn selected" data-mode="after">What Comes After? ➡️</button>
+                    <button class="toggle-btn mode-btn" data-mode="before">What Comes Before? ⬅️</button>
+                    <button class="toggle-btn mode-btn" data-mode="between">What Comes Between? ↔️</button>
+                    <button class="toggle-btn mode-btn" data-mode="mixed">All Styles! 🔀</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GAMEPLAY SCREEN -->
+    <main class="screen" id="screenGame">
+        <h2 class="prompt-text" id="promptText">What comes after?</h2>
+        
+        <!-- Adaptive display for single numbers and sequences -->
+        <div class="sequence-display-row" id="displayArea">
+            <!-- Dynamic elements generated here by JS engine -->
+        </div>
+
+        <div class="options-grid" id="optionsGrid">
+            <!-- Selection Buttons -->
+        </div>
+
+        <div class="keyboard-hint" aria-hidden="true">
+            <span>⌨️</span> Press the number keys on your keyboard!
+        </div>
+    </main>
+
+    <!-- VISUAL FEEDBACK POPUPS -->
+    <div class="feedback-overlay" id="feedbackOverlay"></div>
+
+    <!-- Streak Milestone Popup -->
+    <div class="streak-popup" id="streakPopup">
+        <h2>Awesome Job!</h2>
+        <div class="star-container">⭐⭐⭐</div>
+        <p style="font-size: 1.3rem;">Keep going!</p>
+    </div>
+
+    <!-- Celebration Popup -->
+    <div class="congrats-popup" id="congratsPopup">
+        <h1 id="congratsTitle">🎉 Congratulations!</h1>
+        <p id="congratsMessage" style="font-size: 1.4rem; margin: 15px 0;">You learned numbers all the way to twenty!</p>
+        <button class="btn-giant" id="postGameHomeBtn">Play Again! 🔄</button>
+    </div>
+
+    <!-- Offline Notification Toast -->
+    <div class="toast-notification" id="toastNotification">Done!</div>
+
+    <script>
+        // --- GAME SYSTEM STATE ---
+        let currentLevel = 1;
+        let selectedGameMode = 'after'; // 'after', 'before', 'between', 'mixed'
+        let currentQuestionType = 'after'; // Tracks current: 'after' / 'before' / 'between'
+        
+        let currentNumber = 0; // Reference anchor number
+        let leftNumber = 0;    // Reference for between (Left value)
+        let rightNumber = 0;   // Reference for between (Right value)
+        let correctAnswer = 0;
+        let correctSequenceCount = 0; // Tracks active streak matching
+        let answersCompletedCount = 0; // Progress meter target = 20
+
+        // Analytics State
+        let stats = {
+            total: 0,
+            correct: 0,
+            wrong: 0
+        };
+
+        // Speech word translation map (Up to 51 to cover "after 50" answers fully)
+        const numberWords = {
+            1:"one", 2:"two", 3:"three", 4:"four", 5:"five", 6:"six", 7:"seven", 8:"eight", 9:"nine", 10:"ten",
+            11:"eleven", 12:"twelve", 13:"thirteen", 14:"fourteen", 15:"fifteen", 16:"sixteen", 17:"seventeen", 
+            18:"eighteen", 19:"nineteen", 20:"twenty", 21:"twenty-one", 22:"twenty-two", 23:"twenty-three",
+            24:"twenty-four", 25:"twenty-five", 26:"twenty-six", 27:"twenty-seven", 28:"twenty-eight", 29:"twenty-nine",
+            30:"thirty", 31:"thirty-one", 32:"thirty-two", 33:"thirty-three", 34:"thirty-four", 35:"thirty-five",
+            36:"thirty-six", 37:"thirty-seven", 38:"thirty-eight", 39:"thirty-nine", 40:"forty", 41:"forty-one",
+            42:"forty-two", 43:"forty-three", 44:"forty-four", 45:"forty-five", 46:"forty-six", 47:"forty-seven",
+            48:"forty-eight", 49:"forty-nine", 50:"fifty", 51:"fifty-one"
+        };
+
+        // --- DOM REFERENCES ---
+        const screenHome = document.getElementById('screenHome');
+        const screenGame = document.getElementById('screenGame');
+        const startBtn = document.getElementById('startBtn');
+        const gearBtn = document.getElementById('gearBtn');
+        const parentPanel = document.getElementById('parentPanel');
+        const resetBtn = document.getElementById('resetBtn');
+        const postGameHomeBtn = document.getElementById('postGameHomeBtn');
+        
+        const displayArea = document.getElementById('displayArea');
+        const promptText = document.getElementById('promptText');
+        const optionsGrid = document.getElementById('optionsGrid');
+        const feedbackOverlay = document.getElementById('feedbackOverlay');
+        const streakPopup = document.getElementById('streakPopup');
+        const congratsPopup = document.getElementById('congratsPopup');
+        const congratsTitle = document.getElementById('congratsTitle');
+        const congratsMessage = document.getElementById('congratsMessage');
+        const toastNotification = document.getElementById('toastNotification');
+
+        const statTotal = document.getElementById('statTotal');
+        const statCorrect = document.getElementById('statCorrect');
+        const statWrong = document.getElementById('statWrong');
+        const statAccuracy = document.getElementById('statAccuracy');
+
+        // --- STREAMING_CHUNK: Implementing Offline Audio Synthesizers ---
+        // --- AUDIO SYNTHESIS ENGINE (Offline Web Audio API) ---
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(type) {
+            initAudio();
+            if (!audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, now); // A4
+                osc.frequency.setValueAtTime(554.37, now + 0.12); // C#5
+                osc.frequency.setValueAtTime(659.25, now + 0.24); // E5
+                osc.frequency.setValueAtTime(880, now + 0.36); // A5
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+                osc.start(now);
+                osc.stop(now + 0.6);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.linearRampToValueAtTime(130, now + 0.25);
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.15, now + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'applause') {
+                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 523.25, 783.99]; 
+                notes.forEach((freq, idx) => {
+                    const noteOsc = audioCtx.createOscillator();
+                    const noteGain = audioCtx.createGain();
+                    noteOsc.connect(noteGain);
+                    noteGain.connect(audioCtx.destination);
+                    noteOsc.type = 'sine';
+                    noteOsc.frequency.setValueAtTime(freq, now + (idx * 0.12));
+                    noteGain.gain.setValueAtTime(0, now + (idx * 0.12));
+                    noteGain.gain.linearRampToValueAtTime(0.15, now + (idx * 0.12) + 0.02);
+                    noteGain.gain.exponentialRampToValueAtTime(0.001, now + (idx * 0.12) + 0.18);
+                    noteOsc.start(now + (idx * 0.12));
+                    noteOsc.stop(now + (idx * 0.12) + 0.2);
+                });
+            }
+        }
+
+        // --- STREAMING_CHUNK: Setting up Speech Synthesis logic ---
+        // --- TEXT TO SPEECH SERVICE ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.85; 
+                utterance.pitch = 1.25; 
+                
+                const voices = window.speechSynthesis.getVoices();
+                const primaryVoice = voices.find(v => v.lang.includes('en') && v.name.toLowerCase().includes('google')) || 
+                                     voices.find(v => v.lang.includes('en') && v.name.toLowerCase().includes('natural')) || 
+                                     voices.find(v => v.lang.includes('en'));
+                if (primaryVoice) {
+                    utterance.voice = primaryVoice;
+                }
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function showToast(message) {
+            toastNotification.innerText = message;
+            toastNotification.classList.add('active');
+            setTimeout(() => {
+                toastNotification.classList.remove('active');
+            }, 3000);
+        }
+
+        // --- STREAMING_CHUNK: Coding responsive Particle and Balloon animations ---
+        // --- PARTICLE SYSTEMS (Confetti & Balloons) ---
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let confettiArray = [];
+        let animationFrameId = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ConfettiParticle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height - 20;
+                this.size = Math.random() * 8 + 8;
+                this.speed = Math.random() * 4 + 3;
+                this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
+                this.angle = Math.random() * 360;
+                this.spinSpeed = Math.random() * 4 - 2;
+            }
+            update() {
+                this.y += this.speed;
+                this.angle += this.spinSpeed;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.angle * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function triggerConfettiBurst() {
+            cancelAnimationFrame(animationFrameId);
+            confettiArray = [];
+            for (let i = 0; i < 90; i++) {
+                confettiArray.push(new ConfettiParticle());
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let activeParticles = false;
+            confettiArray.forEach(p => {
+                p.update();
+                p.draw();
+                if (p.y < canvas.height) {
+                    activeParticles = true;
+                }
+            });
+            if (activeParticles) {
+                animationFrameId = requestAnimationFrame(animateConfetti);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function triggerBalloonsCascade() {
+            const colors = ['#ff477e', '#ffb703', '#2ec4b6', '#3a86ff', '#8338ec', '#ff006e'];
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'floating-balloon';
+                    const col = colors[Math.floor(Math.random() * colors.length)];
+                    balloon.style.background = col;
+                    balloon.style.color = col;
+                    balloon.style.left = `${Math.random() * 80 + 10}%`;
+                    balloon.style.animationDuration = `${Math.random() * 3 + 4}s`;
+                    
+                    const string = document.createElement('div');
+                    string.className = 'balloon-string';
+                    balloon.appendChild(string);
+                    
+                    document.body.appendChild(balloon);
+                    setTimeout(() => balloon.remove(), 7000);
+                }, i * 300);
+            }
+        }
+
+        // --- STREAMING_CHUNK: Managing Parental Analytics Dashboard State ---
+        // --- PARENTAL DASHBOARD METRICS ---
+        function updateParentDashboard() {
+            statTotal.innerText = stats.total;
+            statCorrect.innerText = stats.correct;
+            statWrong.innerText = stats.wrong;
+            const percentage = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+            statAccuracy.innerText = `${percentage}%`;
+            localStorage.setItem('kidsPlayground_stats_v2', JSON.stringify(stats));
+        }
+
+        function loadStats() {
+            const saved = localStorage.getItem('kidsPlayground_stats_v2');
+            if (saved) {
+                stats = JSON.parse(saved);
+            }
+            updateParentDashboard();
+        }
+
+        gearBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            parentPanel.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            parentPanel.classList.remove('active');
+        });
+
+        parentPanel.addEventListener('click', (e) => e.stopPropagation());
+
+        resetBtn.addEventListener('click', () => {
+            stats = { total: 0, correct: 0, wrong: 0 };
+            updateParentDashboard();
+            showToast("Stats reset complete! 🧹");
+        });
+
+        // --- STREAMING_CHUNK: Binding Physical Keyboard Input Listeners ---
+        // --- PHYSICAL KEYBOARD SYSTEM ---
+        let keyBuffer = "";
+        let keyBufferTimeout = null;
+
+        window.addEventListener('keydown', (e) => {
+            if (!screenGame.classList.contains('active')) return;
+            if (optionsGrid.style.pointerEvents === 'none') return;
+
+            if (e.key >= '0' && e.key <= '9') {
+                clearTimeout(keyBufferTimeout);
+                keyBuffer += e.key;
+
+                const optionButtons = Array.from(optionsGrid.querySelectorAll('.btn-option'));
+                const exactMatch = optionButtons.find(btn => btn.innerText === keyBuffer);
+                const prefixMatches = optionButtons.filter(btn => btn.innerText.startsWith(keyBuffer) && btn.innerText !== keyBuffer);
+
+                const animateKeyPress = (btn) => {
+                    btn.classList.add('keyboard-active');
+                    setTimeout(() => btn.classList.remove('keyboard-active'), 150);
+                };
+
+                if (exactMatch) {
+                    if (prefixMatches.length === 0) {
+                        animateKeyPress(exactMatch);
+                        handleOptionSelection(parseInt(exactMatch.innerText), exactMatch);
+                        keyBuffer = "";
+                    } else {
+                        keyBufferTimeout = setTimeout(() => {
+                            animateKeyPress(exactMatch);
+                            handleOptionSelection(parseInt(exactMatch.innerText), exactMatch);
+                            keyBuffer = "";
+                        }, 550);
+                    }
+                } else {
+                    if (prefixMatches.length > 0) {
+                        keyBufferTimeout = setTimeout(() => {
+                            keyBuffer = ""; 
+                        }, 1200);
+                    } else {
+                        keyBuffer = "";
+                    }
+                }
+            }
+        });
+
+        // --- STREAMING_CHUNK: Setting up Home Screen Choice Controls ---
+        // --- SELECTION UI EVENT HANDLERS ---
+        const levelBtns = document.querySelectorAll('.toggle-level');
+        levelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                levelBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                currentLevel = parseInt(btn.getAttribute('data-level'));
+            });
+        });
+
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedGameMode = btn.getAttribute('data-mode');
+            });
+        });
+
+        startBtn.addEventListener('click', () => {
+            initAudio();
+            screenHome.classList.remove('active');
+            screenGame.classList.add('active');
+            
+            correctSequenceCount = 0;
+            answersCompletedCount = 0;
+            
+            generateNewQuestion();
+        });
+
+        // --- STREAMING_CHUNK: Implementing Mathematical Algorithms for Modes ---
+        // --- MATH QUESTION ENGINE ---
+        function generateNewQuestion() {
+            let minRange, maxRange;
+            if (currentLevel === 1) {
+                minRange = 1;
+                maxRange = 10;
+            } else if (currentLevel === 2) {
+                minRange = 11;
+                maxRange = 20;
+            } else if (currentLevel === 3) {
+                minRange = 21;
+                maxRange = 50; 
+            } else {
+                minRange = 1;
+                maxRange = 50; 
+            }
+
+            // Decide specific question mode
+            if (selectedGameMode === 'mixed') {
+                const styles = ['after', 'before', 'between'];
+                currentQuestionType = styles[Math.floor(Math.random() * styles.length)];
+            } else {
+                currentQuestionType = selectedGameMode;
+            }
+
+            // Calculations based on modes ensuring boundaries do not exceed ranges dynamically
+            if (currentQuestionType === 'after') {
+                let actualMax = maxRange - 1;
+                currentNumber = Math.floor(Math.random() * (actualMax - minRange + 1)) + minRange;
+                correctAnswer = currentNumber + 1;
+                
+                promptText.innerText = "What comes after?";
+                renderSequenceDisplay('single', currentNumber);
+                
+                speakText(`What comes after ${numberWords[currentNumber]}?`);
+
+            } else if (currentQuestionType === 'before') {
+                let actualMin = minRange + 1;
+                currentNumber = Math.floor(Math.random() * (maxRange - actualMin + 1)) + actualMin;
+                correctAnswer = currentNumber - 1;
+                
+                promptText.innerText = "What comes before?";
+                renderSequenceDisplay('single', currentNumber);
+                
+                speakText(`What comes before ${numberWords[currentNumber]}?`);
+
+            } else {
+                // "Between" logic: left_number [blank] right_number
+                let adjustedMin = minRange;
+                let adjustedMax = maxRange - 2;
+                
+                leftNumber = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
+                correctAnswer = leftNumber + 1;
+                rightNumber = leftNumber + 2;
+                
+                promptText.innerText = "What comes between?";
+                renderSequenceDisplay('sequence', leftNumber, rightNumber);
+                
+                speakText(`What comes between ${numberWords[leftNumber]} and ${numberWords[rightNumber]}?`);
+            }
+
+            // Compile options grid (1 correct + 3 distractor values)
+            const answersSet = new Set();
+            answersSet.add(correctAnswer);
+
+            while (answersSet.size < 4) {
+                let fakeNum = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+                // Avoid using actual question components as options
+                if (fakeNum !== correctAnswer && fakeNum !== currentNumber && fakeNum !== leftNumber && fakeNum !== rightNumber && fakeNum > 0) {
+                    answersSet.add(fakeNum);
+                }
+            }
+
+            const optionsArray = Array.from(answersSet);
+            optionsArray.sort(() => Math.random() - 0.5);
+
+            // Print choices to layout grid
+            optionsGrid.innerHTML = '';
+            optionsArray.forEach((val, index) => {
+                const btn = document.createElement('button');
+                btn.className = `btn-option opt-${index}`;
+                btn.innerText = val;
+                btn.setAttribute('aria-label', `Is it ${val}?`);
+                btn.addEventListener('click', () => handleOptionSelection(val, btn));
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        // --- STREAMING_CHUNK: Coding Adaptive Element Sizer Helpers ---
+        // Helper to output single vs triple sequence visual blocks
+        function renderSequenceDisplay(formatType, numVal1, numVal2 = null) {
+            displayArea.innerHTML = '';
+            if (formatType === 'single') {
+                const card = document.createElement('div');
+                card.className = 'number-card';
+                card.innerText = numVal1;
+                displayArea.appendChild(card);
+            } else {
+                // Left card
+                const leftCard = document.createElement('div');
+                leftCard.className = 'number-card';
+                leftCard.innerText = numVal1;
+                displayArea.appendChild(leftCard);
+
+                // Gap card
+                const gapCard = document.createElement('div');
+                gapCard.className = 'number-card blank';
+                gapCard.innerText = '?';
+                displayArea.appendChild(gapCard);
+
+                // Right card
+                const rightCard = document.createElement('div');
+                rightCard.className = 'number-card';
+                rightCard.innerText = numVal2;
+                displayArea.appendChild(rightCard);
+            }
+        }
+
+        // --- STREAMING_CHUNK: Handling Answer Validations and Rewards ---
+        // --- INPUT VERIFICATION PROCESSOR ---
+        function handleOptionSelection(selectedVal, optionBtn) {
+            if (optionsGrid.style.pointerEvents === 'none') return;
+
+            if (selectedVal === correctAnswer) {
+                // Correct Choice
+                optionsGrid.style.pointerEvents = 'none'; 
+                stats.total++;
+                stats.correct++;
+                correctSequenceCount++;
+                answersCompletedCount++;
+                updateParentDashboard();
+
+                playSound('correct');
+                triggerConfettiBurst();
+
+                feedbackOverlay.innerHTML = '<span class="emoji-pop">😊</span>';
+                feedbackOverlay.classList.add('active');
+
+                // Phonetically precise voice feedback matching question type
+                let congratulationsMessage = "";
+                if (currentQuestionType === 'after') {
+                    congratulationsMessage = `Excellent! ${numberWords[correctAnswer]} comes after ${numberWords[currentNumber]}.`;
+                } else if (currentQuestionType === 'before') {
+                    congratulationsMessage = `Excellent! ${numberWords[correctAnswer]} comes before ${numberWords[currentNumber]}.`;
+                } else {
+                    congratulationsMessage = `Excellent! ${numberWords[correctAnswer]} comes between ${numberWords[leftNumber]} and ${numberWords[rightNumber]}.`;
+                }
+                
+                speakText(congratulationsMessage);
+
+                setTimeout(() => {
+                    feedbackOverlay.classList.remove('active');
+                    
+                    if (answersCompletedCount >= 20) {
+                        triggerCompletionAwards();
+                    } else if (correctSequenceCount > 0 && correctSequenceCount % 5 === 0) {
+                        triggerMilestoneAward();
+                    } else {
+                        optionsGrid.style.pointerEvents = 'auto';
+                        generateNewQuestion();
+                    }
+                }, 2400);
+
+            } else {
+                // Incorrect Choice
+                stats.total++;
+                stats.wrong++;
+                updateParentDashboard();
+
+                playSound('wrong');
+                speakText("Try again.");
+
+                optionBtn.style.opacity = '0.35';
+                optionBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        // --- STREAMING_CHUNK: Managing Award Transitions ---
+        // --- REWARDS & COMPLETIONS ---
+        function triggerMilestoneAward() {
+            playSound('applause');
+            streakPopup.classList.add('active');
+            speakText("Awesome Job! You got three stars!");
+
+            setTimeout(() => {
+                streakPopup.classList.remove('active');
+                optionsGrid.style.pointerEvents = 'auto';
+                generateNewQuestion();
+            }, 3000);
+        }
+
+        function triggerCompletionAwards() {
+            playSound('applause');
+            triggerBalloonsCascade();
+
+            // Calibrate message word based on highest level limit
+            if (currentLevel === 1) {
+                congratsMessage.innerText = "You learned numbers from one to ten!";
+                speakText("Congratulations! You learned numbers from one to ten!");
+            } else if (currentLevel === 2) {
+                congratsMessage.innerText = "You learned numbers from one to twenty!";
+                speakText("Congratulations! You learned numbers from one to twenty!");
+            } else if (currentLevel === 3) {
+                congratsMessage.innerText = "You learned numbers all the way to fifty!";
+                speakText("Congratulations! You learned numbers all the way to fifty!");
+            } else {
+                congratsMessage.innerText = "You mastered numbers all the way from one to fifty!";
+                speakText("Congratulations! You mastered numbers all the way from one to fifty!");
+            }
+
+            congratsPopup.classList.add('active');
+        }
+
+        postGameHomeBtn.addEventListener('click', () => {
+            congratsPopup.classList.remove('active');
+            screenGame.classList.remove('active');
+            screenHome.classList.add('active');
+            optionsGrid.style.pointerEvents = 'auto';
+        });
+
+        window.onload = function() {
+            loadStats();
+        };
+    </script>
+</body>
+</html>
