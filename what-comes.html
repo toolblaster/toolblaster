@@ -498,8 +498,9 @@
                 <div class="option-buttons-row">
                     <button class="toggle-btn toggle-level selected" data-level="1">Beginner (1 to 10)</button>
                     <button class="toggle-btn toggle-level" data-level="2">Easy (11 to 20)</button>
-                    <button class="toggle-btn toggle-level" data-level="3">Intermediate (21 to 50)</button>
-                    <button class="toggle-btn toggle-level" data-level="4">Mixed (1 to 50)</button>
+                    <button class="toggle-btn toggle-level" data-level="3">Mixed (1 to 20)</button>
+                    <button class="toggle-btn toggle-level" data-level="4">Intermediate (21 to 50)</button>
+                    <button class="toggle-btn toggle-level" data-level="5">Mixed (1 to 50)</button>
                 </div>
             </div>
 
@@ -566,6 +567,7 @@
         let correctAnswer = 0;
         let correctSequenceCount = 0; // Tracks active streak matching
         let answersCompletedCount = 0; // Progress meter target = 20
+        let questionHistory = [];      // Rolling list of recently used answers to prevent repeats
 
         // Analytics State
         let stats = {
@@ -893,6 +895,7 @@
             
             correctSequenceCount = 0;
             answersCompletedCount = 0;
+            questionHistory = []; // Clear history when starting a fresh session
             
             generateNewQuestion();
         });
@@ -908,6 +911,10 @@
                 minRange = 11;
                 maxRange = 20;
             } else if (currentLevel === 3) {
+                // New Mixed (1 to 20) Level
+                minRange = 1;
+                maxRange = 20;
+            } else if (currentLevel === 4) {
                 minRange = 21;
                 maxRange = 50; 
             } else {
@@ -923,39 +930,71 @@
                 currentQuestionType = selectedGameMode;
             }
 
-            // Calculations based on modes ensuring boundaries do not exceed ranges dynamically
+            // Dynamically calibrate memory size based on pool limits to prevent locking/infinite loops
+            const totalAvailableNumbers = maxRange - minRange + 1;
+            let historyDepthLimit = 3; 
+            if (totalAvailableNumbers <= 5) {
+                historyDepthLimit = 1; // Very narrow level (e.g. if level range is tiny)
+            } else if (totalAvailableNumbers <= 12) {
+                historyDepthLimit = 3; // Standard 10-number levels
+            } else if (totalAvailableNumbers <= 25) {
+                historyDepthLimit = 7; // Mixed 1-20 level
+            } else {
+                historyDepthLimit = 15; // 21-50 levels
+            }
+
+            let tempCurrent = 0;
+            let tempCorrect = 0;
+            let tempLeft = 0;
+            let tempRight = 0;
+            let attempts = 0;
+
+            // Enforce non-repeating unpredictability
+            do {
+                attempts++;
+                if (currentQuestionType === 'after') {
+                    let actualMax = maxRange - 1;
+                    tempCurrent = Math.floor(Math.random() * (actualMax - minRange + 1)) + minRange;
+                    tempCorrect = tempCurrent + 1;
+                } else if (currentQuestionType === 'before') {
+                    let actualMin = minRange + 1;
+                    tempCurrent = Math.floor(Math.random() * (maxRange - actualMin + 1)) + actualMin;
+                    tempCorrect = tempCurrent - 1;
+                } else {
+                    // "Between" logic: left_number [blank] right_number
+                    let adjustedMin = minRange;
+                    let adjustedMax = maxRange - 2;
+                    tempLeft = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
+                    tempCorrect = tempLeft + 1;
+                    tempRight = tempLeft + 2;
+                }
+                // Loop continues if the calculated correct answer matches recent history
+            } while (questionHistory.includes(tempCorrect) && attempts < 100);
+
+            // Record this question's answer to history buffer
+            questionHistory.push(tempCorrect);
+            if (questionHistory.length > historyDepthLimit) {
+                questionHistory.shift(); // Evict the oldest tracked number
+            }
+
+            // Map selected values to state
+            currentNumber = tempCurrent;
+            correctAnswer = tempCorrect;
+            leftNumber = tempLeft;
+            rightNumber = tempRight;
+
+            // Render current question mode layout
             if (currentQuestionType === 'after') {
-                let actualMax = maxRange - 1;
-                currentNumber = Math.floor(Math.random() * (actualMax - minRange + 1)) + minRange;
-                correctAnswer = currentNumber + 1;
-                
                 promptText.innerText = "What comes after?";
                 renderSequenceDisplay('single', currentNumber);
-                
                 speakText(`What comes after ${numberWords[currentNumber]}?`);
-
             } else if (currentQuestionType === 'before') {
-                let actualMin = minRange + 1;
-                currentNumber = Math.floor(Math.random() * (maxRange - actualMin + 1)) + actualMin;
-                correctAnswer = currentNumber - 1;
-                
                 promptText.innerText = "What comes before?";
                 renderSequenceDisplay('single', currentNumber);
-                
                 speakText(`What comes before ${numberWords[currentNumber]}?`);
-
             } else {
-                // "Between" logic: left_number [blank] right_number
-                let adjustedMin = minRange;
-                let adjustedMax = maxRange - 2;
-                
-                leftNumber = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
-                correctAnswer = leftNumber + 1;
-                rightNumber = leftNumber + 2;
-                
                 promptText.innerText = "What comes between?";
                 renderSequenceDisplay('sequence', leftNumber, rightNumber);
-                
                 speakText(`What comes between ${numberWords[leftNumber]} and ${numberWords[rightNumber]}?`);
             }
 
@@ -1097,10 +1136,10 @@
             if (currentLevel === 1) {
                 congratsMessage.innerText = "You learned numbers from one to ten!";
                 speakText("Congratulations! You learned numbers from one to ten!");
-            } else if (currentLevel === 2) {
+            } else if (currentLevel === 2 || currentLevel === 3) {
                 congratsMessage.innerText = "You learned numbers from one to twenty!";
                 speakText("Congratulations! You learned numbers from one to twenty!");
-            } else if (currentLevel === 3) {
+            } else if (currentLevel === 4) {
                 congratsMessage.innerText = "You learned numbers all the way to fifty!";
                 speakText("Congratulations! You learned numbers all the way to fifty!");
             } else {
@@ -1116,6 +1155,7 @@
             screenGame.classList.remove('active');
             screenHome.classList.add('active');
             optionsGrid.style.pointerEvents = 'auto';
+            questionHistory = []; // Reset history list upon exiting gameplay
         });
 
         window.onload = function() {
