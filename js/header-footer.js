@@ -41,7 +41,8 @@ const TOOLBLASTER_APPS = [
             { name: "AksharTrace", url: "/educational/akshar-trace/", icon: "fa-feather-pointed", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/akshar-trace/" },
             { name: "Kids Rhymes", url: "/educational/nursery-rhymes-for-kids/", icon: "fa-music", classes: "bg-pink-50 border-pink-100 text-pink-600 group-hover:text-pink-600", matchPath: "/educational/nursery-rhymes-for-kids/" },
             { name: "Math Sprint", url: "/educational/math-sprint-speed-drill-worksheets/", icon: "fa-calculator", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/math-sprint-speed-drill-worksheets/" },
-            { name: "TraceWrite", url: "/educational/tracewrite-handwriting-tracing-worksheets/", icon: "fa-pen-nib", classes: "bg-amber-50 border-amber-100 text-amber-600 group-hover:text-amber-600", matchPath: "/educational/tracewrite-handwriting-tracing-worksheets/" }
+            { name: "TraceWrite", url: "/educational/tracewrite-handwriting-tracing-worksheets/", icon: "fa-pen-nib", classes: "bg-amber-50 border-amber-100 text-amber-600 group-hover:text-amber-600", matchPath: "/educational/tracewrite-handwriting-tracing-worksheets/" },
+            { name: "Typing Tutor", url: "/educational/devanagari-typing-tutor", icon: "fa-keyboard", classes: "bg-red-50 border-red-100 text-red-600 group-hover:text-red-600", matchPath: "/educational/devanagari-typing-tutor" }
         ]
     }
 ];
@@ -94,6 +95,7 @@ function injectHeader() {
         else if (currentPath.includes('/educational/nursery-rhymes')) centerTitle = "KIDS RHYMES";
         else if (currentPath.includes('/educational/math-sprint-speed-drill-worksheets')) centerTitle = "MATH SPRINT";
         else if (currentPath.includes('/educational/tracewrite-handwriting-tracing-worksheets')) centerTitle = "TRACEWRITE";
+        else if (currentPath.includes('/educational/devanagari-typing-tutor')) centerTitle = "Devanagari TYPING TUTOR";
         else if (currentPath.includes('/productivity/word-counter')) centerTitle = "WORD COUNTER";
         else if (currentPath.includes('/productivity/breathing-pacer')) centerTitle = "BREATHING PACER";
         else if (currentPath.includes('/productivity/habit-tracker')) centerTitle = "HABIT TRACKER";
