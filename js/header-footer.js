@@ -184,7 +184,7 @@ function injectHeader() {
                 <h3 class="text-[9px] font-black text-stone-600 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
                     <i class="fa-solid ${cat.icon}"></i> ${cat.category}
                 </h3>
-                <div class="grid grid-cols-4 min-[420px]:grid-cols-5 sm:grid-cols-6 gap-1 sm:gap-1.5">
+                <div class="grid grid-cols-4 min-[400px]:grid-cols-5 sm:grid-cols-6 gap-1 sm:gap-1.5">
         `;
         
         cat.apps.forEach(app => {
@@ -274,7 +274,7 @@ function injectHeader() {
 
         <!-- Global Slide-over App Menu (Grid Drawer Style) -->
         <div id="global-sidebar-overlay" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[150] opacity-0 pointer-events-none transition-opacity duration-300"></div>
-        <div id="global-sidebar" class="fixed inset-y-0 right-0 w-[320px] min-[420px]:w-[420px] sm:w-[560px] bg-white z-[200] flex flex-col shadow-2xl border-l border-stone-200 translate-x-full">
+        <div id="global-sidebar" class="fixed inset-y-0 right-0 w-[300px] min-[400px]:w-[380px] sm:w-[480px] bg-white z-[200] flex flex-col shadow-2xl border-l border-stone-200 translate-x-full">
             
             <!-- Sidebar Header with Perfectly Centered Home Link -->
             <div class="grid grid-cols-3 items-center px-4 py-3 sm:px-5 sm:py-4 border-b border-stone-100 bg-stone-50/50">
