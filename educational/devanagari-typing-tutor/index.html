@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Clean, human-friendly meta title focused on user benefits (Exactly 60 characters) -->
+    <title>Devanagari Typing Tutor - Learn Hindi & English Touch Typing</title>
+    <!-- Accessible, natural meta description focusing on value and speed (Exactly 148 characters) -->
+    <meta name="description" content="Improve typing speed for Remington Krutidev, Mangal Inscript, and English keyboard layouts with real-time feedback, heatmaps, and free certificates.">
+    <link class="canonical" rel="canonical" href="https://toolblaster.com/educational/devanagari-typing-tutor" />
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook Meta Data -->
+    <meta property="og:title" content="Devanagari Typing Tutor: Learn Hindi & English Touch Typing">
+    <meta property="og:description" content="Build typing speed on Remington, Inscript, and English layouts with clear visual keys, color-coded fingers, and customized exercises.">
+    <meta property="og:url" content="https://toolblaster.com/educational/devanagari-typing-tutor">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../js/favicon/android-chrome-512x512.png">
+
+    <!-- Favicons & Manifest Links -->
+    <link class="icon animate-pulse" rel="icon" type="image/x-icon" href="../../js/favicon/favicon.ico">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="16x16" href="../../js/favicon/favicon-16x16.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="32x32" href="../../js/favicon/favicon-32x32.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="48x48" href="../../js/favicon/favicon-48x48.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="192x192" href="../../js/favicon/android-chrome-192x192.png">
+    <link class="rounded-full" rel="icon" type="image/png" sizes="512x512" href="../../js/favicon/android-chrome-512x512.png">
+    <link class="apple-touch-icon" href="../../js/favicon/apple-touch-icon.png">
+
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            750: '#2e2a24',
+                            850: '#211f1b',
+                            950: '#0c0a09',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts Preconnect Guards -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Core Google Fonts Stylesheets to ensure standard initial load times -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;700;900&family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,700;1,600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link class="print-hide" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JSON-LD Multi-Schema Structured Data Schema (Includes SoftwareApplication, Breadcrumb, HowTo, and FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://toolblaster.com/educational/devanagari-typing-tutor#software",
+          "name": "Devanagari Typing Tutor",
+          "url": "https://toolblaster.com/educational/devanagari-typing-tutor",
+          "operatingSystem": "All",
+          "applicationCategory": "EducationalApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://toolblaster.com/educational/devanagari-typing-tutor#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://toolblaster.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Educational Tools",
+              "item": "https://toolblaster.com/educational/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Devanagari Typing Tutor",
+              "item": "https://toolblaster.com/educational/devanagari-typing-tutor"
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://toolblaster.com/educational/devanagari-typing-tutor#howto",
+          "name": "How to Learn Touch Typing with Devanagari Typing Tutor",
+          "description": "Step-by-step tutorial on learning Hindi Krutidev, Mangal Inscript, and English keyboard layout guidelines.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Select Your Keyboard Standard",
+              "text": "Open the standard layouts dropdown and choose Inscript (Mangal Unicode), Remington (Krutidev), or Classic QWERTY."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Select Typing Drill Grade",
+              "text": "Identify your muscle anchor targets starting with Home Row, advancing gradually up to official Clerk Paragraph Mock examinations."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Focus Inputs and Match Visual Highlight Keys",
+              "text": "Click or tap the active arena box, and strike highlighted keys using your specified color-coded fingertip guides."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://toolblaster.com/educational/devanagari-typing-tutor#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can I practice Hindi Remington (Krutidev) typing without installing custom fonts?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Devanagari Typing Tutor maps standard keystrokes directly to standard Devanagari Unicode characters in real-time, eliminating the need to install external layout files on your local computer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What metrics are used to calculate Gross and Net typing speed?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We follow the guidelines established by Indian government typing tests: Gross Speed = (Total Keystrokes / 5) / Minutes Elapsed, and Net Speed (Govt) = Gross WPM - (Incorrect Keystrokes / Minutes Elapsed). This standard accounts for word structures by defining 5 keystrokes as 1 standard word."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the benefit of the keystroke friction heatmap?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The typing heatmap is a utility that tracks your error rates per key. Buttons with high error ratios glow red, helping you pinpoint keys that disrupt your writing rhythm so you can isolate them for targeted practice."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my typed data sent to external servers or logged?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. In accordance with standard privacy-by-design principles, Devanagari Typing Tutor operates entirely client-side inside your browser. Your practice texts, typing speeds, and keystroke data never leave your computer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I download my Devanagari Typing Certificate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Once your personal records achieve a Net Speed of 35 WPM or higher with at least 95% accuracy, the lock is removed on the Certificate Modal. Type your name and tap the download button to generate a downloadable PNG file on your device."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-gradient-start: #fff5f5;
+            --bg-gradient-end: #f9fafb;
+            --text-color: #1c1917; 
+            --accent-primary: #b91c1c; 
+        }
+        .dark {
+            --bg-gradient-start: #1c1917;
+            --bg-gradient-end: #0c0a09;
+            --text-color: #f5f5f4;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, var(--bg-gradient-start) 10%, var(--bg-gradient-end) 80%);
+            color: var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .hindi-font {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+
+        /* Glassmorphism panel variables */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 223, 219, 0.6);
+        }
+        .dark .glass-panel {
+            background: rgba(28, 25, 23, 0.85);
+            border: 1px solid rgba(68, 64, 60, 0.4);
+        }
+
+        /* Color-coded mechanical keyboard keys to guide specific fingers */
+        .key-pinky { background-color: #fee2e2; border-color: #fca5a5; }
+        .key-ring { background-color: #ffedd5; border-color: #fdba74; }
+        .key-middle { background-color: #fef9c3; border-color: #fde047; }
+        .key-index-l { background-color: #dcfce7; border-color: #86efac; }
+        .key-index-r { background-color: #e0f2fe; border-color: #7dd3fc; }
+        .key-thumb { background-color: #f3e8ff; border-color: #c084fc; }
+
+        /* Dark mode keyboard color-coded shifts for contrast preservation */
+        .dark .key-pinky { background-color: #451a1a; border-color: #7f1d1d; color: #fecaca; }
+        .dark .key-ring { background-color: #431407; border-color: #7c2d12; color: #ffedd5; }
+        .dark .key-middle { background-color: #422006; border-color: #713f12; color: #fef9c3; }
+        .dark .key-index-l { background-color: #022c22; border-color: #064e3b; color: #d1fae5; }
+        .dark .key-index-r { background-color: #0c4a6e; border-color: #0369a1; color: #e0f2fe; }
+        .dark .key-thumb { background-color: #3b0764; border-color: #581c87; color: #f3e8ff; }
+
+        .key-active {
+            background-color: #b91c1c !important;
+            color: #ffffff !important;
+            border-color: #991b1b !important;
+            transform: translateY(2px);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3) !important;
+        }
+
+        /* Active key interior alignment variables */
+        .key-active .main-label { color: #ffffff !important; }
+        .key-active .sub-label { color: #fee2e2 !important; }
+
+        /* Fingertip guide dynamic styles */
+        .finger-active {
+            background-color: #b91c1c !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 12px rgba(185, 28, 28, 0.8) !important;
+            transform: scale(1.15);
+        }
+
+        /* Custom Scrollbar for horizontal slider containers */
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(28, 25, 23, 0.05);
+            border-radius: 999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(185, 28, 28, 0.3);
+            border-radius: 999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(185, 28, 28, 0.6);
+        }
+
+        @media screen {
+            .print-only { display: none !important; }
+        }
+
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0;
+            }
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            #screen-container, #global-bg-orbs, #app-header, #app-tool-nav, #app-footer, .print-hide, .main-seo-article, main {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #faf8f5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div id="global-bg-orbs" class="fixed inset-0 overflow-hidden pointer-events-none z-0 print-hide">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-red-100/10 dark:bg-red-900/5 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-amber-100/10 dark:bg-amber-900/5 blur-[100px]"></div>
+    </div>
+
+    <!-- Layout Navigation Placeholders -->
+    <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
+    <div id="app-tool-nav" class="w-full relative z-[50] min-h-[40px]"></div>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-3 pb-16">
+
+        <!-- Unified Breadcrumbs Navigation with compliant text contrast colors -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-800 dark:text-stone-300 mb-4 font-semibold flex justify-between items-center px-1 print-hide">
+            <div class="flex items-center flex-wrap">
+                <a href="/" class="hover:text-red-750 dark:hover:text-red-400 transition-colors inline-flex items-center gap-1.5 text-stone-700 dark:text-stone-300">
+                    <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
+                </a>
+                <span class="mx-1.5 text-stone-400">/</span>
+                <a href="https://toolblaster.com/educational/" class="hover:text-red-750 dark:hover:text-red-400 transition-colors text-stone-700 dark:text-stone-300">Educational</a>
+                <span class="mx-1.5 text-stone-400">/</span>
+                <span class="text-stone-900 dark:text-white font-bold">Devanagari Typing Tutor</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="w-7 h-7 rounded-xl bg-white dark:bg-stone-850 hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 transition-all flex items-center justify-center text-xs shadow-sm" title="Toggle contrast mode">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+                <div id="streak-pill-desktop" class="hidden sm:flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-stone-850 dark:to-stone-800 text-amber-950 dark:text-amber-300 border border-amber-300 dark:border-amber-800/60 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                    <i class="fa-solid fa-fire text-orange-600"></i> <span id="streak-count-desktop">0 Day Streak</span>
+                </div>
+                <div class="hidden sm:flex items-center gap-1.5 bg-red-50 dark:bg-stone-850 text-red-950 dark:text-red-300 border border-red-300 dark:border-red-900/50 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
+                    <i class="fa-regular fa-keyboard"></i> Touch Typing Trainer
+                </div>
+            </div>
+        </nav>
+
+        <div id="screen-container" class="w-full text-left print-hide">
+            <!-- Main Card UI (Horizontal width updated from 896px max-w-4xl to 1000px max-w-[1000px]) -->
+            <div id="main-tool-card" class="glass-panel border border-stone-200/80 dark:border-stone-800 shadow-xl rounded-3xl p-5 sm:p-8 mx-auto my-0 relative max-w-[1000px] transition-all duration-300">
+                
+                <!-- Title Header Block -->
+                <div class="text-center mb-1">
+                    <h1 class="text-xl sm:text-2xl font-black text-stone-900 dark:text-white tracking-tight flex items-center justify-center gap-2">
+                        <span class="inline-flex items-center justify-center text-red-700 dark:text-red-500 flex-shrink-0">
+                            <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                        </span>
+                        <span>Devanagari Typing Tutor</span>
+                    </h1>
+                    <!-- Streak Badge -->
+                    <div id="streak-badge-container" class="mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase text-amber-950 dark:text-amber-300 tracking-wide shadow-sm cursor-help" title="Practice daily to maintain your speed streak!">
+                        <i class="fa-solid fa-fire text-orange-600 text-[11px] animate-bounce"></i> 
+                        <span id="streak-count-badge">0 Day Streak</span>
+                        <span class="text-stone-400 mx-1">|</span>
+                        <span class="text-[9px] text-stone-700 dark:text-stone-300 font-bold">Best: <span id="streak-best-badge">0</span></span>
+                    </div>
+                </div>
+                <p class="text-center text-stone-800 dark:text-stone-300 mb-4 text-xs font-semibold max-w-lg mx-auto leading-relaxed">
+                    Master Remington (Krutidev), Inscript (Mangal), or English Touch Typing. Develop muscle memory with easy guided tutorials.
+                </p>
+
+                <!-- Mode Switcher Segmented Control -->
+                <div class="flex justify-center w-full my-3">
+                    <div class="inline-flex p-1 bg-stone-100/90 dark:bg-stone-850 rounded-xl border border-stone-200 dark:border-stone-800 shadow-inner">
+                        <button type="button" id="btn-mode-beginner" class="px-6 py-1 rounded-lg text-xs font-black transition-all flex items-center gap-1.5 focus:outline-none bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-sm border border-stone-200 dark:border-stone-700" style="min-height: 28px;" title="Standard typing workspace">
+                            <i class="fa-solid fa-graduation-cap text-red-700 dark:text-red-400"></i> Beginner Mode
+                        </button>
+                        <button type="button" id="btn-mode-advanced" class="px-6 py-1 rounded-lg text-xs font-black transition-all flex items-center gap-1.5 focus:outline-none text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200" style="min-height: 28px;" title="Access mock exams, sound customizers, and detailed analytics">
+                            <i class="fa-solid fa-sliders"></i> Advanced Mode
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Core Configurations Row (Always Visible in both Modes) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-stone-100/90 dark:bg-stone-850 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 mb-5 text-xs font-bold text-stone-800 dark:text-stone-300 shadow-sm">
+                    <!-- Layout Select -->
+                    <div class="space-y-1 relative">
+                        <label for="keyboard-layout-select" class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Keyboard Layout Standard</label>
+                        <select id="keyboard-layout-select" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-xl py-2.5 px-2 text-[11px] font-extrabold text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Choose standard Government Unicode Inscript, Legacy Krutidev, or classic English standard layout">
+                            <option value="hindi_inscript" selected>Inscript (Mangal Unicode)</option>
+                            <option value="hindi_remington">Remington (Krutidev Legacy)</option>
+                            <option value="english_qwerty">English (Classic QWERTY Standard)</option>
+                        </select>
+                    </div>
+
+                    <!-- Practice Category Select -->
+                    <div class="space-y-1 relative">
+                        <label for="lesson-category-select" class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Training Category Row</label>
+                        <select id="lesson-category-select" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-xl py-2.5 px-2 text-[11px] font-extrabold text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-1 focus:ring-red-500 cursor-pointer" title="Select typing drill level from basic home row up to official exam paragraphs">
+                            <option value="home_row" selected>Home Row Drills (होम रो अभ्यास)</option>
+                            <option value="top_row">Top Row Drills (टॉप रो अभ्यास)</option>
+                            <option value="bottom_row">Bottom Row Drills (बॉटम रो अभ्यास)</option>
+                            <option value="government_exams" id="opt-gov-lessons" class="hidden">Government Mock Exam Paragraphs (सरकारी परीक्षा अभ्यास)</option>
+                            <option value="custom_practice">Custom Practice Sandbox (स्वयं का पाठ)</option>
+                        </select>
+                    </div>
+
+                    <!-- Compact Certificate Unlock Button -->
+                    <div class="flex flex-col justify-end space-y-1 relative">
+                        <label class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black opacity-0 sm:block">Certificate</label>
+                        <button type="button" id="btn-toggle-lessons-modal" class="w-full bg-red-50 hover:bg-red-100 dark:bg-stone-800 dark:hover:bg-stone-750 border border-red-300 dark:border-stone-700 text-red-950 dark:text-red-300 p-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 font-extrabold shadow-sm text-[11px]" title="View & Print your touch typing commemorative certificate card">
+                            <i class="fa-solid fa-medal text-red-700 dark:text-red-500"></i> <span class="inline">Claim Certificate</span>
+                            <span id="cert-badge-dot" class="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-red-600 hidden animate-ping"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CUSTOM PRACTICE SANDBOX TEXTAREA -->
+                <div id="custom-practice-sandbox" class="hidden bg-stone-100/80 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 mb-5 space-y-3 shadow-inner text-xs font-bold text-stone-850 dark:text-stone-300">
+                    <label for="custom-typed-text" class="block text-[10px] font-black text-stone-850 dark:text-stone-200 uppercase tracking-widest">Custom Devanagari / English Sandbox (अपना खुद का पाठ यहाँ पेस्ट करें)</label>
+                    <textarea id="custom-typed-text" rows="3" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-750 rounded-xl p-3 text-xs font-medium focus:ring-2 focus:ring-red-500 focus:outline-none leading-relaxed text-stone-900 dark:text-white" placeholder="Type or paste your own paragraph here... Our engine maps standard input instantly into Krutidev or Inscript layout standards."></textarea>
+                    <button type="button" id="btn-load-custom-text" class="bg-red-800 hover:bg-red-900 text-white font-black text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-xl transition-all active:scale-95 shadow-sm" title="Load your custom text to begin practice">📂 Load Practice Paragraph</button>
+                </div>
+
+                <!-- Advanced Configuration Section (Hidden in Beginner Mode) -->
+                <div id="advanced-config-panel" class="hidden transition-all duration-300">
+                    
+                    <!-- Advanced Controls Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-stone-100/50 dark:bg-stone-900/50 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 mb-5 text-xs font-bold text-stone-850 dark:text-stone-300">
+                        <!-- Sound & Shift Configuration Panel -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="space-y-1 relative">
+                                <label for="switch-sound-select" class="block uppercase tracking-wider text-[9px] text-stone-750 dark:text-stone-350 font-black">Sensory Sound Profile</label>
+                                <select id="switch-sound-select" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-xl py-2 px-2 text-[11px] font-extrabold text-stone-900 dark:text-stone-100 focus:outline-none cursor-pointer" title="Adjust click profile sounds">
+                                    <option value="blue">Tactile Blue (Clicky)</option>
+                                    <option value="brown">Tactile Brown (Bump)</option>
+                                    <option value="red">Linear Red (Silent)</option>
+                                    <option value="mute">Mute Switches</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1 relative flex flex-col justify-end">
+                                <button type="button" id="btn-screen-shift" class="w-full bg-stone-200 dark:bg-stone-700 hover:bg-stone-300 dark:hover:bg-stone-600 text-stone-900 dark:text-white font-extrabold py-2.5 px-3 rounded-xl text-[10px] uppercase transition-all flex items-center justify-center gap-1 shadow-sm">
+                                    <i class="fa-solid fa-arrow-up"></i> <span id="lbl-screen-shift">Shift: OFF</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Performance Analytics & Diagnostic Trigger (Optimized with precise right padding) -->
+                        <div class="flex items-center justify-between bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-xl p-2.5 pr-4 sm:pr-6 shadow-sm" title="Open interactive charts tracking speed trends, accuracy logs, and layouts weak key analytics instantly">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-stone-800 dark:text-stone-200 uppercase font-black tracking-wider">Performance Analytics:</span>
+                                <span class="text-[10px] text-stone-650 dark:text-stone-400 font-extrabold leading-none mt-1">(View progress graphs)</span>
+                            </div>
+                            <!-- Charts Button equipped with right-margin padding safeguards -->
+                            <button type="button" id="btn-quick-analytics-jump" class="mr-1 sm:mr-2 bg-red-800 dark:bg-red-700 hover:bg-red-900 dark:hover:bg-red-800 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-[10px] uppercase transition-all flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-chart-line"></i> <span>View Charts</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- GOVERNMENT MOCK EXAM CONTROLS PANEL -->
+                    <div class="bg-stone-100/90 dark:bg-stone-850 border border-stone-200 dark:border-stone-800 rounded-3xl p-5 sm:p-6 mb-5 text-xs font-bold text-stone-800 dark:text-stone-200 space-y-4 shadow-sm">
+                        <div class="flex justify-between items-center border-b border-stone-200 dark:border-stone-800 pb-3">
+                            <span class="text-xs font-black uppercase tracking-wider text-red-900 dark:text-red-400 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-red-700 dark:text-red-500"></i> Govt Clerk Exam Simulator</span>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-[10px] font-black uppercase text-stone-800 dark:text-stone-200 relative" title="Locks Backspace usage & locks duration to standard 10 minutes">
+                                <input type="checkbox" id="chk-strict-mock" class="rounded text-red-600 focus:ring-red-500 h-4 w-4">
+                                <span>Strict Mock Mode ON 🚨</span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-end gap-4 sm:gap-6 w-full">
+                            <!-- Exam Text Preset -->
+                            <div id="mock-exam-subselect-wrap" class="hidden flex-1 min-w-[210px] space-y-1.5 relative">
+                                <span class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Exam Text Preset</span>
+                                <select id="mock-exam-subselect" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-750 py-2 px-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-[11px] text-stone-900 dark:text-stone-100 shadow-sm transition-all" title="Select standard government verified exam paragraphs">
+                                    <option value="test_1">SSC CHSL Clerk standard drill (Easy)</option>
+                                    <option value="test_2">ASI Police Clerk test (Medium)</option>
+                                    <option value="test_3">High Court Special paragraph (Hard)</option>
+                                    <option value="test_4">Preamble of Constitution (Constitution)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                                <span class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Practice Duration</span>
+                                <select id="mock-timer-select" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-750 py-2 px-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-[11px] text-stone-900 dark:text-stone-100 shadow-sm transition-all" title="Set countdown time limit interval for your session">
+                                    <option value="0">No Limit (असीमित समय)</option>
+                                    <option value="120">2 Minute Run</option>
+                                    <option value="300">5 Minute Run</option>
+                                    <option value="600">10 Minute Run (Standard Exam)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                                <span class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Backspace Restriction</span>
+                                <select id="backspace-lock-select" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-750 py-2 px-3 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-[11px] text-stone-900 dark:text-stone-100 shadow-sm transition-all" title="Toggle backspace block constraints to simulate rigorous government typist standards">
+                                    <option value="allow">Allow Backspace (संशोधन की अनुमति)</option>
+                                    <option value="disable">Lock Backspace (कठोर प्रतिबंध)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex-1 min-w-[210px] space-y-1.5 relative">
+                                <span class="block uppercase tracking-wider text-[9px] text-stone-700 dark:text-stone-300 font-black">Friction Map Visual</span>
+                                <button type="button" id="btn-toggle-heatmap" class="w-full bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 px-4 py-3 rounded-xl transition-all flex items-center justify-center gap-1.5 font-bold text-stone-800 dark:text-stone-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" title="Highlights high friction keys on the visual overlay with warning colors">
+                                    <i class="fa-solid fa-fire text-amber-500"></i> <span id="heatmap-toggle-lbl">Friction Heatmap: OFF</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Weak key practice alert prompt -->
+                        <div id="weak-keys-alert-bar" class="hidden bg-amber-50 dark:bg-stone-900 border border-amber-300 dark:border-amber-800/50 rounded-xl p-3 flex justify-between items-center text-[10px] text-stone-900 dark:text-stone-100 font-bold leading-relaxed transition-all w-full">
+                            <span>⚠️ High friction keystrokes detected. Practice them specifically to construct strong motor neural maps!</span>
+                            <button type="button" id="btn-practice-weak-keys" class="bg-amber-700 dark:bg-amber-800 hover:bg-amber-800 dark:hover:bg-amber-700 text-white font-black uppercase text-[9px] tracking-wider px-3 py-1.5 rounded-lg transition-all" title="Compile and load custom exercises isolated specifically to target your weak keys">Practice Weak Keys</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Unified Hardware & Soft-Receiver Arena -->
+                <div class="relative bg-stone-950 rounded-2xl p-5 md:p-6 mb-5 border-4 border-stone-800 shadow-2xl">
+                    <!-- Visually hidden accessible input receiver for desktop keyboards (Tailwind sr-only class) -->
+                    <input type="text" id="hidden-typing-input" class="sr-only" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Touch Typing Input Receiver">
+
+                    <!-- Dedicated hidden live announcer region for assertive screen reader announcements -->
+                    <div id="sr-announcements" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+                    <!-- Typing stats banner with upgraded high contrast text labels -->
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4 border-b border-stone-800 pb-3 text-center text-stone-300 font-bold font-sans">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-black">Gross Speed</span>
+                            <span id="stat-wpm" class="text-white text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true">0 WPM</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-black">Net WPM (Govt)</span>
+                            <span id="stat-net-wpm" class="text-red-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true">0 WPM</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-black">Accuracy Rate</span>
+                            <span id="stat-accuracy" class="text-emerald-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true">100%</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-400 font-black">Errors Log</span>
+                            <span id="stat-errors" class="text-amber-400 text-base sm:text-lg font-black transition-colors" role="status" aria-live="polite" aria-atomic="true">0 Keys</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="text-[9px] uppercase tracking-wider block text-stone-300 font-black">Time Clock</span>
+                            <span id="stat-countdown" class="text-white text-base sm:text-lg font-black transition-colors" role="timer" aria-live="polite" aria-atomic="true">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Target Words Display Box (Optimized vertical length to fit 3 lines comfortably, with updated ARIA application context) -->
+                    <div id="typing-words-container" role="application" aria-label="Typing practice arena. Press Space after typing each word successfully." class="min-h-[140px] max-h-[165px] overflow-y-auto mb-4 p-4 bg-stone-900 rounded-xl border border-stone-800 text-lg sm:text-xl leading-relaxed font-semibold text-stone-300 select-none flex flex-wrap gap-x-3 gap-y-2 outline-none focus:ring-2 focus:ring-red-600 cursor-text custom-scroll" tabindex="0">
+                        <!-- Words injected programmatically -->
+                    </div>
+
+                    <!-- Live Progress Feedback Bar with upgraded high contrast tag elements -->
+                    <div id="live-progress-feedback" class="mb-2 flex items-center justify-between text-xs font-bold px-1 bg-stone-900 border border-stone-800 p-2.5 rounded-xl flex-wrap gap-2 text-stone-200">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-400 block font-black">Live Typed:</span>
+                            <span id="user-live-word-typed" class="text-stone-100 font-extrabold text-sm min-h-[20px] hindi-font bg-stone-950 border border-stone-850 px-2.5 py-0.5 rounded min-w-[50px] text-center"></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-400 block font-black">Flow State:</span>
+                            <div class="w-16 bg-stone-950 h-3 rounded-full overflow-hidden border border-stone-850 flex items-center">
+                                <div id="live-flow-indicator" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-emerald-400 transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase text-stone-400 block font-black">Next Key:</span>
+                            <span id="expected-key-indicator" class="text-amber-400 font-black text-sm bg-stone-950 px-3 py-0.5 rounded border border-stone-800 uppercase tracking-widest text-center" role="status" aria-live="assertive" aria-atomic="true">A</span>
+                        </div>
+                    </div>
+
+                    <!-- Input Instructions HUD -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] text-stone-300 font-semibold gap-2 border-t border-stone-800/60 pt-2.5">
+                        <span>💡 <strong class="text-white">Tap the box above</strong> to focus the input field. Support hardware and OTG mobile keyboards!</span>
+                        <div class="flex gap-2">
+                            <button type="button" id="btn-reset-practice" class="bg-stone-800 hover:bg-stone-750 text-stone-100 uppercase font-black tracking-widest text-[9px] px-3.5 py-1.5 rounded-lg transition-all border border-stone-800" title="Reset your practice statistics and restart the active layout drill"><i class="fa-solid fa-rotate-left"></i> Restart Drill</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center px-1 mb-2">
+                    <span class="text-[10px] font-black uppercase text-stone-700 dark:text-stone-300 tracking-wider">Keyboard Overlay Configuration</span>
+                    <button type="button" id="btn-toggle-kb-visibility" class="bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-750 text-stone-900 dark:text-stone-100 font-extrabold px-3 py-1 rounded-xl text-[9px] uppercase tracking-wide transition-all shadow-sm" title="Toggle visible states of the interactive on-screen mechanical guides">
+                        <i class="fa-regular fa-eye-slash"></i> Hide Key Overlay
+                    </button>
+                </div>
+
+                <!-- KEYBOARD FINGER GRAPHIC OVERLAY -->
+                <div id="keyboard-overlay-outer" class="w-full bg-stone-100/95 dark:bg-stone-850/95 border border-stone-300 dark:border-stone-800 rounded-3xl p-3 sm:p-5 select-none print-hide overflow-x-auto custom-scroll shadow-sm transition-all duration-300">
+                    <p class="text-stone-800 dark:text-stone-300 text-[10px] font-black uppercase tracking-widest text-center mb-3">Color-Coded Touch Typist Fingertip Alignment</p>
+                    
+                    <div class="min-w-[620px] max-w-full space-y-1 mx-auto text-stone-900 font-bold text-xs p-1" id="virtual-keyboard">
+                        <!-- Key Rows injected dynamically -->
+                    </div>
+
+                    <!-- Fingertips color legends bar -->
+                    <div class="flex justify-center gap-4 flex-wrap mt-4 text-[9px] font-black uppercase text-stone-700 dark:text-stone-300 tracking-wider">
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-100 dark:bg-red-900/50 border border-red-300 dark:border-red-800 block shadow-sm"></span> Pinky</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-orange-100 dark:bg-orange-900/50 border border-orange-300 dark:border-orange-800 block shadow-sm"></span> Ring</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-yellow-100 dark:bg-yellow-900/50 border border-yellow-300 dark:border-yellow-800 block shadow-sm"></span> Middle</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-green-100 dark:bg-green-900/50 border border-green-300 dark:border-green-800 block shadow-sm"></span> Left Index</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-100 dark:bg-sky-900/50 border border-sky-300 dark:border-sky-800 block shadow-sm"></span> Right Index</div>
+                        <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-100 dark:bg-purple-900/50 border border-purple-300 dark:border-purple-800 block shadow-sm"></span> Thumbs</div>
+                    </div>
+                </div>
+
+                <!-- FLOATING ACTIVE HANDS FINGER GUIDE -->
+                <div id="hands-finger-guide-outer" class="mt-5 bg-stone-100/95 dark:bg-stone-850/95 border border-stone-300 dark:border-stone-800 rounded-3xl p-4 text-center select-none print-hide shadow-sm transition-all duration-300">
+                    <p class="text-stone-800 dark:text-stone-300 text-[10px] font-black uppercase tracking-widest mb-3">🖐️ Active Touch-Typing Fingertips Guide</p>
+                    <div class="flex justify-center gap-10 items-center flex-wrap">
+                        <!-- Left Hand -->
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] font-black text-stone-700 dark:text-stone-300 mb-1.5 tracking-widest">LEFT HAND</span>
+                            <div class="flex gap-1.5 text-[10px] font-black text-stone-900 dark:text-stone-100">
+                                <div id="finger-L-pink" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">P</div>
+                                <div id="finger-L-ring" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">R</div>
+                                <div id="finger-L-middle" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">M</div>
+                                <div id="finger-L-index" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">I</div>
+                                <div id="finger-L-thumb" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">T</div>
+                            </div>
+                        </div>
+                        <!-- Right Hand -->
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] font-black text-stone-700 dark:text-stone-300 mb-1.5 tracking-widest">RIGHT HAND</span>
+                            <div class="flex gap-1.5 text-[10px] font-black text-stone-900 dark:text-stone-100">
+                                <div id="finger-R-thumb" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">T</div>
+                                <div id="finger-R-index" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">I</div>
+                                <div id="finger-R-middle" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">M</div>
+                                <div id="finger-R-ring" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">R</div>
+                                <div id="finger-R-pinky" class="w-8 h-8 rounded-full bg-white dark:bg-stone-800 border border-stone-400 dark:border-stone-700 flex items-center justify-center transition-all shadow-sm">P</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Aligned Related Tools Links -->
+        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <!-- Card 1: MathSprint -->
+                <a href="https://toolblaster.com/educational/math-sprint-speed-drill-worksheets/" class="flex items-center justify-between bg-white dark:bg-stone-850 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-250 dark:border-stone-800 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-stone-800 text-red-700 dark:text-red-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-200 dark:border-stone-700">
+                            <i class="fa-solid fa-calculator text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 dark:text-white m-0 leading-tight block">MathSprint</span>
+                            <p class="text-[10px] text-stone-700 dark:text-stone-300 mt-0.5 leading-tight truncate">Class 1 to 5 mathematical speed drills.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 dark:text-red-400 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 2: TraceWrite -->
+                <a href="https://toolblaster.com/educational/tracewrite-handwriting-tracing-worksheets/" class="flex items-center justify-between bg-white dark:bg-stone-850 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-250 dark:border-stone-800 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-stone-800 text-blue-700 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-200 dark:border-stone-700">
+                            <i class="fa-solid fa-pen-nib text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 dark:text-white m-0 leading-tight block">TraceWrite</span>
+                            <p class="text-[10px] text-stone-700 dark:text-stone-300 mt-0.5 leading-tight truncate">English alphabet & custom name writing maker.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 dark:text-red-400 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+                <!-- Card 3: AksharTrace -->
+                <a href="https://toolblaster.com/educational/akshar-trace/" class="flex items-center justify-between bg-white dark:bg-stone-850 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-250 dark:border-stone-800 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-stone-800 text-amber-700 dark:text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-amber-200 dark:border-stone-700">
+                            <i class="fa-solid fa-feather-pointed text-xs"></i>
+                        </div>
+                        <div class="text-left min-w-0 font-inter">
+                            <span class="text-sm font-black text-stone-900 dark:text-white m-0 leading-tight block">AksharTrace</span>
+                            <p class="text-[10px] text-stone-700 dark:text-stone-300 mt-0.5 leading-tight truncate">Hindi alphabet handwriting and tracing sheets.</p>
+                        </div>
+                    </div>
+                    <div class="text-red-700 dark:text-red-400 font-bold text-xs flex items-center flex-shrink-0 group-hover:translate-x-0.5 transition-transform">
+                        <span class="text-sm">&rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Informational & SEO Documentation Article Section -->
+        <article class="w-full max-w-[768px] mx-auto mt-10 mb-16 prose prose-stone dark:prose-invert relative z-10 print-hide px-4 sm:px-1 text-left font-sans">
+            <div class="space-y-6 text-stone-900 dark:text-stone-100 font-inter">
+                
+                <!-- Section 1: Philosophy & Cognitive Science with standard highlights -->
+                <section class="bg-white/90 dark:bg-stone-850 p-6 sm:p-8 rounded-[2rem] border border-stone-200 dark:border-stone-800 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 dark:text-white mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700 dark:text-red-500"><i class="fa-solid fa-brain"></i></span> Why Learn Touch Typing?
+                    </h2>
+                    <p class="leading-relaxed mb-4 text-stone-800 dark:text-stone-300 text-[13px] font-medium">
+                        Touch typing is all about training your hands to find keys automatically without looking down at the keyboard. When you build this skill, your fingers remember where the letters are all on their own. This helps you type much faster and lets your brain focus entirely on what you want to write, instead of hunting for keys. Here are the main benefits of learning touch typing:
+                    </p>
+                    
+                    <ul class="space-y-3 mb-5 pl-1">
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 dark:text-stone-300 font-medium leading-relaxed">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Build Muscle Memory:</strong> Regular practice with the "Home Row" anchor keys creates a physical memory of the keyboard layout. Eventually, your fingers will press the right keys naturally.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 dark:text-stone-300 font-medium leading-relaxed">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Simplify Hindi Typing:</strong> Layouts like Krutidev or Inscript can feel tricky at first because of complex conjunct letters and half-characters. Typing regularly helps make these character patterns easy to remember.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-[13px] text-stone-800 dark:text-stone-300 font-medium leading-relaxed">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Prepare for Typing Exams:</strong> Many government jobs, clerk posts, and civil service exams require a minimum typing speed (usually 35 Words Per Minute or higher). Practicing with simulated timer tests helps you stay calm and accurate on exam day.</span>
+                        </li>
+                    </ul>
+                    
+                    <p class="leading-relaxed mb-0 text-stone-800 dark:text-stone-300 text-[13px] font-medium border-t border-stone-200 dark:border-stone-800 pt-4">
+                        Our free <strong>Devanagari Typing Tutor App</strong> offers a friendly, distraction-free environment to learn at your own pace without installing any fonts or language packs.
+                    </p>
+                </section>
+
+                <!-- Section 2: Remington vs Inscript Layout Comparison -->
+                <section class="bg-white/90 dark:bg-stone-850 p-6 sm:p-8 rounded-[2rem] border border-stone-200 dark:border-stone-800 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 dark:text-white mb-4 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700 dark:text-red-500"><i class="fa-solid fa-code-fork"></i></span> Krutidev (Remington) vs. Mangal (Inscript)
+                    </h2>
+                    <p class="text-xs leading-relaxed mb-4 text-stone-800 dark:text-stone-300 font-semibold">
+                        Most government examinations and departments in India use one of these two main keyboard layouts. Here is a simple comparison to help you choose the right one:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-medium text-stone-800 dark:text-stone-300 leading-relaxed">
+                        <div class="bg-stone-50 dark:bg-stone-900 p-4 rounded-xl border border-stone-200 dark:border-stone-800">
+                            <h3 class="font-extrabold text-stone-900 dark:text-white uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/50 text-red-900 dark:text-red-300 font-bold flex items-center justify-center text-[10px]">1</span>
+                                Krutidev (Legacy Remington layout)
+                            </h3>
+                            <p class="text-[11px] text-stone-700 dark:text-stone-400 leading-normal">
+                                This layout was modeled after traditional mechanical typewriters. It uses standard English keys to create Hindi characters. Because it relies on standard computer fonts (like Krutidev 010), you often need to install these legacy fonts on your system to read what you type. It is still widely used in many state-level clerk examinations.
+                            </p>
+                        </div>
+                        <div class="bg-stone-50 dark:bg-stone-900 p-4 rounded-xl border border-stone-200 dark:border-stone-800">
+                            <h3 class="font-extrabold text-stone-900 dark:text-white uppercase tracking-wide flex items-center gap-1.5 mb-2">
+                                <span class="w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/50 text-red-900 dark:text-red-300 font-bold flex items-center justify-center text-[10px]">2</span>
+                                Mangal (Modern Inscript Unicode standard)
+                            </h3>
+                            <p class="text-[11px] text-stone-700 dark:text-stone-400 leading-normal">
+                                This is the modern, official Unicode standard endorsed by the Government of India. The Inscript layout makes Hindi typing systematic, placing vowels logically on the left hand and consonants on the right. Because it uses Unicode characters, your text will show up on any computer or phone without installing any extra fonts.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Advantages Bullet List -->
+                <section class="bg-white/90 dark:bg-stone-850 p-6 sm:p-8 rounded-[2rem] border border-stone-200 dark:border-stone-800 shadow-sm">
+                    <h2 class="text-base font-black text-stone-900 dark:text-white mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
+                        <span class="text-red-700 dark:text-red-500"><i class="fa-solid fa-circle-check"></i></span> Key Features of Devanagari Typing Tutor
+                    </h2>
+                    <ul class="space-y-3.5 pl-1 text-[13px] text-stone-800 dark:text-stone-300 font-medium leading-relaxed">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>No Extra Font Installation:</strong> You can practice both Remington and Inscript typing right away using your standard QWERTY keyboard, with no complex setup needed.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Shift Guides:</strong> Our on-screen visual keyboard highlights whenever you need to press the Shift key for capital characters, helping you learn the correct finger movements.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 dark:text-emerald-400 mt-0.5"><i class="fa-solid fa-shield-heart text-[11px]"></i></span>
+                            <span><strong>Works on Any Device:</strong> Practice typing smoothly on desktop browsers, tablet setups, or mobile phones with OTG external keyboards.</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 4: Frequently Asked Questions (Exactly 5 Targeted Entries) -->
+                <section id="faqs" class="bg-transparent space-y-3">
+                    <h2 class="text-base font-black text-stone-900 dark:text-white mb-5 flex items-center gap-2 uppercase tracking-tight">
+                        <span class="text-red-700 dark:text-red-500"><i class="fa-solid fa-circle-question"></i></span> Frequently Asked Questions (FAQ)
+                    </h2>
+                    <div class="p-4 sm:p-5 bg-white dark:bg-stone-850 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+                        <h3 class="font-black text-stone-900 dark:text-white mb-1.5 mt-0 text-sm">1. Can I practice Hindi Remington (Krutidev) typing without installing custom fonts?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-700 dark:text-stone-300 font-semibold">Yes. Devanagari Typing Tutor's virtual parsing engine intercepts classical ASCII keyboard codes and displays Devanagari Unicode equivalents in real-time, eliminating the need to install external layout files on your local computer.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white dark:bg-stone-850 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+                        <h3 class="font-black text-stone-900 dark:text-white mb-1.5 mt-0 text-sm">2. What metrics are used to calculate Gross and Net typing speed?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-700 dark:text-stone-300 font-semibold text-left">
+                            We follow the precise guidelines established by Indian government typing tests: 
+                            $$\text{Gross Speed} = \frac{\text{Total Keystrokes} / 5}{\text{Minutes Elapsed}}$$
+                            $$\text{Net Speed (Govt)} = \text{Gross WPM} - \frac{\text{Incorrect Keystrokes}}{\text{Minutes Elapsed}}$$
+                            This standard accounts for word structures by defining 5 keystrokes as 1 standard word.
+                        </p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white dark:bg-stone-850 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+                        <h3 class="font-black text-stone-900 dark:text-white mb-1.5 mt-0 text-sm">3. What is the benefit of the keystroke friction heatmap?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-700 dark:text-stone-300 font-semibold">The friction heatmap is a diagnostic tool that tracks your exact error rates per key. Buttons with high error ratios glow red, helping you pinpoint keys that disrupt your writing rhythm so you can isolate them for targeted practice.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white dark:bg-stone-850 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+                        <h3 class="font-black text-stone-900 dark:text-white mb-1.5 mt-0 text-sm">4. Is my typed data sent to external servers or logged?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-700 dark:text-stone-300 font-semibold">No. In accordance with strict COPPA guidelines and privacy-by-design standards, Devanagari Typing Tutor operates entirely client-side. Your practice texts, typing speeds, and spatial coordinates never leave your device.</p>
+                    </div>
+                    <div class="p-4 sm:p-5 bg-white dark:bg-stone-850 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+                        <h3 class="font-black text-stone-900 dark:text-white mb-1.5 mt-0 text-sm">5. How do I download my Devanagari Typing Certificate?</h3>
+                        <p class="text-xs leading-relaxed mb-0 text-stone-700 dark:text-stone-300 font-semibold">Once your personal records achieve a Net Speed of 35 WPM or higher with at least 95% accuracy, the lock is removed on the Certificate Modal. Type your name and tap the download button to generate a downloadable PNG file on your device.</p>
+                    </div>
+                </section>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- PRINTABLE MASTER CERTIFICATE (FALLBACK FOR PRINT DRIVERS) -->
+    <div id="print-certificate-shelf" class="print-only hidden w-full bg-white text-stone-900">
+        <!-- Injected programmatically during print call -->
+    </div>
+
+    <!-- CERTIFICATE CLAIM MODAL -->
+    <div id="cert-claim-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="cert-claim-modal-content" class="bg-white dark:bg-stone-900 rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 relative transform transition-all duration-200 text-left">
+            <button type="button" id="btn-close-cert-modal" class="absolute top-4 right-4 text-stone-700 dark:text-stone-300 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close certificate details">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 dark:border-stone-800 pb-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-stone-800 text-red-700 dark:text-red-400 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h2 class="text-sm font-black text-stone-900 dark:text-white uppercase tracking-wider">Devanagari Typing Certificate</h2>
+            </div>
+
+            <div class="bg-amber-50 dark:bg-stone-850 border border-amber-300 dark:border-amber-900/50 rounded-xl p-3 text-[11px] text-stone-900 dark:text-stone-100 font-bold leading-relaxed mb-4">
+                🏆 <strong>Requirement:</strong> Maintain a net speed of over <strong>35 WPM</strong> with an accuracy threshold of <strong>95%</strong> to claim your certificate.
+            </div>
+
+            <!-- Streak Achievements inside Modal Container -->
+            <div class="border border-stone-200 dark:border-stone-800 rounded-2xl p-3 mb-4 space-y-2.5">
+                <span class="text-[10px] font-black uppercase text-stone-700 dark:text-stone-300 tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-medal text-amber-600"></i> Streak Achievements
+                </span>
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-bold text-stone-800 dark:text-stone-300">
+                    <div id="achieve-7day" class="flex items-center gap-2 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-2">
+                        <span id="achieve-7day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <div>
+                            <span class="block font-extrabold text-stone-900 dark:text-white">7-Day Fire Medal</span>
+                            <span id="achieve-7day-status" class="text-[8px] text-stone-700 dark:text-stone-400 font-medium">Practice 7 days consecutively</span>
+                        </div>
+                    </div>
+                    <div id="achieve-30day" class="flex items-center gap-2 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-2">
+                        <span id="achieve-30day-icon" class="text-stone-500 text-xs">🔒</span>
+                        <div>
+                            <span class="block font-extrabold text-stone-900 dark:text-white">30-Day Master Ring</span>
+                            <span id="achieve-30day-status" class="text-[8px] text-stone-700 dark:text-stone-400 font-medium">Practice 30 days consecutively</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label for="student-name-input" class="block text-[10px] font-black text-stone-800 dark:text-stone-200 uppercase">Student / Candidate Name</label>
+                    <input type="text" id="student-name-input" class="w-full bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-xl px-3 py-2 text-xs font-extrabold text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-red-500" value="TypeMaster Candidate">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                    <div class="bg-stone-50 dark:bg-stone-850 p-2.5 rounded-xl border border-stone-200 dark:border-stone-800">
+                        <span class="text-[9px] uppercase text-stone-700 dark:text-stone-300 block font-bold">Your Best Speed</span>
+                        <span id="best-speed-lbl" class="text-sm font-black text-stone-900 dark:text-white">0 WPM</span>
+                    </div>
+                    <div class="bg-stone-50 dark:bg-stone-850 p-2.5 rounded-xl border border-stone-200 dark:border-stone-800">
+                        <span class="text-[9px] uppercase text-stone-700 dark:text-stone-300 block font-bold">Your Best Accuracy</span>
+                        <span id="best-accuracy-lbl" class="text-sm font-black text-emerald-950 dark:text-emerald-400">0%</span>
+                    </div>
+                </div>
+
+                <p id="cert-status-error-msg" class="text-[11px] text-red-800 font-bold italic text-center"></p>
+
+                <div class="flex gap-2">
+                    <button type="button" id="btn-print-certificate" class="flex-1 bg-red-800 hover:bg-red-900 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95">
+                        📜 Print Document
+                    </button>
+                    <button type="button" id="btn-download-certificate-png" class="flex-1 bg-stone-900 dark:bg-stone-850 hover:bg-stone-950 dark:hover:bg-stone-700 text-white font-black text-xs uppercase tracking-widest py-3 rounded-xl shadow-md transition-all active:scale-95 border border-stone-700">
+                        💾 Save PNG Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFORMANCE ANALYTICS POPUP MODAL -->
+    <div id="analytics-modal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4 print-hide">
+        <div id="analytics-modal-content" class="bg-white dark:bg-stone-900 rounded-3xl max-w-4xl w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 relative transform transition-all duration-200 text-left max-h-[90vh] overflow-y-auto custom-scroll">
+            <button type="button" id="btn-close-analytics-modal" class="absolute top-4 right-4 text-stone-700 dark:text-stone-300 hover:text-stone-900 font-extrabold text-xl focus:outline-none" aria-label="Close performance analytics dashboard">&times;</button>
+            
+            <div class="flex items-center gap-2 border-b border-stone-200 dark:border-stone-800 pb-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-stone-800 text-red-700 dark:text-red-400 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h2 class="text-sm font-black text-stone-900 dark:text-white uppercase tracking-wider">Performance Analytics Dashboard</h2>
+            </div>
+            
+            <div id="analytics-content-wrapper" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Historical Progress Line Chart Card -->
+                    <div class="bg-white dark:bg-stone-850 border border-stone-200 dark:border-stone-800 rounded-2xl p-4 shadow-sm relative min-h-[260px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-stone-700 dark:text-stone-300">WPM & Accuracy Trends</span>
+                            <span class="text-[9px] text-stone-500 dark:text-stone-400 font-bold">Last 15 Sessions</span>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center relative">
+                            <canvas id="progressTrendChart" class="max-h-[180px] w-full"></canvas>
+                            <div id="no-history-overlay" class="absolute inset-0 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4">
+                                <i class="fa-solid fa-chart-line text-stone-400 text-3xl mb-1.5"></i>
+                                <p class="text-xs font-bold text-stone-800 dark:text-stone-200">No practice history recorded yet.</p>
+                                <p class="text-[10px] text-stone-650 dark:text-stone-400 mt-0.5 font-medium">Complete your first touch typing run to plot your progress!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weak Keys Cumulative Friction Bar Chart -->
+                    <div class="bg-white dark:bg-stone-850 border border-stone-200 border-stone-800 rounded-2xl p-4 shadow-sm relative min-h-[260px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-black uppercase tracking-wider text-stone-700 dark:text-stone-300">Keystroke Friction Analysis</span>
+                            <span class="text-[9px] text-stone-500 dark:text-stone-400 font-bold">Error Ratios per Key</span>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center relative">
+                            <canvas id="weakKeysFrictionChart" class="max-h-[180px] w-full"></canvas>
+                            <div id="no-weakkeys-overlay" class="absolute inset-0 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-4">
+                                <i class="fa-solid fa-fingerprint text-stone-400 text-3xl mb-1.5"></i>
+                                <p class="text-xs font-bold text-stone-800 dark:text-stone-200">No friction keys tracked yet.</p>
+                                <p class="text-[10px] text-stone-650 dark:text-stone-400 mt-0.5 font-medium">Make typos during practice to map key-friction coefficients!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center text-[10px] text-stone-750 dark:text-stone-300 font-bold px-1 bg-stone-50 dark:bg-stone-850 border border-stone-200 dark:border-stone-800 p-2.5 rounded-xl flex-wrap gap-2">
+                    <span>💡 <strong class="text-stone-900 dark:text-white">Target metrics:</strong> Try to keep accuracy above 95% to build solid muscle memory.</span>
+                    <button type="button" id="btn-clear-analytics" class="text-red-700 dark:text-red-400 hover:text-red-900 uppercase font-black tracking-widest text-[9px] transition-all flex items-center gap-1.5" title="Clear all local user progress logs and weak character coefficients"><i class="fa-solid fa-trash-can"></i> Clear History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOM AA CONFIRMATION DIALOG (Strictly replaces window.confirm API) -->
+    <div id="custom-confirm-modal" class="fixed inset-0 bg-stone-900/80 dark:bg-stone-950/80 backdrop-blur-sm z-[2100] hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-stone-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 dark:border-stone-800 transform transition-all duration-200">
+            <h3 class="text-base font-black text-stone-900 dark:text-white uppercase tracking-wider mb-2 flex items-center gap-2">
+                <span class="text-red-600"><i class="fa-solid fa-circle-exclamation"></i></span> Confirm Action
+            </h3>
+            <p id="custom-confirm-message" class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed mb-6"></p>
+            <div class="flex gap-3 justify-end">
+                <button type="button" id="btn-confirm-cancel" class="bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-750 text-stone-900 dark:text-white font-black text-[10px] uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all">Cancel</button>
+                <button type="button" id="btn-confirm-proceed" class="bg-red-800 hover:bg-red-900 text-white font-black text-[10px] uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER PLACEHOLDERS -->
+    <div id="app-footer" class="min-h-[80px] w-full relative z-[60] print-hide"></div>
+    <div id="notification-toast" role="status" aria-live="polite" class="print-hide"></div>
+
+    <!-- External Layout script to parse placeholder blocks dynamically on loading -->
+    <script src="../../js/header-footer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
