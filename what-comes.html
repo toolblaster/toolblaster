@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- SEO Meta Tags -->
-    <title>Maths Numbers Playground | What Comes Before, After & Between?</title>
-    <meta name="description" content="An interactive math learning game for kids to master what numbers come before, after, or between. Features offline sounds, animations, and star rewards!">
+    <!-- SEO Meta Tags (Optimized to strict character limit standards) -->
+    <title>Maths Numbers Playground | Before, After & Between Game</title>
+    <meta name="description" content="Interactive math learning game for kids to master what comes before, after, between, next, and previous numbers with stars, offline sounds, and magic themes.">
     <link class="canonical" rel="canonical" href="https://toolblaster.com/educational/what-comes-before-after-between/" />
     <meta name="robots" content="index, follow">
 
@@ -20,13 +20,25 @@
 
     <!-- Stylesheets & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Force Tailwind's default sans font family to always be Inter for non-game content
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- STREAMING_CHUNK: Initializing CSS variables and base styles... --- */
         :root {
             --bg-sky: #e0f4ff;
             --color-primary: #ff477e;
@@ -44,12 +56,10 @@
             color: #292524;
         }
 
-        /* Fun font styling for playground cards */
         .kids-font {
             font-family: var(--font-fun);
         }
 
-        /* --- STREAMING_CHUNK: Structuring Game Playground Container... --- */
         #playground-card {
             font-family: var(--font-fun);
             position: relative;
@@ -98,18 +108,17 @@
         }
         #playground-card.theme-dinosaur .number-card { border-color: #8b4513; color: #5c4033; }
 
-        /* --- STREAMING_CHUNK: Formatting Screen overlay systems... --- */
         .screen {
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Pushes content cleanly to the top side */
+            justify-content: flex-start;
             width: 100%;
-            height: auto; /* Dynamic height flow to prevent clipping */
+            height: auto;
             min-height: 540px;
             padding: 24px min(20px, 3vw);
             text-align: center;
-            position: relative; /* Switch to relative so parent div expands */
+            position: relative;
             z-index: 5;
             box-sizing: border-box;
         }
@@ -118,7 +127,6 @@
             display: flex;
         }
 
-        /* --- STREAMING_CHUNK: Generating Flying background Theme Floaters --- */
         .theme-floater {
             position: absolute;
             font-size: clamp(1.4rem, 4vw, 2.8rem);
@@ -136,9 +144,8 @@
             100% { transform: translateY(-700px) rotate(360deg); opacity: 0; }
         }
 
-        /* --- STREAMING_CHUNK: Customizing bubble typography and buttons... --- */
         .kids-h1 {
-            font-size: clamp(1.5rem, 4.5vw, 34px); /* Optimized to cap precisely at 34px max */
+            font-size: clamp(1.5rem, 4.5vw, 34px);
             color: var(--color-primary);
             text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffccd5;
             margin-bottom: 0px;
@@ -148,8 +155,8 @@
 
         @media (max-width: 640px) {
             .kids-h1 {
-                font-size: clamp(1rem, 5.2vw, 1.4rem) !important; /* Forces single inline line on mobile viewports */
-                white-space: nowrap; /* Ensures text never wraps into 2nd line */
+                font-size: clamp(1rem, 5.2vw, 1.4rem) !important;
+                white-space: nowrap;
                 text-shadow: 1.5px 1.5px 0px #fff, 3px 3px 0px #ffccd5 !important;
             }
         }
@@ -158,7 +165,7 @@
             font-family: var(--font-fun);
             font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             font-weight: bold;
-            padding: 12px 48px;
+            padding: 10px 40px; /* Symmetrical slight compaction from 12px 48px */
             background: var(--color-primary);
             color: white;
             border: none;
@@ -174,16 +181,16 @@
             box-shadow: none;
         }
 
-        /* --- STREAMING_CHUNK: Designing Kids Friendly Config Dashboard (Horizontal Grid Optimizations) --- */
+        /* --- STREAMING_CHUNK: Designing Symmetrical 50-50 Config Grid... --- */
         .config-container {
             margin-top: 18px;
             z-index: 2;
             background: rgba(255, 255, 255, 0.96);
-            padding: 15px min(20px, 4vw);
+            padding: 18px min(20px, 4vw);
             border-radius: 28px;
             border: 4px solid #ffffff;
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05), inset 0 4px 10px rgba(255, 255, 255, 0.8);
-            max-width: 920px; 
+            max-width: 1000px; 
             width: 100%;
             display: grid;
             grid-template-columns: 1fr;
@@ -192,8 +199,8 @@
 
         @media (min-width: 768px) {
             .config-container {
-                grid-template-columns: 1.15fr 1fr; /* Splendid side-by-side horizontal utilization */
-                gap: 20px;
+                grid-template-columns: 1fr 1fr; 
+                gap: 24px;
             }
         }
 
@@ -215,7 +222,7 @@
         @media (min-width: 768px) {
             .config-section:first-child {
                 border-right: 2px dashed #cbd5e1;
-                padding-right: 20px;
+                padding-right: 24px;
             }
         }
 
@@ -237,11 +244,11 @@
             justify-content: flex-start;
         }
 
-        /* Tactile Bubble Buttons */
+        /* --- STREAMING_CHUNK: Defining Adventure Levels color schemes... --- */
         .toggle-btn {
             font-family: var(--font-fun);
-            font-size: clamp(0.75rem, 1.5vw, 0.85rem);
-            padding: 6px 12px;
+            font-size: clamp(0.72rem, 1.35vw, 0.82rem); 
+            padding: 5px 10px; 
             border: 3px solid #f1f5f9;
             background: #ffffff;
             color: #4b5563;
@@ -253,7 +260,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 40px;
+            min-height: 38px;
         }
 
         .toggle-btn:hover {
@@ -278,24 +285,27 @@
             .mode-btn.selected {
                 box-shadow: 0 2px 0 #1b8a7f !important;
             }
-            /* Mobile Specific Tactical Offsets */
             .toggle-level[data-level="1"].selected { box-shadow: 0 2px 0 #81c784 !important; }
             .toggle-level[data-level="2"].selected { box-shadow: 0 2px 0 #64b5f6 !important; }
             .toggle-level[data-level="3"].selected { box-shadow: 0 2px 0 #ffb74d !important; }
             .toggle-level[data-level="4"].selected { box-shadow: 0 2px 0 #ba68c8 !important; }
             .toggle-level[data-level="5"].selected { box-shadow: 0 2px 0 #e57373 !important; }
             .toggle-level[data-level="6"].selected { box-shadow: 0 2px 0 #a9d18e !important; }
+            .toggle-level[data-level="7"].selected { box-shadow: 0 2px 0 #b37feb !important; }
+            .toggle-level[data-level="8"].selected { box-shadow: 0 2px 0 #fb923c !important; }
+            .toggle-level[data-level="9"].selected { box-shadow: 0 2px 0 #f472b6 !important; }
         }
 
-        /* Color-coded level assignments to assist kids with cognitive memory */
         .toggle-level[data-level="1"].selected { background: #caffbf; color: #1b5e20; box-shadow: 0 4px 0 #81c784; border-color: #a5d6a7; }
         .toggle-level[data-level="2"].selected { background: #9bf6ff; color: #0d47a1; box-shadow: 0 4px 0 #64b5f6; border-color: #90caf9; }
         .toggle-level[data-level="3"].selected { background: #ffd6a5; color: #e65100; box-shadow: 0 4px 0 #ffb74d; border-color: #ffcc80; }
         .toggle-level[data-level="4"].selected { background: #ffc6ff; color: #4a148c; box-shadow: 0 4px 0 #ba68c8; border-color: #e1bee7; }
         .toggle-level[data-level="5"].selected { background: #ffadad; color: #b71c1c; box-shadow: 0 4px 0 #e57373; border-color: #ef9a9a; }
         .toggle-level[data-level="6"].selected { background: #e2f0d9; color: #2f5597; box-shadow: 0 4px 0 #a9d18e; border-color: #c6e0b4; }
+        .toggle-level[data-level="7"].selected { background: #e8dbfc; color: #531dab; box-shadow: 0 4px 0 #b37feb; border-color: #d3adf7; }
+        .toggle-level[data-level="8"].selected { background: #fed7aa; color: #7c2d12; box-shadow: 0 4px 0 #fb923c; border-color: #ffedd5; }
+        .toggle-level[data-level="9"].selected { background: #fbcfe8; color: #831843; box-shadow: 0 4px 0 #f472b6; border-color: #fce7f3; }
 
-        /* Game Style Active Indicators */
         .mode-btn.selected {
             background: var(--color-success);
             color: white;
@@ -303,7 +313,6 @@
             box-shadow: 0 4px 0 #1b8a7f;
         }
 
-        /* --- STREAMING_CHUNK: Styling Theme Selection Cards --- */
         .theme-sticker-card {
             border-radius: 18px;
             cursor: pointer;
@@ -334,13 +343,13 @@
 
         @media (max-width: 640px) {
             .theme-sticker-card {
-                min-height: 64px !important;
-                padding: 4px !important;
+                min-height: 52px !important; /* Extremely vertical compact styling */
+                padding: 3px 2px !important; 
                 border-radius: 12px !important;
             }
         }
 
-        /* --- STREAMING_CHUNK: Scaling prompt screens and scorecards... --- */
+        /* --- STREAMING_CHUNK: Scaling sequence cards and options grid... --- */
         .prompt-text {
             font-size: clamp(1.4rem, 4vw, 2.2rem);
             font-weight: bold;
@@ -353,19 +362,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Reduced from 12px to optimize horizontal space */
+            gap: 10px;
             margin-bottom: min(15px, 2vh);
             z-index: 2;
             width: 100%;
         }
 
         .number-card {
-            font-size: clamp(3.65rem, 11vw, 6.0rem); /* Increased font size by 4px for better visibility */
+            font-size: clamp(2.8rem, 9vw, 5.5rem);
             font-weight: bold;
             color: #1d3557;
             background: white;
-            min-width: clamp(72px, 12.5vw, 118px); /* Reduced horizontal area slightly to optimize space */
-            padding: 6px 10px; /* Reduced padding to save extra space */
+            min-width: clamp(65px, 11vw, 110px);
+            padding: 6px 10px;
             border-radius: 20px;
             box-shadow: 0 10px 0 rgba(0,0,0,0.05);
             border: 4px solid #457b9d;
@@ -388,7 +397,6 @@
             100% { border-color: var(--color-warning); transform: scale(1.03); }
         }
 
-        /* --- STREAMING_CHUNK: Refining Interactive Option Grids --- */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -396,10 +404,9 @@
             width: 100%;
             max-width: 580px;
             z-index: 2;
-            margin-bottom: min(8px, 1vh); /* Extremely balanced spacing */
+            margin-bottom: min(8px, 1vh);
         }
 
-        /* Consolidated single-definition for .btn-option to prevent overwrites */
         .btn-option {
             font-family: var(--font-fun);
             font-size: clamp(2.4rem, 6.5vw, 4rem);
@@ -413,7 +420,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: clamp(75px, 11vh, 95px); /* Perfectly optimized height to prevent any clipping */
+            min-height: clamp(75px, 11vh, 95px);
             box-sizing: border-box;
         }
 
@@ -426,7 +433,6 @@
             box-shadow: none !important;
         }
 
-        /* Keyboard Support Tooltip Hint */
         .keyboard-hint {
             font-size: clamp(0.7rem, 1.3vw, 0.85rem);
             color: #555;
@@ -442,13 +448,11 @@
             box-shadow: 0 3px 5px rgba(0,0,0,0.05);
         }
 
-        /* Dynamic Color Options Classes */
         .opt-0 { background: #ffadad; border-color: #ff8585; box-shadow: 0 6px 0 #e66060; color: #600; }
         .opt-1 { background: #ffd6a5; border-color: #ffbe76; box-shadow: 0 6px 0 #e69d45; color: #630; }
         .opt-2 { background: #caffbf; border-color: #a3e895; box-shadow: 0 6px 0 #7ec76f; color: #050; }
         .opt-3 { background: #9bf6ff; border-color: #62e1ed; box-shadow: 0 6px 0 #3cbac7; color: #056; }
 
-        /* --- STREAMING_CHUNK: Styling Feedback Overlays & Popups --- */
         .feedback-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -466,7 +470,6 @@
             opacity: 1;
         }
 
-        /* --- POPUPS --- */
         .streak-popup, .congrats-popup {
             position: fixed;
             background: rgba(255, 255, 255, 0.98);
@@ -493,7 +496,7 @@
             letter-spacing: 6px;
         }
 
-        /* --- STREAMING_CHUNK: Structuring Canvas and Animation elements --- */
+        /* --- STREAMING_CHUNK: Structuring Canvas and overlay components... --- */
         canvas#confettiCanvas {
             position: fixed;
             top: 0;
@@ -539,12 +542,10 @@
             100% { transform: translateY(-130vh) translateX(-25px) rotate(-10deg); }
         }
 
-        /* --- STREAMING_CHUNK: Designing Parental Dashboard Overlays --- */
-        /* Placed in absolute global coordinates so it never shifts layout or gets removed */
         .parent-gear {
             position: absolute;
             right: 20px;
-            top: 24px; /* Perfectly aligned vertically with the center of H1/H2 header row */
+            top: 24px;
             font-size: 1.6rem;
             background: white;
             border: 3px solid #cbd5e1;
@@ -555,7 +556,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 130; /* Stays above visual elements */
+            z-index: 130;
             box-shadow: 0 3px 0 #cbd5e1;
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -581,7 +582,6 @@
             }
         }
 
-        /* Tactile Back Button for Playback Display */
         .back-btn {
             position: absolute;
             left: 10px;
@@ -622,7 +622,9 @@
             }
         }
 
+        /* Parent dashboard configured strictly in Inter Font for adult accessibility */
         .parent-panel {
+            font-family: 'Inter', sans-serif;
             position: absolute;
             top: 74px;
             right: 20px;
@@ -637,14 +639,34 @@
         }
 
         .parent-panel.active { display: block; }
-        .parent-panel h2 { font-size: 1.05rem; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-align: left;}
-        .stat-line { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; font-family: sans-serif; }
+        .parent-panel h2 { font-size: 0.9rem; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; text-align: left; font-weight: 800; color: #1e293b; }
+        
+        .stat-line { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 8px; 
+            font-size: 0.75rem; /* Optimized to exactly 12px size to prevent multi-line breaks */
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.4;
+        }
+        .stat-line span {
+            color: #4b5563;
+            font-weight: 600;
+            white-space: nowrap; /* Forces labels to stay single-line */
+        }
+        .stat-line strong {
+            color: #0f172a;
+            font-weight: 700;
+            text-align: right;
+            margin-left: 8px;
+        }
         
         @media (max-width: 640px) {
             .parent-panel {
                 top: 56px !important;
                 right: 12px !important;
-                width: 260px !important;
+                width: 270px !important; /* Slightly increased width on mobile for breathing space */
                 padding: 12px !important;
             }
         }
@@ -684,7 +706,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="flex flex-col min-h-screen relative overflow-x-hidden font-inter">
 
     <!-- Global App Layout Placeholders -->
     <div id="app-header" class="w-full relative z-[60] min-h-[48px]"></div>
@@ -693,8 +715,8 @@
     <!-- Main Workspace Container -->
     <main class="flex-grow relative z-10 w-[95%] max-w-[1080px] mx-auto pt-4 pb-28">
         
-        <!-- Breadcrumbs Navigation -->
-        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-750 mb-4 font-semibold flex justify-between items-center px-1">
+        <!-- Breadcrumbs Navigation (Explicit Inter Font applied) -->
+        <nav aria-label="Breadcrumb" class="text-[11px] leading-[16.5px] text-stone-750 mb-4 font-semibold flex justify-between items-center px-1 font-inter">
             <div class="flex items-center flex-wrap">
                 <a href="/" class="hover:text-red-750 transition-colors inline-flex items-center gap-1.5 text-stone-700">
                     <i class="fa-solid fa-house text-[10px] pb-0.5"></i> Home
@@ -705,25 +727,22 @@
                 <span class="text-stone-900 font-bold">Maths Numbers Playground</span>
             </div>
             <div class="flex items-center gap-2">
-                <!-- Kids badge optimized with hidden text on mobile screens -->
                 <div class="flex items-center gap-1.5 bg-red-50 text-red-950 border border-red-300 px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
                     <i class="fa-solid fa-child"></i> <span class="hidden sm:inline">Kids Learning Game</span>
                 </div>
             </div>
         </nav>
 
-        <!-- Dynamic Embedded Playground Board Card (Calibrated to match 1080px wide grid alignment) -->
+        <!-- Dynamic Embedded Playground Board Card (Protects kids game Comic Neue Font) -->
         <div id="playground-card" class="theme-sky w-full max-w-[1080px] mx-auto p-1 text-center select-none">
             
             <!-- Confetti Overlay canvas scoped inside card boundaries -->
             <canvas id="confettiCanvas"></canvas>
 
             <!-- Floaters container managed by JavaScript engine -->
-            <div id="floatersContainer" class="absolute inset-0 pointer-events-none z-1 overflow-hidden">
-                <!-- Float elements will be dynamically injected here -->
-            </div>
+            <div id="floatersContainer" class="absolute inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
-            <!-- Global Parent Dashboard Gear Button (Always Accessible Everywhere) -->
+            <!-- Global Parent Dashboard Gear Button -->
             <button class="parent-gear" id="gearBtn" aria-label="Parent Dashboard">⚙️</button>
 
             <!-- Parent Control Panel (Absolute layered internally) -->
@@ -742,7 +761,6 @@
 
             <!-- HOME SCREEN STATE -->
             <section class="screen active" id="screenHome">
-                <!-- Relative Header Container to keep H1 perfectly centered and Settings Cog inline on the right -->
                 <div class="relative w-full flex items-center justify-center mb-6 max-w-[720px] mx-auto px-12">
                     <h1 class="kids-h1">🎈 Maths Numbers Playground</h1>
                 </div>
@@ -752,7 +770,7 @@
                 </div>
                 
                 <div class="config-container text-left mx-auto">
-                    <!-- Level Picker Section -->
+                    <!-- Level Picker Section (9 Total Levels Integrated flawlessly with 50-100 coming first) -->
                     <div class="config-section">
                         <div class="selector-label">
                             <span>🎮</span> 1. Choose Adventure Level:
@@ -763,11 +781,14 @@
                             <button class="toggle-btn toggle-level" data-level="3">Mixed (1 to 20)</button>
                             <button class="toggle-btn toggle-level" data-level="4">Intermediate (21 to 50)</button>
                             <button class="toggle-btn toggle-level" data-level="5">Mixed (1 to 50)</button>
-                            <button class="toggle-btn toggle-level" data-level="6">Mixed (1 to 100)</button>
+                            <button class="toggle-btn toggle-level" data-level="6">Mixed (50 to 100)</button>
+                            <button class="toggle-btn toggle-level" data-level="7">Mixed (1 to 100)</button>
+                            <button class="toggle-btn toggle-level" data-level="8">Mixed (101 to 150)</button>
+                            <button class="toggle-btn toggle-level" data-level="9">Mixed (150 to 200)</button>
                         </div>
                     </div>
 
-                    <!-- Game Mode Select Section -->
+                    <!-- Game Mode Select Section (Perfect wrapping of 1-icon clean styles) -->
                     <div class="config-section">
                         <div class="selector-label">
                             <span>✨</span> 2. Choose Game Style:
@@ -777,38 +798,33 @@
                             <button class="toggle-btn mode-btn" data-mode="before">What Comes Before? ⬅️</button>
                             <button class="toggle-btn mode-btn" data-mode="between">What Comes Between? ↔️</button>
                             <button class="toggle-btn mode-btn" data-mode="missing">Missing Numbers 🧩</button>
+                            <button class="toggle-btn mode-btn" data-mode="next_pattern">Find Next Number 🚀</button>
+                            <button class="toggle-btn mode-btn" data-mode="prev_pattern">Find Previous Number 🛰️</button>
                             <button class="toggle-btn mode-btn" data-mode="mixed">All Styles! 🔀</button>
                         </div>
                     </div>
 
-                    <!-- Theme Section (Magical Unlockables Map) -->
+                    <!-- Theme Section (Magical Theme Grid with Star tracking) -->
                     <div class="config-section md:col-span-2 border-t border-stone-200 pt-4 mt-2">
-                        <div class="selector-label justify-between flex items-center w-full">
-                            <span>🎨 3. Choose Magical Theme:</span>
-                            <span class="text-xs font-black bg-amber-100 border border-amber-300 text-amber-900 px-3 py-1 rounded-full shadow-sm" id="statsStarCount">⭐ 0 Stars Collected</span>
+                        <div class="selector-label justify-between flex flex-wrap items-center gap-2 w-full font-inter">
+                            <span class="text-stone-850">🎨 3. Choose Magical Theme:</span>
+                            <span class="text-[10px] sm:text-xs font-black bg-amber-100 border border-amber-300 text-amber-900 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-sm whitespace-nowrap" id="statsStarCount">⭐ 0 Stars Collected</span>
                         </div>
-                        <div class="grid grid-cols-2 min-[440px]:grid-cols-3 sm:grid-cols-6 gap-2 mt-2" id="themePickerGrid">
-                            <!-- Injected dynamically by Theme Engine -->
-                        </div>
+                        <div class="grid grid-cols-2 min-[440px]:grid-cols-3 sm:grid-cols-6 gap-2 mt-2" id="themePickerGrid"></div>
                     </div>
                 </div>
             </section>
 
             <!-- GAMEPLAY SCREEN STATE -->
             <section class="screen" id="screenGame">
-                <!-- Perfectly Centered Prompt Header with Inline Back button in left corner -->
                 <div class="relative w-full flex items-center justify-center mb-4 max-w-[720px] mx-auto px-12">
                     <button class="back-btn" id="btnBackToMenu" aria-label="Go Back to Menu" title="Go Back">⬅️</button>
                     <h2 class="prompt-text m-0" id="promptText">What comes after?</h2>
                 </div>
                 
-                <div class="sequence-display-row" id="displayArea">
-                    <!-- Dynamic number blocks injected by engine -->
-                </div>
+                <div class="sequence-display-row" id="displayArea"></div>
 
-                <div class="options-grid mx-auto" id="optionsGrid">
-                    <!-- Dynamic choice values grid -->
-                </div>
+                <div class="options-grid mx-auto" id="optionsGrid"></div>
 
                 <div class="keyboard-hint mt-2 mx-auto" aria-hidden="true">
                     <span>⌨️</span> Press the number keys on your keyboard!
@@ -837,10 +853,9 @@
 
         </div>
 
-        <!-- Aligned Related Tools Links (Matches Devanagari tool styles) -->
-        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <!-- Card 1: MathSprint -->
+        <!-- Aligned Related Tools Links (Strictly Styled in Inter Font) -->
+        <div class="max-w-[768px] mx-auto mb-4 print-hide px-4 sm:px-1 mt-8 font-inter">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-inter">
                 <a href="https://toolblaster.com/educational/math-sprint-speed-drill-worksheets/" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
                         <div class="w-8 h-8 rounded-lg bg-red-50 text-red-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-200">
@@ -855,7 +870,6 @@
                         <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
-                <!-- Card 2: TraceWrite -->
                 <a href="https://toolblaster.com/educational/tracewrite-handwriting-tracing-worksheets/" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
                         <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-blue-200">
@@ -870,7 +884,6 @@
                         <span class="text-sm">&rarr;</span>
                     </div>
                 </a>
-                <!-- Card 3: Typing Tutor -->
                 <a href="https://toolblaster.com/educational/devanagari-typing-tutor" class="flex items-center justify-between bg-white hover:bg-stone-50 border border-stone-250 p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group gap-3 cursor-pointer">
                     <div class="flex items-center gap-2.5 min-w-0">
                         <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300 shadow-inner border border-red-100">
@@ -888,10 +901,10 @@
             </div>
         </div>
 
-        <!-- SEO Article & Educational Content -->
-        <article class="w-full max-w-[768px] mx-auto mt-12 prose prose-stone relative z-10 text-left font-sans">
+        <!-- SEO Article & Educational Content (Strictly Locked to Inter Font) -->
+        <article class="w-full max-w-[768px] mx-auto mt-12 prose prose-stone relative z-10 text-left font-sans font-inter">
             <div class="space-y-6 text-stone-900 font-inter">
-                <section class="bg-white p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                <section class="bg-white p-6 sm:p-8 rounded-[2rem] border border-stone-200 shadow-sm font-inter">
                     <h2 class="text-base font-black text-stone-900 mb-3 flex items-center gap-2 mt-0 uppercase tracking-tight">
                         <span class="text-red-700"><i class="fa-solid fa-graduation-cap"></i></span> Master Early Childhood Math
                     </h2>
@@ -901,11 +914,11 @@
                     <ul class="space-y-3 mb-0 pl-1 text-[13px] text-stone-800 font-medium">
                         <li class="flex items-start gap-2.5">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
-                            <span><strong>What Comes After:</strong> Builds forward counting fluency and helps children grasp incremental addition intuitively.</span>
+                            <span><strong>What Comes After & Next:</strong> Builds forward counting fluency and helps children grasp incremental addition and arithmetic skip sequences intuitively.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
-                            <span><strong>What Comes Before:</strong> Strengthens backward counting—a crucial stepping stone for subtraction.</span>
+                            <span><strong>What Comes Before & Previous:</strong> Strengthens backward counting—a crucial stepping stone for subtraction and tracking reverse number series.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
@@ -918,7 +931,7 @@
 
     </main>
 
-    <!-- Footer Container -->
+    <!-- Footer Container (Configured in Inter) -->
     <div id="app-footer" class="min-h-[80px] w-full font-inter"></div>
 
     <script src="../../js/header-footer.js"></script>
@@ -927,19 +940,18 @@
     <script>
         // --- GAME SYSTEM STATE ---
         let currentLevel = 1;
-        let selectedGameMode = 'after'; // 'after', 'before', 'between', 'missing', 'mixed'
-        let currentQuestionType = 'after'; // Tracks current active: 'after' / 'before' / 'between' / 'missing'
+        let selectedGameMode = 'after'; // 'after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern', 'mixed'
+        let currentQuestionType = 'after';
         let activeTheme = 'sky';
         
-        let currentNumber = 0; // Reference anchor number
-        let leftNumber = 0;    // Reference for between (Left value)
-        let rightNumber = 0;   // Reference for between (Right value)
+        let currentNumber = 0;
+        let leftNumber = 0;   
+        let rightNumber = 0;  
         let correctAnswer = 0;
-        let correctSequenceCount = 0; // Tracks active streak matching
-        let answersCompletedCount = 0; // Progress meter target = 20
-        let questionHistory = [];      // Rolling list of recently used answers to prevent repeats
+        let correctSequenceCount = 0; 
+        let answersCompletedCount = 0; // Target = 20
+        let questionHistory = [];      
 
-        // Analytical Time Tracking Parameters
         let questionStartTime = 0;
         let currentQuestionFriendlyText = "None";
 
@@ -950,21 +962,20 @@
             wrong: 0,
             stars: 0,
             totalResponseTime: 0,
-            incorrectCounts: {}, // Format: {"What comes after 4": wrongCount}
+            incorrectCounts: {}, 
             lastPlayed: "Never"
         };
 
-        // Theme Definitions
+        // Theme Definitions - Calibrated progression targets for ultimate kids gameplay dopamine hit (+75 interval step)
         const themesMap = {
             sky: { name: 'Sky World', icon: '☁️🎈', limit: 0, class: 'theme-sky', floaters: ['☁️', '🎈', '☁️', '🎈', '☁️'], feedback: '🎈' },
-            jungle: { name: 'Jungle World', icon: '🦁🌿', limit: 10, class: 'theme-jungle', floaters: ['🦁', '🌿', '🐒', '🌴', '🍌'], feedback: '🦁' },
-            space: { name: 'Space Quest', icon: '🚀🪐', limit: 25, class: 'theme-space', floaters: ['🚀', '🪐', '👾', '🛸', '🌟'], feedback: '🚀' },
-            ocean: { name: 'Coral Reef', icon: '🐳🐠', limit: 50, class: 'theme-ocean', floaters: ['🐠', '🐬', '🐙', '🫧', '🐳'], feedback: '🐠' },
-            princess: { name: 'Royal Palace', icon: '👑🏰', limit: 75, class: 'theme-princess', floaters: ['👑', '💖', '🦄', '🪄', '🏰'], feedback: '👑' },
-            dinosaur: { name: 'Prehistory', icon: '🦖🌋', limit: 100, class: 'theme-dinosaur', floaters: ['🦖', '🦕', '🌋', '🥚', '🦴'], feedback: '🦖' }
+            jungle: { name: 'Jungle World', icon: '🦁🌿', limit: 50, class: 'theme-jungle', floaters: ['🦁', '🌿', '🐒', '🌴', '🍌'], feedback: '🦁' },
+            space: { name: 'Space Quest', icon: '🚀🪐', limit: 125, class: 'theme-space', floaters: ['🚀', '🪐', '👾', '🛸', '🌟'], feedback: '🚀' },
+            ocean: { name: 'Coral Reef', icon: '🐳🐠', limit: 200, class: 'theme-ocean', floaters: ['🐠', '🐬', '🐙', '🫧', '🐳'], feedback: '🐠' },
+            princess: { name: 'Royal Palace', icon: '👑🏰', limit: 275, class: 'theme-princess', floaters: ['👑', '💖', '🦄', '🪄', '🏰'], feedback: '👑' },
+            dinosaur: { name: 'Prehistory', icon: '🦖🌋', limit: 350, class: 'theme-dinosaur', floaters: ['🦖', '🦕', '🌋', '🥚', '🦴'], feedback: '🦖' }
         };
 
-        // Spoken English Dictionary keys (extended programmatically)
         const numberWords = {
             1:"one", 2:"two", 3:"three", 4:"four", 5:"five", 6:"six", 7:"seven", 8:"eight", 9:"nine", 10:"ten",
             11:"eleven", 12:"twelve", 13:"thirteen", 14:"fourteen", 15:"fifteen", 16:"sixteen", 17:"seventeen", 
@@ -976,21 +987,30 @@
             48:"forty-eight", 49:"forty-nine", 50:"fifty", 51:"fifty-one"
         };
 
-        // Dynamic Spoken Engine Helper supporting values up to 101 seamlessly
         function getSpokenNumber(num) {
-            if (numberWords[num]) return numberWords[num];
+            if (num <= 51 && numberWords[num]) return numberWords[num];
             
             const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+            const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
             const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
             
+            function convertTens(n) {
+                if (n < 10) return ones[n];
+                else if (n < 20) return teens[n - 10];
+                else {
+                    const tenDigit = Math.floor(n / 10);
+                    const oneDigit = n % 10;
+                    return tens[tenDigit] + (oneDigit > 0 ? "-" + ones[oneDigit] : "");
+                }
+            }
+
             if (num < 100) {
-                const tenDigit = Math.floor(num / 10);
-                const oneDigit = num % 10;
-                return tens[tenDigit] + (oneDigit > 0 ? "-" + ones[oneDigit] : "");
-            } else if (num === 100) {
-                return "one hundred";
-            } else if (num === 101) {
-                return "one hundred and one";
+                return convertTens(num);
+            } else if (num < 200) {
+                const remainder = num - 100;
+                return "one hundred" + (remainder > 0 ? " and " + convertTens(remainder) : "");
+            } else if (num === 200) {
+                return "two hundred";
             }
             return num.toString();
         }
@@ -1008,7 +1028,6 @@
         const displayArea = document.getElementById('displayArea');
         const promptText = document.getElementById('promptText');
         const optionsGrid = document.getElementById('optionsGrid');
-        const postCongratsBtn = document.getElementById('postGameHomeBtn');
         const congratsMessage = document.getElementById('congratsMessage');
         const congratsTitle = document.getElementById('congratsTitle');
         
@@ -1021,11 +1040,7 @@
         const themePickerGrid = document.getElementById('themePickerGrid');
         const statsStarCount = document.getElementById('statsStarCount');
 
-        let timerIntervalId = null;
         let audioContext = null;
-
-        let activeHighlightedKeys = [];
-        let activeHighlightedFingers = [];
 
         // Initialize local diagnostics on startup
         document.addEventListener('DOMContentLoaded', () => {
@@ -1034,9 +1049,7 @@
 
         function initGame() {
             loadSavedStats();
-            renderKeyboardStructure();
             registerGameEventListeners();
-            updateStreakVisuals();
             renderThemePicker();
             applyTheme(activeTheme);
         }
@@ -1046,7 +1059,6 @@
                 const saved = localStorage.getItem('kidsPlayground_stats_v3');
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    // Standard safety backup migrations
                     stats = {
                         total: parsed.total || 0,
                         correct: parsed.correct || 0,
@@ -1056,31 +1068,17 @@
                         incorrectCounts: parsed.incorrectCounts || {},
                         lastPlayed: parsed.lastPlayed || "Never"
                     };
-                } else {
-                    // Fallback to legacy structure if exists
-                    const legacy = localStorage.getItem('kidsPlayground_stats_v2');
-                    if (legacy) {
-                        const legObj = JSON.parse(legacy);
-                        stats.total = legObj.total || 0;
-                        stats.correct = legObj.correct || 0;
-                        stats.wrong = legObj.wrong || 0;
-                        stats.stars = legObj.correct || 0;
-                    }
                 }
-                
-                // Read active theme preference
                 const savedTheme = localStorage.getItem('kidsPlayground_active_theme');
                 if (savedTheme && themesMap[savedTheme]) {
                     activeTheme = savedTheme;
                 }
-                
                 updateParentDashboard();
             } catch(e) {
                 console.error("Failed to load local game stats: ", e);
             }
         }
 
-        // --- STREAMING_CHUNK: Managing Parent dashboard widgets... ---
         function updateParentDashboard() {
             try {
                 document.getElementById('statTotal').innerText = stats.total;
@@ -1090,11 +1088,9 @@
                 const percentage = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
                 document.getElementById('statAccuracy').innerText = `${percentage}%`;
                 
-                // 1. Calculate Average Response Time
                 const avgTime = stats.correct > 0 ? (stats.totalResponseTime / stats.correct).toFixed(1) + 's' : '0s';
                 document.getElementById('statAvgTime').innerText = avgTime;
 
-                // 2. Identify Most Difficult Question
                 let hardestQ = "None";
                 let maxWrongs = 0;
                 Object.keys(stats.incorrectCounts).forEach(key => {
@@ -1107,23 +1103,14 @@
                 hardestElem.innerText = hardestQ;
                 hardestElem.setAttribute('title', hardestQ);
 
-                // 3. Render Level Progress
                 const levelNames = {
-                    1: "Beginner",
-                    2: "Easy",
-                    3: "Mixed 1-20",
-                    4: "Intermediate",
-                    5: "Mixed 1-50",
-                    6: "Mixed 1-100"
+                    1: "Beginner", 2: "Easy", 3: "Mixed 1-20", 4: "Intermediate", 5: "Mixed 1-50", 6: "Mixed 50-100", 7: "Mixed 1-100", 8: "Mixed 101-150", 9: "Mixed 150-200"
                 };
                 const currentLevelName = levelNames[currentLevel] || "Level " + currentLevel;
                 const progressPercent = Math.min(100, Math.round((answersCompletedCount / 20) * 100));
                 document.getElementById('statProg').innerText = `${currentLevelName}: ${answersCompletedCount}/20 (${progressPercent}%)`;
 
-                // 4. Synchronize Last Session Played Date
                 document.getElementById('statLastPlayed').innerText = stats.lastPlayed;
-
-                // Sync stars collected
                 statsStarCount.innerText = `⭐ ${stats.stars || 0} Stars Collected`;
 
                 localStorage.setItem('kidsPlayground_stats_v3', JSON.stringify(stats));
@@ -1132,31 +1119,28 @@
             }
         }
 
-        // --- THEME SELECTOR ENGINE ---
         function renderThemePicker() {
             if (!themePickerGrid) return;
             themePickerGrid.innerHTML = '';
-
             const currentStars = stats.stars || 0;
 
             Object.keys(themesMap).forEach(themeKey => {
                 const theme = themesMap[themeKey];
                 const isLocked = currentStars < theme.limit;
-
                 const card = document.createElement('div');
                 card.className = `theme-sticker-card ${isLocked ? 'locked' : ''} ${activeTheme === themeKey ? 'selected' : ''}`;
                 
                 if (isLocked) {
                     card.innerHTML = `
-                        <span class="text-xl">🔒</span>
-                        <span class="text-[10px] font-extrabold text-stone-600 block mt-1">${theme.name}</span>
-                        <span class="text-[8px] text-stone-500 font-bold mt-0.5">${currentStars}/${theme.limit} ⭐</span>
+                        <span class="text-lg sm:text-xl">🔒</span>
+                        <span class="text-[9px] sm:text-[10px] font-extrabold text-stone-600 block mt-0.5 leading-none">${theme.name}</span>
+                        <span class="text-[7px] sm:text-[8px] text-stone-500 font-bold mt-0.5 leading-none">${currentStars}/${theme.limit} ⭐</span>
                     `;
                 } else {
                     card.innerHTML = `
-                        <span class="text-2xl bounce-hover">${theme.icon.slice(0,2)}</span>
-                        <span class="text-[10px] font-extrabold text-stone-850 block mt-1 leading-tight">${theme.name}</span>
-                        <span class="text-[8px] text-emerald-700 font-black mt-0.5 uppercase tracking-wider">Unlocked</span>
+                        <span class="text-xl sm:text-2xl bounce-hover">${theme.icon.slice(0,2)}</span>
+                        <span class="text-[9px] sm:text-[10px] font-extrabold text-stone-850 block mt-0.5 leading-none">${theme.name}</span>
+                        <span class="text-[7px] sm:text-[8px] text-emerald-700 font-black mt-0.5 leading-none uppercase tracking-wider">Unlocked</span>
                     `;
                     card.addEventListener('click', () => {
                         applyTheme(themeKey);
@@ -1172,37 +1156,30 @@
             activeTheme = themeKey;
             localStorage.setItem('kidsPlayground_active_theme', themeKey);
 
-            // Update container class on playground card
             const playCard = document.getElementById('playground-card');
             if (playCard) {
-                // Clear out existing theme classes
                 Object.keys(themesMap).forEach(key => {
                     playCard.classList.remove(themesMap[key].class);
                 });
                 playCard.classList.add(themesMap[themeKey].class);
             }
-
-            // Reload floaters
             triggerThemeFloaters(themeKey);
         }
 
         function triggerThemeFloaters(themeKey) {
             if (!floatersContainer) return;
             floatersContainer.innerHTML = '';
-
             const floatersList = themesMap[themeKey].floaters;
-            
-            // Spawn 5 floaters dynamically across distinct vertical spaces
             const positions = [10, 32, 55, 75, 90];
+            
             positions.forEach((pos, idx) => {
                 const floater = document.createElement('div');
                 floater.className = 'theme-floater';
                 floater.textContent = floatersList[idx % floatersList.length];
                 floater.style.left = `${pos}%`;
                 
-                // Offset start speeds so they float non-uniformly
-                const duration = 12 + Math.random() * 8; // 12s to 20s
-                const delay = Math.random() * -15; // Preflow delays
+                const duration = 12 + Math.random() * 8; 
+                const delay = Math.random() * -15; 
                 floater.style.animationDuration = `${duration}s`;
                 floater.style.animationDelay = `${delay}s`;
 
@@ -1210,14 +1187,13 @@
             });
         }
 
-        // --- AUDIO SYNTHESIS ENGINE (Offline Web Audio API with safety nets) ---
         function initAudio() {
             try {
                 if (!audioContext) {
                     audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 }
             } catch(e) {
-                console.warn("AudioContext failed to initialize:", e);
+                console.warn("AudioContext failed:", e);
                 audioContext = null;
             }
         }
@@ -1231,15 +1207,14 @@
                 const gain = audioContext.createGain();
                 osc.connect(gain);
                 gain.connect(audioContext.destination);
-
                 const now = audioContext.currentTime;
 
                 if (type === 'correct') {
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(440, now); // A4
-                    osc.frequency.setValueAtTime(554.37, now + 0.12); // C#5
-                    osc.frequency.setValueAtTime(659.25, now + 0.24); // E5
-                    osc.frequency.setValueAtTime(880, now + 0.36); // A5
+                    osc.frequency.setValueAtTime(440, now); 
+                    osc.frequency.setValueAtTime(554.37, now + 0.12); 
+                    osc.frequency.setValueAtTime(659.25, now + 0.24); 
+                    osc.frequency.setValueAtTime(880, now + 0.36); 
                     gain.gain.setValueAtTime(0, now);
                     gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
@@ -1280,18 +1255,15 @@
             try {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
-                    
                     const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.rate = 0.85; 
+                    utterance.rate = 0.82; 
                     utterance.pitch = 1.25; 
                     
                     const voices = window.speechSynthesis.getVoices();
                     const primaryVoice = voices.find(v => v.lang.includes('en') && v.name.toLowerCase().includes('google')) || 
                                          voices.find(v => v.lang.includes('en') && v.name.toLowerCase().includes('natural')) || 
                                          voices.find(v => v.lang.includes('en'));
-                    if (primaryVoice) {
-                        utterance.voice = primaryVoice;
-                    }
+                    if (primaryVoice) utterance.voice = primaryVoice;
                     window.speechSynthesis.speak(utterance);
                 }
             } catch(e) {
@@ -1307,7 +1279,7 @@
             }, 3000);
         }
 
-        // --- PARTICLE SYSTEMS (Confetti & Balloons) ---
+        /* --- STREAMING_CHUNK: Programming confetti particles & canvas math... --- */
         const canvas = document.getElementById('confettiCanvas');
         const ctx = canvas.getContext('2d');
         let confettiArray = [];
@@ -1378,7 +1350,6 @@
             }
         }
 
-        // --- BALOON PROPAGATION ENGINE ---
         function triggerBalloonsCascade() {
             try {
                 const colors = ['#ff477e', '#ffb703', '#2ec4b6', '#3a86ff', '#8338ec', '#ff006e'];
@@ -1408,10 +1379,7 @@
             }
         }
 
-        // Dummy keyboard function to prevent layout crashes
-        function renderKeyboardStructure() {}
-
-        // --- STREAMING_CHUNK: Registering DOM and Key bindings... ---
+        /* --- STREAMING_CHUNK: Binding tactile inputs & click events... --- */
         function registerGameEventListeners() {
             gearBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1426,7 +1394,6 @@
                 screenHome.classList.add('active');
                 optionsGrid.style.pointerEvents = 'auto';
                 questionHistory = [];
-                // Re-render theme picker on back home to show potential unlocks
                 renderThemePicker();
             });
 
@@ -1438,13 +1405,8 @@
 
             resetBtn.addEventListener('click', () => {
                 stats = { 
-                    total: 0, 
-                    correct: 0, 
-                    wrong: 0, 
-                    stars: 0,
-                    totalResponseTime: 0,
-                    incorrectCounts: {},
-                    lastPlayed: "Never"
+                    total: 0, correct: 0, wrong: 0, stars: 0,
+                    totalResponseTime: 0, incorrectCounts: {}, lastPlayed: "Never"
                 };
                 activeTheme = 'sky';
                 applyTheme('sky');
@@ -1453,7 +1415,7 @@
                 showToast("Stats reset complete! 🧹");
             });
 
-            // Keyboard input processing
+            // Keyboard inputs
             let keyBuffer = "";
             let keyBufferTimeout = null;
 
@@ -1488,9 +1450,7 @@
                         }
                     } else {
                         if (prefixMatches.length > 0) {
-                            keyBufferTimeout = setTimeout(() => {
-                                keyBuffer = ""; 
-                            }, 1200);
+                            keyBufferTimeout = setTimeout(() => { keyBuffer = ""; }, 1200);
                         } else {
                             keyBuffer = "";
                         }
@@ -1498,7 +1458,6 @@
                 }
             });
 
-            // Choose level configuration
             const levelBtns = document.querySelectorAll('.toggle-level');
             levelBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1509,7 +1468,6 @@
                 });
             });
 
-            // Choose game style mode
             const modeBtns = document.querySelectorAll('.mode-btn');
             modeBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1519,7 +1477,6 @@
                 });
             });
 
-            // Start button binding
             startBtn.addEventListener('click', () => {
                 initAudio();
                 screenHome.classList.remove('active');
@@ -1528,7 +1485,6 @@
                 correctSequenceCount = 0;
                 answersCompletedCount = 0;
                 questionHistory = []; 
-                
                 generateNewQuestion();
             });
 
@@ -1542,33 +1498,20 @@
             });
         }
 
-        function updateStreakVisuals() {}
-
-        // --- STREAMING_CHUNK: Coding math core generators... ---
         function generateNewQuestion() {
             let minRange, maxRange;
-            if (currentLevel === 1) {
-                minRange = 1;
-                maxRange = 10;
-            } else if (currentLevel === 2) {
-                minRange = 11;
-                maxRange = 20;
-            } else if (currentLevel === 3) {
-                minRange = 1;
-                maxRange = 20;
-            } else if (currentLevel === 4) {
-                minRange = 21;
-                maxRange = 50; 
-            } else if (currentLevel === 5) {
-                minRange = 1;
-                maxRange = 50; 
-            } else { // Level 6: Mixed 1 to 100
-                minRange = 1;
-                maxRange = 100;
-            }
+            if (currentLevel === 1) { minRange = 1; maxRange = 10; }
+            else if (currentLevel === 2) { minRange = 11; maxRange = 20; }
+            else if (currentLevel === 3) { minRange = 1; maxRange = 20; }
+            else if (currentLevel === 4) { minRange = 21; maxRange = 50; }
+            else if (currentLevel === 5) { minRange = 1; maxRange = 50; }
+            else if (currentLevel === 6) { minRange = 50; maxRange = 100; } // Mixed 50-100 comes before 1-100
+            else if (currentLevel === 7) { minRange = 1; maxRange = 100; }
+            else if (currentLevel === 8) { minRange = 101; maxRange = 150; } // New Level 101-150
+            else { minRange = 150; maxRange = 200; } // New Level 150-200
 
             if (selectedGameMode === 'mixed') {
-                const styles = ['after', 'before', 'between', 'missing'];
+                const styles = ['after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern'];
                 currentQuestionType = styles[Math.floor(Math.random() * styles.length)];
             } else {
                 currentQuestionType = selectedGameMode;
@@ -1576,20 +1519,15 @@
 
             const totalAvailableNumbers = maxRange - minRange + 1;
             let historyDepthLimit = 3; 
-            if (totalAvailableNumbers <= 5) {
-                historyDepthLimit = 1;
-            } else if (totalAvailableNumbers <= 12) {
-                historyDepthLimit = 3;
-            } else if (totalAvailableNumbers <= 25) {
-                historyDepthLimit = 7;
-            } else {
-                historyDepthLimit = 15;
-            }
+            if (totalAvailableNumbers <= 5) historyDepthLimit = 1;
+            else if (totalAvailableNumbers <= 12) historyDepthLimit = 3;
+            else if (totalAvailableNumbers <= 25) historyDepthLimit = 7;
+            else historyDepthLimit = 15;
 
-            let tempCurrent = 0;
-            let tempCorrect = 0;
-            let tempLeft = 0;
-            let tempRight = 0;
+            // Keep steps strictly at 1 across all levels for kid-friendly sequential counting (+1 / -1)
+            let step = 1;
+
+            let tempCurrent = 0, tempCorrect = 0, tempLeft = 0, tempRight = 0;
             let attempts = 0;
             let missingSequence = [];
             let missingIdx = 0;
@@ -1605,17 +1543,28 @@
                     tempCurrent = Math.floor(Math.random() * (maxRange - actualMin + 1)) + actualMin;
                     tempCorrect = tempCurrent - 1;
                 } else if (currentQuestionType === 'between') {
-                    let adjustedMin = minRange;
                     let adjustedMax = maxRange - 2;
-                    tempLeft = Math.floor(Math.random() * (adjustedMax - adjustedMin + 1)) + adjustedMin;
+                    tempLeft = Math.floor(Math.random() * (adjustedMax - minRange + 1)) + minRange;
                     tempCorrect = tempLeft + 1;
                     tempRight = tempLeft + 2;
-                } else { // Missing Numbers mode (sequence of 4)
+                } else if (currentQuestionType === 'missing') {
                     let adjustedMax = maxRange - 3;
                     let startNum = Math.floor(Math.random() * (adjustedMax - minRange + 1)) + minRange;
                     missingIdx = Math.floor(Math.random() * 4);
                     tempCorrect = startNum + missingIdx;
                     missingSequence = [startNum, startNum + 1, startNum + 2, startNum + 3];
+                } else if (currentQuestionType === 'next_pattern') {
+                    // Sequence: A, A+step, A+2*step, [?]
+                    let maxStart = maxRange - (3 * step);
+                    let startNum = Math.floor(Math.random() * (maxStart - minRange + 1)) + minRange;
+                    missingSequence = [startNum, startNum + step, startNum + (2 * step)];
+                    tempCorrect = startNum + (3 * step);
+                } else if (currentQuestionType === 'prev_pattern') {
+                    // Sequence: [?], A+step, A+2*step, A+3*step
+                    let maxStart = maxRange - (3 * step);
+                    let startNum = Math.floor(Math.random() * (maxStart - minRange + 1)) + minRange;
+                    missingSequence = [startNum + step, startNum + (2 * step), startNum + (3 * step)];
+                    tempCorrect = startNum;
                 }
             } while (questionHistory.includes(tempCorrect) && attempts < 100);
 
@@ -1629,6 +1578,7 @@
             leftNumber = tempLeft;
             rightNumber = tempRight;
 
+            // Generate Prompt Views and Speech Synthesis
             if (currentQuestionType === 'after') {
                 promptText.innerText = "What comes after?";
                 renderSequenceDisplay(currentNumber);
@@ -1644,7 +1594,7 @@
                 renderSequenceDisplay(leftNumber, '?', rightNumber);
                 currentQuestionFriendlyText = `${leftNumber} & ${rightNumber}`;
                 speakText(`What comes between ${getSpokenNumber(leftNumber)} and ${getSpokenNumber(rightNumber)}?`);
-            } else { // Missing Numbers
+            } else if (currentQuestionType === 'missing') {
                 promptText.innerText = "Find the missing number!";
                 let displayCards = [...missingSequence];
                 displayCards[missingIdx] = '?';
@@ -1653,16 +1603,28 @@
 
                 let ttsSeq = [];
                 for (let i = 0; i < 4; i++) {
-                    if (i === missingIdx) {
-                        ttsSeq.push("blank");
-                    } else {
-                        ttsSeq.push(getSpokenNumber(missingSequence[i]));
-                    }
+                    if (i === missingIdx) ttsSeq.push("blank");
+                    else ttsSeq.push(getSpokenNumber(missingSequence[i]));
                 }
                 speakText(`Find the missing number. ${ttsSeq.join(", ")}`);
+            } else if (currentQuestionType === 'next_pattern') {
+                promptText.innerText = "Find Next Number!";
+                let displayCards = [...missingSequence, '?'];
+                renderSequenceDisplay(...displayCards);
+                currentQuestionFriendlyText = `Next in pattern starting ${missingSequence[0]}`;
+
+                let ttsSeq = missingSequence.map(n => getSpokenNumber(n));
+                speakText(`Find the next pattern number. ${ttsSeq.join(", ")}, what comes next?`);
+            } else if (currentQuestionType === 'prev_pattern') {
+                promptText.innerText = "Find Previous Number!";
+                let displayCards = ['?', ...missingSequence];
+                renderSequenceDisplay(...displayCards);
+                currentQuestionFriendlyText = `Prev in pattern starting ${missingSequence[0]}`;
+
+                let ttsSeq = missingSequence.map(n => getSpokenNumber(n));
+                speakText(`Find the previous pattern number. Blank, followed by ${ttsSeq.join(", ")}. What comes first?`);
             }
 
-            // Start recording response latency metrics
             questionStartTime = Date.now();
 
             const answersSet = new Set();
@@ -1706,7 +1668,6 @@
             });
         }
 
-        // --- STREAMING_CHUNK: Validating correct answer results (Safe execution nets) ---
         function handleOptionSelection(selectedVal, optionBtn) {
             if (optionsGrid.style.pointerEvents === 'none') return;
 
@@ -1715,32 +1676,18 @@
                     optionsGrid.style.pointerEvents = 'none'; 
                     stats.total++;
                     stats.correct++;
-                    stats.stars = (stats.stars || 0) + 1; // Gain 1 Star for correct answer
+                    stats.stars = (stats.stars || 0) + 1; 
                     correctSequenceCount++;
                     answersCompletedCount++;
                     
-                    // Add latency to analytics
-                    const timeElapsed = (Date.now() - questionStartTime) / 1000; // in seconds
+                    const timeElapsed = (Date.now() - questionStartTime) / 1000; 
                     stats.totalResponseTime += timeElapsed;
-
-                    // Update last session played date
                     stats.lastPlayed = new Date().toLocaleDateString(undefined, {month: 'short', day: 'numeric', year: 'numeric'});
 
-                    // Fail-safe dashboard updates
-                    try {
-                        updateParentDashboard();
-                    } catch(e) { console.error("dashboard update failed", e); }
+                    try { updateParentDashboard(); } catch(e) {}
+                    try { playSound('correct'); } catch(e) {}
+                    try { triggerConfettiBurst(); } catch(e) {}
 
-                    // Fail-safe audio/haptic responses
-                    try {
-                        playSound('correct');
-                    } catch(e) { console.warn("audio failed", e); }
-
-                    try {
-                        triggerConfettiBurst();
-                    } catch(e) { console.warn("confetti failed", e); }
-
-                    // Always display kids' favorite 😊 smiley face overlay on correct answer!
                     feedbackOverlay.innerHTML = `<span class="emoji-pop">😊</span>`;
                     feedbackOverlay.classList.add('active');
 
@@ -1751,20 +1698,15 @@
                         congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} comes before ${getSpokenNumber(currentNumber)}.`;
                     } else if (currentQuestionType === 'between') {
                         congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} comes between ${getSpokenNumber(leftNumber)} and ${getSpokenNumber(rightNumber)}.`;
-                    } else {
+                    } else if (currentQuestionType === 'missing') {
                         congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} is the missing number!`;
+                    } else {
+                        congratulationsMessage = `Fantastic! ${getSpokenNumber(correctAnswer)} completes the pattern series perfectly!`;
                     }
                     
-                    try {
-                        speakText(congratulationsMessage);
-                    } catch(e) { console.warn("voice synthesis failed", e); }
+                    try { speakText(congratulationsMessage); } catch(e) {}
+                    try { checkForThemeUnlocksOnSuccess(); } catch(e) {}
 
-                    // Check for potential theme unlocks to trigger a lovely live toast alert
-                    try {
-                        checkForThemeUnlocksOnSuccess();
-                    } catch(e) { console.error("unlock check failed", e); }
-
-                    // Safe Timer recovery loop (guarantees game resets even if script errors out)
                     setTimeout(() => {
                         try {
                             feedbackOverlay.classList.remove('active');
@@ -1778,7 +1720,6 @@
                                 generateNewQuestion();
                             }
                         } catch(err) {
-                            console.error("Delayed reset recovery activated:", err);
                             optionsGrid.style.pointerEvents = 'auto';
                             generateNewQuestion();
                         }
@@ -1787,38 +1728,25 @@
                 } else {
                     stats.total++;
                     stats.wrong++;
-                    
-                    // Increment the incorrect attempts mapping for this specific question
                     stats.incorrectCounts[currentQuestionFriendlyText] = (stats.incorrectCounts[currentQuestionFriendlyText] || 0) + 1;
 
-                    try {
-                        updateParentDashboard();
-                    } catch(e) {}
-
-                    try {
-                        playSound('wrong');
-                    } catch(e) {}
-
-                    try {
-                        speakText("Try again.");
-                    } catch(e) {}
+                    try { updateParentDashboard(); } catch(e) {}
+                    try { playSound('wrong'); } catch(e) {}
+                    try { speakText("Try again."); } catch(e) {}
 
                     optionBtn.style.opacity = '0.35';
                     optionBtn.style.pointerEvents = 'none';
                 }
             } catch(globalErr) {
-                console.error("Safe net handling activated:", globalErr);
                 optionsGrid.style.pointerEvents = 'auto';
                 generateNewQuestion();
             }
         }
 
-        // Trigger dynamic unlock checks
         function checkForThemeUnlocksOnSuccess() {
             const currentStars = stats.stars || 0;
             Object.keys(themesMap).forEach(themeKey => {
                 const theme = themesMap[themeKey];
-                // Check if this star exactly unlocked this theme
                 if (currentStars === theme.limit && theme.limit > 0) {
                     showToast(`🎉 Magical Theme Unlocked: ${theme.name}!`);
                 }
@@ -1827,7 +1755,7 @@
 
         function triggerMilestoneAward() {
             playSound('applause');
-            stats.stars = (stats.stars || 0) + 5; // Gain 5 Bonus Stars for milestone streak!
+            stats.stars = (stats.stars || 0) + 5; 
             updateParentDashboard();
             streakPopup.classList.add('active');
             speakText("Awesome Job! You got three stars!");
@@ -1852,11 +1780,16 @@
             } else if (currentLevel === 4 || currentLevel === 5) {
                 congratsMessage.innerText = "You learned numbers all the way to fifty!";
                 speakText("Congratulations! You learned numbers all the way to fifty!");
-            } else {
+            } else if (currentLevel === 6 || currentLevel === 7) {
                 congratsMessage.innerText = "You mastered numbers all the way from one to one hundred!";
                 speakText("Congratulations! You mastered numbers all the way from one to one hundred!");
+            } else if (currentLevel === 8) {
+                congratsMessage.innerText = "You learned numbers all the way to one hundred and fifty!";
+                speakText("Congratulations! You learned numbers all the way to one hundred and fifty!");
+            } else {
+                congratsMessage.innerText = "You learned numbers all the way to two hundred!";
+                speakText("Congratulations! You learned numbers all the way to two hundred!");
             }
-
             congratsPopup.classList.add('active');
         }
     </script>
