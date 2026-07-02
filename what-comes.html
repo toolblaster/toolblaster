@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- SEO Meta Tags (Optimized to strict character limit standards) -->
-    <title>Maths Numbers Playground | Before, After & Between Game</title>
+    <title>Math Numbers Playground | Before, After & Between Game</title>
     <meta name="description" content="Interactive math learning game for kids to master what comes before, after, between, next, and previous numbers with stars, offline sounds, and magic themes.">
     <link class="canonical" rel="canonical" href="https://toolblaster.com/educational/what-comes-before-after-between/" />
     <meta name="robots" content="index, follow">
@@ -165,7 +165,7 @@
             font-family: var(--font-fun);
             font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             font-weight: bold;
-            padding: 10px 40px; /* Symmetrical slight compaction from 12px 48px */
+            padding: 10px 40px; 
             background: var(--color-primary);
             color: white;
             border: none;
@@ -181,7 +181,7 @@
             box-shadow: none;
         }
 
-        /* --- STREAMING_CHUNK: Designing Symmetrical 50-50 Config Grid... --- */
+        /* --- STREAMING_CHUNK: Styling Symmetrical 50-50 Config Grid... --- */
         .config-container {
             margin-top: 18px;
             z-index: 2;
@@ -237,18 +237,28 @@
             gap: 6px;
         }
 
+        /* --- STREAMING_CHUNK: Configuring 3-column CSS Grid logic for desktop buttons... --- */
         .option-buttons-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
             gap: 6px;
-            flex-wrap: wrap;
-            justify-content: flex-start;
+            width: 100%;
         }
 
-        /* --- STREAMING_CHUNK: Defining Adventure Levels color schemes... --- */
+        @media (min-width: 768px) {
+            .option-buttons-row {
+                grid-template-columns: repeat(3, 1fr); /* Symmetrical 3 Columns on desktop! */
+            }
+            /* Beautify last Mixed style button to span full width */
+            .option-buttons-row .mode-btn[data-mode="mixed"] {
+                grid-column: span 3;
+            }
+        }
+
         .toggle-btn {
             font-family: var(--font-fun);
             font-size: clamp(0.72rem, 1.35vw, 0.82rem); 
-            padding: 5px 10px; 
+            padding: 4px 8px; /* Ultra-compact padding for beautiful 3-column rows on desktop */
             border: 3px solid #f1f5f9;
             background: #ffffff;
             color: #4b5563;
@@ -261,6 +271,9 @@
             align-items: center;
             justify-content: center;
             min-height: 38px;
+            text-align: center;
+            white-space: nowrap; /* Strictly enforce NO wrapping to a second row */
+            line-height: 1.2;
         }
 
         .toggle-btn:hover {
@@ -273,10 +286,22 @@
             box-shadow: 0 0px 0 transparent !important;
         }
 
+        /* Lock and Blur effect for Count & Match ecosystem boundaries */
+        .toggle-btn.locked-blur {
+            opacity: 0.42;
+            filter: blur(0.9px);
+            pointer-events: none;
+            cursor: not-allowed;
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
         @media (max-width: 640px) {
             .toggle-btn {
-                font-size: 0.72rem !important;
-                padding: 4px 8px !important;
+                font-size: 0.65rem !important; /* Slightly reduced on mobile to prevent overflow */
+                padding: 4px 6px !important;
                 min-height: 32px !important;
                 border-width: 2px !important;
                 border-radius: 10px !important;
@@ -343,7 +368,7 @@
 
         @media (max-width: 640px) {
             .theme-sticker-card {
-                min-height: 52px !important; /* Extremely vertical compact styling */
+                min-height: 52px !important; 
                 padding: 3px 2px !important; 
                 border-radius: 12px !important;
             }
@@ -392,6 +417,58 @@
             animation: pulse-border 1.5s infinite alternate;
         }
 
+        /* Speaker Card Interactive pulse animations for Number Recognition */
+        .speaker-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 4px solid #8338ec;
+            border-radius: 24px;
+            padding: 15px 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #6d28d9;
+            transition: all 0.15s ease-in-out;
+            animation: pulse-speaker 1.5s infinite alternate;
+        }
+
+        .speaker-card:hover {
+            transform: scale(1.04) translateY(-2px);
+        }
+
+        .speaker-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #6d28d9;
+        }
+
+        @keyframes pulse-speaker {
+            0% { border-color: #8338ec; transform: scale(1); }
+            100% { border-color: #ff477e; transform: scale(1.05); }
+        }
+
+        /* Place Value Bundle Card CSS */
+        .place-value-bundle {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fef08a; /* Soft warning yellow box */
+            border: 3px solid #eab308;
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: clamp(0.8rem, 2.2vw, 1.25rem);
+            font-weight: 800;
+            color: #854d0e;
+            box-shadow: 0 4px 0 #ca8a04;
+            animation: bounce-mini 2s infinite alternate;
+        }
+
+        @keyframes bounce-mini {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-4px); }
+        }
+
         @keyframes pulse-border {
             0% { border-color: var(--color-primary); transform: scale(1); }
             100% { border-color: var(--color-warning); transform: scale(1.03); }
@@ -422,6 +499,12 @@
             align-items: center;
             min-height: clamp(75px, 11vh, 95px);
             box-sizing: border-box;
+        }
+
+        /* Class for sequence options to strictly prevent wrapping of two/three digit values */
+        .btn-option.sequence-opt {
+            font-size: clamp(1.1rem, 3.2vw, 1.8rem) !important;
+            white-space: nowrap !important;
         }
 
         .btn-option:hover {
@@ -472,6 +555,9 @@
 
         .streak-popup, .congrats-popup {
             position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.98);
             border: 6px solid var(--color-warning);
             padding: min(25px, 4vh) min(20px, 3vw);
@@ -483,6 +569,11 @@
             animation: pop-out 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             max-width: 90%;
             width: 400px;
+        }
+
+        @keyframes pop-out {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         .streak-popup.active, .congrats-popup.active {
@@ -776,19 +867,19 @@
                             <span>🎮</span> 1. Choose Adventure Level:
                         </div>
                         <div class="option-buttons-row">
-                            <button class="toggle-btn toggle-level selected" data-level="1">Beginner (1 to 10)</button>
-                            <button class="toggle-btn toggle-level" data-level="2">Easy (11 to 20)</button>
-                            <button class="toggle-btn toggle-level" data-level="3">Mixed (1 to 20)</button>
-                            <button class="toggle-btn toggle-level" data-level="4">Intermediate (21 to 50)</button>
-                            <button class="toggle-btn toggle-level" data-level="5">Mixed (1 to 50)</button>
-                            <button class="toggle-btn toggle-level" data-level="6">Mixed (50 to 100)</button>
-                            <button class="toggle-btn toggle-level" data-level="7">Mixed (1 to 100)</button>
-                            <button class="toggle-btn toggle-level" data-level="8">Mixed (101 to 150)</button>
-                            <button class="toggle-btn toggle-level" data-level="9">Mixed (150 to 200)</button>
+                            <button class="toggle-btn toggle-level selected" data-level="1">Beginner (1-10)</button>
+                            <button class="toggle-btn toggle-level" data-level="2">Easy (11-20)</button>
+                            <button class="toggle-btn toggle-level" data-level="3">Mixed (1-20)</button>
+                            <button class="toggle-btn toggle-level" data-level="4">Intermediate (21-50)</button>
+                            <button class="toggle-btn toggle-level" data-level="5">Mixed (1-50)</button>
+                            <button class="toggle-btn toggle-level" data-level="6">Mixed (50-100)</button>
+                            <button class="toggle-btn toggle-level" data-level="7">Mixed (1-100)</button>
+                            <button class="toggle-btn toggle-level" data-level="8">Mixed (101-150)</button>
+                            <button class="toggle-btn toggle-level" data-level="9">Mixed (150-200)</button>
                         </div>
                     </div>
 
-                    <!-- Game Mode Select Section (Perfect wrapping of 1-icon clean styles) -->
+                    <!-- Game Mode Select Section (Perfect wrapping of 1-icon clean styles with new recognition modes!) -->
                     <div class="config-section">
                         <div class="selector-label">
                             <span>✨</span> 2. Choose Game Style:
@@ -800,6 +891,9 @@
                             <button class="toggle-btn mode-btn" data-mode="missing">Missing Numbers 🧩</button>
                             <button class="toggle-btn mode-btn" data-mode="next_pattern">Find Next Number 🚀</button>
                             <button class="toggle-btn mode-btn" data-mode="prev_pattern">Find Previous Number 🛰️</button>
+                            <button class="toggle-btn mode-btn" data-mode="identify">Identify Number 🎯</button>
+                            <button class="toggle-btn mode-btn" data-mode="count_match">Count & Match 🔢</button>
+                            <button class="toggle-btn mode-btn" data-mode="correct_sequence">Correct Sequence 🚂</button>
                             <button class="toggle-btn mode-btn" data-mode="mixed">All Styles! 🔀</button>
                         </div>
                     </div>
@@ -807,8 +901,8 @@
                     <!-- Theme Section (Magical Theme Grid with Star tracking) -->
                     <div class="config-section md:col-span-2 border-t border-stone-200 pt-4 mt-2">
                         <div class="selector-label justify-between flex flex-wrap items-center gap-2 w-full font-inter">
-                            <span class="text-stone-850">🎨 3. Choose Magical Theme:</span>
-                            <span class="text-[10px] sm:text-xs font-black bg-amber-100 border border-amber-300 text-amber-900 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-sm whitespace-nowrap" id="statsStarCount">⭐ 0 Stars Collected</span>
+                            <span class="text-stone-855 text-[14px]">🎨 3. Choose Magical Theme:</span>
+                            <span class="text-[11px] font-black bg-amber-100 border border-amber-300 text-amber-900 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap" id="statsStarCount">⭐ 0 Stars Collected</span>
                         </div>
                         <div class="grid grid-cols-2 min-[440px]:grid-cols-3 sm:grid-cols-6 gap-2 mt-2" id="themePickerGrid"></div>
                     </div>
@@ -914,6 +1008,10 @@
                     <ul class="space-y-3 mb-0 pl-1 text-[13px] text-stone-800 font-medium">
                         <li class="flex items-start gap-2.5">
                             <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
+                            <span><strong>Number Recognition & Counting:</strong> Instantly connects visual numerals to spoke words, and teaches critical base-10 place value representations with visual tens bundles and ones.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-700 mt-0.5"><i class="fa-solid fa-circle-check text-[11px]"></i></span>
                             <span><strong>What Comes After & Next:</strong> Builds forward counting fluency and helps children grasp incremental addition and arithmetic skip sequences intuitively.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
@@ -940,7 +1038,7 @@
     <script>
         // --- GAME SYSTEM STATE ---
         let currentLevel = 1;
-        let selectedGameMode = 'after'; // 'after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern', 'mixed'
+        let selectedGameMode = 'after'; // 'after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern', 'identify', 'count_match', 'correct_sequence', 'mixed'
         let currentQuestionType = 'after';
         let activeTheme = 'sky';
         
@@ -1052,6 +1150,7 @@
             registerGameEventListeners();
             renderThemePicker();
             applyTheme(activeTheme);
+            updateConfigLockState(); // Sync initial locks/blurs
         }
 
         function loadSavedStats() {
@@ -1076,6 +1175,65 @@
                 updateParentDashboard();
             } catch(e) {
                 console.error("Failed to load local game stats: ", e);
+            }
+        }
+
+        // Dynamic synchronizer to lock and blur levels 4 to 9 whenever Count & Match is selected, and vice-versa
+        function updateConfigLockState() {
+            try {
+                const levelBtns = document.querySelectorAll('.toggle-level');
+                const modeBtns = document.querySelectorAll('.mode-btn');
+
+                if (selectedGameMode === 'count_match') {
+                    // Count & Match limits counting to maximum of 20 (Levels 1, 2, 3).
+                    // If an unallowed high level (level 4-9) was selected, auto fallback to level 3.
+                    if (currentLevel > 3) {
+                        currentLevel = 3;
+                        levelBtns.forEach(btn => {
+                            btn.classList.remove('selected');
+                            if (parseInt(btn.getAttribute('data-level')) === 3) {
+                                btn.classList.add('selected');
+                            }
+                        });
+                    }
+                    // Apply visual locks to unallowed levels
+                    levelBtns.forEach(btn => {
+                        const lvlVal = parseInt(btn.getAttribute('data-level'));
+                        if (lvlVal > 3) {
+                            btn.classList.add('locked-blur');
+                        } else {
+                            btn.classList.remove('locked-blur');
+                        }
+                    });
+                } else {
+                    // Unlock all level buttons when other styles are selected
+                    levelBtns.forEach(btn => btn.classList.remove('locked-blur'));
+                }
+
+                // Reverse sync: Lock and blur Count & Match mode if level selected is above Level 3
+                modeBtns.forEach(btn => {
+                    const mode = btn.getAttribute('data-mode');
+                    if (mode === 'count_match') {
+                        if (currentLevel > 3) {
+                            btn.classList.add('locked-blur');
+                            btn.setAttribute('title', 'Only available for Levels up to 20');
+                            // Fallback from count_match if they shifted to a higher level
+                            if (selectedGameMode === 'count_match') {
+                                modeBtns.forEach(m => m.classList.remove('selected'));
+                                const fallbackModeBtn = document.querySelector('.mode-btn[data-mode="after"]');
+                                if (fallbackModeBtn) fallbackModeBtn.classList.add('selected');
+                                selectedGameMode = 'after';
+                            }
+                        } else {
+                            btn.classList.remove('locked-blur');
+                            btn.removeAttribute('title');
+                        }
+                    }
+                });
+
+                updateParentDashboard();
+            } catch(err) {
+                console.error("Lock synchronizer error: ", err);
             }
         }
 
@@ -1271,6 +1429,7 @@
             }
         }
 
+        // Toast utility function for safe offline notifications
         function showToast(message) {
             toastNotification.innerText = message;
             toastNotification.classList.add('active');
@@ -1464,7 +1623,7 @@
                     levelBtns.forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                     currentLevel = parseInt(btn.getAttribute('data-level'));
-                    updateParentDashboard();
+                    updateConfigLockState(); // Sync triggers live
                 });
             });
 
@@ -1474,6 +1633,7 @@
                     modeBtns.forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                     selectedGameMode = btn.getAttribute('data-mode');
+                    updateConfigLockState(); // Sync triggers live
                 });
             });
 
@@ -1498,6 +1658,7 @@
             });
         }
 
+        // --- STREAMING_CHUNK: Coding math core generators... ---
         function generateNewQuestion() {
             let minRange, maxRange;
             if (currentLevel === 1) { minRange = 1; maxRange = 10; }
@@ -1505,26 +1666,24 @@
             else if (currentLevel === 3) { minRange = 1; maxRange = 20; }
             else if (currentLevel === 4) { minRange = 21; maxRange = 50; }
             else if (currentLevel === 5) { minRange = 1; maxRange = 50; }
-            else if (currentLevel === 6) { minRange = 50; maxRange = 100; } // Mixed 50-100 comes before 1-100
+            else if (currentLevel === 6) { minRange = 50; maxRange = 100; } 
             else if (currentLevel === 7) { minRange = 1; maxRange = 100; }
-            else if (currentLevel === 8) { minRange = 101; maxRange = 150; } // New Level 101-150
-            else { minRange = 150; maxRange = 200; } // New Level 150-200
+            else if (currentLevel === 8) { minRange = 101; maxRange = 150; } 
+            else { minRange = 150; maxRange = 200; } 
 
             if (selectedGameMode === 'mixed') {
-                const styles = ['after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern'];
-                currentQuestionType = styles[Math.floor(Math.random() * styles.length)];
+                const styles = ['after', 'before', 'between', 'missing', 'next_pattern', 'prev_pattern', 'identify', 'count_match', 'correct_sequence'];
+                // Count Match is only available in Mixed mode if current level covers numbers up to 20
+                let allowedStyles = [...styles];
+                if (currentLevel > 3) {
+                    allowedStyles = allowedStyles.filter(s => s !== 'count_match');
+                }
+                currentQuestionType = allowedStyles[Math.floor(Math.random() * allowedStyles.length)];
             } else {
                 currentQuestionType = selectedGameMode;
             }
 
-            const totalAvailableNumbers = maxRange - minRange + 1;
-            let historyDepthLimit = 3; 
-            if (totalAvailableNumbers <= 5) historyDepthLimit = 1;
-            else if (totalAvailableNumbers <= 12) historyDepthLimit = 3;
-            else if (totalAvailableNumbers <= 25) historyDepthLimit = 7;
-            else historyDepthLimit = 15;
-
-            // Keep steps strictly at 1 across all levels for kid-friendly sequential counting (+1 / -1)
+            // Secure sequential counts (+1 / -1 steps) across all levels for kids-friendly ecosystem
             let step = 1;
 
             let tempCurrent = 0, tempCorrect = 0, tempLeft = 0, tempRight = 0;
@@ -1554,19 +1713,30 @@
                     tempCorrect = startNum + missingIdx;
                     missingSequence = [startNum, startNum + 1, startNum + 2, startNum + 3];
                 } else if (currentQuestionType === 'next_pattern') {
-                    // Sequence: A, A+step, A+2*step, [?]
                     let maxStart = maxRange - (3 * step);
                     let startNum = Math.floor(Math.random() * (maxStart - minRange + 1)) + minRange;
                     missingSequence = [startNum, startNum + step, startNum + (2 * step)];
                     tempCorrect = startNum + (3 * step);
                 } else if (currentQuestionType === 'prev_pattern') {
-                    // Sequence: [?], A+step, A+2*step, A+3*step
                     let maxStart = maxRange - (3 * step);
                     let startNum = Math.floor(Math.random() * (maxStart - minRange + 1)) + minRange;
                     missingSequence = [startNum + step, startNum + (2 * step), startNum + (3 * step)];
                     tempCorrect = startNum;
+                } else if (currentQuestionType === 'identify' || currentQuestionType === 'count_match') {
+                    tempCorrect = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+                } else if (currentQuestionType === 'correct_sequence') {
+                    let actualMax = maxRange - 2;
+                    tempCorrect = Math.floor(Math.random() * (actualMax - minRange + 1)) + minRange; // start number of sequence
                 }
             } while (questionHistory.includes(tempCorrect) && attempts < 100);
+
+            // Re-define dynamic history depth limit correctly
+            const totalAvailableNumbers = maxRange - minRange + 1;
+            let historyDepthLimit = 3; 
+            if (totalAvailableNumbers <= 5) historyDepthLimit = 1;
+            else if (totalAvailableNumbers <= 12) historyDepthLimit = 3;
+            else if (totalAvailableNumbers <= 25) historyDepthLimit = 7;
+            else historyDepthLimit = 15;
 
             questionHistory.push(tempCorrect);
             if (questionHistory.length > historyDepthLimit) {
@@ -1578,22 +1748,39 @@
             leftNumber = tempLeft;
             rightNumber = tempRight;
 
+            // --- DEVIATION / DISTRACTION SAFEGUARD ---
+            // If the active question is 'count_match', we clear the floatersContainer completely.
+            // This ensures no emojis float upwards through the screen while kids are trying to count!
+            if (currentQuestionType === 'count_match') {
+                if (floatersContainer) floatersContainer.innerHTML = '';
+            } else {
+                // For other modes, we make sure they are active/restored
+                if (floatersContainer && floatersContainer.children.length === 0) {
+                    triggerThemeFloaters(activeTheme);
+                }
+            }
+
             // Generate Prompt Views and Speech Synthesis
+            const optionsArray = [];
+
             if (currentQuestionType === 'after') {
                 promptText.innerText = "What comes after?";
                 renderSequenceDisplay(currentNumber);
                 currentQuestionFriendlyText = `After ${currentNumber}`;
                 speakText(`What comes after ${getSpokenNumber(currentNumber)}?`);
+                optionsArray.push(correctAnswer);
             } else if (currentQuestionType === 'before') {
                 promptText.innerText = "What comes before?";
                 renderSequenceDisplay(currentNumber);
                 currentQuestionFriendlyText = `Before ${currentNumber}`;
                 speakText(`What comes before ${getSpokenNumber(currentNumber)}?`);
+                optionsArray.push(correctAnswer);
             } else if (currentQuestionType === 'between') {
                 promptText.innerText = "What comes between?";
                 renderSequenceDisplay(leftNumber, '?', rightNumber);
                 currentQuestionFriendlyText = `${leftNumber} & ${rightNumber}`;
                 speakText(`What comes between ${getSpokenNumber(leftNumber)} and ${getSpokenNumber(rightNumber)}?`);
+                optionsArray.push(correctAnswer);
             } else if (currentQuestionType === 'missing') {
                 promptText.innerText = "Find the missing number!";
                 let displayCards = [...missingSequence];
@@ -1607,6 +1794,7 @@
                     else ttsSeq.push(getSpokenNumber(missingSequence[i]));
                 }
                 speakText(`Find the missing number. ${ttsSeq.join(", ")}`);
+                optionsArray.push(correctAnswer);
             } else if (currentQuestionType === 'next_pattern') {
                 promptText.innerText = "Find Next Number!";
                 let displayCards = [...missingSequence, '?'];
@@ -1615,6 +1803,7 @@
 
                 let ttsSeq = missingSequence.map(n => getSpokenNumber(n));
                 speakText(`Find the next pattern number. ${ttsSeq.join(", ")}, what comes next?`);
+                optionsArray.push(correctAnswer);
             } else if (currentQuestionType === 'prev_pattern') {
                 promptText.innerText = "Find Previous Number!";
                 let displayCards = ['?', ...missingSequence];
@@ -1623,27 +1812,71 @@
 
                 let ttsSeq = missingSequence.map(n => getSpokenNumber(n));
                 speakText(`Find the previous pattern number. Blank, followed by ${ttsSeq.join(", ")}. What comes first?`);
+                optionsArray.push(correctAnswer);
+            } else if (currentQuestionType === 'identify') {
+                promptText.innerText = "Listen & Find! 👂";
+                renderSequenceDisplay('speaker');
+                currentQuestionFriendlyText = `Identify ${correctAnswer}`;
+                speakText(`Can you find the number ${getSpokenNumber(correctAnswer)}?`);
+                optionsArray.push(correctAnswer);
+            } else if (currentQuestionType === 'count_match') {
+                promptText.innerText = "Count the objects! 🔢";
+                renderSequenceDisplay('count_objects', correctAnswer);
+                currentQuestionFriendlyText = `Count ${correctAnswer}`;
+                speakText(`Count the items and tap the correct number.`);
+                optionsArray.push(correctAnswer);
+            } else if (currentQuestionType === 'correct_sequence') {
+                promptText.innerText = "Choose the Correct Sequence! 🚂";
+                renderSequenceDisplay('correct_sequence');
+                currentQuestionFriendlyText = `Sequence ${correctAnswer}`;
+                speakText(`Find the correct order!`);
+                
+                // For correct sequence, we construct option strings
+                const correctSeqString = `${correctAnswer} → ${correctAnswer + 1} → ${correctAnswer + 2}`;
+                optionsArray.push(correctSeqString);
             }
 
             questionStartTime = Date.now();
 
-            const answersSet = new Set();
-            answersSet.add(correctAnswer);
-
-            while (answersSet.size < 4) {
-                let fakeNum = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
-                if (fakeNum !== correctAnswer && fakeNum !== currentNumber && fakeNum !== leftNumber && fakeNum !== rightNumber && !missingSequence.includes(fakeNum) && fakeNum > 0) {
-                    answersSet.add(fakeNum);
+            if (currentQuestionType === 'correct_sequence') {
+                // Generate distractors as sequence strings
+                const correctSeqString = `${correctAnswer} → ${correctAnswer + 1} → ${correctAnswer + 2}`;
+                const distractors = new Set();
+                while (distractors.size < 3) {
+                    const shuffleArr = [correctAnswer, correctAnswer + 1, correctAnswer + 2];
+                    shuffleArr.sort(() => Math.random() - 0.5);
+                    const candidate = `${shuffleArr[0]} → ${shuffleArr[1]} → ${shuffleArr[2]}`;
+                    if (candidate !== correctSeqString) {
+                        distractors.add(candidate);
+                    }
                 }
+                distractors.forEach(val => optionsArray.push(val));
+            } else {
+                // Fetch dynamic option ranges for normal numeric questions
+                const answersSet = new Set();
+                answersSet.add(correctAnswer);
+                while (answersSet.size < 4) {
+                    let fakeNum = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+                    if (fakeNum !== correctAnswer && fakeNum !== currentNumber && fakeNum !== leftNumber && fakeNum !== rightNumber && !missingSequence.includes(fakeNum) && fakeNum > 0) {
+                        answersSet.add(fakeNum);
+                    }
+                }
+                optionsArray.length = 0; // Clear it
+                answersSet.forEach(val => optionsArray.push(val));
             }
 
-            const optionsArray = Array.from(answersSet);
             optionsArray.sort(() => Math.random() - 0.5);
 
             optionsGrid.innerHTML = '';
             optionsArray.forEach((val, index) => {
                 const btn = document.createElement('button');
                 btn.className = `btn-option opt-${index}`;
+                
+                // Add the sequence-opt class to prevent line-wrapping if the string contains a sequence
+                if (currentQuestionType === 'correct_sequence') {
+                    btn.classList.add('sequence-opt');
+                }
+                
                 btn.innerText = val;
                 btn.setAttribute('aria-label', `Is it ${val}?`);
                 btn.addEventListener('click', () => handleOptionSelection(val, btn));
@@ -1653,6 +1886,55 @@
 
         function renderSequenceDisplay(...cards) {
             displayArea.innerHTML = '';
+            
+            // Custom render for recognition, sequence & counting modes
+            if (cards[0] === 'speaker') {
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-card';
+                speakerBtn.setAttribute('aria-label', 'Replay spoken number');
+                speakerBtn.innerHTML = `
+                    <span class="text-5xl sm:text-6xl text-purple-700">🔊</span>
+                    <span class="text-xs sm:text-sm font-bold text-purple-900 mt-2 uppercase tracking-wide">TAP TO LISTEN</span>
+                `;
+                speakerBtn.addEventListener('click', () => {
+                    speakText(`Can you find the number ${getSpokenNumber(correctAnswer)}?`);
+                });
+                displayArea.appendChild(speakerBtn);
+                return;
+            }
+
+            if (cards[0] === 'count_objects') {
+                const countVal = cards[1];
+                const themeEmoji = themesMap[activeTheme].feedback || '🎈';
+                
+                const container = document.createElement('div');
+                // Stable, perfectly centered visual grid layout to present emojis elegantly
+                container.className = 'flex flex-wrap items-center justify-center gap-4 sm:gap-6 p-4 max-w-[680px] mx-auto';
+
+                // Stable non-bouncing display with slightly larger emojis (text-5xl sm:text-6xl) to prevent eye strain
+                for (let i = 0; i < countVal; i++) {
+                    const emojiSpan = document.createElement('span');
+                    emojiSpan.className = 'text-5xl sm:text-6xl filter drop-shadow-md select-none transform transition-transform duration-200 hover:scale-105';
+                    emojiSpan.innerText = themeEmoji;
+                    container.appendChild(emojiSpan);
+                }
+
+                displayArea.appendChild(container);
+                return;
+            }
+
+            if (cards[0] === 'correct_sequence') {
+                const container = document.createElement('div');
+                container.className = 'flex flex-col items-center justify-center gap-2 p-2';
+                container.innerHTML = `
+                    <span class="text-6xl animate-pulse">🚂💨</span>
+                    <span class="text-sm font-bold text-stone-700 uppercase tracking-wider font-inter">Which train is in the correct order?</span>
+                `;
+                displayArea.appendChild(container);
+                return;
+            }
+
+            // Default card layout (Before, After, Between, Missing, Patterns)
             cards.forEach(val => {
                 const card = document.createElement('div');
                 if (val === '?' || val === null) {
@@ -1668,11 +1950,20 @@
             });
         }
 
+        // --- STREAMING_CHUNK: Validating correct answer results (Safe execution nets) ... ---
         function handleOptionSelection(selectedVal, optionBtn) {
             if (optionsGrid.style.pointerEvents === 'none') return;
 
             try {
-                if (selectedVal === correctAnswer) {
+                let isCorrect = false;
+                if (currentQuestionType === 'correct_sequence') {
+                    const correctSeqString = `${correctAnswer} → ${correctAnswer + 1} → ${correctAnswer + 2}`;
+                    isCorrect = (selectedVal.toString() === correctSeqString);
+                } else {
+                    isCorrect = (parseInt(selectedVal) === correctAnswer);
+                }
+
+                if (isCorrect) {
                     optionsGrid.style.pointerEvents = 'none'; 
                     stats.total++;
                     stats.correct++;
@@ -1692,16 +1983,12 @@
                     feedbackOverlay.classList.add('active');
 
                     let congratulationsMessage = "";
-                    if (currentQuestionType === 'after') {
-                        congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} comes after ${getSpokenNumber(currentNumber)}.`;
-                    } else if (currentQuestionType === 'before') {
-                        congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} comes before ${getSpokenNumber(currentNumber)}.`;
-                    } else if (currentQuestionType === 'between') {
-                        congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} comes between ${getSpokenNumber(leftNumber)} and ${getSpokenNumber(rightNumber)}.`;
-                    } else if (currentQuestionType === 'missing') {
-                        congratulationsMessage = `Excellent! ${getSpokenNumber(correctAnswer)} is the missing number!`;
+                    if (currentQuestionType === 'identify' || currentQuestionType === 'count_match') {
+                        congratulationsMessage = `Yes! ${getSpokenNumber(correctAnswer)}.`;
+                    } else if (currentQuestionType === 'correct_sequence') {
+                        congratulationsMessage = `Correct! Perfect sequence!`;
                     } else {
-                        congratulationsMessage = `Fantastic! ${getSpokenNumber(correctAnswer)} completes the pattern series perfectly!`;
+                        congratulationsMessage = `Correct! ${getSpokenNumber(correctAnswer)}.`;
                     }
                     
                     try { speakText(congratulationsMessage); } catch(e) {}
@@ -1760,11 +2047,12 @@
             streakPopup.classList.add('active');
             speakText("Awesome Job! You got three stars!");
 
+            // Calibrated specifically to exactly 2 seconds (2000ms) for super-fast gamification flow
             setTimeout(() => {
                 streakPopup.classList.remove('active');
                 optionsGrid.style.pointerEvents = 'auto';
                 generateNewQuestion();
-            }, 3000);
+            }, 2000);
         }
 
         function triggerCompletionAwards() {
